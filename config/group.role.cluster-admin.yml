@@ -1,0 +1,30 @@
+uuid: 8117c131-1874-41ed-aa31-c1d9d85e5c6f
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+id: cluster-admin
+label: Admin
+weight: 100
+internal: false
+audience: member
+group_type: cluster
+permissions_ui: true
+permissions:
+  - 'access content overview'
+  - 'access group_node overview'
+  - 'administer group'
+  - 'administer members'
+  - 'delete group'
+  - 'delete group revisions'
+  - 'edit group'
+  - 'leave group'
+  - 'revert group revisions'
+  - 'update own group_membership content'
+  - 'view any unpublished group'
+  - 'view group'
+  - 'view group revisions'
+  - 'view group_membership content'
+  - 'view latest group version'
+  - 'view own unpublished group'

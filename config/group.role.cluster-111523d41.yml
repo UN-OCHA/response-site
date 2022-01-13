@@ -1,0 +1,17 @@
+uuid: c18d11f5-7691-4a95-8d49-903f901d06f6
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+  enforced:
+    config:
+      - user.role.content_editor
+id: cluster-111523d41
+label: 'Content editor'
+weight: 2
+internal: true
+audience: outsider
+group_type: cluster
+permissions_ui: false
+permissions: {  }

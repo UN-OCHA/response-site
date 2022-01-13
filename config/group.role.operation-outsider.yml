@@ -1,0 +1,14 @@
+uuid: 589ee5a4-c2fe-411c-b514-69717da10369
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+id: operation-outsider
+label: Outsider
+weight: -101
+internal: true
+audience: outsider
+group_type: operation
+permissions_ui: true
+permissions: {  }

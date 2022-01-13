@@ -1,0 +1,14 @@
+uuid: dcf4aaa7-6c91-4107-8136-8fa939ed48d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+id: operation-anonymous
+label: Anonymous
+weight: -102
+internal: true
+audience: anonymous
+group_type: operation
+permissions_ui: true
+permissions: {  }

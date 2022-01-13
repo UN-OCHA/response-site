@@ -1,0 +1,22 @@
+uuid: fe945a8e-bee2-42e0-9b49-068f82f547fb
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+_core:
+  default_config_hash: wO545l3vpyCkWXM8XiN6hvs9iaWUQtdpNgWv-5BvPmI
+id: group.subgroup_depth
+field_name: subgroup_depth
+entity_type: group
+type: integer
+settings:
+  unsigned: true
+  size: normal
+module: core
+locked: true
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: true
+custom_storage: false

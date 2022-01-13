@@ -1,0 +1,17 @@
+label: 'Page de Mise en page du Bloc'
+tips:
+  block-layout:
+    label: 'Mise en page du Bloc'
+    body: 'Les blocs sont des boîtes de contenu qui peuvent être affichées dans des régions (telles que le pied de page ou la barre latérale) de votre page.'
+  place-block:
+    label: 'Placer des blocs'
+    body: 'Tout bloc personnalisé ou contribué peut être ajouté à une région particulière en cliquant sur un bouton Positionner un bloc. Un nouveau bloc peut également être créé en cliquant sur Positionner un bloc'
+  block-region:
+    label: 'Région du Bloc'
+    body: 'Attribuer ou modifier la région d''un bloc en cliquant ici. Une liste déroulante avec toutes les régions apparaîtra. Vous pouvez placer un bloc dans plusieurs régions.'
+  configure-block:
+    label: 'Configurer le bloc'
+    body: 'En cliquant sur «Configurer», vous pouvez modifier le contenu du bloc, gérer ses paramètres de visibilité et même changer son emplacement dans votre thème.'
+  custom-block-library:
+    label: 'Bibliothèque des blocs personnalisés'
+    body: 'L''écran de gestion des blocs a également un autre onglet en haut qui est utilisé pour ajouter des blocs personnalisés. Le nom de l''onglet est "Bibliothèque de blocs personnalisés". Cet onglet fournit un lien pour ajouter des blocs personnalisés.'

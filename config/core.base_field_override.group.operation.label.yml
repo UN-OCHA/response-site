@@ -1,0 +1,18 @@
+uuid: 849f6a11-4af2-4a2c-85f5-e62f19e4a14c
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+id: group.operation.label
+field_name: label
+entity_type: group
+bundle: operation
+label: Title
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

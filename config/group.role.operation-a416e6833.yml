@@ -1,0 +1,17 @@
+uuid: d03f2651-1a34-485e-98b7-97fa89690bfd
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+  enforced:
+    config:
+      - user.role.administrator
+id: operation-a416e6833
+label: Administrator
+weight: 3
+internal: true
+audience: outsider
+group_type: operation
+permissions_ui: false
+permissions: {  }

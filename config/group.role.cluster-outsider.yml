@@ -1,0 +1,14 @@
+uuid: 81ac4e6f-b8d1-451c-867c-f76ed9f9b66b
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+id: cluster-outsider
+label: Outsider
+weight: -101
+internal: true
+audience: outsider
+group_type: cluster
+permissions_ui: true
+permissions: {  }

@@ -1,0 +1,23 @@
+uuid: 476ab2ca-cf33-4c05-9b99-58daab163f1f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.subgroup_right
+    - group.type.cluster
+id: group.cluster.subgroup_right
+field_name: subgroup_right
+entity_type: group
+bundle: cluster
+label: Right
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

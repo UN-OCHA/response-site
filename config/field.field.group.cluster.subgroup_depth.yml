@@ -1,0 +1,23 @@
+uuid: db9b8169-2990-4c1e-94a1-93d9724a7ce4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.subgroup_depth
+    - group.type.cluster
+id: group.cluster.subgroup_depth
+field_name: subgroup_depth
+entity_type: group
+bundle: cluster
+label: Depth
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

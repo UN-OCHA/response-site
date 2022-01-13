@@ -1,0 +1,17 @@
+uuid: 5c07c4e8-fc81-4872-b8cd-cf5ed0f8e880
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+  enforced:
+    config:
+      - user.role.administrator
+id: cluster-a416e6833
+label: Administrator
+weight: 3
+internal: true
+audience: outsider
+group_type: cluster
+permissions_ui: false
+permissions: {  }

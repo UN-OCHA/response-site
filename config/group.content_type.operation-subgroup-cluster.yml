@@ -1,0 +1,18 @@
+uuid: 2c743a22-1b71-45c2-8397-85c8d1f4e6ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+    - group.type.operation
+  module:
+    - subgroup
+id: operation-subgroup-cluster
+label: 'Operation: Subgroup (Cluster)'
+description: 'Adds <em class="placeholder">Cluster</em> groups as subgroups.'
+group_type: operation
+content_plugin: 'subgroup:cluster'
+plugin_config:
+  group_cardinality: 1
+  entity_cardinality: 1
+  use_creation_wizard: false

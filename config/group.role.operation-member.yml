@@ -1,0 +1,19 @@
+uuid: 6fe3b8b8-1b3b-4d5b-b45b-853c5d32eacb
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+id: operation-member
+label: Member
+weight: -100
+internal: true
+audience: member
+group_type: operation
+permissions_ui: true
+permissions:
+  - 'create subgroup:cluster entity'
+  - 'leave group'
+  - 'update own group_membership content'
+  - 'update own subgroup:cluster content'
+  - 'view group'

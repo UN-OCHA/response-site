@@ -1,0 +1,44 @@
+uuid: 754e6152-4cd9-4e98-b931-7b907995454a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group.operation.field_paragraphs
+    - field.field.group.operation.subgroup_depth
+    - field.field.group.operation.subgroup_left
+    - field.field.group.operation.subgroup_right
+    - field.field.group.operation.subgroup_tree
+    - group.type.operation
+  module:
+    - layout_paragraphs
+id: group.operation.default
+targetEntityType: group
+bundle: operation
+mode: default
+content:
+  field_paragraphs:
+    type: layout_paragraphs
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: -4
+    region: content
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: -5
+    region: content
+hidden:
+  changed: true
+  created: true
+  langcode: true
+  subgroup_depth: true
+  subgroup_left: true
+  subgroup_right: true
+  subgroup_tree: true
+  uid: true

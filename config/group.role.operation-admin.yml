@@ -1,0 +1,30 @@
+uuid: 236d2cc4-43cd-4e16-a44c-d9c0eaf316e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+id: operation-admin
+label: Admin
+weight: 100
+internal: false
+audience: member
+group_type: operation
+permissions_ui: true
+permissions:
+  - 'access content overview'
+  - 'access group_node overview'
+  - 'administer group'
+  - 'administer members'
+  - 'delete group'
+  - 'delete group revisions'
+  - 'edit group'
+  - 'leave group'
+  - 'revert group revisions'
+  - 'update own group_membership content'
+  - 'view any unpublished group'
+  - 'view group'
+  - 'view group revisions'
+  - 'view group_membership content'
+  - 'view latest group version'
+  - 'view own unpublished group'

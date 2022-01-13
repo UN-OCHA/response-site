@@ -1,0 +1,10 @@
+uuid: 292a7373-30dd-438b-9dd5-8ef87dfd1104
+langcode: en
+status: true
+dependencies: {  }
+id: text_block
+label: 'Text block'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

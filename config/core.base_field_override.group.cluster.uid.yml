@@ -1,0 +1,20 @@
+uuid: 7001cb58-68e4-4c99-8ca8-a08108167f28
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+id: group.cluster.uid
+field_name: uid
+entity_type: group
+bundle: cluster
+label: 'Group creator'
+description: 'The username of the group creator.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\group\Entity\Group::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

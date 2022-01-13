@@ -1,0 +1,14 @@
+uuid: 673d15e9-ae12-47e3-8379-bda30106c73f
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+id: cluster-anonymous
+label: Anonymous
+weight: -102
+internal: true
+audience: anonymous
+group_type: cluster
+permissions_ui: true
+permissions: {  }

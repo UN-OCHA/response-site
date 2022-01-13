@@ -1,0 +1,105 @@
+label: Комментарии
+description: 'Найти и управлять комментариями.'
+display:
+  default:
+    display_title: 'По умолчанию'
+    display_options:
+      title: Комментарии
+      fields:
+        comment_bulk_form:
+          action_title: Действие
+        subject:
+          label: Тема
+          separator: ', '
+        uid:
+          separator: ', '
+        name:
+          label: Автор
+          separator: ', '
+        entity_id:
+          label: Опубликовано
+          separator: ', '
+        changed:
+          label: Обновлено
+          separator: ', '
+        operations:
+          label: Операции
+        name_1:
+          separator: ', '
+      pager:
+        options:
+          tags:
+            next: 'следующая ›'
+            previous: '‹ предыдущая'
+            first: '« первая'
+            last: 'последняя »'
+          expose:
+            items_per_page_label: 'Элементов на страницу'
+            items_per_page_options_all_label: '- Все -'
+            offset_label: Пропустить
+      exposed_form:
+        options:
+          submit_button: Фильтр
+          reset_button_label: Сбросить
+          exposed_sorts_label: 'Сортировать по'
+          sort_asc_label: 'По возрастанию'
+          sort_desc_label: 'По убыванию'
+      empty:
+        area_text_custom:
+          content: 'Комментарии отсутствуют.'
+      filters:
+        subject:
+          expose:
+            label: Тема
+        combine:
+          expose:
+            label: 'Имя автора'
+        langcode:
+          expose:
+            label: Язык
+      use_more_text: ещё
+  page_published:
+    display_title: 'Опубликованные комментарии'
+    display_options:
+      display_description: 'Список утверждённых комментариев.'
+      menu:
+        title: Комментарии
+        description: 'Комментарии опубликованы'
+  page_unapproved:
+    display_title: 'Неодобренные комментарии'
+    display_options:
+      fields:
+        comment_bulk_form:
+          action_title: Действие
+        subject:
+          label: Тема
+          separator: ', '
+        uid:
+          separator: ', '
+        name:
+          label: Автор
+          separator: ', '
+        entity_id:
+          label: Опубликовано
+          separator: ', '
+        changed:
+          label: Обновлено
+          separator: ', '
+        operations:
+          label: Операции
+        name_1:
+          separator: ', '
+      filters:
+        subject:
+          expose:
+            label: Тема
+        combine:
+          expose:
+            label: 'Имя автора'
+        langcode:
+          expose:
+            label: Язык
+      display_description: 'Список неутверждённых комментариев.'
+      menu:
+        title: 'Неодобренные комментарии'
+        description: 'Комментарии не одобрены'

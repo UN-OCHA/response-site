@@ -1,0 +1,20 @@
+uuid: 82c8cfbf-5099-404f-bdc4-0ca9fc8555fb
+langcode: en
+status: true
+dependencies:
+  module:
+    - subgroup
+third_party_settings:
+  subgroup:
+    depth: 0
+    left: 1
+    right: 4
+    tree: operation
+id: operation
+label: Operation
+description: ''
+new_revision: true
+creator_membership: true
+creator_wizard: true
+creator_roles:
+  - operation-admin

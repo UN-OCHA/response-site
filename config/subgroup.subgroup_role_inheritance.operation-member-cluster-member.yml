@@ -1,0 +1,11 @@
+uuid: 7e29552d-e47b-4e63-a114-4ba56ced4cb9
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.role.cluster-member
+    - group.role.operation-member
+id: operation-member-cluster-member
+source: operation-member
+target: cluster-member
+tree: operation

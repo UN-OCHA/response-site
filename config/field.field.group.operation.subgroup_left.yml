@@ -1,0 +1,23 @@
+uuid: 26bd4f82-6851-420c-97ac-86a7962d47c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.subgroup_left
+    - group.type.operation
+id: group.operation.subgroup_left
+field_name: subgroup_left
+entity_type: group
+bundle: operation
+label: Left
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

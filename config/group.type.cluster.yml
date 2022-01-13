@@ -1,0 +1,20 @@
+uuid: ed190f8f-e3a9-45a6-a329-be52c570b238
+langcode: en
+status: true
+dependencies:
+  module:
+    - subgroup
+third_party_settings:
+  subgroup:
+    depth: 1
+    left: 2
+    right: 3
+    tree: operation
+id: cluster
+label: Cluster
+description: ''
+new_revision: true
+creator_membership: true
+creator_wizard: true
+creator_roles:
+  - cluster-admin
