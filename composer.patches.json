@@ -1,0 +1,10 @@
+{
+    "patches": {
+        "drupal/core" : {
+            "https://www.drupal.org/project/drupal/issues/2544110": "https://www.drupal.org/files/issues/2021-02-11/2544110-100.patch"
+        },
+        "drupal/layout_paragraphs": {
+          "Use proper language when previewing paragraphs in forms": "patches/module--layout-paragraphs--display-proper-language-in-preview.patch"
+        }
+    }
+}
