@@ -14,7 +14,7 @@ bundle: operation
 label: Paragraphs
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -23,6 +23,9 @@ settings:
     target_bundles: null
     negate: 0
     target_bundles_drag_drop:
+      heading:
+        weight: 4
+        enabled: false
       layout:
         weight: 3
         enabled: false

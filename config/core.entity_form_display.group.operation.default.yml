@@ -19,12 +19,13 @@ mode: default
 content:
   field_paragraphs:
     type: layout_paragraphs
-    weight: 121
+    weight: 122
     region: content
     settings:
       preview_view_mode: default
       nesting_depth: 4
       require_layouts: 1
+      empty_message: ''
     third_party_settings: {  }
   label:
     type: string_textfield
@@ -53,6 +54,11 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   subgroup_depth: true
