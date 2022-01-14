@@ -21,7 +21,8 @@
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
         "drupal/group": "^1.4",
-        "drupal/layout_paragraphs": "^1.0",
+        "drupal/layout_paragraphs": "^2.0@beta",
+        "drupal/paragraphs_asymmetric_translation_widgets": "^1.0@beta",
         "drupal/subgroup": "^1.0",
         "drush/drush": "^10.2"
     },

@@ -1,0 +1,68 @@
+diff --git a/layout_paragraphs.module b/layout_paragraphs.module
+index 82662743c..64a30f390 100644
+--- a/layout_paragraphs.module
++++ b/layout_paragraphs.module
+@@ -128,3 +128,63 @@ function layout_paragraphs_paragraph_presave(Paragraph $paragraph) {
+     }
+   }
+ }
++
++/**
++ * Implements hook_entity_translation_create().
++ *
++ * Assume that a translatable paragraphs field will hold async content. So we
++ * will need to recursively duplicate all paragraphs when the translation object
++ * is created.
++ *
++ * @todo: Still need to figure out how to pass the layout settings so cloned
++ *    content paragraphs are in the correct layout instead of in the "disabled"
++ *    container.
++ * @todo: Also after adding a translation, all paragraphs are still stored in
++ *    the "disabled" container. Only after a 2nd save are they properly stored.
++ *    Need to figure out why this is happening.
++ */
++function layout_paragraphs_entity_translation_create(\Drupal\Core\Entity\EntityInterface $entity) {
++  $entity_type_manager = \Drupal::entityTypeManager();
++  $paragraph_storage = $entity_type_manager->getStorage('paragraph');
++  /** @var \Drupal\field\FieldConfigInterface[] $field_definitions */
++  $field_definitions = $entity_type_manager->getStorage('field_config')
++    ->loadByProperties([
++      'entity_type' => $entity->getEntityTypeId(),
++      'bundle' => $entity->bundle(),
++      'field_type' => 'entity_reference_revisions',
++    ]);
++
++  foreach ($field_definitions as $field_definition) {
++    if ($field_definition->isTranslatable() === FALSE) {
++      continue;
++    }
++
++    if ($field_definition->getFieldStorageDefinition()->getSetting('target_type') !== 'paragraph') {
++      continue;
++    }
++
++    $async_values = [];
++    $values = $entity->get($field_definition->getName())->getValue();
++    if (!empty($values) && is_array($values)) {
++      foreach ($values as $value) {
++        if (isset($value['entity'])) {
++          $paragraph = $value['entity'];
++        }
++        elseif (isset($value['target_revision_id'])) {
++          $paragraph = $paragraph_storage->loadRevision($value['target_revision_id']);
++        }
++        elseif (isset($value['target_id'])) {
++          $paragraph = $paragraph_storage->load($value['target_id']);
++        }
++
++        if ($paragraph instanceof \Drupal\paragraphs\ParagraphInterface) {
++          $duplicate = $paragraph->createDuplicate();
++          // Clone all sub-paragraphs recursively.
++          layout_paragraphs_entity_translation_create($duplicate);
++          $async_values[] = ['entity' => $duplicate];
++        }
++      }
++      $entity->set($field_definition->getName(), $async_values);
++    }
++  }
++}
