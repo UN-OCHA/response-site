@@ -12,8 +12,6 @@ audience: member
 group_type: operation
 permissions_ui: true
 permissions:
-  - 'create subgroup:cluster entity'
   - 'leave group'
   - 'update own group_membership content'
-  - 'update own subgroup:cluster content'
   - 'view group'

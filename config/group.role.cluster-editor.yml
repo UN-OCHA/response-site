@@ -1,0 +1,29 @@
+uuid: c34255ae-17f1-446f-9025-1f1a6a4b26c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+id: cluster-editor
+label: Editor
+weight: 102
+internal: false
+audience: member
+group_type: cluster
+permissions_ui: true
+permissions:
+  - 'access group_node overview'
+  - 'create group_node:article content'
+  - 'create group_node:article entity'
+  - 'delete own group_node:article content'
+  - 'delete own group_node:article entity'
+  - 'update any group_node:article content'
+  - 'update any group_node:article entity'
+  - 'update own group_node:article content'
+  - 'update own group_node:article entity'
+  - 'view any unpublished group'
+  - 'view group'
+  - 'view group_node:article content'
+  - 'view group_node:article entity'
+  - 'view own unpublished group'
+  - 'view unpublished group_node:article entity'

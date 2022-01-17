@@ -1,0 +1,29 @@
+uuid: b75dae88-c8d8-4d05-bf0e-e8335c526fde
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+id: operation-editor
+label: Editor
+weight: 101
+internal: false
+audience: member
+group_type: operation
+permissions_ui: true
+permissions:
+  - 'access group_node overview'
+  - 'create group_node:article content'
+  - 'create group_node:article entity'
+  - 'create subgroup:cluster entity'
+  - 'delete own group_node:article content'
+  - 'delete own group_node:article entity'
+  - 'leave group'
+  - 'update any group_node:article entity'
+  - 'update own group_node:article content'
+  - 'update own group_node:article entity'
+  - 'update own subgroup:cluster content'
+  - 'view group_node:article content'
+  - 'view group_node:article entity'
+  - 'view subgroup:cluster content'
+  - 'view unpublished group_node:article entity'
