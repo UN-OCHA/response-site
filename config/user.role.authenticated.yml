@@ -7,7 +7,6 @@ dependencies:
   module:
     - contact
     - filter
-    - search
     - shortcut
     - system
 _core:
@@ -20,5 +19,4 @@ permissions:
   - 'access content'
   - 'access shortcuts'
   - 'access site-wide contact form'
-  - 'search content'
   - 'use text format basic_html'
