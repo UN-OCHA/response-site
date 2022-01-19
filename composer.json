@@ -17,9 +17,11 @@
     "require": {
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.7",
+        "drupal/address": "^1.9",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
+        "drupal/external_entities": "2.x-dev@dev",
         "drupal/group": "^1.4",
         "drupal/layout_paragraphs": "^2.0@beta",
         "drupal/paragraphs_asymmetric_translation_widgets": "^1.0@beta",
@@ -102,7 +104,8 @@
         }
     },
     "require-dev": {
+        "drupal/devel_php": "^1.3",
         "marcocesarato/php-conventional-changelog": "^1.13"
     },
-    "version": "0.0.1"
+    "version": "v0.0.1"
 }
