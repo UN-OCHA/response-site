@@ -1,0 +1,88 @@
+uuid: 168e0486-7876-4d57-8129-16d2fe7b43f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.office.office.field_address
+    - field.field.office.office.field_email
+    - field.field.office.office.field_is_coordination_hub
+    - field.field.office.office.field_location
+    - field.field.office.office.field_operations
+    - field.field.office.office.field_organizations
+    - field.field.office.office.field_phones
+  module:
+    - address
+    - external_entities
+    - telephone
+id: office.office.default
+targetEntityType: office
+bundle: office
+mode: default
+content:
+  field_address:
+    type: address_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_email:
+    type: email_default
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
+  field_is_coordination_hub:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_location:
+    type: entity_reference_autocomplete
+    weight: -4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_operations:
+    type: entity_reference_autocomplete
+    weight: -2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_organizations:
+    type: entity_reference_autocomplete
+    weight: -1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_phones:
+    type: telephone_default
+    weight: 2
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

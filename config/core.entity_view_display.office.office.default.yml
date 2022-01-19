@@ -1,0 +1,86 @@
+uuid: af2ec58c-6e42-48c0-bf30-f330c898f51d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.office.office.field_address
+    - field.field.office.office.field_email
+    - field.field.office.office.field_is_coordination_hub
+    - field.field.office.office.field_location
+    - field.field.office.office.field_operations
+    - field.field.office.office.field_organizations
+    - field.field.office.office.field_phones
+  module:
+    - address
+    - external_entities
+    - telephone
+id: office.office.default
+targetEntityType: office
+bundle: office
+mode: default
+content:
+  field_address:
+    type: address_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_email:
+    type: basic_string
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_is_coordination_hub:
+    type: boolean
+    label: inline
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_location:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_operations:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_organizations:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_phones:
+    type: telephone_link
+    label: above
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

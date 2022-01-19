@@ -1,0 +1,27 @@
+uuid: 57aae0f8-cefe-464e-844b-631114d92b40
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.office.field_operations
+  module:
+    - external_entities
+id: office.office.field_operations
+field_name: field_operations
+entity_type: office
+bundle: office
+label: Operations
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:operation'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

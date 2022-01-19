@@ -1,0 +1,19 @@
+uuid: e15c9a32-f1f1-49a5-bdf4-06031e829f42
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: office.field_operations
+field_name: field_operations
+entity_type: office
+type: entity_reference
+settings:
+  target_type: operation
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

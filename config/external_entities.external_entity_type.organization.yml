@@ -1,0 +1,37 @@
+uuid: 4fc678bb-0404-479b-9b5e-7424d9a45036
+langcode: en
+status: true
+dependencies: {  }
+id: organization
+label: Organization
+label_plural: Organizations
+description: ''
+read_only: true
+field_mappings:
+  id:
+    value: uuid
+  uuid:
+    value: uuid
+  title:
+    value: label
+storage_client_id: restjson
+storage_client_config:
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/organizations/terms'
+  response_format: json
+  pager:
+    default_limit: '50'
+    page_parameter: 'page[offset]'
+    page_parameter_type: pagenum
+    page_size_parameter: 'page[limit]'
+    page_size_parameter_type: pagesize
+  api_key:
+    header_name: ''
+    key: ''
+  parameters:
+    list: {  }
+    single: {  }
+persistent_cache_max_age: 21600
+annotation_entity_type_id: null
+annotation_bundle_id: null
+annotation_field_name: null
+inherits_annotation_fields: false

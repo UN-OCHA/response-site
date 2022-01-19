@@ -1,0 +1,27 @@
+uuid: 3bc1ec5a-c02e-47a6-8cf3-4297c81c6fcb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.office.field_location
+  module:
+    - external_entities
+id: office.office.field_location
+field_name: field_location
+entity_type: office
+bundle: office
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:location'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

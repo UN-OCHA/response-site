@@ -1,0 +1,21 @@
+uuid: d2ce807d-9eba-48bb-b851-8750c769913f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.office.field_phones
+  module:
+    - external_entities
+    - telephone
+id: office.office.field_phones
+field_name: field_phones
+entity_type: office
+bundle: office
+label: Phone(s)
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone

@@ -1,0 +1,37 @@
+uuid: 68ee7a8a-2d03-428f-8f0c-c988f8678654
+langcode: en
+status: true
+dependencies: {  }
+id: location
+label: Location
+label_plural: Locations
+description: ''
+read_only: true
+field_mappings:
+  id:
+    value: uuid
+  uuid:
+    value: uuid
+  title:
+    value: display_name
+storage_client_id: restjson
+storage_client_config:
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms'
+  response_format: json
+  pager:
+    default_limit: '50'
+    page_parameter: 'page[offset]'
+    page_parameter_type: pagenum
+    page_size_parameter: 'page[limit]'
+    page_size_parameter_type: pagesize
+  api_key:
+    header_name: ''
+    key: ''
+  parameters:
+    list: {  }
+    single: {  }
+persistent_cache_max_age: 21600
+annotation_entity_type_id: null
+annotation_bundle_id: null
+annotation_field_name: null
+inherits_annotation_fields: false

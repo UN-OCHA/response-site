@@ -1,0 +1,19 @@
+uuid: 2b3ee576-b30a-4982-ac90-e29157e49458
+langcode: en
+status: true
+dependencies:
+  module:
+    - address
+    - external_entities
+id: office.field_address
+field_name: field_address
+entity_type: office
+type: address
+settings: {  }
+module: address
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
