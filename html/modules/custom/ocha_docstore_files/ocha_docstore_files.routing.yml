@@ -1,0 +1,8 @@
+ocha_docstore_files.webhook:
+  path: '/webhook/listen'
+  defaults:
+    _controller: 'ocha_docstore_files.webhook_controller:listen'
+    _title: 'Listen to incoming webhooks'
+  methods: [POST]
+  requirements:
+    _access: 'TRUE'

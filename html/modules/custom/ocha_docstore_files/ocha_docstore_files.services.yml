@@ -1,0 +1,4 @@
+services:
+  ocha_docstore_files.webhook_controller:
+    class: \Drupal\ocha_docstore_files\Controller\WebhookController
+    arguments: ['@logger.factory']

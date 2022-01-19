@@ -1,0 +1,10 @@
+field.widget.settings.ocha_doc_store_file_widget:
+  type: mapping
+  label: 'OCHA Document store file widget widget settings'
+  mapping:
+    size:
+      type: integer
+      label: 'Size'
+    placeholder:
+      type: textfield
+      label: 'Placeholder'

@@ -1,0 +1,92 @@
+<?php
+
+/**
+ * @file
+ * OCHA Document store connector.
+ */
+
+use Drupal\Core\Url;
+
+/**
+ * Add webhooks in document store.
+ */
+function ocha_docstore_files_update_8001() {
+  $endpoint = 'http://docstore.local.docksal/api/v1/webhooks';
+  $api_key = 'abcd';
+
+  $payload_url = Url::fromRoute('ocha_docstore_files.webhook', [], [
+    'absolute' => TRUE,
+  ])->toString();
+
+  $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+  $api_key = ocha_docstore_files_get_endpoint_apikey($api_key);
+
+  // phpcs:ignore
+  $response = \Drupal::httpClient()->request(
+    'POST',
+    $endpoint,
+    [
+      'body' => json_encode([
+        'label' => 'Assessment Registry',
+        'payload_url' => $payload_url,
+        'secret' => $api_key,
+        'events' => [
+          'document:assessment:create' => 'document:assessment:create',
+          'document:assessment:update' => 'document:assessment:update',
+          'document:assessment:delete' => 'document:assessment:delete',
+          'document:assessment_document:update' => 'document:assessment_document:update',
+          'document:assessment_document:delete' => 'document:assessment_document:delete',
+          'document:knowledge_management:create' => 'document:knowledge_management:create',
+          'document:knowledge_management:update' => 'document:knowledge_management:update',
+          'document:knowledge_management:delete' => 'document:knowledge_management:delete',
+          'term:ar_assessment_status:delete' => 'term:ar_assessment_status:delete',
+          'term:ar_assessment_status:update' => 'term:ar_assessment_status:update',
+          'term:ar_context:delete' => 'term:ar_context:delete',
+          'term:ar_context:update' => 'term:ar_context:update',
+          'term:ar_document_type:delete' => 'term:ar_document_type:delete',
+          'term:ar_document_type:update' => 'term:ar_document_type:update',
+          'term:ar_hpc_document_repository:delete' => 'term:ar_hpc_document_repository:delete',
+          'term:ar_hpc_document_repository:update' => 'term:ar_hpc_document_repository:update',
+          'term:ar_life_cycle_steps:delete' => 'term:ar_life_cycle_steps:delete',
+          'term:ar_life_cycle_steps:update' => 'term:ar_life_cycle_steps:update',
+          'term:ar_units_of_measurement:delete' => 'term:ar_units_of_measurement:delete',
+          'term:ar_units_of_measurement:update' => 'term:ar_units_of_measurement:update',
+          'term:countries:delete' => 'term:countries:delete',
+          'term:countries:update' => 'term:countries:update',
+          'term:disaster_status:delete' => 'term:disaster_status:delete',
+          'term:disaster_status:update' => 'term:disaster_status:update',
+          'term:disaster_types:delete' => 'term:disaster_types:delete',
+          'term:disaster_types:update' => 'term:disaster_types:update',
+          'term:global_coordination_groups:delete' => 'term:global_coordination_groups:delete',
+          'term:global_coordination_groups:update' => 'term:global_coordination_groups:update',
+          'term:local_coordination_groups:delete' => 'term:local_coordination_groups:delete',
+          'term:local_coordination_groups:update' => 'term:local_coordination_groups:update',
+          'term:locations:delete' => 'term:locations:delete',
+          'term:locations:update' => 'term:locations:update',
+          'term:operations:delete' => 'term:operations:delete',
+          'term:operations:update' => 'term:operations:update',
+          'term:organization_types:delete' => 'term:organization_types:delete',
+          'term:organization_types:update' => 'term:organization_types:update',
+          'term:organizations:delete' => 'term:organizations:delete',
+          'term:organizations:update' => 'term:organizations:update',
+          'term:population_types:delete' => 'term:population_types:delete',
+          'term:population_types:update' => 'term:population_types:update',
+          'term:silk_dupes:delete' => 'term:silk_dupes:delete',
+          'term:silk_dupes:update' => 'term:silk_dupes:update',
+          'term:silk_dupes_allowed:delete' => 'term:silk_dupes_allowed:delete',
+          'term:silk_dupes_allowed:update' => 'term:silk_dupes_allowed:update',
+          'term:territories:delete' => 'term:territories:delete',
+          'term:territories:update' => 'term:territories:update',
+          'term:themes:delete' => 'term:themes:delete',
+          'term:themes:update' => 'term:themes:update',
+        ],
+      ]),
+      'headers' => [
+        'API-KEY' => $api_key,
+      ],
+    ]
+  );
+
+  $body = $response->getBody() . '';
+  $body = json_decode($body);
+}
