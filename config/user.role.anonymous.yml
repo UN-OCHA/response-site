@@ -6,7 +6,9 @@ dependencies:
     - filter.format.restricted_html
   module:
     - contact
+    - external_entities
     - filter
+    - paragraphs_type_permissions
     - system
 _core:
   default_config_hash: 6WavjUYXIegP9AAg2zXGx54MWIVoomC3SZhNiqe-Dyk
@@ -18,3 +20,25 @@ permissions:
   - 'access content'
   - 'access site-wide contact form'
   - 'use text format restricted_html'
+  - 'view assessment external entity'
+  - 'view assessment_document external entity'
+  - 'view assessment_status external entity'
+  - 'view context external entity'
+  - 'view country external entity'
+  - 'view disaster external entity'
+  - 'view document_type external entity'
+  - 'view global_cluster external entity'
+  - 'view hpc_document_repository external entity'
+  - 'view life_cycle_step external entity'
+  - 'view local_group external entity'
+  - 'view location external entity'
+  - 'view office external entity'
+  - 'view operation external entity'
+  - 'view organization external entity'
+  - 'view paragraph content heading'
+  - 'view paragraph content layout'
+  - 'view paragraph content offices'
+  - 'view paragraph content text_block'
+  - 'view population_type external entity'
+  - 'view theme external entity'
+  - 'view unit_of_measurement external entity'

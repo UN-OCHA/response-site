@@ -13,19 +13,11 @@ dependencies:
     - group.type.operation
   module:
     - layout_paragraphs
-    - options
 id: group.operation.default
 targetEntityType: group
 bundle: operation
 mode: default
 content:
-  field_enabled_tabs:
-    type: list_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: content
   field_paragraphs:
     type: layout_paragraphs
     label: hidden
@@ -46,6 +38,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_enabled_tabs: true
   field_operation: true
   langcode: true
   subgroup_depth: true

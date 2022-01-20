@@ -23,6 +23,7 @@ permissions:
   - 'update own group_node:article content'
   - 'update own group_node:article entity'
   - 'update own subgroup:cluster content'
+  - 'view group'
   - 'view group_node:article content'
   - 'view group_node:article entity'
   - 'view subgroup:cluster content'
