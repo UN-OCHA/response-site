@@ -10,3 +10,16 @@ hr_paragraphs.operation.offices:
     parameters:
       group:
         type: entity:group
+hr_paragraphs.operation.assessments:
+  path: '/group/{group}/assessments'
+  title: 'Assessments'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
+    _title: 'Assessments'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
+  options:
+    parameters:
+      group:
+        type: entity:group
+

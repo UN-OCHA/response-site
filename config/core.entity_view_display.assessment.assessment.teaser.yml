@@ -31,17 +31,44 @@ dependencies:
     - field.field.assessment.assessment.field_themes
     - field.field.assessment.assessment.field_units_of_measurement
   module:
+    - datetime_range
     - external_entities
 id: assessment.assessment.teaser
 targetEntityType: assessment
 bundle: assessment
 mode: teaser
 content:
+  field_date:
+    type: daterange_default
+    label: inline
+    settings:
+      timezone_override: ''
+      format_type: medium
+      separator: '-'
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_organizations:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_status:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
   title:
     type: string
     label: hidden
     settings:
-      link_to_entity: false
+      link_to_entity: true
     third_party_settings: {  }
     weight: 0
     region: content
@@ -53,7 +80,6 @@ hidden:
   field_author: true
   field_collection_methods: true
   field_contacts: true
-  field_date: true
   field_disaster: true
   field_frequency: true
   field_key_findings: true
@@ -62,13 +88,11 @@ hidden:
   field_locations: true
   field_methodology: true
   field_operations: true
-  field_organizations: true
   field_other_location: true
   field_population_types: true
   field_published: true
   field_related_content: true
   field_sample_size: true
-  field_status: true
   field_subject_objective: true
   field_themes: true
   field_units_of_measurement: true
