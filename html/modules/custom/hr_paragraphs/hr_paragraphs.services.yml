@@ -1,0 +1,4 @@
+services:
+  hr_paragraphs.paragraph_controller:
+    class: \Drupal\hr_paragraphs\Controller\ParagraphController
+    arguments: ['@entity_type.manager']

@@ -1,0 +1,14 @@
+hr_paragraphs.operation:
+  title: 'Home'
+  route_name: entity.group.canonical
+  base_route: entity.group.canonical
+hr_paragraphs.operation.home:
+  title: 'Home'
+  route_name: entity.group.canonical
+  base_route: entity.group.canonical
+  parent_id: hr_paragraphs.operation
+hr_paragraphs.operation.offices:
+  title: 'Offices / Coordination Hubs'
+  route_name: hr_paragraphs.operation.offices
+  base_route: entity.group.canonical
+  parent_id: hr_paragraphs.operation

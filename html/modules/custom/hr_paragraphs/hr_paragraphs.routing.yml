@@ -1,0 +1,12 @@
+hr_paragraphs.operation.offices:
+  path: '/group/{group}/offices'
+  title: 'Offices / Coordination Hubs'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getOffices'
+    _title: 'Offices / Coordination Hubs'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasOffices'
+  options:
+    parameters:
+      group:
+        type: entity:group
