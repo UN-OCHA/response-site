@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_preprocess_paragraph__page_title().
+ * Implements hook_preprocess_paragraph__type().
  */
 function hr_paragraphs_preprocess_paragraph__offices(&$variables) {
   $operation_uuid = FALSE;
@@ -29,9 +29,44 @@ function hr_paragraphs_preprocess_paragraph__offices(&$variables) {
   $view_mode = 'teaser';
 
   $entity_type_manager = \Drupal::entityTypeManager();
-  $office_uuids = $entity_type_manager->getStorage($entity_id)->getQuery()->condition('operations', $operation_uuid)->execute();
-  $offices = $entity_type_manager->getStorage($entity_id)->loadMultiple($office_uuids);
+  $assessment_uuids = $entity_type_manager->getStorage($entity_id)->getQuery()->condition('operations', $operation_uuid)->execute();
+  $offices = $entity_type_manager->getStorage($entity_id)->loadMultiple($assessment_uuids);
 
   $view_builder = $entity_type_manager->getViewBuilder($entity_id);
   $variables['content']['offices'] = $view_builder->viewMultiple($offices, $view_mode);
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__recent_assessments(&$variables) {
+  $operation_uuid = FALSE;
+
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  if (!$paragraph->field_operation->isEmpty()) {
+    $operation_uuid = $paragraph->field_operation->entity->uuid();
+  }
+  else {
+    $operation_uuid = $paragraph->getParentEntity()->field_operation->entity->uuid();
+  }
+
+  if (!$operation_uuid) {
+    return;
+  }
+
+  $entity_id = 'assessment';
+  $view_mode = 'teaser';
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $assessment_uuids = $entity_type_manager->getStorage($entity_id)->getQuery()
+    ->condition('operations', $operation_uuid)
+    ->range(0, 10)
+    ->sort('changed', 'DESC')
+    ->execute();
+  $assessments = $entity_type_manager->getStorage($entity_id)->loadMultiple($assessment_uuids);
+
+  $view_builder = $entity_type_manager->getViewBuilder($entity_id);
+  $variables['content']['assessments'] = $view_builder->viewMultiple($assessments, $view_mode);
 }

@@ -1,0 +1,74 @@
+uuid: d2fdb660-a930-417c-a9f9-170677f1d1f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.assessment.teaser
+    - field.field.assessment.assessment.field_assessment_data
+    - field.field.assessment.assessment.field_assessment_questionnaire
+    - field.field.assessment.assessment.field_assessment_report
+    - field.field.assessment.assessment.field_asst_organizations
+    - field.field.assessment.assessment.field_author
+    - field.field.assessment.assessment.field_collection_methods
+    - field.field.assessment.assessment.field_contacts
+    - field.field.assessment.assessment.field_date
+    - field.field.assessment.assessment.field_disaster
+    - field.field.assessment.assessment.field_frequency
+    - field.field.assessment.assessment.field_key_findings
+    - field.field.assessment.assessment.field_level_of_representation
+    - field.field.assessment.assessment.field_local_coordination_groups
+    - field.field.assessment.assessment.field_locations
+    - field.field.assessment.assessment.field_methodology
+    - field.field.assessment.assessment.field_operations
+    - field.field.assessment.assessment.field_organizations
+    - field.field.assessment.assessment.field_other_location
+    - field.field.assessment.assessment.field_population_types
+    - field.field.assessment.assessment.field_published
+    - field.field.assessment.assessment.field_related_content
+    - field.field.assessment.assessment.field_sample_size
+    - field.field.assessment.assessment.field_status
+    - field.field.assessment.assessment.field_subject_objective
+    - field.field.assessment.assessment.field_themes
+    - field.field.assessment.assessment.field_units_of_measurement
+  module:
+    - external_entities
+id: assessment.assessment.teaser
+targetEntityType: assessment
+bundle: assessment
+mode: teaser
+content:
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_assessment_data: true
+  field_assessment_questionnaire: true
+  field_assessment_report: true
+  field_asst_organizations: true
+  field_author: true
+  field_collection_methods: true
+  field_contacts: true
+  field_date: true
+  field_disaster: true
+  field_frequency: true
+  field_key_findings: true
+  field_level_of_representation: true
+  field_local_coordination_groups: true
+  field_locations: true
+  field_methodology: true
+  field_operations: true
+  field_organizations: true
+  field_other_location: true
+  field_population_types: true
+  field_published: true
+  field_related_content: true
+  field_sample_size: true
+  field_status: true
+  field_subject_objective: true
+  field_themes: true
+  field_units_of_measurement: true

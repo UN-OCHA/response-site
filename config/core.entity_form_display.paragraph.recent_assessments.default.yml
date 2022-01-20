@@ -1,0 +1,25 @@
+uuid: 399cf088-f357-4b65-a729-1afb51ed7bfc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.recent_assessments.field_operation
+    - paragraphs.paragraphs_type.recent_assessments
+id: paragraph.recent_assessments.default
+targetEntityType: paragraph
+bundle: recent_assessments
+mode: default
+content:
+  field_operation:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

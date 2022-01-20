@@ -1,0 +1,10 @@
+uuid: 5ba8e785-6754-4e60-a28d-c5d98a27e56d
+langcode: en
+status: true
+dependencies: {  }
+id: recent_assessments
+label: 'Recent assessments'
+icon_uuid: null
+icon_default: null
+description: 'Recent assessments from the assessment registry.'
+behavior_plugins: {  }
