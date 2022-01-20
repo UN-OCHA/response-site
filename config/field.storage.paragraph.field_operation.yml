@@ -1,0 +1,20 @@
+uuid: dadb60b4-d08e-4358-8eb6-a4746fd93ccf
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+    - paragraphs
+id: paragraph.field_operation
+field_name: field_operation
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: operation
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

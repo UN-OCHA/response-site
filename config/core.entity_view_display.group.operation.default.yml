@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.operation.field_operation
     - field.field.group.operation.field_paragraphs
     - field.field.group.operation.subgroup_depth
     - field.field.group.operation.subgroup_left
@@ -23,7 +24,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: -3
+    weight: 1
     region: content
   label:
     type: string
@@ -31,11 +32,12 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: -5
+    weight: 0
     region: content
 hidden:
   changed: true
   created: true
+  field_operation: true
   langcode: true
   subgroup_depth: true
   subgroup_left: true

@@ -1,0 +1,26 @@
+uuid: 7de4570a-36f1-4438-8b6c-12df62166238
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_operation
+    - group.type.operation
+id: group.operation.field_operation
+field_name: field_operation
+entity_type: group
+bundle: operation
+label: Operation
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:operation'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

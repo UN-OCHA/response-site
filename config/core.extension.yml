@@ -23,6 +23,7 @@ module:
   gnode: 0
   group: 0
   help: 0
+  hr_paragraphs: 0
   image: 0
   language: 0
   layout_discovery: 0
@@ -40,6 +41,7 @@ module:
   path: 0
   path_alias: 0
   rdf: 0
+  select2: 0
   shortcut: 0
   subgroup: 0
   system: 0
