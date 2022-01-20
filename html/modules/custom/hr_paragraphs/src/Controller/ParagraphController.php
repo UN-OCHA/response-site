@@ -55,6 +55,13 @@ class ParagraphController extends ControllerBase {
   }
 
   /**
+   * Check if events is enabled.
+   */
+  public function hasEvents($group) {
+    return $this->tabIsActive($group, 'events');
+  }
+
+  /**
    * Return all offices of an operation, sector or cluster.
    */
   public function getOffices($group) {
@@ -103,4 +110,21 @@ class ParagraphController extends ControllerBase {
     $view_builder = $this->entityTypeManager->getViewBuilder($entity_id);
     return $view_builder->viewMultiple($assessments, $view_mode);
   }
+
+  /**
+   * Return all events of an operation, sector or cluster.
+   */
+  public function getEvents($group) {
+    return [
+      'calendar' => [
+        '#type' => 'inline_template',
+        '#template' => '<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%23ffffff&ctz=Asia%2FDamascus&showTitle=0&showPrint=0&showCalendars=0&src=M3Rha2FwdmgxZWpiMHFmZzAyaDFsMWRhMXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=ZW4uYmUjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%237986CB&color=%237986CB&color=%237986CB" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>',
+      ],
+      'link' => [
+        '#type' => 'inline_template',
+        '#template' => '<a href="https://calendar.google.com/calendar/u/0?cid=M3Rha2FwdmgxZWpiMHFmZzAyaDFsMWRhMXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ">Link to calendar</a>',
+      ],
+    ];
+  }
+
 }

@@ -7,6 +7,11 @@ hr_paragraphs.operation.home:
   route_name: entity.group.canonical
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
+hr_paragraphs.operation.events:
+  title: 'Events'
+  route_name: hr_paragraphs.operation.events
+  base_route: entity.group.canonical
+  parent_id: hr_paragraphs.operation
 hr_paragraphs.operation.offices:
   title: 'Offices / Coordination Hubs'
   route_name: hr_paragraphs.operation.offices
