@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * Themes and preprocessors for the paragraphs page title module.
+ */
+
+/**
+ * Implements hook_preprocess_paragraph__page_title().
+ */
+function hr_paragraphs_preprocess_paragraph__offices(&$variables) {
+  $operation_uuid = FALSE;
+
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  if (!$paragraph->field_operation->isEmpty()) {
+    $operation_uuid = $paragraph->field_operation->entity->uuid();
+  }
+  else {
+    $operation_uuid = $paragraph->getParentEntity()->field_operation->entity->uuid();
+  }
+
+  if (!$operation_uuid) {
+    return;
+  }
+
+  $entity_id = 'office';
+  $view_mode = 'teaser';
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $office_uuids = $entity_type_manager->getStorage($entity_id)->getQuery()->condition('operations', $operation_uuid)->execute();
+  $offices = $entity_type_manager->getStorage($entity_id)->loadMultiple($office_uuids);
+
+  $view_builder = $entity_type_manager->getViewBuilder($entity_id);
+  $variables['content']['offices'] = $view_builder->viewMultiple($offices, $view_mode);
+}

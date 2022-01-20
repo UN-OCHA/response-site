@@ -1,0 +1,21 @@
+uuid: dcebf5c0-6c3c-44f2-b462-c67c678d1376
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.offices.field_operation
+    - paragraphs.paragraphs_type.offices
+id: paragraph.offices.default
+targetEntityType: paragraph
+bundle: offices
+mode: default
+content:
+  field_operation:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

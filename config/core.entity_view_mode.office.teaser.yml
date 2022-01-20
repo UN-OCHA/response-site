@@ -1,0 +1,10 @@
+uuid: 0bdd942c-7edf-4df6-9ef9-bfd25a22e923
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: office.teaser
+label: Teaser
+targetEntityType: office
+cache: true

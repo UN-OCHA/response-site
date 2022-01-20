@@ -1,0 +1,6 @@
+name: 'HR Paragraphs'
+description: 'Custom paragraphs for HRInfo'
+type: module
+core_version_requirement: ^8 || ^9
+dependencies:
+  - paragraphs

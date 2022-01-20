@@ -1,0 +1,64 @@
+uuid: f6c1fbfd-82fc-4139-bdf0-a26db941098a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.office.teaser
+    - field.field.office.office.field_address
+    - field.field.office.office.field_email
+    - field.field.office.office.field_is_coordination_hub
+    - field.field.office.office.field_location
+    - field.field.office.office.field_operations
+    - field.field.office.office.field_organizations
+    - field.field.office.office.field_phones
+  module:
+    - address
+    - external_entities
+    - telephone
+id: office.office.teaser
+targetEntityType: office
+bundle: office
+mode: teaser
+content:
+  field_address:
+    type: address_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_email:
+    type: basic_string
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_organizations:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_phones:
+    type: telephone_link
+    label: above
+    settings:
+      title: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_is_coordination_hub: true
+  field_location: true
+  field_operations: true

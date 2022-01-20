@@ -1,0 +1,10 @@
+uuid: 1b8df88d-f1da-406b-bd9d-f6d4f02f1cd0
+langcode: en
+status: true
+dependencies: {  }
+id: offices
+label: 'Offices / Coordination Hubs'
+icon_uuid: null
+icon_default: null
+description: 'Outputs a list of Offices / Coordination Hubs for a given operation'
+behavior_plugins: {  }
