@@ -1,0 +1,19 @@
+uuid: d3cf948f-0243-4abf-aa85-cbb7e6afe9ac
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_assessment_questionnaire
+field_name: field_assessment_questionnaire
+entity_type: assessment
+type: entity_reference
+settings:
+  target_type: assessment_document
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

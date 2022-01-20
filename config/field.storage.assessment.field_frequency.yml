@@ -1,0 +1,36 @@
+uuid: 2b91179b-cc82-471e-8a96-a7c1b486c21a
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+    - options
+id: assessment.field_frequency
+field_name: field_frequency
+entity_type: assessment
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: weekly
+      label: Weekly
+    -
+      value: monthly
+      label: Monthly
+    -
+      value: quarterly
+      label: Quarterly
+    -
+      value: yearly
+      label: Yearly
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

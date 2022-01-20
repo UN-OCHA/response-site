@@ -1,10 +1,10 @@
-uuid: 2cf9663c-f716-45a9-b40f-3a85bcaf85c9
+uuid: 010db261-75b0-43ae-9c28-2e44ec23c023
 langcode: en
 status: true
 dependencies: {  }
-id: organization
-label: Organization
-label_plural: Organizations
+id: theme
+label: Theme
+label_plural: Themes
 description: ''
 read_only: true
 field_mappings:
@@ -16,14 +16,14 @@ field_mappings:
     value: label
 storage_client_id: restjson
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/organizations/terms'
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/themes/terms'
   response_format: json
   pager:
     default_limit: '50'
-    page_parameter: ''
-    page_parameter_type: null
-    page_size_parameter: ''
-    page_size_parameter_type: null
+    page_parameter: 'page[offset]'
+    page_parameter_type: pagenum
+    page_size_parameter: 'page[limit]'
+    page_size_parameter_type: pagesize
   api_key:
     header_name: ''
     key: ''

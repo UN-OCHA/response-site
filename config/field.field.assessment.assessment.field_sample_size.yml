@@ -1,0 +1,20 @@
+uuid: 114411e6-d3a7-48bc-9129-a3ad952bee94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_sample_size
+  module:
+    - external_entities
+id: assessment.assessment.field_sample_size
+field_name: field_sample_size
+entity_type: assessment
+bundle: assessment
+label: 'Sample size'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

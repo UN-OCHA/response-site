@@ -1,0 +1,26 @@
+uuid: 466d9fa2-f335-498d-86f6-622dd8acbb79
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.local_group.field_operations
+  module:
+    - external_entities
+id: local_group.local_group.field_operations
+field_name: field_operations
+entity_type: local_group
+bundle: local_group
+label: Operations
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:operation'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

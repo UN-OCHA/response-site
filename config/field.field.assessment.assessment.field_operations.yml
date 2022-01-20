@@ -1,0 +1,22 @@
+uuid: a0d93266-32a0-41a2-a66c-d0379867cef0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_operations
+  module:
+    - external_entities
+id: assessment.assessment.field_operations
+field_name: field_operations
+entity_type: assessment
+bundle: assessment
+label: Operations
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:operation'
+  handler_settings: {  }
+field_type: entity_reference

@@ -1,4 +1,4 @@
-uuid: 3534f5a9-d309-4a01-99c1-ad5570670e4c
+uuid: b7f6e231-dfdf-483d-b260-d7b90a850f5e
 langcode: en
 status: true
 dependencies: {  }
@@ -14,6 +14,8 @@ field_mappings:
     value: uuid
   title:
     value: label
+  field_hrinfo_id:
+    value: id
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/operations/terms'

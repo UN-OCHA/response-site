@@ -1,0 +1,19 @@
+uuid: 9deb7399-ec87-4384-ab7c-c7a0c0270829
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+    - ocha_docstore_files
+id: assessment_document.field_files
+field_name: field_files
+entity_type: assessment_document
+type: ocha_doc_store_file
+settings: {  }
+module: ocha_docstore_files
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,19 @@
+uuid: 518188c5-e9d0-4b1e-a5c8-51414a7127ff
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: local_group.field_operations
+field_name: field_operations
+entity_type: local_group
+type: entity_reference
+settings:
+  target_type: operation
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

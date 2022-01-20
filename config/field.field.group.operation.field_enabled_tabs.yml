@@ -1,0 +1,33 @@
+uuid: 9d88fc02-1877-49a4-bc36-191c70f93e80
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_enabled_tabs
+    - group.type.operation
+  module:
+    - options
+id: group.operation.field_enabled_tabs
+field_name: field_enabled_tabs
+entity_type: group
+bundle: operation
+label: 'Enabled tabs'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: events
+  -
+    value: documents
+  -
+    value: maps
+  -
+    value: datasets
+  -
+    value: offices
+  -
+    value: assessments
+default_value_callback: ''
+settings: {  }
+field_type: list_string

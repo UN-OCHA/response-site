@@ -1,0 +1,21 @@
+uuid: 674011c8-90b5-42c4-b09c-05b8e28255ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_frequency
+  module:
+    - external_entities
+    - options
+id: assessment.assessment.field_frequency
+field_name: field_frequency
+entity_type: assessment
+bundle: assessment
+label: Frequency
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

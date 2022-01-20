@@ -1,0 +1,26 @@
+uuid: ea8ad295-166a-48cb-9b17-503db13a92d5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_assessment_questionnaire
+  module:
+    - external_entities
+id: assessment.assessment.field_assessment_questionnaire
+field_name: field_assessment_questionnaire
+entity_type: assessment
+bundle: assessment
+label: 'Assessment questionnaire'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:assessment_document'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

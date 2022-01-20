@@ -1,0 +1,21 @@
+uuid: 470584c7-dd76-493e-8a14-295284453110
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment_document.field_accessibility
+  module:
+    - external_entities
+    - options
+id: assessment_document.assessment_document.field_accessibility
+field_name: field_accessibility
+entity_type: assessment_document
+bundle: assessment_document
+label: Accessibility
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

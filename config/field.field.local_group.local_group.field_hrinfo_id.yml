@@ -1,0 +1,24 @@
+uuid: a15f136a-9b25-4ad1-b457-3f67661b45d0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.local_group.field_hrinfo_id
+  module:
+    - external_entities
+id: local_group.local_group.field_hrinfo_id
+field_name: field_hrinfo_id
+entity_type: local_group
+bundle: local_group
+label: 'HRInfo Id'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

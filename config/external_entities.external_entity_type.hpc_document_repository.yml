@@ -1,10 +1,10 @@
-uuid: 2cf9663c-f716-45a9-b40f-3a85bcaf85c9
+uuid: 7587963f-9058-4f38-9bf9-b86f766f86a2
 langcode: en
 status: true
 dependencies: {  }
-id: organization
-label: Organization
-label_plural: Organizations
+id: hpc_document_repository
+label: 'HPC document repository'
+label_plural: 'HPC document repositories'
 description: ''
 read_only: true
 field_mappings:
@@ -13,10 +13,10 @@ field_mappings:
   uuid:
     value: uuid
   title:
-    value: label
+    value: display_name
 storage_client_id: restjson
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/organizations/terms'
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/ar_hpc_document_repository/terms'
   response_format: json
   pager:
     default_limit: '50'

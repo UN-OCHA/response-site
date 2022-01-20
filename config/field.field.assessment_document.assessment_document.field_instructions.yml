@@ -1,0 +1,20 @@
+uuid: 8ffba244-fc0e-4de7-a48b-79ff5ec93f8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment_document.field_instructions
+  module:
+    - external_entities
+id: assessment_document.assessment_document.field_instructions
+field_name: field_instructions
+entity_type: assessment_document
+bundle: assessment_document
+label: Instructions
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

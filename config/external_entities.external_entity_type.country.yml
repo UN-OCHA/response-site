@@ -1,10 +1,10 @@
-uuid: 2cf9663c-f716-45a9-b40f-3a85bcaf85c9
+uuid: 50e1318a-02cd-4a63-a829-1e878abacd33
 langcode: en
 status: true
 dependencies: {  }
-id: organization
-label: Organization
-label_plural: Organizations
+id: country
+label: Country
+label_plural: Countries
 description: ''
 read_only: true
 field_mappings:
@@ -16,7 +16,7 @@ field_mappings:
     value: label
 storage_client_id: restjson
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/organizations/terms'
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/countries/terms'
   response_format: json
   pager:
     default_limit: '50'

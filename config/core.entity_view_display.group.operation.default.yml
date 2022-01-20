@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.operation.field_enabled_tabs
     - field.field.group.operation.field_operation
     - field.field.group.operation.field_paragraphs
     - field.field.group.operation.subgroup_depth
@@ -12,11 +13,19 @@ dependencies:
     - group.type.operation
   module:
     - layout_paragraphs
+    - options
 id: group.operation.default
 targetEntityType: group
 bundle: operation
 mode: default
 content:
+  field_enabled_tabs:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
   field_paragraphs:
     type: layout_paragraphs
     label: hidden

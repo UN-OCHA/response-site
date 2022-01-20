@@ -1,0 +1,33 @@
+uuid: 7c8da658-e6f4-4e75-8c2a-fe971a185237
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+    - options
+id: assessment_document.field_accessibility
+field_name: field_accessibility
+entity_type: assessment_document
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 'Not Applicable'
+      label: 'Not Applicable'
+    -
+      value: 'Publicly Available'
+      label: 'Publicly Available'
+    -
+      value: 'Available on Request'
+      label: 'Available on Request'
+    -
+      value: 'Not Available'
+      label: 'Not Available'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

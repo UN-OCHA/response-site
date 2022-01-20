@@ -1,0 +1,20 @@
+uuid: 28d99e72-87d4-40ce-9c5e-d584278607d6
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: location.field_admin_level
+field_name: field_admin_level
+entity_type: location
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

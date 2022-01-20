@@ -1,0 +1,26 @@
+uuid: 8ac0d915-3d44-4ff2-94f0-73b1183a8383
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_disaster
+  module:
+    - external_entities
+id: assessment.assessment.field_disaster
+field_name: field_disaster
+entity_type: assessment
+bundle: assessment
+label: Disaster
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:disaster'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

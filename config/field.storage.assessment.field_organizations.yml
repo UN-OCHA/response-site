@@ -1,0 +1,19 @@
+uuid: 1e4ae9d8-4ff4-49a6-bcfc-0464babbbcc8
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_organizations
+field_name: field_organizations
+entity_type: assessment
+type: entity_reference
+settings:
+  target_type: organization
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

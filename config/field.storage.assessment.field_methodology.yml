@@ -1,0 +1,19 @@
+uuid: 02987137-a127-4e15-96c8-32276c84f1b5
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_methodology
+field_name: field_methodology
+entity_type: assessment
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

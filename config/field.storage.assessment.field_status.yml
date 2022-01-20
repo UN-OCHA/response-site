@@ -1,0 +1,19 @@
+uuid: ad26e51b-af76-4177-a5dd-8b21f0a0a06b
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_status
+field_name: field_status
+entity_type: assessment
+type: entity_reference
+settings:
+  target_type: assessment_status
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

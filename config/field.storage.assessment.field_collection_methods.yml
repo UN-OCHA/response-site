@@ -1,0 +1,54 @@
+uuid: 39b51a93-d442-410a-8d19-54e49817f9bc
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+    - options
+id: assessment.field_collection_methods
+field_name: field_collection_methods
+entity_type: assessment
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: structured
+      label: 'Structured Interview'
+    -
+      value: unstructured
+      label: 'Unstructured Interview'
+    -
+      value: key_informant
+      label: 'Key Informant Interview'
+    -
+      value: focus_group
+      label: 'Focus group discussion'
+    -
+      value: observation
+      label: Observation
+    -
+      value: baseline
+      label: 'Baseline data analysis'
+    -
+      value: phone
+      label: 'Phone Interview'
+    -
+      value: field
+      label: 'Field Interview'
+    -
+      value: email
+      label: 'Email / Mail Interview'
+    -
+      value: mixed
+      label: Mixed
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

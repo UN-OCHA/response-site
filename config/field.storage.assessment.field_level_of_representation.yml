@@ -1,0 +1,42 @@
+uuid: 28d71ef4-4ceb-44ea-a0f1-7ea4c750af0f
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+    - options
+id: assessment.field_level_of_representation
+field_name: field_level_of_representation
+entity_type: assessment
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: admin0
+      label: 'National (admin 0)'
+    -
+      value: admin1
+      label: 'Governorate (admin 1)'
+    -
+      value: admin2
+      label: 'District (admin 2)'
+    -
+      value: admin3
+      label: 'Sub-district (admin 3)'
+    -
+      value: admin4
+      label: 'Village (admin 4)'
+    -
+      value: admin5
+      label: 'Admin 5'
+    -
+      value: other
+      label: Other
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

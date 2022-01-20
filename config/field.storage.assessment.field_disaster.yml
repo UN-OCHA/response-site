@@ -1,0 +1,19 @@
+uuid: 2754dc66-62fc-490e-a06e-4ea260803843
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_disaster
+field_name: field_disaster
+entity_type: assessment
+type: entity_reference
+settings:
+  target_type: disaster
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

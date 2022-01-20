@@ -1,0 +1,20 @@
+uuid: 22f32e53-aadd-4e94-91f7-7c31d96b7a69
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_contacts
+  module:
+    - external_entities
+id: assessment.assessment.field_contacts
+field_name: field_contacts
+entity_type: assessment
+bundle: assessment
+label: Contacts
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,19 @@
+uuid: e2a3648c-6aeb-4c0d-b066-31afec9d3586
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment_document.field_instructions
+field_name: field_instructions
+entity_type: assessment_document
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

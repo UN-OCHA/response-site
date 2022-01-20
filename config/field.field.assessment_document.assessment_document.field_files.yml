@@ -1,0 +1,23 @@
+uuid: 1bac6433-b7d1-4945-969d-cc9324f91ca8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment_document.field_files
+  module:
+    - external_entities
+    - ocha_docstore_files
+id: assessment_document.assessment_document.field_files
+field_name: field_files
+entity_type: assessment_document
+bundle: assessment_document
+label: Files
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  endpoint: 'http://docstore.local.docksal/api/v1/files'
+  api-key: abcd
+field_type: ocha_doc_store_file

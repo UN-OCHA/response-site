@@ -1,0 +1,39 @@
+uuid: 06117c9d-ddc5-41bd-86c9-17999be193a1
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - options
+id: group.field_enabled_tabs
+field_name: field_enabled_tabs
+entity_type: group
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: events
+      label: Events
+    -
+      value: documents
+      label: Documents
+    -
+      value: maps
+      label: Maps/Infographics
+    -
+      value: datasets
+      label: Datasets
+    -
+      value: offices
+      label: 'Offices / Coordination Hubs'
+    -
+      value: assessments
+      label: Assessments
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

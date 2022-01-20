@@ -1,0 +1,26 @@
+uuid: 5936854b-7b46-491b-a686-dd0a86944ed0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_status
+  module:
+    - external_entities
+id: assessment.assessment.field_status
+field_name: field_status
+entity_type: assessment
+bundle: assessment
+label: Status
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:assessment_status'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

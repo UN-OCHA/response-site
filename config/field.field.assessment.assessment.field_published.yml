@@ -1,0 +1,24 @@
+uuid: 171343d2-13ff-4dd2-b0bd-8d065ecc3aab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_published
+  module:
+    - external_entities
+id: assessment.assessment.field_published
+field_name: field_published
+entity_type: assessment
+bundle: assessment
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

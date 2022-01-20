@@ -1,22 +1,22 @@
-uuid: 2cf9663c-f716-45a9-b40f-3a85bcaf85c9
+uuid: 70ace887-bd18-4212-aed4-d401b63cdb1b
 langcode: en
 status: true
 dependencies: {  }
-id: organization
-label: Organization
-label_plural: Organizations
+id: life_cycle_step
+label: 'Life cycle step'
+label_plural: 'Life cycle steps'
 description: ''
-read_only: true
+read_only: false
 field_mappings:
   id:
     value: uuid
   uuid:
     value: uuid
   title:
-    value: label
+    value: display_name
 storage_client_id: restjson
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/organizations/terms'
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms'
   response_format: json
   pager:
     default_limit: '50'

@@ -1,0 +1,26 @@
+uuid: 7e81fcc9-a0a2-4293-a7a2-07adce2bcdfc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_units_of_measurement
+  module:
+    - external_entities
+id: assessment.assessment.field_units_of_measurement
+field_name: field_units_of_measurement
+entity_type: assessment
+bundle: assessment
+label: 'Units of measurement'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:unit_of_measurement'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

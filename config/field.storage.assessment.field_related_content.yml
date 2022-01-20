@@ -1,0 +1,19 @@
+uuid: 52dd8294-4685-489f-b2e2-626405cf01dd
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+    - link
+id: assessment.field_related_content
+field_name: field_related_content
+entity_type: assessment
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

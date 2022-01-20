@@ -1,12 +1,12 @@
-uuid: fa2fa501-2810-408c-b2dc-783dd3bfbc25
+uuid: 78fb7af1-c12c-491f-8849-8cafecebb6a2
 langcode: en
 status: true
 dependencies: {  }
-id: location
-label: Location
-label_plural: Locations
+id: local_group
+label: Cluster
+label_plural: Clusters
 description: ''
-read_only: true
+read_only: false
 field_mappings:
   id:
     value: uuid
@@ -14,17 +14,13 @@ field_mappings:
     value: uuid
   title:
     value: display_name
-  field_admin_level:
-    value: admin_level
-  field_geolocation:
-    geo_type: +Point
-    lat: geolocation/lat
-    lon: geolocation/lon
-  field_parent:
-    target_id: 'parent/*/uuid'
+  field_hrinfo_id:
+    value: id
+  field_operations:
+    target_id: 'operations/*/uuid'
 storage_client_id: restjson
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms'
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/local_coordination_groups/terms'
   response_format: json
   pager:
     default_limit: '50'
@@ -33,12 +29,12 @@ storage_client_config:
     page_size_parameter: 'page[limit]'
     page_size_parameter_type: pagesize
   api_key:
-    header_name: ''
-    key: ''
+    header_name: API-KEY
+    key: abcd
   parameters:
     list: {  }
     single: {  }
-persistent_cache_max_age: 21600
+persistent_cache_max_age: 43200
 annotation_entity_type_id: null
 annotation_bundle_id: null
 annotation_field_name: null

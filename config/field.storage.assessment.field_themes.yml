@@ -1,0 +1,19 @@
+uuid: 4aa3f0e4-fa4b-4d07-a9f2-36a8165a5057
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_themes
+field_name: field_themes
+entity_type: assessment
+type: entity_reference
+settings:
+  target_type: theme
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

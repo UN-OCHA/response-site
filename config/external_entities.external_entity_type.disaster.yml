@@ -1,10 +1,10 @@
-uuid: 2cf9663c-f716-45a9-b40f-3a85bcaf85c9
+uuid: e30501e4-bce1-4f33-93fa-6cac1fde6676
 langcode: en
 status: true
 dependencies: {  }
-id: organization
-label: Organization
-label_plural: Organizations
+id: disaster
+label: Disaster
+label_plural: Disasters
 description: ''
 read_only: true
 field_mappings:
@@ -13,17 +13,17 @@ field_mappings:
   uuid:
     value: uuid
   title:
-    value: label
+    value: title
 storage_client_id: restjson
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/organizations/terms'
+  endpoint: 'http://docstore.local.docksal/api/v1/documents/disasters'
   response_format: json
   pager:
     default_limit: '50'
-    page_parameter: ''
-    page_parameter_type: null
-    page_size_parameter: ''
-    page_size_parameter_type: null
+    page_parameter: 'page[offset]'
+    page_parameter_type: pagenum
+    page_size_parameter: 'page[limit]'
+    page_size_parameter_type: pagesize
   api_key:
     header_name: ''
     key: ''

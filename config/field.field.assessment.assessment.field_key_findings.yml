@@ -1,0 +1,20 @@
+uuid: eb80b076-3da4-45e7-b229-a7ea843aa24c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_key_findings
+  module:
+    - external_entities
+id: assessment.assessment.field_key_findings
+field_name: field_key_findings
+entity_type: assessment
+bundle: assessment
+label: 'Key findings'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

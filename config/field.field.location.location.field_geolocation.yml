@@ -1,0 +1,21 @@
+uuid: a2dcd34d-ce18-4b03-b96b-20bcf5458922
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.location.field_geolocation
+  module:
+    - external_entities
+    - geofield
+id: location.location.field_geolocation
+field_name: field_geolocation
+entity_type: location
+bundle: location
+label: geolocation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geofield

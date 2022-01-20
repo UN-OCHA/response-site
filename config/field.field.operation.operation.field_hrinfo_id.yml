@@ -1,0 +1,24 @@
+uuid: 9f82edc1-a62b-4fa7-9349-36d263d3482d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.operation.field_hrinfo_id
+  module:
+    - external_entities
+id: operation.operation.field_hrinfo_id
+field_name: field_hrinfo_id
+entity_type: operation
+bundle: operation
+label: 'HRInfo Id'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

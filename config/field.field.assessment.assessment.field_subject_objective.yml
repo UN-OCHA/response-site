@@ -1,0 +1,20 @@
+uuid: 03c8214c-bfda-431e-9c29-cba10a551f3b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_subject_objective
+  module:
+    - external_entities
+id: assessment.assessment.field_subject_objective
+field_name: field_subject_objective
+entity_type: assessment
+bundle: assessment
+label: Subject/Objective
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

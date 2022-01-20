@@ -1,0 +1,23 @@
+uuid: e2d4a7a3-d931-48d9-b61f-05e63eb1ac9e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_related_content
+  module:
+    - external_entities
+    - link
+id: assessment.assessment.field_related_content
+field_name: field_related_content
+entity_type: assessment
+bundle: assessment
+label: 'Related content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

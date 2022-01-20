@@ -1,0 +1,24 @@
+uuid: c8d2418a-f61a-4e6a-97ff-6e75264dc312
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.location.field_admin_level
+  module:
+    - external_entities
+id: location.location.field_admin_level
+field_name: field_admin_level
+entity_type: location
+bundle: location
+label: 'Admin level'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

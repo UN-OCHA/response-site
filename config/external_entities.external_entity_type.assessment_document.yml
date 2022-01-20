@@ -1,0 +1,48 @@
+uuid: fc860db5-cbe9-4929-ae52-8ea40cd91cd5
+langcode: en
+status: true
+dependencies: {  }
+id: assessment_document
+label: 'Assessment document'
+label_plural: 'Assessment documents'
+description: ''
+read_only: false
+field_mappings:
+  id:
+    value: uuid
+  uuid:
+    value: uuid
+  title:
+    value: title
+  field_accessibility:
+    value: accessibility
+  field_author:
+    value: author
+  field_files:
+    media_uuid: 'files/*/uuid'
+    filename: 'files/*/filename'
+    uri: 'files/*/uri'
+    private: 'files/*/private'
+  field_instructions:
+    value: instructions
+storage_client_id: restjson
+storage_client_config:
+  endpoint: 'http://docstore.local.docksal/api/v1/documents/assessment-documents'
+  response_format: json
+  pager:
+    default_limit: '50'
+    page_parameter: 'page[offset]'
+    page_parameter_type: pagenum
+    page_size_parameter: 'page[limit]'
+    page_size_parameter_type: pagesize
+  api_key:
+    header_name: API-KEY
+    key: abcd
+  parameters:
+    list: {  }
+    single: {  }
+persistent_cache_max_age: 3600
+annotation_entity_type_id: null
+annotation_bundle_id: null
+annotation_field_name: null
+inherits_annotation_fields: false

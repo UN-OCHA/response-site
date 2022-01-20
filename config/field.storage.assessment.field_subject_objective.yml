@@ -1,0 +1,19 @@
+uuid: 8e87ba08-faed-4bac-b0a6-22caeec2498b
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_subject_objective
+field_name: field_subject_objective
+entity_type: assessment
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

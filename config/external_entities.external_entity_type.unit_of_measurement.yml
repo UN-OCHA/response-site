@@ -1,10 +1,10 @@
-uuid: 2cf9663c-f716-45a9-b40f-3a85bcaf85c9
+uuid: e5d576b0-9634-4b17-93c4-2206358735f6
 langcode: en
 status: true
 dependencies: {  }
-id: organization
-label: Organization
-label_plural: Organizations
+id: unit_of_measurement
+label: 'Unit of measurement'
+label_plural: 'Units of measurement'
 description: ''
 read_only: true
 field_mappings:
@@ -16,7 +16,7 @@ field_mappings:
     value: label
 storage_client_id: restjson
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/organizations/terms'
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/ar_units_of_measurement/terms'
   response_format: json
   pager:
     default_limit: '50'
@@ -30,7 +30,7 @@ storage_client_config:
   parameters:
     list: {  }
     single: {  }
-persistent_cache_max_age: 21600
+persistent_cache_max_age: 86400
 annotation_entity_type_id: null
 annotation_bundle_id: null
 annotation_field_name: null

@@ -1,0 +1,21 @@
+uuid: d525a465-8f3e-43db-81e9-62e7947d4c6c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_level_of_representation
+  module:
+    - external_entities
+    - options
+id: assessment.assessment.field_level_of_representation
+field_name: field_level_of_representation
+entity_type: assessment
+bundle: assessment
+label: 'Level of Representation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,20 @@
+uuid: e0535e34-6eec-4edb-9268-333eb18d4dbc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_other_location
+  module:
+    - external_entities
+id: assessment.assessment.field_other_location
+field_name: field_other_location
+entity_type: assessment
+bundle: assessment
+label: 'Other location'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

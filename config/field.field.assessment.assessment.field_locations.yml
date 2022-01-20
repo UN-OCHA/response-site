@@ -1,0 +1,26 @@
+uuid: b697d4aa-7967-40a9-8435-5db21c7df2e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_locations
+  module:
+    - external_entities
+id: assessment.assessment.field_locations
+field_name: field_locations
+entity_type: assessment
+bundle: assessment
+label: Location(s)
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:location'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

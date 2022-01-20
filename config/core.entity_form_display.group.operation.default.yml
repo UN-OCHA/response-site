@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.operation.field_enabled_tabs
     - field.field.group.operation.field_operation
     - field.field.group.operation.field_paragraphs
     - field.field.group.operation.subgroup_depth
@@ -19,9 +20,15 @@ targetEntityType: group
 bundle: operation
 mode: default
 content:
+  field_enabled_tabs:
+    type: options_buttons
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_operation:
     type: select2_entity_reference
-    weight: 3
+    weight: 4
     region: content
     settings:
       width: 100%
@@ -31,7 +38,7 @@ content:
     third_party_settings: {  }
   field_paragraphs:
     type: layout_paragraphs
-    weight: 4
+    weight: 5
     region: content
     settings:
       preview_view_mode: default
@@ -49,26 +56,26 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 1
+    weight: 2
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 6
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   translation:
-    weight: 2
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }

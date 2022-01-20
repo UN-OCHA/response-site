@@ -1,0 +1,19 @@
+uuid: ed0312c0-f394-4e12-91fb-f717c6e7036f
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_key_findings
+field_name: field_key_findings
+entity_type: assessment
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

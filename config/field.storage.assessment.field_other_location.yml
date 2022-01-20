@@ -1,0 +1,21 @@
+uuid: 5e6fe36d-1b98-44f6-85a6-8e2a7da43859
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_other_location
+field_name: field_other_location
+entity_type: assessment
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

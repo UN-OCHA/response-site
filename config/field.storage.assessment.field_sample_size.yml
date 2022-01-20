@@ -1,0 +1,21 @@
+uuid: 32ef0e05-33f9-4fdb-a9ed-c7d14656bbd0
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_sample_size
+field_name: field_sample_size
+entity_type: assessment
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

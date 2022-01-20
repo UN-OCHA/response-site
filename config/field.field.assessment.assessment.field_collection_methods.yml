@@ -1,0 +1,21 @@
+uuid: c25687c6-3487-426c-b402-d8d492967ea6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_collection_methods
+  module:
+    - external_entities
+    - options
+id: assessment.assessment.field_collection_methods
+field_name: field_collection_methods
+entity_type: assessment
+bundle: assessment
+label: 'Collection Method(s)'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,20 @@
+uuid: 5414f09f-f2b5-429c-8225-ac6c939739d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_methodology
+  module:
+    - external_entities
+id: assessment.assessment.field_methodology
+field_name: field_methodology
+entity_type: assessment
+bundle: assessment
+label: Methodology
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

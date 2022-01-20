@@ -1,0 +1,21 @@
+uuid: 0cf59253-a821-4b36-a58c-ddcda4911428
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.assessment.field_date
+  module:
+    - datetime_range
+    - external_entities
+id: assessment.assessment.field_date
+field_name: field_date
+entity_type: assessment
+bundle: assessment
+label: Date
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: daterange

@@ -1,0 +1,19 @@
+uuid: ee241925-b980-4a66-84b1-a6c9ca353139
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment.field_locations
+field_name: field_locations
+entity_type: assessment
+type: entity_reference
+settings:
+  target_type: location
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

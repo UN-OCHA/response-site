@@ -1,10 +1,10 @@
-uuid: 2cf9663c-f716-45a9-b40f-3a85bcaf85c9
+uuid: d4ae4822-7ea3-48b5-acb8-b6e049119025
 langcode: en
 status: true
 dependencies: {  }
-id: organization
-label: Organization
-label_plural: Organizations
+id: global_cluster
+label: 'Global cluster'
+label_plural: 'Global clusters'
 description: ''
 read_only: true
 field_mappings:
@@ -16,7 +16,7 @@ field_mappings:
     value: label
 storage_client_id: restjson
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/organizations/terms'
+  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/global_coordination_groups/terms'
   response_format: json
   pager:
     default_limit: '50'
@@ -30,7 +30,7 @@ storage_client_config:
   parameters:
     list: {  }
     single: {  }
-persistent_cache_max_age: 21600
+persistent_cache_max_age: 43200
 annotation_entity_type_id: null
 annotation_bundle_id: null
 annotation_field_name: null

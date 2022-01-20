@@ -1,0 +1,20 @@
+uuid: 165c8f40-261c-4de0-b1a9-12fbd468f270
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: local_group.field_hrinfo_id
+field_name: field_hrinfo_id
+entity_type: local_group
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

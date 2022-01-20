@@ -1,0 +1,20 @@
+uuid: 7945e8e2-225b-42ce-9f1d-ed67cd9f0d97
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime_range
+    - external_entities
+id: assessment.field_date
+field_name: field_date
+entity_type: assessment
+type: daterange
+settings:
+  datetime_type: datetime
+module: datetime_range
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
