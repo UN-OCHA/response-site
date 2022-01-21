@@ -2,8 +2,13 @@
 
 namespace Drupal\hr_paragraphs\Controller;
 
+use DateTime;
+use DateTimeInterface;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\date_recur\DateRecurHelper;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Page controller for tabs.
@@ -58,7 +63,16 @@ class ParagraphController extends ControllerBase {
    * Check if events is enabled.
    */
   public function hasEvents($group) {
-    return $this->tabIsActive($group, 'events');
+    $active = $this->tabIsActive($group, 'events');
+    if (!$active) {
+      return $active;
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    return AccessResult::allowedIf(!$group->field_ical_url->isEmpty());
   }
 
   /**
@@ -115,10 +129,26 @@ class ParagraphController extends ControllerBase {
    * Return all events of an operation, sector or cluster.
    */
   public function getEvents($group) {
+    // Array of FullCalendar settings.
+    $settings = [
+      'header' => [
+        'left' => 'prev,next today',
+        'center' => 'title',
+        'right' => 'month,agendaWeek,agendaDay',
+      ],
+      'defaultDate' => date('Y-m-d'),
+      'editable' => FALSE,
+    ];
+    // @see fullcalendar_api_example.ajax.inc.
+    $datasource_uri = '/group/7/ical';
+    $settings['events'] = $datasource_uri;
+
     return [
       'calendar' => [
-        '#type' => 'inline_template',
-        '#template' => '<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%23ffffff&ctz=Asia%2FDamascus&showTitle=0&showPrint=0&showCalendars=0&src=M3Rha2FwdmgxZWpiMHFmZzAyaDFsMWRhMXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=ZW4uYmUjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%237986CB&color=%237986CB&color=%237986CB" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>',
+        '#theme' => 'fullcalendar_calendar',
+        '#calendar_id' => 'fullcalendar',
+        '#calendar_settings' => $settings,
+        '#datasource_uri' => $datasource_uri,
       ],
       'link' => [
         '#type' => 'inline_template',
@@ -127,4 +157,75 @@ class ParagraphController extends ControllerBase {
     ];
   }
 
+  /**
+   * Proxy iCal requests.
+   */
+  public function getIcal($group, Request $request) {
+    $range_start = $request->query->get('start') ?? date('Y-m-d');
+    $range_end = $request->query->get('end') ?? date('Y-m-d', time() + 365 * 24 * 60 * 60);
+
+    // Get iCal URL from group.
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+    $url = $group->field_ical_url->value;
+
+    // Feych and parse iCal.
+    $cal = new CalFileParser();
+    $events = $cal->parse($url);
+
+    $output = [];
+    foreach ($events as $event) {
+      if (isset($event['RRULE'])) {
+        $iterationCount = 0;
+        $maxIterations = 40;
+
+        $rule = DateRecurHelper::create($event['RRULE'], $event['DTSTART'], $event['DTEND']);
+        if ($range_start && $range_end) {
+          $generator = $rule->generateOccurrences(new DateTime($range_start), new DateTime($range_end));
+        }
+        else {
+          $generator = $rule->generateOccurrences(new DateTime());
+        }
+
+        foreach ($generator as $occurrence) {
+          $output[] = [
+            'title' => $event['SUMMARY'],
+            'start' => $occurrence->getStart()->format(DateTimeInterface::W3C),
+            'end' => $occurrence->getEnd()->format(DateTimeInterface::W3C),
+          ];
+
+          $iterationCount++;
+          if ($iterationCount >= $maxIterations) {
+            break;
+          }
+        }
+      }
+      else {
+        if ($range_start && $range_end) {
+          if ($event['DTSTART']->format('Y-m-d') > $range_end) {
+            continue;
+          }
+          if ($event['DTEND']->format('Y-m-d') < $range_start) {
+            continue;
+          }
+
+          $output[] = [
+            'title' => $event['SUMMARY'],
+            'start' => $event['DTSTART']->format(DateTimeInterface::W3C),
+            'end' => $event['DTEND']->format(DateTimeInterface::W3C),
+          ];
+        }
+        else {
+          $output[] = [
+            'title' => $event['SUMMARY'],
+            'start' => $event['DTSTART']->format(DateTimeInterface::W3C),
+            'end' => $event['DTEND']->format(DateTimeInterface::W3C),
+          ];
+        }
+      }
+    }
+
+    return new JsonResponse($output);
+  }
 }

@@ -9,6 +9,7 @@ module:
   config: 0
   contact: 0
   contextual: 0
+  date_recur: 0
   datetime: 0
   datetime_range: 0
   dblog: 0
@@ -21,6 +22,7 @@ module:
   field_ui: 0
   file: 0
   filter: 0
+  fullcalendar_api: 0
   geofield: 0
   gnode: 0
   group: 0

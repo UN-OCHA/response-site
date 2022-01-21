@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.group.operation.field_enabled_tabs
+    - field.field.group.operation.field_ical_url
     - field.field.group.operation.field_operation
     - field.field.group.operation.field_paragraphs
     - field.field.group.operation.subgroup_depth
@@ -39,6 +40,7 @@ hidden:
   changed: true
   created: true
   field_enabled_tabs: true
+  field_ical_url: true
   field_operation: true
   langcode: true
   subgroup_depth: true

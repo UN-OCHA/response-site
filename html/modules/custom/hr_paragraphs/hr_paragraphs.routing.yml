@@ -34,5 +34,17 @@ hr_paragraphs.operation.events:
     parameters:
       group:
         type: entity:group
+hr_paragraphs.operation.ical:
+  path: '/group/{group}/ical'
+  title: 'Events'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getIcal'
+    _title: 'Events'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasEvents'
+  options:
+    parameters:
+      group:
+        type: entity:group
 
 
