@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a105e83844d1dcf27b5204db24208426",
+    "content-hash": "38e88c04e7d67775c84ac2e317a15750",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1919,6 +1919,71 @@
             "time": "2022-01-05T02:55:30+00:00"
         },
         {
+            "name": "drupal/date_recur",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/date_recur.git",
+                "reference": "3.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/date_recur-3.0.1.zip",
+                "reference": "3.0.1",
+                "shasum": "ca000eabbb0995d629cc5734a9dc6cef72f04d7e"
+            },
+            "require": {
+                "drupal/core": "^9",
+                "php": ">=7.3",
+                "rlanvin/php-rrule": "1.*"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "dev-master",
+                "drupal/coder": "^8.3",
+                "drupal/token": "^1.5",
+                "mglaman/phpstan-drupal": "^0.12",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-deprecation-rules": "*"
+            },
+            "suggest": {
+                "drupal/date_recur_interactive": "Provides an interactive recurring date widget."
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "3.0.1",
+                    "datestamp": "1636969596",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Frando",
+                    "homepage": "https://www.drupal.org/user/21850"
+                },
+                {
+                    "name": "dpi",
+                    "homepage": "https://www.drupal.org/user/81431"
+                }
+            ],
+            "description": "Recurring Dates Field",
+            "homepage": "https://www.drupal.org/project/date_recur",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/date_recur",
+                "issues": "https://www.drupal.org/project/issues/date_recur"
+            }
+        },
+        {
             "name": "drupal/entity",
             "version": "1.2.0",
             "source": {
@@ -2112,6 +2177,54 @@
             "homepage": "https://www.drupal.org/project/external_entities",
             "support": {
                 "source": "https://git.drupalcode.org/project/external_entities"
+            }
+        },
+        {
+            "name": "drupal/fullcalendar_api",
+            "version": "2.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/fullcalendar_api.git",
+                "reference": "2.0.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/fullcalendar_api-2.0.0-alpha1.zip",
+                "reference": "2.0.0-alpha1",
+                "shasum": "8cc3170c6cc15f855e00fbdbabc188b7a8d7e0e9"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0-alpha1",
+                    "datestamp": "1634589654",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "UsingSession",
+                    "homepage": "https://www.drupal.org/user/3582050"
+                },
+                {
+                    "name": "earthday47",
+                    "homepage": "https://www.drupal.org/user/605842"
+                }
+            ],
+            "description": "API interface for jQuery FullCalendar plugin, http://fullcalendar.io/.",
+            "homepage": "https://www.drupal.org/project/fullcalendar_api",
+            "support": {
+                "source": "https://git.drupalcode.org/project/fullcalendar_api"
             }
         },
         {
@@ -2866,6 +2979,15 @@
                 "source": "https://github.com/enlightn/security-checker/tree/v1.9.0"
             },
             "time": "2021-05-06T09:03:35+00:00"
+        },
+        {
+            "name": "fullcalendar/fullcalendar",
+            "version": "3.10.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/fullcalendar/fullcalendar/releases/download/v3.10.0/fullcalendar-3.10.0.zip"
+            },
+            "type": "drupal-library"
         },
         {
             "name": "grasmash/expander",
@@ -3737,6 +3859,18 @@
             "time": "2021-11-30T19:35:32+00:00"
         },
         {
+            "name": "npm-asset/moment",
+            "version": "2.29.1",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "npm-asset/select2",
             "version": "4.0.13",
             "dist": {
@@ -4399,6 +4533,54 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
+        },
+        {
+            "name": "rlanvin/php-rrule",
+            "version": "v1.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rlanvin/php-rrule.git",
+                "reference": "1373df401e0926cf7548716dabbc0d19603a144d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rlanvin/php-rrule/zipball/1373df401e0926cf7548716dabbc0d19603a144d",
+                "reference": "1373df401e0926cf7548716dabbc0d19603a144d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8|^5.5|^6.5"
+            },
+            "suggest": {
+                "ext-intl": "Intl extension is needed for humanReadable()"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RRule\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Lightweight and fast recurrence rules for PHP (RFC 5545)",
+            "homepage": "https://github.com/rlanvin/php-rrule",
+            "keywords": [
+                "date",
+                "ical",
+                "recurrence",
+                "recurring",
+                "rrule"
+            ],
+            "support": {
+                "issues": "https://github.com/rlanvin/php-rrule/issues",
+                "source": "https://github.com/rlanvin/php-rrule/tree/v1.6.3"
+            },
+            "time": "2019-01-13T09:49:03+00:00"
         },
         {
             "name": "stack/builder",
@@ -7993,6 +8175,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/external_entities": 20,
+        "drupal/fullcalendar_api": 15,
         "drupal/layout_paragraphs": 10,
         "drupal/paragraphs_asymmetric_translation_widgets": 10
     },

@@ -16,6 +16,18 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "fullcalendar/fullcalendar",
+                "version": "3.10.0",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/fullcalendar/fullcalendar/releases/download/v3.10.0/fullcalendar-3.10.0.zip",
+                    "type": "zip"
+                }
+            }
         }
     ],
     "require": {
@@ -25,7 +37,9 @@
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
+        "drupal/date_recur": "^3.0",
         "drupal/external_entities": "2.x-dev@dev",
+        "drupal/fullcalendar_api": "^2.0@alpha",
         "drupal/geofield": "^1.36",
         "drupal/group": "^1.4",
         "drupal/layout_paragraphs": "^2.0@beta",
@@ -33,6 +47,8 @@
         "drupal/select2": "^1.13",
         "drupal/subgroup": "^1.0",
         "drush/drush": "^10.2",
+        "fullcalendar/fullcalendar": "^3.10.0",
+        "npm-asset/moment": "^2.29",
         "npm-asset/select2": "^4"
     },
     "conflict": {
