@@ -101,7 +101,7 @@ class ParagraphController extends ControllerBase {
   /**
    * Return all assessments of an operation, sector or cluster.
    */
-  public function getAssessments($group) {
+  public function getAssessments($group, $type = 'list') {
     if ($group->field_operation->isEmpty()) {
       return array(
         '#type' => 'markup',
@@ -111,25 +111,47 @@ class ParagraphController extends ControllerBase {
 
     $operation_uuid = $group->field_operation->entity->uuid();
 
-    $entity_id = 'assessment';
-    $view_mode = 'teaser';
+    global $base_url;
+    switch ($type) {
+      case 'map':
+        $src = $base_url . '/rest/assessments/map-data?f[0]=operations:' . $operation_uuid;
+        $theme = 'hr_paragraphs_assessments_map';
+        break;
 
-    $assessment_uuids = $this->entityTypeManager->getStorage($entity_id)->getQuery()
-      ->condition('operations', $operation_uuid)
-      ->range(0, 25)
-      ->sort('changed', 'DESC')
-      ->execute();
-    $assessments = $this->entityTypeManager->getStorage($entity_id)->loadMultiple($assessment_uuids);
+      case 'table':
+        $src = $base_url . '/rest/assessments/table-data?f[0]=operations:' . $operation_uuid;
+        $theme = 'hr_paragraphs_assessments_table';
+        break;
 
-    $view_builder = $this->entityTypeManager->getViewBuilder($entity_id);
-    return $view_builder->viewMultiple($assessments, $view_mode);
+      case 'list':
+        $src = $base_url . '/rest/assessments/list-data?f[0]=operations:' . $operation_uuid;
+        $theme = 'hr_paragraphs_assessments_list';
+        break;
+
+      default:
+        $src = $base_url . '/rest/assessments/list-data?f[0]=operations:' . $operation_uuid;
+        $theme = 'hr_paragraphs_assessments_list';
+        break;
+
+    }
+
+    return [
+      '#theme' => $theme,
+      '#base_url' => $base_url,
+      '#src' => $src,
+      '#component_url' => '/modules/custom/hr_paragraphs/component/build/',
+    ];
   }
 
   /**
    * Return all events of an operation, sector or cluster.
    */
   public function getEvents($group) {
-    // Array of FullCalendar settings.
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    // Settings.
     $settings = [
       'header' => [
         'left' => 'prev,next today',
@@ -139,8 +161,9 @@ class ParagraphController extends ControllerBase {
       'defaultDate' => date('Y-m-d'),
       'editable' => FALSE,
     ];
-    // @see fullcalendar_api_example.ajax.inc.
-    $datasource_uri = '/group/7/ical';
+
+    // Set source to proxy.
+    $datasource_uri = '/group/' . $group->id() . '/ical';
     $settings['events'] = $datasource_uri;
 
     return [
@@ -148,11 +171,6 @@ class ParagraphController extends ControllerBase {
         '#theme' => 'fullcalendar_calendar',
         '#calendar_id' => 'fullcalendar',
         '#calendar_settings' => $settings,
-        '#datasource_uri' => $datasource_uri,
-      ],
-      'link' => [
-        '#type' => 'inline_template',
-        '#template' => '<a href="https://calendar.google.com/calendar/u/0?cid=M3Rha2FwdmgxZWpiMHFmZzAyaDFsMWRhMXNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ">Link to calendar</a>',
       ],
     ];
   }

@@ -11,11 +11,12 @@ hr_paragraphs.operation.offices:
       group:
         type: entity:group
 hr_paragraphs.operation.assessments:
-  path: '/group/{group}/assessments'
+  path: '/group/{group}/assessments/{type}'
   title: 'Assessments'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
     _title: 'Assessments'
+    type: 'list'
   requirements:
     _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
   options:
@@ -47,4 +48,25 @@ hr_paragraphs.operation.ical:
       group:
         type: entity:group
 
+hr_paragraphs.assessments.map_data:
+  path: '/rest/assessments/map-data'
+  defaults:
+    _controller: 'hr_paragraphs.json_controller:assessmentsMapData'
+    _title: 'Assessments map'
+  requirements:
+    _permission: 'access content'
+hr_paragraphs.assessments.list_data:
+  path: '/rest/assessments/list-data'
+  defaults:
+    _controller: 'hr_paragraphs.json_controller:assessmentsListData'
+    _title: 'Assessments list'
+  requirements:
+    _permission: 'access content'
+hr_paragraphs.assessments.table_data:
+  path: '/rest/assessments/table-data'
+  defaults:
+    _controller: 'hr_paragraphs.json_controller:assessmentsTableData'
+    _title: 'Assessments table'
+  requirements:
+    _permission: 'access content'
 

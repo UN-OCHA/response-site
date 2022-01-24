@@ -6,6 +6,38 @@
  */
 
 /**
+ * Implements hook_theme().
+ */
+function hr_paragraphs_theme($existing, $type, $theme, $path) {
+  return [
+    'hr_paragraphs_assessments_map' => [
+      'template' => 'ocha-map',
+      'variables' => [
+        'base_url' => 'http://hrinfo-site.docksal/',
+        'src' => 'http://hrinfo-site.docksal/rest/assessments/map-data?items_per_page=800',
+        'component_url' => '/modules/custom/hr_paragraphs/component/build/',
+      ],
+    ],
+    'hr_paragraphs_assessments_table' => [
+      'template' => 'ocha-table',
+      'variables' => [
+        'base_url' => 'http://hrinfo-site.docksal/',
+        'src' => 'http://hrinfo-site.docksal/rest/assessments/table-data?items_per_page=800',
+        'component_url' => '/modules/custom/hr_paragraphs/component/build/',
+      ],
+    ],
+    'hr_paragraphs_assessments_list' => [
+      'template' => 'ocha-list',
+      'variables' => [
+        'base_url' => 'http://hrinfo-site.docksal/',
+        'src' => 'http://hrinfo-site.docksal/rest/assessments/list-data?items_per_page=800',
+        'component_url' => '/modules/custom/hr_paragraphs/component/build/',
+      ],
+    ],
+  ];
+}
+
+/**
  * Implements hook_preprocess_paragraph__type().
  */
 function hr_paragraphs_preprocess_paragraph__offices(&$variables) {

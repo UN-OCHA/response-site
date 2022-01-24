@@ -2,3 +2,6 @@ services:
   hr_paragraphs.paragraph_controller:
     class: \Drupal\hr_paragraphs\Controller\ParagraphController
     arguments: ['@entity_type.manager']
+  hr_paragraphs.json_controller:
+    class: \Drupal\hr_paragraphs\Controller\JsonController
+    arguments: ['@entity_type.manager', '@http_client']
