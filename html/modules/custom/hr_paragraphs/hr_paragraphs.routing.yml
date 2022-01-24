@@ -10,6 +10,7 @@ hr_paragraphs.operation.offices:
     parameters:
       group:
         type: entity:group
+
 hr_paragraphs.operation.assessments:
   path: '/group/{group}/assessments/{type}'
   title: 'Assessments'
@@ -23,6 +24,46 @@ hr_paragraphs.operation.assessments:
     parameters:
       group:
         type: entity:group
+hr_paragraphs.operation.assessments.list:
+  path: '/group/{group}/assessments/{type}'
+  title: 'Assessments'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
+    _title: 'Assessments'
+    type: 'list'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
+  options:
+    parameters:
+      group:
+        type: entity:group
+hr_paragraphs.operation.assessments.table:
+  path: '/group/{group}/assessments/{type}'
+  title: 'Assessments'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
+    _title: 'Assessments'
+    type: 'table'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
+  options:
+    parameters:
+      group:
+        type: entity:group
+hr_paragraphs.operation.assessments.map:
+  path: '/group/{group}/assessments/{type}'
+  title: 'Assessments'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
+    _title: 'Assessments'
+    type: 'map'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
 hr_paragraphs.operation.events:
   path: '/group/{group}/events'
   title: 'Events'
