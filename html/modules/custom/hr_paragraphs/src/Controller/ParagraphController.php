@@ -179,6 +179,7 @@ class ParagraphController extends ControllerBase {
           <div>Date: <span id="modalStartDate"></span> <span id="modalEndDate"></span></div>
           <div><span id="modalDescription"></span></div>
           <div>Location: <span id="modalLocation"></span></div>
+          <div><span id="modalAttachments"></span></div>
         </div>',
         '#attached' => [
           'library' => [
@@ -208,6 +209,18 @@ class ParagraphController extends ControllerBase {
 
     $output = [];
     foreach ($events as $event) {
+      // Collect attachments.
+      $attachments = [];
+      foreach ($event as $key => $value) {
+        if (strpos($key, 'ATTACH;FILENAME=') !== FALSE) {
+          $str_length = strlen('ATTACH;FILENAME=');
+          $attachments[] = [
+            'filename' => substr($key, $str_length, strpos($key, ';', $str_length) - $str_length),
+            'url' => $value,
+          ];
+        }
+      }
+
       if (isset($event['RRULE'])) {
         $iterationCount = 0;
         $maxIterations = 40;
@@ -227,6 +240,7 @@ class ParagraphController extends ControllerBase {
             'location' => $event['LOCATION'],
             'start' => $occurrence->getStart()->format(DateTimeInterface::W3C),
             'end' => $occurrence->getEnd()->format(DateTimeInterface::W3C),
+            'attachments' => $attachments,
           ];
 
           $iterationCount++;
@@ -250,6 +264,7 @@ class ParagraphController extends ControllerBase {
             'location' => $event['LOCATION'],
             'start' => $event['DTSTART']->format(DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(DateTimeInterface::W3C),
+            'attachments' => $attachments,
           ];
         }
         else {
@@ -259,6 +274,7 @@ class ParagraphController extends ControllerBase {
             'location' => $event['LOCATION'],
             'start' => $event['DTSTART']->format(DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(DateTimeInterface::W3C),
+            'attachments' => $attachments,
           ];
         }
       }

@@ -43,6 +43,17 @@
         $('#modalLocation').html(info.location);
         $('#modalStartDate').html(startdate);
         $('#modalEndDate').html(enddate);
+
+        if (info.attachments) {
+          var output = '';
+          output += '<ul>';
+          info.attachments.forEach(attachment => {
+            output += '<li><a href="' + attachment.url + '" target="_blank" rel="nofollow noopener">' + attachment.filename + '</a></li>';
+          });
+          output += '</ul>';
+          $('#modalAttachments').html(output);
+        }
+
         $('#fullCalModal').dialog({
           title: info.title
         });
