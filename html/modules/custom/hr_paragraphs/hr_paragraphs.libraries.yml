@@ -1,0 +1,3 @@
+fullcalendar:
+  dependencies:
+    - jquery_ui_dialog/dialog

@@ -102,3 +102,28 @@ function hr_paragraphs_preprocess_paragraph__recent_assessments(&$variables) {
   $view_builder = $entity_type_manager->getViewBuilder($entity_id);
   $variables['content']['assessments'] = $view_builder->viewMultiple($assessments, $view_mode);
 }
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function hr_paragraphs_library_info_alter(&$libraries, $extension) {
+  if ($extension !== 'fullcalendar_api') {
+    return;
+  }
+
+  $new_file = '/' . drupal_get_path('module', 'hr_paragraphs') . '/component/events/js/fullcalendar.js';
+  $replacements = [
+    'js/fullcalendar.load.js' => $new_file,
+  ];
+
+  $new_js = [];
+  foreach ($libraries['fullcalendar_load']['js'] as $source => $options) {
+    if (isset($replacements[$source])) {
+      $new_js[$replacements[$source]] = $options;
+    }
+    else {
+      $new_js[$source] = $options;
+    }
+  }
+  $libraries['fullcalendar_load']['js'] = $new_js;
+}

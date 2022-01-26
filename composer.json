@@ -42,6 +42,7 @@
         "drupal/fullcalendar_api": "^2.0@alpha",
         "drupal/geofield": "^1.36",
         "drupal/group": "^1.4",
+        "drupal/jquery_ui_dialog": "^1.0",
         "drupal/layout_paragraphs": "^2.0@beta",
         "drupal/paragraphs_asymmetric_translation_widgets": "^1.0@beta",
         "drupal/select2": "^1.13",

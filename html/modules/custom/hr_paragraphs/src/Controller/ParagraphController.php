@@ -172,6 +172,20 @@ class ParagraphController extends ControllerBase {
         '#calendar_id' => 'fullcalendar',
         '#calendar_settings' => $settings,
       ],
+      'calendar_popup' => [
+        '#type' => 'inline_template',
+        '#template' => '
+          <div id="fullCalModal" style="display:none;">
+          <div>Date: <span id="modalStartDate"></span> <span id="modalEndDate"></span></div>
+          <div><span id="modalDescription"></span></div>
+          <div>Location: <span id="modalLocation"></span></div>
+        </div>',
+        '#attached' => [
+          'library' => [
+            'hr_paragraphs/fullcalendar',
+          ]
+        ],
+      ],
     ];
   }
 
@@ -209,6 +223,8 @@ class ParagraphController extends ControllerBase {
         foreach ($generator as $occurrence) {
           $output[] = [
             'title' => $event['SUMMARY'],
+            'description' => $event['DESCRIPTION'],
+            'location' => $event['LOCATION'],
             'start' => $occurrence->getStart()->format(DateTimeInterface::W3C),
             'end' => $occurrence->getEnd()->format(DateTimeInterface::W3C),
           ];
@@ -230,6 +246,8 @@ class ParagraphController extends ControllerBase {
 
           $output[] = [
             'title' => $event['SUMMARY'],
+            'description' => $event['DESCRIPTION'],
+            'location' => $event['LOCATION'],
             'start' => $event['DTSTART']->format(DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(DateTimeInterface::W3C),
           ];
@@ -237,6 +255,8 @@ class ParagraphController extends ControllerBase {
         else {
           $output[] = [
             'title' => $event['SUMMARY'],
+            'description' => $event['DESCRIPTION'],
+            'location' => $event['LOCATION'],
             'start' => $event['DTSTART']->format(DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(DateTimeInterface::W3C),
           ];
