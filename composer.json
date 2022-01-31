@@ -72,6 +72,7 @@
             "cweagans/composer-patches": true,
             "drupal-composer/preserve-paths": true,
             "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
             "drupal/console-extend-plugin": true,
             "symfony/flex": true
         }
