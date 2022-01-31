@@ -65,7 +65,16 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true
+        "bin-dir": "vendor/bin/",
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal-composer/preserve-paths": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/console-extend-plugin": true,
+            "symfony/flex": true
+        }
     },
     "extra": {
         "enable-patching": true,
