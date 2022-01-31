@@ -10,7 +10,7 @@ volumes:
 services:
   redis:
     restart: always
-    image: unocha/alpine-redis:5
+    image: public.ecr.aws/unocha/redis:5
     hostname: hrinfo9-test-redis
     container_name: hrinfo9-test-redis
     ports:
@@ -19,7 +19,7 @@ services:
       - default
 
   mysql:
-    image: unocha/alpine-mysql:10.4.13-r0-202006-01
+    image: public.ecr.aws/unocha/mysql:10.4.13-r0-202006-01
     hostname: hrinfo9-test-mysql
     container_name: hrinfo9-test-mysql
     environment:
@@ -30,7 +30,7 @@ services:
       - default
 
   drupal:
-    image: unocha/hrinfo9-site:local
+    image: public.ecr.aws/unocha/hrinfo9-site:local
     hostname: hrinfo9-test-site
     container_name: hrinfo9-test-site
     depends_on:
