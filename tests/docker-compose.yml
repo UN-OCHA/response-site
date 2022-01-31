@@ -23,9 +23,9 @@ services:
     hostname: hrinfo9-test-mysql
     container_name: hrinfo9-test-mysql
     environment:
-      - MYSQL_DB=reliefweb
-      - MYSQL_USER=reliefweb
-      - MYSQL_PASS=reliefweb
+      - MYSQL_DB=hrinfo
+      - MYSQL_USER=hrinfo
+      - MYSQL_PASS=hrinfo
     networks:
       - default
 
