@@ -80,4 +80,4 @@ module:
 theme:
   bartik: 0
   seven: 0
-profile: standard
+profile: minimal
