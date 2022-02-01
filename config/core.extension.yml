@@ -2,6 +2,7 @@ _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc
 module:
   address: 0
+  admin_denied: 0
   big_pipe: 0
   block: 0
   breakpoint: 0
@@ -9,6 +10,7 @@ module:
   config: 0
   contact: 0
   contextual: 0
+  ctools: 0
   date_recur: 0
   datetime: 0
   datetime_range: 0
@@ -24,15 +26,24 @@ module:
   fullcalendar_api: 0
   geofield: 0
   gnode: 0
+  google_tag: 0
   group: 0
   help: 0
   hr_paragraphs: 0
   image: 0
+  jquery_ui: 0
+  jquery_ui_button: 0
+  jquery_ui_checkboxradio: 0
+  jquery_ui_controlgroup: 0
+  jquery_ui_dialog: 0
+  jquery_ui_draggable: 0
+  jquery_ui_resizable: 0
   language: 0
   layout_discovery: 0
   layout_paragraphs: 0
   link: 0
   locale: 0
+  maintenance200: 0
   menu_link_content: 0
   menu_ui: 0
   node: 0
@@ -44,25 +55,29 @@ module:
   path: 0
   path_alias: 0
   rdf: 0
-  redis: 0
+  seckit: 0
   select2: 0
   shortcut: 0
+  social_api: 0
+  social_auth: 0
+  social_auth_hid: 0
   subgroup: 0
   system: 0
-  syslog: 0
   taxonomy: 0
   telephone: 0
   text: 0
+  token: 0
   toolbar: 0
   update: 0
   user: 0
   variationcache: 0
   views_ui: 0
+  pathauto: 1
   content_translation: 10
   views: 10
   paragraphs: 11
-  minimal: 1000
+  standard: 1000
 theme:
   bartik: 0
   seven: 0
-profile: minimal
+profile: standard

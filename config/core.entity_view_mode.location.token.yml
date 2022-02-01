@@ -1,0 +1,10 @@
+uuid: 0307f27a-cdc0-4004-9c4a-5d336d115918
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: location.token
+label: Token
+targetEntityType: location
+cache: true

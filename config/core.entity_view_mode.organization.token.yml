@@ -1,0 +1,10 @@
+uuid: 888b63f0-37a8-4ec5-b701-23b76b916429
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: organization.token
+label: Token
+targetEntityType: organization
+cache: true

@@ -1,0 +1,10 @@
+uuid: 9d803a16-3064-4b39-a66e-fd79a6decb3e
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: assessment_status.token
+label: Token
+targetEntityType: assessment_status
+cache: true

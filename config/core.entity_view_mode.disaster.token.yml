@@ -1,0 +1,10 @@
+uuid: 3ceddc87-7da6-426c-b951-c73b7646c8a0
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: disaster.token
+label: Token
+targetEntityType: disaster
+cache: true

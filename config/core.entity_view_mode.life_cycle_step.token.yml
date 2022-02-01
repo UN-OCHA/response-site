@@ -1,0 +1,10 @@
+uuid: 275dba4d-8df1-4d96-9b67-f399b19352c5
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: life_cycle_step.token
+label: Token
+targetEntityType: life_cycle_step
+cache: true

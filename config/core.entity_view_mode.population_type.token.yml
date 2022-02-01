@@ -1,0 +1,10 @@
+uuid: 071fcfcf-8d97-45d4-a52b-4da0673854fa
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: population_type.token
+label: Token
+targetEntityType: population_type
+cache: true

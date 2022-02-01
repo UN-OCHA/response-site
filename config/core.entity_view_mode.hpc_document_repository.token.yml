@@ -1,0 +1,10 @@
+uuid: 2c7b8e1a-e8aa-431a-a776-d5af751698ba
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: hpc_document_repository.token
+label: Token
+targetEntityType: hpc_document_repository
+cache: true

@@ -1,6 +1,6 @@
 {
-    "name": "drupal/recommended-project",
-    "description": "Project template for Drupal 8 projects with a relocated document root",
+    "name": "un-ocha/hrinfo-site-2022",
+    "description": "HRInfo 2022",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/drupal",
@@ -34,6 +34,8 @@
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.7",
         "drupal/address": "^1.9",
+        "drupal/admin_denied": "^1.1",
+        "drupal/components": "^2.4",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
@@ -41,17 +43,23 @@
         "drupal/external_entities": "2.x-dev@dev",
         "drupal/fullcalendar_api": "^2.0@alpha",
         "drupal/geofield": "^1.36",
+        "drupal/google_tag": "^1.4",
         "drupal/group": "^1.4",
         "drupal/jquery_ui_dialog": "^1.0",
         "drupal/layout_paragraphs": "^2.0@beta",
+        "drupal/maintenance200": "^1.1",
         "drupal/paragraphs_asymmetric_translation_widgets": "^1.0@beta",
+        "drupal/pathauto": "^1.8",
         "drupal/redis": "^1.5",
+        "drupal/seckit": "^2.0",
         "drupal/select2": "^1.13",
+        "drupal/social_auth_hid": "^3.0",
         "drupal/subgroup": "^1.0",
         "drush/drush": "^10.2",
         "fullcalendar/fullcalendar": "^3.10.0",
         "npm-asset/moment": "^2.29",
-        "npm-asset/select2": "^4"
+        "npm-asset/select2": "^4",
+        "unocha/common_design": "^5.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -144,6 +152,7 @@
     },
     "require-dev": {
         "drupal/coder": "^8.3",
+        "drupal/console": "^1.9",
         "drupal/core-dev": "^9",
         "drupal/devel_php": "^1.3",
         "marcocesarato/php-conventional-changelog": "^1.13",

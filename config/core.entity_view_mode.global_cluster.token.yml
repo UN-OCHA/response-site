@@ -1,0 +1,10 @@
+uuid: 28663b84-d321-4620-917a-e843dc24e1a2
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: global_cluster.token
+label: Token
+targetEntityType: global_cluster
+cache: true
