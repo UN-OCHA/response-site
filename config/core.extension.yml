@@ -12,7 +12,6 @@ module:
   date_recur: 0
   datetime: 0
   datetime_range: 0
-  dblog: 0
   dynamic_page_cache: 0
   editor: 0
   entity: 0
@@ -45,10 +44,12 @@ module:
   path: 0
   path_alias: 0
   rdf: 0
+  redis: 0
   select2: 0
   shortcut: 0
   subgroup: 0
   system: 0
+  syslog: 0
   taxonomy: 0
   telephone: 0
   text: 0
