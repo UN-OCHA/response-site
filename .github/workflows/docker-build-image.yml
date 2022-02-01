@@ -1,0 +1,32 @@
+name: Build docker image
+
+on:
+  push:
+    branches:
+      - develop
+      - 'feature/**'
+      - main
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Build
+      id: build-action
+      uses: UN-OCHA/actions/drupal-docker-build@main
+      with:
+        aws_access_key_id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+        docker_registry_url: public.ecr.aws
+        docker_registry_path: /unocha/
+        docker_image: hrinfo9-site
+        docker_username: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+        docker_password: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+        ecr_github_token: ${{ secrets.ECR_GITHUB_TOKEN }}
+        ecr_jenkins_token: ${{ secrets.JENKINS_ECR_TOKEN }}
+        flowdock_token: ${{ secrets.FLOWDOCK_TOKEN }}
+        flowdock_icon_success: 'blossom'
+        flowdock_icon_failure: 'warning'
