@@ -85,7 +85,8 @@
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "drupal/console-extend-plugin": true,
-            "symfony/flex": true
+            "symfony/flex": true,
+            "oomphinc/composer-installers-extender": true
         }
     },
     "extra": {
