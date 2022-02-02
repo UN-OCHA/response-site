@@ -5,3 +5,6 @@ services:
   hr_paragraphs.json_controller:
     class: \Drupal\hr_paragraphs\Controller\JsonController
     arguments: ['@entity_type.manager', '@http_client']
+  hr_paragraphs.google_calendar:
+    class: Drupal\hr_paragraphs\GoogleCalendar
+    arguments: ['@config.factory', '@file_system']

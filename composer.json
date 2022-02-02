@@ -57,6 +57,7 @@
         "drupal/subgroup": "^1.0",
         "drush/drush": "^10.2",
         "fullcalendar/fullcalendar": "^3.10.0",
+        "google/apiclient": "^2.12",
         "npm-asset/moment": "^2.29",
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",
