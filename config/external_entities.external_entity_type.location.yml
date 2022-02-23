@@ -7,21 +7,23 @@ label: Location
 label_plural: Locations
 description: ''
 read_only: true
-field_mappings:
-  id:
-    value: uuid
-  uuid:
-    value: uuid
-  title:
-    value: display_name
-  field_admin_level:
-    value: admin_level
-  field_geolocation:
-    geo_type: +Point
-    lat: geolocation/lat
-    lon: geolocation/lon
-  field_parent:
-    target_id: 'parent/*/uuid'
+field_mapper_id: simple
+field_mapper_config:
+  field_mappings:
+    id:
+      value: uuid
+    uuid:
+      value: uuid
+    title:
+      value: display_name
+    field_admin_level:
+      value: admin_level
+    field_geolocation:
+      geo_type: +Point
+      lat: geolocation/lat
+      lon: geolocation/lon
+    field_parent:
+      target_id: 'parent/*/uuid'
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/locations/terms'

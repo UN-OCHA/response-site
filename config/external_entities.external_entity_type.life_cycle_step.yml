@@ -7,13 +7,15 @@ label: 'Life cycle step'
 label_plural: 'Life cycle steps'
 description: ''
 read_only: false
-field_mappings:
-  id:
-    value: uuid
-  uuid:
-    value: uuid
-  title:
-    value: display_name
+field_mapper_id: simple
+field_mapper_config:
+  field_mappings:
+    id:
+      value: uuid
+    uuid:
+      value: uuid
+    title:
+      value: display_name
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/ar_life_cycle_steps/terms'

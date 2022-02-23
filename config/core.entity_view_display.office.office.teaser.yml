@@ -11,6 +11,7 @@ dependencies:
     - field.field.office.office.field_operations
     - field.field.office.office.field_organizations
     - field.field.office.office.field_phones
+    - field.field.office.office.field_test
   module:
     - address
     - external_entities
@@ -62,3 +63,4 @@ hidden:
   field_is_coordination_hub: true
   field_location: true
   field_operations: true
+  field_test: true

@@ -7,17 +7,19 @@ label: Cluster
 label_plural: Clusters
 description: ''
 read_only: false
-field_mappings:
-  id:
-    value: uuid
-  uuid:
-    value: uuid
-  title:
-    value: display_name
-  field_hrinfo_id:
-    value: id
-  field_operations:
-    target_id: 'operations/*/uuid'
+field_mapper_id: simple
+field_mapper_config:
+  field_mappings:
+    id:
+      value: uuid
+    uuid:
+      value: uuid
+    title:
+      value: display_name
+    field_hrinfo_id:
+      value: id
+    field_operations:
+      target_id: 'operations/*/uuid'
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/local_coordination_groups/terms'

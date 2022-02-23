@@ -7,15 +7,17 @@ label: Operation
 label_plural: Operations
 description: ''
 read_only: true
-field_mappings:
-  id:
-    value: uuid
-  uuid:
-    value: uuid
-  title:
-    value: label
-  field_hrinfo_id:
-    value: id
+field_mapper_id: simple
+field_mapper_config:
+  field_mappings:
+    id:
+      value: uuid
+    uuid:
+      value: uuid
+    title:
+      value: label
+    field_hrinfo_id:
+      value: id
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/operations/terms'

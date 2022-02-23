@@ -7,13 +7,15 @@ label: 'HPC document repository'
 label_plural: 'HPC document repositories'
 description: ''
 read_only: true
-field_mappings:
-  id:
-    value: uuid
-  uuid:
-    value: uuid
-  title:
-    value: display_name
+field_mapper_id: simple
+field_mapper_config:
+  field_mappings:
+    id:
+      value: uuid
+    uuid:
+      value: uuid
+    title:
+      value: display_name
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/ar_hpc_document_repository/terms'

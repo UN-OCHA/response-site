@@ -7,13 +7,15 @@ label: 'Unit of measurement'
 label_plural: 'Units of measurement'
 description: ''
 read_only: true
-field_mappings:
-  id:
-    value: uuid
-  uuid:
-    value: uuid
-  title:
-    value: label
+field_mapper_id: simple
+field_mapper_config:
+  field_mappings:
+    id:
+      value: uuid
+    uuid:
+      value: uuid
+    title:
+      value: label
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/ar_units_of_measurement/terms'

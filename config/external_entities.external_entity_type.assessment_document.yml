@@ -7,24 +7,26 @@ label: 'Assessment document'
 label_plural: 'Assessment documents'
 description: ''
 read_only: false
-field_mappings:
-  id:
-    value: uuid
-  uuid:
-    value: uuid
-  title:
-    value: title
-  field_accessibility:
-    value: accessibility
-  field_author:
-    value: author
-  field_files:
-    media_uuid: 'files/*/uuid'
-    filename: 'files/*/filename'
-    uri: 'files/*/uri'
-    private: 'files/*/private'
-  field_instructions:
-    value: instructions
+field_mapper_id: simple
+field_mapper_config:
+  field_mappings:
+    id:
+      value: uuid
+    uuid:
+      value: uuid
+    title:
+      value: title
+    field_accessibility:
+      value: accessibility
+    field_author:
+      value: author
+    field_files:
+      media_uuid: 'files/*/uuid'
+      filename: 'files/*/filename'
+      uri: 'files/*/uri'
+      private: 'files/*/private'
+    field_instructions:
+      value: instructions
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/documents/assessment-documents'

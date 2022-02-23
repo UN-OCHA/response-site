@@ -10,6 +10,8 @@ dependencies:
     - contextual
     - file
     - node
+    - paragraphs
+    - paragraphs_type_permissions
     - path
     - system
     - taxonomy
@@ -29,16 +31,35 @@ permissions:
   - 'administer url aliases'
   - 'create article content'
   - 'create page content'
+  - 'create paragraph content heading'
+  - 'create paragraph content iframe'
+  - 'create paragraph content layout'
+  - 'create paragraph content offices'
+  - 'create paragraph content recent_assessments'
+  - 'create paragraph content text_block'
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete article revisions'
   - 'delete own article content'
   - 'delete own page content'
   - 'delete page revisions'
+  - 'delete paragraph content heading'
+  - 'delete paragraph content iframe'
+  - 'delete paragraph content layout'
+  - 'delete paragraph content offices'
+  - 'delete paragraph content recent_assessments'
+  - 'delete paragraph content text_block'
   - 'edit own article content'
   - 'edit own page content'
   - 'edit terms in tags'
   - 'revert all revisions'
+  - 'update paragraph content heading'
+  - 'update paragraph content iframe'
+  - 'update paragraph content layout'
+  - 'update paragraph content offices'
+  - 'update paragraph content recent_assessments'
+  - 'update paragraph content text_block'
   - 'view all revisions'
   - 'view own unpublished content'
   - 'view the administration theme'
+  - 'view unpublished paragraphs'

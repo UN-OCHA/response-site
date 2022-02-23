@@ -1,3 +1,4 @@
+label: 'Group nodes'
 display:
   default:
     display_title: Основной
@@ -36,6 +37,10 @@ display:
         changed:
           label: Обновлено
           separator: ', '
+        edit_node:
+          text: 'Edit node'
+        delete_node:
+          text: 'Delete node'
         dropbutton:
           label: Операции
       filters:

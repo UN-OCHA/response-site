@@ -1,3 +1,4 @@
+label: 'Group members'
 display:
   default:
     display_title: Máster
@@ -31,12 +32,21 @@ display:
           label: Actualizado
           separator: ', '
         created:
+          label: Joined
           separator: ', '
+        edit_group_content:
+          text: 'Edit member'
+        delete_group_content:
+          text: 'Remove member'
         dropbutton:
           label: Operaciones
       arguments:
         gid:
           exception:
             title: Todo(s)
+      title: Members
   page_1:
     display_title: Página
+    display_options:
+      menu:
+        title: Members

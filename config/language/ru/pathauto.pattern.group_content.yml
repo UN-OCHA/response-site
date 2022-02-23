@@ -1,3 +1,4 @@
+label: 'Содержимое группы'
 relationships:
   'group_content:langcode:language':
     label: Язык

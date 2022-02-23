@@ -7,36 +7,40 @@ label: Office
 label_plural: Offices
 description: ''
 read_only: false
-field_mappings:
-  id:
-    value: uuid
-  uuid:
-    value: uuid
-  title:
-    value: label
-  field_address:
-    langcode: address/langcode
-    country_code: address/country_code
-    administrative_area: address/administrative_area
-    locality: address/locality
-    dependent_locality: address/dependent_locality
-    postal_code: address/postal_code
-    sorting_code: address/sorting_code
-    address_line1: address/address_line1
-    address_line2: address/address_line2
-    organization: organization
-  field_email:
-    value: email
-  field_is_coordination_hub:
-    value: is_coordination_hub
-  field_location:
-    target_id: location/uuid
-  field_operations:
-    target_id: 'operations/*/uuid'
-  field_organizations:
-    target_id: 'organizations/*/uuid'
-  field_phones:
-    value: 'phones/*'
+field_mapper_id: simple
+field_mapper_config:
+  field_mappings:
+    id:
+      value: uuid
+    uuid:
+      value: uuid
+    title:
+      value: label
+    field_test:
+      value: '+dit is een test'
+    field_address:
+      langcode: address/langcode
+      country_code: address/country_code
+      administrative_area: address/administrative_area
+      locality: address/locality
+      dependent_locality: address/dependent_locality
+      postal_code: address/postal_code
+      sorting_code: address/sorting_code
+      address_line1: address/address_line1
+      address_line2: address/address_line2
+      organization: organization
+    field_email:
+      value: email
+    field_is_coordination_hub:
+      value: is_coordination_hub
+    field_location:
+      target_id: location/uuid
+    field_operations:
+      target_id: 'operations/*/uuid'
+    field_organizations:
+      target_id: 'organizations/*/uuid'
+    field_phones:
+      value: 'phones/*'
 storage_client_id: restjson
 storage_client_config:
   endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/offices/terms'
