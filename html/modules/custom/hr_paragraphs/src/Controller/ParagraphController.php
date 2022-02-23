@@ -37,6 +37,10 @@ class ParagraphController extends ControllerBase {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
     }
 
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
     $enabled_tabs = $group->field_enabled_tabs->getValue();
     array_walk($enabled_tabs, function (&$item) {
       $item = $item['value'];
