@@ -10,7 +10,6 @@ dependencies:
     - field.field.office.office.field_operations
     - field.field.office.office.field_organizations
     - field.field.office.office.field_phones
-    - field.field.office.office.field_test
   module:
     - address
     - external_entities
@@ -76,14 +75,6 @@ content:
     weight: 2
     region: content
     settings:
-      placeholder: ''
-    third_party_settings: {  }
-  field_test:
-    type: string_textfield
-    weight: 4
-    region: content
-    settings:
-      size: 60
       placeholder: ''
     third_party_settings: {  }
   title:

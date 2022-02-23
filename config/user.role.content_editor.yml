@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - node.type.article
-    - node.type.page
     - taxonomy.vocabulary.tags
   module:
     - contextual
@@ -30,7 +29,6 @@ permissions:
   - 'access toolbar'
   - 'administer url aliases'
   - 'create article content'
-  - 'create page content'
   - 'create paragraph content heading'
   - 'create paragraph content iframe'
   - 'create paragraph content layout'
@@ -41,8 +39,6 @@ permissions:
   - 'create url aliases'
   - 'delete article revisions'
   - 'delete own article content'
-  - 'delete own page content'
-  - 'delete page revisions'
   - 'delete paragraph content heading'
   - 'delete paragraph content iframe'
   - 'delete paragraph content layout'
@@ -50,7 +46,6 @@ permissions:
   - 'delete paragraph content recent_assessments'
   - 'delete paragraph content text_block'
   - 'edit own article content'
-  - 'edit own page content'
   - 'edit terms in tags'
   - 'revert all revisions'
   - 'update paragraph content heading'

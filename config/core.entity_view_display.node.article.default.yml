@@ -5,12 +5,10 @@ dependencies:
   config:
     - field.field.node.article.body
     - field.field.node.article.field_image
-    - field.field.node.article.field_ssdf
     - field.field.node.article.field_tags
     - image.style.large
     - node.type.article
   module:
-    - datetime_range
     - image
     - text
     - user
@@ -36,16 +34,6 @@ content:
       image_style: large
     third_party_settings: {  }
     weight: -1
-    region: content
-  field_ssdf:
-    type: daterange_default
-    label: above
-    settings:
-      timezone_override: ''
-      format_type: medium
-      separator: '-'
-    third_party_settings: {  }
-    weight: 101
     region: content
   field_tags:
     type: entity_reference_label

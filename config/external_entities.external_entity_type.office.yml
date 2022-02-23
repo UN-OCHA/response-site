@@ -16,8 +16,6 @@ field_mapper_config:
       value: uuid
     title:
       value: label
-    field_test:
-      value: '+dit is een test'
     field_address:
       langcode: address/langcode
       country_code: address/country_code
