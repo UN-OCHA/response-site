@@ -1,0 +1,20 @@
+uuid: bd063533-27bb-461a-ae1d-7593fc9aec62
+langcode: en
+status: true
+dependencies:
+  theme:
+    - common_design
+_core:
+  default_config_hash: ItFhhiUOoeR7oIq73ZaCV7PAYrOwXZ-9fazMzF5DJXM
+id: common_design_page_title
+theme: common_design
+region: content
+weight: -4
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }
