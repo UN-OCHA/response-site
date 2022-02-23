@@ -131,6 +131,67 @@ function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
+  $output = '';
+
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  if ($paragraph->field_rss_link->isEmpty()) {
+    return;
+  }
+
+  $rss_options = $paragraph->field_rss_options->getValue();
+  foreach ($rss_options as &$rss_option) {
+    $rss_option = $rss_option['value'];
+  }
+
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 10;
+
+  $content = file_get_contents($paragraph->field_rss_link->first()->uri);
+  $xml = new SimpleXmlElement($content);
+
+  $items = [];
+  foreach($xml->channel->item as $entry) {
+    $items[] = [
+      'title' => $entry->title,
+      'link' => $entry->link,
+      'description' => $entry->description,
+      'date' => strtotime($entry->pubDate),
+    ];
+  }
+
+  if (empty($items)) {
+    return;
+  }
+
+  // Slice array.
+  $items = array_slice($items, 0, $max_number_of_items);
+
+  $output .= '<ul class="external-feed--list">';
+  foreach ($items as $item) {
+    $output .= '<li class="external-feed--item">';
+    $output .= '<div class="external-feed--item-title"><a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href="' . $item['link'] . '">' . $item['title'] . '</a></div>';
+    if (in_array('display_date', $rss_options)) {
+      $output .= '<div class="external-feed--item-date">' . date('d-M-Y', $item['date']) . '</div>';
+    }
+    if (in_array('display_description', $rss_options)) {
+      $output .= '<div class="external-feed--item-description">' . $item['description'] . '</div>';
+    }
+    $output .= '</li>';
+  }
+  $output .= '</ul>';
+
+  $variables['content']['embed'] = [
+    '#type' => 'inline_template',
+    '#template' => $output,
+    '#weight' => 99,
+  ];
+}
+
+/**
  * Implements hook_library_info_alter().
  */
 function hr_paragraphs_library_info_alter(&$libraries, $extension) {

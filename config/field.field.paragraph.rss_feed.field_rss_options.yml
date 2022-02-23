@@ -1,0 +1,23 @@
+uuid: aebe3816-6d0a-45ca-afca-a9bbafc54279
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_rss_options
+    - paragraphs.paragraphs_type.rss_feed
+  module:
+    - options
+id: paragraph.rss_feed.field_rss_options
+field_name: field_rss_options
+entity_type: paragraph
+bundle: rss_feed
+label: 'RSS options'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: display_date
+default_value_callback: ''
+settings: {  }
+field_type: list_string

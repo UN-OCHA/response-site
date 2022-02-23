@@ -1,0 +1,21 @@
+uuid: 86f0f3e4-19d7-4687-ab6f-da245a888805
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.rss_feed
+  module:
+    - text
+id: paragraph.rss_feed.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: rss_feed
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
