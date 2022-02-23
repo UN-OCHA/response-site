@@ -1,0 +1,48 @@
+uuid: 7f2c8087-c777-4855-88b7-ee7ac32faece
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group.cluster.field_enabled_tabs
+    - field.field.group.cluster.field_ical_url
+    - field.field.group.cluster.field_paragraphs
+    - field.field.group.cluster.subgroup_depth
+    - field.field.group.cluster.subgroup_left
+    - field.field.group.cluster.subgroup_right
+    - field.field.group.cluster.subgroup_tree
+    - group.type.cluster
+  module:
+    - layout_paragraphs
+id: group.cluster.default
+targetEntityType: group
+bundle: cluster
+mode: default
+content:
+  field_paragraphs:
+    type: layout_paragraphs
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  field_enabled_tabs: true
+  field_ical_url: true
+  langcode: true
+  subgroup_depth: true
+  subgroup_left: true
+  subgroup_right: true
+  subgroup_tree: true
+  uid: true
