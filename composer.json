@@ -70,7 +70,22 @@
         "release": "conventional-changelog --commit",
         "release:patch": "conventional-changelog --patch --commit",
         "release:minor": "conventional-changelog --minor --commit",
-        "release:major": "conventional-changelog --major --commit"
+        "release:major": "conventional-changelog --major --commit",
+        "git-hooks": "git config core.hooksPath git-hooks || exit 0",
+        "sass-prepare": "cd html/themes/custom/gms_ocha_common && npm install",
+        "sass-build": "cd html/themes/custom/gms_ocha_common && ./node_modules/.bin/sass sass:build",
+        "sass-cleanup": "cd html/themes/custom/gms_ocha_common && rm -rf ./node_modules",
+        "sass": [
+            "@sass-prepare",
+            "@sass-build",
+            "@sass-cleanup"
+        ],
+        "post-install-cmd": [
+            "@git-hooks"
+        ],
+        "post-update-cmd": [
+            "@git-hooks"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
