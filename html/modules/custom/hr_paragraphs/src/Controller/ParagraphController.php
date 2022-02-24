@@ -2,8 +2,7 @@
 
 namespace Drupal\hr_paragraphs\Controller;
 
-use DateTime;
-use DateTimeInterface;
+use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\date_recur\DateRecurHelper;
@@ -25,7 +24,7 @@ class ParagraphController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(\Drupal\Core\Entity\EntityTypeManager $entity_type_manager) {
+  public function __construct(EntityTypeManager $entity_type_manager) {
     $this->entityTypeManager = $entity_type_manager;
   }
 
@@ -84,10 +83,10 @@ class ParagraphController extends ControllerBase {
    */
   public function getOffices($group) {
     if ($group->field_operation->isEmpty()) {
-      return array(
+      return [
         '#type' => 'markup',
         '#markup' => $this->t('Operation not set.'),
-      );
+      ];
     }
 
     $operation_uuid = $group->field_operation->entity->uuid();
@@ -107,10 +106,10 @@ class ParagraphController extends ControllerBase {
    */
   public function getAssessments($group, $type = 'list') {
     if ($group->field_operation->isEmpty()) {
-      return array(
+      return [
         '#type' => 'markup',
         '#markup' => $this->t('Operation not set.'),
-      );
+      ];
     }
 
     $operation_uuid = $group->field_operation->entity->uuid();
@@ -188,7 +187,7 @@ class ParagraphController extends ControllerBase {
         '#attached' => [
           'library' => [
             'hr_paragraphs/fullcalendar',
-          ]
+          ],
         ],
       ],
     ];
@@ -231,10 +230,10 @@ class ParagraphController extends ControllerBase {
 
         $rule = DateRecurHelper::create($event['RRULE'], $event['DTSTART'], $event['DTEND']);
         if ($range_start && $range_end) {
-          $generator = $rule->generateOccurrences(new DateTime($range_start), new DateTime($range_end));
+          $generator = $rule->generateOccurrences(new \DateTime($range_start), new \DateTime($range_end));
         }
         else {
-          $generator = $rule->generateOccurrences(new DateTime());
+          $generator = $rule->generateOccurrences(new \DateTime());
         }
 
         foreach ($generator as $occurrence) {
@@ -242,8 +241,8 @@ class ParagraphController extends ControllerBase {
             'title' => $event['SUMMARY'],
             'description' => $event['DESCRIPTION'],
             'location' => $event['LOCATION'],
-            'start' => $occurrence->getStart()->format(DateTimeInterface::W3C),
-            'end' => $occurrence->getEnd()->format(DateTimeInterface::W3C),
+            'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
+            'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
             'attachments' => $attachments,
           ];
 
@@ -266,8 +265,8 @@ class ParagraphController extends ControllerBase {
             'title' => $event['SUMMARY'],
             'description' => $event['DESCRIPTION'],
             'location' => $event['LOCATION'],
-            'start' => $event['DTSTART']->format(DateTimeInterface::W3C),
-            'end' => $event['DTEND']->format(DateTimeInterface::W3C),
+            'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
+            'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
             'attachments' => $attachments,
           ];
         }
@@ -276,8 +275,8 @@ class ParagraphController extends ControllerBase {
             'title' => $event['SUMMARY'],
             'description' => $event['DESCRIPTION'],
             'location' => $event['LOCATION'],
-            'start' => $event['DTSTART']->format(DateTimeInterface::W3C),
-            'end' => $event['DTEND']->format(DateTimeInterface::W3C),
+            'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
+            'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
             'attachments' => $attachments,
           ];
         }
@@ -286,4 +285,5 @@ class ParagraphController extends ControllerBase {
 
     return new JsonResponse($output);
   }
+
 }
