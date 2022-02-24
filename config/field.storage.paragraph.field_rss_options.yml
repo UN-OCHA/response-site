@@ -17,6 +17,9 @@ settings:
     -
       value: display_description
       label: 'Display description'
+    -
+      value: display_read_more
+      label: 'Display read more link'
   allowed_values_function: ''
 module: options
 locked: false

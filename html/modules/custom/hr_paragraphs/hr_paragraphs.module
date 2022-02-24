@@ -170,6 +170,7 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   // Slice array.
   $items = array_slice($items, 0, $max_number_of_items);
 
+  $output .= '<div class="external-feed--wrapper">';
   $output .= '<ul class="external-feed--list">';
   foreach ($items as $item) {
     $output .= '<li class="external-feed--item">';
@@ -183,6 +184,21 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     $output .= '</li>';
   }
   $output .= '</ul>';
+
+  // Add read more if needed.
+  if (in_array('display_read_more', $rss_options)) {
+    $output .= '<div class="external-feed--readmore">';
+    if ($paragraph->field_rss_read_more->isEmpty()) {
+      if (!empty($xml->channel->link[0])) {
+        $output .= '<a rel="noopener noreferrer external nofollow" href="' . $xml->channel->link[0] . '">' . t('Read more') . '</a>';
+      }
+    }
+    else {
+      $output .= '<a rel="noopener noreferrer external nofollow" href="' . $paragraph->field_rss_read_more->first()->uri . '">' . $paragraph->field_rss_read_more->first()->title . '</a>';
+    }
+    $output .= '</div>';
+  }
+  $output .= '</div>';
 
   $variables['content']['embed'] = [
     '#type' => 'inline_template',

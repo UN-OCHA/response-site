@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.rss_feed.field_max_number_of_items
     - field.field.paragraph.rss_feed.field_rss_link
     - field.field.paragraph.rss_feed.field_rss_options
+    - field.field.paragraph.rss_feed.field_rss_read_more
     - field.field.paragraph.rss_feed.field_text
     - field.field.paragraph.rss_feed.field_title
     - paragraphs.paragraphs_type.rss_feed
@@ -35,3 +36,4 @@ hidden:
   field_max_number_of_items: true
   field_rss_link: true
   field_rss_options: true
+  field_rss_read_more: true

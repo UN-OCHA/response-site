@@ -6,6 +6,7 @@ dependencies:
     - field.field.paragraph.rss_feed.field_max_number_of_items
     - field.field.paragraph.rss_feed.field_rss_link
     - field.field.paragraph.rss_feed.field_rss_options
+    - field.field.paragraph.rss_feed.field_rss_read_more
     - field.field.paragraph.rss_feed.field_text
     - field.field.paragraph.rss_feed.field_title
     - paragraphs.paragraphs_type.rss_feed
@@ -37,6 +38,14 @@ content:
     weight: 4
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_rss_read_more:
+    type: link_default
+    weight: 5
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_text:
     type: text_textarea

@@ -1,0 +1,23 @@
+uuid: b949edf8-16c4-4ea9-bce9-b0c10ea344a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_rss_read_more
+    - paragraphs.paragraphs_type.rss_feed
+  module:
+    - link
+id: paragraph.rss_feed.field_rss_read_more
+field_name: field_rss_read_more
+entity_type: paragraph
+bundle: rss_feed
+label: 'RSS read more'
+description: 'Link back to the source, but allows you to entered your own URL. I left empty the RSS Channel link will be used.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 2
+  link_type: 16
+field_type: link
