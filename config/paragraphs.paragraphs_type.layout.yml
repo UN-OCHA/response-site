@@ -14,4 +14,3 @@ behavior_plugins:
     enabled: true
     available_layouts:
       layout_onecol: 'One column'
-      layout_twocol: 'Two column'

@@ -1,0 +1,9 @@
+uuid: 0211c26a-383d-4837-a753-ac5643ebe393
+langcode: en
+status: true
+dependencies: {  }
+id: hr_info_admin
+label: 'HR.info Admin'
+weight: 4
+is_admin: null
+permissions: {  }

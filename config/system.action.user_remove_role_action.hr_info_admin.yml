@@ -1,0 +1,14 @@
+uuid: 285cee9e-bf5f-4789-b2b1-d3cafb179bad
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.hr_info_admin
+  module:
+    - user
+id: user_remove_role_action.hr_info_admin
+label: 'Remove the HR.info Admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: hr_info_admin
