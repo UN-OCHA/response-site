@@ -55,8 +55,10 @@
         "drupal/select2": "^1.13",
         "drupal/social_auth_hid": "^3.0",
         "drupal/subgroup": "^1.0",
+        "drupal/user_expire": "^1.0",
         "drush/drush": "^10.2",
         "fullcalendar/fullcalendar": "^3.10.0",
+        "galbar/jsonpath": "^2.0",
         "npm-asset/moment": "^2.29",
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",
@@ -154,10 +156,12 @@
     },
     "require-dev": {
         "drupal/coder": "^8.3",
+        "drupal/config_inspector": "^2.0",
         "drupal/console": "^1.9",
         "drupal/core-dev": "^9",
         "drupal/devel_php": "^1.3",
         "marcocesarato/php-conventional-changelog": "^1.13",
+        "phpspec/prophecy-phpunit": "^2",
         "phpunit/php-code-coverage": "^9.2",
         "phpunit/phpunit": "^9.5"
     },
