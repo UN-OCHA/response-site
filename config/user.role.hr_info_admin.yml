@@ -1,9 +1,98 @@
 uuid: 0211c26a-383d-4837-a753-ac5643ebe393
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - group.type.cluster
+    - group.type.operation
+    - node.type.article
+  module:
+    - content_translation
+    - contextual
+    - entity_reference_revisions
+    - external_entities
+    - file
+    - group
+    - locale
+    - menu_link_content
+    - node
+    - paragraphs
+    - paragraphs_type_permissions
+    - path
+    - shortcut
+    - system
+    - toolbar
+    - user_expire
 id: hr_info_admin
 label: 'HR.info Admin'
 weight: 4
 is_admin: null
-permissions: {  }
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access files overview'
+  - 'access group overview'
+  - 'access site in maintenance mode'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer group'
+  - 'administer shortcuts'
+  - 'administer url aliases'
+  - 'administer users'
+  - 'create article content'
+  - 'create cluster group'
+  - 'create content translations'
+  - 'create office external entity'
+  - 'create operation group'
+  - 'create paragraph content heading'
+  - 'create paragraph content iframe'
+  - 'create paragraph content layout'
+  - 'create paragraph content offices'
+  - 'create paragraph content recent_assessments'
+  - 'create paragraph content rss_feed'
+  - 'create paragraph content text_block'
+  - 'create url aliases'
+  - 'customize shortcut links'
+  - 'delete article revisions'
+  - 'delete content translations'
+  - 'delete office external entity'
+  - 'delete orphan revisions'
+  - 'delete own article content'
+  - 'delete paragraph content heading'
+  - 'delete paragraph content iframe'
+  - 'delete paragraph content layout'
+  - 'delete paragraph content offices'
+  - 'delete paragraph content recent_assessments'
+  - 'delete paragraph content rss_feed'
+  - 'delete paragraph content text_block'
+  - 'edit any article content'
+  - 'edit own article content'
+  - 'revert all revisions'
+  - 'revert article revisions'
+  - 'switch shortcut sets'
+  - 'translate any entity'
+  - 'translate article node'
+  - 'translate cluster group'
+  - 'translate editable entities'
+  - 'translate interface'
+  - 'translate menu_link_content'
+  - 'translate operation group'
+  - 'translate paragraph'
+  - 'update content translations'
+  - 'update office external entity'
+  - 'update paragraph content heading'
+  - 'update paragraph content iframe'
+  - 'update paragraph content layout'
+  - 'update paragraph content offices'
+  - 'update paragraph content recent_assessments'
+  - 'update paragraph content rss_feed'
+  - 'update paragraph content text_block'
+  - 'view all revisions'
+  - 'view article revisions'
+  - 'view expiring users report'
+  - 'view office external entity collection'
+  - 'view own unpublished content'
+  - 'view the administration theme'
+  - 'view unpublished paragraphs'
+  - 'view user email addresses'
