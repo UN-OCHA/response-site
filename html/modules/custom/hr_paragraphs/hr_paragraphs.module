@@ -154,7 +154,7 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   $xml = new SimpleXmlElement($content);
 
   $items = [];
-  foreach($xml->channel->item as $entry) {
+  foreach ($xml->channel->item as $entry) {
     $items[] = [
       'title' => $entry->title,
       'link' => $entry->link,
