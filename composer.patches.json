@@ -4,8 +4,7 @@
             "https://www.drupal.org/project/drupal/issues/2544110": "https://www.drupal.org/files/issues/2021-02-11/2544110-100.patch"
         },
         "drupal/external_entities": {
-          "Dateranges - https://www.drupal.org/project/external_entities/issues/3230639": "https://www.drupal.org/files/issues/2021-08-31/external_entities-daterange.patch",
-          "Always pass boolean fields - https://www.drupal.org/project/external_entities/issues/3230638#comment-14205286": "https://www.drupal.org/files/issues/2021-08-31/external_entity_boolean_0.patch"
+          "https://www.drupal.org/project/external_entities/issues/3079012": "https://git.drupalcode.org/project/external_entities/-/merge_requests/8.diff"
         },
         "drupal/layout_paragraphs" : {
             "Async translation - https://www.drupal.org/project/layout_paragraphs/issues/3178277": "./patches/3178277-6.patch"

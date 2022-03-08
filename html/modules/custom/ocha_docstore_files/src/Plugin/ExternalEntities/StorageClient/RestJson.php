@@ -164,7 +164,7 @@ class RestJson extends Rest implements PluginFormInterface {
         'PUT',
         $this->getDocstoreEndpoint() . '/' . $entity->id(),
         [
-          'body' => json_encode($entity->extractRawData()),
+          'body' => json_encode($entity->toRawData()),
           'headers' => $this->getHttpHeaders(),
         ]
       );
@@ -172,7 +172,7 @@ class RestJson extends Rest implements PluginFormInterface {
     }
     else {
       // Remove uuid.
-      $raw_data = $entity->extractRawData();
+      $raw_data = $entity->toRawData();
       unset($raw_data['uuid']);
 
       $response = $this->httpClient->request(
@@ -238,15 +238,18 @@ class RestJson extends Rest implements PluginFormInterface {
   public function getListQueryParameters(array $parameters = [], $start = NULL, $length = NULL) {
     $query_parameters = [];
 
+    /** @var \Drupal\external_entities\Plugin\ExternalEntities\FieldMapper\SimpleFieldMapper $field_mapper */
+    $field_mapper = $this->externalEntityType->getFieldMapper();
+
     // Currently always providing a limit.
     $query_parameters += $this->getPagingQueryParameters($start, $length);
 
     foreach ($parameters as $parameter) {
       // Map field names.
-      $external_field_name = $this->externalEntityType->getFieldMapping($parameter['field'], 'value');
+      $external_field_name = $field_mapper->getFieldMapping($parameter['field'], 'value');
 
       if (!$external_field_name) {
-        $external_field_name = $this->externalEntityType->getFieldMapping($parameter['field'], 'target_id');
+        $external_field_name = $field_mapper->getFieldMapping($parameter['field'], 'target_id');
         if (!$external_field_name) {
           $external_field_name = $parameter['field'];
         }
@@ -565,10 +568,11 @@ class RestJson extends Rest implements PluginFormInterface {
       $field_definitions = \Drupal::service('entity_field.manager')
         ->getFieldDefinitions($entity_type_id, $entity_type_id);
 
-      $field_mapping = \Drupal::service('entity_type.manager')
+      /** @var \Drupal\external_entities\Entity\ExternalEntityType $external_entity_type */
+      $external_entity_type = \Drupal::service('entity_type.manager')
         ->getStorage('external_entity_type')
-        ->load($entity_type_id)
-        ->getFieldMappings();
+        ->load($entity_type_id);
+      $field_mapping = $external_entity_type->getFieldMapper()->getFieldMappings();
 
       $fields = [];
       foreach ($field_definitions as $field => $field_definition) {
