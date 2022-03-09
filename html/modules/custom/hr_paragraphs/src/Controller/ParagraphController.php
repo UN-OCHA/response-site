@@ -196,7 +196,7 @@ class ParagraphController extends ControllerBase {
     $results = json_decode($body, TRUE);
 
     $count = $results['result']['count'];
-    $currentPage = $this->pagerManager->createPager($count, $limit)->getCurrentPage();
+    $this->pagerManager->createPager($count, $limit);
 
     $data = [];
     foreach ($results['result']['results'] as $row) {
