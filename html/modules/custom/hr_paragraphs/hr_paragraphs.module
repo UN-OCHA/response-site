@@ -5,6 +5,12 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\layout_paragraphs\LayoutParagraphsLayout;
+use Drupal\layout_paragraphs\LayoutParagraphsSection;
+use Drupal\layout_paragraphs\LayoutParagraphsComponent;
+
 /**
  * Implements hook_theme().
  */
@@ -237,4 +243,54 @@ function hr_paragraphs_library_info_alter(&$libraries, $extension) {
     }
   }
   $libraries['fullcalendar_load']['js'] = $new_js;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_create().*
+ */
+function hr_paragraphs_group_create(EntityInterface $entity) {
+  if ($entity->bundle() !== 'operation') {
+    return;
+  }
+
+  // Create content layout components, in order.
+  $default_types = [
+    'heading',
+  ];
+
+  foreach ($default_types as $type) {
+    $paragraph = Paragraph::create([
+      'type' => $type,
+    ]);
+    $components[] = new LayoutParagraphsComponent($paragraph);
+  }
+
+  // Create and populate a layout section.
+  $paragraph = Paragraph::create([
+    'type' => 'layout',
+  ]);
+  $uuid = $paragraph->uuid();
+
+  foreach ($components as $component) {
+    $component->setSettings([
+      'parent_uuid' => $uuid,
+      'region' => 'content',
+    ]);
+  }
+
+  $section = new LayoutParagraphsSection($paragraph, $components);
+  $section->setSettings([
+    'layout' => 'layout_onecol',
+  ]);
+  $components[] = $section;
+
+  // Create the layout and add it to the paragraphs reference field.
+  /** @var \Drupal\Core\Field\EntityReferenceFieldItemListInterface $field */
+  $field = $entity->field_paragraphs;
+  $layout = new LayoutParagraphsLayout($field);
+
+  // Add the component and section paragraphs to the layout.
+  foreach ($components as $component) {
+    $layout->appendComponent($component->getEntity());
+  }
 }

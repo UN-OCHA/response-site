@@ -110,7 +110,7 @@ content:
     weight: 3
     region: content
     settings:
-      preview_view_mode: default
+      preview_view_mode: preview
       nesting_depth: 4
       require_layouts: 1
       empty_message: ''
