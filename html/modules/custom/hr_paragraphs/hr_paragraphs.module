@@ -47,6 +47,13 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'pager' => NULL,
       ],
     ],
+    'rw_river' => [
+      'template' => 'rw-river',
+      'variables' => [
+        'data' => [],
+        'pager' => NULL,
+      ],
+    ],
   ];
 }
 

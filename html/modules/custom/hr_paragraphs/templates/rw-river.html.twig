@@ -1,0 +1,37 @@
+<table class="operations-dataset">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Map/Infographic Type</th>
+      <th>Managed By</th>
+      <th>Original Publication Date</th>
+      <th>Files</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data %}
+    <tr>
+      <td data-title="Name">
+        <a href="{{ row.url }}">{{ row.title }}</a>
+      </td>
+      <td data-title="Map/Infographic Type">{{ row.format }}</td>
+      <td data-title="Managed by">{{ row.sources }}</td>
+      <td data-title="Original Publication Date">{{ row.date_changed|date("d M Y") }} </td>
+      <td data-title="Files">
+        {% if row.files|length > 0 %}
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Download<span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            {% for file in row.files %}
+            <li><a href="{{ file.url }}">{{ file.filename }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{{ pager }}

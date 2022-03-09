@@ -24,6 +24,32 @@ hr_paragraphs.operation.datasets:
       group:
         type: entity:group
 
+hr_paragraphs.operation.documents:
+  path: '/group/{group}/documents'
+  title: 'Documents'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getDocuments'
+    _title: 'Documents'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasDocuments'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
+hr_paragraphs.operation.infographics:
+  path: '/group/{group}/infographics'
+  title: 'Infographics'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getInfographics'
+    _title: 'Infographics'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasInfographics'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
 hr_paragraphs.operation.assessments:
   path: '/group/{group}/assessments/{type}'
   title: 'Assessments'
