@@ -1,0 +1,22 @@
+uuid: 41804059-ce54-4668-b669-cd5224ffecd1
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - common_design_subtheme
+_core:
+  default_config_hash: kigu8pTxXt1qGR2NJ5HHdC4G2G1wsDrIjLPKBT5wUBc
+id: common_design_subtheme_content
+theme: common_design_subtheme
+region: content
+weight: 1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

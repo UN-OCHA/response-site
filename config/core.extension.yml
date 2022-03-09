@@ -86,4 +86,5 @@ theme:
   seven: 0
   stable: 0
   common_design: 0
+  common_design_subtheme: 0
 profile: minimal
