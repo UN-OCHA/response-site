@@ -1,0 +1,24 @@
+uuid: 29664520-f46a-417d-b245-20935cca01db
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.simple_external_entity.field_fff
+  module:
+    - external_entities
+id: simple_external_entity.simple_external_entity.field_fff
+field_name: field_fff
+entity_type: simple_external_entity
+bundle: simple_external_entity
+label: fff
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

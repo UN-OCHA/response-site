@@ -1,0 +1,24 @@
+uuid: 58fdeed1-b96c-4f06-b4e0-45d778859514
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.simple_external_entity.ref
+  module:
+    - external_entities
+id: simple_external_entity.simple_external_entity.ref
+field_name: ref
+entity_type: simple_external_entity
+bundle: simple_external_entity
+label: ref
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:assessment'
+  handler_settings:
+    target_bundles:
+      assessment: assessment
+field_type: entity_reference

@@ -1,0 +1,21 @@
+uuid: 1221f47a-531b-48d5-9bc2-07970b4c9c7d
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: country.field_iso_3
+field_name: field_iso_3
+entity_type: country
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

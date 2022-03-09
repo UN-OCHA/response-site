@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.operation.field_calendar_link
     - field.field.group.operation.field_enabled_tabs
     - field.field.group.operation.field_ical_url
     - field.field.group.operation.field_operation
@@ -13,14 +14,73 @@ dependencies:
     - field.field.group.operation.subgroup_tree
     - group.type.operation
   module:
+    - field_group
     - layout_paragraphs
+    - link
     - path
     - select2
+third_party_settings:
+  field_group:
+    group_content:
+      children:
+        - group_general
+        - group_calendar
+      label: Content
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 640
+    group_calendar:
+      children:
+        - field_ical_url
+        - field_calendar_link
+      label: Calendar
+      region: content
+      parent_name: group_content
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: false
+    group_general:
+      children:
+        - field_enabled_tabs
+        - field_operation
+      label: General
+      region: content
+      parent_name: group_content
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: false
 id: group.operation.default
 targetEntityType: group
 bundle: operation
 mode: default
 content:
+  field_calendar_link:
+    type: link_default
+    weight: 4
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_enabled_tabs:
     type: options_buttons
     weight: 1
@@ -29,7 +89,7 @@ content:
     third_party_settings: {  }
   field_ical_url:
     type: string_textfield
-    weight: 2
+    weight: 3
     region: content
     settings:
       size: 60
@@ -37,7 +97,7 @@ content:
     third_party_settings: {  }
   field_operation:
     type: select2_entity_reference
-    weight: 5
+    weight: 2
     region: content
     settings:
       width: 100%
@@ -47,7 +107,7 @@ content:
     third_party_settings: {  }
   field_paragraphs:
     type: layout_paragraphs
-    weight: 6
+    weight: 3
     region: content
     settings:
       preview_view_mode: default
@@ -65,20 +125,20 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 3
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 8
+    weight: 6
     region: content
     settings:
       display_label: true

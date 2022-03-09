@@ -1,12 +1,12 @@
-uuid: 50e1318a-02cd-4a63-a829-1e878abacd33
+uuid: 9c78eaec-a489-4a8d-b018-d8e345078336
 langcode: en
 status: true
 dependencies: {  }
-id: country
-label: Country
-label_plural: Countries
+id: simple_external_entity
+label: 'Simple external entity'
+label_plural: 'Simple external entities'
 description: ''
-read_only: true
+read_only: false
 field_mapper_id: simple
 field_mapper_config:
   field_mappings:
@@ -15,14 +15,14 @@ field_mapper_config:
     uuid:
       value: uuid
     title:
-      value: label
-    field_iso_2:
-      value: common_iso2
-    field_iso_3:
-      value: common_iso3
-storage_client_id: restjson
+      value: title
+    field_fff:
+      value: status
+    field_fx:
+      value: +vast
+storage_client_id: rest
 storage_client_config:
-  endpoint: 'http://docstore.local.docksal/api/v1/vocabularies/countries/terms'
+  endpoint: 'http://hrinfo-site.docksal/external-entities-test/simple'
   response_format: json
   pager:
     default_limit: '50'
@@ -36,7 +36,7 @@ storage_client_config:
   parameters:
     list: {  }
     single: {  }
-persistent_cache_max_age: 21600
+persistent_cache_max_age: 0
 annotation_entity_type_id: null
 annotation_bundle_id: null
 annotation_field_name: null

@@ -1,0 +1,21 @@
+uuid: 849d3eff-6f3e-491c-9a01-1dea04e1f5db
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: simple_external_entity.field_fx
+field_name: field_fx
+entity_type: simple_external_entity
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

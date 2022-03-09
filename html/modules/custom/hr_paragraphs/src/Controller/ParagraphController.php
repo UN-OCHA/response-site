@@ -2,12 +2,17 @@
 
 namespace Drupal\hr_paragraphs\Controller;
 
-use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Pager\PagerManagerInterface;
+use Drupal\Core\Pager\PagerParametersInterface;
 use Drupal\date_recur\DateRecurHelper;
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Page controller for tabs.
@@ -22,10 +27,33 @@ class ParagraphController extends ControllerBase {
   protected $entityTypeManager;
 
   /**
+   * The HTTP client to fetch the files with.
+   *
+   * @var \GuzzleHttp\ClientInterface
+   */
+  protected $httpClient;
+
+  /**
+   * The pager manager servie.
+   *
+   * @var \Drupal\Core\Pager\PagerManagerInterface
+   */
+  protected $pagerManager;
+
+  /**
+   * The pager parameters service.
+   *
+   * @var \Drupal\Core\Pager\PagerParametersInterface
+   */
+  protected $pagerParameters;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager) {
+  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager) {
     $this->entityTypeManager = $entity_type_manager;
+    $this->httpClient = $http_client;
+    $this->pagerManager = $pager_manager;
   }
 
   /**
@@ -60,6 +88,27 @@ class ParagraphController extends ControllerBase {
    */
   public function hasAssessments($group) {
     return $this->tabIsActive($group, 'assessments');
+  }
+
+  /**
+   * Check if datasets is enabled.
+   */
+  public function hasDatasets($group) {
+    return $this->tabIsActive($group, 'datasets');
+  }
+
+  /**
+   * Check if documents is enabled.
+   */
+  public function hasDocuments($group) {
+    return $this->tabIsActive($group, 'documents');
+  }
+
+  /**
+   * Check if maps is enabled.
+   */
+  public function hasMaps($group) {
+    return $this->tabIsActive($group, 'maps');
   }
 
   /**
@@ -99,6 +148,73 @@ class ParagraphController extends ControllerBase {
 
     $view_builder = $this->entityTypeManager->getViewBuilder($entity_id);
     return $view_builder->viewMultiple($offices, $view_mode);
+  }
+
+  /**
+   * Return all datasets of an operation, sector or cluster.
+   */
+  public function getDatasets($group, Request $request) {
+    $limit = 10;
+    $offset = 0;
+
+    if ($request->query->has('page')) {
+      $offset = $request->query->getInt('page', 0) * $limit;
+    }
+
+    if ($group->field_operation->isEmpty()) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('Operation not set.'),
+      ];
+    }
+
+    // Get country.
+    $country = $group->field_operation->entity->field_country->entity;
+
+    $endpoint = 'https://data.humdata.org/api/3/action/package_search';
+    $parameters = [
+      'q' => 'groups:' . strtolower($country->field_iso_3->value),
+      'rows' => $limit,
+      'start' => $offset,
+    ];
+
+    try {
+      $response = $this->httpClient->request(
+        'GET',
+        $endpoint,
+        [
+          'query' => $parameters,
+        ]
+      );
+    } catch (RequestException $exception) {
+      if ($exception->getCode() === 404) {
+        throw new NotFoundHttpException();
+      }
+    }
+
+    $body = $response->getBody() . '';
+    $results = json_decode($body, TRUE);
+
+    $count = $results['result']['count'];
+    $currentPage = $this->pagerManager->createPager($count, $limit)->getCurrentPage();
+
+    $data = [];
+    foreach ($results['result']['results'] as $row) {
+      $data[] = [
+        'id' => $row['id'],
+        'title' => $row['title'],
+        'last_modified' => strtotime($row['last_modified']),
+        'source' => $row['dataset_source'],
+      ];
+    }
+
+    return [
+      '#theme' => 'hdx_dataset',
+      '#data' => $data,
+      '#pager' => [
+        '#type' => 'pager',
+      ],
+    ];
   }
 
   /**

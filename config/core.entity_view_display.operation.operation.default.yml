@@ -1,0 +1,32 @@
+uuid: dae9a6f8-9ff3-4882-adc8-b2239f90c2cf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.operation.operation.field_country
+    - field.field.operation.operation.field_hrinfo_id
+  module:
+    - external_entities
+id: operation.operation.default
+targetEntityType: operation
+bundle: operation
+mode: default
+content:
+  field_country:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_hrinfo_id: true

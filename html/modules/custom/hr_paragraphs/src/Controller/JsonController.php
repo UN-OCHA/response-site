@@ -5,7 +5,9 @@ namespace Drupal\hr_paragraphs\Controller;
 use Drupal\Core\Cache\CacheableJsonResponse;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\ocha_docstore_files\Plugin\ExternalEntities\StorageClient\RestJson;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -32,7 +34,7 @@ class JsonController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(\Drupal\Core\Entity\EntityTypeManager $entity_type_manager, \GuzzleHttp\ClientInterface $http_client) {
+  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client) {
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
   }

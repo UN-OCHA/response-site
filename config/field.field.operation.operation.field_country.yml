@@ -1,0 +1,27 @@
+uuid: 4c9b6c64-525b-4ccf-8b4f-21854cc968d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.operation.field_country
+  module:
+    - external_entities
+id: operation.operation.field_country
+field_name: field_country
+entity_type: operation
+bundle: operation
+label: Country
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:country'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+field_type: entity_reference

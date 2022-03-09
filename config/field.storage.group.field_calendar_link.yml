@@ -1,0 +1,19 @@
+uuid: 67a09b5b-78cc-4e87-b114-cb4773cb04fa
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - link
+id: group.field_calendar_link
+field_name: field_calendar_link
+entity_type: group
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

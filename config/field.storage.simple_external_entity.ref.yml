@@ -1,0 +1,19 @@
+uuid: 20542715-0394-4f49-94d3-f68a5aa618fc
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: simple_external_entity.ref
+field_name: ref
+entity_type: simple_external_entity
+type: entity_reference
+settings:
+  target_type: assessment
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -11,6 +11,19 @@ hr_paragraphs.operation.offices:
       group:
         type: entity:group
 
+hr_paragraphs.operation.datasets:
+  path: '/group/{group}/datasets'
+  title: 'Datasets'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getDatasets'
+    _title: 'Datasets'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasDatasets'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
 hr_paragraphs.operation.assessments:
   path: '/group/{group}/assessments/{type}'
   title: 'Assessments'

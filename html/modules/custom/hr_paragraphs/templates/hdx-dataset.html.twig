@@ -1,0 +1,22 @@
+<table class="operations-dataset">
+  <thead>
+    <tr>
+      <th>Dataset</th>
+      <th>Last Updated</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data %}
+    <tr>
+      <td data-title="Title">
+        <a href="https://data.humdata.org/dataset/{{ row.id }}">{{ row.title }}</a>
+      </td>
+      <td data-title="Last updated">{{ row.last_modified|date("d M Y") }} </td>
+      <td data-title="Source">{{ row.source }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{{ pager }}

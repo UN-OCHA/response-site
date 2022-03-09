@@ -1,0 +1,20 @@
+uuid: e7fbff6b-4d93-4197-824a-249b72ce6a62
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.country.field_iso_2
+  module:
+    - external_entities
+id: country.country.field_iso_2
+field_name: field_iso_2
+entity_type: country
+bundle: country
+label: 'Iso 2'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
