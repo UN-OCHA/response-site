@@ -4,7 +4,11 @@
 .cd-ocha-dropdown__link {
   a {
     &:focus {
-      outline: 3px solid $cd-blue--bright;
+      outline: 3px solid var(--implementation-highlight);
     }
   }
+}
+
+.cd-ocha-dropdown__heading {
+  color: #ffc7c9;
 }
