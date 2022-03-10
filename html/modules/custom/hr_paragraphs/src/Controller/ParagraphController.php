@@ -239,37 +239,7 @@ class ParagraphController extends ControllerBase {
     $country = $group->field_operation->entity->field_country->entity;
 
     $endpoint = 'https://api.reliefweb.int/v1/reports';
-    $parameters = [
-      'appname' => 'hrinfo',
-      'offset' => $offset,
-      'limit' => $limit,
-      'preset' => 'latest',
-      'fields[include]' => [
-        'id',
-        'disaster_type.name',
-        'url',
-        'title',
-        'date.changed',
-        'source.shortname',
-        'country.name',
-        'primary_country.name',
-        'file.url',
-        'file.preview.url-thumb',
-        'file.description',
-        'file.filename',
-        'format.name',
-      ],
-      'filter' => [
-        'operator' => 'AND',
-        'conditions' => [],
-      ],
-    ];
-
-    $parameters['filter']['conditions'][] = array(
-      'field' => 'primary_country.iso3',
-      'value' => strtolower($country->field_iso_3->value),
-      'operator' => 'OR',
-    );
+    $parameters = $this->buildReliefwebParameters($offset, $limit, $country->field_iso_3->value);
 
     $parameters['filter']['conditions'][] = array(
       'field' => 'format.id',
@@ -281,80 +251,14 @@ class ParagraphController extends ControllerBase {
       'negate' => TRUE,
     );
 
-    try {
-      $response = $this->httpClient->request(
-        'GET',
-        $endpoint,
-        [
-          'query' => $parameters,
-        ]
-      );
-    } catch (RequestException $exception) {
-      if ($exception->getCode() === 404) {
-        throw new NotFoundHttpException();
-      }
-    }
-
-    $body = $response->getBody() . '';
-    $results = json_decode($body, TRUE);
+    $results = $this->executeReliefwebQuery($parameters);
 
     $count = $results['totalCount'];
     $this->pagerManager->createPager($count, $limit);
 
-    $data = [];
-    foreach ($results['data'] as $row) {
-      $url = $row['fields']['url'];
-      $title = isset($row['fields']['title']) ? $row['fields']['title'] : $row['fields']['name'];
-      $data[$title] = [
-        'id' => $row['fields']['id'],
-        'title' => $title,
-        'url' => $url,
-        'date_changed' => $row['fields']['date']['changed'],
-        'format' => $row['fields']['format'][0]['name'],
-        'primary_country' => $row['fields']['primary_country']['name'],
-      ];
-
-      if (isset($row['fields']['source'])) {
-        $sources = [];
-        foreach ($row['fields']['source'] as $source) {
-          $sources[] = $source['shortname'];
-        }
-        $data[$title]['sources'] = implode(', ', $sources);
-      }
-
-      if (isset($row['fields']['disaster_type'])) {
-        $disaster_types = [];
-        foreach ($row['fields']['disaster_type'] as $disaster_type) {
-          $disaster_types[] = $disaster_type['name'];
-        }
-        $data[$title]['disaster_types'] = $disaster_types;
-      }
-
-      if (isset($row['fields']['country'])) {
-        $countries = [];
-        foreach ($row['fields']['country'] as $country) {
-          $countries[] = $country['name'];
-        }
-        $data[$title]['countries'] = $countries;
-      }
-
-      if (isset($row['fields']['file'])) {
-        $files = [];
-        foreach ($row['fields']['file'] as $file) {
-          $files[] = array(
-            'preview' => isset($file['preview']['url-thumb']) ? $this->reliefweb_fix_url($file['preview']['url-thumb']) : '',
-            'url' => $this->reliefweb_fix_url($file['url']),
-            'filename' => isset($file['filename']) ? $file['filename'] : '',
-            'description' => isset($file['description']) ? $file['description'] : '',
-          );
-        }
-        $data[$title]['files'] = $files;
-      }
-    }
-
     return [
       '#theme' => 'rw_river',
-      '#data' => $data,
+      '#data' => $this->buildReliefwebObjects($results),
       '#pager' => [
         '#type' => 'pager',
       ],
@@ -382,7 +286,34 @@ class ParagraphController extends ControllerBase {
     // Get country.
     $country = $group->field_operation->entity->field_country->entity;
 
-    $endpoint = 'https://api.reliefweb.int/v1/reports';
+    $parameters = $this->buildReliefwebParameters($offset, $limit, $country->field_iso_3->value);
+    $parameters['filter']['conditions'][] = array(
+      'field' => 'format.id',
+      'value' => [
+        12,
+        12570,
+      ],
+      'operator' => 'OR',
+    );
+
+    $results = $this->executeReliefwebQuery($parameters);
+
+    $count = $results['totalCount'];
+    $this->pagerManager->createPager($count, $limit);
+
+    return [
+      '#theme' => 'rw_river',
+      '#data' => $this->buildReliefwebObjects($results),
+      '#pager' => [
+        '#type' => 'pager',
+      ],
+    ];
+  }
+
+  /**
+   * Build reliefweb parameters.
+   */
+  protected function buildReliefwebParameters (int $offset, int $limit, string $iso3 = '') : array {
     $parameters = [
       'appname' => 'hrinfo',
       'offset' => $offset,
@@ -409,20 +340,22 @@ class ParagraphController extends ControllerBase {
       ],
     ];
 
-    $parameters['filter']['conditions'][] = array(
-      'field' => 'primary_country.iso3',
-      'value' => strtolower($country->field_iso_3->value),
-      'operator' => 'OR',
-    );
+    if (!empty($iso3)) {
+      $parameters['filter']['conditions'][] = array(
+        'field' => 'primary_country.iso3',
+        'value' => strtolower($iso3),
+        'operator' => 'OR',
+      );
+    }
 
-    $parameters['filter']['conditions'][] = array(
-      'field' => 'format.id',
-      'value' => [
-        12,
-        12570,
-      ],
-      'operator' => 'OR',
-    );
+    return $parameters;
+  }
+
+  /**
+   * Execute reliefweb query.
+   */
+  protected function executeReliefwebQuery(array $parameters) : array {
+    $endpoint = 'https://api.reliefweb.int/v1/reports';
 
     try {
       $response = $this->httpClient->request(
@@ -441,10 +374,15 @@ class ParagraphController extends ControllerBase {
     $body = $response->getBody() . '';
     $results = json_decode($body, TRUE);
 
-    $count = $results['totalCount'];
-    $this->pagerManager->createPager($count, $limit);
+    return $results;
+  }
 
+  /**
+   * Build reliefweb objects.
+   */
+  protected function buildReliefwebObjects(array $results) : array {
     $data = [];
+
     foreach ($results['data'] as $row) {
       $url = $row['fields']['url'];
       $title = isset($row['fields']['title']) ? $row['fields']['title'] : $row['fields']['name'];
@@ -495,13 +433,7 @@ class ParagraphController extends ControllerBase {
       }
     }
 
-    return [
-      '#theme' => 'rw_river',
-      '#data' => $data,
-      '#pager' => [
-        '#type' => 'pager',
-      ],
-    ];
+    return $data;
   }
 
   /**
