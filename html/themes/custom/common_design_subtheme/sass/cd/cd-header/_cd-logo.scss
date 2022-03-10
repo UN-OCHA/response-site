@@ -18,6 +18,6 @@
   }
 
   @include tablet {
-    width: 186px; // width may need to be adjusted depending on logo width.
+    width: $implementation-logo-width;
   }
 }
