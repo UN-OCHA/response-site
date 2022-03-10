@@ -206,7 +206,7 @@ $zindex: (
 // Implementation colours
 //——————————————————————————————————————————————————————————————————————————————
 
-$implementation-primary: $cd-ocha-blue;
-$implementation-primary-dark: $cd-blue--dark;
-$implementation-secondary: $cd-blue--bright;
-$implementation-highlight: $cd-highlight-red;
+$implementation-primary: #a02837;
+$implementation-primary-dark: #901522;
+$implementation-secondary: #b04044;
+$implementation-highlight: var(--cd-highlight-red);
