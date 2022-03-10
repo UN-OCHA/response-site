@@ -4,7 +4,7 @@ global-styling:
       css/styles.css: {}
 
 # Custom components
-# cd-teaser:
-#   css:
-#     theme:
-#       components/cd-teaser/cd-teaser.css: {}
+cd-read-more:
+  css:
+    theme:
+      components/cd-read-more/cd-read-more.css: {}

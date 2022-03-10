@@ -1,0 +1,6 @@
+/**
+ * Extension to cd-read-more component for HR.info specific branding.
+ */
+.cd-read-more svg {
+  fill: var(--implementation-primary-dark);
+}
