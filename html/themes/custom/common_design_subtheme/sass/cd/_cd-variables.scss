@@ -36,7 +36,9 @@
   --cd-rgb-blue-grey--dark: 211, 221, 229;
 
   /* Implementation colors */
+  --implementation-primary: #a02837;
   --implementation-primary-dark: #901522;
+  --implementation-secondary: #b04044;
 
   /* Measurements */
   --cd-max-content-width: 820px;
@@ -209,8 +211,8 @@ $zindex: (
 // Implementation colours
 //——————————————————————————————————————————————————————————————————————————————
 
-$implementation-primary: #a02837;
+$implementation-primary: var(--implementation-primary);
 $implementation-primary-dark: var(--implementation-primary-dark);
-$implementation-secondary: #b04044;
+$implementation-secondary: var(--implementation-secondary);
 $implementation-highlight: var(--cd-highlight-red);
 $implementation-logo-width: 132px;
