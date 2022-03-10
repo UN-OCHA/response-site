@@ -28,6 +28,8 @@ regions:
 libraries-extend:
   common_design/cd-read-more:
     - common_design_subtheme/cd-read-more
+  common_design/cd-button:
+    - common_design_subtheme/cd-button
 
 # Custom namespace
 # https://www.drupal.org/docs/contributed-modules/components/understanding-twig-namespaces

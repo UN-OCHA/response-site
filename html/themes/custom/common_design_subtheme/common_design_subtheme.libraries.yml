@@ -8,3 +8,8 @@ cd-read-more:
   css:
     theme:
       components/cd-read-more/cd-read-more.css: {}
+
+cd-button:
+  css:
+    theme:
+      components/cd-button/cd-button.css: {}
