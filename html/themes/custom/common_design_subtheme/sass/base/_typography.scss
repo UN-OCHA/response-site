@@ -3,10 +3,10 @@
 //——————————————————————————————————————————————————————————————————————————————
 
 a {
-  color: $cd-blue--dark;
+  color: $implementation-primary-dark;
 
   &:hover,
   &:focus {
-    color: $cd-ocha-blue;
+    color: $implementation-primary;
   }
 }
