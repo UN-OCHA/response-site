@@ -47,6 +47,14 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'pager' => NULL,
       ],
     ],
+    'rw_river' => [
+      'template' => 'rw-river',
+      'variables' => [
+        'data' => [],
+        'facets' => [],
+        'pager' => NULL,
+      ],
+    ],
   ];
 }
 
@@ -246,7 +254,7 @@ function hr_paragraphs_library_info_alter(&$libraries, $extension) {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_create().*
+ * Implements hook_ENTITY_TYPE_create().
  */
 function hr_paragraphs_group_create(EntityInterface $entity) {
   if ($entity->bundle() !== 'operation') {

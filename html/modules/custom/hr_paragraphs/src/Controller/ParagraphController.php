@@ -6,7 +6,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Pager\PagerManagerInterface;
-use Drupal\Core\Pager\PagerParametersInterface;
+use Drupal\Core\Url;
 use Drupal\date_recur\DateRecurHelper;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
@@ -107,7 +107,7 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if maps is enabled.
    */
-  public function hasMaps($group) {
+  public function hasInfographics($group) {
     return $this->tabIsActive($group, 'maps');
   }
 
@@ -186,7 +186,8 @@ class ParagraphController extends ControllerBase {
           'query' => $parameters,
         ]
       );
-    } catch (RequestException $exception) {
+    }
+    catch (RequestException $exception) {
       if ($exception->getCode() === 404) {
         throw new NotFoundHttpException();
       }
@@ -215,6 +216,427 @@ class ParagraphController extends ControllerBase {
         '#type' => 'pager',
       ],
     ];
+  }
+
+  /**
+   * Return all documents of an operation, sector or cluster.
+   */
+  public function getDocuments($group, Request $request) {
+    if ($group->field_operation->isEmpty()) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('Operation not set.'),
+      ];
+    }
+
+    $limit = 10;
+    $offset = $request->query->getInt('page', 0) * $limit;
+    $filters = $request->query->get('filters', []);
+    $base_url = $request->getRequestUri();
+
+    $facet_blocks = [];
+    $facet_filters = [];
+    foreach ($filters as $key => $keywords) {
+      // Date is a special case.
+      if (strpos($key, 'date') !== FALSE) {
+        $from_to = explode(':', $keywords);
+        $facet_filters[] = [
+          'field' => $key,
+          'value' => [
+            'from' => $from_to[0] . 'T00:00:00+00:00',
+            'to' => $from_to[1] . 'T23:59:59+00:00',
+          ],
+          'operator' => 'AND',
+        ];
+      }
+      else {
+        $facet_filters[] = [
+          'field' => $key,
+          'value' => $keywords,
+          'operator' => 'OR',
+        ];
+      }
+    }
+
+    // Active facets.
+    $active_facets = [];
+    foreach ($filters as $key => $keywords) {
+      if (is_string($keywords)) {
+        $title = $this->t('Remove @name', ['@name' => $filters[$key]]);
+        $cloned_filters = $filters;
+        unset($cloned_filters[$key]);
+        $active_facets[] = [
+          'title' => $title,
+          'url' => Url::fromUserInput($base_url, [
+            'query' => [
+              'filters' => $cloned_filters,
+            ],
+          ]),
+        ];
+      }
+      else {
+        foreach ($keywords as $index => $keyword) {
+          $title = $this->t('Remove @name', ['@name' => $filters[$key][$index]]);
+          $cloned_filters = $filters;
+          unset($cloned_filters[$key][$index]);
+          $active_facets[] = [
+            'title' => $title,
+            'url' => Url::fromUserInput($base_url, [
+              'query' => [
+                'filters' => $cloned_filters,
+              ],
+            ]),
+          ];
+        }
+      }
+    }
+
+    if (count($active_facets) > 0) {
+      $facet_blocks[] = [
+        '#theme' => 'links',
+        '#links' => $active_facets,
+        '#prefix' => '<div class="reliefweb--facet block"><details><summary>' . $this->t('Remove filters') . '</summary>',
+        '#suffix' => '</details></div>',
+      ];
+    }
+
+    // Get country.
+    $country = $group->field_operation->entity->field_country->entity;
+
+    $parameters = $this->buildReliefwebParameters($offset, $limit, $facet_filters, $country->field_iso_3->value);
+    $parameters['filter']['conditions'][] = [
+      'field' => 'format.id',
+      'value' => [
+        12,
+        12570,
+      ],
+      'operator' => 'OR',
+      'negate' => TRUE,
+    ];
+
+    $results = $this->executeReliefwebQuery($parameters);
+
+    $count = $results['totalCount'];
+    $this->pagerManager->createPager($count, $limit);
+
+    // Re-order facets.
+    $facets = [];
+    if (isset($results['embedded'])) {
+      $allowed_filters = $this->getReliefwebFilters();
+      foreach (array_keys($allowed_filters) as $key) {
+        $facets[$key] = $results['embedded']['facets'][$key];
+      }
+    }
+
+    foreach ($facets as $name => $facet) {
+      $links = [];
+      if (isset($facet['data']) && count($facet['data']) > 1) {
+        foreach ($facet['data'] as $term) {
+          // Date is a special case.
+          if (strpos($name, 'date') !== FALSE) {
+            $filter = [
+              $name => date('Y-m-d', strtotime($term['value'])) . ':' . date('Y-m-t', strtotime($term['value'])),
+            ];
+          }
+          else {
+            $filter = [
+              $name => $term['value'],
+            ];
+          }
+
+          // Check if facet is already active.
+          if (isset($filters[$name])) {
+            if (is_string($filters[$name]) && $filters[$name] == $filter[$name]) {
+              continue;
+            }
+            if (is_array($filters[$name]) && in_array($filter[$name], $filters[$name])) {
+              continue;
+            }
+          }
+
+          // Date is a special case.
+          if (strpos($name, 'date') !== FALSE) {
+            if ($term['count'] > 0) {
+              $links[] = [
+                'title' => date('F Y', strtotime($term['value'])) . ' (' . $term['count'] . ')',
+                'url' => Url::fromUserInput($base_url, [
+                  'query' => [
+                    'filters' => array_merge_recursive($filters, $filter),
+                  ],
+                ]),
+              ];
+            }
+          }
+          else {
+            $links[] = [
+              'title' => $term['value'] . ' (' . $term['count'] . ')',
+              'url' => Url::fromUserInput($base_url, [
+                'query' => [
+                  'filters' => array_merge_recursive($filters, $filter),
+                ],
+              ]),
+            ];
+          }
+        }
+
+        // Reverse order for date filter.
+        if (strpos($name, 'date') !== FALSE) {
+          $links = array_reverse($links);
+        }
+
+        if (count($links) > 1) {
+          $facet_blocks[] = [
+            '#theme' => 'links',
+            '#links' => $links,
+            '#prefix' => '<div class="reliefweb--facet block"><details><summary>' . $this->t('Filter by @name', ['@name' => $this->getReliefwebFilters($name)]) . '</summary>',
+            '#suffix' => '</details></div>',
+          ];
+        }
+      }
+    }
+
+    return [
+      '#theme' => 'rw_river',
+      '#data' => $this->buildReliefwebObjects($results),
+      '#facets' => $facet_blocks,
+      '#pager' => [
+        '#type' => 'pager',
+      ],
+    ];
+  }
+
+  /**
+   * Return all documents of an operation, sector or cluster.
+   */
+  public function getInfographics($group, Request $request) {
+    $limit = 10;
+    $offset = 0;
+
+    if ($request->query->has('page')) {
+      $offset = $request->query->getInt('page', 0) * $limit;
+    }
+
+    if ($group->field_operation->isEmpty()) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('Operation not set.'),
+      ];
+    }
+
+    // Get country.
+    $country = $group->field_operation->entity->field_country->entity;
+    $facet_filters = [];
+    $parameters = $this->buildReliefwebParameters($offset, $limit, $facet_filters, $country->field_iso_3->value);
+    $parameters['filter']['conditions'][] = [
+      'field' => 'format.id',
+      'value' => [
+        12,
+        12570,
+      ],
+      'operator' => 'OR',
+    ];
+
+    $results = $this->executeReliefwebQuery($parameters);
+
+    $count = $results['totalCount'];
+    $this->pagerManager->createPager($count, $limit);
+
+    return [
+      '#theme' => 'rw_river',
+      '#data' => $this->buildReliefwebObjects($results),
+      '#pager' => [
+        '#type' => 'pager',
+      ],
+    ];
+  }
+
+  /**
+   * Build reliefweb parameters.
+   */
+  protected function buildReliefwebParameters(int $offset, int $limit, array $facet_filters, string $iso3 = '') : array {
+    $parameters = [
+      'appname' => 'hrinfo',
+      'offset' => $offset,
+      'limit' => $limit,
+      'preset' => 'latest',
+      'fields[include]' => [
+        'id',
+        'disaster_type.name',
+        'url',
+        'title',
+        'date.changed',
+        'source.shortname',
+        'country.name',
+        'primary_country.name',
+        'file.url',
+        'file.preview.url-thumb',
+        'file.description',
+        'file.filename',
+        'format.name',
+      ],
+      'filter' => [
+        'operator' => 'AND',
+        'conditions' => [],
+      ],
+      'facets' => [],
+    ];
+
+    if (!empty($iso3)) {
+      $parameters['filter']['conditions'][] = [
+        'field' => 'primary_country.iso3',
+        'value' => strtolower($iso3),
+        'operator' => 'OR',
+      ];
+    }
+
+    foreach ($facet_filters as $facet_filter) {
+      $parameters['filter']['conditions'][] = $facet_filter;
+    }
+
+    $allowed_filters = $this->getReliefwebFilters();
+    foreach (array_keys($allowed_filters) as $key) {
+      // Date is a special case, needs an interval.
+      if (strpos($key, 'date') !== FALSE) {
+        $parameters['facets'][] = [
+          'field' => $key,
+          'interval' => 'month',
+        ];
+      }
+      else {
+        $parameters['facets'][] = [
+          'field' => $key,
+          'limit' => 2000,
+          'sort' => 'value:asc',
+        ];
+      }
+    }
+
+    return $parameters;
+  }
+
+  /**
+   * Allowed filters.
+   */
+  protected function getReliefwebFilters($key = NULL) {
+    $filters = [
+      'source.name' => $this->t('Organization'),
+      'theme.name' => $this->t('Theme'),
+      'format.name' => $this->t('Format'),
+      'disaster_type' => $this->t('Disaster type'),
+      'language.name' => $this->t('Language'),
+      'date.original' => $this->t('Original publication date'),
+      'date.changed' => $this->t('Posting date'),
+      'disaster.name' => $this->t('Disaster'),
+    ];
+
+    if ($key) {
+      if (array_key_exists($key, $filters)) {
+        return $filters[$key];
+      }
+      else {
+        return FALSE;
+      }
+    }
+    else {
+      return $filters;
+    }
+  }
+
+  /**
+   * Execute reliefweb query.
+   */
+  protected function executeReliefwebQuery(array $parameters) : array {
+    $endpoint = 'https://api.reliefweb.int/v1/reports';
+
+    try {
+      $response = $this->httpClient->request(
+        'GET',
+        $endpoint,
+        [
+          'query' => $parameters,
+        ]
+      );
+    }
+    catch (RequestException $exception) {
+      if ($exception->getCode() === 404) {
+        throw new NotFoundHttpException();
+      }
+    }
+
+    $body = $response->getBody() . '';
+    $results = json_decode($body, TRUE);
+
+    return $results;
+  }
+
+  /**
+   * Build reliefweb objects.
+   */
+  protected function buildReliefwebObjects(array $results) : array {
+    $data = [];
+
+    foreach ($results['data'] as $row) {
+      $url = $row['fields']['url'];
+      $title = $row['fields']['title'] ?? $row['fields']['name'];
+      $data[$title] = [
+        'id' => $row['fields']['id'],
+        'title' => $title,
+        'url' => $url,
+        'date_changed' => $row['fields']['date']['changed'],
+        'format' => $row['fields']['format'][0]['name'],
+        'primary_country' => $row['fields']['primary_country']['name'],
+      ];
+
+      if (isset($row['fields']['source'])) {
+        $sources = [];
+        foreach ($row['fields']['source'] as $source) {
+          $sources[] = $source['shortname'];
+        }
+        $data[$title]['sources'] = implode(', ', $sources);
+      }
+
+      if (isset($row['fields']['disaster_type'])) {
+        $disaster_types = [];
+        foreach ($row['fields']['disaster_type'] as $disaster_type) {
+          $disaster_types[] = $disaster_type['name'];
+        }
+        $data[$title]['disaster_types'] = $disaster_types;
+      }
+
+      if (isset($row['fields']['country'])) {
+        $countries = [];
+        foreach ($row['fields']['country'] as $country) {
+          $countries[] = $country['name'];
+        }
+        $data[$title]['countries'] = $countries;
+      }
+
+      if (isset($row['fields']['file'])) {
+        $files = [];
+        foreach ($row['fields']['file'] as $file) {
+          $files[] = [
+            'preview' => isset($file['preview']['url-thumb']) ? $this->reliefwebFixUrl($file['preview']['url-thumb']) : '',
+            'url' => $this->reliefwebFixUrl($file['url']),
+            'filename' => $file['filename'] ?? '',
+            'description' => $file['description'] ?? '',
+          ];
+        }
+        $data[$title]['files'] = $files;
+      }
+    }
+
+    return $data;
+  }
+
+  /**
+   * Fix URL for reliefweb.
+   */
+  protected function reliefwebFixUrl($url) {
+    $url = str_replace('#', '%23', $url);
+    $url = str_replace(' ', '%20', $url);
+    $url = str_replace('http://', 'https://', $url);
+
+    return $url;
   }
 
   /**

@@ -11,6 +11,5 @@ icon_default: null
 description: 'A paragraph to define a region with a given layout (ex: 4 columns)'
 behavior_plugins:
   layout_paragraphs:
-    enabled: true
-    available_layouts:
-      layout_onecol: 'One column'
+    enabled: false
+    available_layouts: {  }
