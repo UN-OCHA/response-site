@@ -13,3 +13,8 @@ cd-button:
   css:
     theme:
       components/cd-button/cd-button.css: {}
+
+cd-tabs:
+  css:
+    theme:
+      components/cd-tabs/cd-tabs.css: {}
