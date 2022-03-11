@@ -291,15 +291,6 @@ class ParagraphController extends ControllerBase {
       }
     }
 
-    if (count($active_facets) > 0) {
-      $facet_blocks[] = [
-        '#theme' => 'links',
-        '#links' => $active_facets,
-        '#prefix' => '<div class="reliefweb--facet block"><details><summary>' . $this->t('Remove filters') . '</summary>',
-        '#suffix' => '</details></div>',
-      ];
-    }
-
     // Get country.
     $country = $group->field_operation->entity->field_country->entity;
 
@@ -386,10 +377,8 @@ class ParagraphController extends ControllerBase {
 
         if (count($links) > 1) {
           $facet_blocks[] = [
-            '#theme' => 'links',
-            '#links' => $links,
-            '#prefix' => '<div class="reliefweb--facet block"><details><summary>' . $this->t('Filter by @name', ['@name' => $this->getReliefwebFilters($name)]) . '</summary>',
-            '#suffix' => '</details></div>',
+            'title' => $this->getReliefwebFilters($name),
+            'links' => $links,
           ];
         }
       }
@@ -398,7 +387,9 @@ class ParagraphController extends ControllerBase {
     return [
       '#theme' => 'rw_river',
       '#data' => $this->buildReliefwebObjects($results),
+      '#total' => $count,
       '#facets' => $facet_blocks,
+      '#active_facets' => $active_facets,
       '#pager' => [
         '#type' => 'pager',
       ],
