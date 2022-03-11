@@ -234,32 +234,108 @@ class ParagraphController extends ControllerBase {
     $filters = $request->query->get('filters', []);
     $base_url = $request->getRequestUri();
 
-    $facet_blocks = [];
-    $facet_filters = [];
-    foreach ($filters as $key => $keywords) {
-      // Date is a special case.
-      if (strpos($key, 'date') !== FALSE) {
-        $from_to = explode(':', $keywords);
-        $facet_filters[] = [
-          'field' => $key,
-          'value' => [
-            'from' => $from_to[0] . 'T00:00:00+00:00',
-            'to' => $from_to[1] . 'T23:59:59+00:00',
-          ],
-          'operator' => 'AND',
-        ];
-      }
-      else {
-        $facet_filters[] = [
-          'field' => $key,
-          'value' => $keywords,
-          'operator' => 'OR',
-        ];
-      }
+    // Active facets.
+    $active_facets = $this->buildReliefwebActiveFacets($base_url, $filters);
+
+    // Get country.
+    $country = $group->field_operation->entity->field_country->entity;
+
+    $parameters = $this->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
+    $parameters['filter']['conditions'][] = [
+      'field' => 'format.id',
+      'value' => [
+        12,
+        12570,
+      ],
+      'operator' => 'OR',
+      'negate' => TRUE,
+    ];
+
+    $results = $this->executeReliefwebQuery($parameters);
+
+    $count = $results['totalCount'];
+    $this->pagerManager->createPager($count, $limit);
+
+    // Re-order facets.
+    $facets = [];
+    if (isset($results['embedded'])) {
+      $facets = $this->buildReliefwebFacets($base_url, $results['embedded'], $filters);
     }
 
+    return [
+      '#theme' => 'rw_river',
+      '#data' => $this->buildReliefwebObjects($results),
+      '#total' => $count,
+      '#facets' => $facets,
+      '#active_facets' => $active_facets,
+      '#pager' => [
+        '#type' => 'pager',
+      ],
+    ];
+  }
+
+  /**
+   * Return all documents of an operation, sector or cluster.
+   */
+  public function getInfographics($group, Request $request) {
+    if ($group->field_operation->isEmpty()) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('Operation not set.'),
+      ];
+    }
+
+    $limit = 10;
+    $offset = $request->query->getInt('page', 0) * $limit;
+    $filters = $request->query->get('filters', []);
+    $base_url = $request->getRequestUri();
+
     // Active facets.
+    $active_facets = $this->buildReliefwebActiveFacets($base_url, $filters);
+
+    // Get country.
+    $country = $group->field_operation->entity->field_country->entity;
+
+    $parameters = $this->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
+    $parameters['filter']['conditions'][] = [
+      'field' => 'format.id',
+      'value' => [
+        12,
+        12570,
+      ],
+      'operator' => 'OR',
+      'negate' => FALSE,
+    ];
+
+    $results = $this->executeReliefwebQuery($parameters);
+
+    $count = $results['totalCount'];
+    $this->pagerManager->createPager($count, $limit);
+
+    // Re-order facets.
+    $facets = [];
+    if (isset($results['embedded'])) {
+      $facets = $this->buildReliefwebFacets($base_url, $results['embedded'], $filters);
+    }
+
+    return [
+      '#theme' => 'rw_river',
+      '#data' => $this->buildReliefwebObjects($results),
+      '#total' => $count,
+      '#facets' => $facets,
+      '#active_facets' => $active_facets,
+      '#pager' => [
+        '#type' => 'pager',
+      ],
+    ];
+  }
+
+  /**
+   * Build active facets for Reliefweb.
+   */
+  protected function buildReliefwebActiveFacets(string $base_url, array $filters) : array {
     $active_facets = [];
+
     foreach ($filters as $key => $keywords) {
       if (is_string($keywords)) {
         $title = $this->t('Remove @name', ['@name' => $filters[$key]]);
@@ -291,32 +367,18 @@ class ParagraphController extends ControllerBase {
       }
     }
 
-    // Get country.
-    $country = $group->field_operation->entity->field_country->entity;
+    return $active_facets;
+  }
 
-    $parameters = $this->buildReliefwebParameters($offset, $limit, $facet_filters, $country->field_iso_3->value);
-    $parameters['filter']['conditions'][] = [
-      'field' => 'format.id',
-      'value' => [
-        12,
-        12570,
-      ],
-      'operator' => 'OR',
-      'negate' => TRUE,
-    ];
+  /**
+   * Build facets for Reliefweb.
+   */
+  protected function buildReliefwebFacets(string $base_url, array $embedded_facets, array $filters) : array {
+    $facet_blocks = [];
 
-    $results = $this->executeReliefwebQuery($parameters);
-
-    $count = $results['totalCount'];
-    $this->pagerManager->createPager($count, $limit);
-
-    // Re-order facets.
-    $facets = [];
-    if (isset($results['embedded'])) {
-      $allowed_filters = $this->getReliefwebFilters();
-      foreach (array_keys($allowed_filters) as $key) {
-        $facets[$key] = $results['embedded']['facets'][$key];
-      }
+    $allowed_filters = $this->getReliefwebFilters();
+    foreach (array_keys($allowed_filters) as $key) {
+      $facets[$key] = $embedded_facets['facets'][$key];
     }
 
     foreach ($facets as $name => $facet) {
@@ -384,67 +446,37 @@ class ParagraphController extends ControllerBase {
       }
     }
 
-    return [
-      '#theme' => 'rw_river',
-      '#data' => $this->buildReliefwebObjects($results),
-      '#total' => $count,
-      '#facets' => $facet_blocks,
-      '#active_facets' => $active_facets,
-      '#pager' => [
-        '#type' => 'pager',
-      ],
-    ];
-  }
-
-  /**
-   * Return all documents of an operation, sector or cluster.
-   */
-  public function getInfographics($group, Request $request) {
-    $limit = 10;
-    $offset = 0;
-
-    if ($request->query->has('page')) {
-      $offset = $request->query->getInt('page', 0) * $limit;
-    }
-
-    if ($group->field_operation->isEmpty()) {
-      return [
-        '#type' => 'markup',
-        '#markup' => $this->t('Operation not set.'),
-      ];
-    }
-
-    // Get country.
-    $country = $group->field_operation->entity->field_country->entity;
-    $facet_filters = [];
-    $parameters = $this->buildReliefwebParameters($offset, $limit, $facet_filters, $country->field_iso_3->value);
-    $parameters['filter']['conditions'][] = [
-      'field' => 'format.id',
-      'value' => [
-        12,
-        12570,
-      ],
-      'operator' => 'OR',
-    ];
-
-    $results = $this->executeReliefwebQuery($parameters);
-
-    $count = $results['totalCount'];
-    $this->pagerManager->createPager($count, $limit);
-
-    return [
-      '#theme' => 'rw_river',
-      '#data' => $this->buildReliefwebObjects($results),
-      '#pager' => [
-        '#type' => 'pager',
-      ],
-    ];
+    return $facet_blocks;
   }
 
   /**
    * Build reliefweb parameters.
    */
-  protected function buildReliefwebParameters(int $offset, int $limit, array $facet_filters, string $iso3 = '') : array {
+  protected function buildReliefwebParameters(int $offset, int $limit, array $query_filters, string $iso3 = '') : array {
+    $facet_filters = [];
+
+    foreach ($query_filters as $key => $keywords) {
+      // Date is a special case.
+      if (strpos($key, 'date') !== FALSE) {
+        $from_to = explode(':', $keywords);
+        $facet_filters[] = [
+          'field' => $key,
+          'value' => [
+            'from' => $from_to[0] . 'T00:00:00+00:00',
+            'to' => $from_to[1] . 'T23:59:59+00:00',
+          ],
+          'operator' => 'AND',
+        ];
+      }
+      else {
+        $facet_filters[] = [
+          'field' => $key,
+          'value' => $keywords,
+          'operator' => 'OR',
+        ];
+      }
+    }
+
     $parameters = [
       'appname' => 'hrinfo',
       'offset' => $offset,
