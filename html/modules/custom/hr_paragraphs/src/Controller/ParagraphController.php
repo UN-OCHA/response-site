@@ -234,6 +234,7 @@ class ParagraphController extends ControllerBase {
     $filters = $request->query->get('filters', []);
     $base_url = $request->getRequestUri();
 
+    $facet_blocks = [];
     $facet_filters = [];
     foreach ($filters as $key => $keywords) {
       // Date is a special case.
@@ -255,6 +256,48 @@ class ParagraphController extends ControllerBase {
           'operator' => 'OR',
         ];
       }
+    }
+
+    // Active facets.
+    $active_facets = [];
+    foreach ($filters as $key => $keywords) {
+      if (is_string($keywords)) {
+        $title = $this->t('Remove @name', ['@name' => $filters[$key]]);
+        $cloned_filters = $filters;
+        unset($cloned_filters[$key]);
+        $active_facets[] = [
+          'title' => $title,
+          'url' => Url::fromUserInput($base_url, [
+            'query' => [
+              'filters' => $cloned_filters,
+            ],
+          ]),
+        ];
+      }
+      else {
+        foreach ($keywords as $index => $keyword) {
+          $title = $this->t('Remove @name', ['@name' => $filters[$key][$index]]);
+          $cloned_filters = $filters;
+          unset($cloned_filters[$key][$index]);
+          $active_facets[] = [
+            'title' => $title,
+            'url' => Url::fromUserInput($base_url, [
+              'query' => [
+                'filters' => $cloned_filters,
+              ],
+            ]),
+          ];
+        }
+      }
+    }
+
+    if (count($active_facets) > 0) {
+      $facet_blocks[] = [
+        '#theme' => 'links',
+        '#links' => $active_facets,
+        '#prefix' => '<div class="reliefweb--facet block"><details><summary>' . $this->t('Remove filters') . '</summary>',
+        '#suffix' => '</details></div>',
+      ];
     }
 
     // Get country.
@@ -285,7 +328,6 @@ class ParagraphController extends ControllerBase {
       }
     }
 
-    $facet_blocks = [];
     foreach ($facets as $name => $facet) {
       $links = [];
       if (isset($facet['data']) && count($facet['data']) > 1) {
@@ -302,16 +344,16 @@ class ParagraphController extends ControllerBase {
             ];
           }
 
-          // Special case filters.
-          /*
-          if ($name == 'disaster.name') {
-          if (!in_array($term['value'], $country_disasters)) {
-          continue;
+          // Check if facet is already active.
+          if (isset($filters[$name])) {
+            if (is_string($filters[$name]) && $filters[$name] == $filter[$name]) {
+              continue;
+            }
+            if (is_array($filters[$name]) && in_array($filter[$name], $filters[$name])) {
+              continue;
+            }
           }
-          }
-           */
 
-          // If (!array_key_exists($filter_path, $active_filters)) {
           // Date is a special case.
           if (strpos($name, 'date') !== FALSE) {
             if ($term['count'] > 0) {
@@ -335,7 +377,6 @@ class ParagraphController extends ControllerBase {
               ]),
             ];
           }
-          // }
         }
 
         // Reverse order for date filter.
