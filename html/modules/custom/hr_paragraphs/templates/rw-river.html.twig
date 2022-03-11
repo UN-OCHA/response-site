@@ -1,41 +1,65 @@
-    <div class="reliefweb--facets">
-      {{ facets }}
-    </div>
+<div class="reliefweb--count block">{{ total }} documents found</div>
 
-<table class="operations-dataset">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Map/Infographic Type</th>
-      <th>Managed By</th>
-      <th>Original Publication Date</th>
-      <th>Files</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for row in data %}
-    <tr>
-      <td data-title="Name">
-        <a href="{{ row.url }}">{{ row.title }}</a>
-      </td>
-      <td data-title="Map/Infographic Type">{{ row.format }}</td>
-      <td data-title="Managed by">{{ row.sources }}</td>
-      <td data-title="Original Publication Date">{{ row.date_changed|date("d M Y") }} </td>
-      <td data-title="Files">
-        {% if row.files|length > 0 %}
-        <div class="btn-group">
-          <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Download<span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            {% for file in row.files %}
-            <li><a href="{{ file.url }}">{{ file.filename }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endif %}
-      </td>
-    </tr>
+{% if active_facets|length > 0 %}
+  <div class="reliefweb--active-facets block">
+    <details open>
+      <summary>{{ 'Remove filters'|trans }} </summary>
+      <ul>
+      {% for link in active_facets %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endfor %}
+      </ul>
+  </details>
+{% endif %}
+
+{% for facet in facets %}
+<div class="reliefweb--facets block">
+  <details open>
+    <summary>{{ facet.title }}</summary>
+    <ul>
+    {% for link in facet.links %}
+      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
     {% endfor %}
-  </tbody>
-</table>
+    </ul>
+</details>
+{% endfor %}
 
-{{ pager }}
+<div class="reliefweb--results block">
+  <table class="operations-dataset">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Map/Infographic Type</th>
+        <th>Managed By</th>
+        <th>Original Publication Date</th>
+        <th>Files</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+      <tr>
+        <td data-title="Name">
+          <a href="{{ row.url }}">{{ row.title }}</a>
+        </td>
+        <td data-title="Map/Infographic Type">{{ row.format }}</td>
+        <td data-title="Managed by">{{ row.sources }}</td>
+        <td data-title="Original Publication Date">{{ row.date_changed|date("d M Y") }} </td>
+        <td data-title="Files">
+          {% if row.files|length > 0 %}
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">Download<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              {% for file in row.files %}
+              <li><a href="{{ file.url }}">{{ file.filename }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {{ pager }}
+</div>
