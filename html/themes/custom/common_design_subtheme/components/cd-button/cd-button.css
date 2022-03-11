@@ -1,0 +1,15 @@
+.cd-button--light {
+  color: var(--cd-white);
+  background-color: var(--implementation-secondary);
+}
+.cd-button--light:hover {
+  color: var(--cd-white);
+  background-color: var(--implementation-secondary);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.0625), rgba(255, 255, 255, 0.0625));
+}
+.cd-button--light:focus {
+  color: var(--cd-white);
+  border-color: black;
+  background-color: var(--implementation-secondary);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.0625), rgba(255, 255, 255, 0.0625));
+}
