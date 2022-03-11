@@ -11,7 +11,7 @@ _core:
 id: common_design_subtheme_breadcrumbs
 theme: common_design_subtheme
 region: content
-weight: -5
+weight: -6
 provider: null
 plugin: system_breadcrumb_block
 settings:
