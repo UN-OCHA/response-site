@@ -1,0 +1,12 @@
+/**
+ * HR.info overrides for CD Tabs component.
+ */
+ul.tabs > li > a,
+ul.tabs > li > a.is-active {
+  color: var(--implementation-primary);
+}
+
+ul.tabs > li > a:focus {
+  outline: 3px solid var(--implementation-highlight);
+  background: #f1ecec;
+}

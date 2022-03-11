@@ -30,6 +30,8 @@ libraries-extend:
     - common_design_subtheme/cd-read-more
   common_design/cd-button:
     - common_design_subtheme/cd-button
+  common_design/cd-tabs:
+    - common_design_subtheme/cd-tabs
 
 # Custom namespace
 # https://www.drupal.org/docs/contributed-modules/components/understanding-twig-namespaces

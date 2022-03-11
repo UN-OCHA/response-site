@@ -2,6 +2,8 @@ uuid: c5c9acdd-386d-4c9c-a63b-0d2c851b0d08
 langcode: en
 status: true
 dependencies:
+  module:
+    - user
   theme:
     - common_design_subtheme
 _core:
@@ -9,14 +11,21 @@ _core:
 id: common_design_subtheme_local_tasks
 theme: common_design_subtheme
 region: content
-weight: -3
+weight: -4
 provider: null
 plugin: local_tasks_block
 settings:
   id: local_tasks_block
-  label: Tabs
+  label: 'Primary Tabs'
   label_display: '0'
   provider: core
   primary: true
-  secondary: true
-visibility: {  }
+  secondary: false
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated
