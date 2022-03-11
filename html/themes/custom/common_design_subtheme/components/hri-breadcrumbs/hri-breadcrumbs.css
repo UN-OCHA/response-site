@@ -1,0 +1,17 @@
+/**
+ * HR.info custom styles for breadcrumbs
+ */
+.block-system-breadcrumb-block ol {
+  display: block;
+  margin: 1rem 0;
+  padding: 0;
+  font-size: 0.875rem;
+}
+
+.block-system-breadcrumb-block li {
+  display: inline-block;
+}
+
+.block-system-breadcrumb-block li+li::before {
+  content: '›';
+}

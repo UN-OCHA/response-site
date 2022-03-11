@@ -2,6 +2,7 @@ global-styling:
   css:
     theme:
       css/styles.css: {}
+      components/hri-breadcrumbs/hri-breadcrumbs.css: {}
 
 # Custom components
 cd-read-more:
@@ -18,3 +19,8 @@ cd-tabs:
   css:
     theme:
       components/cd-tabs/cd-tabs.css: {}
+
+hri-breadcrumbs:
+  css:
+    theme:
+      components/hri-breadcrumbs/hri-breadcrumbs.css: {}
