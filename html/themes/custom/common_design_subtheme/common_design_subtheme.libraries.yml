@@ -24,3 +24,8 @@ hri-breadcrumbs:
   css:
     theme:
       components/hri-breadcrumbs/hri-breadcrumbs.css: {}
+
+hri-pagination:
+  css:
+    theme:
+      components/hri-pagination/hri-pagination.css: {}
