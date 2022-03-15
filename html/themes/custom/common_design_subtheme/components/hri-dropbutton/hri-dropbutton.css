@@ -17,7 +17,7 @@
 
 .js .dropbutton-multiple .dropbutton,
 .js .dropbutton-multiple.open .dropbutton {
-  padding: .2rem 1.5rem;
+  padding: 0.2rem 1.5rem;
 }
 
 .js .dropbutton-wrapper {
@@ -28,7 +28,7 @@
 
 @media (min-width: 480px) {
   .js .dropbutton-wrapper {
-    top: .25rem;
+    top: 0.25rem;
   }
 }
 
