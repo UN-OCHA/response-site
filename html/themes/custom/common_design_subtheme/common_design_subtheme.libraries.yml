@@ -24,3 +24,13 @@ hri-breadcrumbs:
   css:
     theme:
       components/hri-breadcrumbs/hri-breadcrumbs.css: {}
+
+hri-dropbutton:
+  css:
+    component:
+      components/hri-dropbutton/hri-dropbutton.css: {}
+
+hri-group-operations:
+  css:
+    component:
+      components/hri-group-operations/hri-group-operations.css: {}

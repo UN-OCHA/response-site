@@ -1,0 +1,38 @@
+/**
+ * Extends the core/drupal.dropbutton component.
+ * Extends the common_design/cd-dropbutton component.
+ */
+.js .dropbutton-wrapper,
+.dropbutton-multiple.open {
+  max-width: max-content;
+}
+
+.js .dropbutton-multiple .dropbutton-widget,
+.js .dropbutton-multiple.open .dropbutton,
+.js .dropbutton-multiple.open .dropbutton-toggle button {
+  border: 0;
+  border-radius: 4px;
+  background-image: linear-gradient(to bottom, #f6f6f3, #e7e7df);
+}
+
+.js .dropbutton-multiple .dropbutton,
+.js .dropbutton-multiple.open .dropbutton {
+  padding: .2rem 1.5rem;
+}
+
+.js .dropbutton-wrapper {
+  position: absolute;
+  top: 2.5rem;
+  right: 3rem;
+}
+
+@media (min-width: 480px) {
+  .js .dropbutton-wrapper {
+    top: .25rem;
+  }
+}
+
+.js .dropbutton-multiple.open .dropbutton a {
+  display: inline-block;
+  white-space: nowrap;
+}

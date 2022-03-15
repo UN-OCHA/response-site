@@ -1,0 +1,19 @@
+/**
+ * HR.info custom styling for Groups.
+ */
+
+
+/**
+ * Group Operations block.
+ */
+.block-group-operations {
+  /**
+   * The dropbutton inside the Group Operations block is a core component that
+   * normally appears inside table cells and uses position: absolute; to avoid
+   * affecting the layout of content around it. To emulate the behavior we are
+   * setting a minimum height and making sure the button can be positioned in
+   * relation to the block itself.
+   */
+  min-height: 85px;
+  position: relative;
+}
