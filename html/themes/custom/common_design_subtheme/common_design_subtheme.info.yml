@@ -26,6 +26,8 @@ regions:
 
 # Add implementation-specific styles to base theme components
 libraries-extend:
+  core/drupal.dropbutton:
+    - common_design_subtheme/hri-dropbutton
   common_design/cd-read-more:
     - common_design_subtheme/cd-read-more
   common_design/cd-button:
@@ -34,6 +36,7 @@ libraries-extend:
     - common_design_subtheme/cd-tabs
   common_design/cd-pagination:
     - common_design_subtheme/hri-pagination
+
 
 # Custom namespace
 # https://www.drupal.org/docs/contributed-modules/components/understanding-twig-namespaces
