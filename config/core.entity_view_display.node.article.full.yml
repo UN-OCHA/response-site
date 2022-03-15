@@ -4,14 +4,10 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.full
-    - field.field.node.article.body
-    - field.field.node.article.field_image
-    - field.field.node.article.field_tags
-    - image.style.large
+    - field.field.node.article.field_paragraphs
     - node.type.article
   module:
-    - image
-    - text
+    - layout_paragraphs
     - user
 _core:
   default_config_hash: b4RQ-Nfz-gOoG_jjftd_qDIz4lf_-OzlxoLHkRXjfrE
@@ -20,29 +16,14 @@ targetEntityType: node
 bundle: article
 mode: full
 content:
-  body:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  field_image:
-    type: image
+  field_paragraphs:
+    type: layout_paragraphs
     label: hidden
     settings:
-      image_link: ''
-      image_style: large
+      view_mode: default
+      link: ''
     third_party_settings: {  }
     weight: 0
-    region: content
-  field_tags:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
     region: content
 hidden:
   langcode: true
