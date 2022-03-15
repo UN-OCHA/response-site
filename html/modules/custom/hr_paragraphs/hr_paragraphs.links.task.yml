@@ -1,9 +1,11 @@
 hr_paragraphs.operation:
   title: 'Home'
+  class: '\Drupal\hr_paragraphs\Plugin\Menu\LocalTask\DynamicTabLocalTask'
   route_name: entity.group.canonical
   base_route: entity.group.canonical
 hr_paragraphs.operation.home:
   title: 'Home'
+  class: '\Drupal\hr_paragraphs\Plugin\Menu\LocalTask\DynamicTabLocalTask'
   route_name: entity.group.canonical
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
@@ -13,7 +15,7 @@ hr_paragraphs.operation.events:
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
 hr_paragraphs.operation.offices:
-  title: 'Offices / Coordination Hubs'
+  title: 'Offices'
   route_name: hr_paragraphs.operation.offices
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
