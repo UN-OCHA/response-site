@@ -6,6 +6,7 @@ dependencies:
     - field.field.group.operation.field_calendar_link
     - field.field.group.operation.field_enabled_tabs
     - field.field.group.operation.field_ical_url
+    - field.field.group.operation.field_offices_page
     - field.field.group.operation.field_operation
     - field.field.group.operation.field_paragraphs
     - field.field.group.operation.subgroup_depth
@@ -15,6 +16,7 @@ dependencies:
     - group.type.operation
   module:
     - field_group
+    - hr_paragraphs
     - layout_paragraphs
     - link
     - path
@@ -25,6 +27,7 @@ third_party_settings:
       children:
         - group_general
         - group_calendar
+        - group_offices
       label: Content
       region: content
       parent_name: ''
@@ -68,6 +71,21 @@ third_party_settings:
         formatter: open
         description: ''
         required_fields: false
+    group_offices:
+      children:
+        - field_offices_page
+      label: Offices
+      region: content
+      parent_name: group_content
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
 id: group.operation.default
 targetEntityType: group
 bundle: operation
@@ -94,6 +112,14 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_offices_page:
+    type: hr_paragraphs_link_default
+    weight: 26
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_operation:
     type: select2_entity_reference

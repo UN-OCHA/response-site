@@ -34,3 +34,8 @@ hri-group-operations:
   css:
     component:
       components/hri-group-operations/hri-group-operations.css: {}
+
+hri-pagination:
+  css:
+    theme:
+      components/hri-pagination/hri-pagination.css: {}

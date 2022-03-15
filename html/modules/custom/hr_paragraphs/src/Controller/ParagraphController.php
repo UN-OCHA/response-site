@@ -11,6 +11,7 @@ use Drupal\date_recur\DateRecurHelper;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -131,23 +132,28 @@ class ParagraphController extends ControllerBase {
    * Return all offices of an operation, sector or cluster.
    */
   public function getOffices($group) {
-    if ($group->field_operation->isEmpty()) {
+    if ($group->field_offices_page->isEmpty()) {
       return [
         '#type' => 'markup',
-        '#markup' => $this->t('Operation not set.'),
+        '#markup' => $this->t('No offices link defined.'),
       ];
     }
 
-    $operation_uuid = $group->field_operation->entity->uuid();
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_offices_page->first();
 
-    $entity_id = 'office';
-    $view_mode = 'teaser';
+    // Redirect external links.
+    if ($link->isExternal()) {
+      return new RedirectResponse($link->getUrl()->getUri());
+    }
 
-    $office_uuids = $this->entityTypeManager->getStorage($entity_id)->getQuery()->condition('operations', $operation_uuid)->execute();
-    $offices = $this->entityTypeManager->getStorage($entity_id)->loadMultiple($office_uuids);
+    $entity_type = 'node';
+    $view_mode = 'full';
+    $params = $link->getUrl()->getRouteParameters();
 
-    $view_builder = $this->entityTypeManager->getViewBuilder($entity_id);
-    return $view_builder->viewMultiple($offices, $view_mode);
+    $office_page = $this->entityTypeManager->getStorage($entity_type)->load($params[$entity_type]);
+    $view_builder = $this->entityTypeManager->getViewBuilder($entity_type);
+    return $view_builder->view($office_page, $view_mode);
   }
 
   /**

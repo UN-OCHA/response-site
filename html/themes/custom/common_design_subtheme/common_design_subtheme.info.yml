@@ -34,6 +34,8 @@ libraries-extend:
     - common_design_subtheme/cd-button
   common_design/cd-tabs:
     - common_design_subtheme/cd-tabs
+  common_design/cd-pagination:
+    - common_design_subtheme/hri-pagination
 
 
 # Custom namespace

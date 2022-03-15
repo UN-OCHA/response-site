@@ -12,6 +12,6 @@
   display: inline-block;
 }
 
-.block-system-breadcrumb-block li+li::before {
-  content: '›';
+.block-system-breadcrumb-block li + li::before {
+  content: "›";
 }

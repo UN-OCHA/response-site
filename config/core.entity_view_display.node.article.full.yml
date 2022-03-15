@@ -1,8 +1,9 @@
-uuid: 237a6b19-72e0-40ee-82c4-269150ac610f
+uuid: aaf31abd-d92f-42d0-a8b0-fde6d205ceda
 langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.node.full
     - field.field.node.article.field_paragraphs
     - node.type.article
   module:
@@ -10,10 +11,10 @@ dependencies:
     - user
 _core:
   default_config_hash: b4RQ-Nfz-gOoG_jjftd_qDIz4lf_-OzlxoLHkRXjfrE
-id: node.article.default
+id: node.article.full
 targetEntityType: node
 bundle: article
-mode: default
+mode: full
 content:
   field_paragraphs:
     type: layout_paragraphs
