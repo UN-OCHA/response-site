@@ -37,18 +37,3 @@ hr_paragraphs.operation.assessments:
   route_name: hr_paragraphs.operation.assessments
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
-hr_paragraphs.operation.assessments.list:
-  title: 'Assessments list'
-  route_name: hr_paragraphs.operation.assessments
-  base_route: entity.group.canonical
-  parent_id: hr_paragraphs.operation.assessments
-hr_paragraphs.operation.assessments.table:
-  title: 'Assessments table'
-  route_name: hr_paragraphs.operation.assessments
-  base_route: entity.group.canonical
-  parent_id: hr_paragraphs.operation.assessments
-hr_paragraphs.operation.assessments.map:
-  title: 'Assessments map'
-  route_name: hr_paragraphs.operation.assessments
-  base_route: entity.group.canonical
-  parent_id: hr_paragraphs.operation.assessments
