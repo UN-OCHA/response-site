@@ -6,12 +6,12 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Pager\PagerManagerInterface;
+use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Url;
 use Drupal\date_recur\DateRecurHelper;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -155,7 +155,7 @@ class ParagraphController extends ControllerBase {
 
     // Redirect external links.
     if ($link->isExternal()) {
-      return new RedirectResponse($link->getUrl()->getUri());
+      return new TrustedRedirectResponse($link->getUrl()->getUri());
     }
 
     $entity_type = 'node';

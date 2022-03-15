@@ -65,7 +65,7 @@ class HrParagraphsLinkWidget extends LinkWidget {
     }
     else {
       global $base_url;
-      if ($base_url = parse_url($uri, PHP_URL_HOST)) {
+      if ($base_url == parse_url($uri, PHP_URL_HOST)) {
         $uri = substr($uri, strpos($uri, $base_url) + strlen($base_url));
       }
     }
