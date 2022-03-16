@@ -8,6 +8,7 @@ dependencies:
     - field.field.group.operation.field_ical_url
     - field.field.group.operation.field_offices_page
     - field.field.group.operation.field_operation
+    - field.field.group.operation.field_pages_page
     - field.field.group.operation.field_paragraphs
     - field.field.group.operation.subgroup_depth
     - field.field.group.operation.subgroup_left
@@ -28,6 +29,7 @@ third_party_settings:
         - group_general
         - group_calendar
         - group_offices
+        - group_pages
       label: Content
       region: content
       parent_name: ''
@@ -86,6 +88,21 @@ third_party_settings:
         formatter: closed
         description: ''
         required_fields: true
+    group_pages:
+      children:
+        - field_pages_page
+      label: Pages
+      region: content
+      parent_name: group_content
+      weight: 23
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
 id: group.operation.default
 targetEntityType: group
 bundle: operation
@@ -130,6 +147,14 @@ content:
       autocomplete: true
       match_operator: CONTAINS
       match_limit: 25
+    third_party_settings: {  }
+  field_pages_page:
+    type: link_default
+    weight: 24
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_paragraphs:
     type: layout_paragraphs

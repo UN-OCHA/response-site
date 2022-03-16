@@ -81,7 +81,32 @@ class ParagraphController extends ControllerBase {
    * Check if offices is enabled.
    */
   public function hasOffices($group) {
-    return $this->tabIsActive($group, 'offices');
+    $active = $this->tabIsActive($group, 'offices');
+    if (!$active) {
+      return $active;
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    return AccessResult::allowedIf(!$group->field_offices_page->isEmpty());
+  }
+
+  /**
+   * Check if pages is enabled.
+   */
+  public function hasPages($group) {
+    $active = $this->tabIsActive($group, 'pages');
+    if (!$active) {
+      return $active;
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    return AccessResult::allowedIf(!$group->field_pages_page->isEmpty());
   }
 
   /**
@@ -157,6 +182,29 @@ class ParagraphController extends ControllerBase {
     if ($link->isExternal()) {
       return new TrustedRedirectResponse($link->getUrl()->getUri());
     }
+
+    $entity_type = 'node';
+    $view_mode = 'full';
+    $params = $link->getUrl()->getRouteParameters();
+
+    $office_page = $this->entityTypeManager->getStorage($entity_type)->load($params[$entity_type]);
+    $view_builder = $this->entityTypeManager->getViewBuilder($entity_type);
+    return $view_builder->view($office_page, $view_mode);
+  }
+
+  /**
+   * Return all pages of an operation, sector or cluster.
+   */
+  public function getPages($group) {
+    if ($group->field_pages_page->isEmpty()) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('No offices link defined.'),
+      ];
+    }
+
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_pages_page->first();
 
     $entity_type = 'node';
     $view_mode = 'full';

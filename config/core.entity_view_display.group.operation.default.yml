@@ -8,6 +8,7 @@ dependencies:
     - field.field.group.operation.field_ical_url
     - field.field.group.operation.field_offices_page
     - field.field.group.operation.field_operation
+    - field.field.group.operation.field_pages_page
     - field.field.group.operation.field_paragraphs
     - field.field.group.operation.subgroup_depth
     - field.field.group.operation.subgroup_left
@@ -46,6 +47,7 @@ hidden:
   field_ical_url: true
   field_offices_page: true
   field_operation: true
+  field_pages_page: true
   langcode: true
   subgroup_depth: true
   subgroup_left: true
