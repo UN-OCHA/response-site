@@ -67,6 +67,12 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'children' => [],
       ],
     ],
+    'group_nodes' => [
+      'template' => 'group-nodes',
+      'variables' => [
+        'nodes' => [],
+      ],
+    ],
   ];
 }
 
@@ -314,6 +320,54 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
   $variables['content']['children'] = [
     '#theme' => 'group_children',
     '#children' => $items,
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
+  $current_page = FALSE;
+
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  /** @var \Drupal\group\Entity\Group */
+  $group = $paragraph->getParentEntity();
+
+  // If we are on page, get the group.
+  if (get_class($group) == 'Drupal\node\Entity\Node') {
+    $current_page = $group->id();
+    $group_content_array = GroupContent::loadByEntity($group);
+    $group_content = reset($group_content_array);
+    $group = $group_content->getGroup();
+  }
+
+  if (!$group) {
+    return;
+  }
+
+  $nodes = $group->getContentEntities('group_node:article');
+  if (empty($nodes)) {
+    return;
+  }
+
+  $items = [];
+  foreach ($nodes as $node) {
+    // Skip current page.
+    if ($current_page && $current_page === $node->id()) {
+      continue;
+    }
+
+    $items[] = [
+      'label' => $node->title->value,
+      'link' => $node->toUrl(),
+    ];
+  }
+
+  $variables['content']['nodes'] = [
+    '#theme' => 'group_nodes',
+    '#nodes' => $items,
   ];
 }
 
