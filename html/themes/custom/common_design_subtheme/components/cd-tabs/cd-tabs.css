@@ -1,27 +1,29 @@
 ul.tabs {
-  display: block;
+  --cd-tabs-border-width: 2px;
+
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.5rem;
   margin: 1rem 0 2rem;
   padding: 0;
   list-style: none;
-  border-bottom: 2px solid var(--implementation-light);
-}
-
-/* Clearfix */
-ul.tabs::after {
-  display: block;
-  visibility: hidden;
-  clear: both;
-  height: 0;
-  content: ".";
+  border-bottom: var(--cd-tabs-border-width) solid var(--implementation-light);
 }
 
 ul.tabs > li {
   display: block;
+  flex: 0 0 100%;
   margin: 0;
+  margin-bottom: calc(var(--cd-tabs-border-width) * -1);
+}
+
+@media (min-width: 576px) {
+  ul.tabs > li {
+    flex-basis: auto;
+  }
 }
 
 ul.tabs > li > a {
-  position: relative;
   display: block;
   margin: 0;
   padding: 0.25rem 1rem;
@@ -30,34 +32,10 @@ ul.tabs > li > a {
   text-transform: uppercase;
   color: var(--implementation-primary);
   border: 0 none;
-  border-bottom: 2px solid var(--implementation-light);
+  border-bottom: var(--cd-tabs-border-width) solid var(--implementation-light);
   border-radius: 0;
   background: none;
   font-weight: 700;
-}
-
-@media (min-width: 576px) {
-  ul.tabs > li {
-    position: relative;
-    /* Height of border bottom. */
-    margin-bottom: -2px;
-  }
-
-  [dir="ltr"] ul.tabs > li {
-    float: left;
-    margin-right: 0.5rem;
-  }
-
-  [dir="rtl"] ul.tabs > li {
-    float: right;
-    margin-left: 0.5rem;
-  }
-}
-
-@media (min-width: 768px) {
-  ul.tabs > li > a {
-    min-width: 7rem; /* 112px */
-  }
 }
 
 ul.tabs > li > a.is-active,
