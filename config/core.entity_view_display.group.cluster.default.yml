@@ -3,8 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.cluster.field_calendar_link
     - field.field.group.cluster.field_enabled_tabs
     - field.field.group.cluster.field_ical_url
+    - field.field.group.cluster.field_offices_page
+    - field.field.group.cluster.field_pages_page
     - field.field.group.cluster.field_paragraphs
     - field.field.group.cluster.subgroup_depth
     - field.field.group.cluster.subgroup_left
@@ -13,11 +16,48 @@ dependencies:
     - group.type.cluster
   module:
     - layout_paragraphs
+    - link
 id: group.cluster.default
 targetEntityType: group
 bundle: cluster
 mode: default
 content:
+  field_calendar_link:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_offices_page:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_pages_page:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
   field_paragraphs:
     type: layout_paragraphs
     label: hidden
