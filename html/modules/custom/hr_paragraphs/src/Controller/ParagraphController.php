@@ -8,7 +8,6 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Url;
-use Drupal\date_recur\DateRecurHelper;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -42,19 +41,20 @@ class ParagraphController extends ControllerBase {
   protected $pagerManager;
 
   /**
-   * The pager parameters service.
+   * Ical controller.
    *
-   * @var \Drupal\Core\Pager\PagerParametersInterface
+   * @var \Drupal\hr_paragraphs\Controller\IcalController
    */
-  protected $pagerParameters;
+  protected $icalController;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager) {
+  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller) {
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
     $this->pagerManager = $pager_manager;
+    $this->icalController = $ical_controller;
   }
 
   /**
@@ -785,84 +785,8 @@ class ParagraphController extends ControllerBase {
     if (is_numeric($group)) {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
     }
-    $url = $group->field_ical_url->value;
 
-    // Feych and parse iCal.
-    $cal = new CalFileParser();
-    $events = $cal->parse($url);
-
-    $output = [];
-    foreach ($events as $event) {
-      // Collect attachments.
-      $attachments = [];
-      foreach ($event as $key => $value) {
-        if (strpos($key, 'ATTACH;FILENAME=') !== FALSE) {
-          $str_length = strlen('ATTACH;FILENAME=');
-          $attachments[] = [
-            'filename' => substr($key, $str_length, strpos($key, ';', $str_length) - $str_length),
-            'url' => $value,
-          ];
-        }
-      }
-
-      if (isset($event['RRULE'])) {
-        $iterationCount = 0;
-        $maxIterations = 40;
-
-        $rule = DateRecurHelper::create($event['RRULE'], $event['DTSTART'], $event['DTEND']);
-        if ($range_start && $range_end) {
-          $generator = $rule->generateOccurrences(new \DateTime($range_start), new \DateTime($range_end));
-        }
-        else {
-          $generator = $rule->generateOccurrences(new \DateTime());
-        }
-
-        foreach ($generator as $occurrence) {
-          $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
-            'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
-            'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
-            'attachments' => $attachments,
-          ];
-
-          $iterationCount++;
-          if ($iterationCount >= $maxIterations) {
-            break;
-          }
-        }
-      }
-      else {
-        if ($range_start && $range_end) {
-          if ($event['DTSTART']->format('Y-m-d') > $range_end) {
-            continue;
-          }
-          if ($event['DTEND']->format('Y-m-d') < $range_start) {
-            continue;
-          }
-
-          $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
-            'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
-            'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
-            'attachments' => $attachments,
-          ];
-        }
-        else {
-          $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
-            'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
-            'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
-            'attachments' => $attachments,
-          ];
-        }
-      }
-    }
+    $output = $this->icalController->getIcalEvents($group, $range_start, $range_end);
 
     return new JsonResponse($output);
   }

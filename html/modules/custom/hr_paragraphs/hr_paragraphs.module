@@ -5,6 +5,8 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
+use Drupal\Core\Url;
+
 /**
  * Implements hook_theme().
  */
@@ -221,6 +223,50 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     '#type' => 'inline_template',
     '#template' => $output,
     '#weight' => 99,
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $group = $paragraph->getParentEntity();
+
+  if (!$group) {
+    return;
+  }
+
+  if ($group->field_ical_url->isEmpty()) {
+    return;
+  }
+
+  /** @var \Drupal\hr_paragraphs\Controller\IcalController $ical_controller */
+  $ical_controller = \Drupal::service('hr_paragraphs.ical_controller');
+  $start = date('Y-m-d');
+  $end = date('Y-m-d', time() + 30 * 24 * 60 * 60);
+
+  $events = $ical_controller->getIcalEvents($group, $start, $end);
+  $items = [];
+  foreach ($events as $event) {
+    $items[] = $event['title'] . ' - ' . $event['start'];
+  }
+
+  $variables['content']['upcoming'] = [
+    '#theme' => 'item_list',
+    '#list_type' => 'ul',
+    '#title' => t('Upcoming events'),
+    '#items' => $items,
+    '#attributes' => ['class' => 'events-upcoming'],
+    '#wrapper_attributes' => ['class' => 'events-upcoming--wrapper'],
+  ];
+  $variables['content']['read_more'] = [
+    '#title' => t('More events'),
+    '#type' => 'link',
+    '#url' => Url::fromRoute('hr_paragraphs.operation.events', [
+      'group' => $group->id(),
+    ]),
   ];
 }
 
