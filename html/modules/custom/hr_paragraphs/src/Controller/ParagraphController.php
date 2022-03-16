@@ -69,6 +69,10 @@ class ParagraphController extends ControllerBase {
       return AccessResult::forbidden();
     }
 
+    if (!$group->hasField('field_enabled_tabs')) {
+      return AccessResult::forbidden();
+    }
+
     $enabled_tabs = $group->field_enabled_tabs->getValue();
     array_walk($enabled_tabs, function (&$item) {
       $item = $item['value'];
@@ -90,6 +94,14 @@ class ParagraphController extends ControllerBase {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
     }
 
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_offices_page')) {
+      return AccessResult::forbidden();
+    }
+
     return AccessResult::allowedIf(!$group->field_offices_page->isEmpty());
   }
 
@@ -104,6 +116,14 @@ class ParagraphController extends ControllerBase {
 
     if (is_numeric($group)) {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_pages_page')) {
+      return AccessResult::forbidden();
     }
 
     return AccessResult::allowedIf(!$group->field_pages_page->isEmpty());
@@ -148,6 +168,14 @@ class ParagraphController extends ControllerBase {
 
     if (is_numeric($group)) {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_ical_url')) {
+      return AccessResult::forbidden();
     }
 
     return AccessResult::allowedIf(!$group->field_ical_url->isEmpty());

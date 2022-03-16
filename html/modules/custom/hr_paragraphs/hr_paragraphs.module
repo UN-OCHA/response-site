@@ -7,6 +7,7 @@
 
 use Drupal\Core\Url;
 use Drupal\group\Entity\GroupContent;
+use Drupal\subgroup\MalformedLeafException;
 
 /**
  * Implements hook_theme().
@@ -301,26 +302,34 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
     return;
   }
 
-  /** @var \Drupal\subgroup\Entity\SubgroupHandlerInterface $subgroup_handler */
-  $subgroup_handler = \Drupal::entityTypeManager()->getHandler($group->getEntityTypeId(), 'subgroup');
-  $children = $subgroup_handler->getDescendants($group);
+  try {
+    /** @var \Drupal\subgroup\Entity\SubgroupHandlerInterface $subgroup_handler */
+    $subgroup_handler = \Drupal::entityTypeManager()->getHandler($group->getEntityTypeId(), 'subgroup');
+    if (!$subgroup_handler->hasDescendants($group)) {
+      return;
+    }
+    $children = $subgroup_handler->getDescendants($group);
 
-  if (empty($children)) {
-    return;
-  }
+    if (empty($children)) {
+      return;
+    }
 
-  $items = [];
-  foreach ($children as $child) {
-    $items[] = [
-      'label' => $child->label->value,
-      'link' => $child->toUrl(),
+    $items = [];
+    foreach ($children as $child) {
+      $items[] = [
+        'label' => $child->label->value,
+        'link' => $child->toUrl(),
+      ];
+    }
+
+    $variables['content']['children'] = [
+      '#theme' => 'group_children',
+      '#children' => $items,
     ];
   }
-
-  $variables['content']['children'] = [
-    '#theme' => 'group_children',
-    '#children' => $items,
-  ];
+  catch (MalformedLeafException $exception) {
+    return;
+  }
 }
 
 /**
