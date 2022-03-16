@@ -53,6 +53,13 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'pager' => NULL,
       ],
     ],
+    'upcoming_events' => [
+      'template' => 'upcoming-events',
+      'variables' => [
+        'events' => [],
+        'read_more' => NULL,
+      ],
+    ],
   ];
 }
 
@@ -254,19 +261,14 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
   }
 
   $variables['content']['upcoming'] = [
-    '#theme' => 'item_list',
-    '#list_type' => 'ul',
-    '#title' => t('Upcoming events'),
-    '#items' => $items,
-    '#attributes' => ['class' => 'events-upcoming'],
-    '#wrapper_attributes' => ['class' => 'events-upcoming--wrapper'],
-  ];
-  $variables['content']['read_more'] = [
-    '#title' => t('More events'),
-    '#type' => 'link',
-    '#url' => Url::fromRoute('hr_paragraphs.operation.events', [
-      'group' => $group->id(),
-    ]),
+    '#theme' => 'upcoming_events',
+    '#events' => $events,
+    '#read_more' => [
+      'title' => 'More events',
+      'url' => Url::fromRoute('hr_paragraphs.operation.events', [
+        'group' => $group->id(),
+      ]),
+    ],
   ];
 }
 
