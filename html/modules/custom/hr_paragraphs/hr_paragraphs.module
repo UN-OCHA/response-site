@@ -5,6 +5,10 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
+use Drupal\Core\Url;
+use Drupal\group\Entity\GroupContent;
+use Drupal\subgroup\MalformedLeafException;
+
 /**
  * Implements hook_theme().
  */
@@ -49,6 +53,25 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'facets' => [],
         'active_facets' => [],
         'pager' => NULL,
+      ],
+    ],
+    'upcoming_events' => [
+      'template' => 'upcoming-events',
+      'variables' => [
+        'events' => [],
+        'read_more' => NULL,
+      ],
+    ],
+    'group_children' => [
+      'template' => 'group-children',
+      'variables' => [
+        'children' => [],
+      ],
+    ],
+    'group_nodes' => [
+      'template' => 'group-nodes',
+      'variables' => [
+        'nodes' => [],
       ],
     ],
   ];
@@ -221,6 +244,170 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     '#type' => 'inline_template',
     '#template' => $output,
     '#weight' => 99,
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $group = $paragraph->getParentEntity();
+
+  if (!$group) {
+    return;
+  }
+
+  if ($group->field_ical_url->isEmpty()) {
+    return;
+  }
+
+  /** @var \Drupal\hr_paragraphs\Controller\IcalController $ical_controller */
+  $ical_controller = \Drupal::service('hr_paragraphs.ical_controller');
+  $start = date('Y-m-d');
+  $end = date('Y-m-d', time() + 30 * 24 * 60 * 60);
+  $events = $ical_controller->getIcalEvents($group, $start, $end);
+
+  $variables['content']['upcoming'] = [
+    '#theme' => 'upcoming_events',
+    '#events' => $events,
+    '#read_more' => [
+      'title' => 'More events',
+      'url' => Url::fromRoute('hr_paragraphs.operation.events', [
+        'group' => $group->id(),
+      ]),
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  /** @var \Drupal\group\Entity\Group */
+  $group = $paragraph->getParentEntity();
+
+  // For preview mode.
+  if (!$group) {
+    return;
+  }
+
+  // If we are on page, get the group.
+  if (get_class($group) == 'Drupal\node\Entity\Node') {
+    $group_content_array = GroupContent::loadByEntity($group);
+    $group_content = reset($group_content_array);
+    $group = $group_content->getGroup();
+  }
+
+  if (!$group) {
+    return;
+  }
+
+  try {
+    /** @var \Drupal\subgroup\Entity\SubgroupHandlerInterface $subgroup_handler */
+    $subgroup_handler = \Drupal::entityTypeManager()->getHandler($group->getEntityTypeId(), 'subgroup');
+    if (!$subgroup_handler->hasDescendants($group)) {
+      return;
+    }
+    $children = $subgroup_handler->getDescendants($group);
+
+    if (empty($children)) {
+      return;
+    }
+
+    $items = [];
+    foreach ($children as $child) {
+      $items[] = [
+        'label' => $child->label->value,
+        'link' => $child->toUrl(),
+      ];
+    }
+
+    $variables['content']['children'] = [
+      '#theme' => 'group_children',
+      '#children' => $items,
+    ];
+  }
+  catch (MalformedLeafException $exception) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
+  $exclude_pages = [];
+
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  /** @var \Drupal\group\Entity\Group */
+  $group = $paragraph->getParentEntity();
+
+  // For preview mode.
+  if (!$group) {
+    return;
+  }
+
+  // If we are on page, get the group.
+  if (get_class($group) == 'Drupal\node\Entity\Node') {
+    $exclude_pages[] = $group->id();
+    $group_content_array = GroupContent::loadByEntity($group);
+    $group_content = reset($group_content_array);
+    $group = $group_content->getGroup();
+  }
+
+  if (!$group) {
+    return;
+  }
+
+  // Exclude special pages.
+  if ($group->hasField('field_offices_page') && !$group->field_offices_page->isEmpty()) {
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_offices_page->first();
+
+    if (!$link->isExternal()) {
+      $params = $link->getUrl()->getRouteParameters();
+      $exclude_pages[] = $params['node'];
+    }
+  }
+
+  if ($group->hasField('field_pages_page') && !$group->field_pages_page->isEmpty()) {
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_pages_page->first();
+
+    if (!$link->isExternal()) {
+      $params = $link->getUrl()->getRouteParameters();
+      $exclude_pages[] = $params['node'];
+    }
+  }
+
+  $nodes = $group->getContentEntities('group_node:article');
+  if (empty($nodes)) {
+    return;
+  }
+
+  $items = [];
+  foreach ($nodes as $node) {
+    // Skip current page.
+    if (in_array($node->id(), $exclude_pages)) {
+      continue;
+    }
+
+    $items[] = [
+      'label' => $node->title->value,
+      'link' => $node->toUrl(),
+    ];
+  }
+
+  $variables['content']['nodes'] = [
+    '#theme' => 'group_nodes',
+    '#nodes' => $items,
   ];
 }
 

@@ -1,0 +1,10 @@
+uuid: caf75ec9-7560-49c3-b566-a9cd1755db9c
+langcode: en
+status: true
+dependencies: {  }
+id: group_pages
+label: 'Group pages'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

@@ -11,6 +11,19 @@ hr_paragraphs.operation.offices:
       group:
         type: entity:group
 
+hr_paragraphs.operation.pages:
+  path: '/group/{group}/pages'
+  title: 'Pages'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getPages'
+    _title: 'Pages'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasPages'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
 hr_paragraphs.operation.datasets:
   path: '/group/{group}/datasets'
   title: 'Datasets'

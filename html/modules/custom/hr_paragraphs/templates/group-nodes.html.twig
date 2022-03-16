@@ -1,0 +1,10 @@
+<div class="group-nodes block">
+  <h3>{{ 'Pages'|trans }}</h3>
+  <ul class="group-nodes--list">
+    {% for node in nodes %}
+      <li class="group-nodes--node">
+        <a href="{{ node.link }}">{{ node.label }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

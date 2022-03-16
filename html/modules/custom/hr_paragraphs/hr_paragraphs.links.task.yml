@@ -19,6 +19,11 @@ hr_paragraphs.operation.offices:
   route_name: hr_paragraphs.operation.offices
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
+hr_paragraphs.operation.pages:
+  title: 'Pages'
+  route_name: hr_paragraphs.operation.pages
+  base_route: entity.group.canonical
+  parent_id: hr_paragraphs.operation
 hr_paragraphs.operation.datasets:
   title: 'Datasets'
   route_name: hr_paragraphs.operation.datasets

@@ -3,8 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.cluster.field_calendar_link
     - field.field.group.cluster.field_enabled_tabs
     - field.field.group.cluster.field_ical_url
+    - field.field.group.cluster.field_offices_page
+    - field.field.group.cluster.field_pages_page
     - field.field.group.cluster.field_paragraphs
     - field.field.group.cluster.subgroup_depth
     - field.field.group.cluster.subgroup_left
@@ -13,12 +16,21 @@ dependencies:
     - group.type.cluster
   module:
     - layout_paragraphs
+    - link
     - path
 id: group.cluster.default
 targetEntityType: group
 bundle: cluster
 mode: default
 content:
+  field_calendar_link:
+    type: link_default
+    weight: 124
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_enabled_tabs:
     type: options_buttons
     weight: 121
@@ -32,6 +44,22 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_offices_page:
+    type: link_default
+    weight: 125
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_pages_page:
+    type: link_default
+    weight: 126
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_paragraphs:
     type: layout_paragraphs

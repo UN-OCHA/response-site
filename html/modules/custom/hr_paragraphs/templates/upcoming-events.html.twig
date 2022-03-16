@@ -1,0 +1,12 @@
+<div class="upcoming-events block">
+  <h3>{{ 'Upcoming events'|trans }}</h3>
+  <ul class="upcoming-events--list">
+    {% for event in events %}
+      <li class="upcoming-events--event">
+        <span class="upcoming-events--title">{{ event.title }}</span>
+        <span class="upcoming-events--date">{{ event.start|date("d M Y h:i A") }} - {{ event.end|date("h:i A") }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{{ read_more.url }}">{{ read_more.title|trans }}</a>
+</div>

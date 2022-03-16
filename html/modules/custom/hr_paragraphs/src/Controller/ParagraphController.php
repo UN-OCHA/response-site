@@ -6,12 +6,11 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Pager\PagerManagerInterface;
+use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Url;
-use Drupal\date_recur\DateRecurHelper;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -42,19 +41,20 @@ class ParagraphController extends ControllerBase {
   protected $pagerManager;
 
   /**
-   * The pager parameters service.
+   * Ical controller.
    *
-   * @var \Drupal\Core\Pager\PagerParametersInterface
+   * @var \Drupal\hr_paragraphs\Controller\IcalController
    */
-  protected $pagerParameters;
+  protected $icalController;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager) {
+  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller) {
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
     $this->pagerManager = $pager_manager;
+    $this->icalController = $ical_controller;
   }
 
   /**
@@ -66,6 +66,10 @@ class ParagraphController extends ControllerBase {
     }
 
     if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_enabled_tabs')) {
       return AccessResult::forbidden();
     }
 
@@ -81,7 +85,48 @@ class ParagraphController extends ControllerBase {
    * Check if offices is enabled.
    */
   public function hasOffices($group) {
-    return $this->tabIsActive($group, 'offices');
+    $active = $this->tabIsActive($group, 'offices');
+    if (!$active) {
+      return $active;
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_offices_page')) {
+      return AccessResult::forbidden();
+    }
+
+    return AccessResult::allowedIf(!$group->field_offices_page->isEmpty());
+  }
+
+  /**
+   * Check if pages is enabled.
+   */
+  public function hasPages($group) {
+    $active = $this->tabIsActive($group, 'pages');
+    if (!$active) {
+      return $active;
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_pages_page')) {
+      return AccessResult::forbidden();
+    }
+
+    return AccessResult::allowedIf(!$group->field_pages_page->isEmpty());
   }
 
   /**
@@ -125,6 +170,14 @@ class ParagraphController extends ControllerBase {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
     }
 
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_ical_url')) {
+      return AccessResult::forbidden();
+    }
+
     return AccessResult::allowedIf(!$group->field_ical_url->isEmpty());
   }
 
@@ -155,8 +208,31 @@ class ParagraphController extends ControllerBase {
 
     // Redirect external links.
     if ($link->isExternal()) {
-      return new RedirectResponse($link->getUrl()->getUri());
+      return new TrustedRedirectResponse($link->getUrl()->getUri());
     }
+
+    $entity_type = 'node';
+    $view_mode = 'full';
+    $params = $link->getUrl()->getRouteParameters();
+
+    $office_page = $this->entityTypeManager->getStorage($entity_type)->load($params[$entity_type]);
+    $view_builder = $this->entityTypeManager->getViewBuilder($entity_type);
+    return $view_builder->view($office_page, $view_mode);
+  }
+
+  /**
+   * Return all pages of an operation, sector or cluster.
+   */
+  public function getPages($group) {
+    if ($group->field_pages_page->isEmpty()) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('No offices link defined.'),
+      ];
+    }
+
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_pages_page->first();
 
     $entity_type = 'node';
     $view_mode = 'full';
@@ -239,6 +315,16 @@ class ParagraphController extends ControllerBase {
    * Return all documents of an operation, sector or cluster.
    */
   public function getDocuments($group, Request $request) {
+    if ($group->hasField('field_documents_page') && !$group->field_documents_page->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_documents_page->first();
+
+      // Redirect external links.
+      if ($link->isExternal()) {
+        return new TrustedRedirectResponse($link->getUrl()->getUri());
+      }
+    }
+
     if ($group->field_operation->isEmpty()) {
       return [
         '#type' => 'markup',
@@ -785,84 +871,8 @@ class ParagraphController extends ControllerBase {
     if (is_numeric($group)) {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
     }
-    $url = $group->field_ical_url->value;
 
-    // Feych and parse iCal.
-    $cal = new CalFileParser();
-    $events = $cal->parse($url);
-
-    $output = [];
-    foreach ($events as $event) {
-      // Collect attachments.
-      $attachments = [];
-      foreach ($event as $key => $value) {
-        if (strpos($key, 'ATTACH;FILENAME=') !== FALSE) {
-          $str_length = strlen('ATTACH;FILENAME=');
-          $attachments[] = [
-            'filename' => substr($key, $str_length, strpos($key, ';', $str_length) - $str_length),
-            'url' => $value,
-          ];
-        }
-      }
-
-      if (isset($event['RRULE'])) {
-        $iterationCount = 0;
-        $maxIterations = 40;
-
-        $rule = DateRecurHelper::create($event['RRULE'], $event['DTSTART'], $event['DTEND']);
-        if ($range_start && $range_end) {
-          $generator = $rule->generateOccurrences(new \DateTime($range_start), new \DateTime($range_end));
-        }
-        else {
-          $generator = $rule->generateOccurrences(new \DateTime());
-        }
-
-        foreach ($generator as $occurrence) {
-          $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
-            'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
-            'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
-            'attachments' => $attachments,
-          ];
-
-          $iterationCount++;
-          if ($iterationCount >= $maxIterations) {
-            break;
-          }
-        }
-      }
-      else {
-        if ($range_start && $range_end) {
-          if ($event['DTSTART']->format('Y-m-d') > $range_end) {
-            continue;
-          }
-          if ($event['DTEND']->format('Y-m-d') < $range_start) {
-            continue;
-          }
-
-          $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
-            'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
-            'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
-            'attachments' => $attachments,
-          ];
-        }
-        else {
-          $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
-            'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
-            'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
-            'attachments' => $attachments,
-          ];
-        }
-      }
-    }
+    $output = $this->icalController->getIcalEvents($group, $range_start, $range_end);
 
     return new JsonResponse($output);
   }
