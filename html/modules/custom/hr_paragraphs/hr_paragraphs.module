@@ -5,8 +5,12 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
+use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupContent;
+use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
 
 /**
@@ -75,6 +79,93 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
       ],
     ],
   ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hr_paragraphs_group_insert(EntityInterface $entity) {
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+  $source = '/group/' . $entity->id();
+
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+  $group_alias = $path_alias_manager->getAliasByPath($source);
+
+  // Skip if an alias is already set.
+  if ($group_alias !== $source) {
+    return;
+  }
+
+  $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
+  $new_alias = '/operations/' . $page_title;
+
+  if ($entity->subgroup_tree->value && $entity->subgroup_tree->value !== $entity->id()) {
+    $parent_group = Group::load($entity->subgroup_tree->value);
+    $group_alias = $path_alias_manager->getAliasByPath('/group/' . $parent_group->id());
+    $new_alias = $group_alias . '/' . $page_title;
+  }
+
+  /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
+  $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+  $alias_uniquifier->uniquify($new_alias, $source, $langcode);
+
+  $path_alias = PathAlias::create([
+    'path' => $source,
+    'alias' => $new_alias,
+  ]);
+
+  $path_alias->save();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function hr_paragraphs_group_update(EntityInterface $entity) {
+  return hr_paragraphs_group_insert($entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hr_paragraphs_node_insert(EntityInterface $entity) {
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+  $source = '/node/' . $entity->id();
+
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+  $node_alias = $path_alias_manager->getAliasByPath($source);
+
+  // Skip if an alias is already set.
+  if ($node_alias !== $source) {
+    return;
+  }
+
+  $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
+
+  $group_content_array = GroupContent::loadByEntity($entity);
+  $group_content = reset($group_content_array);
+  if ($group_content) {
+    $group = $group_content->getGroup();
+    $group_alias = $path_alias_manager->getAliasByPath('/group/' . $group->id());
+    $new_alias = $group_alias . '/' . $page_title;
+
+    /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
+    $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+    $alias_uniquifier->uniquify($new_alias, $source, $langcode);
+
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $new_alias,
+    ]);
+
+    $path_alias->save();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function hr_paragraphs_node_update(EntityInterface $entity) {
+  return hr_paragraphs_node_insert($entity);
 }
 
 /**
