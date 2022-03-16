@@ -8,3 +8,11 @@ services:
   hr_paragraphs.ical_controller:
     class: \Drupal\hr_paragraphs\Controller\IcalController
     arguments: ['@entity_type.manager', '@http_client']
+  hr_paragraphs.breadcrumb.groupcontent:
+    class: 'Drupal\hr_paragraphs\Breadcrumb\GroupContentBreadcrumbBuilder'
+    tags:
+      - { name: 'breadcrumb_builder', priority: 100 }
+  hr_paragraphs.breadcrumb.group:
+    class: 'Drupal\hr_paragraphs\Breadcrumb\GroupBreadcrumbBuilder'
+    tags:
+      - { name: 'breadcrumb_builder', priority: 100 }
