@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Url;
+use Drupal\group\Entity\GroupContent;
 
 /**
  * Implements hook_theme().
@@ -58,6 +59,12 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
       'variables' => [
         'events' => [],
         'read_more' => NULL,
+      ],
+    ],
+    'group_children' => [
+      'template' => 'group-children',
+      'variables' => [
+        'children' => [],
       ],
     ],
   ];
@@ -253,12 +260,7 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
   $ical_controller = \Drupal::service('hr_paragraphs.ical_controller');
   $start = date('Y-m-d');
   $end = date('Y-m-d', time() + 30 * 24 * 60 * 60);
-
   $events = $ical_controller->getIcalEvents($group, $start, $end);
-  $items = [];
-  foreach ($events as $event) {
-    $items[] = $event['title'] . ' - ' . $event['start'];
-  }
 
   $variables['content']['upcoming'] = [
     '#theme' => 'upcoming_events',
@@ -269,6 +271,49 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
         'group' => $group->id(),
       ]),
     ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  /** @var \Drupal\group\Entity\Group */
+  $group = $paragraph->getParentEntity();
+
+  // If we are on page, get the group.
+  if (get_class($group) == 'Drupal\node\Entity\Node') {
+    $group_content_array = GroupContent::loadByEntity($group);
+    $group_content = reset($group_content_array);
+    $group = $group_content->getGroup();
+  }
+
+  if (!$group) {
+    return;
+  }
+
+  /** @var \Drupal\subgroup\Entity\SubgroupHandlerInterface $subgroup_handler */
+  $subgroup_handler = \Drupal::entityTypeManager()->getHandler($group->getEntityTypeId(), 'subgroup');
+  $children = $subgroup_handler->getDescendants($group);
+
+  if (empty($children)) {
+    return;
+  }
+
+  $items = [];
+  foreach ($children as $child) {
+    $items[] = [
+      'label' => $child->label->value,
+      'link' => $child->toUrl(),
+    ];
+  }
+
+  $variables['content']['children'] = [
+    '#theme' => 'group_children',
+    '#children' => $items,
   ];
 }
 
