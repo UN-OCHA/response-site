@@ -291,6 +291,11 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
   /** @var \Drupal\group\Entity\Group */
   $group = $paragraph->getParentEntity();
 
+  // For preview mode.
+  if (!$group) {
+    return;
+  }
+
   // If we are on page, get the group.
   if (get_class($group) == 'Drupal\node\Entity\Node') {
     $group_content_array = GroupContent::loadByEntity($group);
@@ -343,6 +348,11 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
 
   /** @var \Drupal\group\Entity\Group */
   $group = $paragraph->getParentEntity();
+
+  // For preview mode.
+  if (!$group) {
+    return;
+  }
 
   // If we are on page, get the group.
   if (get_class($group) == 'Drupal\node\Entity\Node') {
