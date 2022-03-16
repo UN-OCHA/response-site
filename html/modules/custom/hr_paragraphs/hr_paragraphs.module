@@ -336,7 +336,7 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
  * Implements hook_preprocess_paragraph__type().
  */
 function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
-  $current_page = FALSE;
+  $exclude_pages = [];
 
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
@@ -346,7 +346,7 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
 
   // If we are on page, get the group.
   if (get_class($group) == 'Drupal\node\Entity\Node') {
-    $current_page = $group->id();
+    $exclude_pages[] = $group->id();
     $group_content_array = GroupContent::loadByEntity($group);
     $group_content = reset($group_content_array);
     $group = $group_content->getGroup();
@@ -354,6 +354,27 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
 
   if (!$group) {
     return;
+  }
+
+  // Exclude special pages.
+  if ($group->hasField('field_offices_page') && !$group->field_offices_page->isEmpty()) {
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_offices_page->first();
+
+    if (!$link->isExternal()) {
+      $params = $link->getUrl()->getRouteParameters();
+      $exclude_pages[] = $params['node'];
+    }
+  }
+
+  if ($group->hasField('field_pages_page') && !$group->field_pages_page->isEmpty()) {
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_pages_page->first();
+
+    if (!$link->isExternal()) {
+      $params = $link->getUrl()->getRouteParameters();
+      $exclude_pages[] = $params['node'];
+    }
   }
 
   $nodes = $group->getContentEntities('group_node:article');
@@ -364,7 +385,7 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
   $items = [];
   foreach ($nodes as $node) {
     // Skip current page.
-    if ($current_page && $current_page === $node->id()) {
+    if (in_array($node->id(), $exclude_pages)) {
       continue;
     }
 
