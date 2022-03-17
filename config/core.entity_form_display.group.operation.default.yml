@@ -7,6 +7,7 @@ dependencies:
     - field.field.group.operation.field_documents_page
     - field.field.group.operation.field_enabled_tabs
     - field.field.group.operation.field_ical_url
+    - field.field.group.operation.field_infographics
     - field.field.group.operation.field_offices_page
     - field.field.group.operation.field_operation
     - field.field.group.operation.field_pages_page
@@ -32,6 +33,7 @@ third_party_settings:
         - group_offices
         - group_pages
         - group_documents
+        - group_infographics
       label: Content
       region: content
       parent_name: ''
@@ -108,10 +110,25 @@ third_party_settings:
     group_documents:
       children:
         - field_documents_page
-      label: Documents
+      label: Reports
       region: content
       parent_name: group_content
       weight: 24
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_infographics:
+      children:
+        - field_infographics
+      label: Infographics
+      region: content
+      parent_name: group_content
+      weight: 25
       format_type: tab
       format_settings:
         classes: ''
@@ -154,6 +171,14 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  field_infographics:
+    type: link_default
+    weight: 28
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_offices_page:
     type: hr_paragraphs_link_default

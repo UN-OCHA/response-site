@@ -437,6 +437,16 @@ class ParagraphController extends ControllerBase {
    * Return all documents of an operation, sector or cluster.
    */
   public function getInfographics($group, Request $request) {
+    if ($group->hasField('field_infographics') && !$group->field_infographics->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_infographics->first();
+
+      // Redirect external links.
+      if ($link->isExternal()) {
+        return new TrustedRedirectResponse($link->getUrl()->getUri());
+      }
+    }
+
     if ($group->field_operation->isEmpty()) {
       return [
         '#type' => 'markup',

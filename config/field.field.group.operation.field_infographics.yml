@@ -1,0 +1,23 @@
+uuid: cd7db754-b464-47d7-8026-606ef3fd0972
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_infographics
+    - group.type.operation
+  module:
+    - link
+id: group.operation.field_infographics
+field_name: field_infographics
+entity_type: group
+bundle: operation
+label: 'Maps / Infographics page'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link
