@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf14989b470223d19e6598e41b3fa92c",
+    "content-hash": "c45d6fb9eeeb0e9fad7e4aa9c229d7ef",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3101,6 +3101,58 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/layout_paragraphs",
                 "issues": "https://www.drupal.org/project/issues/layout_paragraphs"
+            }
+        },
+        {
+            "name": "drupal/link_allowed_hosts",
+            "version": "1.0.0-beta2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/link_allowed_hosts.git",
+                "reference": "1.0.0-beta2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/link_allowed_hosts-1.0.0-beta2.zip",
+                "reference": "1.0.0-beta2",
+                "shasum": "8675787113a7e64b464ac24b1d3d41cabf61e9e6"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0-beta2",
+                    "datestamp": "1619767101",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "arthur_lorenz",
+                    "homepage": "https://www.drupal.org/user/3529915"
+                },
+                {
+                    "name": "leymannx",
+                    "homepage": "https://www.drupal.org/user/2482808"
+                },
+                {
+                    "name": "yannickoo",
+                    "homepage": "https://www.drupal.org/user/531118"
+                }
+            ],
+            "description": "Restrict link fields to only contain links to certain hosts.",
+            "homepage": "https://www.drupal.org/project/link_allowed_hosts",
+            "support": {
+                "source": "https://git.drupalcode.org/project/link_allowed_hosts"
             }
         },
         {
@@ -14289,11 +14341,12 @@
         "drupal/external_entities": 20,
         "drupal/fullcalendar_api": 15,
         "drupal/layout_paragraphs": 10,
+        "drupal/link_allowed_hosts": 10,
         "drupal/paragraphs_asymmetric_translation_widgets": 10
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
