@@ -1,0 +1,10 @@
+uuid: 80df4b5e-4706-40a8-8fc0-6493bb227cc9
+langcode: en
+status: true
+dependencies: {  }
+id: article_card_list
+label: Highlights
+icon_uuid: null
+icon_default: null
+description: 'A list of Articles rendered as cards with thumbnails.'
+behavior_plugins: {  }

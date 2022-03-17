@@ -46,6 +46,7 @@
         "drupal/geofield": "^1.36",
         "drupal/google_tag": "^1.4",
         "drupal/group": "^1.4",
+        "drupal/inline_entity_form": "^1.0@RC",
         "drupal/jquery_ui_dialog": "^1.0",
         "drupal/layout_paragraphs": "^2.0@beta",
         "drupal/link_allowed_hosts": "^1.0@beta",

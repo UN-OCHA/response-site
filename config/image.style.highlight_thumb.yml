@@ -1,0 +1,15 @@
+uuid: 7d9af158-ba79-4fb1-b909-8c91ce162cbf
+langcode: en
+status: true
+dependencies: {  }
+name: highlight_thumb
+label: 'Highlight Thumb'
+effects:
+  605d38ff-49a8-43f7-802e-f2f8a9f336ae:
+    uuid: 605d38ff-49a8-43f7-802e-f2f8a9f336ae
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 410
+      height: 205
+      anchor: center-top

@@ -1,0 +1,19 @@
+uuid: 7755949c-e8b5-410e-a536-127b11a0383f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_summary
+    - node.type.highlight
+id: node.highlight.field_summary
+field_name: field_summary
+entity_type: node
+bundle: highlight
+label: Summary
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long
