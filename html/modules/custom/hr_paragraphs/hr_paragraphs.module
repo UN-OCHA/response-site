@@ -120,8 +120,9 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
     'events',
     'offices',
     'pages',
-    'documents',
-    'infographics',
+    'updates',
+    'updates/reports',
+    'updates/infographics',
     'datasets',
     'assessments',
   ];
@@ -601,4 +602,35 @@ function hr_paragraphs_library_info_alter(&$libraries, $extension) {
     }
   }
   $libraries['fullcalendar_load']['js'] = $new_js;
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
+  if ($route_name == 'hr_paragraphs.operation.documents.reports') {
+    if (isset($data['tabs'][1]['hr_paragraphs.operation.documents'])) {
+      $data['tabs'][1]['hr_paragraphs.operation.documents']['#active'] = TRUE;
+      $data['tabs'][1]['hr_paragraphs.operation.documents']['#link']['localized_options']['attributes']['class'] = ['is-active'];
+    }
+  }
+
+  if ($route_name == 'hr_paragraphs.operation.documents.infographics') {
+    if (isset($data['tabs'][1]['hr_paragraphs.operation.documents'])) {
+      $data['tabs'][1]['hr_paragraphs.operation.documents']['#active'] = TRUE;
+      $data['tabs'][1]['hr_paragraphs.operation.documents']['#link']['localized_options']['attributes']['class'] = ['is-active'];
+    }
+  }
+
+  if (isset($data['tabs'][0]['group.view']['#access'])) {
+    $data['tabs'][0]['group.view']['#access'] = FALSE;
+  }
+
+  if (isset($data['tabs'][1]['hr_paragraphs.operation.documents.reports']['#access'])) {
+    $data['tabs'][1]['hr_paragraphs.operation.documents.reports']['#access'] = FALSE;
+  }
+
+  if (isset($data['tabs'][1]['hr_paragraphs.operation.documents.infographics']['#access'])) {
+    $data['tabs'][1]['hr_paragraphs.operation.documents.infographics']['#access'] = FALSE;
+  }
 }

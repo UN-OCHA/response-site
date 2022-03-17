@@ -30,14 +30,17 @@ hr_paragraphs.operation.datasets:
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
 hr_paragraphs.operation.documents:
-  title: 'Documents'
+  title: 'Updates'
   route_name: hr_paragraphs.operation.documents
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
-hr_paragraphs.operation.infographics:
-  title: 'Infographics'
-  route_name: hr_paragraphs.operation.infographics
-  base_route: entity.group.canonical
+hr_paragraphs.operation.documents.reports:
+  title: 'Reports only'
+  route_name: hr_paragraphs.operation.documents.reports
+  parent_id: hr_paragraphs.operation
+hr_paragraphs.operation.documents.infographics:
+  title: 'Maps / Infographics'
+  route_name: hr_paragraphs.operation.documents.infographics
   parent_id: hr_paragraphs.operation
 hr_paragraphs.operation.assessments:
   title: 'Assessments'
