@@ -7,6 +7,7 @@ dependencies:
     - field.field.group.operation.field_documents_page
     - field.field.group.operation.field_enabled_tabs
     - field.field.group.operation.field_ical_url
+    - field.field.group.operation.field_infographics
     - field.field.group.operation.field_offices_page
     - field.field.group.operation.field_operation
     - field.field.group.operation.field_pages_page
@@ -47,6 +48,7 @@ hidden:
   field_documents_page: true
   field_enabled_tabs: true
   field_ical_url: true
+  field_infographics: true
   field_offices_page: true
   field_operation: true
   field_pages_page: true

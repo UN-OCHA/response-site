@@ -11,7 +11,7 @@ id: group.operation.field_documents_page
 field_name: field_documents_page
 entity_type: group
 bundle: operation
-label: 'Documents page'
+label: 'Reports page'
 description: "If you want to link to an external source for your documents, please provide the link.\r\nIf left empty if will fetch documents from ReliefWeb based on the selected operation."
 required: false
 translatable: false
