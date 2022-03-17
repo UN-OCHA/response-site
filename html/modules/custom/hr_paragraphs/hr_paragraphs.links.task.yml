@@ -1,9 +1,11 @@
 hr_paragraphs.operation:
   title: 'Home'
+  class: '\Drupal\hr_paragraphs\Plugin\Menu\LocalTask\DynamicTabLocalTask'
   route_name: entity.group.canonical
   base_route: entity.group.canonical
 hr_paragraphs.operation.home:
   title: 'Home'
+  class: '\Drupal\hr_paragraphs\Plugin\Menu\LocalTask\DynamicTabLocalTask'
   route_name: entity.group.canonical
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
@@ -13,8 +15,13 @@ hr_paragraphs.operation.events:
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
 hr_paragraphs.operation.offices:
-  title: 'Offices / Coordination Hubs'
+  title: 'Offices'
   route_name: hr_paragraphs.operation.offices
+  base_route: entity.group.canonical
+  parent_id: hr_paragraphs.operation
+hr_paragraphs.operation.pages:
+  title: 'Pages'
+  route_name: hr_paragraphs.operation.pages
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
 hr_paragraphs.operation.datasets:
@@ -37,18 +44,3 @@ hr_paragraphs.operation.assessments:
   route_name: hr_paragraphs.operation.assessments
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
-hr_paragraphs.operation.assessments.list:
-  title: 'Assessments list'
-  route_name: hr_paragraphs.operation.assessments
-  base_route: entity.group.canonical
-  parent_id: hr_paragraphs.operation.assessments
-hr_paragraphs.operation.assessments.table:
-  title: 'Assessments table'
-  route_name: hr_paragraphs.operation.assessments
-  base_route: entity.group.canonical
-  parent_id: hr_paragraphs.operation.assessments
-hr_paragraphs.operation.assessments.map:
-  title: 'Assessments map'
-  route_name: hr_paragraphs.operation.assessments
-  base_route: entity.group.canonical
-  parent_id: hr_paragraphs.operation.assessments

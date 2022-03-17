@@ -1,11 +1,24 @@
 hr_paragraphs.operation.offices:
   path: '/group/{group}/offices'
-  title: 'Offices / Coordination Hubs'
+  title: 'Offices'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getOffices'
-    _title: 'Offices / Coordination Hubs'
+    _title: 'Offices'
   requirements:
     _custom_access: 'hr_paragraphs.paragraph_controller:hasOffices'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
+hr_paragraphs.operation.pages:
+  path: '/group/{group}/pages'
+  title: 'Pages'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getPages'
+    _title: 'Pages'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasPages'
   options:
     parameters:
       group:
@@ -57,45 +70,6 @@ hr_paragraphs.operation.assessments:
     _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
     _title: 'Assessments'
     type: 'list'
-  requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
-  options:
-    parameters:
-      group:
-        type: entity:group
-hr_paragraphs.operation.assessments.list:
-  path: '/group/{group}/assessments/{type}'
-  title: 'Assessments'
-  defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
-    _title: 'Assessments'
-    type: 'list'
-  requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
-  options:
-    parameters:
-      group:
-        type: entity:group
-hr_paragraphs.operation.assessments.table:
-  path: '/group/{group}/assessments/{type}'
-  title: 'Assessments'
-  defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
-    _title: 'Assessments'
-    type: 'table'
-  requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
-  options:
-    parameters:
-      group:
-        type: entity:group
-hr_paragraphs.operation.assessments.map:
-  path: '/group/{group}/assessments/{type}'
-  title: 'Assessments'
-  defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
-    _title: 'Assessments'
-    type: 'map'
   requirements:
     _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
   options:

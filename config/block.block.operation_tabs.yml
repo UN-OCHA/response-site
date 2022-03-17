@@ -1,0 +1,20 @@
+uuid: 4de02c18-c639-4ab1-bf99-1d538ebda4b6
+langcode: en
+status: true
+dependencies:
+  theme:
+    - common_design_subtheme
+id: operation_tabs
+theme: common_design_subtheme
+region: content
+weight: -3
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Operation Tabs'
+  label_display: '0'
+  provider: core
+  primary: false
+  secondary: true
+visibility: {  }

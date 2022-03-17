@@ -10,7 +10,6 @@ dependencies:
     - content_translation
     - contextual
     - entity_reference_revisions
-    - external_entities
     - file
     - group
     - locale

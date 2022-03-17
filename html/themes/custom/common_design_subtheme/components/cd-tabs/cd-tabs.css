@@ -1,0 +1,67 @@
+ul.tabs {
+  --cd-tabs-border-width: 2px;
+
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 2rem;
+  padding: 0;
+  list-style: none;
+  border-bottom: var(--cd-tabs-border-width) solid var(--implementation-light);
+}
+
+ul.tabs > li {
+  display: block;
+  flex: 0 0 100%;
+  align-self: flex-end;
+  margin: 0;
+  margin-bottom: calc(var(--cd-tabs-border-width) * -1);
+}
+
+@media (min-width: 576px) {
+  ul.tabs > li {
+    flex-basis: auto;
+  }
+}
+
+ul.tabs > li > a {
+  display: block;
+  margin: 0;
+  padding: 0.25rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--implementation-primary);
+  border: 0 none;
+  border-bottom: var(--cd-tabs-border-width) solid var(--implementation-light);
+  border-radius: 0;
+  background: none;
+  font-weight: 700;
+}
+
+ul.tabs > li > a.is-active,
+ul.tabs > li > a:hover {
+  color: var(--implementation-primary);
+  border: 0 none !important;
+  border-bottom: 2px solid var(--implementation-light) !important;
+  background-color: var(--implementation-light);
+}
+
+ul.tabs > li > a.is-active {
+  background-color: var(--implementation-light);
+}
+
+ul.tabs > li > a:focus {
+  outline: 3px solid var(--implementation-highlight);
+  background: var(--implementation-light);
+}
+
+/**
+ * Operation tabs visual treatment
+ */
+#block-operation-tabs ul.tabs > li:first-child > a {
+  text-transform: none;
+  color: inherit;
+  background-color: var(--implementation-light);
+  font-size: var(--cd-font-size--large);
+}

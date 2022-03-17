@@ -6,8 +6,8 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Pager\PagerManagerInterface;
+use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Url;
-use Drupal\date_recur\DateRecurHelper;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -41,19 +41,20 @@ class ParagraphController extends ControllerBase {
   protected $pagerManager;
 
   /**
-   * The pager parameters service.
+   * Ical controller.
    *
-   * @var \Drupal\Core\Pager\PagerParametersInterface
+   * @var \Drupal\hr_paragraphs\Controller\IcalController
    */
-  protected $pagerParameters;
+  protected $icalController;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager) {
+  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller) {
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
     $this->pagerManager = $pager_manager;
+    $this->icalController = $ical_controller;
   }
 
   /**
@@ -65,6 +66,10 @@ class ParagraphController extends ControllerBase {
     }
 
     if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_enabled_tabs')) {
       return AccessResult::forbidden();
     }
 
@@ -80,7 +85,48 @@ class ParagraphController extends ControllerBase {
    * Check if offices is enabled.
    */
   public function hasOffices($group) {
-    return $this->tabIsActive($group, 'offices');
+    $active = $this->tabIsActive($group, 'offices');
+    if (!$active) {
+      return $active;
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_offices_page')) {
+      return AccessResult::forbidden();
+    }
+
+    return AccessResult::allowedIf(!$group->field_offices_page->isEmpty());
+  }
+
+  /**
+   * Check if pages is enabled.
+   */
+  public function hasPages($group) {
+    $active = $this->tabIsActive($group, 'pages');
+    if (!$active) {
+      return $active;
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_pages_page')) {
+      return AccessResult::forbidden();
+    }
+
+    return AccessResult::allowedIf(!$group->field_pages_page->isEmpty());
   }
 
   /**
@@ -124,30 +170,77 @@ class ParagraphController extends ControllerBase {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
     }
 
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    if (!$group->hasField('field_ical_url')) {
+      return AccessResult::forbidden();
+    }
+
     return AccessResult::allowedIf(!$group->field_ical_url->isEmpty());
+  }
+
+  /**
+   * Get group title.
+   */
+  public function getGroupTitle($group) {
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    return $group->label->value;
   }
 
   /**
    * Return all offices of an operation, sector or cluster.
    */
   public function getOffices($group) {
-    if ($group->field_operation->isEmpty()) {
+    if ($group->field_offices_page->isEmpty()) {
       return [
         '#type' => 'markup',
-        '#markup' => $this->t('Operation not set.'),
+        '#markup' => $this->t('No offices link defined.'),
       ];
     }
 
-    $operation_uuid = $group->field_operation->entity->uuid();
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_offices_page->first();
 
-    $entity_id = 'office';
-    $view_mode = 'teaser';
+    // Redirect external links.
+    if ($link->isExternal()) {
+      return new TrustedRedirectResponse($link->getUrl()->getUri());
+    }
 
-    $office_uuids = $this->entityTypeManager->getStorage($entity_id)->getQuery()->condition('operations', $operation_uuid)->execute();
-    $offices = $this->entityTypeManager->getStorage($entity_id)->loadMultiple($office_uuids);
+    $entity_type = 'node';
+    $view_mode = 'full';
+    $params = $link->getUrl()->getRouteParameters();
 
-    $view_builder = $this->entityTypeManager->getViewBuilder($entity_id);
-    return $view_builder->viewMultiple($offices, $view_mode);
+    $office_page = $this->entityTypeManager->getStorage($entity_type)->load($params[$entity_type]);
+    $view_builder = $this->entityTypeManager->getViewBuilder($entity_type);
+    return $view_builder->view($office_page, $view_mode);
+  }
+
+  /**
+   * Return all pages of an operation, sector or cluster.
+   */
+  public function getPages($group) {
+    if ($group->field_pages_page->isEmpty()) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('No offices link defined.'),
+      ];
+    }
+
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_pages_page->first();
+
+    $entity_type = 'node';
+    $view_mode = 'full';
+    $params = $link->getUrl()->getRouteParameters();
+
+    $office_page = $this->entityTypeManager->getStorage($entity_type)->load($params[$entity_type]);
+    $view_builder = $this->entityTypeManager->getViewBuilder($entity_type);
+    return $view_builder->view($office_page, $view_mode);
   }
 
   /**
@@ -222,6 +315,16 @@ class ParagraphController extends ControllerBase {
    * Return all documents of an operation, sector or cluster.
    */
   public function getDocuments($group, Request $request) {
+    if ($group->hasField('field_documents_page') && !$group->field_documents_page->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_documents_page->first();
+
+      // Redirect external links.
+      if ($link->isExternal()) {
+        return new TrustedRedirectResponse($link->getUrl()->getUri());
+      }
+    }
+
     if ($group->field_operation->isEmpty()) {
       return [
         '#type' => 'markup',
@@ -234,32 +337,108 @@ class ParagraphController extends ControllerBase {
     $filters = $request->query->get('filters', []);
     $base_url = $request->getRequestUri();
 
-    $facet_blocks = [];
-    $facet_filters = [];
-    foreach ($filters as $key => $keywords) {
-      // Date is a special case.
-      if (strpos($key, 'date') !== FALSE) {
-        $from_to = explode(':', $keywords);
-        $facet_filters[] = [
-          'field' => $key,
-          'value' => [
-            'from' => $from_to[0] . 'T00:00:00+00:00',
-            'to' => $from_to[1] . 'T23:59:59+00:00',
-          ],
-          'operator' => 'AND',
-        ];
-      }
-      else {
-        $facet_filters[] = [
-          'field' => $key,
-          'value' => $keywords,
-          'operator' => 'OR',
-        ];
-      }
+    // Active facets.
+    $active_facets = $this->buildReliefwebActiveFacets($base_url, $filters);
+
+    // Get country.
+    $country = $group->field_operation->entity->field_country->entity;
+
+    $parameters = $this->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
+    $parameters['filter']['conditions'][] = [
+      'field' => 'format.id',
+      'value' => [
+        12,
+        12570,
+      ],
+      'operator' => 'OR',
+      'negate' => TRUE,
+    ];
+
+    $results = $this->executeReliefwebQuery($parameters);
+
+    $count = $results['totalCount'];
+    $this->pagerManager->createPager($count, $limit);
+
+    // Re-order facets.
+    $facets = [];
+    if (isset($results['embedded'])) {
+      $facets = $this->buildReliefwebFacets($base_url, $results['embedded'], $filters);
     }
 
+    return [
+      '#theme' => 'rw_river',
+      '#data' => $this->buildReliefwebObjects($results),
+      '#total' => $count,
+      '#facets' => $facets,
+      '#active_facets' => $active_facets,
+      '#pager' => [
+        '#type' => 'pager',
+      ],
+    ];
+  }
+
+  /**
+   * Return all documents of an operation, sector or cluster.
+   */
+  public function getInfographics($group, Request $request) {
+    if ($group->field_operation->isEmpty()) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('Operation not set.'),
+      ];
+    }
+
+    $limit = 10;
+    $offset = $request->query->getInt('page', 0) * $limit;
+    $filters = $request->query->get('filters', []);
+    $base_url = $request->getRequestUri();
+
     // Active facets.
+    $active_facets = $this->buildReliefwebActiveFacets($base_url, $filters);
+
+    // Get country.
+    $country = $group->field_operation->entity->field_country->entity;
+
+    $parameters = $this->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
+    $parameters['filter']['conditions'][] = [
+      'field' => 'format.id',
+      'value' => [
+        12,
+        12570,
+      ],
+      'operator' => 'OR',
+      'negate' => FALSE,
+    ];
+
+    $results = $this->executeReliefwebQuery($parameters);
+
+    $count = $results['totalCount'];
+    $this->pagerManager->createPager($count, $limit);
+
+    // Re-order facets.
+    $facets = [];
+    if (isset($results['embedded'])) {
+      $facets = $this->buildReliefwebFacets($base_url, $results['embedded'], $filters);
+    }
+
+    return [
+      '#theme' => 'rw_river',
+      '#data' => $this->buildReliefwebObjects($results),
+      '#total' => $count,
+      '#facets' => $facets,
+      '#active_facets' => $active_facets,
+      '#pager' => [
+        '#type' => 'pager',
+      ],
+    ];
+  }
+
+  /**
+   * Build active facets for Reliefweb.
+   */
+  protected function buildReliefwebActiveFacets(string $base_url, array $filters) : array {
     $active_facets = [];
+
     foreach ($filters as $key => $keywords) {
       if (is_string($keywords)) {
         $title = $this->t('Remove @name', ['@name' => $filters[$key]]);
@@ -291,41 +470,18 @@ class ParagraphController extends ControllerBase {
       }
     }
 
-    if (count($active_facets) > 0) {
-      $facet_blocks[] = [
-        '#theme' => 'links',
-        '#links' => $active_facets,
-        '#prefix' => '<div class="reliefweb--facet block"><details><summary>' . $this->t('Remove filters') . '</summary>',
-        '#suffix' => '</details></div>',
-      ];
-    }
+    return $active_facets;
+  }
 
-    // Get country.
-    $country = $group->field_operation->entity->field_country->entity;
+  /**
+   * Build facets for Reliefweb.
+   */
+  protected function buildReliefwebFacets(string $base_url, array $embedded_facets, array $filters) : array {
+    $facet_blocks = [];
 
-    $parameters = $this->buildReliefwebParameters($offset, $limit, $facet_filters, $country->field_iso_3->value);
-    $parameters['filter']['conditions'][] = [
-      'field' => 'format.id',
-      'value' => [
-        12,
-        12570,
-      ],
-      'operator' => 'OR',
-      'negate' => TRUE,
-    ];
-
-    $results = $this->executeReliefwebQuery($parameters);
-
-    $count = $results['totalCount'];
-    $this->pagerManager->createPager($count, $limit);
-
-    // Re-order facets.
-    $facets = [];
-    if (isset($results['embedded'])) {
-      $allowed_filters = $this->getReliefwebFilters();
-      foreach (array_keys($allowed_filters) as $key) {
-        $facets[$key] = $results['embedded']['facets'][$key];
-      }
+    $allowed_filters = $this->getReliefwebFilters();
+    foreach (array_keys($allowed_filters) as $key) {
+      $facets[$key] = $embedded_facets['facets'][$key];
     }
 
     foreach ($facets as $name => $facet) {
@@ -386,74 +542,44 @@ class ParagraphController extends ControllerBase {
 
         if (count($links) > 1) {
           $facet_blocks[] = [
-            '#theme' => 'links',
-            '#links' => $links,
-            '#prefix' => '<div class="reliefweb--facet block"><details><summary>' . $this->t('Filter by @name', ['@name' => $this->getReliefwebFilters($name)]) . '</summary>',
-            '#suffix' => '</details></div>',
+            'title' => $this->getReliefwebFilters($name),
+            'links' => $links,
           ];
         }
       }
     }
 
-    return [
-      '#theme' => 'rw_river',
-      '#data' => $this->buildReliefwebObjects($results),
-      '#facets' => $facet_blocks,
-      '#pager' => [
-        '#type' => 'pager',
-      ],
-    ];
-  }
-
-  /**
-   * Return all documents of an operation, sector or cluster.
-   */
-  public function getInfographics($group, Request $request) {
-    $limit = 10;
-    $offset = 0;
-
-    if ($request->query->has('page')) {
-      $offset = $request->query->getInt('page', 0) * $limit;
-    }
-
-    if ($group->field_operation->isEmpty()) {
-      return [
-        '#type' => 'markup',
-        '#markup' => $this->t('Operation not set.'),
-      ];
-    }
-
-    // Get country.
-    $country = $group->field_operation->entity->field_country->entity;
-    $facet_filters = [];
-    $parameters = $this->buildReliefwebParameters($offset, $limit, $facet_filters, $country->field_iso_3->value);
-    $parameters['filter']['conditions'][] = [
-      'field' => 'format.id',
-      'value' => [
-        12,
-        12570,
-      ],
-      'operator' => 'OR',
-    ];
-
-    $results = $this->executeReliefwebQuery($parameters);
-
-    $count = $results['totalCount'];
-    $this->pagerManager->createPager($count, $limit);
-
-    return [
-      '#theme' => 'rw_river',
-      '#data' => $this->buildReliefwebObjects($results),
-      '#pager' => [
-        '#type' => 'pager',
-      ],
-    ];
+    return $facet_blocks;
   }
 
   /**
    * Build reliefweb parameters.
    */
-  protected function buildReliefwebParameters(int $offset, int $limit, array $facet_filters, string $iso3 = '') : array {
+  protected function buildReliefwebParameters(int $offset, int $limit, array $query_filters, string $iso3 = '') : array {
+    $facet_filters = [];
+
+    foreach ($query_filters as $key => $keywords) {
+      // Date is a special case.
+      if (strpos($key, 'date') !== FALSE) {
+        $from_to = explode(':', $keywords);
+        $facet_filters[] = [
+          'field' => $key,
+          'value' => [
+            'from' => $from_to[0] . 'T00:00:00+00:00',
+            'to' => $from_to[1] . 'T23:59:59+00:00',
+          ],
+          'operator' => 'AND',
+        ];
+      }
+      else {
+        $facet_filters[] = [
+          'field' => $key,
+          'value' => $keywords,
+          'operator' => 'OR',
+        ];
+      }
+    }
+
     $parameters = [
       'appname' => 'hrinfo',
       'offset' => $offset,
@@ -745,84 +871,8 @@ class ParagraphController extends ControllerBase {
     if (is_numeric($group)) {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
     }
-    $url = $group->field_ical_url->value;
 
-    // Feych and parse iCal.
-    $cal = new CalFileParser();
-    $events = $cal->parse($url);
-
-    $output = [];
-    foreach ($events as $event) {
-      // Collect attachments.
-      $attachments = [];
-      foreach ($event as $key => $value) {
-        if (strpos($key, 'ATTACH;FILENAME=') !== FALSE) {
-          $str_length = strlen('ATTACH;FILENAME=');
-          $attachments[] = [
-            'filename' => substr($key, $str_length, strpos($key, ';', $str_length) - $str_length),
-            'url' => $value,
-          ];
-        }
-      }
-
-      if (isset($event['RRULE'])) {
-        $iterationCount = 0;
-        $maxIterations = 40;
-
-        $rule = DateRecurHelper::create($event['RRULE'], $event['DTSTART'], $event['DTEND']);
-        if ($range_start && $range_end) {
-          $generator = $rule->generateOccurrences(new \DateTime($range_start), new \DateTime($range_end));
-        }
-        else {
-          $generator = $rule->generateOccurrences(new \DateTime());
-        }
-
-        foreach ($generator as $occurrence) {
-          $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
-            'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
-            'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
-            'attachments' => $attachments,
-          ];
-
-          $iterationCount++;
-          if ($iterationCount >= $maxIterations) {
-            break;
-          }
-        }
-      }
-      else {
-        if ($range_start && $range_end) {
-          if ($event['DTSTART']->format('Y-m-d') > $range_end) {
-            continue;
-          }
-          if ($event['DTEND']->format('Y-m-d') < $range_start) {
-            continue;
-          }
-
-          $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
-            'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
-            'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
-            'attachments' => $attachments,
-          ];
-        }
-        else {
-          $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
-            'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
-            'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
-            'attachments' => $attachments,
-          ];
-        }
-      }
-    }
+    $output = $this->icalController->getIcalEvents($group, $range_start, $range_end);
 
     return new JsonResponse($output);
   }

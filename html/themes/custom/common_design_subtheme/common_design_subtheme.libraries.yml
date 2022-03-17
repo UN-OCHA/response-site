@@ -2,6 +2,7 @@ global-styling:
   css:
     theme:
       css/styles.css: {}
+      components/hri-breadcrumbs/hri-breadcrumbs.css: {}
 
 # Custom components
 cd-read-more:
@@ -13,3 +14,28 @@ cd-button:
   css:
     theme:
       components/cd-button/cd-button.css: {}
+
+cd-tabs:
+  css:
+    theme:
+      components/cd-tabs/cd-tabs.css: {}
+
+hri-breadcrumbs:
+  css:
+    theme:
+      components/hri-breadcrumbs/hri-breadcrumbs.css: {}
+
+hri-dropbutton:
+  css:
+    component:
+      components/hri-dropbutton/hri-dropbutton.css: {}
+
+hri-group-operations:
+  css:
+    component:
+      components/hri-group-operations/hri-group-operations.css: {}
+
+hri-pagination:
+  css:
+    theme:
+      components/hri-pagination/hri-pagination.css: {}
