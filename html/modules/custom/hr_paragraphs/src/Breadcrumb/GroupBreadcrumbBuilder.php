@@ -44,10 +44,14 @@ class GroupBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     }
 
     $breadcrumb->addLink($group->toLink());
-
     $breadcrumb->addCacheableDependency($group);
-
     $breadcrumb->addCacheContexts(['route']);
+
+    if (strpos($route_match->getRouteName(), 'hr_paragraphs.operation.') !== FALSE) {
+      $breadcrumb->addLink(Link::createFromRoute($route_match->getRouteObject()->getDefault('_title'), $route_match->getRouteName(), [
+        'group' => $group->id(),
+      ]));
+    }
 
     return $breadcrumb;
   }

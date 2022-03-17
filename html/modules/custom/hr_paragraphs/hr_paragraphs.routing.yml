@@ -39,10 +39,10 @@ hr_paragraphs.operation.datasets:
 
 hr_paragraphs.operation.documents:
   path: '/group/{group}/updates'
-  title: 'Documents'
+  title: 'Updates'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getDocuments'
-    _title: 'Documents'
+    _title: 'Updates'
   requirements:
     _custom_access: 'hr_paragraphs.paragraph_controller:hasDocuments'
   options:
