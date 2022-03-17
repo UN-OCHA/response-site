@@ -49,7 +49,7 @@ class GroupContentBreadcrumbBuilder implements BreadcrumbBuilderInterface {
     $group_content = reset($group_content_array);
     $group = $group_content->getGroup();
 
-    if ($group->subgroup_tree->value !== $group->id()) {
+    if ($group->subgroup_tree->value && $group->subgroup_tree->value !== $group->id()) {
       $parent_group = Group::load($group->subgroup_tree->value);
       $breadcrumb->addLink($parent_group->toLink());
       $breadcrumb->addCacheableDependency($parent_group);
