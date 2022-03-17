@@ -1,16 +1,3 @@
-hr_paragraphs.operation.offices:
-  path: '/group/{group}/offices'
-  title: 'Offices'
-  defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getOffices'
-    _title: 'Offices'
-  requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasOffices'
-  options:
-    parameters:
-      group:
-        type: entity:group
-
 hr_paragraphs.operation.pages:
   path: '/group/{group}/pages'
   title: 'Pages'
@@ -24,38 +11,12 @@ hr_paragraphs.operation.pages:
       group:
         type: entity:group
 
-hr_paragraphs.operation.datasets:
-  path: '/group/{group}/datasets'
-  title: 'Datasets'
-  defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getDatasets'
-    _title: 'Datasets'
-  requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasDatasets'
-  options:
-    parameters:
-      group:
-        type: entity:group
-
-hr_paragraphs.operation.documents:
-  path: '/group/{group}/updates'
-  title: 'Updates'
-  defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getDocuments'
-    _title: 'Updates'
-  requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasDocuments'
-  options:
-    parameters:
-      group:
-        type: entity:group
-
 hr_paragraphs.operation.documents.reports:
-  path: '/group/{group}/updates/reports'
-  title: 'Reports only'
+  path: '/group/{group}/reports'
+  title: 'Reports'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getReports'
-    _title: 'Reports only'
+    _title: 'Reports'
   requirements:
     _custom_access: 'hr_paragraphs.paragraph_controller:hasDocuments'
   options:
@@ -64,13 +25,13 @@ hr_paragraphs.operation.documents.reports:
         type: entity:group
 
 hr_paragraphs.operation.documents.infographics:
-  path: '/group/{group}/updates/infographics'
+  path: '/group/{group}/infographics'
   title: 'Maps / Infographics'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getInfographics'
     _title: 'Maps / Infographics'
   requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasDocuments'
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasInfographics'
   options:
     parameters:
       group:
@@ -90,6 +51,19 @@ hr_paragraphs.operation.assessments:
       group:
         type: entity:group
 
+hr_paragraphs.operation.datasets:
+  path: '/group/{group}/datasets'
+  title: 'Datasets'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getDatasets'
+    _title: 'Datasets'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasDatasets'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
 hr_paragraphs.operation.events:
   path: '/group/{group}/events'
   title: 'Events'
@@ -102,6 +76,20 @@ hr_paragraphs.operation.events:
     parameters:
       group:
         type: entity:group
+
+hr_paragraphs.operation.offices:
+  path: '/group/{group}/offices'
+  title: 'Offices'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getOffices'
+    _title: 'Offices'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasOffices'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
 hr_paragraphs.operation.ical:
   path: '/group/{group}/ical'
   title: 'Events'
