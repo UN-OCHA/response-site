@@ -892,7 +892,7 @@ class ParagraphController extends ControllerBase {
     $datasource_uri = '/group/' . $group->id() . '/ical';
     $settings['events'] = $datasource_uri;
 
-    // Calendar link
+    // Calendar link.
     $cal_link = $group->field_calendar_link->view();
     $cal_link['#label_display'] = 'visually_hidden';
 
