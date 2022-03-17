@@ -41,10 +41,10 @@
 {{ attach_library('common_design_subtheme/hri-calendar') }}
 
 {% for item in items %}
-  <div{{ attributes.addClass('cd-read-more', 'calendar-read-more') }}>
-    {{ item.content }}
+  <a{{ attributes.addClass('cd-read-more', 'calendar-read-more') }} href="{{ item.content|render|striptags }}">
+    {{ 'View original calendar'|t }}
     <svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16">
       <use xlink:href="#cd-icon--arrow-right"></use>
     </svg>
-  </div>
+  </a>
 {% endfor %}
