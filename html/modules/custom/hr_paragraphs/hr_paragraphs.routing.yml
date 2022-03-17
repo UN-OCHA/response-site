@@ -38,7 +38,7 @@ hr_paragraphs.operation.datasets:
         type: entity:group
 
 hr_paragraphs.operation.documents:
-  path: '/group/{group}/documents'
+  path: '/group/{group}/updates'
   title: 'Documents'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getDocuments'
@@ -50,14 +50,27 @@ hr_paragraphs.operation.documents:
       group:
         type: entity:group
 
-hr_paragraphs.operation.infographics:
-  path: '/group/{group}/infographics'
-  title: 'Infographics'
+hr_paragraphs.operation.documents.reports:
+  path: '/group/{group}/updates/reports'
+  title: 'Reports only'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getReports'
+    _title: 'Reports only'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasDocuments'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
+hr_paragraphs.operation.documents.infographics:
+  path: '/group/{group}/updates/infographics'
+  title: 'Maps / Infographics'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getInfographics'
-    _title: 'Infographics'
+    _title: 'Maps / Infographics'
   requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasInfographics'
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasDocuments'
   options:
     parameters:
       group:
