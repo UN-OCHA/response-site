@@ -37,6 +37,8 @@ libraries-extend:
   common_design/cd-pagination:
     - common_design_subtheme/hri-pagination
 
+libraries-override:
+  common_design/cd-tabs: common_design_subtheme/cd-tabs
 
 # Custom namespace
 # https://www.drupal.org/docs/contributed-modules/components/understanding-twig-namespaces
