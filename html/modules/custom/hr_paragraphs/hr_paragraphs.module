@@ -113,8 +113,36 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
     'path' => $source,
     'alias' => $new_alias,
   ]);
-
   $path_alias->save();
+
+  // Add aliases for tabs.
+  $tabs = [
+    'events',
+    'offices',
+    'pages',
+    'documents',
+    'infographics',
+    'datasets',
+    'assessments',
+  ];
+
+  foreach ($tabs as $tab) {
+    $source = '/group/' . $entity->id() . '/' . $tab;
+    $tab_alias = $new_alias . '/' . $tab;
+
+    $existing_alias = $path_alias_manager->getAliasByPath($source);
+
+    // Skip if an alias is already set.
+    if ($existing_alias !== $source) {
+      continue;
+    }
+
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $tab_alias,
+    ]);
+    $path_alias->save();
+  }
 }
 
 /**
