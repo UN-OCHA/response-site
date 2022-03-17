@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Template overrides, preprocess, and hooks for the OCHA Common Design theme.
+ */
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function common_design_subtheme_theme_suggestions_fullcalendar_calendar_alter(array &$suggestions, array $variables, $hook) {
+  $suggestions[] = $hook . '__hri';
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function common_design_subtheme_theme_suggestions_fullcalendar_alter(array &$suggestions, array $variables, $hook) {
+  $suggestions[] = $hook . '__hri';
+}
