@@ -113,8 +113,36 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
     'path' => $source,
     'alias' => $new_alias,
   ]);
-
   $path_alias->save();
+
+  // Add aliases for tabs.
+  $tabs = [
+    'events',
+    'offices',
+    'pages',
+    'documents',
+    'infographics',
+    'datasets',
+    'assessments',
+  ];
+
+  foreach ($tabs as $tab) {
+    $source = '/group/' . $entity->id() . '/' . $tab;
+    $tab_alias = $new_alias . '/' . $tab;
+
+    $existing_alias = $path_alias_manager->getAliasByPath($source);
+
+    // Skip if an alias is already set.
+    if ($existing_alias !== $source) {
+      continue;
+    }
+
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $tab_alias,
+    ]);
+    $path_alias->save();
+  }
 }
 
 /**
@@ -166,6 +194,54 @@ function hr_paragraphs_node_insert(EntityInterface $entity) {
  */
 function hr_paragraphs_node_update(EntityInterface $entity) {
   return hr_paragraphs_node_insert($entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hr_paragraphs_group_content_insert(EntityInterface $entity) {
+  /** @var \Drupal\group\Entity\GroupContent $entity */
+  $plugin_id = $entity->getGroupContentType()->getContentPluginId();
+  if ($plugin_id != 'group_node:article') {
+    return;
+  }
+
+  $node = $entity->getEntity();
+  $group = $entity->getGroup();
+
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+  $source = '/node/' . $node->id();
+
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+  $node_alias = $path_alias_manager->getAliasByPath($source);
+
+  // Skip if an alias is already set.
+  if ($node_alias !== $source) {
+    return;
+  }
+
+  $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($node->label());
+
+  $group_alias = $path_alias_manager->getAliasByPath('/group/' . $group->id());
+  $new_alias = $group_alias . '/' . $page_title;
+
+  /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
+  $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+  $alias_uniquifier->uniquify($new_alias, $source, $langcode);
+
+  $path_alias = PathAlias::create([
+    'path' => $source,
+    'alias' => $new_alias,
+  ]);
+
+  $path_alias->save();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function hr_paragraphs_group_content_update(EntityInterface $entity) {
+  return hr_paragraphs_group_content_insert($entity);
 }
 
 /**
