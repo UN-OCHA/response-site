@@ -1,0 +1,22 @@
+uuid: dbc6fc94-5493-4b49-b2ae-5a29f26b5edd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.article_card_list.field_highlights
+    - paragraphs.paragraphs_type.article_card_list
+id: paragraph.article_card_list.default
+targetEntityType: paragraph
+bundle: article_card_list
+mode: default
+content:
+  field_highlights:
+    type: entity_reference_entity_view
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

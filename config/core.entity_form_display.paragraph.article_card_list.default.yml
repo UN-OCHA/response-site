@@ -1,0 +1,41 @@
+uuid: 1a51f9e7-d1c1-45b9-8fef-2eb263260137
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.article_card_list.field_highlights
+    - paragraphs.paragraphs_type.article_card_list
+  module:
+    - inline_entity_form
+id: paragraph.article_card_list.default
+targetEntityType: paragraph
+bundle: article_card_list
+mode: default
+content:
+  field_highlights:
+    type: inline_entity_form_complex
+    weight: 3
+    region: content
+    settings:
+      form_mode: default
+      override_labels: true
+      label_singular: Highlight
+      label_plural: Highlights
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  translation: true

@@ -1,0 +1,17 @@
+uuid: 15cdb594-f424-4908-a6e5-118658798359
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Highlight
+type: highlight
+description: 'Featured content on an Operation'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false
