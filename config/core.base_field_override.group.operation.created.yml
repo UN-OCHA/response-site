@@ -1,0 +1,18 @@
+uuid: 14781e1f-10aa-4273-81df-a0a20362d239
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+id: group.operation.created
+field_name: created
+entity_type: group
+bundle: operation
+label: 'Created on'
+description: 'The time that the group was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

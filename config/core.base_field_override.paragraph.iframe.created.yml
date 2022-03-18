@@ -1,21 +1,18 @@
-uuid: 86797f04-b532-4916-b254-63c72a682275
+uuid: 3a540f18-4545-48b8-9b1f-050501ebfc76
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_text
     - paragraphs.paragraphs_type.iframe
-  module:
-    - text
-id: paragraph.iframe.field_text
-field_name: field_text
+id: paragraph.iframe.created
+field_name: created
 entity_type: paragraph
 bundle: iframe
-label: Text
-description: ''
+label: 'Authored on'
+description: 'The time that the Paragraph was created.'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: text_long
+field_type: created

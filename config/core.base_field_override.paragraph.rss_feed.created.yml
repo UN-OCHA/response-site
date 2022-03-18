@@ -1,21 +1,18 @@
-uuid: 86f0f3e4-19d7-4687-ab6f-da245a888805
+uuid: 01618a43-fa15-4d7c-a37f-df8a64c3a862
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_text
     - paragraphs.paragraphs_type.rss_feed
-  module:
-    - text
-id: paragraph.rss_feed.field_text
-field_name: field_text
+id: paragraph.rss_feed.created
+field_name: created
 entity_type: paragraph
 bundle: rss_feed
-label: Text
-description: ''
+label: 'Authored on'
+description: 'The time that the Paragraph was created.'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: text_long
+field_type: created

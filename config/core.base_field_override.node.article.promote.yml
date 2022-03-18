@@ -1,20 +1,20 @@
-uuid: 4ec882e5-c0f5-4658-8355-44c643595287
+uuid: 356b2b8f-7cd3-4594-9359-aa314d985e35
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.highlight
-id: node.highlight.promote
+    - node.type.article
+id: node.article.promote
 field_name: promote
 entity_type: node
-bundle: highlight
+bundle: article
 label: 'Promoted to front page'
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: 0
+    value: 1
 default_value_callback: ''
 settings:
   on_label: 'On'

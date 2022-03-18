@@ -14,7 +14,7 @@ bundle: operation
 label: Paragraphs
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -31,9 +31,6 @@ settings:
         enabled: false
       layout:
         weight: 3
-        enabled: false
-      offices:
-        weight: 11
         enabled: false
       recent_assessments:
         weight: 12

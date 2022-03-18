@@ -1,0 +1,20 @@
+uuid: 2653f826-f12e-49a5-a264-269c40c99c8a
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.content_type.cluster-group_node-article
+  module:
+    - path
+id: group_content.cluster-group_node-article.path
+field_name: path
+entity_type: group_content
+bundle: cluster-group_node-article
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

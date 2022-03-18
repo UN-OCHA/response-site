@@ -1,0 +1,18 @@
+uuid: 6140704d-c25e-4b71-868d-0979c2b26e39
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.content_type.operation-group_node-article
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: group_content.operation-group_node-article
+target_entity_type_id: group_content
+target_bundle: operation-group_node-article
+default_langcode: site_default
+language_alterable: false

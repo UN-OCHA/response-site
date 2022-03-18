@@ -1,15 +1,10 @@
 uuid: d01d8439-84cd-4122-b896-365c82db8542
 langcode: en
 status: true
-dependencies:
-  module:
-    - layout_paragraphs
+dependencies: {  }
 id: iframe
-label: IFrame
+label: iFrame
 icon_uuid: null
 icon_default: null
-description: 'Use this to embed an IFrame'
-behavior_plugins:
-  layout_paragraphs:
-    enabled: false
-    available_layouts: {  }
+description: 'Use this to embed an iFrame'
+behavior_plugins: {  }
