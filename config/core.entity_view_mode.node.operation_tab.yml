@@ -1,0 +1,10 @@
+uuid: 608bc0d8-a725-4b60-81ad-fa887a8c9415
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.operation_tab
+label: 'Operation tab'
+targetEntityType: node
+cache: true
