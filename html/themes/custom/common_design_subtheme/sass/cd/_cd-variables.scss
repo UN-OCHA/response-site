@@ -36,11 +36,13 @@
   --cd-rgb-blue-grey--dark: 211, 221, 229;
 
   /* Implementation colors */
-  --implementation-primary: #a02837;
-  --implementation-primary-dark: #901522;
-  --implementation-secondary: #b04044;
-  --implementation-highlight: var(--cd-highlight-red);
-  --implementation-light: #f1ecec;
+  --implementation-primary: #055372;
+  --implementation-primary-light: #0988bb;
+  --implementation-primary-dark: #04415a;
+  --implementation-secondary: #f65c51;
+  --implementation-secondary-dark: #eb1405;
+  --implementation-highlight: var(--cd-blue--bright);
+  --implementation-light: #d4e5f7;
 
   /* Measurements */
   --cd-max-content-width: 820px;
