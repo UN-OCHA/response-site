@@ -44,3 +44,10 @@ hri-pagination:
   css:
     theme:
       components/hri-pagination/hri-pagination.css: {}
+
+hri-table:
+  css:
+    theme:
+      components/hri-table/hri-table.css: {}
+  dependencies:
+    - common_design/cd-table

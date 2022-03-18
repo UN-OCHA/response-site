@@ -1,15 +1,17 @@
-<table class="operations-dataset">
+{{ attach_library('common_design_subtheme/hri-table') }}
+
+<table class="operations-dataset cd-table cd-table--striped">
   <thead>
     <tr>
-      <th>Dataset</th>
-      <th>Last Updated</th>
-      <th>Source</th>
+      <th data-title="Dataset" class="cd-table--name">Dataset</th>
+      <th data-title="Last updated" class="cd-table--name">Last Updated</th>
+      <th data-title="Source" class="cd-table--name">Source</th>
     </tr>
   </thead>
   <tbody>
     {% for row in data %}
     <tr>
-      <td data-title="Title">
+      <td data-title="Dataset">
         <a href="https://data.humdata.org/dataset/{{ row.id }}">{{ row.title }}</a>
       </td>
       <td data-title="Last updated">{{ row.last_modified|date("d M Y") }} </td>
