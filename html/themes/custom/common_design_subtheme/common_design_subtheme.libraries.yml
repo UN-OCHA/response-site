@@ -49,3 +49,5 @@ hri-table:
   css:
     theme:
       components/hri-table/hri-table.css: {}
+  dependencies:
+    - common_design/cd-table
