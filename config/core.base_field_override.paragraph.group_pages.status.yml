@@ -1,20 +1,20 @@
-uuid: 4ec882e5-c0f5-4658-8355-44c643595287
+uuid: 14e59f14-7f77-4d7b-b258-7fadcc1ccee5
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.highlight
-id: node.highlight.promote
-field_name: promote
-entity_type: node
-bundle: highlight
-label: 'Promoted to front page'
+    - paragraphs.paragraphs_type.group_pages
+id: paragraph.group_pages.status
+field_name: status
+entity_type: paragraph
+bundle: group_pages
+label: Published
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: 0
+    value: 1
 default_value_callback: ''
 settings:
   on_label: 'On'

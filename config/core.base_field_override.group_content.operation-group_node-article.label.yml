@@ -1,0 +1,18 @@
+uuid: b8c6d5af-2bf6-40e4-9c5f-ff7617c3e775
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.content_type.operation-group_node-article
+id: group_content.operation-group_node-article.label
+field_name: label
+entity_type: group_content
+bundle: operation-group_node-article
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

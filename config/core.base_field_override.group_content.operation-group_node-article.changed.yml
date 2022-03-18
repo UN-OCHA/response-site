@@ -1,0 +1,18 @@
+uuid: d525b3d2-50a5-4d00-b4c0-4fba400d0a93
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.content_type.operation-group_node-article
+id: group_content.operation-group_node-article.changed
+field_name: changed
+entity_type: group_content
+bundle: operation-group_node-article
+label: 'Changed on'
+description: 'The time that the group content was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

@@ -1,18 +1,18 @@
-uuid: 0d39a752-5a3f-41aa-a54b-69ef4daa39be
+uuid: b2725374-76c0-407d-897e-712769130f43
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.highlight
+    - paragraphs.paragraphs_type.iframe
   module:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: true
+    enabled: false
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: node.highlight
-target_entity_type_id: node
-target_bundle: highlight
+id: paragraph.iframe
+target_entity_type_id: paragraph
+target_bundle: iframe
 default_langcode: site_default
-language_alterable: true
+language_alterable: false
