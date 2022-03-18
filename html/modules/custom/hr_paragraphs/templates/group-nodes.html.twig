@@ -1,8 +1,16 @@
+{#
+/**
+ * @file
+ * Default template for Operation Pages list.
+ *
+ * @see hr_paragraphs_preprocess_paragraph__group_pages()
+ */
+#}
 <div class="group-nodes block">
-  <h3>{{ 'Pages'|trans }}</h3>
-  <ul class="group-nodes--list">
+  <h2>{{ 'Pages'|t }}</h2>
+  <ul class="group-nodes__list">
     {% for node in nodes %}
-      <li class="group-nodes--node">
+      <li class="group-nodes__node">
         <a href="{{ node.link }}">{{ node.label }}</a>
       </li>
     {% endfor %}

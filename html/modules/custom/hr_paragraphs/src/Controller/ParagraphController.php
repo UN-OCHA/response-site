@@ -212,7 +212,7 @@ class ParagraphController extends ControllerBase {
     }
 
     $entity_type = 'node';
-    $view_mode = 'full';
+    $view_mode = 'operation_tab';
     $params = $link->getUrl()->getRouteParameters();
 
     $office_page = $this->entityTypeManager->getStorage($entity_type)->load($params[$entity_type]);
@@ -235,7 +235,7 @@ class ParagraphController extends ControllerBase {
     $link = $group->field_pages_page->first();
 
     $entity_type = 'node';
-    $view_mode = 'full';
+    $view_mode = 'operation_tab';
     $params = $link->getUrl()->getRouteParameters();
 
     $office_page = $this->entityTypeManager->getStorage($entity_type)->load($params[$entity_type]);
