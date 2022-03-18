@@ -27,6 +27,11 @@ class GroupContentBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     $group_content_array = GroupContent::loadByEntity($node);
     $group_content = reset($group_content_array);
+
+    if (gettype($group_content) === 'boolean') {
+      return $group_content;
+    }
+
     $group = $group_content->getGroup();
 
     if (!$group) {
