@@ -1,0 +1,17 @@
+/**
+ * Extends common_design/cd-table with customizations for HR.info
+ */
+
+.cd-table th {
+  color: var(--implementation-primary-dark);
+}
+
+/* Force a min-width on Dataset column */
+.cd-table th:nth-child(1) {
+  width: 33%;
+}
+
+/* Dates don't wrap, but otherwise they're as small as possible */
+.cd-table [data-title="Last updated"] {
+  white-space: nowrap;
+}
