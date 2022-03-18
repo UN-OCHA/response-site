@@ -32,9 +32,6 @@ settings:
       layout:
         weight: 3
         enabled: false
-      offices:
-        weight: 11
-        enabled: false
       recent_assessments:
         weight: 12
         enabled: false
