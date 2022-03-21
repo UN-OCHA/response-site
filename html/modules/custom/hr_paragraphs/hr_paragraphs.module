@@ -413,15 +413,15 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     $output .= '<div class="external-feed--readmore">';
     if ($paragraph->field_rss_read_more->isEmpty()) {
       if (!empty($xml->channel->link[0])) {
-        $output .= '<a class="cd-read-more" rel="noopener noreferrer external nofollow" href="' . $xml->channel->link[0] . '">';
-        $output .= t('View original RSS feed');
+        $output .= '<a class="cd-button cd-button--icon cd-button--small" rel="noopener noreferrer external nofollow" href="' . $xml->channel->link[0] . '">';
+        $output .= '<span class="cd-button__text">' . t('View original RSS feed') . '</span>';
         $output .= '<svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>';
         $output .= '</a>';
       }
     }
     else {
-      $output .= '<a class="cd-read-more" rel="noopener noreferrer external nofollow" href="' . $paragraph->field_rss_read_more->first()->uri . '">';
-      $output .= t('View content related to this feed');
+      $output .= '<a class="cd-button cd-button--icon cd-button--small" rel="noopener noreferrer external nofollow" href="' . $paragraph->field_rss_read_more->first()->uri . '">';
+      $output .= '<span class="cd-button__text">' . t('View content related to this feed') . '</span>';
       $output .= '<svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>';
       $output .= '</a>';
     }
@@ -435,6 +435,7 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     '#weight' => 99,
     '#attached' => [
       'library' => [
+        'common_design_subtheme/cd-button',
         'common_design_subtheme/hri-rss-feed',
       ],
     ],
