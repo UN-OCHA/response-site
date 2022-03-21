@@ -20,6 +20,9 @@ settings:
     -
       value: display_read_more
       label: 'Display read more link'
+    -
+      value: display_each_item_full
+      label: 'Display full contents of each RSS item'
   allowed_values_function: ''
 module: options
 locked: false

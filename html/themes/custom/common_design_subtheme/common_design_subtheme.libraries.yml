@@ -2,7 +2,9 @@ global-styling:
   css:
     theme:
       css/styles.css: {}
-      components/hri-breadcrumbs/hri-breadcrumbs.css: {}
+  dependencies:
+    - common_design_subtheme/hri-breadcrumbs
+    - common_design_subtheme/cd-read-more
 
 # Custom components
 cd-read-more:
@@ -44,6 +46,11 @@ hri-pagination:
   css:
     theme:
       components/hri-pagination/hri-pagination.css: {}
+
+hri-rss-feed:
+  css:
+    theme:
+      components/hri-rss-feed/hri-rss-feed.css: {}
 
 hri-table:
   css:

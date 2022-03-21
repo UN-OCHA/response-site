@@ -5,6 +5,7 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
+use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
@@ -383,31 +384,46 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   // Slice array.
   $items = array_slice($items, 0, $max_number_of_items);
 
-  $output .= '<div class="external-feed--wrapper">';
+  $output .= '<div class="external-feed--wrapper hri-rss-feed">';
   $output .= '<ul class="external-feed--list">';
   foreach ($items as $item) {
     $output .= '<li class="external-feed--item">';
-    $output .= '<div class="external-feed--item-title"><a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href="' . $item['link'] . '">' . $item['title'] . '</a></div>';
+    $output .= '<div class="external-feed--item-title">';
+    $output .= '<h3>';
     if (in_array('display_date', $rss_options)) {
-      $output .= '<div class="external-feed--item-date">' . date('d-M-Y', $item['date']) . '</div>';
+      $output .= date('d-M-Y', $item['date']) . ' - ';
     }
+    $output .= '<a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href="' . $item['link'] . '">' . $item['title'] . '</a></h3>';
+    $output .= '</div>';
     if (in_array('display_description', $rss_options)) {
-      $output .= '<div class="external-feed--item-description">' . $item['description'] . '</div>';
+      if (in_array('display_each_item_full', $rss_options)) {
+        $output .= '<div class="external-feed--item-description--full">' . $item['description'] . '</div>';
+      }
+      else {
+        $truncated = Unicode::truncate($item['description'], 255, TRUE, TRUE, 1);
+        $output .= '<div class="external-feed--item-description--teaser">' . $truncated . '</div>';
+      }
     }
     $output .= '</li>';
   }
   $output .= '</ul>';
 
-  // Add read more if needed.
+  // Add 'read more' if needed.
   if (in_array('display_read_more', $rss_options)) {
     $output .= '<div class="external-feed--readmore">';
     if ($paragraph->field_rss_read_more->isEmpty()) {
       if (!empty($xml->channel->link[0])) {
-        $output .= '<a rel="noopener noreferrer external nofollow" href="' . $xml->channel->link[0] . '">' . t('Read more') . '</a>';
+        $output .= '<a class="cd-read-more" rel="noopener noreferrer external nofollow" href="' . $xml->channel->link[0] . '">';
+        $output .= t('View original RSS feed');
+        $output .= '<svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>';
+        $output .= '</a>';
       }
     }
     else {
-      $output .= '<a rel="noopener noreferrer external nofollow" href="' . $paragraph->field_rss_read_more->first()->uri . '">' . $paragraph->field_rss_read_more->first()->title . '</a>';
+      $output .= '<a class="cd-read-more" rel="noopener noreferrer external nofollow" href="' . $paragraph->field_rss_read_more->first()->uri . '">';
+      $output .= t('View content related to this feed');
+      $output .= '<svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>';
+      $output .= '</a>';
     }
     $output .= '</div>';
   }
@@ -417,6 +433,11 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     '#type' => 'inline_template',
     '#template' => $output,
     '#weight' => 99,
+    '#attached' => [
+      'library' => [
+        'common_design_subtheme/hri-rss-feed',
+      ],
+    ],
   ];
 }
 
