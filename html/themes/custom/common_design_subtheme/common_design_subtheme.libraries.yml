@@ -2,7 +2,9 @@ global-styling:
   css:
     theme:
       css/styles.css: {}
-      components/hri-breadcrumbs/hri-breadcrumbs.css: {}
+  dependencies:
+    - common_design_subtheme/hri-breadcrumbs
+    - common_design_subtheme/cd-read-more
 
 # Custom components
 cd-read-more:
