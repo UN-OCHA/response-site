@@ -78,6 +78,12 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'nodes' => [],
       ],
     ],
+    'fullcalendar_link' => [
+      'template' => 'fullcalendar-link',
+      'variables' => [
+        'calendar_url' => NULL,
+      ],
+    ],
   ];
 }
 
