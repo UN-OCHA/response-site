@@ -47,6 +47,11 @@ hri-pagination:
     theme:
       components/hri-pagination/hri-pagination.css: {}
 
+hri-rss-feed:
+  css:
+    theme:
+      components/hri-rss-feed/hri-rss-feed.css: {}
+
 hri-table:
   css:
     theme:

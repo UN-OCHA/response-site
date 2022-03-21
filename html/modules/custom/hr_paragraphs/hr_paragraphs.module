@@ -384,14 +384,17 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   // Slice array.
   $items = array_slice($items, 0, $max_number_of_items);
 
-  $output .= '<div class="external-feed--wrapper">';
+  $output .= '<div class="external-feed--wrapper hri-rss-feed">';
   $output .= '<ul class="external-feed--list">';
   foreach ($items as $item) {
     $output .= '<li class="external-feed--item">';
-    $output .= '<div class="external-feed--item-title"><a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href="' . $item['link'] . '">' . $item['title'] . '</a></div>';
+    $output .= '<div class="external-feed--item-title">';
+    $output .= '<h3>';
     if (in_array('display_date', $rss_options)) {
-      $output .= '<div class="external-feed--item-date">' . date('d-M-Y', $item['date']) . '</div>';
+      $output .= date('d-M-Y', $item['date']) . ' - ';
     }
+    $output .= '<a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href="' . $item['link'] . '">' . $item['title'] . '</a></h3>';
+    $output .= '</div>';
     if (in_array('display_description', $rss_options)) {
       if (in_array('display_each_item_full', $rss_options)) {
         $output .= '<div class="external-feed--item-description--full">' . $item['description'] . '</div>';
@@ -430,6 +433,11 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     '#type' => 'inline_template',
     '#template' => $output,
     '#weight' => 99,
+    '#attached' => [
+      'library' => [
+        'common_design_subtheme/hri-rss-feed',
+      ],
+    ],
   ];
 }
 
