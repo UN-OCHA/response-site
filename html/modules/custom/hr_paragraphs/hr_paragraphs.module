@@ -408,7 +408,7 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   }
   $output .= '</ul>';
 
-  // Add read more if needed.
+  // Add 'read more' if needed.
   if (in_array('display_read_more', $rss_options)) {
     $output .= '<div class="external-feed--readmore">';
     if ($paragraph->field_rss_read_more->isEmpty()) {
@@ -421,7 +421,7 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     }
     else {
       $output .= '<a class="cd-read-more" rel="noopener noreferrer external nofollow" href="' . $paragraph->field_rss_read_more->first()->uri . '">';
-      $output .= t('View original RSS feed');
+      $output .= t('View content related to this feed');
       $output .= '<svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>';
       $output .= '</a>';
     }
