@@ -5,19 +5,21 @@
 /**
  * Basic Layout is 2-col flexbox
  */
-.hri-river {
-  display: flex;
-  flex-flow: row nowrap;
-  gap: 1rem;
-}
+@media (min-width: 860px) {
+  .hri-river {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1rem;
+  }
 
-.hri-river__results {
-  flex: 1 0 80%;
-}
+  .hri-river__results {
+    flex: 1 0 80%;
+  }
 
-.hri-river__facets-wrapper {
-  flex: 1 0 200px;
-  order: -1;
+  .hri-river__facets-wrapper {
+    flex: 1 0 200px;
+    order: -1;
+  }
 }
 
 /**
