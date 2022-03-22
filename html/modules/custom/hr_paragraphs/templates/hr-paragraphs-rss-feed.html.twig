@@ -1,0 +1,36 @@
+<div class="external-feed--wrapper hri-rss-feed">
+  <ul class="external-feed--list">
+    {% for item in items %}
+      <li class="external-feed--item">
+      <div class="external-feed--item-title">
+        <h3>
+          {% if options.display_date %}{{ item.date|date('d-M-Y') }} - {% endif %}<a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href=" {{ item.link }}">{{ item.title }}</a>
+        </h3>
+      </div>
+
+      {% if options.display_description %}
+        {% if item.description|length > 0 %}
+          {% if options.display_each_item_full %}
+            <div class="external-feed--item-description--full">
+              {{ item.description }}
+            </div>
+          {% else %}
+            <div class="external-feed--item-description--teaser">
+              {{ item.description|slice(0, 200)|raw }}
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if options.display_read_more %}
+    <div class="external-feed--readmore">
+      <a class="cd-read-more" rel="noopener noreferrer external nofollow" href="{{ read_more.url }}">
+        {{ read_more.title }}
+      </a>
+    </div>
+  {% endif %}
+</div>
+

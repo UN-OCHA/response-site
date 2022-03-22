@@ -1,0 +1,41 @@
+{{ attach_library('common_design_subtheme/cd-button') }}
+{{ attach_library('common_design_subtheme/hri-rss-feed') }}
+
+<div class="external-feed--wrapper hri-rss-feed">
+  <ul class="external-feed--list">
+    {% for item in items %}
+      <li class="external-feed--item">
+      <div class="external-feed--item-title">
+        <h3>
+          {% if options.display_date %}{{ item.date|date('d-M-Y') }} - {% endif %}
+          <a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href="{{ item.link }}">{{ item.title }}</a>
+        </h3>
+      </div>
+
+      {% if options.display_description %}
+        {% if item.description|length > 0 %}
+          {% if options.display_each_item_full %}
+            <div class="external-feed--item-description--full">
+              {{ item.description }}
+            </div>
+          {% else %}
+            <div class="external-feed--item-description--teaser">
+              {{ item.description|slice(0, 200)|raw }}
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if options.display_read_more %}
+    <div class="external-feed--readmore">
+      <a class="cd-button cd-button--icon cd-button--small" rel="noopener noreferrer external nofollow" href="{{ read_more.url }}">
+        <span class="cd-button__text">{{ read_more.title }}</span>
+        <svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>
+      </a>
+    </div>
+  {% endif %}
+</div>
+

@@ -1,3 +1,13 @@
+/**
+ * Extends the base CD Button component.
+ */
+.cd-button {
+  background-color: var(--implementation-primary);
+}
+.cd-button:hover {
+  background-color: var(--implementation-primary-light);
+}
+
 .cd-button--light {
   color: var(--cd-white);
   background-color: var(--implementation-secondary);

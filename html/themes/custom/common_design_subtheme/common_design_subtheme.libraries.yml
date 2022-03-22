@@ -11,11 +11,15 @@ cd-read-more:
   css:
     theme:
       components/cd-read-more/cd-read-more.css: {}
+  dependencies:
+    - common_design/cd-read-more
 
 cd-button:
   css:
     theme:
       components/cd-button/cd-button.css: {}
+  dependencies:
+    - common_design/cd-button
 
 cd-tabs:
   css:
@@ -46,6 +50,8 @@ hri-pagination:
   css:
     theme:
       components/hri-pagination/hri-pagination.css: {}
+  dependencies:
+    - common_design/cd-pagination
 
 hri-rss-feed:
   css:
