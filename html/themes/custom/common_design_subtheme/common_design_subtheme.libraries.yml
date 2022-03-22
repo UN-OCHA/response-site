@@ -53,6 +53,11 @@ hri-pagination:
   dependencies:
     - common_design/cd-pagination
 
+hri-river:
+  css:
+    theme:
+      components/hri-river/hri-river.css: {}
+
 hri-rss-feed:
   css:
     theme:

@@ -1,0 +1,78 @@
+{{ attach_library('common_design_subtheme/cd-button') }}
+{{ attach_library('common_design_subtheme/hri-dropbutton') }}
+{{ attach_library('common_design_subtheme/hri-pagination') }}
+{{ attach_library('common_design_subtheme/hri-river') }}
+{{ attach_library('common_design_subtheme/hri-table') }}
+
+<div class="hri-river">
+  <div class="hri-river__results">
+    <table class="operations-dataset cd-table cd-table--striped">
+      <thead>
+        <tr>
+          <th class="cd-table--name" data-title="Name">{{ 'Name'|t }}</th>
+          <th class="cd-table--name" data-title="Type">{{ 'Type'|t }}</th>
+          <th class="cd-table--name" data-title="Managed by">{{ 'Managed by'|t }}</th>
+          <th class="cd-table--name" data-title="Last updated">{{ 'Last updated'|t }}</th>
+          <th class="cd-table--name" data-title="Files">{{ 'Files'|t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+        <tr>
+          <td data-title="Name">
+            <a href="{{ row.url }}">{{ row.title }}</a>
+          </td>
+          <td data-title="Type">{{ row.format }}</td>
+          <td data-title="Managed by">{{ row.sources }}</td>
+          <td data-title="Last updated">{{ row.date_changed|date("d M Y") }} </td>
+          <td data-title="Files">
+            {% if row.files|length > 0 %}
+              {% for file in row.files %}
+                <a class="cd-button cd-button--icon cd-button--small" href="{{ file.url }}" title="{{ file.url }}">
+                  <span class="visually-hidden">{{ 'Download'|t }}</span>
+                  <svg class="cd-icon cd-icon--copyurl" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copyurl"></use></svg>
+                </a>
+              {% endfor %}
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    {{ pager }}
+  </div>{# .river__results #}
+
+  <div class="hri-river__facets-wrapper">
+    <p class="hri-river__facets-count">
+      <span class="hri-river__facets-count__value">{{ total }}</span> documents found
+    </p>
+
+    {% if active_facets|length > 0 %}
+      <div class="hri-river__facets--active">
+        <details open>
+          <summary>{{ 'Remove filters'|t }} </summary>
+          <ul>
+          {% for link in active_facets %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+          </ul>
+        </details>
+      </div>
+    {% endif %}
+
+    {% for facet in facets %}
+      <div class="hri-river__facets">
+        <details>
+          <summary>{{ facet.title }}</summary>
+          <ul class="hri-river__facet">
+          {% for link in facet.links %}
+            <li class="hri-river__facet-link"><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+          </ul>
+        </details>
+      </div>
+    {% endfor %}
+  </div>{# .river__facets-wrapper #}
+
+</div>{# .river #}
