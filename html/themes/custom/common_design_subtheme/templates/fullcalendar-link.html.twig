@@ -5,11 +5,11 @@
  * @see html/modules/custom/hr_paragraphs/src/Controller/ParagraphController.php
  */
 #}
-{{ attach_library('common_design/cd-read-more') }}
+{{ attach_library('common_design_subtheme/cd-button') }}
 {{ attach_library('common_design_subtheme/hri-calendar') }}
 
-<a{{ attributes.addClass('cd-read-more', 'hri-calendar__read-more') }} href="{{ calendar_url }}">
-  {{ 'View original calendar'|t }}
+<a{{ attributes.addClass('cd-button', 'cd-button--icon', 'cd-button--small', 'hri-calendar__read-more') }} href="{{ calendar_url }}">
+  <span class="cd-button__text">{{ 'View original calendar'|t }}</span>
   <svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16">
     <use xlink:href="#cd-icon--arrow-right"></use>
   </svg>
