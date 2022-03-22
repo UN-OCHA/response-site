@@ -716,7 +716,7 @@ class ParagraphController extends ControllerBase {
       'format.name' => $this->t('Format'),
       'disaster_type' => $this->t('Disaster type'),
       'language.name' => $this->t('Language'),
-      'date.original' => $this->t('Original publication date'),
+      'date.original' => $this->t('Original date'),
       'date.changed' => $this->t('Posting date'),
       'disaster.name' => $this->t('Disaster'),
     ];
