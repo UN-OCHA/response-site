@@ -5,7 +5,6 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
-use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
@@ -64,6 +63,14 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'upcoming-events',
       'variables' => [
         'events' => [],
+        'read_more' => NULL,
+      ],
+    ],
+    'hr_paragraphs_rss_feed' => [
+      'template' => 'hr-paragraphs-rss-feed',
+      'variables' => [
+        'items' => [],
+        'options' => [],
         'read_more' => NULL,
       ],
     ],
@@ -348,8 +355,6 @@ function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
  * Implements hook_preprocess_paragraph__type().
  */
 function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
-  $output = '';
-
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
@@ -363,6 +368,12 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   }
 
   $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 10;
+  $options = [
+    'display_date' => FALSE,
+    'display_description' => FALSE,
+    'display_each_item_full' => FALSE,
+    'display_read_more' => FALSE,
+  ];
 
   $content = file_get_contents($paragraph->field_rss_link->first()->uri);
   $xml = new SimpleXmlElement($content);
@@ -381,62 +392,45 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     return;
   }
 
+  if (in_array('display_date', $rss_options)) {
+    $options['display_date'] = TRUE;
+  }
+  if (in_array('display_description', $rss_options)) {
+    $options['display_description'] = TRUE;
+  }
+  if (in_array('display_each_item_full', $rss_options)) {
+    $options['display_each_item_full'] = TRUE;
+  }
+
   // Slice array.
   $items = array_slice($items, 0, $max_number_of_items);
 
-  $output .= '<div class="external-feed--wrapper hri-rss-feed">';
-  $output .= '<ul class="external-feed--list">';
-  foreach ($items as $item) {
-    $output .= '<li class="external-feed--item">';
-    $output .= '<div class="external-feed--item-title">';
-    $output .= '<h3>';
-    if (in_array('display_date', $rss_options)) {
-      $output .= date('d-M-Y', $item['date']) . ' - ';
-    }
-    $output .= '<a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href="' . $item['link'] . '">' . $item['title'] . '</a></h3>';
-    $output .= '</div>';
-    if (in_array('display_description', $rss_options)) {
-      if (in_array('display_each_item_full', $rss_options)) {
-        $output .= '<div class="external-feed--item-description--full">' . $item['description'] . '</div>';
-      }
-      else {
-        $truncated = Unicode::truncate($item['description'], 255, TRUE, TRUE, 1);
-        $output .= '<div class="external-feed--item-description--teaser">' . $truncated . '</div>';
-      }
-    }
-    $output .= '</li>';
-  }
-  $output .= '</ul>';
-
   // Add 'read more' if needed.
   if (in_array('display_read_more', $rss_options)) {
-    $output .= '<div class="external-feed--readmore">';
+    $read_more_label = '';
+    $read_more_url = '';
+
     if ($paragraph->field_rss_read_more->isEmpty()) {
       if (!empty($xml->channel->link[0])) {
-        $output .= '<a class="cd-read-more" rel="noopener noreferrer external nofollow" href="' . $xml->channel->link[0] . '">';
-        $output .= t('View original RSS feed');
-        $output .= '<svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>';
-        $output .= '</a>';
+        $read_more_label = t('View original RSS feed');
+        $read_more_url = $xml->channel->link[0];
+        $options['display_read_more'] = TRUE;
       }
     }
     else {
-      $output .= '<a class="cd-read-more" rel="noopener noreferrer external nofollow" href="' . $paragraph->field_rss_read_more->first()->uri . '">';
-      $output .= t('View content related to this feed');
-      $output .= '<svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>';
-      $output .= '</a>';
+      $read_more_label = t('View content related to this feed');
+      $read_more_url = $paragraph->field_rss_read_more->first()->uri;
+      $options['display_read_more'] = TRUE;
     }
-    $output .= '</div>';
   }
-  $output .= '</div>';
 
   $variables['content']['embed'] = [
-    '#type' => 'inline_template',
-    '#template' => $output,
-    '#weight' => 99,
-    '#attached' => [
-      'library' => [
-        'common_design_subtheme/hri-rss-feed',
-      ],
+    '#theme' => 'hr_paragraphs_rss_feed',
+    '#items' => $items,
+    '#options' => $options,
+    '#read_more' => [
+      'title' => $read_more_label,
+      'url' => $read_more_url,
     ],
   ];
 }
