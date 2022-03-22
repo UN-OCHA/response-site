@@ -27,16 +27,32 @@
   white-space: nowrap;
 }
 
+.hri-river__facets-count {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  padding-bottom: calc(0.5rem - 2px);
+  border-bottom: 2px solid var(--implementation-light);
+}
+
 .hri-river__facets-count__value {
   color: black;
   font-weight: 700;
 }
 
 .hri-river__facets summary {
+  display: list-item;
+  padding-inline-start: 0.5rem;
   cursor: pointer;
   white-space: nowrap;
 }
+.hri-river__facets summary > * {
+  display: inline;
+}
 
+.hri-river__facet-link {
+  font-size: var(--cd-font-size--small);
+}
 .hri-river td[data-title="Files"] {
   position: relative;
   width: 100px;

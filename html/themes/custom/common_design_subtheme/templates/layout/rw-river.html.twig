@@ -65,9 +65,9 @@
       <div class="hri-river__facets">
         <details>
           <summary>{{ facet.title }}</summary>
-          <ul>
+          <ul class="hri-river__facet">
           {% for link in facet.links %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            <li class="hri-river__facet-link"><a href="{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           </ul>
         </details>
