@@ -74,6 +74,14 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'read_more' => NULL,
       ],
     ],
+    'hr_paragraphs_iframe' => [
+      'template' => 'hr-paragraphs-iframe',
+      'variables' => [
+        'embed_url' => NULL,
+        'width' => NULL,
+        'height' => NULL,
+      ],
+    ],
     'group_children' => [
       'template' => 'group-children',
       'variables' => [
@@ -328,26 +336,46 @@ function hr_paragraphs_preprocess_paragraph__recent_assessments(&$variables) {
  * Implements hook_preprocess_paragraph__type().
  */
 function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
-  $embed_code = '';
-
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
   if (!$paragraph->field_iframe_url->isEmpty()) {
-    $embed_code .= '<iframe sandbox="allow-scripts allow-same-origin" allow="autoplay; encrypted-media;" width="100%" height="500" referrerpolicy="no-referrer" frameborder="0" src="' . $paragraph->get('field_iframe_url')->first()->uri . '"></iframe>';
+    $embed_url = $paragraph->get('field_iframe_url')->first()->uri;
+    $width = '100%';
+    $height = '500px';
   }
   elseif (!$paragraph->field_embed_code->isEmpty()) {
-    $embed_code .= $paragraph->field_embed_code->value;
-  }
-
-  if (empty($embed_code)) {
-    return;
+    $settings = hr_paragraphs_handle_iframe($paragraph->field_embed_code->value);
+    $embed_url = $settings['embed_url'];
+    $width = $settings['width'];
+    $height = $settings['height'];
   }
 
   $variables['content']['embed'] = [
-    '#type' => 'inline_template',
-    '#template' => $embed_code,
-    '#weight' => 99,
+    '#theme' => 'hr_paragraphs_iframe',
+    '#embed_url' => $embed_url,
+    '#width' => $width,
+    '#height' => $height,
+  ];
+}
+
+/**
+ * Validate iframe code and wrap it.
+ */
+function hr_paragraphs_handle_iframe($html) {
+  $flags = LIBXML_NONET | LIBXML_NOBLANKS | LIBXML_NOERROR | LIBXML_NOWARNING;
+  $prefix = '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>';
+  $suffix = '</body></html>';
+  $dom = new \DOMDocument();
+  $dom->loadHTML($prefix . $html . $suffix, $flags);
+
+  $iframes = $dom->getElementsByTagName('iframe');
+  $iframe = $iframes[0];
+
+  return [
+    'embed_url' => $iframe->getAttribute('src'),
+    'width' => intval($iframe->getAttribute('width'), 10),
+    'height' => intval($iframe->getAttribute('height'), 10),
   ];
 }
 
