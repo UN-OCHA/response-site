@@ -1,0 +1,47 @@
+/**
+ * HR.info River
+ */
+
+/**
+ * Basic Layout is 2-col flexbox
+ */
+.hri-river {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+}
+
+.hri-river__results {
+  flex: 1 0 80%;
+}
+
+.hri-river__facets-wrapper {
+  flex: 1 0 200px;
+  order: -1;
+}
+
+/**
+ * Cosmetic styles
+ */
+.hri-river__results th {
+  white-space: nowrap;
+}
+
+.hri-river__facets-count__value {
+  color: black;
+  font-weight: 700;
+}
+
+.hri-river__facets summary {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.hri-river td[data-title="Files"] {
+  position: relative;
+  width: 100px;
+}
+
+.hri-river .cd-button--small .cd-icon {
+  margin: 0;
+}
