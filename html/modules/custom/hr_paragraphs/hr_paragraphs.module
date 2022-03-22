@@ -679,6 +679,48 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
     '#data' => $reliefweb_controller->buildReliefwebObjects($results),
     '#total' => 10,
   ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  // Exclude special pages.
+  if (!$paragraph->hasField('field_reliefweb_url') || $paragraph->field_reliefweb_url->isEmpty()) {
+    return;
+  }
+
+  $url = $paragraph->field_reliefweb_url->first()->uri;
+  $data = file_get_contents($url);
+
+  // @todo fetch document, https://reliefweb.int/report/afghanistan/kabul-university-benefit-new-building-and-buses
+  // @todo extract id from canonical: <link rel="shortlink" href="https://reliefweb.int/node/575401" />
+  $nid = $data[''];
+  $nid = 575401;
+
+  /** @var \Drupal\hr_paragraphs\Controller\ReliefwebController */
+  $reliefweb_controller = \Drupal::service('hr_paragraphs.reliefweb_controller');
+  $parameters = $reliefweb_controller->buildReliefwebParameters(0, 10, []);
+
+  // Remove facets.
+  unset($parameters['facets']);
+
+  // Add conditions.
+  $parameters['filter']['conditions'][] = [
+    'field' => 'id',
+    'value' => $nid,
+  ];
+
+  $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+
+  $variables['content']['rw_list'] = [
+    '#theme' => 'hr_paragraphs_rw_list',
+    '#data' => $reliefweb_controller->buildReliefwebObjects($results),
+    '#total' => 10,
+  ];
 
 }
 

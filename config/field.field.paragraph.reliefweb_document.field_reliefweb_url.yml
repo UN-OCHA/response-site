@@ -1,0 +1,28 @@
+uuid: 9681f798-89ed-4b74-90f7-afa1bf518708
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_reliefweb_url
+    - paragraphs.paragraphs_type.reliefweb_document
+  module:
+    - link
+    - link_allowed_hosts
+third_party_settings:
+  link_allowed_hosts:
+    allowed_hosts: reliefweb.int
+    secure_hosts: true
+id: paragraph.reliefweb_document.field_reliefweb_url
+field_name: field_reliefweb_url
+entity_type: paragraph
+bundle: reliefweb_document
+label: 'Reliefweb URL'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

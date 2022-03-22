@@ -1,0 +1,27 @@
+uuid: 432ac1f0-a71a-407c-b4ca-0abe3de465ed
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.reliefweb_document.field_reliefweb_url
+    - paragraphs.paragraphs_type.reliefweb_document
+  module:
+    - link
+id: paragraph.reliefweb_document.default
+targetEntityType: paragraph
+bundle: reliefweb_document
+mode: default
+content:
+  field_reliefweb_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }
