@@ -450,6 +450,7 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     '#theme' => 'hr_paragraphs_rss_feed',
     '#items' => $items,
     '#options' => $options,
+    '#weight' => 99,
   ];
 
   // Add 'read more' if needed.
