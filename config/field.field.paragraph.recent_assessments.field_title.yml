@@ -1,0 +1,21 @@
+uuid: c4d38358-724c-4ad2-8ad3-c4aa5f0bb5ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_title
+    - paragraphs.paragraphs_type.recent_assessments
+id: paragraph.recent_assessments.field_title
+field_name: field_title
+entity_type: paragraph
+bundle: recent_assessments
+label: Title
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 'Recent assessments'
+default_value_callback: ''
+settings: {  }
+field_type: string

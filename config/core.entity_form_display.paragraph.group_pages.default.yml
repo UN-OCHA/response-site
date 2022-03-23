@@ -1,0 +1,34 @@
+uuid: a595c83f-7f60-4174-8dd4-678fe5c7abbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.group_pages.field_text
+    - field.field.paragraph.group_pages.field_title
+    - paragraphs.paragraphs_type.group_pages
+  module:
+    - text
+id: paragraph.group_pages.default
+targetEntityType: paragraph
+bundle: group_pages
+mode: default
+content:
+  field_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

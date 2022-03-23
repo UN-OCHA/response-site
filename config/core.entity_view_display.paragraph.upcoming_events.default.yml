@@ -1,17 +1,16 @@
-uuid: ac4c629f-a265-47f6-ad11-497c930efc52
+uuid: 8ccac241-672d-42e7-9410-dc813be09f60
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.recent_assessments.field_operation
-    - field.field.paragraph.recent_assessments.field_text
-    - field.field.paragraph.recent_assessments.field_title
-    - paragraphs.paragraphs_type.recent_assessments
+    - field.field.paragraph.upcoming_events.field_text
+    - field.field.paragraph.upcoming_events.field_title
+    - paragraphs.paragraphs_type.upcoming_events
   module:
     - text
-id: paragraph.recent_assessments.default
+id: paragraph.upcoming_events.default
 targetEntityType: paragraph
-bundle: recent_assessments
+bundle: upcoming_events
 mode: default
 content:
   field_text:
@@ -29,5 +28,4 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-hidden:
-  field_operation: true
+hidden: {  }

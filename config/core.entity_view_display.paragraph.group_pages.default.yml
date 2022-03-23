@@ -1,17 +1,16 @@
-uuid: ac4c629f-a265-47f6-ad11-497c930efc52
+uuid: 88da8205-13bb-4387-9ee9-cc10201d63d4
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.recent_assessments.field_operation
-    - field.field.paragraph.recent_assessments.field_text
-    - field.field.paragraph.recent_assessments.field_title
-    - paragraphs.paragraphs_type.recent_assessments
+    - field.field.paragraph.group_pages.field_text
+    - field.field.paragraph.group_pages.field_title
+    - paragraphs.paragraphs_type.group_pages
   module:
     - text
-id: paragraph.recent_assessments.default
+id: paragraph.group_pages.default
 targetEntityType: paragraph
-bundle: recent_assessments
+bundle: group_pages
 mode: default
 content:
   field_text:
@@ -29,5 +28,4 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-hidden:
-  field_operation: true
+hidden: {  }

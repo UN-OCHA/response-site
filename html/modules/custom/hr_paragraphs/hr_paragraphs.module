@@ -282,37 +282,6 @@ function hr_paragraphs_group_content_update(EntityInterface $entity) {
 /**
  * Implements hook_preprocess_paragraph__type().
  */
-function hr_paragraphs_preprocess_paragraph__offices(&$variables) {
-  $operation_uuid = FALSE;
-
-  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
-  $paragraph = $variables['paragraph'];
-
-  if (!$paragraph->field_operation->isEmpty()) {
-    $operation_uuid = $paragraph->field_operation->entity->uuid();
-  }
-  else {
-    $operation_uuid = $paragraph->getParentEntity()->field_operation->entity->uuid();
-  }
-
-  if (!$operation_uuid) {
-    return;
-  }
-
-  $entity_id = 'office';
-  $view_mode = 'teaser';
-
-  $entity_type_manager = \Drupal::entityTypeManager();
-  $assessment_uuids = $entity_type_manager->getStorage($entity_id)->getQuery()->condition('operations', $operation_uuid)->execute();
-  $offices = $entity_type_manager->getStorage($entity_id)->loadMultiple($assessment_uuids);
-
-  $view_builder = $entity_type_manager->getViewBuilder($entity_id);
-  $variables['content']['offices'] = $view_builder->viewMultiple($offices, $view_mode);
-}
-
-/**
- * Implements hook_preprocess_paragraph__type().
- */
 function hr_paragraphs_preprocess_paragraph__recent_assessments(&$variables) {
   $operation_uuid = FALSE;
 
@@ -369,6 +338,7 @@ function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
     '#embed_url' => $embed_url,
     '#width' => $width,
     '#height' => $height,
+    '#weight' => 99,
   ];
 }
 
@@ -507,6 +477,7 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
         'group' => $group->id(),
       ]),
     ],
+    '#weight' => 99,
   ];
 }
 
@@ -559,6 +530,7 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
     $variables['content']['children'] = [
       '#theme' => 'group_children',
       '#children' => $items,
+      '#weight' => 99,
     ];
   }
   catch (MalformedLeafException $exception) {
@@ -637,6 +609,7 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
   $variables['content']['nodes'] = [
     '#theme' => 'group_nodes',
     '#nodes' => $items,
+    '#weight' => 99,
   ];
 }
 
@@ -684,6 +657,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
     '#theme' => 'hr_paragraphs_rw_list',
     '#data' => $reliefweb_controller->buildReliefwebObjects($results),
     '#total' => 10,
+    '#weight' => 99,
   ];
 }
 
@@ -739,6 +713,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   $variables['content']['rw_list'] = [
     '#theme' => 'hr_paragraphs_rw_doc',
     '#doc' => $doc,
+    '#weight' => 99,
   ];
 
 }

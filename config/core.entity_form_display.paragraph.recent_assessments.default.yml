@@ -4,7 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.recent_assessments.field_operation
+    - field.field.paragraph.recent_assessments.field_text
+    - field.field.paragraph.recent_assessments.field_title
     - paragraphs.paragraphs_type.recent_assessments
+  module:
+    - text
 id: paragraph.recent_assessments.default
 targetEntityType: paragraph
 bundle: recent_assessments
@@ -17,6 +21,22 @@ content:
     settings:
       match_operator: CONTAINS
       match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_text:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }

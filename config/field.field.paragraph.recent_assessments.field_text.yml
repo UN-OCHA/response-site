@@ -1,0 +1,21 @@
+uuid: 60f979ed-36a2-49fe-bedc-919b55650209
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.recent_assessments
+  module:
+    - text
+id: paragraph.recent_assessments.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: recent_assessments
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
