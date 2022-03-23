@@ -66,6 +66,12 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'total' => [],
       ],
     ],
+    'hr_paragraphs_rw_doc' => [
+      'template' => 'hr-paragraphs-rw-doc',
+      'variables' => [
+        'doc' => [],
+      ],
+    ],
     'upcoming_events' => [
       'template' => 'upcoming-events',
       'variables' => [
@@ -694,16 +700,28 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   }
 
   $url = $paragraph->field_reliefweb_url->first()->uri;
-  $data = file_get_contents($url);
+  $flags = LIBXML_NONET | LIBXML_NOBLANKS | LIBXML_NOERROR | LIBXML_NOWARNING;
 
-  // @todo fetch document, https://reliefweb.int/report/afghanistan/kabul-university-benefit-new-building-and-buses
-  // @todo extract id from canonical: <link rel="shortlink" href="https://reliefweb.int/node/575401" />
-  $nid = $data[''];
-  $nid = 575401;
+  $data = file_get_contents($url);
+  $dom = new \DOMDocument();
+  $dom->loadHTML($data, $flags);
+
+  $nid = FALSE;
+  $nodes = $dom->getElementsByTagName('link');
+  foreach ($nodes as $node) {
+    if ($node->getAttribute('rel') === 'shortlink') {
+      $nid = str_replace('https://reliefweb.int/node/', '', $node->getAttribute('href'));
+      break;
+    }
+  }
+
+  if (!$nid) {
+    return;
+  }
 
   /** @var \Drupal\hr_paragraphs\Controller\ReliefwebController */
   $reliefweb_controller = \Drupal::service('hr_paragraphs.reliefweb_controller');
-  $parameters = $reliefweb_controller->buildReliefwebParameters(0, 10, []);
+  $parameters = $reliefweb_controller->buildReliefwebParameters(0, 1, []);
 
   // Remove facets.
   unset($parameters['facets']);
@@ -715,11 +733,12 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   ];
 
   $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+  $docs = $reliefweb_controller->buildReliefwebObjects($results);
+  $doc = reset($docs);
 
   $variables['content']['rw_list'] = [
-    '#theme' => 'hr_paragraphs_rw_list',
-    '#data' => $reliefweb_controller->buildReliefwebObjects($results),
-    '#total' => 10,
+    '#theme' => 'hr_paragraphs_rw_doc',
+    '#doc' => $doc,
   ];
 
 }
