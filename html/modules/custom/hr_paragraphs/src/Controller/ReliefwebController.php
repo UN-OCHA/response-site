@@ -175,7 +175,7 @@ class ReliefwebController extends ControllerBase {
   /**
    * Build reliefweb parameters.
    */
-  public function buildReliefwebParameters(int $offset, int $limit, array $query_filters, string $iso3 = '') : array {
+  public function buildReliefwebParameters(int $offset, int $limit, array $query_filters) : array {
     $facet_filters = [];
 
     foreach ($query_filters as $key => $keywords) {
@@ -226,14 +226,6 @@ class ReliefwebController extends ControllerBase {
       ],
       'facets' => [],
     ];
-
-    if (!empty($iso3)) {
-      $parameters['filter']['conditions'][] = [
-        'field' => 'primary_country.iso3',
-        'value' => strtolower($iso3),
-        'operator' => 'OR',
-      ];
-    }
 
     foreach ($facet_filters as $facet_filter) {
       $parameters['filter']['conditions'][] = $facet_filter;

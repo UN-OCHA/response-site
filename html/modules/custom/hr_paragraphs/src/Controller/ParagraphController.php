@@ -261,19 +261,19 @@ class ParagraphController extends ControllerBase {
       $offset = $request->query->getInt('page', 0) * $limit;
     }
 
-    if ($group->field_operation->isEmpty()) {
+    if ($group->field_hdx_country->isEmpty()) {
       return [
         '#type' => 'markup',
-        '#markup' => $this->t('Operation not set.'),
+        '#markup' => $this->t('Country not set.'),
       ];
     }
 
     // Get country.
-    $country = $group->field_operation->entity->field_country->entity;
+    $country = $group->field_hdx_country->value;
 
     $endpoint = 'https://data.humdata.org/api/3/action/package_search';
     $parameters = [
-      'q' => 'groups:' . strtolower($country->field_iso_3->value),
+      'q' => 'groups:' . strtolower($country),
       'rows' => $limit,
       'start' => $offset,
     ];
@@ -321,62 +321,6 @@ class ParagraphController extends ControllerBase {
   /**
    * Return all documents of an operation, sector or cluster.
    */
-  public function getDocuments($group, Request $request) {
-    if ($group->hasField('field_documents_page') && !$group->field_documents_page->isEmpty()) {
-      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
-      $link = $group->field_documents_page->first();
-
-      // Redirect external links.
-      if ($link->isExternal()) {
-        return new TrustedRedirectResponse($link->getUrl()->getUri());
-      }
-    }
-
-    if ($group->field_operation->isEmpty()) {
-      return [
-        '#type' => 'markup',
-        '#markup' => $this->t('Operation not set.'),
-      ];
-    }
-
-    $limit = 10;
-    $offset = $request->query->getInt('page', 0) * $limit;
-    $filters = $request->query->get('filters', []);
-    $base_url = $request->getRequestUri();
-
-    // Active facets.
-    $active_facets = $this->reliefwebController->buildReliefwebActiveFacets($base_url, $filters);
-
-    // Get country.
-    $country = $group->field_operation->entity->field_country->entity;
-
-    $parameters = $this->reliefwebController->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
-    $results = $this->reliefwebController->executeReliefwebQuery($parameters);
-
-    $count = $results['totalCount'];
-    $this->pagerManager->createPager($count, $limit);
-
-    // Re-order facets.
-    $facets = [];
-    if (isset($results['embedded'])) {
-      $facets = $this->reliefwebController->buildReliefwebFacets($base_url, $results['embedded'], $filters);
-    }
-
-    return [
-      '#theme' => 'rw_river',
-      '#data' => $this->reliefwebController->buildReliefwebObjects($results),
-      '#total' => $count,
-      '#facets' => $facets,
-      '#active_facets' => $active_facets,
-      '#pager' => [
-        '#type' => 'pager',
-      ],
-    ];
-  }
-
-  /**
-   * Return all reports of an operation, sector or cluster.
-   */
   public function getReports($group, Request $request) {
     if ($group->hasField('field_documents_page') && !$group->field_documents_page->isEmpty()) {
       /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
@@ -388,56 +332,15 @@ class ParagraphController extends ControllerBase {
       }
     }
 
-    if ($group->field_operation->isEmpty()) {
+    if ($group->field_reliefweb_documents->isEmpty()) {
       return [
         '#type' => 'markup',
-        '#markup' => $this->t('Operation not set.'),
+        '#markup' => $this->t('Reliefweb URL not set.'),
       ];
     }
 
-    $limit = 10;
-    $offset = $request->query->getInt('page', 0) * $limit;
-    $filters = $request->query->get('filters', []);
-    $base_url = $request->getRequestUri();
-
-    // Active facets.
-    $active_facets = $this->reliefwebController->buildReliefwebActiveFacets($base_url, $filters);
-
-    // Get country.
-    $country = $group->field_operation->entity->field_country->entity;
-
-    $parameters = $this->reliefwebController->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
-    $parameters['filter']['conditions'][] = [
-      'field' => 'format.id',
-      'value' => [
-        12,
-        12570,
-      ],
-      'operator' => 'OR',
-      'negate' => TRUE,
-    ];
-
-    $results = $this->reliefwebController->executeReliefwebQuery($parameters);
-
-    $count = $results['totalCount'];
-    $this->pagerManager->createPager($count, $limit);
-
-    // Re-order facets.
-    $facets = [];
-    if (isset($results['embedded'])) {
-      $facets = $this->reliefwebController->buildReliefwebFacets($base_url, $results['embedded'], $filters);
-    }
-
-    return [
-      '#theme' => 'rw_river',
-      '#data' => $this->reliefwebController->buildReliefwebObjects($results),
-      '#total' => $count,
-      '#facets' => $facets,
-      '#active_facets' => $active_facets,
-      '#pager' => [
-        '#type' => 'pager',
-      ],
-    ];
+    $url = $group->field_reliefweb_documents->first()->uri;
+    return $this->getReliefwebDocuments($request, $url);
   }
 
   /**
@@ -454,13 +357,21 @@ class ParagraphController extends ControllerBase {
       }
     }
 
-    if ($group->field_operation->isEmpty()) {
+    if ($group->field_maps_infographics_link->isEmpty()) {
       return [
         '#type' => 'markup',
-        '#markup' => $this->t('Operation not set.'),
+        '#markup' => $this->t('Reliefweb URL not set.'),
       ];
     }
 
+    $url = $group->field_maps_infographics_link->first()->uri;
+    return $this->getReliefwebDocuments($request, $url);
+  }
+
+  /**
+   * Return all reports of an operation, sector or cluster.
+   */
+  public function getReliefwebDocuments(Request $request, $url) {
     $limit = 10;
     $offset = $request->query->getInt('page', 0) * $limit;
     $filters = $request->query->get('filters', []);
@@ -469,19 +380,27 @@ class ParagraphController extends ControllerBase {
     // Active facets.
     $active_facets = $this->reliefwebController->buildReliefwebActiveFacets($base_url, $filters);
 
-    // Get country.
-    $country = $group->field_operation->entity->field_country->entity;
+    $parameters = $this->reliefwebController->buildReliefwebParameters($offset, $limit, $filters);
 
-    $parameters = $this->reliefwebController->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
-    $parameters['filter']['conditions'][] = [
-      'field' => 'format.id',
-      'value' => [
-        12,
-        12570,
-      ],
-      'operator' => 'OR',
-      'negate' => FALSE,
-    ];
+    // Base filter from entered URL.
+    $conditions = $this->reliefwebController->parseReliefwebUrl($url);
+
+    // Add conditions.
+    if ($this->reliefwebController->reliefwebQueryType($url) === 'advanced-search') {
+      foreach ($conditions as $condition) {
+        $parameters['filter']['conditions'][] = [
+          'field' => $condition['field'],
+          'value' => $condition['value'],
+        ];
+      }
+    }
+    else {
+      unset($parameters['filter']);
+      $parameters['query'] = [
+        'value' => $conditions[0],
+        'operator' => 'AND',
+      ];
+    }
 
     $results = $this->reliefwebController->executeReliefwebQuery($parameters);
 

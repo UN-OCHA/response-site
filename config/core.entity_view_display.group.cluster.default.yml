@@ -4,11 +4,17 @@ status: true
 dependencies:
   config:
     - field.field.group.cluster.field_calendar_link
+    - field.field.group.cluster.field_documents_page
     - field.field.group.cluster.field_enabled_tabs
+    - field.field.group.cluster.field_hdx_country
     - field.field.group.cluster.field_ical_url
+    - field.field.group.cluster.field_infographics
+    - field.field.group.cluster.field_maps_infographics_link
     - field.field.group.cluster.field_offices_page
+    - field.field.group.cluster.field_operation
     - field.field.group.cluster.field_pages_page
     - field.field.group.cluster.field_paragraphs
+    - field.field.group.cluster.field_reliefweb_documents
     - field.field.group.cluster.subgroup_depth
     - field.field.group.cluster.subgroup_left
     - field.field.group.cluster.subgroup_right
@@ -78,8 +84,14 @@ content:
 hidden:
   changed: true
   created: true
+  field_documents_page: true
   field_enabled_tabs: true
+  field_hdx_country: true
   field_ical_url: true
+  field_infographics: true
+  field_maps_infographics_link: true
+  field_operation: true
+  field_reliefweb_documents: true
   langcode: true
   subgroup_depth: true
   subgroup_left: true

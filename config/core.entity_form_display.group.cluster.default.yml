@@ -4,20 +4,176 @@ status: true
 dependencies:
   config:
     - field.field.group.cluster.field_calendar_link
+    - field.field.group.cluster.field_documents_page
     - field.field.group.cluster.field_enabled_tabs
+    - field.field.group.cluster.field_hdx_country
     - field.field.group.cluster.field_ical_url
+    - field.field.group.cluster.field_infographics
+    - field.field.group.cluster.field_maps_infographics_link
     - field.field.group.cluster.field_offices_page
+    - field.field.group.cluster.field_operation
     - field.field.group.cluster.field_pages_page
     - field.field.group.cluster.field_paragraphs
+    - field.field.group.cluster.field_reliefweb_documents
     - field.field.group.cluster.subgroup_depth
     - field.field.group.cluster.subgroup_left
     - field.field.group.cluster.subgroup_right
     - field.field.group.cluster.subgroup_tree
     - group.type.cluster
   module:
+    - field_group
+    - hr_paragraphs
     - layout_paragraphs
     - link
     - path
+    - select2
+third_party_settings:
+  field_group:
+    group_hdx:
+      children:
+        - field_hdx_country
+      label: HDX
+      region: content
+      parent_name: group_content
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_infographics:
+      children:
+        - field_maps_infographics_link
+        - field_infographics
+      label: Infographics
+      region: content
+      parent_name: group_content
+      weight: 19
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_assessments:
+      children:
+        - field_operation
+      label: Assessments
+      region: content
+      parent_name: group_content
+      weight: 23
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_documents:
+      children:
+        - field_reliefweb_documents
+        - field_documents_page
+      label: Reports
+      region: content
+      parent_name: group_content
+      weight: 18
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_content:
+      children:
+        - group_general
+        - group_calendar
+        - group_documents
+        - group_infographics
+        - group_offices
+        - group_pages
+        - group_hdx
+        - group_assessments
+      label: Content
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 640
+    group_general:
+      children:
+        - langcode
+        - field_enabled_tabs
+      label: General
+      region: hidden
+      parent_name: group_content
+      weight: 16
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
+    group_calendar:
+      children:
+        - field_calendar_link
+        - field_ical_url
+      label: Calendar
+      region: hidden
+      parent_name: group_content
+      weight: 17
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_offices:
+      children:
+        - field_offices_page
+      label: Offices
+      region: hidden
+      parent_name: group_content
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_pages:
+      children:
+        - field_pages_page
+      label: Pages
+      region: hidden
+      parent_name: group_content
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
 id: group.cluster.default
 targetEntityType: group
 bundle: cluster
@@ -25,7 +181,15 @@ mode: default
 content:
   field_calendar_link:
     type: link_default
-    weight: 124
+    weight: 5
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_documents_page:
+    type: hr_paragraphs_link_default
+    weight: 29
     region: content
     settings:
       placeholder_url: ''
@@ -33,29 +197,62 @@ content:
     third_party_settings: {  }
   field_enabled_tabs:
     type: options_buttons
-    weight: 121
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_hdx_country:
+    type: select2
+    weight: 33
+    region: content
+    settings:
+      width: 100%
+    third_party_settings: {  }
   field_ical_url:
     type: string_textfield
-    weight: 122
+    weight: 6
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_offices_page:
+  field_infographics:
     type: link_default
-    weight: 125
+    weight: 31
     region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  field_pages_page:
+  field_maps_infographics_link:
     type: link_default
-    weight: 126
+    weight: 30
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_offices_page:
+    type: hr_paragraphs_link_default
+    weight: 11
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_operation:
+    type: select2_entity_reference
+    weight: 2
+    region: content
+    settings:
+      width: 100%
+      autocomplete: true
+      match_operator: CONTAINS
+      match_limit: 25
+    third_party_settings: {  }
+  field_pages_page:
+    type: hr_paragraphs_link_default
+    weight: 8
     region: content
     settings:
       placeholder_url: ''
@@ -63,17 +260,25 @@ content:
     third_party_settings: {  }
   field_paragraphs:
     type: layout_paragraphs
-    weight: 123
+    weight: 2
     region: content
     settings:
-      preview_view_mode: default
+      preview_view_mode: preview
       nesting_depth: 0
       require_layouts: 0
       empty_message: ''
     third_party_settings: {  }
+  field_reliefweb_documents:
+    type: link_default
+    weight: 28
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   label:
     type: string_textfield
-    weight: -5
+    weight: 0
     region: content
     settings:
       size: 60
@@ -81,30 +286,32 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 2
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 120
+    weight: 3
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  changed: true
+  created: true
   subgroup_depth: true
   subgroup_left: true
   subgroup_right: true
