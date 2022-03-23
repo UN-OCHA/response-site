@@ -14,13 +14,6 @@ cd-read-more:
   dependencies:
     - common_design/cd-read-more
 
-cd-button:
-  css:
-    theme:
-      components/cd-button/cd-button.css: {}
-  dependencies:
-    - common_design/cd-button
-
 cd-tabs:
   css:
     theme:
@@ -30,6 +23,11 @@ hri-breadcrumbs:
   css:
     theme:
       components/hri-breadcrumbs/hri-breadcrumbs.css: {}
+
+hri-button:
+  css:
+    theme:
+      components/hri-button/hri-button.css: {}
 
 hri-calendar:
   css:
@@ -50,8 +48,6 @@ hri-pagination:
   css:
     theme:
       components/hri-pagination/hri-pagination.css: {}
-  dependencies:
-    - common_design/cd-pagination
 
 hri-river:
   css:
