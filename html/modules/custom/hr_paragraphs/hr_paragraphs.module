@@ -153,7 +153,7 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
   // Add aliases for tabs.
   $tabs = [
     'events',
-    'offices',
+    'contacts',
     'pages',
     'reports',
     'infographics',
