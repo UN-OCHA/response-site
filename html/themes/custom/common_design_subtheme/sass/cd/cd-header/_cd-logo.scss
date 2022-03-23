@@ -5,19 +5,17 @@
 //——————————————————————————————————————————————————————————————————————————————
 
 .cd-site-logo {
-  width: 52px;
+  display: block;
+  width: $implementation-logo-width;
+  background: none;
 
   &:focus {
     outline: 3px solid var(--implementation-highlight);
   }
+}
 
-  // Logo for mobile.
-  @include max-width(md) {
-    background: url("../../../../../contrib/common_design/img/logos/ocha-logo-blue@53x37.png") center no-repeat;
-    background: linear-gradient(transparent, transparent), url("../../../../../contrib/common_design/img/logos/ocha-logo-blue.svg") center no-repeat;
-  }
-
-  @include tablet {
-    width: $implementation-logo-width;
-  }
+// Override the CD base-theme mobile logo
+.cd-site-logo img {
+  display: block;
+  width: 100%;
 }
