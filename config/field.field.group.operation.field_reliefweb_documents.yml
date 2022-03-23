@@ -1,0 +1,28 @@
+uuid: 9a7ee78d-3282-4c39-af03-21139d702aa8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_reliefweb_documents
+    - group.type.operation
+  module:
+    - link
+    - link_allowed_hosts
+third_party_settings:
+  link_allowed_hosts:
+    allowed_hosts: reliefweb.int
+    secure_hosts: true
+id: group.operation.field_reliefweb_documents
+field_name: field_reliefweb_documents
+entity_type: group
+bundle: operation
+label: 'Reliefweb documents'
+description: 'Link from https://reliefweb.int/updates'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

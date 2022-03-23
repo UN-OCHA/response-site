@@ -1,0 +1,28 @@
+uuid: 2b7d0f62-d326-428d-9a93-e5fb3e603a05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_maps_infographics_link
+    - group.type.cluster
+  module:
+    - link
+    - link_allowed_hosts
+third_party_settings:
+  link_allowed_hosts:
+    allowed_hosts: reliefweb.int
+    secure_hosts: true
+id: group.cluster.field_maps_infographics_link
+field_name: field_maps_infographics_link
+entity_type: group
+bundle: cluster
+label: 'Maps / Infographics link'
+description: 'Link from https://reliefweb.int/updates'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

@@ -1,0 +1,23 @@
+uuid: 1947232a-6fc0-4b31-b579-24db4b625b91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_documents_page
+    - group.type.cluster
+  module:
+    - link
+id: group.cluster.field_documents_page
+field_name: field_documents_page
+entity_type: group
+bundle: cluster
+label: 'Reports page'
+description: "If you want to link to an external source for your documents, please provide the link.\r\nIf left empty if will fetch documents from ReliefWeb based on the selected operation."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

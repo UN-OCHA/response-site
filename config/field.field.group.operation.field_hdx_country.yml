@@ -1,0 +1,21 @@
+uuid: 32489ae5-5078-44b4-aac0-02f5479d31c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_hdx_country
+    - group.type.operation
+  module:
+    - options
+id: group.operation.field_hdx_country
+field_name: field_hdx_country
+entity_type: group
+bundle: operation
+label: 'HDX country'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
