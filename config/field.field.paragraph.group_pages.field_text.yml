@@ -1,0 +1,21 @@
+uuid: 6089d2d7-7c10-4fde-8ca5-351d933efa4b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.group_pages
+  module:
+    - text
+id: paragraph.group_pages.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: group_pages
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

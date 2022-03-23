@@ -11,7 +11,7 @@ third_party_settings:
     right: 3
     tree: operation
 id: cluster
-label: Cluster
+label: 'Cluster, Sector, Working group'
 description: ''
 new_revision: true
 creator_membership: true

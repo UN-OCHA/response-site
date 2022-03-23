@@ -1,0 +1,21 @@
+uuid: 69125b79-d8a8-4a4d-b202-e93fd4fa3a97
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.upcoming_events
+  module:
+    - text
+id: paragraph.upcoming_events.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: upcoming_events
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

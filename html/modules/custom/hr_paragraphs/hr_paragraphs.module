@@ -369,6 +369,7 @@ function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
     '#embed_url' => $embed_url,
     '#width' => $width,
     '#height' => $height,
+    '#weight' => 99,
   ];
 }
 
@@ -507,6 +508,7 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
         'group' => $group->id(),
       ]),
     ],
+    '#weight' => 99,
   ];
 }
 
@@ -559,6 +561,7 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
     $variables['content']['children'] = [
       '#theme' => 'group_children',
       '#children' => $items,
+      '#weight' => 99,
     ];
   }
   catch (MalformedLeafException $exception) {
@@ -637,6 +640,7 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
   $variables['content']['nodes'] = [
     '#theme' => 'group_nodes',
     '#nodes' => $items,
+    '#weight' => 99,
   ];
 }
 
@@ -684,6 +688,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
     '#theme' => 'hr_paragraphs_rw_list',
     '#data' => $reliefweb_controller->buildReliefwebObjects($results),
     '#total' => 10,
+    '#weight' => 99,
   ];
 }
 
@@ -739,6 +744,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   $variables['content']['rw_list'] = [
     '#theme' => 'hr_paragraphs_rw_doc',
     '#doc' => $doc,
+    '#weight' => 99,
   ];
 
 }

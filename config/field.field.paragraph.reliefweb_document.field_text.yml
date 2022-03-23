@@ -1,0 +1,21 @@
+uuid: 57c56225-a9c7-4d99-a527-1c9a36c961d4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.reliefweb_document
+  module:
+    - text
+id: paragraph.reliefweb_document.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: reliefweb_document
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
