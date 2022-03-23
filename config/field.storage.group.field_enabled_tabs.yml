@@ -25,7 +25,7 @@ settings:
       label: Datasets
     -
       value: offices
-      label: 'Offices / Coordination Hubs'
+      label: Contacts
     -
       value: assessments
       label: Assessments

@@ -35,7 +35,7 @@ third_party_settings:
       label: HDX
       region: content
       parent_name: group_content
-      weight: 22
+      weight: 20
       format_type: tab
       format_settings:
         classes: ''
@@ -66,7 +66,7 @@ third_party_settings:
       label: Assessments
       region: content
       parent_name: group_content
-      weight: 23
+      weight: 21
       format_type: tab
       format_settings:
         classes: ''
@@ -93,14 +93,14 @@ third_party_settings:
         required_fields: true
     group_content:
       children:
-        - group_general
-        - group_calendar
         - group_documents
         - group_infographics
-        - group_offices
-        - group_pages
         - group_hdx
         - group_assessments
+        - group_general
+        - group_calendar
+        - group_offices
+        - group_pages
       label: Content
       region: content
       parent_name: ''
@@ -117,9 +117,9 @@ third_party_settings:
         - langcode
         - field_enabled_tabs
       label: General
-      region: hidden
+      region: content
       parent_name: group_content
-      weight: 16
+      weight: 22
       format_type: tab
       format_settings:
         classes: ''
@@ -133,9 +133,9 @@ third_party_settings:
         - field_calendar_link
         - field_ical_url
       label: Calendar
-      region: hidden
+      region: content
       parent_name: group_content
-      weight: 17
+      weight: 23
       format_type: tab
       format_settings:
         classes: ''
@@ -147,10 +147,10 @@ third_party_settings:
     group_offices:
       children:
         - field_offices_page
-      label: Offices
-      region: hidden
+      label: Contacts
+      region: content
       parent_name: group_content
-      weight: 20
+      weight: 24
       format_type: tab
       format_settings:
         classes: ''
@@ -163,9 +163,9 @@ third_party_settings:
       children:
         - field_pages_page
       label: Pages
-      region: hidden
+      region: content
       parent_name: group_content
-      weight: 21
+      weight: 25
       format_type: tab
       format_settings:
         classes: ''

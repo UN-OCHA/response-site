@@ -91,7 +91,7 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if offices is enabled.
    */
-  public function hasOffices($group) {
+  public function hasContacts($group) {
     $active = $this->tabIsActive($group, 'offices');
     if (!$active) {
       return $active;
@@ -202,11 +202,11 @@ class ParagraphController extends ControllerBase {
   /**
    * Return all offices of an operation, sector or cluster.
    */
-  public function getOffices($group) {
+  public function getContacts($group) {
     if ($group->field_offices_page->isEmpty()) {
       return [
         '#type' => 'markup',
-        '#markup' => $this->t('No offices link defined.'),
+        '#markup' => $this->t('No contacts link defined.'),
       ];
     }
 
