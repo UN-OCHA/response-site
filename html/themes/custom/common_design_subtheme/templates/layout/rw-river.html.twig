@@ -8,7 +8,7 @@
         <tr>
           <th class="cd-table--name" data-title="Name">{{ 'Name'|t }}</th>
           <th class="cd-table--name" data-title="Type">{{ 'Type'|t }}</th>
-          <th class="cd-table--name" data-title="Managed by">{{ 'Managed by'|t }}</th>
+          <th class="cd-table--name" data-title="Source">{{ 'Source'|t }}</th>
           <th class="cd-table--name" data-title="Last updated">{{ 'Last updated'|t }}</th>
           <th class="cd-table--name" data-title="Files">{{ 'Files'|t }}</th>
         </tr>
@@ -20,7 +20,7 @@
             <a href="{{ row.url }}">{{ row.title }}</a>
           </td>
           <td data-title="Type">{{ row.format }}</td>
-          <td data-title="Managed by">{{ row.sources }}</td>
+          <td data-title="Source">{{ row.sources }}</td>
           <td data-title="Last updated">{{ row.date_changed|date("d M Y") }} </td>
           <td data-title="Files">
             {% if row.files|length > 0 %}
