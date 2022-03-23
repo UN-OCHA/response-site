@@ -1,9 +1,11 @@
-<table class="operations-dataset">
+{{ attach_library('common_design_subtheme/hri-table') }}
+
+<table class="operations-dataset cd-table cd-table--striped">
   <thead>
     <tr>
-      <th data-title="Dataset">{{ 'Dataset'|t }}</th>
-      <th data-title="Last updated">{{ 'Last updated'|t }}</th>
-      <th data-title="Source">{{ 'Source'|t }}</th>
+      <th data-title="Dataset" class="cd-table--name">{{ 'Dataset'|t }}</th>
+      <th data-title="Last updated" class="cd-table--name">{{ 'Last updated'|t }}</th>
+      <th data-title="Source" class="cd-table--name">{{ 'Source'|t }}</th>
     </tr>
   </thead>
   <tbody>

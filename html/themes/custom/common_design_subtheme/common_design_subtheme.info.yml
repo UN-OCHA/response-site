@@ -28,6 +28,10 @@ regions:
 libraries-extend:
   core/drupal.dropbutton:
     - common_design_subtheme/hri-dropbutton
+  common_design/cd-pagination:
+    - common_design_subtheme/hri-pagination
+  common_design/cd-button:
+    - common_design_subtheme/hri-button
 
 libraries-override:
   common_design/cd-tabs: common_design_subtheme/cd-tabs
