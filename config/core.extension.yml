@@ -45,6 +45,7 @@ module:
   layout_discovery: 0
   layout_paragraphs: 0
   link: 0
+  link_allowed_hosts: 0
   locale: 0
   maintenance200: 0
   menu_link_content: 0

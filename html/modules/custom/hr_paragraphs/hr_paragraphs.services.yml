@@ -1,12 +1,15 @@
 services:
   hr_paragraphs.paragraph_controller:
     class: \Drupal\hr_paragraphs\Controller\ParagraphController
-    arguments: ['@entity_type.manager', '@http_client', '@pager.manager', '@hr_paragraphs.ical_controller']
+    arguments: ['@entity_type.manager', '@http_client', '@pager.manager', '@hr_paragraphs.ical_controller', '@hr_paragraphs.reliefweb_controller']
   hr_paragraphs.json_controller:
     class: \Drupal\hr_paragraphs\Controller\JsonController
     arguments: ['@entity_type.manager', '@http_client']
   hr_paragraphs.ical_controller:
     class: \Drupal\hr_paragraphs\Controller\IcalController
+    arguments: ['@entity_type.manager', '@http_client']
+  hr_paragraphs.reliefweb_controller:
+    class: \Drupal\hr_paragraphs\Controller\ReliefwebController
     arguments: ['@entity_type.manager', '@http_client']
   hr_paragraphs.breadcrumb.groupcontent:
     class: 'Drupal\hr_paragraphs\Breadcrumb\GroupContentBreadcrumbBuilder'

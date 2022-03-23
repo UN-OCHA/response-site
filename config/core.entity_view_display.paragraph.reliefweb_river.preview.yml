@@ -1,0 +1,28 @@
+uuid: 6795e89c-ba6c-4535-bfd3-4b9d6dde1a27
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.reliefweb_river.field_reliefweb_url
+    - paragraphs.paragraphs_type.reliefweb_river
+  module:
+    - link
+id: paragraph.reliefweb_river.preview
+targetEntityType: paragraph
+bundle: reliefweb_river
+mode: preview
+content:
+  field_reliefweb_url:
+    type: link
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

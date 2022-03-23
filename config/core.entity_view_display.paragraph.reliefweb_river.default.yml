@@ -1,0 +1,14 @@
+uuid: 39b05d5d-0c8a-40ef-84d8-1b83543150b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.reliefweb_river.field_reliefweb_url
+    - paragraphs.paragraphs_type.reliefweb_river
+id: paragraph.reliefweb_river.default
+targetEntityType: paragraph
+bundle: reliefweb_river
+mode: default
+content: {  }
+hidden:
+  field_reliefweb_url: true

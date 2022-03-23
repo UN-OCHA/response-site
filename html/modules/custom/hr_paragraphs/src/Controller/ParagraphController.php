@@ -7,7 +7,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
-use Drupal\Core\Url;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -48,13 +47,21 @@ class ParagraphController extends ControllerBase {
   protected $icalController;
 
   /**
+   * Reliefweb controller.
+   *
+   * @var \Drupal\hr_paragraphs\Controller\ReliefwebController
+   */
+  protected $reliefwebController;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller) {
+  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller, $reliefweb_controller) {
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
     $this->pagerManager = $pager_manager;
     $this->icalController = $ical_controller;
+    $this->reliefwebController = $reliefweb_controller;
   }
 
   /**
@@ -338,13 +345,13 @@ class ParagraphController extends ControllerBase {
     $base_url = $request->getRequestUri();
 
     // Active facets.
-    $active_facets = $this->buildReliefwebActiveFacets($base_url, $filters);
+    $active_facets = $this->reliefwebController->buildReliefwebActiveFacets($base_url, $filters);
 
     // Get country.
     $country = $group->field_operation->entity->field_country->entity;
 
-    $parameters = $this->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
-    $results = $this->executeReliefwebQuery($parameters);
+    $parameters = $this->reliefwebController->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
+    $results = $this->reliefwebController->executeReliefwebQuery($parameters);
 
     $count = $results['totalCount'];
     $this->pagerManager->createPager($count, $limit);
@@ -352,12 +359,12 @@ class ParagraphController extends ControllerBase {
     // Re-order facets.
     $facets = [];
     if (isset($results['embedded'])) {
-      $facets = $this->buildReliefwebFacets($base_url, $results['embedded'], $filters);
+      $facets = $this->reliefwebController->buildReliefwebFacets($base_url, $results['embedded'], $filters);
     }
 
     return [
       '#theme' => 'rw_river',
-      '#data' => $this->buildReliefwebObjects($results),
+      '#data' => $this->reliefwebController->buildReliefwebObjects($results),
       '#total' => $count,
       '#facets' => $facets,
       '#active_facets' => $active_facets,
@@ -394,12 +401,12 @@ class ParagraphController extends ControllerBase {
     $base_url = $request->getRequestUri();
 
     // Active facets.
-    $active_facets = $this->buildReliefwebActiveFacets($base_url, $filters);
+    $active_facets = $this->reliefwebController->buildReliefwebActiveFacets($base_url, $filters);
 
     // Get country.
     $country = $group->field_operation->entity->field_country->entity;
 
-    $parameters = $this->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
+    $parameters = $this->reliefwebController->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
     $parameters['filter']['conditions'][] = [
       'field' => 'format.id',
       'value' => [
@@ -410,7 +417,7 @@ class ParagraphController extends ControllerBase {
       'negate' => TRUE,
     ];
 
-    $results = $this->executeReliefwebQuery($parameters);
+    $results = $this->reliefwebController->executeReliefwebQuery($parameters);
 
     $count = $results['totalCount'];
     $this->pagerManager->createPager($count, $limit);
@@ -418,12 +425,12 @@ class ParagraphController extends ControllerBase {
     // Re-order facets.
     $facets = [];
     if (isset($results['embedded'])) {
-      $facets = $this->buildReliefwebFacets($base_url, $results['embedded'], $filters);
+      $facets = $this->reliefwebController->buildReliefwebFacets($base_url, $results['embedded'], $filters);
     }
 
     return [
       '#theme' => 'rw_river',
-      '#data' => $this->buildReliefwebObjects($results),
+      '#data' => $this->reliefwebController->buildReliefwebObjects($results),
       '#total' => $count,
       '#facets' => $facets,
       '#active_facets' => $active_facets,
@@ -460,12 +467,12 @@ class ParagraphController extends ControllerBase {
     $base_url = $request->getRequestUri();
 
     // Active facets.
-    $active_facets = $this->buildReliefwebActiveFacets($base_url, $filters);
+    $active_facets = $this->reliefwebController->buildReliefwebActiveFacets($base_url, $filters);
 
     // Get country.
     $country = $group->field_operation->entity->field_country->entity;
 
-    $parameters = $this->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
+    $parameters = $this->reliefwebController->buildReliefwebParameters($offset, $limit, $filters, $country->field_iso_3->value);
     $parameters['filter']['conditions'][] = [
       'field' => 'format.id',
       'value' => [
@@ -476,7 +483,7 @@ class ParagraphController extends ControllerBase {
       'negate' => FALSE,
     ];
 
-    $results = $this->executeReliefwebQuery($parameters);
+    $results = $this->reliefwebController->executeReliefwebQuery($parameters);
 
     $count = $results['totalCount'];
     $this->pagerManager->createPager($count, $limit);
@@ -484,12 +491,12 @@ class ParagraphController extends ControllerBase {
     // Re-order facets.
     $facets = [];
     if (isset($results['embedded'])) {
-      $facets = $this->buildReliefwebFacets($base_url, $results['embedded'], $filters);
+      $facets = $this->reliefwebController->buildReliefwebFacets($base_url, $results['embedded'], $filters);
     }
 
     return [
       '#theme' => 'rw_river',
-      '#data' => $this->buildReliefwebObjects($results),
+      '#data' => $this->reliefwebController->buildReliefwebObjects($results),
       '#total' => $count,
       '#facets' => $facets,
       '#active_facets' => $active_facets,
@@ -497,338 +504,6 @@ class ParagraphController extends ControllerBase {
         '#type' => 'pager',
       ],
     ];
-  }
-
-  /**
-   * Build active facets for Reliefweb.
-   */
-  protected function buildReliefwebActiveFacets(string $base_url, array $filters) : array {
-    $active_facets = [];
-
-    foreach ($filters as $key => $keywords) {
-      if (is_string($keywords)) {
-        $title = $this->t('Remove @name', ['@name' => $filters[$key]]);
-        $cloned_filters = $filters;
-        unset($cloned_filters[$key]);
-        $active_facets[] = [
-          'title' => $title,
-          'url' => Url::fromUserInput($base_url, [
-            'query' => [
-              'filters' => $cloned_filters,
-            ],
-          ]),
-        ];
-      }
-      else {
-        foreach ($keywords as $index => $keyword) {
-          $title = $this->t('Remove @name', ['@name' => $filters[$key][$index]]);
-          $cloned_filters = $filters;
-          unset($cloned_filters[$key][$index]);
-          $active_facets[] = [
-            'title' => $title,
-            'url' => Url::fromUserInput($base_url, [
-              'query' => [
-                'filters' => $cloned_filters,
-              ],
-            ]),
-          ];
-        }
-      }
-    }
-
-    return $active_facets;
-  }
-
-  /**
-   * Build facets for Reliefweb.
-   */
-  protected function buildReliefwebFacets(string $base_url, array $embedded_facets, array $filters) : array {
-    $facet_blocks = [];
-
-    $allowed_filters = $this->getReliefwebFilters();
-    foreach (array_keys($allowed_filters) as $key) {
-      $facets[$key] = $embedded_facets['facets'][$key];
-    }
-
-    foreach ($facets as $name => $facet) {
-      $links = [];
-      if (isset($facet['data']) && count($facet['data']) > 1) {
-        foreach ($facet['data'] as $term) {
-          // Date is a special case.
-          if (strpos($name, 'date') !== FALSE) {
-            $filter = [
-              $name => date('Y-m-d', strtotime($term['value'])) . ':' . date('Y-m-t', strtotime($term['value'])),
-            ];
-          }
-          else {
-            $filter = [
-              $name => $term['value'],
-            ];
-          }
-
-          // Check if facet is already active.
-          if (isset($filters[$name])) {
-            if (is_string($filters[$name]) && $filters[$name] == $filter[$name]) {
-              continue;
-            }
-            if (is_array($filters[$name]) && in_array($filter[$name], $filters[$name])) {
-              continue;
-            }
-          }
-
-          // Date is a special case.
-          if (strpos($name, 'date') !== FALSE) {
-            if ($term['count'] > 0) {
-              $links[] = [
-                'title' => date('F Y', strtotime($term['value'])) . ' (' . $term['count'] . ')',
-                'url' => Url::fromUserInput($base_url, [
-                  'query' => [
-                    'filters' => array_merge_recursive($filters, $filter),
-                  ],
-                ]),
-              ];
-            }
-          }
-          else {
-            $links[] = [
-              'title' => $term['value'] . ' (' . $term['count'] . ')',
-              'url' => Url::fromUserInput($base_url, [
-                'query' => [
-                  'filters' => array_merge_recursive($filters, $filter),
-                ],
-              ]),
-            ];
-          }
-        }
-
-        // Reverse order for date filter.
-        if (strpos($name, 'date') !== FALSE) {
-          $links = array_reverse($links);
-        }
-
-        if (count($links) > 1) {
-          $facet_blocks[] = [
-            'title' => $this->getReliefwebFilters($name),
-            'links' => $links,
-          ];
-        }
-      }
-    }
-
-    return $facet_blocks;
-  }
-
-  /**
-   * Build reliefweb parameters.
-   */
-  protected function buildReliefwebParameters(int $offset, int $limit, array $query_filters, string $iso3 = '') : array {
-    $facet_filters = [];
-
-    foreach ($query_filters as $key => $keywords) {
-      // Date is a special case.
-      if (strpos($key, 'date') !== FALSE) {
-        $from_to = explode(':', $keywords);
-        $facet_filters[] = [
-          'field' => $key,
-          'value' => [
-            'from' => $from_to[0] . 'T00:00:00+00:00',
-            'to' => $from_to[1] . 'T23:59:59+00:00',
-          ],
-          'operator' => 'AND',
-        ];
-      }
-      else {
-        $facet_filters[] = [
-          'field' => $key,
-          'value' => $keywords,
-          'operator' => 'OR',
-        ];
-      }
-    }
-
-    $parameters = [
-      'appname' => 'hrinfo',
-      'offset' => $offset,
-      'limit' => $limit,
-      'preset' => 'latest',
-      'fields[include]' => [
-        'id',
-        'disaster_type.name',
-        'url',
-        'title',
-        'date.changed',
-        'source.shortname',
-        'country.name',
-        'primary_country.name',
-        'file.url',
-        'file.preview.url-thumb',
-        'file.description',
-        'file.filename',
-        'format.name',
-      ],
-      'filter' => [
-        'operator' => 'AND',
-        'conditions' => [],
-      ],
-      'facets' => [],
-    ];
-
-    if (!empty($iso3)) {
-      $parameters['filter']['conditions'][] = [
-        'field' => 'primary_country.iso3',
-        'value' => strtolower($iso3),
-        'operator' => 'OR',
-      ];
-    }
-
-    foreach ($facet_filters as $facet_filter) {
-      $parameters['filter']['conditions'][] = $facet_filter;
-    }
-
-    $allowed_filters = $this->getReliefwebFilters();
-    foreach (array_keys($allowed_filters) as $key) {
-      // Date is a special case, needs an interval.
-      if (strpos($key, 'date') !== FALSE) {
-        $parameters['facets'][] = [
-          'field' => $key,
-          'interval' => 'month',
-        ];
-      }
-      else {
-        $parameters['facets'][] = [
-          'field' => $key,
-          'limit' => 2000,
-          'sort' => 'value:asc',
-        ];
-      }
-    }
-
-    return $parameters;
-  }
-
-  /**
-   * Allowed filters.
-   */
-  protected function getReliefwebFilters($key = NULL) {
-    $filters = [
-      'source.name' => $this->t('Organization'),
-      'theme.name' => $this->t('Theme'),
-      'format.name' => $this->t('Format'),
-      'disaster_type' => $this->t('Disaster type'),
-      'language.name' => $this->t('Language'),
-      'date.original' => $this->t('Original date'),
-      'date.changed' => $this->t('Posting date'),
-      'disaster.name' => $this->t('Disaster'),
-    ];
-
-    if ($key) {
-      if (array_key_exists($key, $filters)) {
-        return $filters[$key];
-      }
-      else {
-        return FALSE;
-      }
-    }
-    else {
-      return $filters;
-    }
-  }
-
-  /**
-   * Execute reliefweb query.
-   */
-  protected function executeReliefwebQuery(array $parameters) : array {
-    $endpoint = 'https://api.reliefweb.int/v1/reports';
-
-    try {
-      $response = $this->httpClient->request(
-        'GET',
-        $endpoint,
-        [
-          'query' => $parameters,
-        ]
-      );
-    }
-    catch (RequestException $exception) {
-      if ($exception->getCode() === 404) {
-        throw new NotFoundHttpException();
-      }
-    }
-
-    $body = $response->getBody() . '';
-    $results = json_decode($body, TRUE);
-
-    return $results;
-  }
-
-  /**
-   * Build reliefweb objects.
-   */
-  protected function buildReliefwebObjects(array $results) : array {
-    $data = [];
-
-    foreach ($results['data'] as $row) {
-      $url = $row['fields']['url'];
-      $title = $row['fields']['title'] ?? $row['fields']['name'];
-      $data[$title] = [
-        'id' => $row['fields']['id'],
-        'title' => $title,
-        'url' => $url,
-        'date_changed' => $row['fields']['date']['changed'],
-        'format' => $row['fields']['format'][0]['name'],
-        'primary_country' => $row['fields']['primary_country']['name'],
-      ];
-
-      if (isset($row['fields']['source'])) {
-        $sources = [];
-        foreach ($row['fields']['source'] as $source) {
-          $sources[] = $source['shortname'];
-        }
-        $data[$title]['sources'] = implode(', ', $sources);
-      }
-
-      if (isset($row['fields']['disaster_type'])) {
-        $disaster_types = [];
-        foreach ($row['fields']['disaster_type'] as $disaster_type) {
-          $disaster_types[] = $disaster_type['name'];
-        }
-        $data[$title]['disaster_types'] = $disaster_types;
-      }
-
-      if (isset($row['fields']['country'])) {
-        $countries = [];
-        foreach ($row['fields']['country'] as $country) {
-          $countries[] = $country['name'];
-        }
-        $data[$title]['countries'] = $countries;
-      }
-
-      if (isset($row['fields']['file'])) {
-        $files = [];
-        foreach ($row['fields']['file'] as $file) {
-          $files[] = [
-            'preview' => isset($file['preview']['url-thumb']) ? $this->reliefwebFixUrl($file['preview']['url-thumb']) : '',
-            'url' => $this->reliefwebFixUrl($file['url']),
-            'filename' => $file['filename'] ?? '',
-            'description' => $file['description'] ?? '',
-          ];
-        }
-        $data[$title]['files'] = $files;
-      }
-    }
-
-    return $data;
-  }
-
-  /**
-   * Fix URL for reliefweb.
-   */
-  protected function reliefwebFixUrl($url) {
-    $url = str_replace('#', '%23', $url);
-    $url = str_replace(' ', '%20', $url);
-    $url = str_replace('http://', 'https://', $url);
-
-    return $url;
   }
 
   /**

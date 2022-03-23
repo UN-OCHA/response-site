@@ -1,0 +1,25 @@
+uuid: 6b226221-201b-4fe4-9753-4d938ed158e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.reliefweb_river.field_reliefweb_url
+    - paragraphs.paragraphs_type.reliefweb_river
+  module:
+    - link
+id: paragraph.reliefweb_river.default
+targetEntityType: paragraph
+bundle: reliefweb_river
+mode: default
+content:
+  field_reliefweb_url:
+    type: link_default
+    weight: 0
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
