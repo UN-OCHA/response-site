@@ -422,9 +422,9 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   $items = [];
   foreach ($xml->channel->item as $entry) {
     $items[] = [
-      'title' => $entry->title,
-      'link' => $entry->link,
-      'description' => $entry->description,
+      'title' => (string) $entry->title,
+      'link' => (string) $entry->link,
+      'description' => (string) $entry->description,
       'date' => strtotime($entry->pubDate),
     ];
   }
@@ -446,34 +446,34 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   // Slice array.
   $items = array_slice($items, 0, $max_number_of_items);
 
+  $variables['content']['embed'] = [
+    '#theme' => 'hr_paragraphs_rss_feed',
+    '#items' => $items,
+    '#options' => $options,
+    '#weight' => 99,
+  ];
+
   // Add 'read more' if needed.
   if (in_array('display_read_more', $rss_options)) {
-    $read_more_label = '';
     $read_more_url = '';
 
     if ($paragraph->field_rss_read_more->isEmpty()) {
       if (!empty($xml->channel->link[0])) {
-        $read_more_label = t('View original RSS feed');
         $read_more_url = $xml->channel->link[0];
         $options['display_read_more'] = TRUE;
       }
     }
     else {
-      $read_more_label = t('View content related to this feed');
       $read_more_url = $paragraph->field_rss_read_more->first()->uri;
       $options['display_read_more'] = TRUE;
     }
-  }
 
-  $variables['content']['embed'] = [
-    '#theme' => 'hr_paragraphs_rss_feed',
-    '#items' => $items,
-    '#options' => $options,
-    '#read_more' => [
-      'title' => $read_more_label,
-      'url' => $read_more_url,
-    ],
-  ];
+    if ($options['display_read_more']) {
+      $variables['content']['embed']['#read_more'] = [
+        'url' => $read_more_url,
+      ];
+    }
+  }
 }
 
 /**
