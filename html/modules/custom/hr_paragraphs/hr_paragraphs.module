@@ -455,25 +455,21 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
 
   // Add 'read more' if needed.
   if (in_array('display_read_more', $rss_options)) {
-    $read_more_label = '';
     $read_more_url = '';
 
     if ($paragraph->field_rss_read_more->isEmpty()) {
       if (!empty($xml->channel->link[0])) {
-        $read_more_label = t('View original RSS feed');
         $read_more_url = $xml->channel->link[0];
         $options['display_read_more'] = TRUE;
       }
     }
     else {
-      $read_more_label = t('View content related to this feed');
       $read_more_url = $paragraph->field_rss_read_more->first()->uri;
       $options['display_read_more'] = TRUE;
     }
 
     if ($options['display_read_more']) {
       $variables['content']['embed']['#read_more'] = [
-        'title' => $read_more_label,
         'url' => $read_more_url,
       ];
     }
