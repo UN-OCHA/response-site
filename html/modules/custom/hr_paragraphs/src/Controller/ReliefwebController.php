@@ -210,6 +210,7 @@ class ReliefwebController extends ControllerBase {
         'disaster_type.name',
         'url',
         'title',
+        'body-html',
         'date.changed',
         'source.shortname',
         'country.name',
@@ -319,6 +320,7 @@ class ReliefwebController extends ControllerBase {
       $data[$title] = [
         'id' => $row['fields']['id'],
         'title' => $title,
+        'body' => $row['fields']['body-html'],
         'url' => $url,
         'date_changed' => $row['fields']['date']['changed'],
         'format' => $row['fields']['format'][0]['name'],

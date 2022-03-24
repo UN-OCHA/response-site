@@ -375,19 +375,16 @@ function hr_paragraphs_preprocess_paragraph__recent_assessments(&$variables) {
     return;
   }
 
-  $entity_id = 'assessment';
-  $view_mode = 'teaser';
+  global $base_url;
+  $src = $base_url . '/rest/assessments/list-data?f[0]=operations:' . $operation_uuid;
+  $theme = 'hr_paragraphs_assessments_list';
 
-  $entity_type_manager = \Drupal::entityTypeManager();
-  $assessment_uuids = $entity_type_manager->getStorage($entity_id)->getQuery()
-    ->condition('operations', $operation_uuid)
-    ->range(0, 10)
-    ->sort('changed', 'DESC')
-    ->execute();
-  $assessments = $entity_type_manager->getStorage($entity_id)->loadMultiple($assessment_uuids);
-
-  $view_builder = $entity_type_manager->getViewBuilder($entity_id);
-  $variables['content']['assessments'] = $view_builder->viewMultiple($assessments, $view_mode);
+  $variables['content']['assessments'] = [
+    '#theme' => $theme,
+    '#base_url' => 'https://assessments.hpc.tools',
+    '#src' => $src,
+    '#component_url' => '/modules/custom/hr_paragraphs/component/build/',
+  ];
 }
 
 /**
