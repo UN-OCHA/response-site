@@ -7,7 +7,6 @@ dependencies:
     - node.type.highlight
     - taxonomy.vocabulary.tags
   module:
-    - content_translation
     - contextual
     - file
     - node
@@ -64,7 +63,6 @@ permissions:
   - 'edit own highlight content'
   - 'edit terms in tags'
   - 'revert all revisions'
-  - 'translate editable entities'
   - 'update paragraph content article_card_list'
   - 'update paragraph content child_groups'
   - 'update paragraph content group_pages'
