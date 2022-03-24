@@ -779,7 +779,26 @@ function hr_paragraphs_library_info_alter(&$libraries, $extension) {
  * Implements hook_menu_local_tasks_alter().
  */
 function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
+  // Hide duplicate local task.
   if (isset($data['tabs'][0]['group.view']['#access'])) {
     $data['tabs'][0]['group.view']['#access'] = FALSE;
+  }
+
+  // Mark local task active for queries.
+  $supported_routes = [
+    'hr_paragraphs.operation.pages',
+    'hr_paragraphs.operation.documents.reports',
+    'hr_paragraphs.operation.documents.infographics',
+    'hr_paragraphs.operation.assessments',
+    'hr_paragraphs.operation.datasets',
+    'hr_paragraphs.operation.events',
+    'hr_paragraphs.operation.contacts',
+    'hr_paragraphs.operation.ical',
+  ];
+
+  if (in_array($route_name, $supported_routes)) {
+    if ($data['tabs'][1][$route_name]['#active']) {
+      $data['tabs'][1][$route_name]['#link']['localized_options']['attributes']['class'] = ['is-active'];
+    }
   }
 }
