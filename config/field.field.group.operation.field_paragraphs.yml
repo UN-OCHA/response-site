@@ -11,8 +11,8 @@ id: group.operation.field_paragraphs
 field_name: field_paragraphs
 entity_type: group
 bundle: operation
-label: Paragraphs
-description: ''
+label: 'Custom Content'
+description: 'This content displays on the "homepage" of each Operation.'
 required: false
 translatable: false
 default_value: {  }
@@ -23,6 +23,15 @@ settings:
     target_bundles: null
     negate: 1
     target_bundles_drag_drop:
+      article_card_list:
+        weight: 13
+        enabled: false
+      child_groups:
+        weight: 14
+        enabled: false
+      group_pages:
+        weight: 15
+        enabled: false
       heading:
         weight: 4
         enabled: false
@@ -35,10 +44,19 @@ settings:
       recent_assessments:
         weight: 12
         enabled: false
+      reliefweb_document:
+        weight: 20
+        enabled: false
+      reliefweb_river:
+        weight: 21
+        enabled: false
       rss_feed:
         weight: 13
         enabled: false
       text_block:
         weight: 4
+        enabled: false
+      upcoming_events:
+        weight: 24
         enabled: false
 field_type: entity_reference_revisions
