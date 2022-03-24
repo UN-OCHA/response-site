@@ -464,7 +464,7 @@ class ParagraphController extends ControllerBase {
 
     return [
       '#theme' => $theme,
-      '#base_url' => $base_url,
+      '#base_url' => 'https://assessments.hpc.tools',
       '#src' => $src,
       '#component_url' => '/modules/custom/hr_paragraphs/component/build/',
     ];
