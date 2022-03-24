@@ -3,17 +3,14 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.type.cluster
-    - group.type.operation
     - node.type.article
   module:
-    - content_translation
     - contextual
     - entity_reference_revisions
+    - external_entities
     - file
     - group
     - locale
-    - menu_link_content
     - node
     - paragraphs
     - paragraphs_type_permissions
@@ -41,7 +38,6 @@ permissions:
   - 'administer users'
   - 'create article content'
   - 'create cluster group'
-  - 'create content translations'
   - 'create office external entity'
   - 'create operation group'
   - 'create paragraph content child_groups'
@@ -57,7 +53,6 @@ permissions:
   - 'create url aliases'
   - 'customize shortcut links'
   - 'delete article revisions'
-  - 'delete content translations'
   - 'delete office external entity'
   - 'delete orphan revisions'
   - 'delete own article content'
@@ -75,15 +70,7 @@ permissions:
   - 'revert all revisions'
   - 'revert article revisions'
   - 'switch shortcut sets'
-  - 'translate any entity'
-  - 'translate article node'
-  - 'translate cluster group'
-  - 'translate editable entities'
   - 'translate interface'
-  - 'translate menu_link_content'
-  - 'translate operation group'
-  - 'translate paragraph'
-  - 'update content translations'
   - 'update office external entity'
   - 'update paragraph content child_groups'
   - 'update paragraph content group_pages'
