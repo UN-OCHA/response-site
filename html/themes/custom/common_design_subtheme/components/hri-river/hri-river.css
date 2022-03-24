@@ -17,7 +17,7 @@
   }
 
   .hri-river__facets-wrapper {
-    flex: 1 0 200px;
+    flex: 1 0 280px;
     order: -1;
   }
 }
@@ -52,6 +52,10 @@
   display: inline;
 }
 
+.hri-river__facet {
+  padding-inline-start: 1.5rem;
+}
+
 .hri-river__facet-link {
   font-size: var(--cd-font-size--small);
 }
@@ -62,4 +66,53 @@
 
 .hri-river .cd-button--small .cd-icon {
   margin: 0;
+}
+
+/* all results */
+.hri-river__result {
+  margin: 0;
+  padding: 1rem 0;
+}
+
+/* all results but the first */
+.hri-river__result + .hri-river__result {
+  border-top: 1px solid var(--implementation-light);
+}
+
+.hri-river__result .country {
+  display: inline;
+  padding: 0.25rem 1rem;
+  background: var(--implementation-light);
+  font-size: var(--cd-font-size--small);
+  font-weight: 700;
+}
+
+.hri-river__result .title {
+  display: inline;
+  font-size: var(--cd-font-size--base);
+}
+
+.hri-river__result .meta {
+  margin: 1rem 0 0;
+  padding: 0;
+  font-size: var(--cd-font-size--small);
+}
+.hri-river__result .meta dt {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+}
+.hri-river__result .meta dd {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.hri-river__result .meta dd::after {
+  display: inline-block;
+  margin: 0 0.5rem;
+  content: "•";
+}
+.hri-river__result .meta dd:last-of-type::after {
+  content: none;
 }

@@ -53,6 +53,8 @@ hri-river:
   css:
     theme:
       components/hri-river/hri-river.css: {}
+  dependencies:
+    - common_design/cd-button
 
 hri-rss-feed:
   css:
