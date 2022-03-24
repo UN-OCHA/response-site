@@ -77,14 +77,14 @@ hr_paragraphs.operation.events:
       group:
         type: entity:group
 
-hr_paragraphs.operation.offices:
-  path: '/group/{group}/offices'
-  title: 'Offices'
+hr_paragraphs.operation.contacts:
+  path: '/group/{group}/contacts'
+  title: 'Contacts'
   defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getOffices'
-    _title: 'Offices'
+    _controller: 'hr_paragraphs.paragraph_controller:getContacts'
+    _title: 'Contacts'
   requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasOffices'
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasContacts'
   options:
     parameters:
       group:

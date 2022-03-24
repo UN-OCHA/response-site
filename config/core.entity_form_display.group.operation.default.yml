@@ -84,7 +84,7 @@ third_party_settings:
     group_offices:
       children:
         - field_offices_page
-      label: Offices
+      label: Contacts
       region: content
       parent_name: group_content
       weight: 22

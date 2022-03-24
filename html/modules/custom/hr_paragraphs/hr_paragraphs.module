@@ -153,7 +153,7 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
   // Add aliases for tabs.
   $tabs = [
     'events',
-    'offices',
+    'contacts',
     'pages',
     'reports',
     'infographics',
@@ -674,24 +674,6 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   }
 
   $url = $paragraph->field_reliefweb_url->first()->uri;
-  $flags = LIBXML_NONET | LIBXML_NOBLANKS | LIBXML_NOERROR | LIBXML_NOWARNING;
-
-  $data = file_get_contents($url);
-  $dom = new \DOMDocument();
-  $dom->loadHTML($data, $flags);
-
-  $nid = FALSE;
-  $nodes = $dom->getElementsByTagName('link');
-  foreach ($nodes as $node) {
-    if ($node->getAttribute('rel') === 'shortlink') {
-      $nid = str_replace('https://reliefweb.int/node/', '', $node->getAttribute('href'));
-      break;
-    }
-  }
-
-  if (!$nid) {
-    return;
-  }
 
   /** @var \Drupal\hr_paragraphs\Controller\ReliefwebController */
   $reliefweb_controller = \Drupal::service('hr_paragraphs.reliefweb_controller');
@@ -700,10 +682,9 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   // Remove facets.
   unset($parameters['facets']);
 
-  // Add conditions.
   $parameters['filter']['conditions'][] = [
-    'field' => 'id',
-    'value' => $nid,
+    'field' => 'url_alias',
+    'value' => $url,
   ];
 
   $results = $reliefweb_controller->executeReliefwebQuery($parameters);
@@ -715,7 +696,6 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
     '#doc' => $doc,
     '#weight' => 99,
   ];
-
 }
 
 /**

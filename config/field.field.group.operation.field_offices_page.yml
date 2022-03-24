@@ -11,7 +11,7 @@ id: group.operation.field_offices_page
 field_name: field_offices_page
 entity_type: group
 bundle: operation
-label: 'Offices page'
+label: 'Contacts page'
 description: ''
 required: false
 translatable: false

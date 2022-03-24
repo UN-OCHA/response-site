@@ -38,8 +38,8 @@ hr_paragraphs.operation.events:
   route_name: hr_paragraphs.operation.events
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
-hr_paragraphs.operation.offices:
-  title: 'Offices'
-  route_name: hr_paragraphs.operation.offices
+hr_paragraphs.operation.contacts:
+  title: 'Contacts'
+  route_name: hr_paragraphs.operation.contacts
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
