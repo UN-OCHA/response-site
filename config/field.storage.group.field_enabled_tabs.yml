@@ -12,26 +12,26 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: events
-      label: Events
+      value: pages
+      label: Pages
     -
       value: documents
-      label: Documents
+      label: Reports
     -
       value: maps
       label: Maps/Infographics
     -
-      value: datasets
-      label: Datasets
-    -
-      value: offices
-      label: Contacts
-    -
       value: assessments
       label: Assessments
     -
-      value: pages
-      label: Pages
+      value: datasets
+      label: Datasets
+    -
+      value: events
+      label: Events
+    -
+      value: offices
+      label: Contacts
   allowed_values_function: ''
 module: options
 locked: false
