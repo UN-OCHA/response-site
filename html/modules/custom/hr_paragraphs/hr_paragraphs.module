@@ -5,8 +5,10 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
+use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\GroupContent;
 use Drupal\path_alias\Entity\PathAlias;
@@ -427,6 +429,14 @@ function hr_paragraphs_handle_iframe($html) {
   $dom->loadHTML($prefix . $html . $suffix, $flags);
 
   $iframes = $dom->getElementsByTagName('iframe');
+  if (empty($iframes)) {
+    return [
+      'embed_url' => '',
+      'width' => 0,
+      'height' => 0,
+    ];
+  }
+
   $iframe = $iframes[0];
 
   return [
@@ -875,5 +885,26 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
     if ($data['tabs'][1][$route_name]['#active']) {
       $data['tabs'][1][$route_name]['#link']['localized_options']['attributes']['class'] = ['is-active'];
     }
+  }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function hr_paragraphs_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+  if (empty($breadcrumb)) {
+    return;
+  }
+
+  if ($route_match->getRouteName() !== 'entity.group.add_form') {
+    return;
+  }
+
+  $links = $breadcrumb->getLinks();
+  if (!empty($links[1])) {
+    $title = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), $route_match->getRouteObject());
+    $links[1]->setText($title);
+    $breadcrumb = new Breadcrumb();
+    $breadcrumb->setLinks($links);
   }
 }
