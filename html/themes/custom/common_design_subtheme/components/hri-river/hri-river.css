@@ -13,12 +13,11 @@
   }
 
   .hri-river__results {
-    flex: 1 0 80%;
+    flex: 1 0 auto;
   }
 
   .hri-river__facets-wrapper {
-    flex: 1 0 200px;
-    order: -1;
+    flex: 1 0 280px;
   }
 }
 
@@ -52,6 +51,10 @@
   display: inline;
 }
 
+.hri-river__facet {
+  padding-inline-start: 1.5rem;
+}
+
 .hri-river__facet-link {
   font-size: var(--cd-font-size--small);
 }
@@ -60,6 +63,97 @@
   width: 100px;
 }
 
-.hri-river .cd-button--small .cd-icon {
+/* all results */
+.hri-river__result {
+  max-width: 720px;
+  margin: 0;
+  padding: 1rem 0;
+}
+
+/* all results but the first */
+.hri-river__result + .hri-river__result {
+  border-top: 1px solid var(--implementation-light);
+}
+
+.hri-river__result .country {
+  display: inline;
+  margin-inline-end: 0.75em;
+  padding: 0.25em 1em;
+  background: var(--implementation-light);
+  font-size: var(--cd-font-size--small);
+}
+.hri-river__result .country--primary {
+  font-weight: 700;
+}
+
+.hri-river__result .title {
+  display: inline;
+  font-size: var(--cd-font-size--base);
+}
+
+.hri-river__result .content {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.hri-river__result .content img {
+  flex: 1 0 auto;
+  max-height: 118px;
+  margin-inline-end: 1rem;
+}
+
+.hri-river__result .meta {
+  margin: 1rem 0 0;
+  padding: 0;
+  font-size: var(--cd-font-size--small);
+}
+.hri-river__result .meta dt {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+}
+.hri-river__result .meta dd {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.hri-river__result .meta dd::after {
+  display: inline;
+  margin: 0 0.5rem;
+  content: "•";
+}
+.hri-river__result .meta dd:last-of-type::after {
+  content: none;
+}
+
+.hri-river__result .meta dd.format::before {
+  display: inline-block;
+  overflow: hidden;
+  width: 16px;
+  height: 16px;
+  margin: -2px 6px 0 0;
+  content: "";
+  vertical-align: middle;
+  background: rgba(0, 0, 0, 0) url("rw-icons-sprite.svg") -328px -32px no-repeat;
+}
+
+.hri-river__result .meta dd.format.map::before {
+  background-position-y: -48px;
+}
+.hri-river__result .meta dd.format.infographic::before {
+  background-position-y: -64px;
+}
+.hri-river__result .meta dd.format.interactive::before {
+  background-position-y: -80px;
+}
+.hri-river__result .meta dd.format.dataset::before {
+  background-position-y: -64px;
+}
+
+/* files buttons */
+.hri-river__result .cd-button--small .cd-icon {
   margin: 0;
 }

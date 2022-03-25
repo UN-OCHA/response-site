@@ -1,7 +1,9 @@
-<div class="river">
-  <div class="river__results">
+{{ attach_library('common_design_subtheme/hri-river') }}
+
+<div class="hri-river">
+  <div class="hri-river__results">
     {% for row in data %}
-      <article class="river__result" data-rw-id="{{ row.id }}">
+      <article class="hri-river__result" data-rw-id="{{ row.id }}">
         <header>
           <p class="country">
             <span class="country--primary">{{ row.primary_country }}</span>
@@ -28,7 +30,7 @@
         {% endif %}
         <footer>
           <dl class="meta core">
-            <dt class="format {{ row.format|clean_class }}">{{ 'Format'|t }}:</dt>
+            <dt class="format {{ row.format|clean_class }} visually-hidden">{{ 'Format'|t }}:</dt>
             <dd class="format {{ row.format|clean_class }}">{{ row.format }}</dd>
 
             <dt class="source">{{ 'Source'|t }}:</dt>
@@ -41,8 +43,9 @@
               <dt class="files">{{ 'Files'|t }}:</dt>
               <dd class="files">
                 {% for file in row.files %}
-                  <a href="{{ file.url }}" title="{{ file.url }}">
-                    {{ file.filename }}
+                  <a class="cd-button cd-button--icon cd-button--small" href="{{ file.url }}" title="{{ file.url }}">
+                    <span class="visually-hidden">{{ 'Download'|t }}</span>
+                    <svg class="cd-icon cd-icon--copyurl" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copyurl"></use></svg>
                   </a>
                 {% endfor %}
               </dd>
@@ -53,15 +56,15 @@
     {% endfor %}
 
     {{ pager }}
-  </div>{# .river__results #}
+  </div>{# .hri-river__results #}
 
-  <div class="river__facets-wrapper">
-    <p class="river__facets-count">
-      <span class="river__facets-count__value">{{ total }}</span> documents found
+  <div class="hri-river__facets-wrapper">
+    <p class="hri-river__facets-count">
+      <span class="hri-river__facets-count__value">{{ total }}</span> documents found
     </p>
 
     {% if active_facets|length > 0 %}
-      <div class="river__facets--active">
+      <div class="hri-river__facets--active">
         <details open>
           <summary>{{ 'Remove filters'|t }} </summary>
           <ul>
@@ -74,17 +77,17 @@
     {% endif %}
 
     {% for facet in facets %}
-      <div class="river__facets">
+      <div class="hri-river__facets">
         <details>
           <summary>{{ facet.title }}</summary>
-          <ul class="river__facet">
+          <ul class="hri-river__facet">
           {% for link in facet.links %}
-            <li class="river__facet-link"><a href="{{ link.url }}">{{ link.title }}</a></li>
+            <li class="hri-river__facet-link"><a href="{{ link.url }}">{{ link.title }}</a></li>
           {% endfor %}
           </ul>
         </details>
       </div>
     {% endfor %}
-  </div>{# .river__facets-wrapper #}
+  </div>{# .hri-river__facets-wrapper #}
 
-</div>{# .river #}
+</div>{# .hri-river #}
