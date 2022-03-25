@@ -461,7 +461,7 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     $rss_option = $rss_option['value'];
   }
 
-  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 10;
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
   $options = [
     'display_date' => FALSE,
     'display_description' => FALSE,
