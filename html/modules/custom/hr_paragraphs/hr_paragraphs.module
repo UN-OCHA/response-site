@@ -63,6 +63,7 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
       'variables' => [
         'data' => [],
         'total' => [],
+        'view_all' => NULL,
       ],
     ],
     'hr_paragraphs_rw_doc' => [
@@ -729,6 +730,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
   $variables['content']['rw_list'] = [
     '#theme' => 'hr_paragraphs_rw_list',
     '#data' => $reliefweb_controller->buildReliefwebObjects($results),
+    '#view_all' => $paragraph->field_reliefweb_url->first()->uri,
     '#total' => 10,
     '#weight' => 99,
   ];

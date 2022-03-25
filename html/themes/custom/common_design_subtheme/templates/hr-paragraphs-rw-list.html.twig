@@ -56,5 +56,10 @@
     {% endfor %}
 
     {{ pager }}
+
+    <a class="cd-button cd-button--icon cd-button--small" href="{{ view_all }}">
+      <span class="cd-button__text">{{ 'View all updates'|t }}</span>
+      <svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>
+    </a>
   </div>{# .hri-river__results #}
 </div>{# .hri-river #}

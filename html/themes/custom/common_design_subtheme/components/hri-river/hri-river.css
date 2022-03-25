@@ -64,10 +64,6 @@
   width: 100px;
 }
 
-.hri-river .cd-button--small .cd-icon {
-  margin: 0;
-}
-
 /* all results */
 .hri-river__result {
   max-width: 720px;
@@ -156,4 +152,9 @@
 }
 .hri-river__result .meta dd.format.dataset::before {
   background-position-y: -64px;
+}
+
+/* files buttons */
+.hri-river__result .cd-button--small .cd-icon {
+  margin: 0;
 }
