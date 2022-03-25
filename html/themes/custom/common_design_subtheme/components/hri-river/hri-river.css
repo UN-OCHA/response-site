@@ -70,6 +70,7 @@
 
 /* all results */
 .hri-river__result {
+  max-width: 720px;
   margin: 0;
   padding: 1rem 0;
 }
@@ -81,15 +82,31 @@
 
 .hri-river__result .country {
   display: inline;
-  padding: 0.25rem 1rem;
+  margin-inline-end: 0.75em;
+  padding: 0.25em 1em;
   background: var(--implementation-light);
   font-size: var(--cd-font-size--small);
+}
+.hri-river__result .country--primary {
   font-weight: 700;
 }
 
 .hri-river__result .title {
   display: inline;
   font-size: var(--cd-font-size--base);
+}
+
+.hri-river__result .content {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.hri-river__result .content img {
+  flex: 1 0 auto;
+  max-height: 118px;
+  margin-inline-end: 1rem;
 }
 
 .hri-river__result .meta {

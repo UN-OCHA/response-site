@@ -3,11 +3,31 @@
 <div class="hri-river">
   <div class="hri-river__results">
     {% for row in data %}
-      <article class="hri-river__result">
+      <article class="hri-river__result" data-rw-id="{{ row.id }}">
         <header>
-          <p class="country">{{ row.primary_country }}</p>
+          <p class="country">
+            <span class="country--primary">{{ row.primary_country }}</span>
+            {% if row.countries|length > 1 %}
+              + {{ row.countries|slice(1)|length }} more
+            {% endif %}
+          </p>
           <h4 class="title"><a href="{{ row.url }}">{{ row.title }}</a></h4>
         </header>
+        {% if row.body != '' %}
+          <div class="content">
+            {% for file in row.files|slice(0, 1) %}
+              {% if file.preview != '' %}
+                <img src="{{ file.preview }}" alt="{{ file.description }}">
+              {% endif %}
+            {% endfor %}
+
+            {% if row.body|striptags|split(' ')|length > 36 %}
+              <p>{{ row.body|striptags|split(' ')|slice(0, 36)|join(' ') }}&hellip;</p>
+            {% else %}
+              <p>{{ row.body }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
         <footer>
           <dl class="meta core">
             <dt class="format {{ row.format|clean_class }}">{{ 'Format'|t }}:</dt>
