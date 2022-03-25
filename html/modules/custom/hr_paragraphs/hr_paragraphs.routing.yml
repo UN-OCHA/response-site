@@ -97,7 +97,7 @@ hr_paragraphs.operation.operations:
     _controller: 'hr_paragraphs.paragraph_controller:getOperations'
     _title: 'Operations'
   requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasContacts'
+    _group_permission: 'leave group'
   options:
     parameters:
       group:
