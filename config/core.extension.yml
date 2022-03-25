@@ -48,6 +48,7 @@ module:
   link_allowed_hosts: 0
   locale: 0
   maintenance200: 0
+  masquerade: 0
   menu_link_content: 0
   menu_ui: 0
   node: 0

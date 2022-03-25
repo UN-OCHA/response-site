@@ -11,6 +11,7 @@ dependencies:
     - file
     - group
     - locale
+    - masquerade
     - node
     - paragraphs
     - paragraphs_type_permissions
@@ -67,6 +68,8 @@ permissions:
   - 'delete paragraph content upcoming_events'
   - 'edit any article content'
   - 'edit own article content'
+  - 'masquerade as authenticated'
+  - 'masquerade as content_editor'
   - 'revert all revisions'
   - 'revert article revisions'
   - 'switch shortcut sets'

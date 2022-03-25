@@ -8,7 +8,6 @@
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
-use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupContent;
 use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
@@ -132,13 +131,12 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
   }
 
   $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
-  $new_alias = '/operations/' . $page_title;
 
-  if ($entity->subgroup_tree->value && $entity->subgroup_tree->value !== $entity->id()) {
-    $parent_group = Group::load($entity->subgroup_tree->value);
-    $group_alias = $path_alias_manager->getAliasByPath('/group/' . $parent_group->id());
-    $new_alias = $group_alias . '/' . $page_title;
+  if ($entity->bundle() != 'operation') {
+    return;
   }
+
+  $new_alias = '/operations/' . $page_title;
 
   /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
   $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
@@ -237,6 +235,84 @@ function hr_paragraphs_node_update(EntityInterface $entity) {
 function hr_paragraphs_group_content_insert(EntityInterface $entity) {
   /** @var \Drupal\group\Entity\GroupContent $entity */
   $plugin_id = $entity->getGroupContentType()->getContentPluginId();
+
+  if ($plugin_id === 'group_node:article') {
+    return hr_paragraphs_group_content_alias($entity);
+  }
+
+  if ($plugin_id === 'subgroup:cluster') {
+    return hr_paragraphs_group_subgroup_alias($entity);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
+  /** @var \Drupal\group\Entity\GroupContent $entity */
+  $plugin_id = $entity->getGroupContentType()->getContentPluginId();
+  if ($plugin_id != 'subgroup:cluster') {
+    return;
+  }
+
+  $subgroup = $entity->getEntity();
+  $group = $entity->getGroup();
+
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+
+  $group_alias = $path_alias_manager->getAliasByPath('/group/' . $group->id());
+  $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
+  $new_alias = $group_alias . '/' . $page_title;
+
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+  $source = '/group/' . $subgroup->id();
+
+  /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
+  $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+  $alias_uniquifier->uniquify($new_alias, $source, $langcode);
+
+  $path_alias = PathAlias::create([
+    'path' => $source,
+    'alias' => $new_alias,
+  ]);
+  $path_alias->save();
+
+  // Add aliases for tabs.
+  $tabs = [
+    'events',
+    'contacts',
+    'pages',
+    'reports',
+    'infographics',
+    'datasets',
+    'assessments',
+  ];
+
+  foreach ($tabs as $tab) {
+    $source = '/group/' . $entity->id() . '/' . $tab;
+    $tab_alias = $new_alias . '/' . $tab;
+
+    $existing_alias = $path_alias_manager->getAliasByPath($source);
+
+    // Skip if an alias is already set.
+    if ($existing_alias !== $source) {
+      continue;
+    }
+
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $tab_alias,
+    ]);
+    $path_alias->save();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hr_paragraphs_group_content_alias(EntityInterface $entity) {
+  /** @var \Drupal\group\Entity\GroupContent $entity */
+  $plugin_id = $entity->getGroupContentType()->getContentPluginId();
   if ($plugin_id != 'group_node:article') {
     return;
   }
@@ -299,19 +375,16 @@ function hr_paragraphs_preprocess_paragraph__recent_assessments(&$variables) {
     return;
   }
 
-  $entity_id = 'assessment';
-  $view_mode = 'teaser';
+  global $base_url;
+  $src = $base_url . '/rest/assessments/list-data?f[0]=operations:' . $operation_uuid;
+  $theme = 'hr_paragraphs_assessments_list';
 
-  $entity_type_manager = \Drupal::entityTypeManager();
-  $assessment_uuids = $entity_type_manager->getStorage($entity_id)->getQuery()
-    ->condition('operations', $operation_uuid)
-    ->range(0, 10)
-    ->sort('changed', 'DESC')
-    ->execute();
-  $assessments = $entity_type_manager->getStorage($entity_id)->loadMultiple($assessment_uuids);
-
-  $view_builder = $entity_type_manager->getViewBuilder($entity_id);
-  $variables['content']['assessments'] = $view_builder->viewMultiple($assessments, $view_mode);
+  $variables['content']['assessments'] = [
+    '#theme' => $theme,
+    '#base_url' => 'https://assessments.hpc.tools',
+    '#src' => $src,
+    '#component_url' => '/modules/custom/hr_paragraphs/component/build/',
+  ];
 }
 
 /**
