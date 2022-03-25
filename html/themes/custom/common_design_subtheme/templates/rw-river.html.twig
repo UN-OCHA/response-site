@@ -22,9 +22,9 @@
             {% endfor %}
 
             {% if row.body|striptags|split(' ')|length > 36 %}
-              <p>{{ row.body|striptags|split(' ')|slice(0, 36)|join(' ') }}&hellip;</p>
+              <p>{{ row.body|striptags|split(' ')|slice(0, 36)|join(' ')|raw }}&hellip;</p>
             {% else %}
-              <p>{{ row.body }}</p>
+              <p>{{ row.body|raw }}</p>
             {% endif %}
           </div>
         {% endif %}
