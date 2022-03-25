@@ -133,3 +133,24 @@
 .hri-river__result .meta dd:last-of-type::after {
   content: none;
 }
+
+.hri-river__result .meta dd.format::before {
+  display: inline-block;
+  overflow: hidden;
+  width: 16px;
+  height: 16px;
+  margin: -2px 6px 0 0;
+  content: "";
+  vertical-align: middle;
+  background: rgba(0, 0, 0, 0) url("rw-icons-sprite.svg") -328px -32px no-repeat;
+}
+
+.hri-river__result .meta dd.format.map::before {
+  background-position-y: -48px;
+}
+.hri-river__result .meta dd.format.infographic::before {
+  background-position-y: -64px;
+}
+.hri-river__result .meta dd.format.interactive::before {
+  background-position-y: -80px;
+}
