@@ -25,7 +25,7 @@ hr_paragraphs.operation.documents.reports:
         type: entity:group
 
 hr_paragraphs.operation.documents.infographics:
-  path: '/group/{group}/infographics'
+  path: '/group/{group}/maps'
   title: 'Maps / Infographics'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getInfographics'
