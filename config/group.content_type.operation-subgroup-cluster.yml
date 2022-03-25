@@ -8,8 +8,8 @@ dependencies:
   module:
     - subgroup
 id: operation-subgroup-cluster
-label: 'Operation: Subgroup (Cluster)'
-description: 'Adds <em class="placeholder">Cluster</em> groups as subgroups.'
+label: 'Operation: add Cluster or Working Group'
+description: 'Adds <em class="placeholder">Cluster or Working Group</em> as subgroups.'
 group_type: operation
 content_plugin: 'subgroup:cluster'
 plugin_config:
