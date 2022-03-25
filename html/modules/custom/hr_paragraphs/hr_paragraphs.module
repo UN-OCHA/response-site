@@ -154,7 +154,7 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
     'contacts',
     'pages',
     'reports',
-    'infographics',
+    'maps',
     'datasets',
     'assessments',
   ];
@@ -283,7 +283,7 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
     'contacts',
     'pages',
     'reports',
-    'infographics',
+    'maps',
     'datasets',
     'assessments',
   ];

@@ -32,13 +32,13 @@ third_party_settings:
     group_content:
       children:
         - group_general
-        - group_calendar
-        - group_offices
         - group_pages
         - group_documents
         - group_infographics
-        - group_hdx
         - group_assessments
+        - group_hdx
+        - group_calendar
+        - group_offices
       label: Content
       region: content
       parent_name: ''
@@ -52,12 +52,12 @@ third_party_settings:
         width_breakpoint: 640
     group_calendar:
       children:
-        - field_ical_url
         - field_calendar_link
-      label: Calendar
+        - field_ical_url
+      label: Events
       region: content
       parent_name: group_content
-      weight: 21
+      weight: 26
       format_type: tab
       format_settings:
         classes: ''
@@ -87,7 +87,7 @@ third_party_settings:
       label: Contacts
       region: content
       parent_name: group_content
-      weight: 22
+      weight: 27
       format_type: tab
       format_settings:
         classes: ''
@@ -102,7 +102,7 @@ third_party_settings:
       label: Pages
       region: content
       parent_name: group_content
-      weight: 23
+      weight: 21
       format_type: tab
       format_settings:
         classes: ''
@@ -118,7 +118,7 @@ third_party_settings:
       label: Reports
       region: content
       parent_name: group_content
-      weight: 24
+      weight: 22
       format_type: tab
       format_settings:
         classes: ''
@@ -131,10 +131,10 @@ third_party_settings:
       children:
         - field_maps_infographics_link
         - field_infographics
-      label: Infographics
+      label: 'Maps / Infographics'
       region: content
       parent_name: group_content
-      weight: 25
+      weight: 23
       format_type: tab
       format_settings:
         classes: ''
@@ -146,10 +146,10 @@ third_party_settings:
     group_hdx:
       children:
         - field_hdx_country
-      label: HDX
+      label: Datasets
       region: content
       parent_name: group_content
-      weight: 26
+      weight: 25
       format_type: tab
       format_settings:
         classes: ''
@@ -164,7 +164,7 @@ third_party_settings:
       label: Assessments
       region: content
       parent_name: group_content
-      weight: 27
+      weight: 24
       format_type: tab
       format_settings:
         classes: ''
@@ -209,7 +209,7 @@ content:
     third_party_settings: {  }
   field_ical_url:
     type: string_textfield
-    weight: 3
+    weight: 5
     region: content
     settings:
       size: 60

@@ -32,10 +32,10 @@ third_party_settings:
     group_hdx:
       children:
         - field_hdx_country
-      label: HDX
+      label: Datasets
       region: content
       parent_name: group_content
-      weight: 20
+      weight: 27
       format_type: tab
       format_settings:
         classes: ''
@@ -48,10 +48,10 @@ third_party_settings:
       children:
         - field_maps_infographics_link
         - field_infographics
-      label: Infographics
+      label: 'Maps / Infographics'
       region: content
       parent_name: group_content
-      weight: 19
+      weight: 25
       format_type: tab
       format_settings:
         classes: ''
@@ -66,7 +66,7 @@ third_party_settings:
       label: Assessments
       region: content
       parent_name: group_content
-      weight: 21
+      weight: 26
       format_type: tab
       format_settings:
         classes: ''
@@ -82,7 +82,7 @@ third_party_settings:
       label: Reports
       region: content
       parent_name: group_content
-      weight: 18
+      weight: 24
       format_type: tab
       format_settings:
         classes: ''
@@ -93,18 +93,18 @@ third_party_settings:
         required_fields: true
     group_content:
       children:
+        - group_general
+        - group_pages
         - group_documents
         - group_infographics
-        - group_hdx
         - group_assessments
-        - group_general
+        - group_hdx
         - group_calendar
         - group_offices
-        - group_pages
       label: Content
       region: content
       parent_name: ''
-      weight: 1
+      weight: 2
       format_type: tabs
       format_settings:
         classes: ''
@@ -114,7 +114,6 @@ third_party_settings:
         width_breakpoint: 640
     group_general:
       children:
-        - langcode
         - field_enabled_tabs
       label: General
       region: content
@@ -132,10 +131,10 @@ third_party_settings:
       children:
         - field_calendar_link
         - field_ical_url
-      label: Calendar
+      label: Events
       region: content
       parent_name: group_content
-      weight: 23
+      weight: 28
       format_type: tab
       format_settings:
         classes: ''
@@ -150,7 +149,7 @@ third_party_settings:
       label: Contacts
       region: content
       parent_name: group_content
-      weight: 24
+      weight: 29
       format_type: tab
       format_settings:
         classes: ''
@@ -165,7 +164,7 @@ third_party_settings:
       label: Pages
       region: content
       parent_name: group_content
-      weight: 25
+      weight: 23
       format_type: tab
       format_settings:
         classes: ''
@@ -260,7 +259,7 @@ content:
     third_party_settings: {  }
   field_paragraphs:
     type: layout_paragraphs
-    weight: 2
+    weight: 3
     region: content
     settings:
       preview_view_mode: preview
@@ -293,19 +292,19 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 3
+    weight: 4
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   translation:
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
