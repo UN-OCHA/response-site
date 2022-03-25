@@ -432,9 +432,20 @@ class ParagraphController extends ControllerBase {
     // Add conditions.
     if ($this->reliefwebController->reliefwebQueryType($url) === 'advanced-search') {
       foreach ($conditions as $condition) {
+        $negative_operators = [
+          'and-without',
+          'or-without',
+        ];
+        $negate = FALSE;
+
+        if (in_array($condition['operator'], $negative_operators)) {
+          $negate = TRUE;
+        }
+
         $parameters['filter']['conditions'][] = [
           'field' => $condition['field'],
           'value' => $condition['value'],
+          'negate' => $negate,
         ];
       }
     }
