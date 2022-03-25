@@ -9,8 +9,8 @@ dependencies:
     - gnode
     - node
 id: operation-group_node-article
-label: 'Operation: Group node (Article)'
-description: 'Adds <em class="placeholder">Article</em> content to groups both publicly and privately.'
+label: 'Operation: Group node (Page)'
+description: 'Adds <em class="placeholder">Page</em> content to groups both publicly and privately.'
 group_type: operation
 content_plugin: 'group_node:article'
 plugin_config:

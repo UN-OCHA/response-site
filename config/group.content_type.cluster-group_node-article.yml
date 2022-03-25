@@ -9,8 +9,8 @@ dependencies:
     - gnode
     - node
 id: cluster-group_node-article
-label: 'Cluster: Group node (Article)'
-description: 'Adds <em class="placeholder">Article</em> content to groups both publicly and privately.'
+label: 'Cluster: Group node (Page)'
+description: 'Adds <em class="placeholder">Page</em> content to groups both publicly and privately.'
 group_type: cluster
 content_plugin: 'group_node:article'
 plugin_config:
