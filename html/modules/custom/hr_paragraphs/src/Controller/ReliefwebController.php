@@ -320,7 +320,7 @@ class ReliefwebController extends ControllerBase {
       $data[$title] = [
         'id' => $row['fields']['id'],
         'title' => $title,
-        'body' => $row['fields']['body-html'],
+        'body' => $row['fields']['body-html'] ?? '',
         'url' => $url,
         'date_changed' => $row['fields']['date']['changed'],
         'format' => $row['fields']['format'][0]['name'],
@@ -464,7 +464,16 @@ class ReliefwebController extends ControllerBase {
               break;
           }
 
-          $conditions[] = $condition;
+          if (isset($conditions[$filter['field']])) {
+            $conditions[$filter['field']]['operator'] = $condition['operator'];
+            if (is_string($conditions[$filter['field']]['value'])) {
+              $conditions[$filter['field']]['value'] = [$conditions[$filter['field']]['value']];
+            }
+            $conditions[$filter['field']]['value'][] = $condition['value'];
+          }
+          else {
+            $conditions[$filter['field']] = $condition;
+          }
         }
       }
 
