@@ -13,12 +13,11 @@
   }
 
   .hri-river__results {
-    flex: 1 0 80%;
+    flex: 1 0 auto;
   }
 
   .hri-river__facets-wrapper {
     flex: 1 0 280px;
-    order: -1;
   }
 }
 
