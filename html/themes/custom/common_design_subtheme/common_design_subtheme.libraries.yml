@@ -6,7 +6,6 @@ global-styling:
     - common_design_subtheme/hri-breadcrumbs
     - common_design_subtheme/cd-read-more
 
-# Custom components
 cd-read-more:
   css:
     theme:
@@ -18,6 +17,7 @@ cd-tabs:
   css:
     theme:
       components/cd-tabs/cd-tabs.css: {}
+      components/cd-tabs/hri-tabs.css: {}
 
 hri-breadcrumbs:
   css:
