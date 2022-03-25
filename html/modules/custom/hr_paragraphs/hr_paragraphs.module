@@ -429,15 +429,14 @@ function hr_paragraphs_handle_iframe($html) {
   $dom->loadHTML($prefix . $html . $suffix, $flags);
 
   $iframes = $dom->getElementsByTagName('iframe');
-  if (empty($iframes)) {
+  $iframe = $iframes[0];
+  if (!$iframe) {
     return [
       'embed_url' => '',
       'width' => 0,
       'height' => 0,
     ];
   }
-
-  $iframe = $iframes[0];
 
   return [
     'embed_url' => $iframe->getAttribute('src'),
