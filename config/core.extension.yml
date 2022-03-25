@@ -33,7 +33,6 @@ module:
   help: 0
   hr_paragraphs: 0
   image: 0
-  inline_entity_form: 0
   jquery_ui: 0
   jquery_ui_button: 0
   jquery_ui_checkboxradio: 0
