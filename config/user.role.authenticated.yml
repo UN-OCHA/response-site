@@ -39,6 +39,7 @@ permissions:
   - 'view organization external entity'
   - 'view paragraph content article_card_list'
   - 'view paragraph content child_groups'
+  - 'view paragraph content featured_highlight'
   - 'view paragraph content group_pages'
   - 'view paragraph content heading'
   - 'view paragraph content iframe'

@@ -1,24 +1,26 @@
-uuid: ca48c95c-7f54-4f8d-9562-818d78a77439
+uuid: 5bd99da7-a5d5-4028-8739-7b50818ebd1a
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.highlight.field_destination
-    - field.field.node.highlight.field_image
-    - field.field.node.highlight.field_summary
+    - field.field.paragraph.featured_highlight.field_destination
+    - field.field.paragraph.featured_highlight.field_image
+    - field.field.paragraph.featured_highlight.field_text
+    - field.field.paragraph.featured_highlight.field_title
     - image.style.thumbnail
-    - node.type.highlight
+    - paragraphs.paragraphs_type.featured_highlight
   module:
     - image
     - link
-id: node.highlight.default
-targetEntityType: node
-bundle: highlight
+    - text
+id: paragraph.featured_highlight.default
+targetEntityType: paragraph
+bundle: featured_highlight
 mode: default
 content:
   field_destination:
     type: link_default
-    weight: 1
+    weight: 3
     region: content
     settings:
       placeholder_url: ''
@@ -32,15 +34,15 @@ content:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
-  field_summary:
-    type: string_textarea
-    weight: 3
+  field_text:
+    type: text_textarea
+    weight: 1
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  title:
+  field_title:
     type: string_textfield
     weight: 0
     region: content
@@ -48,16 +50,6 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  translation:
-    weight: 10
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   created: true
-  langcode: true
-  path: true
-  promote: true
   status: true
-  sticky: true
-  uid: true

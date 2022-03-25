@@ -1,0 +1,10 @@
+uuid: 8553a0ae-7148-4e46-bf38-5c2b388370e8
+langcode: en
+status: true
+dependencies: {  }
+id: featured_highlight
+label: 'Featured Highlight'
+icon_uuid: null
+icon_default: null
+description: 'Create Highlights that link to other key locations that are relevant to the Operation.'
+behavior_plugins: {  }

@@ -1,0 +1,41 @@
+/**
+ * HR.info custom component: Featured Highlight
+ */
+.hri-highlight {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.hri-highlight__image {
+  flex: 1 0 100%;
+  order: -1;
+}
+
+.hri-highlight__image img {
+  width: 100%;
+  height: auto;
+}
+
+.hri-highlight__content {
+  flex: 1 0 50%;
+  padding-inline-start: 1rem;
+}
+
+.hri-highlight h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .hri-highlight {
+    flex-wrap: nowrap;
+  }
+  .hri-highlight__image {
+    flex: 1 1 200px;
+    max-width: 410px;
+  }
+  .hri-highlight__content {
+    padding-inline-start: 1rem;
+  }
+}

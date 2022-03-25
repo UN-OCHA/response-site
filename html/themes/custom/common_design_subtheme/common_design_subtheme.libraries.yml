@@ -39,10 +39,15 @@ hri-dropbutton:
     component:
       components/hri-dropbutton/hri-dropbutton.css: {}
 
-hri-group-operations:
+hri-operation:
   css:
     component:
-      components/hri-group-operations/hri-group-operations.css: {}
+      components/hri-operation/hri-operation.css: {}
+
+hri-highlight:
+  css:
+    component:
+      components/hri-highlight/hri-highlight.css: {}
 
 hri-pagination:
   css:

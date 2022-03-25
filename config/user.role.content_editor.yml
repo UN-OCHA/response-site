@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - node.type.article
-    - node.type.highlight
     - taxonomy.vocabulary.tags
   module:
     - contextual
@@ -30,9 +29,9 @@ permissions:
   - 'access toolbar'
   - 'administer url aliases'
   - 'create article content'
-  - 'create highlight content'
   - 'create paragraph content article_card_list'
   - 'create paragraph content child_groups'
+  - 'create paragraph content featured_highlight'
   - 'create paragraph content group_pages'
   - 'create paragraph content heading'
   - 'create paragraph content iframe'
@@ -47,11 +46,10 @@ permissions:
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete article revisions'
-  - 'delete highlight revisions'
   - 'delete own article content'
-  - 'delete own highlight content'
   - 'delete paragraph content article_card_list'
   - 'delete paragraph content child_groups'
+  - 'delete paragraph content featured_highlight'
   - 'delete paragraph content group_pages'
   - 'delete paragraph content heading'
   - 'delete paragraph content iframe'
@@ -64,11 +62,11 @@ permissions:
   - 'delete paragraph content text_block'
   - 'delete paragraph content upcoming_events'
   - 'edit own article content'
-  - 'edit own highlight content'
   - 'edit terms in tags'
   - 'revert all revisions'
   - 'update paragraph content article_card_list'
   - 'update paragraph content child_groups'
+  - 'update paragraph content featured_highlight'
   - 'update paragraph content group_pages'
   - 'update paragraph content heading'
   - 'update paragraph content iframe'
@@ -82,5 +80,6 @@ permissions:
   - 'update paragraph content upcoming_events'
   - 'view all revisions'
   - 'view own unpublished content'
+  - 'view paragraph content featured_highlight'
   - 'view the administration theme'
   - 'view unpublished paragraphs'
