@@ -154,3 +154,6 @@
 .hri-river__result .meta dd.format.interactive::before {
   background-position-y: -80px;
 }
+.hri-river__result .meta dd.format.dataset::before {
+  background-position-y: -64px;
+}

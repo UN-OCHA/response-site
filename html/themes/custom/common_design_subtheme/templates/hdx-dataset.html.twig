@@ -1,24 +1,27 @@
-{{ attach_library('common_design_subtheme/hri-table') }}
+{{ attach_library('common_design_subtheme/hri-river') }}
 
-<table class="operations-dataset cd-table cd-table--striped">
-  <thead>
-    <tr>
-      <th data-title="Dataset" class="cd-table--name">{{ 'Dataset'|t }}</th>
-      <th data-title="Source" class="cd-table--name">{{ 'Source'|t }}</th>
-      <th data-title="Last updated" class="cd-table--name">{{ 'Last updated'|t }}</th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="hri-river">
+  <div class="hri-river__results">
     {% for row in data %}
-    <tr>
-      <td data-title="Dataset">
-        <a href="https://data.humdata.org/dataset/{{ row.id }}">{{ row.title }}</a>
-      </td>
-      <td data-title="Source">{{ row.source }}</td>
-      <td data-title="Last updated">{{ row.last_modified|date("d M Y") }} </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+      <article class="hri-river__result">
+        <header>
+          <h4 class="title"><a href="{{ row.url }}">{{ row.title }}</a></h4>
+        </header>
+        <footer>
+          <dl class="meta core">
+            <dt class="format dataset visually-hidden">{{ 'Format'|t }}:</dt>
+            <dd class="format dataset">{{ 'HDX Dataset'|t }}</dd>
 
-{{ pager }}
+            <dt class="source">{{ 'Source'|t }}:</dt>
+            <dd class="source">{{ row.source }}</dd>
+
+            <dt class="date posted">{{ 'Last updated'|t }}:</dt>
+            <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+          </dl>
+        </footer>
+      </article>
+    {% endfor %}
+
+    {{ pager }}
+  </div>{# .hri-river__results #}
+</div>{# .hri-river #}
