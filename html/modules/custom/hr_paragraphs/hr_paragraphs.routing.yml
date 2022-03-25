@@ -90,6 +90,19 @@ hr_paragraphs.operation.contacts:
       group:
         type: entity:group
 
+hr_paragraphs.operation.operations:
+  path: '/group/{group}/operations'
+  title: 'Operations'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getOperations'
+    _title: 'Operations'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasContacts'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
 hr_paragraphs.operation.ical:
   path: '/group/{group}/ical'
   title: 'Events'
