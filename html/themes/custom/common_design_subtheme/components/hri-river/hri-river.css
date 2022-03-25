@@ -115,18 +115,18 @@
   font-size: var(--cd-font-size--small);
 }
 .hri-river__result .meta dt {
-  display: inline-block;
+  display: inline;
   margin: 0;
   padding: 0;
   font-weight: 700;
 }
 .hri-river__result .meta dd {
-  display: inline-block;
+  display: inline;
   margin: 0;
   padding: 0;
 }
 .hri-river__result .meta dd::after {
-  display: inline-block;
+  display: inline;
   margin: 0 0.5rem;
   content: "•";
 }
