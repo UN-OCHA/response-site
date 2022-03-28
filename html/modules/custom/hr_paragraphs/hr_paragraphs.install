@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Themes and preprocessors for the paragraphs page title module.
+ */
+
+use Drupal\node\Entity\Node;
+
+/**
+ * Change content type to page.
+ */
+function hr_paragraphs_update_9001() {
+  $query = \Drupal::entityQuery('node')->condition('type', 'article');
+  $results = $query->execute();
+
+  foreach ($results as $nid) {
+    $node = Node::load($nid);
+    if ($nid == 1) {
+      $node->set('type', 'page');
+      $node->setNewRevision();
+      $node->save();
+    }
+    else {
+      $node->delete();
+    }
+  }
+}
