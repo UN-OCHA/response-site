@@ -1,0 +1,23 @@
+uuid: 8296599d-9c59-4e35-b103-236e959b210b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_destination
+    - paragraphs.paragraphs_type.featured_highlight
+  module:
+    - link
+id: paragraph.featured_highlight.field_destination
+field_name: field_destination
+entity_type: paragraph
+bundle: featured_highlight
+label: Destination
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

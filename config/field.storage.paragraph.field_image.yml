@@ -1,14 +1,14 @@
-uuid: 1576d7a6-89c0-4404-b8bd-4654c87086c7
+uuid: f2eead5b-399e-4ab6-909f-b097b8017257
 langcode: en
 status: true
 dependencies:
   module:
     - file
     - image
-    - node
-id: node.field_image
+    - paragraphs
+id: paragraph.field_image
 field_name: field_image
-entity_type: node
+entity_type: paragraph
 type: image
 settings:
   target_type: file

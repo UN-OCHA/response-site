@@ -1,27 +1,20 @@
-uuid: 25ec954f-8196-4ba6-8dbb-efa2ec391e3b
+uuid: c799d0af-96e0-4a9e-bfaa-42516787fa17
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_image
-    - node.type.highlight
+    - field.storage.paragraph.field_image
+    - paragraphs.paragraphs_type.featured_highlight
   module:
-    - content_translation
     - image
-third_party_settings:
-  content_translation:
-    translation_sync:
-      alt: alt
-      title: title
-      file: '0'
-id: node.highlight.field_image
+id: paragraph.featured_highlight.field_image
 field_name: field_image
-entity_type: node
-bundle: highlight
+entity_type: paragraph
+bundle: featured_highlight
 label: Image
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:

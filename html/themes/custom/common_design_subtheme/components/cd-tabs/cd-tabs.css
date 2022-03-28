@@ -1,3 +1,8 @@
+/**
+ * This is a full implementation of CD Tabs meant for future contribution to the
+ * Common Design component library. If you want to customize for HR.info please
+ * use the sibling file: hri-tabs.css
+ */
 ul.tabs {
   --cd-tabs-border-width: 2px;
 
@@ -54,14 +59,4 @@ ul.tabs > li > a.is-active {
 ul.tabs > li > a:focus {
   outline: 3px solid var(--implementation-highlight);
   background: var(--implementation-light);
-}
-
-/**
- * Operation tabs visual treatment
- */
-#block-operation-tabs ul.tabs > li:first-child > a {
-  text-transform: none;
-  color: inherit;
-  background-color: var(--implementation-light);
-  font-size: var(--cd-font-size--large);
 }
