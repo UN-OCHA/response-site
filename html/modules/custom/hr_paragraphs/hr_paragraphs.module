@@ -95,6 +95,7 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'embed_url' => NULL,
         'width' => NULL,
         'height' => NULL,
+        'ratio' => NULL,
       ],
     ],
     'group_children' => [
@@ -409,11 +410,19 @@ function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
     $height = $settings['height'];
   }
 
+  if (!$paragraph->field_iframe_aspect_ratio->isEmpty()) {
+    $ratio = $paragraph->field_iframe_aspect_ratio->value;
+  }
+  else {
+    $ratio = 'ratio-16-9';
+  }
+
   $variables['content']['embed'] = [
     '#theme' => 'hr_paragraphs_iframe',
     '#embed_url' => $embed_url,
     '#width' => $width,
     '#height' => $height,
+    '#ratio' => $ratio,
     '#weight' => 99,
   ];
 }

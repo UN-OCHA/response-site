@@ -1,0 +1,23 @@
+uuid: bade7b47-7476-4f72-94cf-c99aaa9f1a23
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_iframe_aspect_ratio
+    - paragraphs.paragraphs_type.iframe
+  module:
+    - options
+id: paragraph.iframe.field_iframe_aspect_ratio
+field_name: field_iframe_aspect_ratio
+entity_type: paragraph
+bundle: iframe
+label: 'Aspect Ratio'
+description: 'Force a particular aspect ratio. If you supply an embed code (not a URL) and the embed code contains explicit values, you can choose ''Automatically detect'''
+required: false
+translatable: false
+default_value:
+  -
+    value: ratio-16-9
+default_value_callback: ''
+settings: {  }
+field_type: list_string
