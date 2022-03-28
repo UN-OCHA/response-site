@@ -39,6 +39,11 @@ hri-dropbutton:
     component:
       components/hri-dropbutton/hri-dropbutton.css: {}
 
+hri-iframe:
+  css:
+    component:
+      components/hri-iframe/hri-iframe.css: {}
+
 hri-operation:
   css:
     component:

@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.iframe.field_embed_code
+    - field.field.paragraph.iframe.field_iframe_aspect_ratio
     - field.field.paragraph.iframe.field_iframe_url
     - field.field.paragraph.iframe.field_text
     - field.field.paragraph.iframe.field_title
@@ -32,4 +33,5 @@ content:
     region: content
 hidden:
   field_embed_code: true
+  field_iframe_aspect_ratio: true
   field_iframe_url: true
