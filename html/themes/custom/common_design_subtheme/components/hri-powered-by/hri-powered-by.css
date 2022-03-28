@@ -23,3 +23,11 @@
   background-position: 50% 0;
   background-size: cover;
 }
+
+.hri-powered-by--hdx .hri-powered-by__link {
+  width: 140px;
+  aspect-ratio: 130 / 28.5;
+  background-image: url("img/logo-hdx.svg");
+  background-position: 50% 50%;
+  background-size: cover;
+}
