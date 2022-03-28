@@ -1,0 +1,32 @@
+uuid: f7b2f90e-d856-4630-ad2d-940ac1a6904c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.operation_tab
+    - field.field.node.page.field_paragraphs
+    - node.type.page
+  module:
+    - layout_paragraphs
+    - user
+id: node.page.operation_tab
+targetEntityType: node
+bundle: page
+mode: operation_tab
+content:
+  field_paragraphs:
+    type: layout_paragraphs
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

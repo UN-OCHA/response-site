@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.article
+    - node.type.page
   module:
     - contextual
     - entity_reference_revisions
@@ -26,7 +26,6 @@ weight: 4
 is_admin: null
 permissions:
   - 'access administration pages'
-  - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
   - 'access group overview'
@@ -34,13 +33,13 @@ permissions:
   - 'access toolbar'
   - 'access user profiles'
   - 'administer group'
+  - 'administer nodes'
   - 'administer shortcuts'
   - 'administer url aliases'
   - 'administer users'
-  - 'create article content'
   - 'create cluster group'
-  - 'create office external entity'
   - 'create operation group'
+  - 'create page content'
   - 'create paragraph content child_groups'
   - 'create paragraph content featured_highlight'
   - 'create paragraph content group_pages'
@@ -56,10 +55,10 @@ permissions:
   - 'create paragraph content upcoming_events'
   - 'create url aliases'
   - 'customize shortcut links'
-  - 'delete article revisions'
-  - 'delete office external entity'
+  - 'delete any page content'
   - 'delete orphan revisions'
-  - 'delete own article content'
+  - 'delete own page content'
+  - 'delete page revisions'
   - 'delete paragraph content article_card_list'
   - 'delete paragraph content child_groups'
   - 'delete paragraph content featured_highlight'
@@ -74,15 +73,14 @@ permissions:
   - 'delete paragraph content rss_feed'
   - 'delete paragraph content text_block'
   - 'delete paragraph content upcoming_events'
-  - 'edit any article content'
-  - 'edit own article content'
+  - 'edit any page content'
+  - 'edit own page content'
   - 'masquerade as authenticated'
   - 'masquerade as content_editor'
   - 'revert all revisions'
-  - 'revert article revisions'
+  - 'revert page revisions'
   - 'switch shortcut sets'
   - 'translate interface'
-  - 'update office external entity'
   - 'update paragraph content article_card_list'
   - 'update paragraph content child_groups'
   - 'update paragraph content featured_highlight'
@@ -98,10 +96,10 @@ permissions:
   - 'update paragraph content text_block'
   - 'update paragraph content upcoming_events'
   - 'view all revisions'
-  - 'view article revisions'
   - 'view expiring users report'
   - 'view office external entity collection'
   - 'view own unpublished content'
+  - 'view page revisions'
   - 'view paragraph content featured_highlight'
   - 'view the administration theme'
   - 'view unpublished paragraphs'
