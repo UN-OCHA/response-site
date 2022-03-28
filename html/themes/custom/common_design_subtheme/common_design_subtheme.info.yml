@@ -32,6 +32,8 @@ libraries-extend:
     - common_design_subtheme/hri-pagination
   common_design/cd-button:
     - common_design_subtheme/hri-button
+  hr_paragraphs/fullcalendar:
+    - common_design_subtheme/hri-events
 
 libraries-override:
   common_design/cd-tabs: common_design_subtheme/cd-tabs
