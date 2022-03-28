@@ -239,7 +239,7 @@ function hr_paragraphs_group_content_insert(EntityInterface $entity) {
   /** @var \Drupal\group\Entity\GroupContent $entity */
   $plugin_id = $entity->getGroupContentType()->getContentPluginId();
 
-  if ($plugin_id === 'group_node:article') {
+  if ($plugin_id === 'group_node:page') {
     return hr_paragraphs_group_content_alias($entity);
   }
 
@@ -316,7 +316,7 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
 function hr_paragraphs_group_content_alias(EntityInterface $entity) {
   /** @var \Drupal\group\Entity\GroupContent $entity */
   $plugin_id = $entity->getGroupContentType()->getContentPluginId();
-  if ($plugin_id != 'group_node:article') {
+  if ($plugin_id != 'group_node:page') {
     return;
   }
 
@@ -671,7 +671,7 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
     }
   }
 
-  $nodes = $group->getContentEntities('group_node:article');
+  $nodes = $group->getContentEntities('group_node:page');
   if (empty($nodes)) {
     return;
   }
