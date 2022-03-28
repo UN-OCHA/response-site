@@ -15,7 +15,7 @@ required: false
 translatable: false
 default_value:
   -
-    value: 10
+    value: 5
 default_value_callback: ''
 settings:
   min: 1
