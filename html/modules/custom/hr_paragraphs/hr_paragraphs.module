@@ -68,12 +68,6 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'view_all' => NULL,
       ],
     ],
-    'hr_paragraphs_rw_doc' => [
-      'template' => 'hr-paragraphs-rw-doc',
-      'variables' => [
-        'doc' => [],
-      ],
-    ],
     'upcoming_events' => [
       'template' => 'upcoming-events',
       'variables' => [
@@ -785,8 +779,10 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   $doc = reset($docs);
 
   $variables['content']['rw_list'] = [
-    '#theme' => 'hr_paragraphs_rw_doc',
-    '#doc' => $doc,
+    '#theme' => 'hr_paragraphs_rw_list',
+    '#data' => [$doc],
+    '#total' => NULL,
+    '#view_all' => NULL,
     '#weight' => 99,
   ];
 }

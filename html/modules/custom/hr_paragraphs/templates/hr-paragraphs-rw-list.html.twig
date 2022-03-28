@@ -54,6 +54,8 @@
 
     {{ pager }}
 
-    <a href="{{ view_all }}">View all updates</a>
+    {% if view_all %}
+      <a href="{{ view_all }}">View all updates</a>
+    {% endif %}
   </div>{# .river__results #}
 </div>{# .river #}
