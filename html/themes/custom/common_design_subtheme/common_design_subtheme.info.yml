@@ -1,7 +1,8 @@
-name: HR.info D9
+name: HR.info public
 type: theme
-description: OCHA Common Design sub theme
+description: HR.info public theme, an OCHA Common Design subtheme
 core_version_requirement: ^8.8 || ^9
+package: HR.info
 base theme: common_design
 logo: 'img/logos/hr-info-logo.svg'
 
