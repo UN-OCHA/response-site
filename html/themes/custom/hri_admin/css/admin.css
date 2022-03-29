@@ -34,6 +34,14 @@
 .river__result {
   max-width: 720px;
 }
+.river__result + .river__result {
+  margin-block-start: 1rem;
+  border-block-start: 1px solid #ddd;
+  padding-block-start: 1rem;
+}
+.river__result .country {
+  display: none;
+}
 .river__result .content {
   display: flex;
   flex-flow: row nowrap;
