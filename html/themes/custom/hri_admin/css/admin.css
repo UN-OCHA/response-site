@@ -1,3 +1,16 @@
 /**
  * HR.info admin theme styles
  */
+
+/**
+ * Large images in WYSIWYG
+ *
+ * When large images get initially uploaded to the WYSIWYG editor, it's possible
+ * for the image to enlarge the editor so much that the Save/Cancel buttons are
+ * obscured, making it difficult to proceed without potential loss of content.
+ *
+ * We restrict the editor's height to avoid obscuring the buttons.
+ */
+.js .ui-dialog .ui-widget-content.ui-dialog-content {
+  max-height: calc(100vh - 160px) !important;
+}
