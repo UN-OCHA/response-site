@@ -1,0 +1,22 @@
+uuid: d8e49c4d-ae82-48af-b029-d0d9b1482618
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - hri_admin
+_core:
+  default_config_hash: y0bXRvKYQQKkf_RVxA3aOPGpIfKKsDOzzrWYCgjxJ9Y
+id: hri_admin_breadcrumbs
+theme: hri_admin
+region: header
+weight: -3
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

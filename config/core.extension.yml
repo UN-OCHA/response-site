@@ -89,4 +89,5 @@ theme:
   stable: 0
   common_design: 0
   common_design_subtheme: 0
+  hri_admin: 0
 profile: minimal

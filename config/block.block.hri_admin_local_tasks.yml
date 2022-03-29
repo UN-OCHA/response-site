@@ -1,0 +1,31 @@
+uuid: 6ca85dfc-f75d-4862-b211-605beda16309
+langcode: en
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - hri_admin
+_core:
+  default_config_hash: Qf2BoIzd9py5AYXZj8fJzCYDyVk1-AWXcu-AqQeDZKA
+id: hri_admin_local_tasks
+theme: hri_admin
+region: header
+weight: -1
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: 'Primary Tabs'
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: false
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated
