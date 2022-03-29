@@ -64,12 +64,18 @@ hri-pagination:
     theme:
       components/hri-pagination/hri-pagination.css: {}
 
+hri-powered-by:
+  css:
+    theme:
+      components/hri-powered-by/hri-powered-by.css: {}
+
 hri-river:
   css:
     theme:
       components/hri-river/hri-river.css: {}
   dependencies:
     - common_design/cd-button
+    - common_design_subtheme/hri-powered-by
 
 hri-rss-feed:
   css:
