@@ -586,7 +586,12 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
   if (get_class($group) == 'Drupal\node\Entity\Node') {
     $group_content_array = GroupContent::loadByEntity($group);
     $group_content = reset($group_content_array);
-    $group = $group_content->getGroup();
+    if ($group_content) {
+      $group = $group_content->getGroup();
+    }
+    else {
+      return;
+    }
   }
 
   if (!$group) {
