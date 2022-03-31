@@ -410,7 +410,42 @@ class ReliefwebController extends ControllerBase {
     $parsed = UrlHelper::parse($url);
     $params = UrlHelper::filterQueryParameters($parsed['query'], $exclude);
 
+    // Add predefined filters.
+    if (isset($params['view'])) {
+      $view = $params['view'];
+
+      switch ($view) {
+        // Headlines.
+        case 'headlines':
+          $conditions['headline'] = [
+            'field' => 'headline',
+          ];
+          break;
+
+        // Maps, Infographics and Interactive content.
+        case 'maps':
+          $conditions['maps'] = [
+            'field' => 'format.id',
+            'value' => [12, 12570, 38974],
+            'operator' => 'OR',
+          ];
+          break;
+
+        // Reports only.
+        case 'reports':
+          $conditions['reports'] = [
+            'field' => 'format.id',
+            'value' => [12, 12570, 38974],
+            'operator' => 'OR',
+            'negate' => TRUE,
+          ];
+          break;
+
+      }
+    }
+
     if (isset($params['advanced-search'])) {
+      // Parse advanced search.
       $parameter = $params['advanced-search'];
       // Validate.
       $pattern = '/^(((^|[._])!?)\(([A-Z]+(-?\d+|\d+-\d*|[0-9a-z-]+)([._](?!\)))?)+\))+$/';
@@ -476,18 +511,11 @@ class ReliefwebController extends ControllerBase {
           }
         }
       }
-
-      // Check for search paramater as well.
-      if (isset($params['search'])) {
-        $conditions['_query'] = $params['search'];
-      }
-
-      return $conditions;
     }
 
+    // Check for search paramater.
     if (isset($params['search'])) {
-      $parameter = $params['search'];
-      return [$parameter];
+      $conditions['_query'] = $params['search'];
     }
 
     return $conditions;
