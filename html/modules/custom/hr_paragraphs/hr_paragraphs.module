@@ -646,7 +646,9 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
     $exclude_pages[] = $group->id();
     $group_content_array = GroupContent::loadByEntity($group);
     $group_content = reset($group_content_array);
-    $group = $group_content->getGroup();
+    if ($group_content) {
+      $group = $group_content->getGroup();
+    }
   }
 
   if (!$group) {
