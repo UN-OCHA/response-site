@@ -477,6 +477,11 @@ class ReliefwebController extends ControllerBase {
         }
       }
 
+      // Check for search paramater as well.
+      if (isset($params['search'])) {
+        $conditions['_query'] = $params['search'];
+      }
+
       return $conditions;
     }
 
