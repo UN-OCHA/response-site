@@ -649,6 +649,9 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
     if ($group_content) {
       $group = $group_content->getGroup();
     }
+    else {
+      return;
+    }
   }
 
   if (!$group) {
