@@ -1,0 +1,14 @@
+/**
+ * HR.info Text Block paragraph type.
+ */
+
+/**
+ * Our WYSIWYG editor image float styles need to be cleared
+ */
+.paragraph--type--text-block::after {
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+  content: ".";
+}

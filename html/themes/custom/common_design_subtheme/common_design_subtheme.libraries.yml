@@ -88,3 +88,8 @@ hri-table:
       components/hri-table/hri-table.css: {}
   dependencies:
     - common_design/cd-table
+
+hri-text-block:
+  css:
+    theme:
+      components/hri-text-block/hri-text-block.css: {}
