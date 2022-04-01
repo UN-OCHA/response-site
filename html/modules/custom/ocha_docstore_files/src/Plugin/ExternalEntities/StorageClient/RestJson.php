@@ -213,7 +213,7 @@ class RestJson extends Rest implements PluginFormInterface {
    */
   public function query(array $parameters = [], array $sorts = [], $start = NULL, $length = NULL) {
     $parameters = $this->getListQueryParameters($parameters, $start, $length);
-    $results = $this->getFromDocstore($this->getDocstoreEndpoint(), $parameters);
+    $results = $this->getFromDocstore($this->getDocstoreEndpoint(), $parameters, $sorts);
 
     // Return only items for lists.
     if (isset($results['_count']) && isset($results['results'])) {
@@ -351,8 +351,39 @@ class RestJson extends Rest implements PluginFormInterface {
    *
    * @todo catch the Guzzle exceptions and return something more user friendly.
    */
-  public function getFromDocstore($endpoint, array $parameters = [], $cache = TRUE) {
+  public function getFromDocstore($endpoint, array $parameters = [], array $sorts = [], $cache = TRUE) {
     $entity_type_id = $this->externalEntityType->id();
+
+    if (!empty($sorts)) {
+      /** @var \Drupal\external_entities\Plugin\ExternalEntities\FieldMapper\SimpleFieldMapper $field_mapper */
+      $field_mapper = $this->externalEntityType->getFieldMapper();
+
+      $sort_parameters = [];
+      foreach ($sorts as $sort) {
+        // Map field names.
+        $external_field_name = $field_mapper->getFieldMapping($sort['field'], 'value');
+
+        if (!$external_field_name) {
+          $external_field_name = $field_mapper->getFieldMapping($sort['field'], 'target_id');
+          if (!$external_field_name) {
+            $external_field_name = $sort['field'];
+          }
+          else {
+            // We only need the property name, a bit ugly.
+            $external_field_name = reset(explode('/', $external_field_name));
+          }
+        }
+
+        if ($sort['direction'] === 'DESC') {
+          $sort_parameters[] = '-' . $external_field_name;
+        }
+        else {
+          $sort_parameters[] = $external_field_name;
+        }
+      }
+
+      $parameters['sort'] = implode(',', $sort_parameters);
+    }
 
     try {
       $response = $this->httpClient->request(
@@ -568,11 +599,14 @@ class RestJson extends Rest implements PluginFormInterface {
       $field_definitions = \Drupal::service('entity_field.manager')
         ->getFieldDefinitions($entity_type_id, $entity_type_id);
 
-      /** @var \Drupal\external_entities\Entity\ExternalEntityType $external_entity_type */
-      $external_entity_type = \Drupal::service('entity_type.manager')
-        ->getStorage('external_entity_type')
-        ->load($entity_type_id);
-      $field_mapping = $external_entity_type->getFieldMapper()->getFieldMappings();
+      // Retrieve the storage client of the external entity.
+      $storage_client = \Drupal::service('entity_type.manager')
+        ->getStorage($entity_type_id)
+        ->getStorageClient();
+
+      /** @var \Drupal\external_entities\Plugin\ExternalEntities\FieldMapper\SimpleFieldMapper $field_mapper */
+      $field_mapper = $storage_client->externalEntityType->getFieldMapper();
+      $field_mapping = $field_mapper->getFieldMappings();
 
       $fields = [];
       foreach ($field_definitions as $field => $field_definition) {

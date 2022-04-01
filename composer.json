@@ -40,7 +40,7 @@
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
         "drupal/date_recur": "^3.0",
-        "drupal/external_entities": "2.x-dev@dev",
+        "drupal/external_entities": "^2.0@alpha",
         "drupal/field_group": "^3.2",
         "drupal/fullcalendar_api": "^2.0@alpha",
         "drupal/geofield": "^1.36",
