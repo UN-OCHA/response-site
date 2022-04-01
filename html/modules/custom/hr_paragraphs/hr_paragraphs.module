@@ -15,6 +15,33 @@ use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
 
 /**
+ * Alter base url of the endpoints.
+ */
+function hr_paragraphs_get_endpoint_base($endpoint) {
+  $base_url = \Drupal::config('hr_paragraphs.settings')->get('endpoint_url');
+
+  if (empty($base_url)) {
+    return $endpoint;
+  }
+
+  $path = parse_url($endpoint, PHP_URL_PATH);
+  return rtrim($base_url, '/') . $path;
+}
+
+/**
+ * Alter api-key of the endpoints.
+ */
+function hr_paragraphs_get_endpoint_apikey($apikey) {
+  $endpoint_apikey = \Drupal::config('hr_paragraphs.settings')->get('endpoint_apikey');
+
+  if (empty($endpoint_apikey)) {
+    return $apikey;
+  }
+
+  return $endpoint_apikey;
+}
+
+/**
  * Implements hook_theme().
  */
 function hr_paragraphs_theme($existing, $type, $theme, $path) {
@@ -47,6 +74,16 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
       'template' => 'hdx-dataset',
       'variables' => [
         'data' => [],
+        'pager' => NULL,
+      ],
+    ],
+    'assessments_river' => [
+      'template' => 'assessments-river',
+      'variables' => [
+        'data' => [],
+        'total' => [],
+        'facets' => [],
+        'active_facets' => [],
         'pager' => NULL,
       ],
     ],
@@ -362,13 +399,7 @@ function hr_paragraphs_preprocess_paragraph__recent_assessments(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  if (!$paragraph->field_operation->isEmpty()) {
-    $operation_uuid = $paragraph->field_operation->entity->uuid();
-  }
-  else {
-    $operation_uuid = $paragraph->getParentEntity()->field_operation->entity->uuid();
-  }
-
+  // @todo parse from url.
   if (!$operation_uuid) {
     return;
   }

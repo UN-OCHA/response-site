@@ -55,14 +55,22 @@ class ParagraphController extends ControllerBase {
   protected $reliefwebController;
 
   /**
+   * Assessments controller.
+   *
+   * @var \Drupal\hr_paragraphs\Controller\AssessmentsController
+   */
+  protected $assessmentsController;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller, $reliefweb_controller) {
+  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller, $reliefweb_controller, $assessments_controller) {
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
     $this->pagerManager = $pager_manager;
     $this->icalController = $ical_controller;
     $this->reliefwebController = $reliefweb_controller;
+    $this->assessmentsController = $assessments_controller;
   }
 
   /**
@@ -482,45 +490,67 @@ class ParagraphController extends ControllerBase {
   /**
    * Return all assessments of an operation, sector or cluster.
    */
-  public function getAssessments($group, $type = 'list') {
-    if ($group->field_operation->isEmpty()) {
+  public function getAssessments($group, Request $request) {
+    if ($group->hasField('field_assessments_page') && !$group->field_assessments_page->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_assessments_page->first();
+
+      // Redirect external links.
+      if ($link->isExternal()) {
+        return new TrustedRedirectResponse($link->getUrl()->getUri());
+      }
+    }
+
+    if ($group->field_assessments_documents->isEmpty()) {
       return [
         '#type' => 'markup',
-        '#markup' => $this->t('Operation not set.'),
+        '#markup' => $this->t('assessments URL not set.'),
       ];
     }
 
-    $operation_uuid = $group->field_operation->entity->uuid();
+    $url = $group->field_assessments_documents->first()->uri;
 
-    global $base_url;
-    switch ($type) {
-      case 'map':
-        $src = $base_url . '/rest/assessments/map-data?f[0]=operations:' . $operation_uuid;
-        $theme = 'hr_paragraphs_assessments_map';
-        break;
+    $limit = 10;
+    $offset = $request->query->getInt('page', 0) * $limit;
+    $filters = $request->query->get('filters', []);
+    $base_url = $request->getRequestUri();
 
-      case 'table':
-        $src = $base_url . '/rest/assessments/table-data?f[0]=operations:' . $operation_uuid;
-        $theme = 'hr_paragraphs_assessments_table';
-        break;
+    // Active facets.
+    $active_facets = $this->assessmentsController->buildAssessmentsActiveFacets($base_url, $filters);
 
-      case 'list':
-        $src = $base_url . '/rest/assessments/list-data?f[0]=operations:' . $operation_uuid;
-        $theme = 'hr_paragraphs_assessments_list';
-        break;
+    $parameters = $this->assessmentsController->buildAssessmentsParameters($offset, $limit, $filters);
 
-      default:
-        $src = $base_url . '/rest/assessments/list-data?f[0]=operations:' . $operation_uuid;
-        $theme = 'hr_paragraphs_assessments_list';
-        break;
+    // Base filter from entered URL.
+    $conditions = $this->assessmentsController->parseAssessmentsUrl($url);
 
+    foreach ($conditions as $field => $values) {
+      $parameters['filter'][$field] = [
+        'path' => $field,
+        'value' => $values,
+        'operator' => is_array($values) ? 'IN' : '=',
+      ];
+    }
+
+    $results = $this->assessmentsController->executeAssessmentsQuery($parameters);
+
+    $count = $results['_count'];
+    $this->pagerManager->createPager($count, $limit);
+
+    // Re-order facets.
+    $facets = [];
+    if (isset($results['_facets'])) {
+      $facets = $this->assessmentsController->buildAssessmentsFacets($base_url, $results['_facets'], $filters);
     }
 
     return [
-      '#theme' => $theme,
-      '#base_url' => 'https://assessments.hpc.tools',
-      '#src' => $src,
-      '#component_url' => '/modules/custom/hr_paragraphs/component/build/',
+      '#theme' => 'assessments_river',
+      '#data' => $this->assessmentsController->buildAssessmentsObjects($results['results']),
+      '#total' => $count,
+      '#facets' => $facets,
+      '#active_facets' => $active_facets,
+      '#pager' => [
+        '#type' => 'pager',
+      ],
     ];
   }
 

@@ -142,7 +142,7 @@ class JsonController extends ControllerBase {
       }
     }
 
-    $endpoint = ocha_docstore_files_get_endpoint_base($endpoint);
+    $endpoint = hr_paragraphs_get_endpoint_base($endpoint);
     $docstore_data = $this->getFromDocstore($entity_id, $endpoint, $parameters);
 
     $document_uuids = [];
