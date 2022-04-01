@@ -1,0 +1,28 @@
+/**
+ * HR.info Text Block paragraph type.
+ */
+
+/**
+ * Our WYSIWYG editor image float styles need to be cleared
+ */
+.paragraph--type--text-block::after {
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+  content: ".";
+}
+
+/**
+ * Because core's align-left/align-right classes do not look for the HTML dir
+ * attribute, we use the older left/right margin directions and intentionally
+ * avoid looking at the HTML's dir attribute.
+ *
+ * @see html/core/modules/system/css/components/align.module.css
+ */
+.paragraph--type--text-block .align-left {
+  margin-right: 1rem;
+}
+.paragraph--type--text-block .align-right {
+  margin-left: 1rem;
+}

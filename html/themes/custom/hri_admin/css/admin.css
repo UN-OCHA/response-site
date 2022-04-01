@@ -59,3 +59,10 @@
   padding: 0;
   padding-inline-end: 1rem;
 }
+
+.paragraph--type--text-block .align-left {
+  margin-right: 1rem;
+}
+.paragraph--type--text-block .align-right {
+  margin-left: 1rem;
+}
