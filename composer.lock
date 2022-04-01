@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6dd9521647bdd7f14fff791f7cac37d",
+    "content-hash": "1ac21e8d6f5f95272f84c0c66353cf2d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2304,26 +2304,30 @@
         },
         {
             "name": "drupal/external_entities",
-            "version": "dev-2.x",
+            "version": "2.0.0-alpha5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/external_entities.git",
-                "reference": "a54ef397b2d8be50327748ca4e2b2f0d5e44b0bf"
+                "reference": "8.x-2.0-alpha5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/external_entities-8.x-2.0-alpha5.zip",
+                "reference": "8.x-2.0-alpha5",
+                "shasum": "ce2402ec96805598f3664e8a61ad68b30190b92b"
             },
             "require": {
-                "drupal/core": "^8.8 || ^9"
+                "drupal/core": "^8.8 || ^9",
+                "galbar/jsonpath": "^2.0"
             },
             "type": "drupal-module",
             "extra": {
-                "branch-alias": {
-                    "dev-2.x": "2.x-dev"
-                },
                 "drupal": {
-                    "version": "8.x-2.0-alpha2+37-dev",
-                    "datestamp": "1630413251",
+                    "version": "8.x-2.0-alpha5",
+                    "datestamp": "1648796532",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Dev releases are not covered by Drupal security advisories."
+                        "message": "Alpha releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -2357,6 +2361,10 @@
                     "homepage": "https://www.drupal.org/user/993376"
                 },
                 {
+                    "name": "pgrond",
+                    "homepage": "https://www.drupal.org/user/698374"
+                },
+                {
                     "name": "rodrigoaguilera",
                     "homepage": "https://www.drupal.org/user/408170"
                 },
@@ -2368,7 +2376,8 @@
             "description": "Allows using remote entities, for example through a REST interface.",
             "homepage": "https://www.drupal.org/project/external_entities",
             "support": {
-                "source": "https://git.drupalcode.org/project/external_entities"
+                "source": "http://cgit.drupalcode.org/external_entities",
+                "issues": "http://drupal.org/project/issues/external_entities"
             }
         },
         {
@@ -14628,7 +14637,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/external_entities": 20,
+        "drupal/external_entities": 15,
         "drupal/fullcalendar_api": 15,
         "drupal/inline_entity_form": 5,
         "drupal/layout_paragraphs": 10,
