@@ -213,7 +213,7 @@ class RestJson extends Rest implements PluginFormInterface {
    */
   public function query(array $parameters = [], array $sorts = [], $start = NULL, $length = NULL) {
     $parameters = $this->getListQueryParameters($parameters, $start, $length);
-    $results = $this->getFromDocstore($this->getDocstoreEndpoint(), $parameters);
+    $results = $this->getFromDocstore($this->getDocstoreEndpoint(), $parameters, $sorts);
 
     // Return only items for lists.
     if (isset($results['_count']) && isset($results['results'])) {
@@ -351,7 +351,7 @@ class RestJson extends Rest implements PluginFormInterface {
    *
    * @todo catch the Guzzle exceptions and return something more user friendly.
    */
-  public function getFromDocstore($endpoint, array $parameters = [], $cache = TRUE) {
+  public function getFromDocstore($endpoint, array $parameters = [], array $sorts = [], $cache = TRUE) {
     $entity_type_id = $this->externalEntityType->id();
 
     if (!empty($sorts)) {
