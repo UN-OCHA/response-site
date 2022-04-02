@@ -511,14 +511,11 @@ class ParagraphController extends ControllerBase {
     $url = $group->field_assessments_documents->first()->uri;
 
     $limit = 10;
-    $offset = $request->query->getInt('page', 0) * $limit;
+    $page = $request->query->getInt('page', 0);
     $filters = $request->query->get('filters', []);
     $base_url = $request->getRequestUri();
 
-    // Active facets.
-    $active_facets = $this->assessmentsController->buildAssessmentsActiveFacets($base_url, $filters);
-
-    $parameters = $this->assessmentsController->buildAssessmentsParameters($offset, $limit, $filters);
+    $parameters = $this->assessmentsController->buildAssessmentsParameters($page, $limit, $filters);
 
     // Base filter from entered URL.
     $conditions = $this->assessmentsController->parseAssessmentsUrl($url);
@@ -541,6 +538,9 @@ class ParagraphController extends ControllerBase {
     if (isset($results['_facets'])) {
       $facets = $this->assessmentsController->buildAssessmentsFacets($base_url, $results['_facets'], $filters);
     }
+
+    // Active facets.
+    $active_facets = $this->assessmentsController->buildAssessmentsActiveFacets($base_url, $filters, $results['_facets']);
 
     return [
       '#theme' => 'assessments_river',

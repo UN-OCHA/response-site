@@ -43,12 +43,12 @@ class AssessmentsController extends ControllerBase {
   /**
    * Build active facets for Assessments.
    */
-  public function buildAssessmentsActiveFacets(string $base_url, array $filters) : array {
+  public function buildAssessmentsActiveFacets(string $base_url, array $filters, array $facets) : array {
     $active_facets = [];
 
     foreach ($filters as $key => $keywords) {
       if (is_string($keywords)) {
-        $title = $this->t('Remove @name', ['@name' => $filters[$key]]);
+        $title = $this->t('Remove @name', ['@name' => $this->getFacetLabel($key, $filters[$key], $facets)]);
         $cloned_filters = $filters;
         unset($cloned_filters[$key]);
         $active_facets[] = [
@@ -62,7 +62,7 @@ class AssessmentsController extends ControllerBase {
       }
       else {
         foreach ($keywords as $index => $keyword) {
-          $title = $this->t('Remove @name', ['@name' => $filters[$key][$index]]);
+          $title = $this->t('Remove @name', ['@name' => $this->getFacetLabel($key, $filters[$key][$index], $facets)]);
           $cloned_filters = $filters;
           unset($cloned_filters[$key][$index]);
           $active_facets[] = [
@@ -80,48 +80,51 @@ class AssessmentsController extends ControllerBase {
     return $active_facets;
   }
 
+  protected function getFacetLabel($key, $uuid, $facets) {
+    foreach ($facets as $facet) {
+      if ($facet['id'] !== $key) {
+        continue;
+      }
+
+      foreach ($facet['items'] as $term) {
+        if ($term['filter'] == $uuid) {
+          return $term['label'];
+        }
+      }
+    }
+  }
+
   /**
    * Build facets for Assessments.
    */
-  public function buildAssessmentsFacets(string $base_url, array $embedded_facets, array $filters) : array {
+  public function buildAssessmentsFacets(string $base_url, array $facets, array $filters) : array {
     $facet_blocks = [];
-    return $facet_blocks;
-    $allowed_filters = $this->getAssessmentsFilters();
-    foreach (array_keys($allowed_filters) as $key) {
-      $facets[$key] = $embedded_facets[$key] ?? [];
-    }
 
-    foreach ($facets as $name => $facet) {
+    foreach ($facets as $facet) {
+      $name = $facet['id'];
+
       $links = [];
-      if (isset($facet['data']) && count($facet['data']) > 1) {
-        foreach ($facet['data'] as $term) {
-          // Date is a special case.
-          if (strpos($name, 'date') !== FALSE) {
-            $filter = [
-              $name => date('Y-m-d', strtotime($term['value'])) . ':' . date('Y-m-t', strtotime($term['value'])),
-            ];
-          }
-          else {
-            $filter = [
-              $name => $term['value'],
-            ];
-          }
-
+      if (isset($facet['items']) && count($facet['items']) > 1) {
+        foreach ($facet['items'] as $term) {
           // Check if facet is already active.
           if (isset($filters[$name])) {
-            if (is_string($filters[$name]) && $filters[$name] == $filter[$name]) {
+            if (is_string($filters[$name]) && $filters[$name] == $term['filter']) {
               continue;
             }
-            if (is_array($filters[$name]) && in_array($filter[$name], $filters[$name])) {
+            if (is_array($filters[$name]) && in_array($term['filter'], $filters['filter'])) {
               continue;
             }
           }
+
+          $filter = [
+            $name => $term['filter'],
+          ];
 
           // Date is a special case.
           if (strpos($name, 'date') !== FALSE) {
             if ($term['count'] > 0) {
               $links[] = [
-                'title' => date('F Y', strtotime($term['value'])) . ' (' . $term['count'] . ')',
+                'title' => date('F Y', strtotime($term['filter'])) . ' (' . $term['count'] . ')',
                 'url' => Url::fromUserInput($base_url, [
                   'query' => [
                     'filters' => array_merge_recursive($filters, $filter),
@@ -132,7 +135,7 @@ class AssessmentsController extends ControllerBase {
           }
           else {
             $links[] = [
-              'title' => $term['value'] . ' (' . $term['count'] . ')',
+              'title' => $term['label'] . ' (' . $term['count'] . ')',
               'url' => Url::fromUserInput($base_url, [
                 'query' => [
                   'filters' => array_merge_recursive($filters, $filter),
@@ -162,7 +165,7 @@ class AssessmentsController extends ControllerBase {
   /**
    * Build Assessments parameters.
    */
-  public function buildAssessmentsParameters(int $offset, int $limit, array $query_filters) : array {
+  public function buildAssessmentsParameters(int $page, int $limit, array $query_filters) : array {
     $facet_filters = [];
 
     foreach ($query_filters as $key => $keywords) {
@@ -188,6 +191,10 @@ class AssessmentsController extends ControllerBase {
     }
 
     $parameters = [
+      'page' => [
+        'offset' => $page,
+        'limit' => $limit,
+      ],
       'filter' => [],
     ];
 
@@ -197,7 +204,6 @@ class AssessmentsController extends ControllerBase {
         'value' => $facet_filter['value'],
         'operator' => is_array($facet_filter['value']) ? 'IN' : '=',
       ];
-
     }
 
     return $parameters;
@@ -262,7 +268,7 @@ class AssessmentsController extends ControllerBase {
       $data[] = [
         'uuid' => $row['uuid'],
         'title' =>$row['title'],
-        'url' => 'https://assessments.hpc.tools/assessments' . $row['uuid'],
+        'url' => 'https://assessments.hpc.tools/assessments/' . $row['uuid'],
         'date' => $row['ar_dates'] ?? [],
         'organizations' => $row['organizations'] ?? [],
         'status' => $row['ar_status'] ?? [],
