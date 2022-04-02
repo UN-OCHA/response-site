@@ -1,0 +1,19 @@
+uuid: 1e74e8a8-a4c5-4d8b-aa30-84ac3b87c084
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - link
+id: group.field_assessments_page
+field_name: field_assessments_page
+entity_type: group
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
