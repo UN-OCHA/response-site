@@ -1,0 +1,10 @@
+uuid: ffb50218-12e4-482b-90e1-291013e503f0
+langcode: en
+status: true
+dependencies: {  }
+id: twitter_feed
+label: 'Twitter feed'
+icon_uuid: null
+icon_default: null
+description: 'Embed a Twitter feed.'
+behavior_plugins: {  }

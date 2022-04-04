@@ -1,0 +1,19 @@
+uuid: e39a609d-1c90-43ff-a2bc-8e182b64527e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_twitter_account
+    - paragraphs.paragraphs_type.twitter_feed
+id: paragraph.twitter_feed.field_twitter_account
+field_name: field_twitter_account
+entity_type: paragraph
+bundle: twitter_feed
+label: 'Twitter account'
+description: 'Enter the Twitter account you''d like to embed. Omit the @ symbol.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
