@@ -1,0 +1,7 @@
+/**
+ * HR.info customizations to Twitter's official embeds.
+ */
+.hri-twitter-feed {
+  overflow-y: scroll;
+  max-height: 80vh;
+}

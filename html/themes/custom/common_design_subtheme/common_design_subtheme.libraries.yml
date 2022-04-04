@@ -93,3 +93,8 @@ hri-text-block:
   css:
     theme:
       components/hri-text-block/hri-text-block.css: {}
+
+hri-twitter-feed:
+  css:
+    theme:
+      components/hri-twitter-feed/hri-twitter-feed.css: {}
