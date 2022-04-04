@@ -19,7 +19,7 @@
   ]
 %}
 {% for item in items %}
-  {% set twitterAccount = item.content|render|striptags|trim %}
+  {% set twitterAccount = item.content|render|striptags|trim|replace({'@': ''}) %}
   <div{{ attributes.addClass(classes) }}>
     <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/{{ twitterAccount }}?ref_src=twsrc%5Etfw">Tweets by {{ twitterAccount }}</a>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
