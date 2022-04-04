@@ -435,9 +435,8 @@ class ReliefwebController extends ControllerBase {
         case 'reports':
           $conditions['reports'] = [
             'field' => 'format.id',
-            'value' => [12, 12570, 38974],
+            'value' => [3, 4, 5, 6, 7, 8, 9, 10, 11],
             'operator' => 'OR',
-            'negate' => TRUE,
           ];
           break;
 
