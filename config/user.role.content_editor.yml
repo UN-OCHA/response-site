@@ -8,6 +8,7 @@ dependencies:
   module:
     - contextual
     - file
+    - group
     - node
     - paragraphs
     - paragraphs_type_permissions
@@ -26,9 +27,12 @@ permissions:
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
+  - 'access group overview'
   - 'access toolbar'
   - 'administer nodes'
   - 'administer url aliases'
+  - 'create cluster group'
+  - 'create operation group'
   - 'create page content'
   - 'create paragraph content article_card_list'
   - 'create paragraph content child_groups'
