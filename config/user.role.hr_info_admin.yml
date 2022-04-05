@@ -18,6 +18,7 @@ dependencies:
     - paragraphs_type_permissions
     - path
     - shortcut
+    - subgroup
     - system
     - taxonomy
     - toolbar
@@ -39,9 +40,12 @@ permissions:
   - 'administer group'
   - 'administer nodes'
   - 'administer shortcuts'
+  - 'administer subgroup'
   - 'administer taxonomy'
   - 'administer url aliases'
   - 'administer users'
+  - 'bypass group access'
+  - 'bypass node access'
   - 'create cluster group'
   - 'create operation group'
   - 'create page content'
