@@ -26,6 +26,7 @@ weight: 4
 is_admin: null
 permissions:
   - 'access administration pages'
+  - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
   - 'access group overview'
