@@ -79,6 +79,8 @@ permissions:
   - 'edit any page content'
   - 'edit own page content'
   - 'masquerade as any user'
+  - 'masquerade as authenticated'
+  - 'masquerade as content_editor'
   - 'revert all revisions'
   - 'revert page revisions'
   - 'switch shortcut sets'
