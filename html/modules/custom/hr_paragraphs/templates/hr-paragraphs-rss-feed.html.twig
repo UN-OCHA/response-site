@@ -12,11 +12,11 @@
         {% if item.description|length > 0 %}
           {% if options.display_each_item_full %}
             <div class="external-feed--item-description--full">
-              {{ item.description }}
+              {{ item.description|striptags|raw }}
             </div>
           {% else %}
             <div class="external-feed--item-description--teaser">
-              {{ item.description|slice(0, 200)|raw }}
+              {{ item.description|slice(0, 200)|striptags|raw }}
             </div>
           {% endif %}
         {% endif %}
