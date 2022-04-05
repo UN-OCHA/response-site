@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - node.type.page
+    - taxonomy.vocabulary.tags
   module:
     - contextual
     - entity_reference_revisions
@@ -18,6 +19,7 @@ dependencies:
     - path
     - shortcut
     - system
+    - taxonomy
     - toolbar
     - user_expire
 id: hr_info_admin
@@ -31,11 +33,13 @@ permissions:
   - 'access files overview'
   - 'access group overview'
   - 'access site in maintenance mode'
+  - 'access taxonomy overview'
   - 'access toolbar'
   - 'access user profiles'
   - 'administer group'
   - 'administer nodes'
   - 'administer shortcuts'
+  - 'administer taxonomy'
   - 'administer url aliases'
   - 'administer users'
   - 'create cluster group'
@@ -55,6 +59,7 @@ permissions:
   - 'create paragraph content text_block'
   - 'create paragraph content twitter_feed'
   - 'create paragraph content upcoming_events'
+  - 'create terms in tags'
   - 'create url aliases'
   - 'customize shortcut links'
   - 'delete any page content'
@@ -76,8 +81,10 @@ permissions:
   - 'delete paragraph content text_block'
   - 'delete paragraph content twitter_feed'
   - 'delete paragraph content upcoming_events'
+  - 'delete terms in tags'
   - 'edit any page content'
   - 'edit own page content'
+  - 'edit terms in tags'
   - 'masquerade as any user'
   - 'masquerade as authenticated'
   - 'masquerade as content_editor'
