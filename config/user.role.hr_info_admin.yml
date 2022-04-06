@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - node.type.page
+    - taxonomy.vocabulary.tags
   module:
     - contextual
     - entity_reference_revisions
@@ -17,7 +18,9 @@ dependencies:
     - paragraphs_type_permissions
     - path
     - shortcut
+    - subgroup
     - system
+    - taxonomy
     - toolbar
     - user_expire
 id: hr_info_admin
@@ -26,17 +29,23 @@ weight: 4
 is_admin: null
 permissions:
   - 'access administration pages'
+  - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
   - 'access group overview'
   - 'access site in maintenance mode'
+  - 'access taxonomy overview'
   - 'access toolbar'
   - 'access user profiles'
   - 'administer group'
   - 'administer nodes'
   - 'administer shortcuts'
+  - 'administer subgroup'
+  - 'administer taxonomy'
   - 'administer url aliases'
   - 'administer users'
+  - 'bypass group access'
+  - 'bypass node access'
   - 'create cluster group'
   - 'create operation group'
   - 'create page content'
@@ -52,7 +61,9 @@ permissions:
   - 'create paragraph content reliefweb_river'
   - 'create paragraph content rss_feed'
   - 'create paragraph content text_block'
+  - 'create paragraph content twitter_feed'
   - 'create paragraph content upcoming_events'
+  - 'create terms in tags'
   - 'create url aliases'
   - 'customize shortcut links'
   - 'delete any page content'
@@ -72,10 +83,15 @@ permissions:
   - 'delete paragraph content reliefweb_river'
   - 'delete paragraph content rss_feed'
   - 'delete paragraph content text_block'
+  - 'delete paragraph content twitter_feed'
   - 'delete paragraph content upcoming_events'
+  - 'delete terms in tags'
   - 'edit any page content'
   - 'edit own page content'
+  - 'edit terms in tags'
   - 'masquerade as any user'
+  - 'masquerade as authenticated'
+  - 'masquerade as content_editor'
   - 'revert all revisions'
   - 'revert page revisions'
   - 'switch shortcut sets'
@@ -93,6 +109,7 @@ permissions:
   - 'update paragraph content reliefweb_river'
   - 'update paragraph content rss_feed'
   - 'update paragraph content text_block'
+  - 'update paragraph content twitter_feed'
   - 'update paragraph content upcoming_events'
   - 'view all revisions'
   - 'view expiring users report'

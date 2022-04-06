@@ -9,5 +9,6 @@ user_allowed: register
 redirect_user_form: true
 disable_admin_login: false
 disabled_roles:
+  content_editor: '0'
   administrator: '0'
-  editor: '0'
+  hr_info_admin: '0'

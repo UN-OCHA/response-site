@@ -50,6 +50,7 @@ permissions:
   - 'view paragraph content reliefweb_river'
   - 'view paragraph content rss_feed'
   - 'view paragraph content text_block'
+  - 'view paragraph content twitter_feed'
   - 'view paragraph content upcoming_events'
   - 'view population_type external entity'
   - 'view theme external entity'
