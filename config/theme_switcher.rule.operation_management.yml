@@ -1,0 +1,24 @@
+uuid: 0227a9c8-90e0-4a45-a7b1-48ed3d089340
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+    - user
+id: operation_management
+label: 'Operation management'
+weight: 0
+theme: hri_admin
+admin_theme: hri_admin
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/group/*/revisions\r\n/group/*/members\r\n/group/*/nodes\r\n/group/*/operations"
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      authenticated: authenticated
