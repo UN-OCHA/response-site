@@ -42,10 +42,6 @@ settings:
           name: Tools
           items:
             - Source
-        -
-          name: Tables
-          items:
-            - Table
   plugins:
     stylescombo:
       styles: ''
