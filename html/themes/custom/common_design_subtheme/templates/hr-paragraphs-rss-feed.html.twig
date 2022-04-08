@@ -20,7 +20,7 @@
             </div>
           {% else %}
             <div class="external-feed--item-description--teaser">
-              {{ item.description|slice(0, 200)|striptags|raw }}
+              {{ item.description|striptags|slice(0, 200)|raw }}
             </div>
           {% endif %}
         {% endif %}
