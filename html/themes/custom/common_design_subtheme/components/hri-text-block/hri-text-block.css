@@ -1,11 +1,12 @@
 /**
- * HR.info Text Block paragraph type.
+ * HR.info customizations to ALL instances of field_text. It appears as a
+ * universal description field on most Paragraph types.
  */
 
 /**
  * Our WYSIWYG editor image float styles need to be cleared
  */
-.paragraph--type--text-block::after {
+.field--name-field-text::after {
   display: block;
   visibility: hidden;
   clear: both;
@@ -20,9 +21,9 @@
  *
  * @see html/core/modules/system/css/components/align.module.css
  */
-.paragraph--type--text-block .align-left {
+.field--name-field-text .align-left {
   margin-right: 1rem;
 }
-.paragraph--type--text-block .align-right {
+.field--name-field-text .align-right {
   margin-left: 1rem;
 }
