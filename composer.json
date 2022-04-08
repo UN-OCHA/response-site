@@ -59,6 +59,7 @@
         "drupal/select2": "^1.13",
         "drupal/social_auth_hid": "^3.0",
         "drupal/subgroup": "^1.0",
+        "drupal/theme_switcher": "^1.2",
         "drupal/user_expire": "^1.0",
         "drush/drush": "^10.2",
         "fullcalendar/fullcalendar": "^3.10.0",
