@@ -1,6 +1,6 @@
 {
-    "name": "un-ocha/hrinfo-site-2022",
-    "description": "HRInfo 2022",
+    "name": "un-ocha/operations-site",
+    "description": "Reliefweb Operations",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/drupal",
