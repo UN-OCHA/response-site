@@ -1,0 +1,33 @@
+uuid: 55b43f89-c12d-4655-b32a-e1b69779bae1
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+id: operation-manager
+label: Manager
+weight: 103
+internal: false
+audience: member
+group_type: operation
+permissions_ui: true
+permissions:
+  - 'access group_node overview'
+  - 'create group_node:page content'
+  - 'create group_node:page entity'
+  - 'create subgroup:cluster entity'
+  - 'delete any group_node:page content'
+  - 'delete any group_node:page entity'
+  - 'delete own group_node:page content'
+  - 'delete own group_node:page entity'
+  - 'edit group'
+  - 'update any group_node:page content'
+  - 'update any group_node:page entity'
+  - 'update own group_node:page content'
+  - 'update own group_node:page entity'
+  - 'view group'
+  - 'view group_membership content'
+  - 'view group_node:page content'
+  - 'view group_node:page entity'
+  - 'view own unpublished group'
+  - 'view unpublished group_node:page entity'

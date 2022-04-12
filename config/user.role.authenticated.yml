@@ -8,6 +8,8 @@ dependencies:
     - contact
     - external_entities
     - filter
+    - node
+    - paragraphs
     - paragraphs_type_permissions
     - shortcut
     - system
@@ -21,6 +23,7 @@ permissions:
   - 'access content'
   - 'access shortcuts'
   - 'access site-wide contact form'
+  - 'create paragraph content child_groups'
   - 'use text format basic_html'
   - 'view assessment external entity'
   - 'view assessment_document external entity'
@@ -37,6 +40,7 @@ permissions:
   - 'view office external entity'
   - 'view operation external entity'
   - 'view organization external entity'
+  - 'view own unpublished content'
   - 'view paragraph content article_card_list'
   - 'view paragraph content child_groups'
   - 'view paragraph content featured_highlight'
@@ -53,5 +57,7 @@ permissions:
   - 'view paragraph content twitter_feed'
   - 'view paragraph content upcoming_events'
   - 'view population_type external entity'
+  - 'view the administration theme'
   - 'view theme external entity'
   - 'view unit_of_measurement external entity'
+  - 'view unpublished paragraphs'

@@ -1,0 +1,14 @@
+uuid: 901d2c97-ec56-413a-8950-89c869d4a0ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.global_editor
+  module:
+    - user
+id: user_add_role_action.global_editor
+label: 'Add the Global editor role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: global_editor

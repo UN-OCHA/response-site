@@ -1,0 +1,14 @@
+uuid: 0b8e846e-6366-4a44-af7d-2ba020e08398
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.global_editor
+  module:
+    - user
+id: user_remove_role_action.global_editor
+label: 'Remove the Global editor role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: global_editor

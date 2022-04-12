@@ -1,4 +1,4 @@
-uuid: 0e4c7517-13d5-419e-a50e-9a83c60b9a9f
+uuid: 1d889e0a-fae5-4ab0-be5d-07ff35909c49
 langcode: en
 status: true
 dependencies:
@@ -6,35 +6,49 @@ dependencies:
     - node.type.page
     - taxonomy.vocabulary.tags
   module:
+    - content_translation
     - contextual
+    - entity_reference_revisions
+    - external_entities
     - file
     - group
+    - locale
+    - masquerade
+    - menu_link_content
     - node
     - paragraphs
     - paragraphs_type_permissions
     - path
+    - shortcut
     - system
     - taxonomy
     - toolbar
-_core:
-  default_config_hash: Wur9kcEOwY1Jal81NssKnz3RhVJxAvBwyWQBGcA_1Go
-id: content_editor
-label: 'Content editor'
-weight: 2
-is_admin: false
+    - user_expire
+id: global_editor
+label: 'Global editor'
+weight: 5
+is_admin: null
 permissions:
   - 'access administration pages'
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
   - 'access group overview'
+  - 'access site in maintenance mode'
+  - 'access taxonomy overview'
   - 'access toolbar'
+  - 'access user profiles'
+  - 'administer menu'
   - 'administer nodes'
+  - 'administer shortcuts'
+  - 'administer taxonomy'
   - 'administer url aliases'
+  - 'administer users'
+  - 'bypass group access'
+  - 'bypass node access'
   - 'create cluster group'
   - 'create operation group'
   - 'create page content'
-  - 'create paragraph content article_card_list'
   - 'create paragraph content child_groups'
   - 'create paragraph content featured_highlight'
   - 'create paragraph content group_pages'
@@ -51,6 +65,9 @@ permissions:
   - 'create paragraph content upcoming_events'
   - 'create terms in tags'
   - 'create url aliases'
+  - 'customize shortcut links'
+  - 'delete any page content'
+  - 'delete orphan revisions'
   - 'delete own page content'
   - 'delete page revisions'
   - 'delete paragraph content article_card_list'
@@ -68,9 +85,18 @@ permissions:
   - 'delete paragraph content text_block'
   - 'delete paragraph content twitter_feed'
   - 'delete paragraph content upcoming_events'
+  - 'delete terms in tags'
+  - 'edit any page content'
   - 'edit own page content'
   - 'edit terms in tags'
+  - 'masquerade as any user'
+  - 'masquerade as authenticated'
+  - 'masquerade as content_editor'
   - 'revert all revisions'
+  - 'revert page revisions'
+  - 'switch shortcut sets'
+  - 'translate interface'
+  - 'translate menu_link_content'
   - 'update paragraph content article_card_list'
   - 'update paragraph content child_groups'
   - 'update paragraph content featured_highlight'
@@ -87,7 +113,11 @@ permissions:
   - 'update paragraph content twitter_feed'
   - 'update paragraph content upcoming_events'
   - 'view all revisions'
+  - 'view expiring users report'
+  - 'view office external entity collection'
   - 'view own unpublished content'
+  - 'view page revisions'
   - 'view paragraph content featured_highlight'
   - 'view the administration theme'
   - 'view unpublished paragraphs'
+  - 'view user email addresses'

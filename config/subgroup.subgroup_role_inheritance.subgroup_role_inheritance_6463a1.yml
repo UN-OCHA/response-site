@@ -1,0 +1,11 @@
+uuid: 0b790b99-55dc-4efd-959e-addd9ee4dfa0
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.role.cluster-manager
+    - group.role.operation-manager
+id: subgroup_role_inheritance_6463a1
+source: operation-manager
+target: cluster-manager
+tree: operation
