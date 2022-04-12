@@ -33,7 +33,7 @@ ARG GITHUB_REPOSITORY
 ARG GITHUB_SHA
 ARG GITHUB_REF
 
-ENV  NGINX_SERVERNAME=humanitarianresponse.info \
+ENV  NGINX_SERVERNAME=operations.reliefweb.int \
      PHP_ENVIRONMENT=production \
      PHP_MEMORY_LIMIT=256M \
      PHP_MAX_CHILDREN=16 \
