@@ -4,43 +4,43 @@ networks:
   default:
 
 volumes:
-  hrinfo9-test-site-public:
-  hrinfo9-test-site-private:
+  operations-test-site-public:
+  operations-test-site-private:
 
 services:
   redis:
     restart: always
     image: public.ecr.aws/unocha/redis:5
-    hostname: hrinfo9-test-redis
-    container_name: hrinfo9-test-redis
+    hostname: operations-test-redis
+    container_name: operations-test-redis
     ports:
       - "6379"
     networks:
       - default
 
   mysql:
-    image: public.ecr.aws/unocha/mysql:10.4.13-r0-202006-01
-    hostname: hrinfo9-test-mysql
-    container_name: hrinfo9-test-mysql
+    image: public.ecr.aws/unocha/mysql:10.5.12-r0-202109-01
+    hostname: operations-test-mysql
+    container_name: operations-test-mysql
     environment:
-      - MYSQL_DB=hrinfo
-      - MYSQL_USER=hrinfo
-      - MYSQL_PASS=hrinfo
+      - MYSQL_DB=operations
+      - MYSQL_USER=operations
+      - MYSQL_PASS=operations
     networks:
       - default
 
   drupal:
-    image: public.ecr.aws/unocha/hrinfo9-site:local
-    hostname: hrinfo9-test-site
-    container_name: hrinfo9-test-site
+    image: public.ecr.aws/unocha/operations-site:local
+    hostname: operations-test-site
+    container_name: operations-test-site
     depends_on:
       - redis
       - mysql
     volumes:
       - "./settings:/srv/www/shared/settings:ro"
       # Mount volumes for the private and public files.
-      - "hrinfo9-test-site-public:/srv/www/html/sites/default/files:rw"
-      - "hrinfo9-test-site-private:/srv/www/html/sites/default/private:rw"
+      - "operations-test-site-public:/srv/www/html/sites/default/files:rw"
+      - "operations-test-site-private:/srv/www/html/sites/default/private:rw"
       # Mount the folders needed for the tests.
       - "../phpcs.xml:/srv/www/phpcs.xml:ro"
       - "../phpunit.xml:/srv/www/phpunit.xml:ro"
@@ -51,12 +51,12 @@ services:
     environment:
       - TERM=xterm
       - ENVIRONMENT=dev
-      - NGINX_SERVERNAME=hrinfo9-test-site,localhost,127.0.0.1
-      - NGINX_OVERRIDE_PROTOCOL=HTTP,hrinfo9-test-site,localhost,127.0.0.1
-      - DRUSH_OPTIONS_URI=http://hrinfo9-test-site
-      - DRUPAL_DB_DATABASE=hrinfo
-      - DRUPAL_DB_USERNAME=hrinfo
-      - DRUPAL_DB_PASSWORD=hrinfo
+      - NGINX_SERVERNAME=operations-test-site,localhost,127.0.0.1
+      - NGINX_OVERRIDE_PROTOCOL=HTTP,operations-test-site,localhost,127.0.0.1
+      - DRUSH_OPTIONS_URI=http://operations-test-site
+      - DRUPAL_DB_DATABASE=operations
+      - DRUPAL_DB_USERNAME=operations
+      - DRUPAL_DB_PASSWORD=operations
       - DRUPAL_DB_HOST=mysql
       - DRUPAL_DB_DRIVER=mysql
       - PHP_ENVIRONMENT=dev
