@@ -7,6 +7,7 @@
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupContent;
 use Drupal\paragraphs\ParagraphInterface;
 
@@ -101,25 +102,52 @@ function paragraphs_group_permissions_paragraph_create_access(AccountInterface $
 
   // Set static cache id to use the type machine name.
   $type = $entity_bundle;
-  $op = 'create';
+  $operation = 'create';
 
   // If we've already checked access for this type, user and op, return from
   // cache.
-  if (isset($permissions[$account->id()][$type][$op])) {
-    return $permissions[$account->id()][$type][$op];
+  if (isset($permissions[$account->id()][$type][$operation])) {
+    return $permissions[$account->id()][$type][$operation];
   }
 
-  // @todo Grant access if user is an admin in a group and has permission to create $entity_bundle.
-  $permissions[$account->id()][$type][$op] = AccessResult::allowed();
-
-  // If the current user has access to this type/op, return access allowed,
-  // forbidden otherwise.
-  if ($account->hasPermission('bypass paragraphs type content access') || $account->hasPermission($op . ' paragraph content ' . $type)) {
-    $permissions[$account->id()][$type][$op] = AccessResult::allowed()->cachePerPermissions();
-  }
-  else {
-    $permissions[$account->id()][$type][$op] = AccessResult::forbidden()->cachePerPermissions();
+  // If the current user has access to this type/op, return access allowed.
+  if ($account->hasPermission('bypass paragraphs type content access') || $account->hasPermission($operation . ' paragraph content ' . $type)) {
+    $permissions[$account->id()][$type][$operation] = AccessResult::allowed()->cachePerPermissions();
+    return $permissions[$account->id()][$type][$operation];
   }
 
-  return $permissions[$account->id()][$type][$op];
+  /** @var \Drupal\group\Access\GroupPermissionCheckerInterface $group_permission_checker */
+  $group_permission_checker = \Drupal::service('group_permission.checker');
+
+  // Get group from referer.
+  $request = \Drupal::request();
+  $referer = $request->headers->get('referer');
+  if (strpos($referer, '/group/') !== FALSE) {
+    $parts = explode('/', $referer);
+    // Remove 'edit'.
+    array_pop($parts);
+    // Group id.
+    $group_id = array_pop($parts);
+    $group = Group::load($group_id);
+    if ($group_permission_checker->hasPermissionInGroup($operation . ' paragraph content ' . $type, $account, $group)) {
+      $permissions[$account->id()][$type][$operation] = AccessResult::allowed()->cachePerPermissions();
+      return $permissions[$account->id()][$type][$operation];
+    }
+
+    $permissions[$account->id()][$type][$operation] = AccessResult::forbidden()->cachePerPermissions();
+    return $permissions[$account->id()][$type][$operation];
+  }
+
+  /** @var \Drupal\group\GroupMembershipLoaderInterface */
+  $group_membership_loader = \Drupal::service('group.membership_loader');
+  $group_membership = $group_membership_loader->loadByUser($account);
+  foreach ($group_membership as $group_membership) {
+    if ($group_permission_checker->hasPermissionInGroup($operation . ' paragraph content ' . $type, $account, $group_membership->getGroup())) {
+      $permissions[$account->id()][$type][$operation] = AccessResult::allowed()->cachePerPermissions();
+      return $permissions[$account->id()][$type][$operation];
+    }
+  }
+
+  $permissions[$account->id()][$type][$operation] = AccessResult::forbidden()->cachePerPermissions();
+  return $permissions[$account->id()][$type][$operation];
 }
