@@ -613,8 +613,13 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
     $link = $group->field_offices_page->first();
 
     if (!$link->isExternal()) {
-      $params = $link->getUrl()->getRouteParameters();
-      $exclude_pages[] = $params['node'];
+      try {
+        $params = $link->getUrl()->getRouteParameters();
+        $exclude_pages[] = $params['node'];
+      }
+      catch (\Exception $exception) {
+        // Ignore, deleted page.
+      }
     }
   }
 
@@ -623,8 +628,13 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
     $link = $group->field_pages_page->first();
 
     if (!$link->isExternal()) {
-      $params = $link->getUrl()->getRouteParameters();
-      $exclude_pages[] = $params['node'];
+      try {
+        $params = $link->getUrl()->getRouteParameters();
+        $exclude_pages[] = $params['node'];
+      }
+      catch (\Exception $exception) {
+        // Ignore, deleted page.
+      }
     }
   }
 
