@@ -416,8 +416,13 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     'display_read_more' => FALSE,
   ];
 
-  $content = file_get_contents($paragraph->field_rss_link->first()->uri);
-  $xml = new SimpleXmlElement($content);
+  try {
+    $content = file_get_contents($paragraph->field_rss_link->first()->uri);
+    $xml = new SimpleXmlElement($content);
+  }
+  catch (\Exception $exception) {
+    return;
+  }
 
   $items = [];
   foreach ($xml->channel->item as $entry) {
@@ -438,9 +443,6 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   }
   if (in_array('display_description', $rss_options)) {
     $options['display_description'] = TRUE;
-  }
-  if (in_array('display_each_item_full', $rss_options)) {
-    $options['display_each_item_full'] = TRUE;
   }
 
   // Slice array.
