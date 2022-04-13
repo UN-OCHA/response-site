@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.operation.field_assessments_page
     - field.field.group.operation.field_calendar_link
     - field.field.group.operation.field_documents_page
     - field.field.group.operation.field_enabled_tabs
@@ -11,9 +12,9 @@ dependencies:
     - field.field.group.operation.field_infographics
     - field.field.group.operation.field_maps_infographics_link
     - field.field.group.operation.field_offices_page
-    - field.field.group.operation.field_operation
     - field.field.group.operation.field_pages_page
     - field.field.group.operation.field_paragraphs
+    - field.field.group.operation.field_reliefweb_assessments
     - field.field.group.operation.field_reliefweb_documents
     - field.field.group.operation.subgroup_depth
     - field.field.group.operation.subgroup_left
@@ -47,6 +48,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_assessments_page: true
   field_calendar_link: true
   field_documents_page: true
   field_enabled_tabs: true
@@ -55,8 +57,8 @@ hidden:
   field_infographics: true
   field_maps_infographics_link: true
   field_offices_page: true
-  field_operation: true
   field_pages_page: true
+  field_reliefweb_assessments: true
   field_reliefweb_documents: true
   langcode: true
   subgroup_depth: true
