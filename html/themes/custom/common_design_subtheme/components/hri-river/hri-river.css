@@ -2,14 +2,33 @@
  * HR.info River
  */
 
+.hri-river {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+
+  /* in order to position our skip-links nearer to the River itself */
+  /* stylelint-disable-next-line */
+  position: relative;
+}
+
+.hri-river__results {
+  flex: 1 0 100%;
+}
+
+.hri-river__facets-wrapper {
+  flex: 1 0 100%;
+
+  /* Mobile layout has facets first. */
+  order: -1;
+}
+
 /**
- * Basic Layout is 2-col flexbox
+ * Big layout is 2-col flexbox with facets at end of reading direction.
  */
 @media (min-width: 860px) {
   .hri-river {
-    display: flex;
     flex-flow: row nowrap;
-    gap: 1rem;
   }
 
   .hri-river__results {
@@ -18,6 +37,7 @@
 
   .hri-river__facets-wrapper {
     flex: 1 0 280px;
+    order: initial;
   }
 }
 
@@ -91,17 +111,27 @@
   font-size: var(--cd-font-size--base);
 }
 
-.hri-river__result .content {
-  display: flex;
-  flex-flow: row nowrap;
-  margin-top: 1rem;
-  font-size: 1rem;
+.hri-river__result .content img {
+  display: none;
 }
 
-.hri-river__result .content img {
-  flex: 1 0 auto;
-  max-height: 118px;
-  margin-inline-end: 1rem;
+@media (min-width: 580px) {
+  .hri-river__result .content {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .hri-river__result .content img {
+    /* unset some mobile styles */
+    display: initial;
+
+    /* setup desktop layout */
+    flex: 1 0 auto;
+    max-height: 118px;
+    margin-inline-end: 1rem;
+  }
 }
 
 .hri-river__result .meta {
@@ -156,4 +186,13 @@
 /* files buttons */
 .hri-river__result .cd-button--small .cd-icon {
   margin: 0;
+}
+
+/**
+ * River skip-links should appear to hug the Operation tabs.
+ */
+@media (min-width: 860px) {
+  .hri-river .skip-link {
+    transform: translateY(-2rem);
+  }
 }
