@@ -15,6 +15,6 @@ label: 'Cluster or Working Group'
 description: ''
 new_revision: true
 creator_membership: true
-creator_wizard: true
+creator_wizard: false
 creator_roles:
-  - cluster-admin
+  - cluster-manager
