@@ -1,0 +1,2 @@
+permission_callbacks:
+  - \Drupal\paragraphs_group_permissions\ParagraphsTypeGroupPermissions::paragraphTypePermissions

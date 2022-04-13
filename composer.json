@@ -52,6 +52,7 @@
         "drupal/link_allowed_hosts": "^1.0@beta",
         "drupal/maintenance200": "^1.1",
         "drupal/masquerade": "^2.0@beta",
+        "drupal/override_node_options": "^2.6",
         "drupal/paragraphs_asymmetric_translation_widgets": "^1.0@beta",
         "drupal/pathauto": "^1.8",
         "drupal/redis": "^1.5",

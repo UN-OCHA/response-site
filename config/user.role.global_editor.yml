@@ -1,4 +1,4 @@
-uuid: 0211c26a-383d-4837-a753-ac5643ebe393
+uuid: 1d889e0a-fae5-4ab0-be5d-07ff35909c49
 langcode: en
 status: true
 dependencies:
@@ -6,6 +6,7 @@ dependencies:
     - node.type.page
     - taxonomy.vocabulary.tags
   module:
+    - content_translation
     - contextual
     - entity_reference_revisions
     - external_entities
@@ -13,19 +14,20 @@ dependencies:
     - group
     - locale
     - masquerade
+    - menu_link_content
     - node
+    - override_node_options
     - paragraphs
     - paragraphs_type_permissions
     - path
     - shortcut
-    - subgroup
     - system
     - taxonomy
     - toolbar
     - user_expire
-id: hr_info_admin
-label: 'HR.info Admin'
-weight: 4
+id: global_editor
+label: 'Global editor'
+weight: 5
 is_admin: null
 permissions:
   - 'access administration pages'
@@ -37,10 +39,9 @@ permissions:
   - 'access taxonomy overview'
   - 'access toolbar'
   - 'access user profiles'
-  - 'administer group'
+  - 'administer menu'
   - 'administer nodes'
   - 'administer shortcuts'
-  - 'administer subgroup'
   - 'administer taxonomy'
   - 'administer url aliases'
   - 'administer users'
@@ -92,10 +93,12 @@ permissions:
   - 'masquerade as any user'
   - 'masquerade as authenticated'
   - 'masquerade as content_editor'
+  - 'override page authored by option'
   - 'revert all revisions'
   - 'revert page revisions'
   - 'switch shortcut sets'
   - 'translate interface'
+  - 'translate menu_link_content'
   - 'update paragraph content article_card_list'
   - 'update paragraph content child_groups'
   - 'update paragraph content featured_highlight'
