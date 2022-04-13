@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.cluster.field_assessments_page
     - field.field.group.cluster.field_calendar_link
     - field.field.group.cluster.field_documents_page
     - field.field.group.cluster.field_enabled_tabs
@@ -11,9 +12,9 @@ dependencies:
     - field.field.group.cluster.field_infographics
     - field.field.group.cluster.field_maps_infographics_link
     - field.field.group.cluster.field_offices_page
-    - field.field.group.cluster.field_operation
     - field.field.group.cluster.field_pages_page
     - field.field.group.cluster.field_paragraphs
+    - field.field.group.cluster.field_reliefweb_assessments
     - field.field.group.cluster.field_reliefweb_documents
     - field.field.group.cluster.subgroup_depth
     - field.field.group.cluster.subgroup_left
@@ -62,6 +63,8 @@ third_party_settings:
         required_fields: true
     group_assessments:
       children:
+        - field_reliefweb_assessments
+        - field_assessments_page
         - field_operation
       label: Assessments
       region: content
@@ -178,6 +181,14 @@ targetEntityType: group
 bundle: cluster
 mode: default
 content:
+  field_assessments_page:
+    type: link_default
+    weight: 36
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_calendar_link:
     type: link_default
     weight: 5
@@ -239,16 +250,6 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  field_operation:
-    type: select2_entity_reference
-    weight: 2
-    region: content
-    settings:
-      width: 100%
-      autocomplete: true
-      match_operator: CONTAINS
-      match_limit: 25
-    third_party_settings: {  }
   field_pages_page:
     type: hr_paragraphs_link_default
     weight: 8
@@ -266,6 +267,14 @@ content:
       nesting_depth: 0
       require_layouts: 0
       empty_message: ''
+    third_party_settings: {  }
+  field_reliefweb_assessments:
+    type: link_default
+    weight: 35
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_reliefweb_documents:
     type: link_default
