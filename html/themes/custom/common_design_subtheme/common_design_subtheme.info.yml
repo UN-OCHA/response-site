@@ -4,7 +4,7 @@ description: HR.info public theme, an OCHA Common Design subtheme
 core_version_requirement: ^8.8 || ^9
 package: HR.info
 base theme: common_design
-logo: 'img/logos/hr-info-logo.svg'
+logo: 'img/logos/reliefweb-operations.svg'
 
 # Defines libraries group in which we can add css/js.
 libraries:
