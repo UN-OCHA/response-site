@@ -216,12 +216,25 @@ class ParagraphController extends ControllerBase {
 
     // Redirect external links.
     if ($link->isExternal()) {
-      return new TrustedRedirectResponse($link->getUrl()->getUri());
+      try {
+        return new TrustedRedirectResponse($link->getUrl()->getUri());
+      }
+      catch (\Exception $exception) {
+        // Ignore, deleted page.
+        throw new NotFoundHttpException();
+      }
     }
 
     $entity_type = 'node';
     $view_mode = 'operation_tab';
-    $params = $link->getUrl()->getRouteParameters();
+
+    try {
+      $params = $link->getUrl()->getRouteParameters();
+    }
+    catch (\Exception $exception) {
+      // Ignore, deleted page.
+      throw new NotFoundHttpException();
+    }
 
     $office_page = $this->entityTypeManager->getStorage($entity_type)->load($params[$entity_type]);
     $view_builder = $this->entityTypeManager->getViewBuilder($entity_type);
