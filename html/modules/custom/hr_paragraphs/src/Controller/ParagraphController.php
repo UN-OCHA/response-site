@@ -216,12 +216,25 @@ class ParagraphController extends ControllerBase {
 
     // Redirect external links.
     if ($link->isExternal()) {
-      return new TrustedRedirectResponse($link->getUrl()->getUri());
+      try {
+        return new TrustedRedirectResponse($link->getUrl()->getUri());
+      }
+      catch (\Exception $exception) {
+        // Ignore, deleted page.
+        throw new NotFoundHttpException();
+      }
     }
 
     $entity_type = 'node';
     $view_mode = 'operation_tab';
-    $params = $link->getUrl()->getRouteParameters();
+
+    try {
+      $params = $link->getUrl()->getRouteParameters();
+    }
+    catch (\Exception $exception) {
+      // Ignore, deleted page.
+      throw new NotFoundHttpException();
+    }
 
     $office_page = $this->entityTypeManager->getStorage($entity_type)->load($params[$entity_type]);
     $view_builder = $this->entityTypeManager->getViewBuilder($entity_type);
@@ -482,46 +495,26 @@ class ParagraphController extends ControllerBase {
   /**
    * Return all assessments of an operation, sector or cluster.
    */
-  public function getAssessments($group, $type = 'list') {
-    if ($group->field_operation->isEmpty()) {
+  public function getAssessments($group, Request $request) {
+    if ($group->hasField('field_assessments_page') && !$group->field_assessments_page->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_assessments_page->first();
+
+      // Redirect external links.
+      if ($link->isExternal()) {
+        return new TrustedRedirectResponse($link->getUrl()->getUri());
+      }
+    }
+
+    if ($group->field_reliefweb_assessments->isEmpty()) {
       return [
         '#type' => 'markup',
-        '#markup' => $this->t('Operation not set.'),
+        '#markup' => $this->t('Reliefweb URL not set.'),
       ];
     }
 
-    $operation_uuid = $group->field_operation->entity->uuid();
-
-    global $base_url;
-    switch ($type) {
-      case 'map':
-        $src = $base_url . '/rest/assessments/map-data?f[0]=operations:' . $operation_uuid;
-        $theme = 'hr_paragraphs_assessments_map';
-        break;
-
-      case 'table':
-        $src = $base_url . '/rest/assessments/table-data?f[0]=operations:' . $operation_uuid;
-        $theme = 'hr_paragraphs_assessments_table';
-        break;
-
-      case 'list':
-        $src = $base_url . '/rest/assessments/list-data?f[0]=operations:' . $operation_uuid;
-        $theme = 'hr_paragraphs_assessments_list';
-        break;
-
-      default:
-        $src = $base_url . '/rest/assessments/list-data?f[0]=operations:' . $operation_uuid;
-        $theme = 'hr_paragraphs_assessments_list';
-        break;
-
-    }
-
-    return [
-      '#theme' => $theme,
-      '#base_url' => 'https://assessments.hpc.tools',
-      '#src' => $src,
-      '#component_url' => '/modules/custom/hr_paragraphs/component/build/',
-    ];
+    $url = $group->field_reliefweb_assessments->first()->uri;
+    return $this->getReliefwebDocuments($request, $url);
   }
 
   /**

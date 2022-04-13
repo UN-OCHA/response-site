@@ -1,17 +1,16 @@
-uuid: fa9f66e6-f6df-4559-a225-06e33db93b20
+uuid: 1ea2a344-5703-4877-abee-0122df0eb8d6
 langcode: en
 status: true
 dependencies:
   module:
-    - external_entities
     - group
-id: group.field_operation
-field_name: field_operation
+    - link
+id: group.field_assessments_page
+field_name: field_assessments_page
 entity_type: group
-type: entity_reference
-settings:
-  target_type: operation
-module: core
+type: link
+settings: {  }
+module: link
 locked: false
 cardinality: 1
 translatable: true
