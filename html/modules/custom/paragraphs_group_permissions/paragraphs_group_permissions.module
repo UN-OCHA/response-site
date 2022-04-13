@@ -1,0 +1,125 @@
+<?php
+
+/**
+ * @file
+ * Paragraph group permissions.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\group\Entity\GroupContent;
+use Drupal\paragraphs\ParagraphInterface;
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function paragraphs_group_permissions_module_implements_alter(&$implementations, $hook) {
+  // Overwrite implementations.
+  if (isset($implementations['paragraphs_group_permissions']) && isset($implementations['paragraphs_type_permissions'])) {
+    $saved = $implementations['paragraphs_type_permissions'];
+    unset($implementations['paragraphs_type_permissions']);
+
+    if ($hook !== 'paragraph_access' && $hook != 'paragraph_create_access') {
+      $implementations['paragraphs_type_permissions'] = $saved;
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_access() for entity type "paragraph".
+ */
+function paragraphs_group_permissions_paragraph_access(ParagraphInterface $entity, $operation, AccountInterface $account) {
+  $permissions = &drupal_static(__FUNCTION__, []);
+
+  if (!in_array($operation, ['view', 'update', 'delete'], TRUE)) {
+    // If there was no type to check against, or the $op was not one of the
+    // supported ones, we return access denied.
+    return AccessResult::neutral();
+  }
+
+  // Set static cache id to use the type machine name.
+  $type = $entity->getType();
+
+  if ($operation == 'view' && !$entity->status->value) {
+    return AccessResult::forbidden();
+  }
+
+  // If we've already checked access for this type, user and op, return from
+  // cache.
+  if (isset($permissions[$account->id()][$type][$operation])) {
+    return $permissions[$account->id()][$type][$operation];
+  }
+
+  // @todo Allow access if user has group permission.
+  $parent = $entity->getParentEntity();
+
+  /** @var \Drupal\group\Entity\Group */
+  $group = NULL;
+
+  // If we are on page, get the group.
+  if (get_class($parent) == 'Drupal\node\Entity\Node') {
+    $group_content_array = GroupContent::loadByEntity($parent);
+    $group_content = reset($group_content_array);
+    if ($group_content) {
+      $group = $group_content->getGroup();
+    }
+    else {
+      return AccessResult::neutral();
+    }
+  }
+  else {
+    $group = $parent;
+  }
+
+  if (!$group) {
+    return AccessResult::neutral();
+  }
+
+  /** @var \Drupal\group\Access\GroupPermissionCheckerInterface $group_permission_checker */
+  $group_permission_checker = \Drupal::service('group_permission.checker');
+
+  if ($account->hasPermission('bypass paragraphs type content access') || $account->hasPermission($operation . ' paragraph content ' . $type)) {
+    $permissions[$account->id()][$type][$operation] = AccessResult::allowed()->cachePerPermissions();
+  }
+  elseif ($group_permission_checker->hasPermissionInGroup($operation . ' paragraph content ' . $type, $account, $group)) {
+    $permissions[$account->id()][$type][$operation] = AccessResult::allowed()->cachePerPermissions();
+  }
+  else {
+    $permissions[$account->id()][$type][$operation] = AccessResult::forbidden()->cachePerPermissions();
+  }
+
+  return $permissions[$account->id()][$type][$operation];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_create_access() for entity type "paragraph".
+ *
+ * For new nodes we can not check group membership.
+ */
+function paragraphs_group_permissions_paragraph_create_access(AccountInterface $account = NULL, array $context = [], $entity_bundle = NULL) {
+  $permissions = &drupal_static(__FUNCTION__, []);
+
+  // Set static cache id to use the type machine name.
+  $type = $entity_bundle;
+  $op = 'create';
+
+  // If we've already checked access for this type, user and op, return from
+  // cache.
+  if (isset($permissions[$account->id()][$type][$op])) {
+    return $permissions[$account->id()][$type][$op];
+  }
+
+  // @todo Grant access if user is an admin in a group and has permission to create $entity_bundle.
+  $permissions[$account->id()][$type][$op] = AccessResult::allowed();
+
+  // If the current user has access to this type/op, return access allowed,
+  // forbidden otherwise.
+  if ($account->hasPermission('bypass paragraphs type content access') || $account->hasPermission($op . ' paragraph content ' . $type)) {
+    $permissions[$account->id()][$type][$op] = AccessResult::allowed()->cachePerPermissions();
+  }
+  else {
+    $permissions[$account->id()][$type][$op] = AccessResult::forbidden()->cachePerPermissions();
+  }
+
+  return $permissions[$account->id()][$type][$op];
+}
