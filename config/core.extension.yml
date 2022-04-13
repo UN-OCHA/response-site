@@ -53,6 +53,7 @@ module:
   node: 0
   ocha_docstore_files: 0
   options: 0
+  override_node_options: 0
   page_cache: 0
   paragraphs_asymmetric_translation_widgets: 0
   paragraphs_group_permissions: 0

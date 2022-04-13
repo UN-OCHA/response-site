@@ -9,6 +9,7 @@ dependencies:
     - external_entities
     - filter
     - node
+    - override_node_options
     - paragraphs
     - paragraphs_type_permissions
     - shortcut
@@ -23,7 +24,10 @@ permissions:
   - 'access content'
   - 'access shortcuts'
   - 'access site-wide contact form'
-  - 'create paragraph content child_groups'
+  - 'enter page revision log entry'
+  - 'override page authored on option'
+  - 'override page published option'
+  - 'override page revision option'
   - 'use text format basic_html'
   - 'view assessment external entity'
   - 'view assessment_document external entity'

@@ -16,6 +16,7 @@ dependencies:
     - masquerade
     - menu_link_content
     - node
+    - override_node_options
     - paragraphs
     - paragraphs_type_permissions
     - path
@@ -92,6 +93,7 @@ permissions:
   - 'masquerade as any user'
   - 'masquerade as authenticated'
   - 'masquerade as content_editor'
+  - 'override page authored by option'
   - 'revert all revisions'
   - 'revert page revisions'
   - 'switch shortcut sets'
