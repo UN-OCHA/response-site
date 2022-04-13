@@ -4,7 +4,6 @@ status: true
 dependencies:
   module:
     - contact
-    - external_entities
     - paragraphs_type_permissions
     - system
 _core:

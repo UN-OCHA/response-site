@@ -4,9 +4,9 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
+    - filter.format.full_html
   module:
     - contact
-    - external_entities
     - filter
     - node
     - override_node_options
@@ -29,6 +29,7 @@ permissions:
   - 'override page published option'
   - 'override page revision option'
   - 'use text format basic_html'
+  - 'use text format full_html'
   - 'view assessment external entity'
   - 'view assessment_document external entity'
   - 'view assessment_status external entity'

@@ -300,6 +300,9 @@ class ReliefwebController extends ControllerBase {
       if ($exception->getCode() === 404) {
         throw new NotFoundHttpException();
       }
+      else {
+        return [];
+      }
     }
 
     $body = $response->getBody() . '';
@@ -498,15 +501,16 @@ class ReliefwebController extends ControllerBase {
               break;
           }
 
-          if (isset($conditions[$filter['field']])) {
-            $conditions[$filter['field']]['operator'] = $condition['operator'];
-            if (is_string($conditions[$filter['field']]['value'])) {
-              $conditions[$filter['field']]['value'] = [$conditions[$filter['field']]['value']];
+          $key = $filter['field'] . '__' . $condition['operator'];
+          if (isset($conditions[$key])) {
+            $conditions[$key]['operator'] = $condition['operator'];
+            if (is_string($conditions[$key]['value'])) {
+              $conditions[$key]['value'] = [$conditions[$key]['value']];
             }
-            $conditions[$filter['field']]['value'][] = $condition['value'];
+            $conditions[$key]['value'][] = $condition['value'];
           }
           else {
-            $conditions[$filter['field']] = $condition;
+            $conditions[$key] = $condition;
           }
         }
       }
@@ -514,6 +518,8 @@ class ReliefwebController extends ControllerBase {
 
     // Check for search paramater.
     if (isset($params['search'])) {
+      // Fix queries starting with AND or OR.
+      $params['search'] = preg_replace('/^\s*(AND|OR)\s+/', '', $params['search']);
       $conditions['_query'] = $params['search'];
     }
 
