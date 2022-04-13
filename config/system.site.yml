@@ -2,7 +2,7 @@ _core:
   default_config_hash: VDJxTZtQR21qB4lvOq8zszJZLvLKrSPQpdn2E3T71Ww
 langcode: en
 uuid: 2c660645-429a-41a3-a911-cc3ccf2de31a
-name: 'HRInfo 2.0'
+name: 'ReliefWeb Operations'
 mail: admin@example.com
 slogan: ''
 page:
