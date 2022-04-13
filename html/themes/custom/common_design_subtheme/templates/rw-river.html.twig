@@ -79,7 +79,8 @@
     </div>
 
     <p class="hri-river__facets-count">
-      <span class="hri-river__facets-count__value">{{ total }}</span> documents found
+      {% set pluralize = total == 1 ? '' : 's' %}
+      <span class="hri-river__facets-count__value">{{ total }}</span> document{{ pluralize }} found
     </p>
 
     {% if active_facets|length > 0 %}
