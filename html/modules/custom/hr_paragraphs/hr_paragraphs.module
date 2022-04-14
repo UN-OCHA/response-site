@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
+use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupContent;
 use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
@@ -156,7 +157,75 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_update().
  */
 function hr_paragraphs_group_update(EntityInterface $entity) {
-  return hr_paragraphs_group_insert($entity);
+  /** @var \Drupal\group\Entity\Group $entity */
+  if ($entity->bundle() == 'operation') {
+    return hr_paragraphs_group_insert($entity);
+  }
+
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+  $source = '/group/' . $entity->id();
+
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+  $group_alias = $path_alias_manager->getAliasByPath($source);
+
+  // Skip if an alias is already set.
+  if ($group_alias !== $source) {
+    return;
+  }
+
+  if ($entity->hasField('subgroup_tree') && !$entity->subgroup_tree->isEmpty()) {
+    $subgroup = $entity;
+    $group = Group::load($entity->subgroup_tree->value);
+
+    $path_alias_manager = \Drupal::service('path_alias.manager');
+
+    $group_alias = $path_alias_manager->getAliasByPath('/group/' . $group->id());
+    $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
+    $new_alias = $group_alias . '/' . $page_title;
+
+    $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+    $source = '/group/' . $subgroup->id();
+
+    /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
+    $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+    $alias_uniquifier->uniquify($new_alias, $source, $langcode);
+
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $new_alias,
+    ]);
+    $path_alias->save();
+
+    // Add aliases for tabs.
+    $tabs = [
+      'events',
+      'contacts',
+      'pages',
+      'reports',
+      'maps',
+      'datasets',
+      'assessments',
+    ];
+
+    foreach ($tabs as $tab) {
+      $source = '/group/' . $entity->id() . '/' . $tab;
+      $tab_alias = $new_alias . '/' . $tab;
+
+      $existing_alias = $path_alias_manager->getAliasByPath($source);
+
+      // Skip if an alias is already set.
+      if ($existing_alias !== $source) {
+        continue;
+      }
+
+      $path_alias = PathAlias::create([
+        'path' => $source,
+        'alias' => $tab_alias,
+      ]);
+      $path_alias->save();
+    }
+  }
+
 }
 
 /**
@@ -584,7 +653,7 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  /** @var \Drupal\group\Entity\Group */
+  /** @var \Drupal\group\Entity\Group $group */
   $group = $paragraph->getParentEntity();
 
   // For preview mode.
