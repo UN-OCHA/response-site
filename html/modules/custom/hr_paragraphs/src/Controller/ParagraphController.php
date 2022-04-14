@@ -270,6 +270,15 @@ class ParagraphController extends ControllerBase {
       }
 
       if ($links) {
+        // Fix subgroup label.
+        foreach ($links as &$link) {
+          /** @var \Drupal\Core\StringTranslation\TranslatableMarkup $title */
+          $title = $link['title'];
+          if ($title->getUntranslatedString() === 'Add @group_type subgroup') {
+            $link['title'] = $this->t('Add @group_type', $title->getArguments());
+          }
+        }
+
         // Sort the operations by weight.
         uasort($links, '\Drupal\Component\Utility\SortArray::sortByWeightElement');
 
