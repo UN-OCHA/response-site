@@ -966,3 +966,52 @@ function hr_paragraphs_menu_local_actions_alter(&$local_actions) {
     unset($local_actions['group.add_group']);
   }
 }
+
+/**
+ * Implements template_preprocess_node().
+ */
+function hr_paragraphs_preprocess_node(&$variables) {
+  if ($variables['view_mode'] != 'full') {
+    return;
+  }
+
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  $group_content_array = GroupContent::loadByEntity($node);
+  $group_content = reset($group_content_array);
+  if ($group_content) {
+    $group = $group_content->getGroup();
+
+    if ($group->hasField('field_sidebar_from_operation') && !$group->field_sidebar_from_operation->isEmpty()) {
+      if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+        $group = Group::load($group->subgroup_tree->value);
+      }
+    }
+
+    if ($group->hasField('field_sidebar_menu') && !$group->field_sidebar_menu->isEmpty()) {
+      $variables['field_sidebar_menu'] = $group->field_sidebar_menu->view();
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_group().
+ */
+function hr_paragraphs_preprocess_group(&$variables) {
+  if ($variables['view_mode'] != 'full') {
+    return;
+  }
+
+  /** @var \Drupal\group\Entity\GroupInterface $group */
+  $group = $variables['elements']['#group'];
+
+  if ($group->hasField('field_sidebar_from_operation') && !$group->field_sidebar_from_operation->isEmpty()) {
+    if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+      $group = Group::load($group->subgroup_tree->value);
+      if ($group->hasField('field_sidebar_menu') && !$group->field_sidebar_menu->isEmpty()) {
+        $variables['content']['field_sidebar_menu'] = $group->field_sidebar_menu->view();
+      }
+    }
+  }
+}

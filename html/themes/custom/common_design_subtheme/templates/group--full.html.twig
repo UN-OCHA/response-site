@@ -51,6 +51,21 @@
   {{ title_suffix }}
 
   <div{{ content_attributes }}>
-    {{ content }}
+
+    {% block section %}
+      <div class="cd-layout-two-col">
+
+        <div class="cd-layout-main-content">
+          {{ content|without('field_sidebar_menu')}}
+        </div>
+
+        <div class="cd-layout-sidebar-first" role="complementary">
+          {{ content.field_sidebar_menu }}
+        </div>
+
+      </div>
+    {% endblock %}
+
   </div>
+
 </div>

@@ -16,6 +16,8 @@ dependencies:
     - field.field.group.cluster.field_paragraphs
     - field.field.group.cluster.field_reliefweb_assessments
     - field.field.group.cluster.field_reliefweb_documents
+    - field.field.group.cluster.field_sidebar_from_operation
+    - field.field.group.cluster.field_sidebar_menu
     - field.field.group.cluster.subgroup_depth
     - field.field.group.cluster.subgroup_left
     - field.field.group.cluster.subgroup_right
@@ -65,7 +67,6 @@ third_party_settings:
       children:
         - field_reliefweb_assessments
         - field_assessments_page
-        - field_operation
       label: Assessments
       region: content
       parent_name: group_content
@@ -284,6 +285,23 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  field_sidebar_from_operation:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_sidebar_menu:
+    type: layout_paragraphs
+    weight: 5
+    region: content
+    settings:
+      preview_view_mode: default
+      nesting_depth: 0
+      require_layouts: 0
+      empty_message: ''
+    third_party_settings: {  }
   label:
     type: string_textfield
     weight: 0
@@ -301,19 +319,19 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 4
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   translation:
-    weight: 5
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }

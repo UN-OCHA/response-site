@@ -16,6 +16,8 @@ dependencies:
     - field.field.group.cluster.field_paragraphs
     - field.field.group.cluster.field_reliefweb_assessments
     - field.field.group.cluster.field_reliefweb_documents
+    - field.field.group.cluster.field_sidebar_from_operation
+    - field.field.group.cluster.field_sidebar_menu
     - field.field.group.cluster.subgroup_depth
     - field.field.group.cluster.subgroup_left
     - field.field.group.cluster.subgroup_right
@@ -36,6 +38,15 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_sidebar_menu:
+    type: layout_paragraphs
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
     region: content
   label:
     type: string
@@ -60,6 +71,7 @@ hidden:
   field_pages_page: true
   field_reliefweb_assessments: true
   field_reliefweb_documents: true
+  field_sidebar_from_operation: true
   langcode: true
   subgroup_depth: true
   subgroup_left: true

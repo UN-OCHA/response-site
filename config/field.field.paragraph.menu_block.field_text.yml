@@ -1,0 +1,21 @@
+uuid: 18d78af3-b329-4d44-99e2-d96ce6e9be94
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.menu_block
+  module:
+    - text
+id: paragraph.menu_block.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: menu_block
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

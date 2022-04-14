@@ -1,0 +1,23 @@
+uuid: 2fc08ab5-133f-4345-b6d3-4f4b9093e35f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_sidebar_from_operation
+    - group.type.cluster
+id: group.cluster.field_sidebar_from_operation
+field_name: field_sidebar_from_operation
+entity_type: group
+bundle: cluster
+label: 'Sidebar from operation'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
