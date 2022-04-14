@@ -1,0 +1,7 @@
+hr_paragraphs.add_operation:
+  route_name: 'entity.group.add_form'
+  route_parameters:
+    group_type: 'operation'
+  title: 'Add Operation'
+  appears_on:
+    - 'entity.group.collection'
