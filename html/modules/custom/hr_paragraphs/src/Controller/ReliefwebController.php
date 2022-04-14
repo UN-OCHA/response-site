@@ -301,7 +301,7 @@ class ReliefwebController extends ControllerBase {
         throw new NotFoundHttpException();
       }
       else {
-        return [];
+        throw $exception;
       }
     }
 
@@ -465,6 +465,7 @@ class ReliefwebController extends ControllerBase {
       $operators = array_flip($this->advancedSearchOperators);
       $filters = $this->getFilters();
 
+      $previous = '';
       foreach ($matches as $match) {
         $operator = $operators[$match[1]];
         $code = $match[2];
@@ -501,6 +502,19 @@ class ReliefwebController extends ControllerBase {
               break;
           }
 
+          // Group or fields.
+          $operator = $condition['operator'];
+          if ($previous === '' && $operator !== 'with' && $operator !== 'without') {
+            $operator = strpos($operator, 'without') !== FALSE ? 'without' : 'with';
+          }
+          elseif ($operator === 'or' || $operator === 'or-with') {
+            $operator = $previous;
+          }
+
+          $previous = $operator;
+          $condition['operator'] = $operator;
+
+          // Add condition.
           $key = $filter['field'] . '__' . $condition['operator'];
           if (isset($conditions[$key])) {
             $conditions[$key]['operator'] = $condition['operator'];
