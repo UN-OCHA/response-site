@@ -957,3 +957,12 @@ function hr_paragraphs_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMat
     $breadcrumb->setLinks($links);
   }
 }
+
+/**
+ * Implements hook_menu_local_actions_alter().
+ */
+function hr_paragraphs_menu_local_actions_alter(&$local_actions) {
+  if (isset($local_actions['group.add_group'])) {
+    unset($local_actions['group.add_group']);
+  }
+}
