@@ -16,6 +16,7 @@ dependencies:
     - field.field.group.operation.field_paragraphs
     - field.field.group.operation.field_reliefweb_assessments
     - field.field.group.operation.field_reliefweb_documents
+    - field.field.group.operation.field_sidebar_menu
     - field.field.group.operation.subgroup_depth
     - field.field.group.operation.subgroup_left
     - field.field.group.operation.subgroup_right
@@ -283,6 +284,16 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  field_sidebar_menu:
+    type: layout_paragraphs
+    weight: 4
+    region: content
+    settings:
+      preview_view_mode: default
+      nesting_depth: 0
+      require_layouts: 0
+      empty_message: ''
+    third_party_settings: {  }
   label:
     type: string_textfield
     weight: 0
@@ -300,19 +311,19 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 6
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   translation:
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
