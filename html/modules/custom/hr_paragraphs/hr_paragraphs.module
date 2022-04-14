@@ -983,7 +983,7 @@ function hr_paragraphs_preprocess_node(&$variables) {
   if ($group_content) {
     $group = $group_content->getGroup();
 
-    if ($group->hasField('field_sidebar_from_operation') && !$group->field_sidebar_from_operation->isEmpty()) {
+    if ($group->hasField('field_sidebar_from_operation') && !$group->field_sidebar_from_operation->isEmpty() && $group->field_sidebar_from_operation->value) {
       if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
         $group = Group::load($group->subgroup_tree->value);
       }
@@ -1006,7 +1006,7 @@ function hr_paragraphs_preprocess_group(&$variables) {
   /** @var \Drupal\group\Entity\GroupInterface $group */
   $group = $variables['elements']['#group'];
 
-  if ($group->hasField('field_sidebar_from_operation') && !$group->field_sidebar_from_operation->isEmpty()) {
+  if ($group->hasField('field_sidebar_from_operation') && !$group->field_sidebar_from_operation->isEmpty() && $group->field_sidebar_from_operation->value) {
     if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
       $group = Group::load($group->subgroup_tree->value);
       if ($group->hasField('field_sidebar_menu') && !$group->field_sidebar_menu->isEmpty()) {
