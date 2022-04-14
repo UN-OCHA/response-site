@@ -755,20 +755,30 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
   // Remove facets.
   unset($parameters['facets']);
 
-  // Add conditions.
-  if ($reliefweb_controller->reliefwebQueryType($url) === 'advanced-search') {
-    foreach ($conditions as $condition) {
-      $parameters['filter']['conditions'][] = [
-        'field' => $condition['field'],
-        'value' => $condition['value'],
-      ];
-    }
-  }
-  else {
-    unset($parameters['filter']);
+  // Check for search paramater as well.
+  if (isset($conditions['_query'])) {
     $parameters['query'] = [
-      'value' => $conditions[0],
+      'value' => $conditions['_query'],
       'operator' => 'AND',
+    ];
+    unset($conditions['_query']);
+  }
+
+  foreach ($conditions as $condition) {
+    $negative_operators = [
+      'and-without',
+      'or-without',
+    ];
+    $negate = FALSE;
+
+    if (in_array($condition['operator'], $negative_operators)) {
+      $negate = TRUE;
+    }
+
+    $parameters['filter']['conditions'][] = [
+      'field' => $condition['field'],
+      'value' => $condition['value'],
+      'negate' => $negate,
     ];
   }
 
