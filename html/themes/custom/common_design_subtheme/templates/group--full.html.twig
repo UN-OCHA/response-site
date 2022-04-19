@@ -41,7 +41,14 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes.addClass('hri-operation') }}>
+{%
+  set classes = [
+    'hri-operation',
+    not group.isPublished() ? 'node--unpublished',
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if not page %}
     <h2{{ title_attributes }}>
