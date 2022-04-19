@@ -53,6 +53,9 @@ function paragraphs_group_permissions_paragraph_access(ParagraphInterface $entit
 
   // @todo Allow access if user has group permission.
   $parent = $entity->getParentEntity();
+  if (!$parent) {
+    return AccessResult::neutral();
+  }
 
   /** @var \Drupal\group\Entity\Group */
   $group = NULL;
