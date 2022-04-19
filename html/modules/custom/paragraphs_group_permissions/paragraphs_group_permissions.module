@@ -123,9 +123,10 @@ function paragraphs_group_permissions_paragraph_create_access(AccountInterface $
   $request = \Drupal::request();
   $referer = $request->headers->get('referer');
   if (strpos($referer, '/group/') !== FALSE) {
-    $parts = explode('/', $referer);
+    $parts = explode('/', parse_url($referer, PHP_URL_PATH));
     // Remove 'edit'.
     array_pop($parts);
+
     // Group id.
     $group_id = array_pop($parts);
     $group = Group::load($group_id);
