@@ -129,9 +129,11 @@
           {{ content }}
         </div>
 
-        <div class="cd-layout-sidebar-first" role="complementary">
-          {{ field_sidebar_menu }}
-        </div>
+        {% if field_sidebar_menu is not empty %}
+          <div class="cd-layout-sidebar-first" role="complementary">
+            {{ field_sidebar_menu }}
+          </div>
+        {% endif %}
 
       </div>
     {% endblock %}
