@@ -59,9 +59,11 @@
           {{ content|without('field_sidebar_menu')}}
         </div>
 
-        <div class="cd-layout-sidebar-first" role="complementary">
-          {{ content.field_sidebar_menu }}
-        </div>
+        {% if content.field_sidebar_menu[0] is not empty %}
+          <div class="cd-layout-sidebar-first" role="complementary">
+            {{ content.field_sidebar_menu }}
+          </div>
+        {% endif %}
 
       </div>
     {% endblock %}
