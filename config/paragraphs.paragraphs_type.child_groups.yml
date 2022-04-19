@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: child_groups
-label: 'Child groups'
+label: 'Menu - List of clusters and working groups'
 icon_uuid: null
 icon_default: null
 description: ''
