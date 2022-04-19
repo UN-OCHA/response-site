@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.group.field_paragraphs
     - group.type.cluster
+    - paragraphs.paragraphs_type.child_groups
     - paragraphs.paragraphs_type.twitter_feed
   module:
     - entity_reference_revisions
@@ -22,12 +23,13 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
+      child_groups: child_groups
       twitter_feed: twitter_feed
     negate: 1
     target_bundles_drag_drop:
       child_groups:
         weight: -23
-        enabled: false
+        enabled: true
       featured_highlight:
         weight: -18
         enabled: false
