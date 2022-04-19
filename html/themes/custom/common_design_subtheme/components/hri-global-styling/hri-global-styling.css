@@ -10,3 +10,10 @@
   padding-top: 1rem;
   border-top: 1px solid var(--implementation-light);
 }
+
+/**
+ * Set the background on ANY unpublished node.
+ */
+.node--unpublished {
+  background: #fdd;
+}
