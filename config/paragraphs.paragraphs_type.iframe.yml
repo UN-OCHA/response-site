@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: iframe
-label: iFrame
+label: 'Text - Iframe'
 icon_uuid: null
 icon_default: null
 description: 'Use this to embed an iFrame'

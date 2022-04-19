@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: reliefweb_river
-label: 'Reliefweb river'
+label: 'ReliefWeb - River'
 icon_uuid: null
 icon_default: null
 description: ''

@@ -1,15 +1,10 @@
 uuid: 565c28e9-3068-424d-99d7-b847de84df66
 langcode: en
 status: true
-dependencies:
-  module:
-    - layout_paragraphs
+dependencies: {  }
 id: heading
-label: Heading
+label: 'Text - Heading'
 icon_uuid: null
 icon_default: null
 description: 'A generic heading.'
-behavior_plugins:
-  layout_paragraphs:
-    enabled: false
-    available_layouts: {  }
+behavior_plugins: {  }

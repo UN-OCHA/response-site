@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: featured_highlight
-label: 'Featured Highlight'
+label: 'Text - Featured highlight'
 icon_uuid: null
 icon_default: null
 description: 'Create Highlights that link to other key locations that are relevant to the Operation.'

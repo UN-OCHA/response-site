@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: group_pages
-label: 'Group pages'
+label: 'Menu - List of pages'
 icon_uuid: null
 icon_default: null
 description: ''

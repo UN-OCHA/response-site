@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.group.field_paragraphs
     - group.type.cluster
+    - paragraphs.paragraphs_type.twitter_feed
   module:
     - entity_reference_revisions
 id: group.cluster.field_paragraphs
@@ -20,43 +21,44 @@ default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
-    target_bundles: null
+    target_bundles:
+      twitter_feed: twitter_feed
     negate: 1
     target_bundles_drag_drop:
-      article_card_list:
-        weight: 13
-        enabled: false
       child_groups:
-        weight: 14
+        weight: -23
+        enabled: false
+      featured_highlight:
+        weight: -18
         enabled: false
       group_pages:
-        weight: 15
+        weight: -22
         enabled: false
       heading:
-        weight: 8
+        weight: -17
         enabled: false
       iframe:
-        weight: 9
+        weight: -16
         enabled: false
-      layout:
-        weight: 10
-        enabled: false
-      recent_assessments:
-        weight: 12
+      menu_block:
+        weight: -24
         enabled: false
       reliefweb_document:
-        weight: 20
+        weight: -20
         enabled: false
       reliefweb_river:
-        weight: 21
+        weight: -19
         enabled: false
       rss_feed:
-        weight: 13
+        weight: -21
         enabled: false
       text_block:
-        weight: 14
+        weight: -15
         enabled: false
+      twitter_feed:
+        weight: -14
+        enabled: true
       upcoming_events:
-        weight: 24
+        weight: -25
         enabled: false
 field_type: entity_reference_revisions
