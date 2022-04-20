@@ -1,7 +1,8 @@
+{{ attach_library('common_design_subtheme/hri-layout') }}
 {{ attach_library('common_design_subtheme/hri-river') }}
 
-<div class="hri-river">
-  <div class="hri-river__results">
+<div class="hri-river hri-layout hri-layout--two-col">
+  <div class="hri-river__results hri-layout__main-content">
     {% for row in data %}
       <article class="hri-river__result">
         <header>
@@ -9,14 +10,20 @@
         </header>
         <footer>
           <dl class="meta core">
-            <dt class="format dataset visually-hidden">{{ 'Format'|t }}:</dt>
-            <dd class="format dataset">{{ 'HDX Dataset'|t }}</dd>
+            <div>
+              <dt class="format dataset visually-hidden">{{ 'Format'|t }}:</dt>
+              <dd class="format dataset">{{ 'HDX Dataset'|t }}</dd>
+            </div>
 
-            <dt class="source">{{ 'Source'|t }}:</dt>
-            <dd class="source">{{ row.source }}</dd>
+            <div>
+              <dt class="source">{{ 'Source'|t }}:</dt>
+              <dd class="source">{{ row.source }}</dd>
+            </div>
 
-            <dt class="date posted">{{ 'Last updated'|t }}:</dt>
-            <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+            <div>
+              <dt class="date posted">{{ 'Last updated'|t }}:</dt>
+              <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+            </div>
           </dl>
         </footer>
       </article>
@@ -25,7 +32,7 @@
     {{ pager }}
   </div>{# .hri-river__results #}
 
-  <div class="hri-river__facets-wrapper">
+  <div class="hri-river__facets-wrapper hri-layout__sidebar hri-layout__first">
     <div class="hri-powered-by hri-powered-by--hdx">
       <span class="hri-powered-by__text">Powered by</span>
       <a class="hri-powered-by__link" href="https://data.humdata.org">
