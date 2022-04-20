@@ -127,11 +127,16 @@ function paragraphs_group_permissions_paragraph_create_access(AccountInterface $
   $referer = $request->headers->get('referer');
   if (strpos($referer, '/group/') !== FALSE) {
     $parts = explode('/', parse_url($referer, PHP_URL_PATH));
-    // Remove 'edit'.
-    array_pop($parts);
+    // Group Id is after group string.
+    $group_id = FALSE;
+    foreach ($parts as $index => $part) {
+      if ($part === 'group') {
+        $group_id = $parts[$index + 1];
+        break;
+      }
+    }
 
-    // Group id.
-    $group_id = array_pop($parts);
+    // Group permissions.
     $group = Group::load($group_id);
     if ($group_permission_checker->hasPermissionInGroup($operation . ' paragraph content ' . $type, $account, $group)) {
       $permissions[$account->id()][$type][$operation] = AccessResult::allowed()->cachePerPermissions();
