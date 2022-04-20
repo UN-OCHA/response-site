@@ -3,8 +3,6 @@
  */
 
 .hri-events {
-  --time-column-width: 190px;
-
   padding-bottom: 1rem;
 }
 
@@ -50,9 +48,9 @@
 
 .hri-event__time {
   position: relative;
-  flex: 0 0 var(--time-column-width);
+  flex: 0 0 0;
   order: -1;
-  min-width: var(--time-column-width);
+  white-space: nowrap;
 }
 .hri-event__time::after {
   position: absolute;

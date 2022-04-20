@@ -6,12 +6,31 @@
 #}
 <div class="upcoming-events block">
   <ul class="upcoming-events__list">
+    {% set previousEventStart = '' %}
+
     {% for event in events %}
-      <li class="upcoming-events__event event">
-        <span class="event__title">{{ event.title }}</span>
-        <span class="event__date">{{ event.start|date("d M Y h:i A") }} - {{ event.end|date("h:i A") }}</span>
+      {% if previousEventStart != event.start|date("d M Y") %}
+        <li class="hri-events__heading event-heading">
+          <div class="event-heading__date">
+            {{ event.start|date("d M Y") }}
+          </div>
+          <div class="event-heading__day">
+            {{ event.start|date("l")|t }}
+          </div>
+        </li>
+      {% endif %}
+
+      <li class="upcoming-events__event upcoming-event">
+        <span class="upcoming-event__title">{{ event.title }}</span>
+        <span class="upcoming-event__time">
+          <time datetime="{{ event.start|date("c") }}">{{ event.start|date("h:i A") }}</time>
+          <span class="visually-hidden">{{ 'until'|t }}</span>-
+          <time datetime="{{ event.end|date("c") }}">{{ event.end|date("h:i A") }}</time>
+        </span>
       </li>
+
+      {% set previousEventStart = event.start|date("d M Y") %}
     {% endfor %}
   </ul>
-  <a href="{{ read_more.url }}">{{ read_more.title|t }}</a>
+  <a href="{{ read_more.url }}">{{ 'View all events'|t }}</a>
 </div>
