@@ -25,7 +25,7 @@ settings:
       label: Assessments
     -
       value: datasets
-      label: Datasets
+      label: Data
     -
       value: events
       label: Events
