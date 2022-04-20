@@ -136,6 +136,10 @@ function paragraphs_group_permissions_paragraph_create_access(AccountInterface $
       }
     }
 
+    if (!$group_id || !is_numeric($group_id)) {
+      return AccessResult::neutral();
+    }
+
     // Group permissions.
     $group = Group::load($group_id);
     if ($group_permission_checker->hasPermissionInGroup($operation . ' paragraph content ' . $type, $account, $group)) {
