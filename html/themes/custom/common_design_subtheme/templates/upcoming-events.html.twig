@@ -2,12 +2,16 @@
 /**
  * @file
  * Theme override to display the Upcoming Events paragraph type.
+ *
+ * @overrides html/modules/custom/hr_paragraphs/templates/upcoming-events.html.twig
  */
 #}
-<div class="upcoming-events block">
-  <ul class="upcoming-events__list">
+{{ attach_library('common_design_subtheme/hri-events') }}
+
+<div class="hri-events">
+  <ul class="hri-events__list hri-events__list">
     {% for event in events %}
-      <li class="upcoming-events__event event">
+      <li class="hri-events__event event">
         <span class="event__title">{{ event.title }}</span>
         <span class="event__date">{{ event.start|date("d M Y h:i A") }} - {{ event.end|date("h:i A") }}</span>
       </li>
