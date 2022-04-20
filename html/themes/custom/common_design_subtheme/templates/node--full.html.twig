@@ -84,6 +84,7 @@
 {{ attach_library('common_design/cd-article') }}
 {{ attach_library('common_design/cd-author') }}
 {{ attach_library('common_design/cd-typography') }}
+{{ attach_library('common_design_subtheme/hri-layout') }}
 
 {% set unochaDate = node.getCreatedTime|date('j F Y') %}
 <article{{ attributes.addClass(classes) }}>
@@ -121,23 +122,18 @@
   {% endif %}
 
   <div{{ content_attributes }}>
-
     {% block section %}
-      <div class="cd-layout-two-col">
-
-        <div class="cd-layout-main-content">
+      <div class="hri-layout hri-layout--two-col">
+        <div class="hri-layout__main-content">
           {{ content }}
         </div>
 
         {% if field_sidebar_menu is not empty %}
-          <div class="cd-layout-sidebar-first" role="complementary">
+          <div class="hri-layout__sidebar hri-layout__first" role="complementary">
             {{ field_sidebar_menu }}
           </div>
         {% endif %}
-
       </div>
     {% endblock %}
-
   </div>
-
 </article>
