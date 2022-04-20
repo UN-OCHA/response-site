@@ -31,10 +31,12 @@
 }
 
 .hri-events__event {
+  --hri-event-gap: 2.5rem;
+
   /* layout */
   display: flex;
   flex-flow: row nowrap;
-  gap: 2rem;
+  gap: var(--hri-event-gap);
   align-items: center;
 
   /* cosmetics */
@@ -53,12 +55,14 @@
   white-space: nowrap;
 }
 .hri-event__time::after {
+  --hri-event-dot-size: 0.7rem;
+
   position: absolute;
   top: 50%;
-  right: -0.666rem;
+  right: calc(((var(--hri-event-gap) - var(--hri-event-dot-size)) / -2) - var(--hri-event-dot-size));
   display: block;
-  width: 0.666rem;
-  height: 0.666rem;
+  width: var(--hri-event-dot-size);
+  height: var(--hri-event-dot-size);
   content: "";
   transform: translateY(-50%);
   border-radius: 9999px;
