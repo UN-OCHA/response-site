@@ -2,6 +2,10 @@
  * HR.info Events paragraphs
  */
 
+.hri-events {
+  --time-column-width: 190px;
+}
+
 .hri-events__list {
   /* layout */
   display: flex;
@@ -38,20 +42,20 @@
 }
 
 .hri-event__time {
-  flex: 0 0 175px;
-  order: -1;
   position: relative;
+  flex: 0 0 var(--time-column-width);
+  order: -1;
+  min-width: var(--time-column-width);
 }
 .hri-event__time::after {
   position: absolute;
   top: 50%;
   right: -0.666rem;
-  transform: translateY(-50%);
-
-  content: '';
   display: block;
   width: 0.666rem;
   height: 0.666rem;
+  content: "";
+  transform: translateY(-50%);
   border-radius: 9999px;
-  background: linear-gradient(to bottom, var(--cd-ocha-blue), var(--cd-blue--dark));
+  background: var(--implementation-primary);
 }
