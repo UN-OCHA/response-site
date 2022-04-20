@@ -41,6 +41,11 @@
   padding: 0.5rem;
 }
 
+.hri-events__event:hover {
+  color: #222;
+  background-color: #f7f7f7;
+}
+
 .hri-event__time {
   position: relative;
   flex: 0 0 var(--time-column-width);
@@ -58,4 +63,9 @@
   transform: translateY(-50%);
   border-radius: 9999px;
   background: var(--implementation-primary);
+}
+
+/* show help cursor when an event has a description */
+.hri-event--has-desc .hri-event__title:hover {
+  cursor: help;
 }

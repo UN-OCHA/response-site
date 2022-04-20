@@ -24,8 +24,10 @@
         </li>
       {% endif %}
 
-      <li class="hri-events__event hri-event">
-        <span class="hri-event__title">{{ event.title }}</span>
+      {% set event_classes = event.description != '' ? ' hri-event--has-desc' : '' %}
+
+      <li class="hri-events__event hri-event{{ event_classes }}">
+        <span class="hri-event__title" title="{{ event.description|replace({'&nbsp;': ' ', '<br>': ' '})|striptags|trim }}">{{ event.title }}</span>
         <span class="hri-event__time">
           <time datetime="{{ event.start|date("c") }}">{{ event.start|date("h:i A") }}</time>
           <span class="visually-hidden">{{ 'until'|t }}</span>-
