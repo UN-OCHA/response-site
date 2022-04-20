@@ -42,10 +42,10 @@ hri-dropbutton:
     component:
       components/hri-dropbutton/hri-dropbutton.css: {}
 
-hri-events:
+hri-fullcalendar:
   css:
     component:
-      components/hri-events/hri-events.css: {}
+      components/hri-fullcalendar/hri-fullcalendar.css: {}
 
 hri-global-styling:
   css:
