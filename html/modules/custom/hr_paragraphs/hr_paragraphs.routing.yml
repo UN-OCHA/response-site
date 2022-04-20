@@ -52,10 +52,10 @@ hr_paragraphs.operation.assessments:
 
 hr_paragraphs.operation.datasets:
   path: '/group/{group}/datasets'
-  title: 'Datasets'
+  title: 'Data'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getDatasets'
-    _title: 'Datasets'
+    _title: 'Data'
   requirements:
     _custom_access: 'hr_paragraphs.paragraph_controller:hasDatasets'
   options:

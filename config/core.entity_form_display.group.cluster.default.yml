@@ -35,7 +35,7 @@ third_party_settings:
     group_hdx:
       children:
         - field_hdx_country
-      label: Datasets
+      label: Data
       region: content
       parent_name: group_content
       weight: 27
