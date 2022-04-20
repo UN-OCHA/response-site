@@ -1,8 +1,7 @@
 /**
  * HR.info River
  */
-
-.hri-river {
+.hri-river--with-filters {
   display: flex;
   flex-flow: row wrap;
   gap: 1rem;
