@@ -1,3 +1,57 @@
 /**
  * HR.info Events paragraphs
  */
+
+.hri-events__list {
+  /* layout */
+  display: flex;
+  flex-flow: column nowrap;
+
+  /* cosmetics */
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ddd;
+}
+
+.hri-events .event-heading {
+  /* layout */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 1rem;
+
+  /* cosmetics */
+  padding: 0.5rem;
+  background: #eee;
+  font-weight: 700;
+}
+
+.hri-events__event {
+  /* layout */
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2rem;
+  align-items: center;
+
+  /* cosmetics */
+  padding: 0.5rem;
+}
+
+.hri-event__time {
+  flex: 0 0 175px;
+  order: -1;
+  position: relative;
+}
+.hri-event__time::after {
+  position: absolute;
+  top: 50%;
+  right: -0.666rem;
+  transform: translateY(-50%);
+
+  content: '';
+  display: block;
+  width: 0.666rem;
+  height: 0.666rem;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, var(--cd-ocha-blue), var(--cd-blue--dark));
+}
