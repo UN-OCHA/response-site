@@ -30,16 +30,23 @@
         {% endif %}
         <footer>
           <dl class="meta core">
-            <dt class="format {{ row.format|clean_class }} visually-hidden">{{ 'Format'|t }}:</dt>
-            <dd class="format {{ row.format|clean_class }}">{{ row.format }}</dd>
+            <div>
+              <dt class="format {{ row.format|clean_class }} visually-hidden">{{ 'Format'|t }}:</dt>
+              <dd class="format {{ row.format|clean_class }}">{{ row.format }}</dd>
+            </div>
 
-            <dt class="source">{{ 'Source'|t }}:</dt>
-            <dd class="source">{{ row.sources }}</dd>
+            <div>
+              <dt class="source">{{ 'Source'|t }}:</dt>
+              <dd class="source">{{ row.sources }}</dd>
+            </div>
 
-            <dt class="date posted">{{ 'Posted'|t }}:</dt>
-            <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+            <div>
+              <dt class="date posted">{{ 'Posted'|t }}:</dt>
+              <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+            </div>
 
             {% if row.files|length > 0 %}
+            <div>
               <dt class="files">{{ 'Files'|t }}:</dt>
               <dd class="files">
                 {% for file in row.files %}
@@ -49,6 +56,7 @@
                   </a>
                 {% endfor %}
               </dd>
+            </div>
             {% endif %}
           </dl>
         </footer>

@@ -1,44 +1,14 @@
 /**
  * HR.info River
+ *
+ * The layout is controlled by hri-layout component.
+ *
+ * @see html/themes/custom/common_design_subtheme/components/hri-layout/hri-layout.css
  */
 
 .hri-river {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 1rem;
-
   /* in order to position our skip-links nearer to the River itself */
-  /* stylelint-disable-next-line */
   position: relative;
-}
-
-.hri-river__results {
-  flex: 1 0 100%;
-}
-
-.hri-river__facets-wrapper {
-  flex: 1 0 100%;
-
-  /* Mobile layout has facets first. */
-  order: -1;
-}
-
-/**
- * Big layout is 2-col flexbox with facets at end of reading direction.
- */
-@media (min-width: 860px) {
-  .hri-river {
-    flex-flow: row nowrap;
-  }
-
-  .hri-river__results {
-    flex: 1 0 auto;
-  }
-
-  .hri-river__facets-wrapper {
-    flex: 1 0 280px;
-    order: initial;
-  }
 }
 
 /**
@@ -139,6 +109,10 @@
   padding: 0;
   font-size: var(--cd-font-size--small);
 }
+.hri-river__result .meta div {
+  display: inline;
+  white-space: nowrap;
+}
 .hri-river__result .meta dt {
   display: inline;
   margin: 0;
@@ -155,7 +129,7 @@
   margin: 0 0.5rem;
   content: "•";
 }
-.hri-river__result .meta dd:last-of-type::after {
+.hri-river__result .meta div:last-of-type dd::after {
   content: none;
 }
 

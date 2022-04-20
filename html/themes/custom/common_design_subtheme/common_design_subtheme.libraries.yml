@@ -5,8 +5,8 @@ global-styling:
     theme:
       css/styles.css: {}
   dependencies:
-    - common_design_subtheme/hri-global-styling
     - common_design_subtheme/hri-breadcrumbs
+    - common_design_subtheme/hri-global-styling
     - common_design_subtheme/cd-read-more
 
 cd-read-more:
@@ -61,6 +61,11 @@ hri-iframe:
   css:
     component:
       components/hri-iframe/hri-iframe.css: {}
+
+hri-layout:
+  css:
+    component:
+      components/hri-layout/hri-layout.css: {}
 
 hri-pagination:
   css:

@@ -1,11 +1,12 @@
+{{ attach_library('common_design_subtheme/hri-layout') }}
 {{ attach_library('common_design_subtheme/hri-river') }}
 
-<div class="hri-river">
+<div class="hri-river hri-layout hri-layout--two-col">
   <a href="#hri-river-filters" class="visually-hidden focusable skip-link">
     {{ 'Skip to filters'|t }}
   </a>
 
-  <div class="hri-river__results" id="hri-river-results" aria-labelledby="hri-river-results-heading">
+  <div class="hri-river__results hri-layout__main-content" id="hri-river-results" aria-labelledby="hri-river-results-heading">
     <h2 id="hri-river-results-heading" class="visually-hidden">ReliefWeb results</h2>
 
     {% for row in data %}
@@ -36,16 +37,23 @@
         {% endif %}
         <footer>
           <dl class="meta core">
-            <dt class="format {{ row.format|clean_class }} visually-hidden">{{ 'Format'|t }}:</dt>
-            <dd class="format {{ row.format|clean_class }}">{{ row.format }}</dd>
+            <div>
+              <dt class="format {{ row.format|clean_class }} visually-hidden">{{ 'Format'|t }}:</dt>
+              <dd class="format {{ row.format|clean_class }}">{{ row.format }}</dd>
+            </div>
 
-            <dt class="source">{{ 'Source'|t }}:</dt>
-            <dd class="source">{{ row.sources }}</dd>
+            <div>
+              <dt class="source">{{ 'Source'|t }}:</dt>
+              <dd class="source">{{ row.sources }}</dd>
+            </div>
 
-            <dt class="date posted">{{ 'Posted'|t }}:</dt>
-            <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+            <div>
+              <dt class="date posted">{{ 'Posted'|t }}:</dt>
+              <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+            </div>
 
             {% if row.files|length > 0 %}
+            <div>
               <dt class="files">{{ 'Files'|t }}:</dt>
               <dd class="files">
                 {% for file in row.files %}
@@ -55,6 +63,7 @@
                   </a>
                 {% endfor %}
               </dd>
+            </div>
             {% endif %}
           </dl>
         </footer>
@@ -68,7 +77,7 @@
     {{ 'Skip to results'|t }}
   </a>
 
-  <div class="hri-river__facets-wrapper" id="hri-river-filters" aria-labelledby="hri-river-filters-heading">
+  <div class="hri-river__facets-wrapper hri-layout__sidebar hri-layout__first" id="hri-river-filters" aria-labelledby="hri-river-filters-heading">
     <h2 id="hri-river-filters-heading" class="visually-hidden">ReliefWeb filters</h2>
 
     <div class="hri-powered-by hri-powered-by--reliefweb">
