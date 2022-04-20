@@ -38,5 +38,9 @@
       {% set previousEventStart = event.start|date("d M Y") %}
     {% endfor %}
   </ul>
-  <a href="{{ read_more.url }}">{{ read_more.title|t }}</a>
+
+  <a class="cd-button cd-button--small cd-button--icon" href="{{ read_more.url }}">
+    <span class="cd-button__text">{{ 'View all events'|t }}</span>
+    <svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>
+  </a>
 </div>
