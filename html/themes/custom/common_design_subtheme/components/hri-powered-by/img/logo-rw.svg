@@ -28,6 +28,6 @@
     <use xlink:href="#colored" width="140" height="60"/>
   </symbol>
   <!-- Actual content -->
-  <use xlink:href="#colored-with-background" x="0" y="0" width="140" height="60"/>
+  <use xlink:href="#colored" x="0" y="0" width="140" height="60"/>
   <use xlink:href="#white" x="0" y="60" width="140" height="60"/>
 </svg>
