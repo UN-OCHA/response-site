@@ -14,6 +14,8 @@ use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupContent;
 use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
+use GuzzleHttp\RequestOptions;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Implements hook_theme().
@@ -1014,4 +1016,116 @@ function hr_paragraphs_preprocess_group(&$variables) {
       }
     }
   }
+}
+
+/**
+ * Parse query string, allowing duplicate keys.
+ */
+function hr_paragraphs_parse_str($string) {
+  $results = [];
+  $parts = explode('&', $string);
+
+  foreach ($parts as $part) {
+    // Split into name and value.
+    [$name, $value] = explode('=', $part, 2);
+
+    // Decode value.
+    $value = urldecode($value);
+
+    // If name already exists.
+    if (isset($results[$name])) {
+      // Stick multiple values into an array.
+      if (is_array($results[$name])) {
+        $results[$name][] = $value;
+      }
+      else {
+        $results[$name] = [$results[$name], $value];
+      }
+    }
+    // Otherwise, simply stick it in a scalar.
+    else {
+      $results[$name] = $value;
+    }
+  }
+
+  return $results;
+}
+
+/**
+ * Build HDX query parameters.
+ */
+function hr_paragraphs_build_hdx_query($filters) {
+  $parameters = [
+    'q' => '',
+    'fq' => '+dataset_type:dataset -extras_archived:true',
+    'fq_list' => [],
+    'facet.field' => [
+      '{!ex=groups}groups',
+      '{!ex=res_format}res_format',
+      '{!ex=organization}organization',
+      '{!ex=vocab_Topics}vocab_Topics',
+      '{!ex=license_id}license_id',
+    ],
+    'facet.limit' => 200,
+    'sort' => 'score desc, if(gt(last_modified,review_date),last_modified,review_date) desc',
+    'start' => 0,
+    'rows' => 25,
+  ];
+
+  foreach ($filters as $key => $values) {
+    switch ($key) {
+      case 'q':
+      case 'sort':
+        $parameters[$key] = $values;
+        break;
+
+      case 'groups':
+        if (is_array($values)) {
+          $parameters['fq_list'][] = '{!tag=groups}groups:"' . implode('" AND "', $values) . '"';
+        }
+        else {
+          $parameters['fq_list'][] = '{!tag=groups}groups:"' . $values . '"';
+        }
+        break;
+
+      case 'organization':
+        if (is_array($values)) {
+          $parameters['fq_list'][] = '{!tag=organization}organization:"' . implode('" OR "', $values) . '"';
+        }
+        else {
+          $parameters['fq_list'][] = '{!tag=organization}organization:"' . $values . '"';
+        }
+        break;
+
+    }
+  }
+
+  return $parameters;
+}
+
+/**
+ * Fetch HDX data and facets.
+ */
+function hr_paragraphs_get_hdx_data($parameters) {
+  $endpoint = 'https://data.humdata.org/api/3/action/package_search';
+
+  try {
+    $response = \Drupal::httpClient()->request(
+      'POST',
+      $endpoint,
+      [
+        RequestOptions::JSON => $parameters,
+      ]
+    );
+  }
+  catch (\Exception $exception) {
+    if ($exception->getCode() === 404) {
+      throw new NotFoundHttpException();
+    }
+  }
+
+  $body = $response->getBody() . '';
+  $results = json_decode($body, TRUE);
+
+  return $results;
 }
