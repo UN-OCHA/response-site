@@ -3,12 +3,15 @@
  * Common Design component library. If you want to customize for HR.info please
  * use the sibling file: hri-tabs.css
  */
+
+/**
+ * Mobile tabs (default)
+ */
 ul.tabs {
   --cd-tabs-border-width: 2px;
 
   display: flex;
   flex-flow: row wrap;
-  gap: 0.5rem;
   margin: 1rem 0 2rem;
   padding: 0;
   list-style: none;
@@ -23,16 +26,10 @@ ul.tabs > li {
   margin-bottom: calc(var(--cd-tabs-border-width) * -1);
 }
 
-@media (min-width: 576px) {
-  ul.tabs > li {
-    flex-basis: auto;
-  }
-}
-
 ul.tabs > li > a {
   display: block;
   margin: 0;
-  padding: 0.25rem 1rem;
+  padding: 0.5rem 1rem;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -47,8 +44,6 @@ ul.tabs > li > a {
 ul.tabs > li > a.is-active,
 ul.tabs > li > a:hover {
   color: var(--implementation-primary);
-  border: 0 none !important;
-  border-bottom: 2px solid var(--implementation-light) !important;
   background-color: var(--implementation-light);
 }
 
@@ -59,4 +54,23 @@ ul.tabs > li > a.is-active {
 ul.tabs > li > a:focus {
   outline: 3px solid var(--implementation-highlight);
   background: var(--implementation-light);
+}
+
+/**
+ * Standard tabs.
+ *
+ * Once we have enough room, expand tabs to a wrappable row and remove borders.
+ */
+@media (min-width: 576px) {
+  ul.tabs {
+    gap: 0.5rem;
+  }
+  ul.tabs > li {
+    flex-basis: auto;
+    margin-bottom: 0;
+  }
+  ul.tabs > li > a {
+    padding: 0.25rem 1rem;
+    border-bottom: 0;
+  }
 }
