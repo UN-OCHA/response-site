@@ -66,3 +66,64 @@
 .paragraph--type--text-block .align-right {
   margin-left: 1rem;
 }
+
+
+.upcoming-events__list {
+  /* layout */
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 720px;
+
+  /* cosmetics */
+  margin: 0 0 1rem 0;
+  padding: 0;
+  border: 1px solid #ddd;
+}
+
+.upcoming-events .event-heading {
+  /* layout */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 1rem;
+
+  /* cosmetics */
+  padding: 0.5rem;
+  background: #eee;
+  font-weight: 700;
+}
+
+.upcoming-event {
+  /* layout */
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2rem;
+  align-items: center;
+
+  /* cosmetics */
+  padding: 0.5rem;
+}
+
+.upcoming-event:hover {
+  color: #222;
+  background-color: #f7f7f7;
+}
+
+.upcoming-event__time {
+  position: relative;
+  flex: 0 0 0;
+  order: -1;
+  white-space: nowrap;
+}
+.upcoming-event__time::after {
+  position: absolute;
+  top: 50%;
+  right: -1.25rem;
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  content: "";
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  background: #666;
+}

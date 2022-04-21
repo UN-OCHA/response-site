@@ -34,7 +34,7 @@ libraries-extend:
   common_design/cd-button:
     - common_design_subtheme/hri-button
   hr_paragraphs/fullcalendar:
-    - common_design_subtheme/hri-events
+    - common_design_subtheme/hri-fullcalendar
 
 # Replace certain libraries with our own implementation.
 #

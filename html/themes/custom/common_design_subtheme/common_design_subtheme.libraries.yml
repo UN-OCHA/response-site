@@ -47,6 +47,11 @@ hri-events:
     component:
       components/hri-events/hri-events.css: {}
 
+hri-fullcalendar:
+  css:
+    component:
+      components/hri-fullcalendar/hri-fullcalendar.css: {}
+
 hri-global-styling:
   css:
     component:

@@ -1,0 +1,8 @@
+/**
+ * HR.info customizations to FullCalendar output.
+ */
+
+/* stylelint-disable-next-line selector-id-pattern */
+#fullCalModal br {
+  display: none;
+}
