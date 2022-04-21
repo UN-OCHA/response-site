@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Template override for Cluster or Working Groups list.
+ *
+ * @overrides html/modules/custom/hr_paragraphs/templates/group-children.html.twig
+ *
+ * @see hr_paragraphs_preprocess_paragraph__group_pages()
+ */
+#}
+{{ attach_library('common_design/cd-bullet-list') }}
+
+<ul class="cd-bullet-list">
+  {% for child in children %}
+    <li><a href="{{ child.link }}">{{ child.label }}</a></li>
+  {% endfor %}
+</ul>
