@@ -1066,12 +1066,14 @@ function hr_paragraphs_build_hdx_query($filters) {
       '{!ex=vocab_Topics}vocab_Topics',
       '{!ex=license_id}license_id',
     ],
-    'facet.limit' => 200,
+    'facet.limit' => 250,
     'sort' => 'score desc, if(gt(last_modified,review_date),last_modified,review_date) desc',
     'start' => 0,
     'rows' => 25,
   ];
 
+  // Pasted filters from URL are using OR.
+  // Local filters on HRInfo will use and and no tag.
   foreach ($filters as $key => $values) {
     switch ($key) {
       case 'q':
@@ -1080,20 +1082,12 @@ function hr_paragraphs_build_hdx_query($filters) {
         break;
 
       case 'groups':
-        if (is_array($values)) {
-          $parameters['fq_list'][] = '{!tag=groups}groups:"' . implode('" AND "', $values) . '"';
-        }
-        else {
-          $parameters['fq_list'][] = '{!tag=groups}groups:"' . $values . '"';
-        }
-        break;
-
       case 'organization':
         if (is_array($values)) {
-          $parameters['fq_list'][] = '{!tag=organization}organization:"' . implode('" OR "', $values) . '"';
+          $parameters['fq_list'][] = '{!tag=' . $key . '}' . $key . ':"' . implode('" OR "', $values) . '"';
         }
         else {
-          $parameters['fq_list'][] = '{!tag=organization}organization:"' . $values . '"';
+          $parameters['fq_list'][] = '{!tag=' . $key . '}' . $key . ':"' . $values . '"';
         }
         break;
 
