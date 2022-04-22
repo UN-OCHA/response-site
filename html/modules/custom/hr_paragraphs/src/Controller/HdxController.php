@@ -308,8 +308,21 @@ class HdxController extends ControllerBase {
    * Parse Hdx URL.
    */
   public function parseHdxUrl(string $url) : array {
+    $path = parse_url($url, PHP_URL_PATH);
     $query = parse_url($url, PHP_URL_QUERY);
-    return hr_paragraphs_parse_str($query);
+
+    if ($path === '/dataset') {
+      return hr_paragraphs_parse_str($query);
+    }
+
+    if (strpos($path, '/group/') === 0) {
+      $parts = explode('/', $path);
+      return [
+        'groups' => array_pop($parts),
+      ];
+    }
+
+    return [];
   }
 
 }
