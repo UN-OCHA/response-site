@@ -550,13 +550,6 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
 }
 
 /**
- * Helper function to sort Events by start-time.
- */
-function __start_sort($a, $b) {
-  return strtotime($b['start']) < strtotime($a['start']) ? 1 : -1;
-}
-
-/**
  * Implements hook_preprocess_paragraph__type().
  */
 function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
@@ -579,7 +572,9 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
   $events = $ical_controller->getIcalEvents($group, $start, $end);
 
   // Sort by start time.
-  usort($events, "__start_sort");
+  usort($events, function ($a, $b) {
+    return strtotime($b['start']) < strtotime($a['start']) ? 1 : -1;
+  });
 
   $variables['content']['upcoming'] = [
     '#theme' => 'upcoming_events',
