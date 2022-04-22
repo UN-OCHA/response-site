@@ -37,6 +37,7 @@ permissions:
   - 'view paragraph content heading'
   - 'view paragraph content iframe'
   - 'view paragraph content layout'
+  - 'view paragraph content menu_block'
   - 'view paragraph content offices'
   - 'view paragraph content recent_assessments'
   - 'view paragraph content reliefweb_document'

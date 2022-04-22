@@ -27,6 +27,11 @@ hri-breadcrumbs:
     theme:
       components/hri-breadcrumbs/hri-breadcrumbs.css: {}
 
+hri-bullet-list:
+  css:
+    theme:
+      components/hri-bullet-list/hri-bullet-list.css: {}
+
 hri-button:
   css:
     theme:
@@ -46,6 +51,11 @@ hri-events:
   css:
     component:
       components/hri-events/hri-events.css: {}
+
+hri-fullcalendar:
+  css:
+    component:
+      components/hri-fullcalendar/hri-fullcalendar.css: {}
 
 hri-global-styling:
   css:

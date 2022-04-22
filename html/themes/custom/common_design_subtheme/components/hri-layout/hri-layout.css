@@ -24,6 +24,7 @@
 .hri-layout--two-col > .hri-layout__sidebar {
   padding: 1rem;
   background-color: var(--cd-grey--light);
+  font-size: 1rem;
 }
 
 @media (min-width: 880px) {

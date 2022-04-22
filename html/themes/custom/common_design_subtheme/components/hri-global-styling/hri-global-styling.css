@@ -12,6 +12,13 @@
 }
 
 /**
+ * Tighten up the headings for each Paragraph
+ */
+.field--name-field-paragraphs .field--name-field-title {
+  margin-top: 0;
+}
+
+/**
  * Set the background on ANY unpublished node.
  */
 .node--unpublished {

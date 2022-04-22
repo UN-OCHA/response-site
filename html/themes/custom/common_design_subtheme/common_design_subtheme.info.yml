@@ -31,10 +31,12 @@ libraries-extend:
     - common_design_subtheme/hri-dropbutton
   common_design/cd-pagination:
     - common_design_subtheme/hri-pagination
+  common_design/cd-bullet-list:
+    - common_design_subtheme/hri-bullet-list
   common_design/cd-button:
     - common_design_subtheme/hri-button
   hr_paragraphs/fullcalendar:
-    - common_design_subtheme/hri-events
+    - common_design_subtheme/hri-fullcalendar
 
 # Replace certain libraries with our own implementation.
 #

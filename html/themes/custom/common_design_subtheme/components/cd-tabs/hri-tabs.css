@@ -12,6 +12,6 @@ ul.tabs > li > a {
 #block-operation-tabs ul.tabs > li:first-child > a {
   text-transform: none;
   color: inherit;
-  background-color: var(--implementation-light);
+  background-color: var(--cd-grey--light);
   font-size: var(--cd-font-size--medium);
 }

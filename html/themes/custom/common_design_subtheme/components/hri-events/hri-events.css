@@ -1,8 +1,75 @@
 /**
- * HR.info customizations to FullCalendar output.
+ * HR.info Events paragraphs
  */
 
-/* stylelint-disable-next-line selector-id-pattern */
-#fullCalModal br {
-  display: none;
+.hri-events {
+  padding-bottom: 1rem;
+}
+
+.hri-events__list {
+  /* layout */
+  display: flex;
+  flex-flow: column nowrap;
+
+  /* cosmetics */
+  margin: 0 0 1rem 0;
+  padding: 0;
+  border: 1px solid #ddd;
+}
+
+.hri-events .event-heading {
+  /* layout */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 1rem;
+
+  /* cosmetics */
+  padding: 0.5rem;
+  background: #eee;
+  font-weight: 700;
+}
+
+.hri-events__event {
+  --hri-event-gap: 2.5rem;
+
+  /* layout */
+  display: flex;
+  flex-flow: row nowrap;
+  gap: var(--hri-event-gap);
+  align-items: center;
+
+  /* cosmetics */
+  padding: 0.5rem;
+}
+
+.hri-events__event:hover {
+  color: #222;
+  background-color: #f7f7f7;
+}
+
+.hri-event__time {
+  position: relative;
+  flex: 0 0 0;
+  order: -1;
+  white-space: nowrap;
+}
+.hri-event__time::after {
+  --hri-event-dot-size: 0.7rem;
+
+  position: absolute;
+  top: 50%;
+  right: calc(((var(--hri-event-gap) - var(--hri-event-dot-size)) / -2) - var(--hri-event-dot-size));
+  display: block;
+  width: var(--hri-event-dot-size);
+  height: var(--hri-event-dot-size);
+  content: "";
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  background: var(--implementation-primary);
+}
+
+/* show help cursor when an event has a description */
+.hri-event--has-desc .hri-event__title:hover {
+  cursor: help;
 }
