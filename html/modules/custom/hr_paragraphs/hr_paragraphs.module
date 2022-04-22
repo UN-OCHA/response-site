@@ -111,7 +111,7 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
     return;
   }
 
-  $new_alias = '/operations/' . $page_title;
+  $new_alias = '/' . $page_title;
 
   /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
   $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
