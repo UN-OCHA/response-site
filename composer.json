@@ -62,7 +62,7 @@
         "drupal/subgroup": "^1.0",
         "drupal/theme_switcher": "^1.2",
         "drupal/user_expire": "^1.0",
-        "drush/drush": "^10.2",
+        "drush/drush": "11",
         "fullcalendar/fullcalendar": "^3.10.0",
         "galbar/jsonpath": "^2.0",
         "league/commonmark": "1.6",
