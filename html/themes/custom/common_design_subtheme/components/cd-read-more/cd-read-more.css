@@ -5,5 +5,5 @@
   font-size: var(--cd-font-size--small);
 }
 .cd-read-more svg {
-  fill: var(--implementation-primary-dark);
+  fill: var(--brand-primary--dark);
 }

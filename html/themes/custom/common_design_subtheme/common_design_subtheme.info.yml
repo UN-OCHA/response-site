@@ -6,10 +6,6 @@ package: HR.info
 base theme: common_design
 logo: 'img/logos/reliefweb-operations.svg'
 
-# Defines libraries group in which we can add css/js.
-libraries:
-  - common_design_subtheme/global-styling
-
 # Regions
 regions:
   header_top: Header top
@@ -38,17 +34,39 @@ libraries-extend:
   hr_paragraphs/fullcalendar:
     - common_design_subtheme/hri-fullcalendar
 
-# Replace certain libraries with our own implementation.
+###
+# Define the default library for the subtheme. If you want to include other
+# libraries by default, add them as dependencies to global-styling.
 #
-# This should be done when none of the original styles are desired, or you want
-# to "prototype" a modification to the upstream library without relying on a
-# branch within the upstream repo. For example, to contribute a change to our
-# Common Design components.
+# @see common_design_subtheme.libraries.yml
+#
+libraries:
+  - common_design_subtheme/global-styling
+
+###
+# Extend libraries to add site-specific styles to the base-theme components.
+# Now, wherever the CD Teaser is used, both the base-theme component and your
+# modifications will automatically apply. NOTE: the Drupal library must be
+# defined in the libraries.yml file to be used here.
+#
+# @see common_design_subtheme.libraries.yml
+#
+# libraries-extend:
+#   common_design/cd-teaser:
+#     - common_design_subtheme/custom-teaser
+
+###
+# Override libraries to replace specific base-theme components. Now, when the
+# base-theme component would have been used, instead ONLY yours will apply.
+#
 libraries-override:
   common_design/cd-tabs: common_design_subtheme/cd-tabs
 
-# Custom namespace
-# https://www.drupal.org/docs/contributed-modules/components/understanding-twig-namespaces
-# Requires Components module
+###
+# Custom namespace - requires Components module
+#
+# @see https://www.drupal.org/project/components
+# @see https://www.drupal.org/docs/contributed-modules/components/understanding-twig-namespaces
+#
 # components:
 #   namespaces:

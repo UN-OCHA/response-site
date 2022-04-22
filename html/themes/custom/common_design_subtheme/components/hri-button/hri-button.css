@@ -2,24 +2,24 @@
  * Extends the base CD Button component.
  */
 .cd-button {
-  background-color: var(--implementation-primary);
+  background-color: var(--brand-primary);
 }
 .cd-button:hover {
-  background-color: var(--implementation-primary-light);
+  background-color: var(--brand-primary--light);
 }
 
 .cd-button--light {
   color: var(--cd-white);
-  background-color: var(--implementation-secondary);
+  background-color: var(--brand-secondary);
 }
 .cd-button--light:hover {
   color: var(--cd-white);
-  background-color: var(--implementation-secondary);
+  background-color: var(--brand-secondary);
   background-image: linear-gradient(rgba(255, 255, 255, 0.0625), rgba(255, 255, 255, 0.0625));
 }
 .cd-button--light:focus {
   color: var(--cd-white);
   border-color: black;
-  background-color: var(--implementation-secondary);
+  background-color: var(--brand-secondary);
   background-image: linear-gradient(rgba(255, 255, 255, 0.0625), rgba(255, 255, 255, 0.0625));
 }

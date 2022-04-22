@@ -3,7 +3,7 @@
  */
 
 .cd-table th {
-  color: var(--implementation-primary-dark);
+  color: var(--brand-primary--dark);
 }
 
 /* Force a min-width on Dataset column */
