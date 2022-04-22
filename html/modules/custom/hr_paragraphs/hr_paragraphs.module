@@ -510,9 +510,6 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   if (in_array('display_date', $rss_options)) {
     $options['display_date'] = TRUE;
   }
-  if (in_array('display_description', $rss_options)) {
-    $options['display_description'] = TRUE;
-  }
 
   // Slice array.
   $items = array_slice($items, 0, $max_number_of_items);
