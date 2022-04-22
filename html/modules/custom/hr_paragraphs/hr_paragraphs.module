@@ -20,16 +20,11 @@ use Drupal\subgroup\MalformedLeafException;
  */
 function hr_paragraphs_theme($existing, $type, $theme, $path) {
   return [
-    'hdx_dataset' => [
-      'template' => 'hdx-dataset',
+    'river' => [
+      'template' => 'river',
       'variables' => [
-        'data' => [],
-        'pager' => NULL,
-      ],
-    ],
-    'rw_river' => [
-      'template' => 'rw-river',
-      'variables' => [
+        'service' => NULL,
+        'service_url' => NULL,
         'data' => [],
         'total' => [],
         'facets' => [],

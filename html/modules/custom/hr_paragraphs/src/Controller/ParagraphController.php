@@ -383,7 +383,9 @@ class ParagraphController extends ControllerBase {
     }
 
     return [
-      '#theme' => 'rw_river',
+      '#theme' => 'river',
+      '#service' => 'Humanitarian Data Exchange',
+      '#service_url' => 'https://data.humdata.org',
       '#data' => $this->hdxController->buildHdxObjects($results),
       '#total' => $count,
       '#facets' => $facets,
@@ -500,7 +502,9 @@ class ParagraphController extends ControllerBase {
     }
 
     return [
-      '#theme' => 'rw_river',
+      '#theme' => 'river',
+      '#service' => 'ReliefWeb',
+      '#service_url' => 'https://reliefweb.int',
       '#data' => $this->reliefwebController->buildReliefwebObjects($results),
       '#total' => $count,
       '#facets' => $facets,

@@ -7,7 +7,7 @@
   </a>
 
   <div class="hri-river__results hri-layout__main-content" id="hri-river-results" aria-labelledby="hri-river-results-heading">
-    <h2 id="hri-river-results-heading" class="visually-hidden">ReliefWeb results</h2>
+    <h2 id="hri-river-results-heading" class="visually-hidden">{{ service }} results</h2>
 
     {% for row in data %}
       <article class="hri-river__result" data-rw-id="{{ row.id }}">
@@ -47,7 +47,7 @@
           <dl class="meta core">
             <div>
               <dt class="format {{ row.format|clean_class }} visually-hidden">{{ 'Format'|t }}:</dt>
-              <dd class="format {{ row.format|clean_class }}">{{ row.format }}</dd>
+              <dd class="format {{ row.format|clean_class }}">{{ row.format|t }}</dd>
             </div>
 
             <div>
@@ -64,12 +64,15 @@
             <div>
               <dt class="files">{{ 'Files'|t }}:</dt>
               <dd class="files">
-                {% for file in row.files %}
-                  <a class="cd-button cd-button--icon cd-button--small" href="{{ file.url }}" title="{{ file.url }}">
+                {% for file in row.files|slice(0,1) %}
+                  <a class="cd-button cd-button--icon cd-button--small" href="{{ file.url }}" title="{{ file.name }}">
                     <span class="visually-hidden">{{ 'Download'|t }}</span>
                     <svg class="cd-icon cd-icon--copyurl" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copyurl"></use></svg>
                   </a>
                 {% endfor %}
+                {% if row.files|length > 1 %}
+                  <em>&nbsp;+ {{ row.files|length - 1 }} more</em>
+                {% endif %}
               </dd>
             </div>
             {% endif %}
@@ -86,12 +89,12 @@
   </a>
 
   <div class="hri-river__facets-wrapper hri-layout__sidebar hri-layout__first" id="hri-river-filters" aria-labelledby="hri-river-filters-heading">
-    <h2 id="hri-river-filters-heading" class="visually-hidden">ReliefWeb filters</h2>
+    <h2 id="hri-river-filters-heading" class="visually-hidden">{{ service }} filters</h2>
 
-    <div class="hri-powered-by hri-powered-by--reliefweb">
+    <div class="hri-powered-by hri-powered-by--{{ service|clean_class }}">
       <span class="hri-powered-by__text">Powered by</span>
-      <a class="hri-powered-by__link" href="https://reliefweb.int">
-        <span class="visually-hidden">Reliefweb</span>
+      <a class="hri-powered-by__link" href="{{ service_url }}">
+        <span class="visually-hidden">{{ service }}</span>
       </a>
     </div>
 
