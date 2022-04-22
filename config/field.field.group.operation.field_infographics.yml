@@ -11,8 +11,8 @@ id: group.operation.field_infographics
 field_name: field_infographics
 entity_type: group
 bundle: operation
-label: 'Maps / Infographics page'
-description: ''
+label: 'Alternate source'
+description: 'If you want to link to a different source for your maps and infographics, please provide the link.'
 required: false
 translatable: false
 default_value: {  }

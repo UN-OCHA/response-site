@@ -7,7 +7,8 @@ dependencies:
     - field.field.group.operation.field_calendar_link
     - field.field.group.operation.field_documents_page
     - field.field.group.operation.field_enabled_tabs
-    - field.field.group.operation.field_hdx_country
+    - field.field.group.operation.field_hdx_alternate_source
+    - field.field.group.operation.field_hdx_dataset_link
     - field.field.group.operation.field_ical_url
     - field.field.group.operation.field_infographics
     - field.field.group.operation.field_maps_infographics_link
@@ -62,7 +63,8 @@ hidden:
   field_calendar_link: true
   field_documents_page: true
   field_enabled_tabs: true
-  field_hdx_country: true
+  field_hdx_alternate_source: true
+  field_hdx_dataset_link: true
   field_ical_url: true
   field_infographics: true
   field_maps_infographics_link: true
