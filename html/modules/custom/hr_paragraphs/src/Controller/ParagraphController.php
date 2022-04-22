@@ -9,7 +9,6 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -55,14 +54,22 @@ class ParagraphController extends ControllerBase {
   protected $reliefwebController;
 
   /**
+   * Hdx controller.
+   *
+   * @var \Drupal\hr_paragraphs\Controller\HdxController
+   */
+  protected $hdxController;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller, $reliefweb_controller) {
+  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller, $reliefweb_controller, $hdx_controller) {
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
     $this->pagerManager = $pager_manager;
     $this->icalController = $ical_controller;
     $this->reliefwebController = $reliefweb_controller;
+    $this->hdxController = $hdx_controller;
   }
 
   /**
@@ -320,64 +327,67 @@ class ParagraphController extends ControllerBase {
    * Return all datasets of an operation, sector or cluster.
    */
   public function getDatasets($group, Request $request) {
-    $limit = 10;
-    $offset = 0;
+    if ($group->hasField('field_hdx_alternate_source') && !$group->field_hdx_alternate_source->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_hdx_alternate_source->first();
 
-    if ($request->query->has('page')) {
-      $offset = $request->query->getInt('page', 0) * $limit;
-    }
-
-    if ($group->field_hdx_country->isEmpty()) {
-      return [
-        '#type' => 'markup',
-        '#markup' => $this->t('Country not set.'),
-      ];
-    }
-
-    // Get country.
-    $country = $group->field_hdx_country->value;
-
-    $endpoint = 'https://data.humdata.org/api/3/action/package_search';
-    $parameters = [
-      'q' => 'groups:' . strtolower($country),
-      'rows' => $limit,
-      'start' => $offset,
-    ];
-
-    try {
-      $response = $this->httpClient->request(
-        'GET',
-        $endpoint,
-        [
-          'query' => $parameters,
-        ]
-      );
-    }
-    catch (RequestException $exception) {
-      if ($exception->getCode() === 404) {
-        throw new NotFoundHttpException();
+      // Redirect external links.
+      if ($link->isExternal()) {
+        return new TrustedRedirectResponse($link->getUrl()->getUri());
       }
     }
 
-    $body = $response->getBody() . '';
-    $results = json_decode($body, TRUE);
-
-    $count = $results['result']['count'];
-    $this->pagerManager->createPager($count, $limit);
-
-    $data = [];
-    foreach ($results['result']['results'] as $row) {
-      $data[] = [
-        'id' => $row['id'],
-        'title' => $row['title'],
-        'last_modified' => strtotime($row['last_modified']),
-        'source' => $row['dataset_source'],
+    if ($group->field_hdx_dataset_link->isEmpty()) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('HDX dataset URL not set.'),
       ];
     }
 
+    $url = $group->field_hdx_dataset_link->first()->uri;
+
+    $limit = 10;
+    $offset = $request->query->getInt('page', 0) * $limit;
+    $filters = $request->query->get('filters', []);
+
+    $base_url = $request->getRequestUri();
+
+    // Base filter from entered URL.
+    $query_filters = $this->hdxController->parseHdxUrl($url);
+
+    // Build Hdx query.
+    $parameters = $this->hdxController->buildHdxParameters($offset, $limit, $query_filters);
+
+    // Add filters.
+    foreach ($filters as $key => $filter) {
+      if (is_array($filter)) {
+        $parameters['fq_list'][] = $key . ':' . implode(' AND ', $filter);
+      }
+      else {
+        $parameters['fq_list'][] = $key . ':' . $filter;
+      }
+    }
+
+    $results = $this->hdxController->executeHdxQuery($parameters);
+
+    // Active facets.
+    $active_facets = $this->hdxController->buildHdxActiveFacets($base_url, $filters, $results['search_facets'] ?? []);
+
+    $count = $results['count'];
+    $this->pagerManager->createPager($count, $limit);
+
+    // Re-order facets.
+    $facets = [];
+    if (isset($results['search_facets'])) {
+      $facets = $this->hdxController->buildHdxFacets($base_url, $results['search_facets'], $filters, $query_filters);
+    }
+
     return [
-      '#theme' => 'hdx_dataset',
-      '#data' => $data,
+      '#theme' => 'rw_river',
+      '#data' => $this->hdxController->buildHdxObjects($results),
+      '#total' => $count,
+      '#facets' => $facets,
+      '#active_facets' => $active_facets,
       '#pager' => [
         '#type' => 'pager',
       ],
