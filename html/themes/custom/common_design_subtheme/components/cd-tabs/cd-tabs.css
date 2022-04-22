@@ -15,7 +15,7 @@ ul.tabs {
   margin: 1rem 0 2rem;
   padding: 0;
   list-style: none;
-  border-bottom: var(--cd-tabs-border-width) solid var(--implementation-light);
+  border-bottom: var(--cd-tabs-border-width) solid var(--brand-light);
 }
 
 ul.tabs > li {
@@ -33,9 +33,9 @@ ul.tabs > li > a {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  color: var(--implementation-primary);
+  color: var(--brand-primary);
   border: 0 none;
-  border-bottom: var(--cd-tabs-border-width) solid var(--implementation-light);
+  border-bottom: var(--cd-tabs-border-width) solid var(--brand-light);
   border-radius: 0;
   background: none;
   font-weight: 700;
@@ -43,17 +43,17 @@ ul.tabs > li > a {
 
 ul.tabs > li > a.is-active,
 ul.tabs > li > a:hover {
-  color: var(--implementation-primary);
-  background-color: var(--implementation-light);
+  color: var(--brand-primary);
+  background-color: var(--brand-light);
 }
 
 ul.tabs > li > a.is-active {
-  background-color: var(--implementation-light);
+  background-color: var(--brand-light);
 }
 
 ul.tabs > li > a:focus {
-  outline: 3px solid var(--implementation-highlight);
-  background: var(--implementation-light);
+  outline: 3px solid var(--brand-highlight);
+  background: var(--brand-light);
 }
 
 /**

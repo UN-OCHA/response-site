@@ -23,7 +23,7 @@
   margin-bottom: 0.5rem;
   padding: 0.5rem;
   padding-bottom: calc(0.5rem - 2px);
-  border-bottom: 2px solid var(--implementation-light);
+  border-bottom: 2px solid var(--brand-light);
 }
 
 .hri-river__facets-count__value {
@@ -62,14 +62,14 @@
 
 /* all results but the first */
 .hri-river__result + .hri-river__result {
-  border-top: 1px solid var(--implementation-light);
+  border-top: 1px solid var(--brand-light);
 }
 
 .hri-river__result .country {
   display: inline;
   margin-inline-end: 0.75em;
   padding: 0.25em 1em;
-  background: var(--implementation-light);
+  background: var(--brand-light);
   font-size: var(--cd-font-size--small);
 }
 .hri-river__result .country--primary {
@@ -98,7 +98,7 @@
     display: initial;
 
     /* setup desktop layout */
-    flex: 1 0 auto;
+    flex: 0 0 auto;
     max-height: 118px;
     margin-inline-end: 1rem;
   }
