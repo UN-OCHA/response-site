@@ -30,6 +30,23 @@
               <dt class="date posted">{{ 'Last updated'|t }}:</dt>
               <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
             </div>
+
+            {% if row.files|length > 0 %}
+            <div>
+              <dt class="files">{{ 'Files'|t }}:</dt>
+              <dd class="files">
+                {% for file in row.files|slice(0,1) %}
+                  <a class="cd-button cd-button--icon cd-button--small" href="{{ file.url }}" title="{{ file.name }}">
+                    <span class="visually-hidden">{{ 'Download'|t }}</span>
+                    <svg class="cd-icon cd-icon--copyurl" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copyurl"></use></svg>
+                  </a>
+                {% endfor %}
+                {% if row.files|length > 1 %}
+                  <em>&nbsp;+ {{ row.files|length - 1 }} more</em>
+                {% endif %}
+              </dd>
+            </div>
+            {% endif %}
           </dl>
         </footer>
       </article>
@@ -52,6 +69,6 @@
       </a>
     </div>
 
-    <p><em>No filters available for this data.</em></p>
+    <p><em>{{ 'No filters available for this data.'|t }}</em></p>
   </div>{# .hri-river__facets-wrapper #}
 </div>{# .hri-river #}

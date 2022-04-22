@@ -370,8 +370,10 @@ class ParagraphController extends ControllerBase {
       $data[] = [
         'id' => $row['id'],
         'title' => $row['title'],
+        'url' => 'https://data.humdata.org/dataset/' . $row['name'],
         'last_modified' => strtotime($row['last_modified']),
         'source' => $row['dataset_source'],
+        'files' => $row['resources'],
       ];
     }
 

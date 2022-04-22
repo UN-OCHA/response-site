@@ -15,6 +15,18 @@
 
             <dt class="date posted">{{ 'Last updated'|t }}:</dt>
             <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+
+            {% if row.files|length > 0 %}
+              <dt class="files">{{ 'Files'|t }}:</dt>
+              <dd class="files">
+                {% for file in row.files|slice(0,1) %}
+                  <a href="{{ file.url }}" title="{{ file.name }}">{{ 'Download'|t }}</a>
+                {% endfor %}
+                {% if row.files|length > 1 %}
+                  <em>&nbsp;+ {{ row.files|length - 1 }} more</em>
+                {% endif %}
+              </dd>
+            {% endif %}
           </dl>
         </footer>
       </article>
