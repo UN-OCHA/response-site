@@ -7,7 +7,8 @@ dependencies:
     - field.field.group.operation.field_calendar_link
     - field.field.group.operation.field_documents_page
     - field.field.group.operation.field_enabled_tabs
-    - field.field.group.operation.field_hdx_country
+    - field.field.group.operation.field_hdx_alternate_source
+    - field.field.group.operation.field_hdx_dataset_link
     - field.field.group.operation.field_ical_url
     - field.field.group.operation.field_infographics
     - field.field.group.operation.field_maps_infographics_link
@@ -28,7 +29,6 @@ dependencies:
     - layout_paragraphs
     - link
     - path
-    - select2
 third_party_settings:
   field_group:
     group_content:
@@ -147,8 +147,9 @@ third_party_settings:
         required_fields: true
     group_hdx:
       children:
-        - field_hdx_country
-      label: Data
+        - field_hdx_dataset_link
+        - field_hdx_alternate_source
+      label: Datasets
       region: content
       parent_name: group_content
       weight: 25
@@ -211,12 +212,21 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_hdx_country:
-    type: select2
-    weight: 33
+  field_hdx_alternate_source:
+    type: link_default
+    weight: 35
     region: content
     settings:
-      width: 100%
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_hdx_dataset_link:
+    type: link_default
+    weight: 34
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_ical_url:
     type: string_textfield

@@ -5,6 +5,7 @@ dependencies:
   config:
     - filter.format.basic_html
     - filter.format.full_html
+    - filter.format.markdown
   module:
     - contact
     - filter
@@ -30,6 +31,7 @@ permissions:
   - 'override page revision option'
   - 'use text format basic_html'
   - 'use text format full_html'
+  - 'use text format markdown'
   - 'view assessment external entity'
   - 'view assessment_document external entity'
   - 'view assessment_status external entity'
@@ -53,7 +55,6 @@ permissions:
   - 'view paragraph content heading'
   - 'view paragraph content iframe'
   - 'view paragraph content layout'
-  - 'view paragraph content menu_block'
   - 'view paragraph content offices'
   - 'view paragraph content recent_assessments'
   - 'view paragraph content reliefweb_document'

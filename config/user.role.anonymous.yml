@@ -2,8 +2,11 @@ uuid: 7ef34071-3ca0-4ba6-95a8-9630e48eb1a4
 langcode: en
 status: true
 dependencies:
+  config:
+    - filter.format.markdown
   module:
     - contact
+    - filter
     - paragraphs_type_permissions
     - system
 _core:
@@ -15,6 +18,7 @@ is_admin: false
 permissions:
   - 'access content'
   - 'access site-wide contact form'
+  - 'use text format markdown'
   - 'view assessment external entity'
   - 'view assessment_document external entity'
   - 'view assessment_status external entity'
@@ -37,7 +41,6 @@ permissions:
   - 'view paragraph content heading'
   - 'view paragraph content iframe'
   - 'view paragraph content layout'
-  - 'view paragraph content menu_block'
   - 'view paragraph content offices'
   - 'view paragraph content recent_assessments'
   - 'view paragraph content reliefweb_document'
