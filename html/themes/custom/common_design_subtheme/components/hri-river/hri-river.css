@@ -98,7 +98,7 @@
     display: initial;
 
     /* setup desktop layout */
-    flex: 1 0 auto;
+    flex: 0 0 auto;
     max-height: 118px;
     margin-inline-end: 1rem;
   }
