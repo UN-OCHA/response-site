@@ -266,15 +266,17 @@ class HdxController extends ControllerBase {
 
     foreach ($results['results'] as $row) {
       $id = $row['id'];
-      $url = 'https://data.humdata.org/dataset/' . $id;
       $data[$id] = [
         'id' => $id,
+        'url' => 'https://data.humdata.org/dataset/' . $row['name'],
         'title' => $row['title'],
         'body' => check_markup($row['notes'] ?? '', 'markdown'),
-        'url' => $url,
         'date_changed' => $row['review_date'] ?? $row['metadata_modified'],
         'organization' => $row['organization']['name'],
         'organization_img' => $row['organization']['image_url'],
+        'primary_country' => $row['groups'][0]['title'],
+        'countries' => $row['groups'],
+        'format' => 'Dataset',
       ];
 
       if (isset($row['groups'])) {
