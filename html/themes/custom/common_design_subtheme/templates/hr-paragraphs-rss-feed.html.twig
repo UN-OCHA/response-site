@@ -1,8 +1,9 @@
+{{ attach_library('common_design/cd-bullet-list') }}
 {{ attach_library('common_design_subtheme/cd-button') }}
 {{ attach_library('common_design_subtheme/hri-rss-feed') }}
 
 <div class="external-feed--wrapper hri-rss-feed">
-  <ul class="external-feed--list">
+  <ul class="external-feed--list cd-bullet-list">
     {% for item in items %}
       <li class="external-feed--item">
       <div class="external-feed--item-title">
