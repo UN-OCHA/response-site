@@ -3,7 +3,7 @@ global-styling:
     js/login_destination.js: {}
   css:
     theme:
-      css/styles.css: {}
+      css/brand.css: {}
   dependencies:
     - common_design_subtheme/hri-breadcrumbs
     - common_design_subtheme/hri-global-styling
