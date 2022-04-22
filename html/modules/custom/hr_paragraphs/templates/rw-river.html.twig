@@ -28,7 +28,7 @@
           {% else %}
             {% for file in row.files|slice(0, 1) %}
               {% if file.preview != '' %}
-                <p>Please see the attached infographic.</p>
+                <p>{{ 'Please see the attached infographic.'|t }}</p>
               {% endif %}
             {% endfor %}
           {% endif %}
