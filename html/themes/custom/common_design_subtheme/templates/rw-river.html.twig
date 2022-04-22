@@ -20,21 +20,29 @@
           </p>
           <h3 class="title"><a href="{{ row.url }}">{{ row.title }}</a></h3>
         </header>
-        {% if row.body != '' %}
-          <div class="content">
-            {% for file in row.files|slice(0, 1) %}
-              {% if file.preview != '' %}
-                <img src="{{ file.preview }}" alt="{{ file.description }}">
-              {% endif %}
-            {% endfor %}
 
+        <div class="content">
+          {% for file in row.files|slice(0, 1) %}
+            {% if file.preview != '' %}
+              <img src="{{ file.preview }}" alt="{{ file.description }}">
+            {% endif %}
+          {% endfor %}
+
+          {% if row.body != '' %}
             {% if row.body|striptags|split(' ')|length > 36 %}
               <p>{{ row.body|striptags|split(' ')|slice(0, 36)|join(' ')|raw }}&hellip;</p>
             {% else %}
               <p>{{ row.body|striptags|raw }}</p>
             {% endif %}
-          </div>
-        {% endif %}
+          {% else %}
+            {% for file in row.files|slice(0, 1) %}
+              {% if file.preview != '' %}
+                <p>{{ 'Please see the attached infographic.'|t }}</p>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+
         <footer>
           <dl class="meta core">
             <div>
