@@ -16,7 +16,7 @@ id: group.operation.field_reliefweb_assessments
 field_name: field_reliefweb_assessments
 entity_type: group
 bundle: operation
-label: 'Reliefweb assessments'
+label: 'ReliefWeb updates link for Assessments'
 description: 'Link from https://reliefweb.int/updates'
 required: false
 translatable: true

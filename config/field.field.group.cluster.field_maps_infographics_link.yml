@@ -16,7 +16,7 @@ id: group.cluster.field_maps_infographics_link
 field_name: field_maps_infographics_link
 entity_type: group
 bundle: cluster
-label: 'Maps / Infographics link'
+label: 'ReliefWeb updates link for Maps / Infographics'
 description: 'Link from https://reliefweb.int/updates'
 required: false
 translatable: false

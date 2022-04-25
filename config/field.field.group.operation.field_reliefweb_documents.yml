@@ -16,7 +16,7 @@ id: group.operation.field_reliefweb_documents
 field_name: field_reliefweb_documents
 entity_type: group
 bundle: operation
-label: 'Reliefweb documents'
+label: 'ReliefWeb updates link for Reports'
 description: 'Link from https://reliefweb.int/updates'
 required: false
 translatable: false
