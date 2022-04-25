@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46ea416de4a796f426721ea8afcacaba",
+    "content-hash": "2d8f65eef224ed7bf3037bd4e3833280",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6470,23 +6470,24 @@
         },
         {
             "name": "rlanvin/php-rrule",
-            "version": "v1.6.3",
+            "version": "v2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rlanvin/php-rrule.git",
-                "reference": "1373df401e0926cf7548716dabbc0d19603a144d"
+                "reference": "5ef9eedb5d32e0999b18ef0d0c18d463c419cf71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rlanvin/php-rrule/zipball/1373df401e0926cf7548716dabbc0d19603a144d",
-                "reference": "1373df401e0926cf7548716dabbc0d19603a144d",
+                "url": "https://api.github.com/repos/rlanvin/php-rrule/zipball/5ef9eedb5d32e0999b18ef0d0c18d463c419cf71",
+                "reference": "5ef9eedb5d32e0999b18ef0d0c18d463c419cf71",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8|^5.5|^6.5"
+                "phpmd/phpmd": "@stable",
+                "phpunit/phpunit": "^5.7|^6.5|^8.0"
             },
             "suggest": {
                 "ext-intl": "Intl extension is needed for humanReadable()"
@@ -6512,9 +6513,9 @@
             ],
             "support": {
                 "issues": "https://github.com/rlanvin/php-rrule/issues",
-                "source": "https://github.com/rlanvin/php-rrule/tree/v1.6.3"
+                "source": "https://github.com/rlanvin/php-rrule/tree/v2.3.1"
             },
-            "time": "2019-01-13T09:49:03+00:00"
+            "time": "2022-04-22T08:45:04+00:00"
         },
         {
             "name": "stack/builder",
