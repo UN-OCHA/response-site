@@ -79,4 +79,42 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     $this->assertSession()->pageTextNotContains('Agiledrop.com Blog: Drupal DevDays 2022 – Revisiting my first in-person Drupal event');
   }
 
+  /**
+   * Test XML import.
+   */
+  public function testBrokenRssOnPage() {
+    $author = $this->createUser([], null, true);
+    $page_title = 'RSS broken test';
+    $paragraph_title = 'A broken RSS feed';
+
+    // RSS.
+    $paragraph = Paragraph::create([
+      'type' => 'rss_feed',
+    ]);
+    $paragraph->set('field_title', $paragraph_title);
+    $paragraph->set('field_max_number_of_items', 3);
+    $paragraph->set('field_rss_link', [
+      'uri' => 'https://www.example.com/broken/rss.xml',
+    ]);
+
+    $paragraph->isNew();
+    $paragraph->save();
+
+    $node = $this->createNode([
+      'title' => $page_title,
+      'type' => 'page',
+      'uid' => $author->id(),
+      'created' => time(),
+    ]);
+    $node->set('field_paragraphs', [
+      $paragraph,
+    ]);
+    $node->setPublished()->save();
+
+    $this->drupalGet($node->toUrl());
+    $this->assertSession()->statusCodeEquals(200);
+
+    $this->assertSession()->pageTextContains($page_title);
+    $this->assertSession()->pageTextContains($paragraph_title);
+  }
 }

@@ -32,8 +32,11 @@ class StubRssController extends RssController {
   public function getRssItems($url) : array {
     $items = [];
 
-    $xml = new \SimpleXmlElement($this->getTestRss1());
+    if ($url !== 'https://www.drupal.org/planet/rss.xml') {
+      return $items;
+    }
 
+    $xml = new \SimpleXmlElement($this->getTestRss1());
     foreach ($xml->channel->item as $entry) {
       $items[] = [
         'title' => (string) $entry->title,
