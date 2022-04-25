@@ -81,10 +81,10 @@
   order: -1;
 }
 [dir="ltr"] .hri-event--has-desc .hri-event__copy {
-  right: 1.5rem;
+  right: 1.25rem;
 }
 [dir="rtl"] .hri-event--has-desc .hri-event__copy {
-  left: 1.5rem;
+  left: 1.25rem;
 }
 
 /* Horizontal layout for wider phones, tablets, desktop */
