@@ -4,6 +4,7 @@
 
 namespace Drupal\Tests\hr_paragraphs\ExistingSite;
 
+use Drupal\group\Entity\Group;
 use Drupal\hr_paragraphs\Controller\RssController;
 use Drupal\paragraphs\Entity\Paragraph;
 use GuzzleHttp\Client;
@@ -115,6 +116,42 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     $this->assertSession()->statusCodeEquals(200);
 
     $this->assertSession()->pageTextContains($page_title);
+    $this->assertSession()->pageTextContains($paragraph_title);
+  }
+
+  /**
+   * Test XML import.
+   */
+  public function testRssOnOperation() {
+    $group_title = 'Operation X';
+    $paragraph_title = 'An RSS feed';
+
+    // RSS.
+    $paragraph = Paragraph::create([
+      'type' => 'rss_feed',
+    ]);
+    $paragraph->set('field_title', $paragraph_title);
+    $paragraph->set('field_max_number_of_items', 3);
+    $paragraph->set('field_rss_link', [
+      'uri' => 'https://www.drupal.org/planet/rss.xml',
+    ]);
+
+    $paragraph->isNew();
+    $paragraph->save();
+
+    $group = Group::create([
+      'type' => 'operation',
+      'label' => $group_title,
+    ]);
+    $group->set('field_paragraphs', [
+      $paragraph,
+    ]);
+    $group->setPublished()->save();
+
+    $this->drupalGet($group->toUrl());
+    $this->assertSession()->statusCodeEquals(200);
+
+    $this->assertSession()->pageTextContains($group_title);
     $this->assertSession()->pageTextContains($paragraph_title);
   }
 }
