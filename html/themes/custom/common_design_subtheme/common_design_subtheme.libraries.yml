@@ -6,6 +6,7 @@ global-styling:
       css/brand.css: {}
   dependencies:
     - common_design_subtheme/hri-breadcrumbs
+    - common_design_subtheme/hri-cd-header
     - common_design_subtheme/hri-global-styling
     - common_design_subtheme/cd-read-more
 
@@ -26,6 +27,11 @@ hri-breadcrumbs:
   css:
     theme:
       components/hri-breadcrumbs/hri-breadcrumbs.css: {}
+
+hri-cd-header:
+  css:
+    theme:
+      components/hri-cd-header/hri-cd-header.css: {}
 
 hri-bullet-list:
   css:
