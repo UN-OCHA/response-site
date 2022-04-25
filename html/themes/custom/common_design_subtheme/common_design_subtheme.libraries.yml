@@ -1,9 +1,9 @@
 global-styling:
-  js:
-    js/login_destination.js: {}
   css:
     theme:
       css/brand.css: {}
+  js:
+    js/login_destination.js: {}
   dependencies:
     - common_design_subtheme/hri-breadcrumbs
     - common_design_subtheme/hri-global-styling
@@ -51,6 +51,10 @@ hri-events:
   css:
     component:
       components/hri-events/hri-events.css: {}
+  js:
+    components/hri-events/hri-events.js: {}
+  dependencies:
+    - common_design_subtheme/hri-tooltip
 
 hri-fullcalendar:
   css:
@@ -111,6 +115,11 @@ hri-text-block:
   css:
     theme:
       components/hri-text-block/hri-text-block.css: {}
+
+hri-tooltip:
+  css:
+    theme:
+      components/hri-tooltip/hri-tooltip.css: {}
 
 hri-twitter-feed:
   css:

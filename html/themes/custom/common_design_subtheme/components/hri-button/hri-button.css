@@ -23,3 +23,7 @@
   background-color: var(--brand-secondary);
   background-image: linear-gradient(rgba(255, 255, 255, 0.0625), rgba(255, 255, 255, 0.0625));
 }
+
+.cd-button--icon.cd-button--small.cd-button--icon-no-margin span + svg {
+  margin: 0;
+}
