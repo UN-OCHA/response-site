@@ -7,6 +7,7 @@
  */
 #}
 {{ attach_library('common_design_subtheme/hri-events') }}
+{{ attach_library('common_design/cd-button') }}
 
 {% set previousEventStart = '' %}
 
@@ -24,15 +25,24 @@
         </li>
       {% endif %}
 
-      {% set event_classes = event.description != '' ? ' hri-event--has-desc' : '' %}
+      {% set event_has_desc = event.description != '' ? ' hri-event--has-desc' : '' %}
+      {% set event_details = event.description|replace({'<br>': ' '})|striptags|replace({'&nbsp;': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|trim %}
 
-      <li class="hri-events__event hri-event{{ event_classes }}">
-        <span class="hri-event__title" title="{{ event.description|replace({'&nbsp;': ' ', '<br>': ' '})|striptags|trim }}">{{ event.title }}</span>
+      <li class="hri-events__event hri-event{{ event_has_desc }}">
+        <span class="hri-event__title" title="{{ event_details }}">{{ event.title }}</span>
         <span class="hri-event__time">
           <time datetime="{{ event.start|date("c") }}">{{ event.start|date("h:i A") }}</time>
           <span class="visually-hidden">{{ 'until'|t }}</span>-
           <time datetime="{{ event.end|date("c") }}">{{ event.end|date("h:i A") }}</time>
         </span>
+        {% if event_has_desc %}
+          <span class="hri-event__copy">
+            <button class="cd-button cd-button--icon cd-button--small cd-button--icon-no-margin hri-tooltip" data-message="{{ 'Event details copied to clipboard'|t }}" data-details="{{ event.title }} — {{ event.start|date("h:i A") }} — {{ event_details }}">
+              <span class="visually-hidden">{{ 'Copy event details'|t }}</span>
+              <svg class="cd-icon cd-icon--copyurl" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copyurl"></use></svg>
+            </button>
+          </span>
+        {% endif %}
       </li>
 
       {% set previousEventStart = event.start|date("d M Y") %}

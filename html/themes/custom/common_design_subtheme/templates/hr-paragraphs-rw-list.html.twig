@@ -52,7 +52,7 @@
               <dt class="files">{{ 'Files'|t }}:</dt>
               <dd class="files">
                 {% for file in row.files %}
-                  <a class="cd-button cd-button--icon cd-button--small" href="{{ file.url }}" title="{{ file.url }}">
+                  <a class="cd-button cd-button--icon cd-button--small cd-button--icon-no-margin" href="{{ file.url }}" title="{{ file.url }}">
                     <span class="visually-hidden">{{ 'Download'|t }}</span>
                     <svg class="cd-icon cd-icon--copyurl" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copyurl"></use></svg>
                   </a>
