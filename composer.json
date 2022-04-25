@@ -69,6 +69,7 @@
         "npm-asset/moment": "^2.29",
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",
+        "rlanvin/php-rrule": "2.3.1",
         "unocha/common_design": "^7.0"
     },
     "conflict": {
