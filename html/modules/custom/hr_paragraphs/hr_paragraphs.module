@@ -480,23 +480,9 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     'display_read_more' => FALSE,
   ];
 
-  try {
-    $content = file_get_contents($paragraph->field_rss_link->first()->uri);
-    $xml = new SimpleXmlElement($content);
-  }
-  catch (\Exception $exception) {
-    return;
-  }
-
-  $items = [];
-  foreach ($xml->channel->item as $entry) {
-    $items[] = [
-      'title' => (string) $entry->title,
-      'link' => (string) $entry->link,
-      'description' => (string) $entry->description,
-      'date' => strtotime($entry->pubDate),
-    ];
-  }
+  /** @var \Drupal\hr_paragraphs\Controller\RssController $rss_controller */
+  $rss_controller = \Drupal::service('hr_paragraphs.rss_controller');
+  $items = $rss_controller->getRssItems($paragraph->field_rss_link->first()->uri);
 
   if (empty($items)) {
     return;
