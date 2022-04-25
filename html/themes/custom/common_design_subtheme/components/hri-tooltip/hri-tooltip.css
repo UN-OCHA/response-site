@@ -5,13 +5,16 @@
  *       alongside transform functions, which have no concept of reading-dir.
  */
 .hri-tooltip {
+  /* how far will the tooltip travel when it (dis)appears? */
+  --hri-tooltip-offset: 24px;
+
   position: relative;
 }
 .hri-tooltip::before,
 .hri-tooltip::after {
   position: absolute;
   z-index: 4;
-  top: -27px;
+  top: 0;
   transition: 0.1666s ease-in-out;
   transition-property: opacity, transform;
   opacity: 0;
@@ -38,7 +41,7 @@
 }
 
 .hri-tooltip::after {
-  top: -16px;
+  top: 0;
   display: block;
   width: 0;
   height: 0;
@@ -48,21 +51,27 @@
   border-left: 10px solid transparent;
 }
 [dir="ltr"] .hri-tooltip::after {
-  left: 13px;
+  left: 15px;
   transform: translateX(-50%);
 }
 [dir="rtl"] .hri-tooltip::after {
-  right: 13px;
+  right: 15px;
   transform: translateX(50%);
 }
+
 .hri-tooltip.is--showing-message::before,
 .hri-tooltip.is--showing-message::after {
   opacity: 1;
 }
-
 [dir="ltr"] .hri-tooltip.is--showing-message::before {
-  transform: translateX(-89%) translateY(-10px);
+  transform: translateX(-89%) translateY(calc(-4px - var(--hri-tooltip-offset)));
+}
+[dir="ltr"] .hri-tooltip.is--showing-message::after {
+  transform: translateX(-50%) translateY(calc(16px - var(--hri-tooltip-offset)));
 }
 [dir="rtl"] .hri-tooltip.is--showing-message::before {
-  transform: translateX(89%) translateY(-10px);
+  transform: translateX(89%) translateY(calc(-4px - var(--hri-tooltip-offset)));
+}
+[dir="rtl"] .hri-tooltip.is--showing-message::after {
+  transform: translateX(50%) translateY(calc(16px - var(--hri-tooltip-offset)));
 }
