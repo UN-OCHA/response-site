@@ -189,7 +189,8 @@
         "marcocesarato/php-conventional-changelog": "^1.13",
         "phpspec/prophecy-phpunit": "^2",
         "phpunit/php-code-coverage": "^9.2",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "weitzman/drupal-test-traits": "^1.5"
     },
     "version": "v0.0.1"
 }
