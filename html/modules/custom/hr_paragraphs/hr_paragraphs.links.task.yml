@@ -14,14 +14,14 @@ hr_paragraphs.operation.pages:
   route_name: hr_paragraphs.operation.pages
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
-hr_paragraphs.operation.documents.reports:
+hr_paragraphs.operation.reports:
   title: 'Reports'
-  route_name: hr_paragraphs.operation.documents.reports
+  route_name: hr_paragraphs.operation.reports
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
-hr_paragraphs.operation.documents.infographics:
+hr_paragraphs.operation.maps:
   title: 'Maps / Infographics'
-  route_name: hr_paragraphs.operation.documents.infographics
+  route_name: hr_paragraphs.operation.maps
   parent_id: hr_paragraphs.operation
 hr_paragraphs.operation.assessments:
   title: 'Assessments'

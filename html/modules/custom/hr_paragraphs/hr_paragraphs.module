@@ -905,8 +905,8 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
   // Mark local task active for queries.
   $supported_routes = [
     'hr_paragraphs.operation.pages',
-    'hr_paragraphs.operation.documents.reports',
-    'hr_paragraphs.operation.documents.infographics',
+    'hr_paragraphs.operation.reports',
+    'hr_paragraphs.operation.maps',
     'hr_paragraphs.operation.assessments',
     'hr_paragraphs.operation.datasets',
     'hr_paragraphs.operation.events',
