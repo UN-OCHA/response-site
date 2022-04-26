@@ -507,8 +507,9 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     $read_more_url = '';
 
     if ($paragraph->field_rss_read_more->isEmpty()) {
-      if (!empty($xml->channel->link[0])) {
-        $read_more_url = $xml->channel->link[0];
+      $channel_link = $rss_controller->getRssChannelLink($paragraph->field_rss_link->first()->uri);
+      if (!empty($channel_link)) {
+        $read_more_url = $channel_link;
         $options['display_read_more'] = TRUE;
       }
     }
