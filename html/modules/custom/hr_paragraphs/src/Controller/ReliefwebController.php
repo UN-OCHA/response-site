@@ -215,6 +215,7 @@ class ReliefwebController extends ControllerBase {
         'source.shortname',
         'country.name',
         'primary_country.name',
+        'file.id',
         'file.url',
         'file.preview.url-thumb',
         'file.description',
@@ -357,8 +358,19 @@ class ReliefwebController extends ControllerBase {
       if (isset($row['fields']['file'])) {
         $files = [];
         foreach ($row['fields']['file'] as $file) {
+          // To avoid browser serving a stale attachment preview after the
+          // attachment is replaced on reliefweb.int, we add the file.id
+          // property as parameter to the thumbnail URL. This ID (~ revision ID)
+          // changes when replacing a file while the file URL and its preview
+          // URL are preserved (permanent URLs).
+          // The file URL doesn't need this treatment because they only use
+          // a ETag based caching strategy.
+          $preview = '';
+          if (isset($file['preview']['url-thumb'])) {
+            $preview = $this->reliefwebFixUrl($file['preview']['url-thumb']) . '?' . $file['id'];
+          }
           $files[] = [
-            'preview' => isset($file['preview']['url-thumb']) ? $this->reliefwebFixUrl($file['preview']['url-thumb']) : '',
+            'preview' => $preview,
             'url' => $this->reliefwebFixUrl($file['url']),
             'filename' => $file['filename'] ?? '',
             'description' => $file['description'] ?? '',
