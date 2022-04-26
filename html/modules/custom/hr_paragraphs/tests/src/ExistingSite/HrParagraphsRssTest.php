@@ -56,7 +56,7 @@ class HrParagraphsRssTest extends ExistingSiteBase {
   }
 
   /**
-   * Test XML import.
+   * Test RSS feed on a page.
    */
   public function testRssOnPage() {
     $author = $this->createUser([], null, true);
@@ -102,7 +102,64 @@ class HrParagraphsRssTest extends ExistingSiteBase {
   }
 
   /**
-   * Test XML import.
+   * Test RSS feed on a page.
+   */
+  public function testRssOnPageCustomReadMore() {
+    $author = $this->createUser([], null, true);
+    $page_title = 'RSS test';
+    $paragraph_title = 'Drupal Planet RSS';
+
+    // RSS.
+    $paragraph = Paragraph::create([
+      'type' => 'rss_feed',
+    ]);
+    $paragraph->set('field_title', $paragraph_title);
+    $paragraph->set('field_max_number_of_items', 3);
+    $paragraph->set('field_rss_link', [
+      'uri' => 'https://www.drupal.org/planet/rss.xml',
+    ]);
+    $paragraph->set('field_rss_read_more', [
+      'uri' => 'https://www.example.com/readmore',
+    ]);
+    $paragraph->set('field_rss_options', [
+      ['value' => 'display_date'],
+      ['value' => 'display_read_more'],
+    ]);
+
+    $paragraph->isNew();
+    $paragraph->save();
+
+    $node = $this->createNode([
+      'title' => $page_title,
+      'type' => 'page',
+      'uid' => $author->id(),
+      'created' => time(),
+    ]);
+    $node->set('field_paragraphs', [
+      $paragraph,
+    ]);
+    $node->setPublished()->save();
+
+    $output = $this->renderIt('node', $node);
+
+    $this->assertStringContainsString($page_title, $output);
+    $this->assertStringContainsString($paragraph_title, $output);
+
+    $this->assertStringContainsString($paragraph_title, $output);
+
+    $this->assertStringContainsString('DrupalCon News: Explore the Thriving Drupal Agency Ecosystem', $output);
+    $this->assertStringContainsString('#! code: Drupal 9: Using The Caching API To Store Data', $output);
+    $this->assertStringContainsString('Docksal: Docksal 1.17.0 Release', $output);
+    $this->assertStringNotContainsString('Centarro: The ABCs of PDPs and PLPs', $output);
+    $this->assertStringNotContainsString('Agiledrop.com Blog: Drupal DevDays 2022 – Revisiting my first in-person Drupal event', $output);
+
+    $this->assertStringNotContainsString('https://www.drupal.org/planet', $output);
+    $this->assertStringContainsString('https://www.example.com/readmore', $output);
+
+  }
+
+  /**
+   * Test illegal RSS url.
    */
   public function testBrokenRssOnPage() {
     $author = $this->createUser([], null, true);
@@ -146,7 +203,48 @@ class HrParagraphsRssTest extends ExistingSiteBase {
   }
 
   /**
-   * Test XML import.
+   * Test RSS without url.
+   */
+  public function testRssWithoutURLOnPage() {
+    $author = $this->createUser([], null, true);
+    $page_title = 'RSS broken test';
+    $paragraph_title = 'A broken RSS feed';
+
+    // RSS.
+    $paragraph = Paragraph::create([
+      'type' => 'rss_feed',
+    ]);
+    $paragraph->set('field_title', $paragraph_title);
+    $paragraph->set('field_max_number_of_items', 3);
+
+    $paragraph->isNew();
+    $paragraph->save();
+
+    $node = $this->createNode([
+      'title' => $page_title,
+      'type' => 'page',
+      'uid' => $author->id(),
+      'created' => time(),
+    ]);
+    $node->set('field_paragraphs', [
+      $paragraph,
+    ]);
+    $node->setPublished()->save();
+
+    $output = $this->renderIt('node', $node);
+
+    $this->assertStringContainsString($page_title, $output);
+    $this->assertStringContainsString($paragraph_title, $output);
+
+    $this->assertStringNotContainsString('DrupalCon News: Explore the Thriving Drupal Agency Ecosystem', $output);
+    $this->assertStringNotContainsString('#! code: Drupal 9: Using The Caching API To Store Data', $output);
+    $this->assertStringNotContainsString('Docksal: Docksal 1.17.0 Release', $output);
+    $this->assertStringNotContainsString('Centarro: The ABCs of PDPs and PLPs', $output);
+    $this->assertStringNotContainsString('Agiledrop.com Blog: Drupal DevDays 2022 – Revisiting my first in-person Drupal event', $output);
+  }
+
+  /**
+   * Test RSS on group.
    */
   public function testRssOnOperation() {
     $group_title = 'Operation X';
