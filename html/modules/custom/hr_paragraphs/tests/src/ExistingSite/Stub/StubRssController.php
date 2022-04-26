@@ -1,9 +1,9 @@
 <?php
 
-namespace Drupal\hr_paragraphs\Controller;
+namespace Drupal\Tests\hr_paragraphs\ExistingSite\Stub;
 
+use Drupal\hr_paragraphs\Controller\RssController;
 use Drupal\Tests\hr_paragraphs\Traits\RssTestDataTrait;
-use GuzzleHttp\ClientInterface;
 
 /**
  * Page controller for tabs.
@@ -13,21 +13,18 @@ class StubRssController extends RssController {
   use RssTestDataTrait;
 
   /**
-   * The HTTP client to fetch the files with.
-   *
-   * @var \GuzzleHttp\ClientInterface
-   */
-  protected $httpClient;
-
-  /**
    * {@inheritdoc}
    */
-  public function __construct(ClientInterface $http_client) {
-    $this->httpClient = $http_client;
+  public function getRssChannelLink($url) : string {
+    if ($url !== 'https://www.drupal.org/planet/rss.xml') {
+      return '';
+    }
+
+    return 'https://www.drupal.org/planet';
   }
 
   /**
-   * Get ICal events.
+   * {@inheritdoc}
    */
   public function getRssItems($url) : array {
     $items = [];

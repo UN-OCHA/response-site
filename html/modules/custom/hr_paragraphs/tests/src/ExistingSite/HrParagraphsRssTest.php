@@ -5,8 +5,9 @@
 namespace Drupal\Tests\hr_paragraphs\ExistingSite;
 
 use Drupal\group\Entity\Group;
-use Drupal\hr_paragraphs\Controller\RssController;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\Tests\hr_paragraphs\ExistingSite\Stub\StubRssController;
+use Drupal\theme_switcher\Entity\ThemeSwitcherRule;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -14,8 +15,15 @@ use weitzman\DrupalTestTraits\ExistingSiteBase;
 
 /**
  * Tests RSS feed.
+ *
+ * @coversDefaultClass \Drupal\hr_paragraphs\Controller\RssController
  */
 class HrParagraphsRssTest extends ExistingSiteBase {
+
+  /**
+   * An http client.
+   */
+  protected $httpClient;
 
   /**
    * {@inheritdoc}
@@ -25,14 +33,26 @@ class HrParagraphsRssTest extends ExistingSiteBase {
 
     $mock = new MockHandler([]);
     $handlerStack = HandlerStack::create($mock);
-    $http_client = new Client(['handler' => $handlerStack]);
+    $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    /** @var \Drupal\hr_paragraphs\Controller\RssController $rss_controller */
-    $rss_controller = new RssController($http_client);
-
-    $container = $this->kernel->getContainer();
-    $container->set('hr_paragraphs.rss_controller', $rss_controller);
+    $rss_controller = new StubRssController($this->httpClient);
+    $this->container->set('hr_paragraphs.rss_controller', $rss_controller);
     \Drupal::setContainer($this->container);
+  }
+
+  protected function renderIt($entity_type, $entity) {
+    $theme_rule = ThemeSwitcherRule::load('operation_management');
+
+    // Disabel the rule, throws an error on line 184 in
+    // html/core/modules/path_alias/src/AliasManager.php.
+    $theme_rule->disable()->save();
+
+    $view_builder = \Drupal::entityTypeManager()->getViewBuilder($entity_type);
+    $build = $view_builder->view($entity);
+    $output = \Drupal::service('renderer')->renderRoot($build);
+
+    $theme_rule->enable()->save();
+    return $output->__toString();
   }
 
   /**
@@ -67,17 +87,18 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     ]);
     $node->setPublished()->save();
 
-    $this->drupalGet($node->toUrl());
-    $this->assertSession()->statusCodeEquals(200);
+    $output = $this->renderIt('node', $node);
 
-    $this->assertSession()->pageTextContains($page_title);
-    $this->assertSession()->pageTextContains($paragraph_title);
+    $this->assertStringContainsString($page_title, $output);
+    $this->assertStringContainsString($paragraph_title, $output);
 
-    $this->assertSession()->pageTextContains('DrupalCon News: Explore the Thriving Drupal Agency Ecosystem');
-    $this->assertSession()->pageTextContains('#! code: Drupal 9: Using The Caching API To Store Data');
-    $this->assertSession()->pageTextContains('Docksal: Docksal 1.17.0 Release');
-    $this->assertSession()->pageTextNotContains('Centarro: The ABCs of PDPs and PLPs');
-    $this->assertSession()->pageTextNotContains('Agiledrop.com Blog: Drupal DevDays 2022 – Revisiting my first in-person Drupal event');
+    $this->assertStringContainsString($paragraph_title, $output);
+
+    $this->assertStringContainsString('DrupalCon News: Explore the Thriving Drupal Agency Ecosystem', $output);
+    $this->assertStringContainsString('#! code: Drupal 9: Using The Caching API To Store Data', $output);
+    $this->assertStringContainsString('Docksal: Docksal 1.17.0 Release', $output);
+    $this->assertStringNotContainsString('Centarro: The ABCs of PDPs and PLPs', $output);
+    $this->assertStringNotContainsString('Agiledrop.com Blog: Drupal DevDays 2022 – Revisiting my first in-person Drupal event', $output);
   }
 
   /**
@@ -112,11 +133,16 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     ]);
     $node->setPublished()->save();
 
-    $this->drupalGet($node->toUrl());
-    $this->assertSession()->statusCodeEquals(200);
+    $output = $this->renderIt('node', $node);
 
-    $this->assertSession()->pageTextContains($page_title);
-    $this->assertSession()->pageTextContains($paragraph_title);
+    $this->assertStringContainsString($page_title, $output);
+    $this->assertStringContainsString($paragraph_title, $output);
+
+    $this->assertStringNotContainsString('DrupalCon News: Explore the Thriving Drupal Agency Ecosystem', $output);
+    $this->assertStringNotContainsString('#! code: Drupal 9: Using The Caching API To Store Data', $output);
+    $this->assertStringNotContainsString('Docksal: Docksal 1.17.0 Release', $output);
+    $this->assertStringNotContainsString('Centarro: The ABCs of PDPs and PLPs', $output);
+    $this->assertStringNotContainsString('Agiledrop.com Blog: Drupal DevDays 2022 – Revisiting my first in-person Drupal event', $output);
   }
 
   /**
@@ -135,6 +161,10 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     $paragraph->set('field_rss_link', [
       'uri' => 'https://www.drupal.org/planet/rss.xml',
     ]);
+    $paragraph->set('field_rss_options', [
+      ['value' => 'display_date'],
+      ['value' => 'display_read_more'],
+    ]);
 
     $paragraph->isNew();
     $paragraph->save();
@@ -148,10 +178,12 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     ]);
     $group->setPublished()->save();
 
-    $this->drupalGet($group->toUrl());
-    $this->assertSession()->statusCodeEquals(200);
+    $output = $this->renderIt('group', $group);
 
-    $this->assertSession()->pageTextContains($group_title);
-    $this->assertSession()->pageTextContains($paragraph_title);
+    $this->assertStringContainsString($group_title, $output);
+    $this->assertStringContainsString($paragraph_title, $output);
+
+    $this->assertStringContainsString('https://www.drupal.org/planet', $output);
   }
+
 }

@@ -5,7 +5,7 @@
  or your current system user. See core/tests/README.md and
  https://www.drupal.org/node/2116263 for details.
 -->
-<phpunit bootstrap="./html/core/tests/bootstrap.php" colors="true"
+<phpunit bootstrap="./vendor/weitzman/drupal-test-traits/src/bootstrap.php" colors="true"
          beStrictAboutTestsThatDoNotTestAnything="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutChangesToGlobalState="true"
@@ -55,6 +55,7 @@
             disableCodeCoverageIgnore="true">
     <include>
       <directory suffix=".php">./html/modules/custom</directory>
+      <directory suffix=".module">./html/modules/custom</directory>
     </include>
     <exclude>
       <directory suffix="Interface.php">./html/modules/custom</directory>

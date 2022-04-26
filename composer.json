@@ -187,6 +187,7 @@
         "drupal/entity_type_clone": "^1.7",
         "drupal/field_tools": "1.x-dev@dev",
         "marcocesarato/php-conventional-changelog": "^1.13",
+        "phpcompatibility/php-compatibility": "^9.3",
         "phpspec/prophecy-phpunit": "^2",
         "phpunit/php-code-coverage": "^9.2",
         "phpunit/phpunit": "^9.5",

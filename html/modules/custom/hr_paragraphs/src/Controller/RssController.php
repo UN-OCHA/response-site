@@ -18,6 +18,13 @@ class RssController extends ControllerBase {
   protected $httpClient;
 
   /**
+   * Static cache.
+   *
+   * @var string
+   */
+  protected $staticCache = '';
+
+  /**
    * {@inheritdoc}
    */
   public function __construct(ClientInterface $http_client) {
@@ -25,16 +32,65 @@ class RssController extends ControllerBase {
   }
 
   /**
-   * Get ICal events.
+   * Fetch XML.
+   *
+   * @param string $url
+   *   RSS feed url.
+   *
+   * @return \SimpleXmlElement|bool
+   *   XML.
+   */
+  protected function getXml($url) {
+    if (!empty($this->staticCache)) {
+      return $this->staticCache;
+    }
+
+    try {
+      $response = $this->httpClient->request('GET', $url);
+      $this->staticCache = new \SimpleXmlElement($response->getBody());
+      return $this->staticCache;
+    }
+    catch (\Exception $exception) {
+      return FALSE;
+    }
+  }
+
+  /**
+   * Get channel link.
+   *
+   * @param string $url
+   *   RSS feed url.
+   *
+   * @return string
+   *   Link of the feed/page.
+   */
+  public function getRssChannelLink($url) : string {
+    $xml = $this->getXml($url);
+    if (!$xml) {
+      return '';
+    }
+
+    if (!empty($xml->channel->link[0])) {
+      return (string) $xml->channel->link[0];
+    }
+
+    return '';
+  }
+
+  /**
+   * Get rss items.
+   *
+   * @param string $url
+   *   RSS feed url.
+   *
+   * @return array
+   *   List of items.
    */
   public function getRssItems($url) : array {
     $items = [];
 
-    try {
-      $response = $this->httpClient->request('GET', $url);
-      $xml = new \SimpleXmlElement($response->getBody());
-    }
-    catch (\Exception $exception) {
+    $xml = $this->getXml($url);
+    if (!$xml) {
       return $items;
     }
 
