@@ -17,17 +17,19 @@ required: false
 translatable: false
 default_value:
   -
-    value: events
+    value: pages
   -
     value: documents
   -
     value: maps
   -
+    value: assessments
+  -
     value: datasets
   -
-    value: offices
+    value: events
   -
-    value: assessments
+    value: offices
 default_value_callback: ''
 settings: {  }
 field_type: list_string

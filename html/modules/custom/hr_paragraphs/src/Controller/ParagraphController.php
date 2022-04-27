@@ -75,17 +75,17 @@ class ParagraphController extends ControllerBase {
   /**
    * Helper to check if tab is active.
    */
-  protected function tabIsActive($group, $tab) {
+  protected function tabIsActive($group, $tab) : bool {
     if (is_numeric($group)) {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
     }
 
     if (!$group) {
-      return AccessResult::forbidden();
+      return FALSE;
     }
 
     if (!$group->hasField('field_enabled_tabs')) {
-      return AccessResult::forbidden();
+      return FALSE;
     }
 
     $enabled_tabs = $group->field_enabled_tabs->getValue();
@@ -93,7 +93,7 @@ class ParagraphController extends ControllerBase {
       $item = $item['value'];
     });
 
-    return AccessResult::allowedIf(in_array($tab, $enabled_tabs));
+    return in_array($tab, $enabled_tabs);
   }
 
   /**
@@ -102,7 +102,7 @@ class ParagraphController extends ControllerBase {
   public function hasContacts($group) {
     $active = $this->tabIsActive($group, 'offices');
     if (!$active) {
-      return $active;
+      return AccessResult::forbidden();
     }
 
     if (is_numeric($group)) {
@@ -126,7 +126,7 @@ class ParagraphController extends ControllerBase {
   public function hasPages($group) {
     $active = $this->tabIsActive($group, 'pages');
     if (!$active) {
-      return $active;
+      return AccessResult::forbidden();
     }
 
     if (is_numeric($group)) {
@@ -148,28 +148,81 @@ class ParagraphController extends ControllerBase {
    * Check if assessments is enabled.
    */
   public function hasAssessments($group) {
-    return $this->tabIsActive($group, 'assessments');
+    $active = $this->tabIsActive($group, 'assessments');
+    if (!$active) {
+      return AccessResult::forbidden();
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    return AccessResult::allowedIf(!$group->field_assessments_page->isEmpty() || !$group->field_reliefweb_assessments->isEmpty());
+
   }
 
   /**
    * Check if datasets is enabled.
    */
   public function hasDatasets($group) {
-    return $this->tabIsActive($group, 'datasets');
+    $active = $this->tabIsActive($group, 'datasets');
+    if (!$active) {
+      return AccessResult::forbidden();
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    return AccessResult::allowedIf(!$group->field_hdx_alternate_source->isEmpty() || !$group->field_hdx_dataset_link->isEmpty());
   }
 
   /**
    * Check if documents is enabled.
    */
   public function hasDocuments($group) {
-    return $this->tabIsActive($group, 'documents');
+    $active = $this->tabIsActive($group, 'documents');
+    if (!$active) {
+      return AccessResult::forbidden();
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    return AccessResult::allowedIf(!$group->field_documents_page->isEmpty() || !$group->field_reliefweb_documents->isEmpty());
   }
 
   /**
    * Check if maps is enabled.
    */
   public function hasInfographics($group) {
-    return $this->tabIsActive($group, 'maps');
+    $active = $this->tabIsActive($group, 'maps');
+    if (!$active) {
+      return AccessResult::forbidden();
+    }
+
+    if (is_numeric($group)) {
+      $group = $this->entityTypeManager->getStorage('group')->load($group);
+    }
+
+    if (!$group) {
+      return AccessResult::forbidden();
+    }
+
+    return AccessResult::allowedIf(!$group->field_infographics->isEmpty() || !$group->field_maps_infographics_link->isEmpty());
   }
 
   /**
@@ -178,7 +231,7 @@ class ParagraphController extends ControllerBase {
   public function hasEvents($group) {
     $active = $this->tabIsActive($group, 'events');
     if (!$active) {
-      return $active;
+      return AccessResult::forbidden();
     }
 
     if (is_numeric($group)) {

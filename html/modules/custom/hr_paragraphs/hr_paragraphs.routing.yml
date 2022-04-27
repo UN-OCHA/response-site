@@ -11,7 +11,7 @@ hr_paragraphs.operation.pages:
       group:
         type: entity:group
 
-hr_paragraphs.operation.documents.reports:
+hr_paragraphs.operation.reports:
   path: '/group/{group}/reports'
   title: 'Reports'
   defaults:
@@ -24,7 +24,7 @@ hr_paragraphs.operation.documents.reports:
       group:
         type: entity:group
 
-hr_paragraphs.operation.documents.infographics:
+hr_paragraphs.operation.maps:
   path: '/group/{group}/maps'
   title: 'Maps / Infographics'
   defaults:

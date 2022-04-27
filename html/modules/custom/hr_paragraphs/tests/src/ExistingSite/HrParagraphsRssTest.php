@@ -15,8 +15,6 @@ use weitzman\DrupalTestTraits\ExistingSiteBase;
 
 /**
  * Tests RSS feed.
- *
- * @coversDefaultClass \Drupal\hr_paragraphs\Controller\RssController
  */
 class HrParagraphsRssTest extends ExistingSiteBase {
 
