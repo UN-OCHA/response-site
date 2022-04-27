@@ -75,17 +75,17 @@ class ParagraphController extends ControllerBase {
   /**
    * Helper to check if tab is active.
    */
-  protected function tabIsActive($group, $tab) {
+  protected function tabIsActive($group, $tab) : bool {
     if (is_numeric($group)) {
       $group = $this->entityTypeManager->getStorage('group')->load($group);
     }
 
     if (!$group) {
-      return AccessResult::forbidden();
+      return FALSE;
     }
 
     if (!$group->hasField('field_enabled_tabs')) {
-      return AccessResult::forbidden();
+      return FALSE;
     }
 
     $enabled_tabs = $group->field_enabled_tabs->getValue();
@@ -93,7 +93,7 @@ class ParagraphController extends ControllerBase {
       $item = $item['value'];
     });
 
-    return AccessResult::allowedIf(in_array($tab, $enabled_tabs));
+    return in_array($tab, $enabled_tabs);
   }
 
   /**
@@ -102,7 +102,7 @@ class ParagraphController extends ControllerBase {
   public function hasContacts($group) {
     $active = $this->tabIsActive($group, 'offices');
     if (!$active) {
-      return $active;
+      return AccessResult::forbidden();
     }
 
     if (is_numeric($group)) {
@@ -126,7 +126,7 @@ class ParagraphController extends ControllerBase {
   public function hasPages($group) {
     $active = $this->tabIsActive($group, 'pages');
     if (!$active) {
-      return $active;
+      return AccessResult::forbidden();
     }
 
     if (is_numeric($group)) {
@@ -150,7 +150,7 @@ class ParagraphController extends ControllerBase {
   public function hasAssessments($group) {
     $active = $this->tabIsActive($group, 'assessments');
     if (!$active) {
-      return $active;
+      return AccessResult::forbidden();
     }
 
     if (is_numeric($group)) {
@@ -171,7 +171,7 @@ class ParagraphController extends ControllerBase {
   public function hasDatasets($group) {
     $active = $this->tabIsActive($group, 'datasets');
     if (!$active) {
-      return $active;
+      return AccessResult::forbidden();
     }
 
     if (is_numeric($group)) {
@@ -191,7 +191,7 @@ class ParagraphController extends ControllerBase {
   public function hasDocuments($group) {
     $active = $this->tabIsActive($group, 'documents');
     if (!$active) {
-      return $active;
+      return AccessResult::forbidden();
     }
 
     if (is_numeric($group)) {
@@ -211,7 +211,7 @@ class ParagraphController extends ControllerBase {
   public function hasInfographics($group) {
     $active = $this->tabIsActive($group, 'maps');
     if (!$active) {
-      return $active;
+      return AccessResult::forbidden();
     }
 
     if (is_numeric($group)) {
@@ -231,7 +231,7 @@ class ParagraphController extends ControllerBase {
   public function hasEvents($group) {
     $active = $this->tabIsActive($group, 'events');
     if (!$active) {
-      return $active;
+      return AccessResult::forbidden();
     }
 
     if (is_numeric($group)) {
