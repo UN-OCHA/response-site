@@ -1032,3 +1032,26 @@ function hr_paragraphs_parse_str($string) {
 
   return $results;
 }
+
+/**
+ * Implements template_preprocess_html().
+ */
+function hr_paragraphs_preprocess_html(&$variables) {
+  /** @var Drupal\group\Entity\Group $group */
+  $group = \Drupal::request()->attributes->get('group');
+  if (!$group) {
+    return;
+  }
+
+  /** @var \Drupal\Core\Routing\RouteMatch $route_match */
+  $route_match = \Drupal::routeMatch();
+  if (!$route_match) {
+    return;
+  }
+
+  if (strpos($route_match->getRouteName(), 'hr_paragraphs.operation.') === FALSE) {
+    return;
+  }
+
+  $variables['head_title']['title'] = $group->label->value . ' - ' . $variables['head_title']['title'];
+}

@@ -250,17 +250,6 @@ class ParagraphController extends ControllerBase {
   }
 
   /**
-   * Get group title.
-   */
-  public function getGroupTitle($group) {
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    return $group->label->value;
-  }
-
-  /**
    * Return all offices of an operation, sector or cluster.
    */
   public function getContacts($group) {
