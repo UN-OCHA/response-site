@@ -89,6 +89,10 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
  * Implements hook_ENTITY_TYPE_insert().
  */
 function hr_paragraphs_group_insert(EntityInterface $entity) {
+  if ($entity->bundle() != 'operation') {
+    return;
+  }
+
   $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
   $source = '/group/' . $entity->id();
 
@@ -101,11 +105,6 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
   }
 
   $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
-
-  if ($entity->bundle() != 'operation') {
-    return;
-  }
-
   $new_alias = '/' . $page_title;
 
   /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
@@ -224,9 +223,9 @@ function hr_paragraphs_group_update(EntityInterface $entity) {
 }
 
 /**
- * Implements hook_ENTITY_TYPE_insert().
+ * Implements hook_ENTITY_TYPE_update().
  */
-function hr_paragraphs_node_insert(EntityInterface $entity) {
+function hr_paragraphs_node_update(EntityInterface $entity) {
   $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
   $source = '/node/' . $entity->id();
 
@@ -245,6 +244,12 @@ function hr_paragraphs_node_insert(EntityInterface $entity) {
   if ($group_content) {
     $group = $group_content->getGroup();
     $group_alias = $path_alias_manager->getAliasByPath('/group/' . $group->id());
+
+    // Make sure group has a proper alias.
+    if ($group_alias == '/group/' . $group->id()) {
+      return;
+    }
+
     $new_alias = $group_alias . '/' . $page_title;
 
     /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
@@ -258,13 +263,6 @@ function hr_paragraphs_node_insert(EntityInterface $entity) {
 
     $path_alias->save();
   }
-}
-
-/**
- * Implements hook_ENTITY_TYPE_update().
- */
-function hr_paragraphs_node_update(EntityInterface $entity) {
-  return hr_paragraphs_node_insert($entity);
 }
 
 /**
