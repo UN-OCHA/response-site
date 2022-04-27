@@ -18,8 +18,8 @@ class HrParagraphsClusterTabTitlesTest extends ExistingSiteBase {
    * Test cluster titles.
    */
   public function testClusterTabTitles() {
-    $operation_title = 'My operation';
-    $group_title = 'My cluster';
+    $operation_title = 'My operation ' . rand(99999, 9999999);
+    $group_title = 'My cluster ' . rand(99999, 9999999);
 
     $contacts = Node::create([
       'type' => 'page',
@@ -68,6 +68,11 @@ class HrParagraphsClusterTabTitlesTest extends ExistingSiteBase {
     // Add cluster to operation.
     $operation->addContent($group, 'subgroup:' . $group->bundle());
 
+    // Add pages to cluster.
+    $group->addContent($contacts, 'group_node:' . $contacts->bundle());
+    $group->addContent($pages, 'group_node:' . $pages->bundle());
+
+    // Check landing page.
     $this->drupalGet($group->toUrl());
     $this->assertSession()->titleEquals($operation_title . ': ' . $group_title . ' | ReliefWeb Operations');
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $group_title);

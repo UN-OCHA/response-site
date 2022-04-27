@@ -46,6 +46,10 @@ class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
     $group->set('field_reliefweb_assessments', 'https://reliefweb.int/updates?advanced-search=%28F5%29&view=reports');
     $group->setPublished()->save();
 
+    // Add pages to group.
+    $group->addContent($contacts, 'group_node:' . $contacts->bundle());
+    $group->addContent($pages, 'group_node:' . $pages->bundle());
+
     $this->drupalGet($group->toUrl());
     $this->assertSession()->titleEquals($group_title . ' | ReliefWeb Operations');
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $group_title);
