@@ -69,6 +69,20 @@ class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
       $this->assertSession()->titleEquals($group_title . ' - ' . $title . ' | ReliefWeb Operations');
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
     }
+
+    $tabs = [
+      'contacts' => 'My contacts',
+      'pages' => 'My pages',
+    ];
+
+    foreach ($tabs as $tab => $title) {
+      $url = Url::fromRoute('hr_paragraphs.operation.' . $tab, [
+        'group' => $group->id(),
+      ]);
+
+      $this->drupalGet($url);
+      $this->assertSession()->pageTextNotContains($title);
+    }
   }
 
 }
