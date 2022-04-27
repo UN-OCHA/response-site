@@ -1053,9 +1053,26 @@ function hr_paragraphs_preprocess_html(&$variables) {
     return;
   }
 
-  if (strpos($route_match->getRouteName(), 'hr_paragraphs.operation.') === FALSE) {
+  // Only act on group homepage and tabs.
+  if (strpos($route_match->getRouteName(), 'hr_paragraphs.operation.') === FALSE && strpos($route_match->getRouteName(), 'entity.group.canonical') === FALSE) {
     return;
   }
 
-  $variables['head_title']['title'] = $group->label->value . ' - ' . $variables['head_title']['title'];
+  // Add operation name for cluster homepage.
+  if (strpos($route_match->getRouteName(), 'entity.group.canonical') !== FALSE) {
+    if ($group->bundle() == 'cluster' && $group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+      $operation = Group::load($group->subgroup_tree->value);
+      $variables['head_title']['title'] = $operation->label->value . ': ' . $variables['head_title']['title'];
+    }
+
+    return;
+  }
+
+  if ($group->bundle() == 'cluster' && $group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+    $operation = Group::load($group->subgroup_tree->value);
+    $variables['head_title']['title'] = $operation->label->value . ': ' . $group->label->value . ' - ' . $variables['head_title']['title'];
+  }
+  else {
+    $variables['head_title']['title'] = $group->label->value . ' - ' . $variables['head_title']['title'];
+  }
 }
