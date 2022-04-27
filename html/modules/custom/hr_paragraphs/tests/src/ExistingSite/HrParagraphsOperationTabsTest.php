@@ -6,13 +6,7 @@ namespace Drupal\Tests\hr_paragraphs\ExistingSite;
 
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
-use Drupal\paragraphs\Entity\Paragraph;
-use Drupal\Tests\hr_paragraphs\ExistingSite\Stub\StubRssController;
-use Drupal\theme_switcher\Entity\ThemeSwitcherRule;
 use Drupal\user\Entity\User;
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
 use weitzman\DrupalTestTraits\ExistingSiteBase;
 
 /**
@@ -35,7 +29,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->drupalGet($group->toUrl());
     $this->assertSession()->titleEquals($group_title . ' | ReliefWeb Operations');
 
-    $tabs = [
+    $inactive_tabs = [
       'events',
       'contacts',
       'pages',
@@ -44,10 +38,8 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'datasets',
       'assessments',
     ];
-
-    foreach ($tabs as $tab) {
-      $this->assertSession()->linkByHrefNotExists($group->toUrl()->toString() . '/' . $tab);
-    }
+    $active_tabs = [];
+    $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
   }
 
   /**
@@ -78,7 +70,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable events.
-    $group->set('field_ical_url', 'https://www.example.com/events');;
+    $group->set('field_ical_url', 'https://www.example.com/events');
     $group->save();
 
     $inactive_tabs = [
@@ -95,7 +87,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable contacts.
-    $group->set('field_offices_page', 'https://www.example.com/contacts');;
+    $group->set('field_offices_page', 'https://www.example.com/contacts');
     $group->save();
 
     $inactive_tabs = [
@@ -112,7 +104,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable pages.
-    $group->set('field_pages_page', 'https://www.example.com/pages');;
+    $group->set('field_pages_page', 'https://www.example.com/pages');
     $group->save();
 
     $inactive_tabs = [
@@ -129,7 +121,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable reports.
-    $group->set('field_documents_page', 'https://www.example.com/reports');;
+    $group->set('field_documents_page', 'https://www.example.com/reports');
     $group->save();
 
     $inactive_tabs = [
@@ -146,7 +138,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable maps.
-    $group->set('field_infographics', 'https://www.example.com/maps');;
+    $group->set('field_infographics', 'https://www.example.com/maps');
     $group->save();
 
     $inactive_tabs = [
@@ -163,7 +155,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable datasets.
-    $group->set('field_hdx_alternate_source', 'https://www.example.com/datasets');;
+    $group->set('field_hdx_alternate_source', 'https://www.example.com/datasets');
     $group->save();
 
     $inactive_tabs = [
@@ -180,7 +172,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable assessments.
-    $group->set('field_assessments_page', 'https://www.example.com/assessments');;
+    $group->set('field_assessments_page', 'https://www.example.com/assessments');
     $group->save();
 
     $inactive_tabs = [
@@ -195,13 +187,30 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'assessments',
     ];
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
+
+    // Disable all tabs.
+    $group->set('field_enabled_tabs', []);
+    $group->save();
+
+    $inactive_tabs = [
+      'events',
+      'contacts',
+      'pages',
+      'reports',
+      'maps',
+      'datasets',
+      'assessments',
+    ];
+    $active_tabs = [
+    ];
+    $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
   }
 
   /**
    * Test operation tabs.
    */
   public function testOperationTabs2() {
-    $group_title = 'Operation with tabs';
+    $group_title = 'Operation with tabs 2';
 
     $group = Group::create([
       'type' => 'operation',
@@ -225,7 +234,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable events.
-    $group->set('field_ical_url', 'https://www.example.com/events');;
+    $group->set('field_ical_url', 'https://www.example.com/events');
     $group->save();
 
     $inactive_tabs = [
@@ -242,7 +251,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable contacts.
-    $group->set('field_offices_page', 'https://www.example.com/contacts');;
+    $group->set('field_offices_page', 'https://www.example.com/contacts');
     $group->save();
 
     $inactive_tabs = [
@@ -259,7 +268,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable pages.
-    $group->set('field_pages_page', 'https://www.example.com/pages');;
+    $group->set('field_pages_page', 'https://www.example.com/pages');
     $group->save();
 
     $inactive_tabs = [
@@ -276,7 +285,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable reports.
-    $group->set('field_reliefweb_documents', 'https://reliefweb.int/updates?view=reports');;
+    $group->set('field_reliefweb_documents', 'https://reliefweb.int/updates?view=reports');
     $group->save();
 
     $inactive_tabs = [
@@ -293,7 +302,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable maps.
-    $group->set('field_maps_infographics_link', 'https://reliefweb.int/updates?view=maps');;
+    $group->set('field_maps_infographics_link', 'https://reliefweb.int/updates?view=maps');
     $group->save();
 
     $inactive_tabs = [
@@ -310,7 +319,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable datasets.
-    $group->set('field_hdx_dataset_link', 'https://data.humdata.org/dataset');;
+    $group->set('field_hdx_dataset_link', 'https://data.humdata.org/dataset');
     $group->save();
 
     $inactive_tabs = [
@@ -327,7 +336,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
     // Enable assessments.
-    $group->set('field_reliefweb_assessments', 'https://reliefweb.int/updates?advanced-search=%28F5%29&view=reports');;
+    $group->set('field_reliefweb_assessments', 'https://reliefweb.int/updates?advanced-search=%28F5%29&view=reports');
     $group->save();
 
     $inactive_tabs = [
