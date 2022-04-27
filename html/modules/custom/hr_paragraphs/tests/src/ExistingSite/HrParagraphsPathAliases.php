@@ -75,6 +75,25 @@ class HrParagraphsPathAliases extends ExistingSiteBase {
     $this->drupalGet($group->toUrl());
     $this->assertSession()->titleEquals($operation_title . ': ' . $group_title . ' | ReliefWeb Operations');
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $group_title);
+
+    // Change group title.
+    $group_title = 'My cluster ' . rand(99999, 9999999);
+    $group->set('label', $group_title);
+    $group->save();
+
+    // Check URL aliases, these are not changed.
+    $this->assertEquals($operation->toUrl()->toString(), $operation_url);
+    $this->assertEquals($group->toUrl()->toString(), $group_url);
+    $this->assertEquals($contacts->toUrl()->toString(), $contacts_url);
+
+    // Change node title.
+    $contacts->set('title', 'Still my contacts');
+    $contacts->save();
+
+    // Check URL aliases, these are not changed.
+    $this->assertEquals($operation->toUrl()->toString(), $operation_url);
+    $this->assertEquals($group->toUrl()->toString(), $group_url);
+    $this->assertEquals($contacts->toUrl()->toString(), $contacts_url);
   }
 
 }
