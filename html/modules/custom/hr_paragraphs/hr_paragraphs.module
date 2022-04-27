@@ -1008,6 +1008,10 @@ function hr_paragraphs_parse_str($string) {
   $parts = explode('&', $string);
 
   foreach ($parts as $part) {
+    if (strpos($part, '=') === FALSE) {
+      continue;
+    }
+
     // Split into name and value.
     [$name, $value] = explode('=', $part, 2);
 
