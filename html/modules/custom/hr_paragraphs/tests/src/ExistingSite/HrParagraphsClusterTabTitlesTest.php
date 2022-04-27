@@ -12,13 +12,14 @@ use weitzman\DrupalTestTraits\ExistingSiteBase;
 /**
  * Tests RSS feed.
  */
-class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
+class HrParagraphsClusterTabTitlesTest extends ExistingSiteBase {
 
   /**
-   * Test empty operation.
+   * Test cluster titles.
    */
-  public function testOperationTabTitles() {
-    $group_title = 'My operation';
+  public function testClusterTabTitles() {
+    $operation_title = 'My operation ' . rand(99999, 9999999);
+    $group_title = 'My cluster ' . rand(99999, 9999999);
 
     $contacts = Node::create([
       'type' => 'page',
@@ -32,8 +33,14 @@ class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
     ]);
     $pages->setPublished()->save();
 
-    $group = Group::create([
+    $operation = Group::create([
       'type' => 'operation',
+      'label' => $operation_title,
+    ]);
+    $operation->setPublished()->save();
+
+    $group = Group::create([
+      'type' => 'cluster',
       'label' => $group_title,
     ]);
 
@@ -44,14 +51,30 @@ class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
     $group->set('field_maps_infographics_link', 'https://reliefweb.int/updates?view=maps');
     $group->set('field_hdx_dataset_link', 'https://data.humdata.org/dataset');
     $group->set('field_reliefweb_assessments', 'https://reliefweb.int/updates?advanced-search=%28F5%29&view=reports');
+
+    // Enable checkbox.
+    $group->set('field_enabled_tabs', [
+      ['value' => 'events'],
+      ['value' => 'offices'],
+      ['value' => 'pages'],
+      ['value' => 'documents'],
+      ['value' => 'maps'],
+      ['value' => 'datasets'],
+      ['value' => 'assessments'],
+    ]);
+
     $group->setPublished()->save();
 
-    // Add pages to group.
+    // Add cluster to operation.
+    $operation->addContent($group, 'subgroup:' . $group->bundle());
+
+    // Add pages to cluster.
     $group->addContent($contacts, 'group_node:' . $contacts->bundle());
     $group->addContent($pages, 'group_node:' . $pages->bundle());
 
+    // Check landing page.
     $this->drupalGet($group->toUrl());
-    $this->assertSession()->titleEquals($group_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($operation_title . ': ' . $group_title . ' | ReliefWeb Operations');
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $group_title);
 
     $tabs = [
@@ -70,7 +93,7 @@ class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
       ]);
 
       $this->drupalGet($url);
-      $this->assertSession()->titleEquals($group_title . ' - ' . $title . ' | ReliefWeb Operations');
+      $this->assertSession()->titleEquals($operation_title . ': ' . $group_title . ' - ' . $title . ' | ReliefWeb Operations');
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
     }
 
