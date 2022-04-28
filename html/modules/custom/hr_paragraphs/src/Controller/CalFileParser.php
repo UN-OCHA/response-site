@@ -118,9 +118,13 @@ class CalFileParser {
       $file_contents = file_get_contents($this->_base_path . $file);
       return $file_contents;
     }
-    else {
-      return FALSE;
+
+    // Assume it's a string.
+    if (!empty($file)) {
+      return $file;
     }
+
+    return FALSE;
   }
 
   /**

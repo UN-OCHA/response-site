@@ -3,21 +3,15 @@
 namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\date_recur\DateRecurHelper;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Page controller for tabs.
  */
 class IcalController extends ControllerBase {
-
-  /**
-   * Entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManager
-   */
-  protected $entityTypeManager;
 
   /**
    * The HTTP client to fetch the files with.
@@ -29,8 +23,7 @@ class IcalController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client) {
-    $this->entityTypeManager = $entity_type_manager;
+  public function __construct(ClientInterface $http_client) {
     $this->httpClient = $http_client;
   }
 
@@ -44,10 +37,30 @@ class IcalController extends ControllerBase {
     $url = $group->field_ical_url->value;
 
     // Fetch and parse iCal.
+    try {
+      $response = $this->httpClient->request(
+        'GET',
+        $url,
+      );
+    }
+    catch (RequestException $exception) {
+      if ($exception->getCode() === 404) {
+        throw new NotFoundHttpException();
+      }
+
+      return [];
+    }
+
+    $body = $response->getBody() . '';
     $cal = new CalFileParser();
-    $events = $cal->parse($url);
+    $events = $cal->parse($body);
 
     $output = [];
+
+    if (!is_array($events)) {
+      return $output;
+    }
+
     foreach ($events as $event) {
       // Collect attachments.
       $attachments = [];

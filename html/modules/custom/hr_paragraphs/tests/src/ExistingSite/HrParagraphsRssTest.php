@@ -10,7 +10,6 @@ use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Tests\hr_paragraphs\Traits\RssTestDataTrait;
 use Drupal\theme_switcher\Entity\ThemeSwitcherRule;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -35,8 +34,6 @@ class HrParagraphsRssTest extends ExistingSiteBase {
    * Set HTTP response.
    */
   protected function setHttpDataResult($data): void {
-    parent::setUp();
-
     $mock = new MockHandler([
       new Response(200, [], $data),
     ]);
@@ -44,7 +41,6 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    // @todo Use real controller, mock http responses.
     $rss_controller = new RssController($this->httpClient);
     $this->container->set('hr_paragraphs.rss_controller', $rss_controller);
     \Drupal::setContainer($this->container);
@@ -54,8 +50,6 @@ class HrParagraphsRssTest extends ExistingSiteBase {
    * Set HTTP excpetion.
    */
   protected function setHttpException(): void {
-    parent::setUp();
-
     $mock = new MockHandler([
       new RequestException('Request exception', new Request('GET', '')),
     ]);
@@ -63,7 +57,6 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    // @todo Use real controller, mock http responses.
     $rss_controller = new RssController($this->httpClient);
     $this->container->set('hr_paragraphs.rss_controller', $rss_controller);
     \Drupal::setContainer($this->container);
