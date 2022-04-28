@@ -544,7 +544,14 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
   $ical_controller = \Drupal::service('hr_paragraphs.ical_controller');
   $start = date('Y-m-d');
   $end = date('Y-m-d', time() + 30 * 24 * 60 * 60);
-  $events = $ical_controller->getIcalEvents($group, $start, $end);
+
+  try {
+    $events = $ical_controller->getIcalEvents($group, $start, $end);
+  }
+  catch (\Exception $exception) {
+    // Fail silently.
+    return [];
+  }
 
   // Sort by start time.
   usort($events, function ($a, $b) {
