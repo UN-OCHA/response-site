@@ -33,6 +33,7 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
+    // @todo Use real controller, mock http responses.
     $rss_controller = new StubRssController($this->httpClient);
     $this->container->set('hr_paragraphs.rss_controller', $rss_controller);
     \Drupal::setContainer($this->container);
