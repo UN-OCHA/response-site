@@ -5,18 +5,26 @@
 namespace Drupal\Tests\hr_paragraphs\ExistingSite;
 
 use Drupal\group\Entity\Group;
+use Drupal\hr_paragraphs\Controller\RssController;
 use Drupal\paragraphs\Entity\Paragraph;
-use Drupal\Tests\hr_paragraphs\ExistingSite\Stub\StubRssController;
+use Drupal\Tests\hr_paragraphs\Traits\RssTestDataTrait;
 use Drupal\theme_switcher\Entity\ThemeSwitcherRule;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use weitzman\DrupalTestTraits\ExistingSiteBase;
+
 
 /**
  * Tests RSS feed.
  */
 class HrParagraphsRssTest extends ExistingSiteBase {
+
+  use RssTestDataTrait;
 
   /**
    * An http client.
@@ -24,17 +32,39 @@ class HrParagraphsRssTest extends ExistingSiteBase {
   protected $httpClient;
 
   /**
-   * {@inheritdoc}
+   * Set HTTP response.
    */
-  protected function setUp(): void {
+  protected function setHttpDataResult($data): void {
     parent::setUp();
 
-    $mock = new MockHandler([]);
+    $mock = new MockHandler([
+      new Response(200, [], $data),
+    ]);
+
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
     // @todo Use real controller, mock http responses.
-    $rss_controller = new StubRssController($this->httpClient);
+    $rss_controller = new RssController($this->httpClient);
+    $this->container->set('hr_paragraphs.rss_controller', $rss_controller);
+    \Drupal::setContainer($this->container);
+  }
+
+  /**
+   * Set HTTP excpetion.
+   */
+  protected function setHttpException(): void {
+    parent::setUp();
+
+    $mock = new MockHandler([
+      new RequestException('Request exception', new Request('GET', '')),
+    ]);
+
+    $handlerStack = HandlerStack::create($mock);
+    $this->httpClient = new Client(['handler' => $handlerStack]);
+
+    // @todo Use real controller, mock http responses.
+    $rss_controller = new RssController($this->httpClient);
     $this->container->set('hr_paragraphs.rss_controller', $rss_controller);
     \Drupal::setContainer($this->container);
   }
@@ -42,7 +72,7 @@ class HrParagraphsRssTest extends ExistingSiteBase {
   protected function renderIt($entity_type, $entity) {
     $theme_rule = ThemeSwitcherRule::load('operation_management');
 
-    // Disabel the rule, throws an error on line 184 in
+    // Disable the rule, throws an error on line 184 in
     // html/core/modules/path_alias/src/AliasManager.php.
     $theme_rule->disable()->save();
 
@@ -58,6 +88,8 @@ class HrParagraphsRssTest extends ExistingSiteBase {
    * Test RSS feed on a page.
    */
   public function testRssOnPage() {
+    $this->setHttpDataResult($this->getTestRss1());
+
     $author = $this->createUser([], null, true);
     $page_title = 'RSS test';
     $paragraph_title = 'Drupal Planet RSS';
@@ -104,6 +136,8 @@ class HrParagraphsRssTest extends ExistingSiteBase {
    * Test RSS feed on a page.
    */
   public function testRssOnPageCustomReadMore() {
+    $this->setHttpDataResult($this->getTestRss1());
+
     $author = $this->createUser([], null, true);
     $page_title = 'RSS test';
     $paragraph_title = 'Drupal Planet RSS';
@@ -161,6 +195,8 @@ class HrParagraphsRssTest extends ExistingSiteBase {
    * Test illegal RSS url.
    */
   public function testBrokenRssOnPage() {
+    $this->setHttpException();
+
     $author = $this->createUser([], null, true);
     $page_title = 'RSS broken test';
     $paragraph_title = 'A broken RSS feed';
