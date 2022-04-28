@@ -110,6 +110,12 @@ class HdxController extends ControllerBase {
 
     foreach ($facets as $name => $facet) {
       $links = [];
+
+      // Sort facets.
+      uasort($facet['items'], function ($a, $b) {
+        return strcmp($a['display_name'], $b['display_name']);
+      });
+
       if (isset($facet['items']) && count($facet['items']) > 1) {
         foreach ($facet['items'] as $term) {
           $filter = [
