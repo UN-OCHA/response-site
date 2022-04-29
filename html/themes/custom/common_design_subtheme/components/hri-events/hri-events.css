@@ -87,15 +87,20 @@
   left: 1.25rem;
 }
 
+/* Customize default jQuery UI Dialog styles */
+.ui-dialog {
+  /* haxx to make sure mobile dialog doesn't overflow container */
+  max-width: calc(100% - 2rem);
+  margin: 0 1rem;
+
+  /* Prevent overflow inside the dialog same way as FullCalendar */
+  /* stylelint-disable-next-line order/properties-order */
+  overflow-x: scroll;
+}
+
 /* Twig removes most line breaks, but we never want to show the first one */
 .ui-dialog br:first-of-type() {
   display: none;
-}
-
-/* haxx to make sure mobile dialog doesn't overflow */
-.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-draggable.ui-resizable {
-  max-width: calc(100% - 2rem);
-  margin: 0 1rem;
 }
 
 /* Horizontal layout for wider phones, tablets, desktop */

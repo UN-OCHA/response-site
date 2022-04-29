@@ -11,7 +11,7 @@
 
     $('#' + id).removeClass('visually-hidden').dialog({
       autoOpen: false,
-      minWidth: 500,
+      minWidth: 400,
       title: $(this).html()
     });
   });
