@@ -10,7 +10,7 @@ services:
     arguments: ['@http_client']
   hr_paragraphs.reliefweb_controller:
     class: \Drupal\hr_paragraphs\Controller\ReliefwebController
-    arguments: ['@entity_type.manager', '@http_client']
+    arguments: ['@http_client']
   hr_paragraphs.hdx_controller:
     class: \Drupal\hr_paragraphs\Controller\HdxController
     arguments: ['@http_client']

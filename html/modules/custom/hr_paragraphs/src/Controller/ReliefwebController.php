@@ -4,7 +4,6 @@ namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Url;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
@@ -14,13 +13,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * Page controller for tabs.
  */
 class ReliefwebController extends ControllerBase {
-
-  /**
-   * Entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManager
-   */
-  protected $entityTypeManager;
 
   /**
    * The HTTP client to fetch the files with.
@@ -48,8 +40,7 @@ class ReliefwebController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client) {
-    $this->entityTypeManager = $entity_type_manager;
+  public function __construct(ClientInterface $http_client) {
     $this->httpClient = $http_client;
   }
 
