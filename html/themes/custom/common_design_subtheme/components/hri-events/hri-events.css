@@ -71,8 +71,8 @@
 }
 
 /* show help cursor when an event has a description */
-.hri-event--has-desc .hri-event__title:hover {
-  cursor: help;
+.hri-event--has-desc .hri-event__title {
+  cursor: pointer;
 }
 
 .hri-event--has-desc .hri-event__copy {
@@ -85,6 +85,11 @@
 }
 [dir="rtl"] .hri-event--has-desc .hri-event__copy {
   left: 1.25rem;
+}
+
+/* Twig removes most line breaks, but we never want to show the first one */
+.ui-dialog br:first-of-type() {
+  display: none;
 }
 
 /* Horizontal layout for wider phones, tablets, desktop */
