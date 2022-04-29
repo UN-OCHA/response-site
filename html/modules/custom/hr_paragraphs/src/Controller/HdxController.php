@@ -314,9 +314,10 @@ class HdxController extends ControllerBase {
 
     if (strpos($path, '/group/') === 0) {
       $parts = explode('/', $path);
-      return [
+      $filters = [
         'groups' => array_pop($parts),
       ];
+      return array_merge_recursive($filters, hr_paragraphs_parse_str($query));
     }
 
     return [];
