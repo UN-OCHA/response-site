@@ -13,6 +13,7 @@
 
 <div class="hri-events">
   <ul class="hri-events__list">
+    {% set counter = 1 %}
     {% for event in events %}
       {% if previousEventStart != event.start|date("d M Y") %}
         <li class="hri-events__heading event-heading">
@@ -29,15 +30,18 @@
       {% set event_details = event.description|replace({'<br>': ' '})|striptags|replace({'&nbsp;': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|trim %}
 
       <li class="hri-events__event hri-event{{ event_has_desc }}">
-        <span class="hri-event__title" title="{{ event_details }}">{{ event.title }}</span>
+        <span class="hri-event__title" data-for="hri-event__desc{{ counter }}" title="{{ event_details }}">{{ event.title }}</span>
         <span class="hri-event__time">
           <time datetime="{{ event.start|date("c") }}">{{ event.start|date("h:i A") }}</time>
           <span class="visually-hidden">{{ 'until'|t }}</span>-
           <time datetime="{{ event.end|date("c") }}">{{ event.end|date("h:i A") }}</time>
         </span>
+        <span class="hri-event__desc visually-hidden" id="hri-event__desc{{ counter }}">
+          {{ event.description|replace({'<br><br>': '<br>'})|replace({'<br><br>': '<br>'})|replace({'<br><br>': '<br>'})|replace({'<br><br>': '<br>'})|raw }}
+        </span>
         {% if event_has_desc %}
           <span class="hri-event__copy">
-            <button class="cd-button cd-button--icon cd-button--small cd-button--icon-no-margin hri-tooltip" data-message="{{ 'Event details copied to clipboard'|t }}" data-details="{{ event.title }} — {{ event.start|date("h:i A") }} — {{ event_details }}">
+            <button class="cd-button cd-button--icon cd-button--small cd-button--icon-no-margin hri-tooltip" data-message="{{ 'Event details copied to clipboard'|t }}" data-details="{{ event.title }} — {{ event.start|date("h:i A") }} — {{ event_details }}" title="{{ 'Copy event details'|t }}">
               <span class="visually-hidden">{{ 'Copy event details'|t }}</span>
               <svg class="cd-icon cd-icon--copyurl" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copyurl"></use></svg>
             </button>
@@ -46,6 +50,7 @@
       </li>
 
       {% set previousEventStart = event.start|date("d M Y") %}
+      {% set counter = counter + 1 %}
     {% endfor %}
   </ul>
 

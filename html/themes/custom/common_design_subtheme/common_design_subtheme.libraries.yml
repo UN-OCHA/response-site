@@ -61,6 +61,7 @@ hri-events:
     components/hri-events/hri-events.js: {}
   dependencies:
     - common_design_subtheme/hri-tooltip
+    - jquery_ui_dialog/dialog
 
 hri-fullcalendar:
   css:
