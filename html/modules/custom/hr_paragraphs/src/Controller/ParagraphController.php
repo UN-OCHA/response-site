@@ -403,10 +403,10 @@ class ParagraphController extends ControllerBase {
     // Add filters.
     foreach ($filters as $key => $filter) {
       if (is_array($filter)) {
-        $parameters['fq_list'][] = $key . ':' . implode(' AND ', $filter);
+        $parameters['fq_list'][] = $key . ':"' . implode('" AND "', $filter) . '"';
       }
       else {
-        $parameters['fq_list'][] = $key . ':' . $filter;
+        $parameters['fq_list'][] = $key . ':"' . $filter . '"';
       }
     }
 
