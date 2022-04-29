@@ -18,8 +18,11 @@
 
   // When clicking titles, open the associated dialog.
   $eventTitles.click(function () {
-    var id = $(this).attr('data-for');
+    // Close other open dialogs.
+    $('.ui-dialog:visible').find('.hri-event__desc').dialog('close');
 
+    // Now open the desired dialog.
+    var id = $(this).attr('data-for');
     $('#' + id).dialog('open');
   });
 
