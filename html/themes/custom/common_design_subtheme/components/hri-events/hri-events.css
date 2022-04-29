@@ -92,6 +92,12 @@
   display: none;
 }
 
+/* haxx to make sure mobile dialog doesn't overflow */
+.ui-dialog.ui-corner-all.ui-widget.ui-widget-content.ui-front.ui-draggable.ui-resizable {
+  max-width: calc(100% - 2rem);
+  margin: 0 1rem;
+}
+
 /* Horizontal layout for wider phones, tablets, desktop */
 @media (min-width: 540px) {
   .hri-event {
