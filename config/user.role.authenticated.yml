@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
-    - filter.format.markdown
   module:
     - contact
     - filter
@@ -29,7 +28,6 @@ permissions:
   - 'override page published option'
   - 'override page revision option'
   - 'use text format basic_html'
-  - 'use text format markdown'
   - 'view assessment external entity'
   - 'view assessment_document external entity'
   - 'view assessment_status external entity'
