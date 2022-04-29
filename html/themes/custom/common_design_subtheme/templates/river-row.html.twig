@@ -1,0 +1,73 @@
+{#
+  This template shouldn't be used on its own. It's shared across the other two
+  River-related templates as a way to consolidate code.
+#}
+<article class="hri-river__result" data-rw-id="{{ row.id }}">
+  <header>
+    <p class="country">
+      <span class="country--primary">{{ row.primary_country }}</span>
+      {% if row.countries|length > 1 %}
+        + {{ row.countries|slice(1)|length }} more
+      {% endif %}
+    </p>
+    <h3 class="title"><a href="{{ row.url }}">{{ row.title }}</a></h3>
+  </header>
+
+  <div class="content">
+    {% for file in row.files|slice(0, 1) %}
+      {% if file.preview != '' %}
+        <img src="{{ file.preview }}" alt="{{ file.description }}">
+      {% endif %}
+    {% endfor %}
+
+    {% if row.body != '' %}
+      {% if row.body|striptags|split(' ')|length > 36 %}
+        <p>{{ row.body|striptags|split(' ')|slice(0, 36)|join(' ')|raw }}&hellip;</p>
+      {% else %}
+        <p>{{ row.body|striptags|raw }}</p>
+      {% endif %}
+    {% else %}
+      {% for file in row.files|slice(0, 1) %}
+        {% if file.preview != '' %}
+          <p>{{ 'Please see the attached infographic.'|t }}</p>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <footer>
+    <dl class="meta core">
+      <div>
+        <dt class="format {{ row.format|clean_class }} visually-hidden">{{ 'Format'|t }}:</dt>
+        <dd class="format {{ row.format|clean_class }}">{{ row.format|t }}</dd>
+      </div>
+
+      <div>
+        <dt class="source">{{ 'Source'|t }}:</dt>
+        <dd class="source">{{ row.sources }}</dd>
+      </div>
+
+      <div>
+        <dt class="date posted">{{ 'Posted'|t }}:</dt>
+        <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+      </div>
+
+      {% if row.files|length > 0 %}
+      <div>
+        <dt class="files">{{ 'Files'|t }}:</dt>
+        <dd class="files">
+          {% for file in row.files|slice(0,1) %}
+            <a class="cd-button cd-button--icon cd-button--small cd-button--icon-no-margin" href="{{ file.url }}" title="{{ file.name }}">
+              <span class="visually-hidden">{{ 'Download'|t }}</span>
+              <svg class="cd-icon cd-icon--copyurl" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copyurl"></use></svg>
+            </a>
+          {% endfor %}
+          {% if row.files|length > 1 %}
+            <em>&nbsp;+ {{ row.files|length - 1 }} more</em>
+          {% endif %}
+        </dd>
+      </div>
+      {% endif %}
+    </dl>
+  </footer>
+</article>
