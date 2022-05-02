@@ -35,7 +35,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [];
@@ -63,7 +63,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [];
@@ -78,7 +78,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -94,7 +94,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -110,7 +110,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $inactive_tabs = [
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -126,7 +126,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
 
     $inactive_tabs = [
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -142,7 +142,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $group->save();
 
     $inactive_tabs = [
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -167,7 +167,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
     ];
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
@@ -183,7 +183,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
@@ -198,7 +198,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -227,7 +227,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [];
@@ -242,7 +242,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -258,7 +258,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -274,7 +274,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $inactive_tabs = [
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -290,7 +290,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
 
     $inactive_tabs = [
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -306,7 +306,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $group->save();
 
     $inactive_tabs = [
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -331,7 +331,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
     ];
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
@@ -347,7 +347,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);

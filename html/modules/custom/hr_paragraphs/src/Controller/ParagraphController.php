@@ -169,7 +169,7 @@ class ParagraphController extends ControllerBase {
    * Check if datasets is enabled.
    */
   public function hasDatasets($group) {
-    $active = $this->tabIsActive($group, 'datasets');
+    $active = $this->tabIsActive($group, 'data');
     if (!$active) {
       return AccessResult::forbidden();
     }

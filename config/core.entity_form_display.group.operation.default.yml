@@ -149,7 +149,7 @@ third_party_settings:
       children:
         - field_hdx_dataset_link
         - field_hdx_alternate_source
-      label: Datasets
+      label: Data
       region: content
       parent_name: group_content
       weight: 25
