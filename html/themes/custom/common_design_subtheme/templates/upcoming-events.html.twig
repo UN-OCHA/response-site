@@ -27,7 +27,7 @@
       {% endif %}
 
       {% set event_has_desc = event.description != '' ? ' hri-event--has-desc' : '' %}
-      {% set event_details = event.description|replace({'<br>': ' '})|striptags|replace({'&nbsp;': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|trim %}
+      {% set event_details = event.description|replace({'\n': ' '})|replace({'<br>': ' '})|striptags|replace({'&nbsp;': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|trim %}
 
       <li class="hri-events__event hri-event{{ event_has_desc }}">
         <span class="hri-event__title" data-for="hri-event__desc{{ random }}" title="{{ event_details }}">{{ event.title }}</span>
