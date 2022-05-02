@@ -58,6 +58,10 @@
           title: info.title
         });
       },
+      eventRender: function (event, element, view) {
+        // Add tabindex=0 to allow keyboard to focus on each event.
+        element.attr('tabindex', '0');
+      },
     });
 
     // Use the hash parameters, if they exist. Hash is of the form:
@@ -77,6 +81,5 @@
     $(document, context).trigger('fullCalendarApiCalendar.preprocess', [calendar, calendarSettings]);
 
     calendar.fullCalendar(calendarSettings);
-
   }
 })(jQuery);
