@@ -59,7 +59,7 @@ class HrParagraphsClusterTabTitlesTest extends ExistingSiteBase {
       ['value' => 'pages'],
       ['value' => 'documents'],
       ['value' => 'maps'],
-      ['value' => 'datasets'],
+      ['value' => 'data'],
       ['value' => 'assessments'],
     ]);
 
@@ -83,7 +83,7 @@ class HrParagraphsClusterTabTitlesTest extends ExistingSiteBase {
       'pages' => 'Pages',
       'reports' => 'Reports',
       'maps' => 'Maps / Infographics',
-      'datasets' => 'Data',
+      'data' => 'Data',
       'assessments' => 'Assessments',
     ];
 

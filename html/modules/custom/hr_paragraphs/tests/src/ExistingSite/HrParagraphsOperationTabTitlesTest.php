@@ -60,7 +60,7 @@ class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
       'pages' => 'Pages',
       'reports' => 'Reports',
       'maps' => 'Maps / Infographics',
-      'datasets' => 'Data',
+      'data' => 'Data',
       'assessments' => 'Assessments',
     ];
 
