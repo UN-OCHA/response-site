@@ -35,7 +35,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [];
@@ -63,7 +63,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [];
@@ -79,7 +79,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -97,7 +97,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -114,7 +114,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -133,7 +133,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -150,7 +150,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -170,7 +170,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
     $inactive_tabs = [
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -202,7 +202,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
 
     $inactive_tabs = [
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -219,7 +219,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
 
     $inactive_tabs = [
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -241,7 +241,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
     $group->save();
 
     $inactive_tabs = [
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -258,7 +258,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
     $group->save();
 
     $inactive_tabs = [
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [
@@ -277,7 +277,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       ['value' => 'pages'],
       ['value' => 'documents'],
       ['value' => 'maps'],
-      ['value' => 'datasets'],
+      ['value' => 'data'],
     ]);
     $group->save();
 
@@ -290,7 +290,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
     ];
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
@@ -307,7 +307,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
     ];
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
 
@@ -318,7 +318,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       ['value' => 'pages'],
       ['value' => 'documents'],
       ['value' => 'maps'],
-      ['value' => 'datasets'],
+      ['value' => 'data'],
       ['value' => 'assessments'],
     ]);
     $group->save();
@@ -331,7 +331,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $this->checkTabAccess($group, $active_tabs, $inactive_tabs);
@@ -346,7 +346,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
     $active_tabs = [

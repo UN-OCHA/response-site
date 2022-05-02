@@ -24,14 +24,17 @@ settings:
       value: assessments
       label: Assessments
     -
-      value: datasets
-      label: Datasets
+      value: data
+      label: Data
     -
       value: events
       label: Events
     -
       value: offices
       label: Contacts
+    -
+      value: datasets
+      label: '- obsolete -'
   allowed_values_function: ''
 module: options
 locked: false

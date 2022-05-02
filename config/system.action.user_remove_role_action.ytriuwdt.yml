@@ -1,0 +1,14 @@
+uuid: b7579c07-1ad7-4fa8-964b-7b62b8b5de90
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.ytriuwdt
+  module:
+    - user
+id: user_remove_role_action.ytriuwdt
+label: 'Remove the 1wxu&gt;&amp;yr role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: ytriuwdt

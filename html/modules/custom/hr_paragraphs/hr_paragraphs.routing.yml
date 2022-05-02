@@ -50,8 +50,8 @@ hr_paragraphs.operation.assessments:
       group:
         type: entity:group
 
-hr_paragraphs.operation.datasets:
-  path: '/group/{group}/datasets'
+hr_paragraphs.operation.data:
+  path: '/group/{group}/data'
   title: 'Data'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getDatasets'

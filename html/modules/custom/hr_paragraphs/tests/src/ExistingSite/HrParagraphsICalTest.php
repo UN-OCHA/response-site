@@ -126,7 +126,7 @@ class HrParagraphsICalTest extends ExistingSiteBase {
     $this->assertStringContainsString($group_title, $output);
     $this->assertStringContainsString($paragraph_title, $output);
 
-    $this->assertStringContainsString('Education in Emergencies (EiE) WG Monthly Meeting', $output);
+    $this->assertStringContainsString('ESNFI Cluster Reporthub Online Training', $output);
   }
 
   /**

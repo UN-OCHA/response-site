@@ -14,6 +14,7 @@ trait IcalTestDataTrait {
    */
   private function getTestIcal1() {
     $yearmonth = date('Ym');
+    $yearmonthday = date('Ymd', strtotime("+1 day"));
 
     return <<<ICAL
     BEGIN:VCALENDAR
@@ -218,19 +219,19 @@ trait IcalTestDataTrait {
     TRANSP:OPAQUE
     END:VEVENT
     BEGIN:VEVENT
-    DTSTART;TZID=Asia/Kabul:{$yearmonth}06T100000
-    DTEND;TZID=Asia/Kabul:{$yearmonth}06T110000
+    DTSTART;TZID=Asia/Kabul:{$yearmonthday}T100000
+    DTEND;TZID=Asia/Kabul:{$yearmonthday}T110000
     RRULE:FREQ=MONTHLY;UNTIL=20221031T192959Z;BYDAY=1SU
     DTSTAMP:20220428T082436Z
     UID:287j5uks6rhnpiradbv6buukhh@google.com
-    CREATED:{$yearmonth}08T141614Z
+    CREATED:{$yearmonthday}T141614Z
     DESCRIPTION:<br><br><br><br>Venue:&nbsp\;<br><br><br><br><br>KabulAfghanist
      an<br><br><br><br><br>Contacts:&nbsp\;<br><br><p>WG Coordinator: Cleopatra
      Chipuriro (UNICEF)&nbsp\;<a href="mailto:cchipuriro@unicef.org">cchipuriro@
      unicef.org</a><br>WG Co-lead:&nbsp\;&nbsp\; &nbsp\;Najeebullah Qadri&nbsp\;
      &nbsp\; &nbsp\;(SCI)&nbsp\;<a href="mailto:najeebullah.qadri@savethechildre
      n.org">najeebullah.qadri@savethechildren.org</a>&nbsp\;</p>
-    LAST-MODIFIED:{$yearmonth}08T141614Z
+    LAST-MODIFIED:{$yearmonthday}T141614Z
     LOCATION:
     SEQUENCE:0
     STATUS:CONFIRMED
@@ -238,14 +239,14 @@ trait IcalTestDataTrait {
     TRANSP:OPAQUE
     END:VEVENT
     BEGIN:VEVENT
-    DTSTART:{$yearmonth}03T053000Z
-    DTEND:{$yearmonth}03T063000Z
+    DTSTART:{$yearmonthday}T053000Z
+    DTEND:{$yearmonthday}T063000Z
     DTSTAMP:20220428T082436Z
     UID:4t5bm1vviu17lc9lcl874uq109@google.com
-    CREATED:{$yearmonth}08T141344Z
+    CREATED:{$yearmonthday}T141344Z
     DESCRIPTION:Training\n\n\nInternational Organization for Migration\nUnited
      Nations High Commissioner for Refugees
-    LAST-MODIFIED:{$yearmonth}08T141344Z
+    LAST-MODIFIED:{$yearmonthday}T141344Z
     LOCATION:
     SEQUENCE:0
     STATUS:CONFIRMED

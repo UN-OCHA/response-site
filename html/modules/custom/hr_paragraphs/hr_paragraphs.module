@@ -124,7 +124,7 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
     'pages',
     'reports',
     'maps',
-    'datasets',
+    'data',
     'assessments',
   ];
 
@@ -197,7 +197,7 @@ function hr_paragraphs_group_update(EntityInterface $entity) {
       'pages',
       'reports',
       'maps',
-      'datasets',
+      'data',
       'assessments',
     ];
 
@@ -320,7 +320,7 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
     'pages',
     'reports',
     'maps',
-    'datasets',
+    'data',
     'assessments',
   ];
 
@@ -913,7 +913,7 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
     'hr_paragraphs.operation.reports',
     'hr_paragraphs.operation.maps',
     'hr_paragraphs.operation.assessments',
-    'hr_paragraphs.operation.datasets',
+    'hr_paragraphs.operation.data',
     'hr_paragraphs.operation.events',
     'hr_paragraphs.operation.contacts',
     'hr_paragraphs.operation.ical',
