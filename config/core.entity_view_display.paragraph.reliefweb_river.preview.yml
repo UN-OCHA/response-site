@@ -4,12 +4,14 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.reliefweb_river.field_max_number_of_items
     - field.field.paragraph.reliefweb_river.field_reliefweb_url
     - field.field.paragraph.reliefweb_river.field_text
     - field.field.paragraph.reliefweb_river.field_title
     - paragraphs.paragraphs_type.reliefweb_river
   module:
     - link
+    - text
 id: paragraph.reliefweb_river.preview
 targetEntityType: paragraph
 bundle: reliefweb_river
@@ -25,8 +27,22 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 2
+    region: content
+  field_text:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
     weight: 0
     region: content
 hidden:
-  field_text: true
-  field_title: true
+  field_max_number_of_items: true
