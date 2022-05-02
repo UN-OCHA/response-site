@@ -13,8 +13,8 @@
 
 <div class="hri-events">
   <ul class="hri-events__list">
-    {% set counter = 1 %}
     {% for event in events %}
+      {% set random = random() %}
       {% if previousEventStart != event.start|date("d M Y") %}
         <li class="hri-events__heading event-heading">
           <div class="event-heading__date">
@@ -27,16 +27,16 @@
       {% endif %}
 
       {% set event_has_desc = event.description != '' ? ' hri-event--has-desc' : '' %}
-      {% set event_details = event.description|replace({'<br>': ' '})|striptags|replace({'&nbsp;': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|trim %}
+      {% set event_details = event.description|replace({'\n': ' '})|replace({'<br>': ' '})|striptags|replace({'&nbsp;': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|replace({'  ': ' '})|trim %}
 
       <li class="hri-events__event hri-event{{ event_has_desc }}">
-        <span class="hri-event__title" data-for="hri-event__desc{{ counter }}" title="{{ event_details }}">{{ event.title }}</span>
+        <span class="hri-event__title" data-for="hri-event__desc{{ random }}" title="{{ event_details }}">{{ event.title }}</span>
         <span class="hri-event__time">
           <time datetime="{{ event.start|date("c") }}">{{ event.start|date("h:i A") }}</time>
           <span class="visually-hidden">{{ 'until'|t }}</span>-
           <time datetime="{{ event.end|date("c") }}">{{ event.end|date("h:i A") }}</time>
         </span>
-        <span class="hri-event__desc visually-hidden" id="hri-event__desc{{ counter }}">
+        <span class="hri-event__desc visually-hidden" id="hri-event__desc{{ random }}">
           {{ event.description|replace({'<br><br>': '<br>'})|replace({'<br><br>': '<br>'})|replace({'<br><br>': '<br>'})|replace({'<br><br>': '<br>'})|raw }}
         </span>
         {% if event_has_desc %}
@@ -50,7 +50,6 @@
       </li>
 
       {% set previousEventStart = event.start|date("d M Y") %}
-      {% set counter = counter + 1 %}
     {% endfor %}
   </ul>
 
