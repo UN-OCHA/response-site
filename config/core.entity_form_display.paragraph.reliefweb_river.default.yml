@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.reliefweb_river.field_max_number_of_items
     - field.field.paragraph.reliefweb_river.field_reliefweb_url
     - field.field.paragraph.reliefweb_river.field_text
     - field.field.paragraph.reliefweb_river.field_title
@@ -15,6 +16,13 @@ targetEntityType: paragraph
 bundle: reliefweb_river
 mode: default
 content:
+  field_max_number_of_items:
+    type: number
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_reliefweb_url:
     type: link_default
     weight: 2

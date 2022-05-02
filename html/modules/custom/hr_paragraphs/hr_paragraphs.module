@@ -558,6 +558,12 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
     return strtotime($b['start']) < strtotime($a['start']) ? 1 : -1;
   });
 
+  // Limit to 5 by default.
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
+
+  // Slice array.
+  $events = array_slice($events, 0, $max_number_of_items);
+
   $variables['content']['upcoming'] = [
     '#theme' => 'upcoming_events',
     '#events' => $events,
@@ -735,11 +741,14 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
     return;
   }
 
+  // Set max number of items to 5 by default.
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
+
   $url = $paragraph->field_reliefweb_url->first()->uri;
   /** @var \Drupal\hr_paragraphs\Controller\ReliefwebController */
   $reliefweb_controller = \Drupal::service('hr_paragraphs.reliefweb_controller');
   $conditions = $reliefweb_controller->parseReliefwebUrl($url);
-  $parameters = $reliefweb_controller->buildReliefwebParameters(0, 10, []);
+  $parameters = $reliefweb_controller->buildReliefwebParameters(0, $max_number_of_items, []);
 
   // Remove facets.
   unset($parameters['facets']);
