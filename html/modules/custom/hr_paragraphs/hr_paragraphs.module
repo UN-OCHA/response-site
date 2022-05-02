@@ -558,6 +558,12 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
     return strtotime($b['start']) < strtotime($a['start']) ? 1 : -1;
   });
 
+  // Limit to 5 by default.
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
+
+  // Slice array.
+  $events = array_slice($events, 0, $max_number_of_items);
+
   $variables['content']['upcoming'] = [
     '#theme' => 'upcoming_events',
     '#events' => $events,

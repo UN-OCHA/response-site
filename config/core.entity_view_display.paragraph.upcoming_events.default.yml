@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.upcoming_events.field_max_number_of_items
     - field.field.paragraph.upcoming_events.field_text
     - field.field.paragraph.upcoming_events.field_title
     - paragraphs.paragraphs_type.upcoming_events
@@ -28,4 +29,5 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-hidden: {  }
+hidden:
+  field_max_number_of_items: true

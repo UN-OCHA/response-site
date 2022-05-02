@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.upcoming_events.field_max_number_of_items
     - field.field.paragraph.upcoming_events.field_text
     - field.field.paragraph.upcoming_events.field_title
     - paragraphs.paragraphs_type.upcoming_events
@@ -13,6 +14,13 @@ targetEntityType: paragraph
 bundle: upcoming_events
 mode: default
 content:
+  field_max_number_of_items:
+    type: number
+    weight: 2
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   field_text:
     type: text_textarea
     weight: 1
