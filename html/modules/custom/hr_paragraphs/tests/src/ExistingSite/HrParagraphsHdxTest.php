@@ -144,7 +144,7 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $this->assertStringNotContainsString('Afghanistan administrative level 0-2 and UNAMA region gazetteer and P-code geoservices', $output);
     $this->assertStringNotContainsString('Remove XLSX', $output);
 
-    $url = Url::fromRoute('hr_paragraphs.operation.datasets', [
+    $url = Url::fromRoute('hr_paragraphs.operation.data', [
       'group' => $group->id(),
     ]);
 
