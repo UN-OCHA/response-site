@@ -363,20 +363,20 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
     $this->drupalGet($group->toUrl());
 
     foreach ($inactive_tabs as $tab) {
-      $this->assertSession()->linkByHrefNotExists($group->toUrl()->toString() . '/' . $tab);
-
       $url = Url::fromRoute('hr_paragraphs.operation.' . $tab, [
         'group' => $group->id(),
       ]);
+
+      $this->assertSession()->linkByHrefNotExists($url->toString());
       $this->assertFalse($url->access($user));
     }
 
     foreach ($active_tabs as $tab) {
-      $this->assertSession()->linkByHrefExists($group->toUrl()->toString() . '/' . $tab);
-
       $url = Url::fromRoute('hr_paragraphs.operation.' . $tab, [
         'group' => $group->id(),
       ]);
+
+      $this->assertSession()->linkByHrefExists($url->toString());
       $this->assertTrue($url->access($user));
     }
   }
