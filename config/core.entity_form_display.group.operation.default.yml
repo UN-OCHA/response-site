@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.operation.field_archive_group
+    - field.field.group.operation.field_archive_message
     - field.field.group.operation.field_assessments_page
     - field.field.group.operation.field_calendar_link
     - field.field.group.operation.field_documents_page
@@ -29,6 +31,7 @@ dependencies:
     - layout_paragraphs
     - link
     - path
+    - text
 third_party_settings:
   field_group:
     group_content:
@@ -59,7 +62,7 @@ third_party_settings:
       label: Events
       region: content
       parent_name: group_content
-      weight: 26
+      weight: 27
       format_type: tab
       format_settings:
         classes: ''
@@ -71,6 +74,10 @@ third_party_settings:
     group_general:
       children:
         - field_enabled_tabs
+        - path
+        - field_archive_group
+        - field_archive_message
+        - status
       label: General
       region: content
       parent_name: group_content
@@ -89,7 +96,7 @@ third_party_settings:
       label: Contacts
       region: content
       parent_name: group_content
-      weight: 27
+      weight: 28
       format_type: tab
       format_settings:
         classes: ''
@@ -152,7 +159,7 @@ third_party_settings:
       label: Data
       region: content
       parent_name: group_content
-      weight: 25
+      weight: 26
       format_type: tab
       format_settings:
         classes: ''
@@ -168,7 +175,7 @@ third_party_settings:
       label: Assessments
       region: content
       parent_name: group_content
-      weight: 24
+      weight: 25
       format_type: tab
       format_settings:
         classes: ''
@@ -182,9 +189,24 @@ targetEntityType: group
 bundle: operation
 mode: default
 content:
+  field_archive_group:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_archive_message:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_assessments_page:
     type: link_default
-    weight: 36
+    weight: 39
     region: content
     settings:
       placeholder_url: ''
@@ -238,7 +260,7 @@ content:
     third_party_settings: {  }
   field_infographics:
     type: link_default
-    weight: 31
+    weight: 32
     region: content
     settings:
       placeholder_url: ''
@@ -280,7 +302,7 @@ content:
     third_party_settings: {  }
   field_reliefweb_assessments:
     type: link_default
-    weight: 35
+    weight: 38
     region: content
     settings:
       placeholder_url: ''
@@ -321,13 +343,13 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 6
+    weight: 2
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 7
+    weight: 5
     region: content
     settings:
       display_label: true

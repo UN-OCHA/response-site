@@ -1,0 +1,23 @@
+uuid: a8834e17-cfda-40fb-8554-017b881db600
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_archive_group
+    - group.type.operation
+id: group.operation.field_archive_group
+field_name: field_archive_group
+entity_type: group
+bundle: operation
+label: 'Archive group'
+description: 'Archive this Operation and any Clusters or Working Groups and related content'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

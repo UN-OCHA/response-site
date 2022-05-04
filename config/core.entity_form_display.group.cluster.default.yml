@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.cluster.field_archive_group
+    - field.field.group.cluster.field_archive_message
     - field.field.group.cluster.field_assessments_page
     - field.field.group.cluster.field_calendar_link
     - field.field.group.cluster.field_documents_page
@@ -30,6 +32,7 @@ dependencies:
     - layout_paragraphs
     - link
     - path
+    - text
 third_party_settings:
   field_group:
     group_hdx:
@@ -120,6 +123,10 @@ third_party_settings:
     group_general:
       children:
         - field_enabled_tabs
+        - path
+        - field_archive_group
+        - field_archive_message
+        - status
       label: General
       region: content
       parent_name: group_content
@@ -183,6 +190,21 @@ targetEntityType: group
 bundle: cluster
 mode: default
 content:
+  field_archive_group:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_archive_message:
+    type: text_textarea
+    weight: 5
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
   field_assessments_page:
     type: link_default
     weight: 36
@@ -201,7 +223,7 @@ content:
     third_party_settings: {  }
   field_documents_page:
     type: hr_paragraphs_link_default
-    weight: 29
+    weight: 32
     region: content
     settings:
       placeholder_url: ''
@@ -329,7 +351,7 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 8
+    weight: 3
     region: content
     settings: {  }
     third_party_settings: {  }

@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.operation.field_archive_group
+    - field.field.group.operation.field_archive_message
     - field.field.group.operation.field_assessments_page
     - field.field.group.operation.field_calendar_link
     - field.field.group.operation.field_documents_page
@@ -59,6 +61,8 @@ content:
 hidden:
   changed: true
   created: true
+  field_archive_group: true
+  field_archive_message: true
   field_assessments_page: true
   field_calendar_link: true
   field_documents_page: true
