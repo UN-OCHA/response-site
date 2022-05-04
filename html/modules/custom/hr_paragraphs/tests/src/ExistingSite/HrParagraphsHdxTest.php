@@ -106,7 +106,7 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
       'label' => $group_title,
     ]);
 
-    $group->set('field_hdx_dataset_link', 'https://www.example.com/data');
+    $group->set('field_hdx_dataset_link', 'https://data.humdata.org/dataset?groups=afg&groups=syr&organization=fao&organization=hdx');
     $group->setPublished()->save();
 
     $output = $this->renderGroupTab($group);
@@ -115,6 +115,36 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $this->assertStringContainsString('Remove XLSX', $output);
 
     $url = Url::fromRoute('hr_paragraphs.operation.data', [
+      'group' => $group->id(),
+    ]);
+
+    $this->drupalGet($url);
+    $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', 'Data');
+  }
+
+  /**
+   * Test hdx data on group.
+   */
+  public function testHdxOnOperationIllegalURL() {
+    $this->setHttpDataResult($this->getTestHdx1());
+
+    $group_title = 'Operation X';
+
+    $group = Group::create([
+      'type' => 'operation',
+      'label' => $group_title,
+    ]);
+
+    $group->set('field_hdx_dataset_link', 'https://www.example.com/data');
+    $group->setPublished()->save();
+
+    $output = $this->renderGroupTab($group);
+    $this->assertStringContainsString('Please make sure the HDX dataset URL is valid.', $output);
+    $this->assertStringNotContainsString('Afghanistan - Subnational Administrative Boundaries', $output);
+    $this->assertStringNotContainsString('Afghanistan administrative level 0-2 and UNAMA region gazetteer and P-code geoservices', $output);
+    $this->assertStringNotContainsString('Remove XLSX', $output);
+
+    $url = Url::fromRoute('hr_paragraphs.operation.datasets', [
       'group' => $group->id(),
     ]);
 
