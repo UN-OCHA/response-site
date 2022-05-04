@@ -12,6 +12,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupContent;
+use Drupal\node\Entity\Node;
 use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
 
@@ -966,9 +967,17 @@ function hr_paragraphs_menu_local_actions_alter(&$local_actions) {
 }
 
 /**
- * Implements template_preprocess_node().
+ * Implements hook_preprocess_node().
  */
 function hr_paragraphs_preprocess_node(&$variables) {
+  hr_paragraphs_node_sidebar($variables);
+  hr_paragraphs_node_is_archived($variables);
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function hr_paragraphs_node_sidebar(&$variables) {
   if ($variables['view_mode'] != 'full') {
     return;
   }
@@ -994,9 +1003,64 @@ function hr_paragraphs_preprocess_node(&$variables) {
 }
 
 /**
- * Implements template_preprocess_group().
+ * Implements hook_preprocess_node().
+ */
+function hr_paragraphs_node_is_archived(&$variables) {
+  $node = $variables['node'];
+
+  if (!($node instanceof Node)) {
+    return;
+  }
+
+  $variables['is_archived'] = FALSE;
+  $storage = \Drupal::entityTypeManager()->getStorage('group_content');
+  $activGroupListEntity = $storage->loadByEntity($node);
+
+  // Not a group node.
+  if (empty($activGroupListEntity)) {
+    return;
+  }
+
+  foreach ($activGroupListEntity as $groupContent) {
+    $group = $groupContent->getGroup();
+    if (!$group->hasField('field_archive_group')) {
+      continue;
+    }
+
+    // Allow it if part of at least 1 non-archived group.
+    if (!$group->field_archive_group->value) {
+      // Check parent.
+      if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+        $group = Group::load($group->subgroup_tree->value);
+        if ($group->hasField('field_archive_group') && !$group->field_archive_group->value) {
+          return;
+        }
+      }
+      else {
+        return;
+      }
+    }
+  }
+
+  $variables['is_archived'] = TRUE;
+  $variables['archive_message'] = t('This group has been archived.');
+  if (!$group->field_archive_message->isEmpty()) {
+    $variables['archive_message'] = $group->field_archive_message->value;
+  }
+}
+
+/**
+ * Implements hook_preprocess_group().
  */
 function hr_paragraphs_preprocess_group(&$variables) {
+  hr_paragraphs_group_sidebar($variables);
+  hr_paragraphs_group_is_archived($variables);
+}
+
+/**
+ * Implements hook_preprocess_group().
+ */
+function hr_paragraphs_group_sidebar(&$variables) {
   if ($variables['view_mode'] != 'full') {
     return;
   }
@@ -1011,6 +1075,38 @@ function hr_paragraphs_preprocess_group(&$variables) {
         $variables['content']['field_sidebar_menu'] = $group->field_sidebar_menu->view();
       }
     }
+  }
+}
+
+/**
+ * Implements hook_preprocess_group().
+ */
+function hr_paragraphs_group_is_archived(&$variables) {
+  /** @var \Drupal\group\Entity\GroupInterface $group */
+  $group = $variables['elements']['#group'];
+
+  if (!$group->hasField('field_archive_group')) {
+    return;
+  }
+
+  $variables['is_archived'] = FALSE;
+  if (!$group->field_archive_group->value) {
+    // Check parent.
+    if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+      $group = Group::load($group->subgroup_tree->value);
+      if ($group->hasField('field_archive_group') && !$group->field_archive_group->value) {
+        return;
+      }
+    }
+    else {
+      return;
+    }
+  }
+
+  $variables['is_archived'] = TRUE;
+  $variables['archive_message'] = t('This group has been archived.');
+  if (!$group->field_archive_message->isEmpty()) {
+    $variables['archive_message'] = $group->field_archive_message->value;
   }
 }
 

@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.cluster.field_archive_group
+    - field.field.group.cluster.field_archive_message
     - field.field.group.cluster.field_assessments_page
     - field.field.group.cluster.field_calendar_link
     - field.field.group.cluster.field_documents_page
@@ -60,6 +62,8 @@ content:
 hidden:
   changed: true
   created: true
+  field_archive_group: true
+  field_archive_message: true
   field_assessments_page: true
   field_calendar_link: true
   field_documents_page: true
