@@ -17,7 +17,7 @@ field_name: field_hdx_dataset_link
 entity_type: group
 bundle: cluster
 label: 'HDX dataset link'
-description: "Either:\r\n- Link from https://data.humdata.org/dataset with filters applied\r\n- A group dataset, without any filters, like https://data.humdata.org/group/afg"
+description: 'Supported URLs with filters applied: https://data.humdata.org/dataset, https://data.humdata.org/group/COUNTRY'
 required: false
 translatable: false
 default_value: {  }
