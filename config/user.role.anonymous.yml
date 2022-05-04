@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - contact
     - paragraphs_type_permissions
     - system
 _core:
@@ -14,7 +13,6 @@ weight: 0
 is_admin: false
 permissions:
   - 'access content'
-  - 'access site-wide contact form'
   - 'view assessment external entity'
   - 'view assessment_document external entity'
   - 'view assessment_status external entity'
