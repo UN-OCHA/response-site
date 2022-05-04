@@ -11,8 +11,8 @@ id: group.cluster.field_assessments_page
 field_name: field_assessments_page
 entity_type: group
 bundle: cluster
-label: 'Assessments page'
-description: "If you want to link to an external source for your assessments, please provide the link.\r\nIf left empty if will fetch assessments from ReliefWeb based on the selected operation."
+label: 'Alternate source'
+description: 'If you want to link to a different source for your assessments, please provide the link.'
 required: false
 translatable: false
 default_value: {  }
