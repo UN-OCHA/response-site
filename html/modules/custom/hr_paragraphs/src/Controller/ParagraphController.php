@@ -396,6 +396,12 @@ class ParagraphController extends ControllerBase {
 
     // Base filter from entered URL.
     $query_filters = $this->hdxController->parseHdxUrl($url);
+    if (empty($query_filters)) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('Please make sure the HDX dataset URL is valid.'),
+      ];
+    }
 
     // Build Hdx query.
     $parameters = $this->hdxController->buildHdxParameters($offset, $limit, $query_filters);
