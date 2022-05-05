@@ -1,0 +1,6 @@
+hr_paragraphs.unmasquerade:
+  title: 'Unmasquerade'
+  menu_name: account
+  description: 'Switch back to your user account.'
+  route_name: hr_paragraphs.unmasquerade
+  weight: -50

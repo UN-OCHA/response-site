@@ -115,3 +115,10 @@ hr_paragraphs.operation.ical:
       group:
         type: entity:group
 
+hr_paragraphs.unmasquerade:
+  path: '/unmasq'
+  defaults:
+    _controller: '\Drupal\masquerade\Controller\SwitchController::switchBack'
+    _title: 'Unmasquerade'
+  requirements:
+    _custom_access: 'access_check.masquerade.unmasquerade:access'
