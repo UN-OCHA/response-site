@@ -441,6 +441,7 @@ class ParagraphController extends ControllerBase {
       '#pager' => [
         '#type' => 'pager',
       ],
+      '#group' => $group,
     ];
   }
 
@@ -466,7 +467,7 @@ class ParagraphController extends ControllerBase {
     }
 
     $url = $group->field_reliefweb_documents->first()->uri;
-    return $this->getReliefwebDocuments($request, $url);
+    return $this->getReliefwebDocuments($request, $group, $url);
   }
 
   /**
@@ -491,13 +492,13 @@ class ParagraphController extends ControllerBase {
     }
 
     $url = $group->field_maps_infographics_link->first()->uri;
-    return $this->getReliefwebDocuments($request, $url);
+    return $this->getReliefwebDocuments($request, $group, $url);
   }
 
   /**
    * Return all reports of an operation, sector or cluster.
    */
-  public function getReliefwebDocuments(Request $request, $url) {
+  public function getReliefwebDocuments(Request $request, $group, $url) {
     $limit = 10;
     $offset = $request->query->getInt('page', 0) * $limit;
     $filters = $request->query->get('filters', []);
@@ -560,6 +561,7 @@ class ParagraphController extends ControllerBase {
       '#pager' => [
         '#type' => 'pager',
       ],
+      '#group' => $group,
     ];
   }
 
@@ -585,7 +587,7 @@ class ParagraphController extends ControllerBase {
     }
 
     $url = $group->field_reliefweb_assessments->first()->uri;
-    return $this->getReliefwebDocuments($request, $url);
+    return $this->getReliefwebDocuments($request, $group, $url);
   }
 
   /**
@@ -622,6 +624,7 @@ class ParagraphController extends ControllerBase {
         '#theme' => 'fullcalendar_calendar',
         '#calendar_id' => 'fullcalendar',
         '#calendar_settings' => $settings,
+        '#group' => $group,
       ],
       'calendar_popup' => [
         '#type' => 'inline_template',
