@@ -31,6 +31,7 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'facets' => [],
         'active_facets' => [],
         'pager' => NULL,
+        'group' => NULL,
       ],
     ],
     'hr_paragraphs_rw_list' => [
@@ -1083,7 +1084,11 @@ function hr_paragraphs_group_sidebar(&$variables) {
  */
 function hr_paragraphs_group_is_archived(&$variables) {
   /** @var \Drupal\group\Entity\GroupInterface $group */
-  $group = $variables['elements']['#group'];
+  $group = $variables['elements']['#group'] ?? $variables['group'];
+
+  if (!$group) {
+    return;
+  }
 
   if (!$group->hasField('field_archive_group')) {
     return;
@@ -1185,4 +1190,29 @@ function hr_paragraphs_preprocess_html(&$variables) {
   else {
     $variables['head_title']['title'] = $group->label->value . ' - ' . $variables['head_title']['title'];
   }
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function hr_paragraphs_theme_registry_alter(&$theme_registry) {
+  if (!isset($theme_registry['fullcalendar_calendar'])) {
+    return;
+  }
+
+  $theme_registry['fullcalendar_calendar']['variables']['group'] = NULL;
+}
+
+/**
+ * Implements hook_preprocess_river().
+ */
+function hr_paragraphs_preprocess_river(&$variables) {
+  hr_paragraphs_group_is_archived($variables);
+}
+
+/**
+ * Implements hook_preprocess_fullcalendar_calendar().
+ */
+function hr_paragraphs_preprocess_fullcalendar_calendar(&$variables) {
+  hr_paragraphs_group_is_archived($variables);
 }
