@@ -462,7 +462,7 @@ class ReliefwebController extends ControllerBase {
    * @param string $url
    *   Full URL.
    *
-   * @return array<string, string>
+   * @return array<string, mixed>
    *   Dates with a 'from' or a 'to' key or both.
    */
   public function parseReliefwebUrl(string $url) : array {
