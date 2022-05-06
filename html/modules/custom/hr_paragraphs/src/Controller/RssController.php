@@ -3,6 +3,7 @@
 namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\hr_paragraphs\RssItem;
 use GuzzleHttp\ClientInterface;
 
 /**
@@ -20,9 +21,9 @@ class RssController extends ControllerBase {
   /**
    * Static cache.
    *
-   * @var string
+   * @var \SimpleXMLElement
    */
-  protected $staticCache = '';
+  protected $staticCache;
 
   /**
    * {@inheritdoc}
@@ -83,7 +84,7 @@ class RssController extends ControllerBase {
    * @param string $url
    *   RSS feed url.
    *
-   * @return array
+   * @return array<int, \Drupal\hr_paragraphs\RssItem>
    *   List of items.
    */
   public function getRssItems($url) : array {
@@ -95,12 +96,12 @@ class RssController extends ControllerBase {
     }
 
     foreach ($xml->channel->item as $entry) {
-      $items[] = [
-        'title' => (string) $entry->title,
-        'link' => (string) $entry->link,
-        'description' => (string) $entry->description,
-        'date' => strtotime($entry->pubDate),
-      ];
+      $items[] = new RssItem(
+        (string) $entry->title,
+        (string) $entry->link,
+        (string) $entry->description,
+        strtotime($entry->pubDate),
+      );
     }
 
     return $items;

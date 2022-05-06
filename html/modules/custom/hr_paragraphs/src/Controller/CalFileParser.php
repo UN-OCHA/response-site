@@ -15,12 +15,19 @@ namespace Drupal\hr_paragraphs\Controller;
  */
 class CalFileParser {
 
-  private $_base_path = './';
-  private $_file_name = '';
-  private $_output = 'array';
-  private $DTfields = ['DTSTART', 'DTEND', 'DTSTAMP', 'CREATED', 'EXDATE', 'LAST-MODIFIED'];
-  private $_user_timezone = NULL;
-  private $_file_timezone = NULL;
+  private string $_base_path = './';
+  private string $_file_name = '';
+  private string $_output = 'array';
+  private string $_default_output = 'array';
+  private ?string $_user_timezone = NULL;
+  private ?string $_file_timezone = NULL;
+
+  /**
+   * Supported fields.
+   *
+   * @var array<string>
+   */
+  private array $DTfields = ['DTSTART', 'DTEND', 'DTSTAMP', 'CREATED', 'EXDATE', 'LAST-MODIFIED'];
 
   /**
    *
@@ -32,8 +39,8 @@ class CalFileParser {
   /**
    *
    */
-  public function set_base_path($path) {
-    if (isset($path)) {
+  public function set_base_path(string $path) : void {
+    if (!empty($path)) {
       $this->_base_path = $path;
     }
   }
@@ -41,7 +48,7 @@ class CalFileParser {
   /**
    *
    */
-  public function set_file_name($filename) {
+  public function set_file_name(string $filename) : void {
     if (!empty($filename)) {
       $this->_file_name = $filename;
     }
@@ -50,7 +57,7 @@ class CalFileParser {
   /**
    *
    */
-  public function set_output($output) {
+  public function set_output(string $output) : void {
     if (!empty($output)) {
       $this->_output = $output;
     }
@@ -59,7 +66,7 @@ class CalFileParser {
   /**
    *
    */
-  public function set_timezone($timezone) {
+  public function set_timezone(string $timezone) : void {
     if (!empty($timezone)) {
       $this->_user_timezone = $timezone;
     }
@@ -68,21 +75,21 @@ class CalFileParser {
   /**
    *
    */
-  public function get_base_path() {
+  public function get_base_path() : string {
     return $this->_base_path;
   }
 
   /**
    *
    */
-  public function get_file_name() {
+  public function get_file_name() : string {
     return $this->_file_name;
   }
 
   /**
    *
    */
-  public function get_output() {
+  public function get_output() : string {
     return $this->_output;
   }
 
@@ -91,7 +98,7 @@ class CalFileParser {
    *
    * @param string $file
    *
-   * @return string
+   * @return string|bool
    *
    * @example
    *  read_file('schedule.vcal')
@@ -130,7 +137,7 @@ class CalFileParser {
   /**
    * Read Remote File.
    *
-   * @param $file
+   * @param string $file
    *
    * @return bool|string
    */
@@ -156,7 +163,7 @@ class CalFileParser {
   public function parse($file = '', $output = '') {
     $file_contents = $this->read_file($file);
 
-    if ($file_contents === FALSE) {
+    if ($file_contents == FALSE) {
       return 'Error: File Could not be read';
     }
 
@@ -210,35 +217,37 @@ class CalFileParser {
 
   /**
    * Output
-   * outputs data in the format specified
    *
-   * @param $events_arr
+   * @param array<int, mixed> $events_arr
+   *   Array of events.
+   *
    * @param string $output
+   *   Output type.
    *
-   * @return mixed
+   * @return mixed|array<int, mixed>
+   *   Output as json or array.
    */
   private function output($events_arr, $output = 'array') {
     switch ($output) {
       case 'json':
         return json_encode($events_arr);
 
-      break;
       default:
         return $events_arr;
-      break;
+
     }
   }
 
   /**
-   * Convert event string to array
-   * accepts a string of calendar event data and produces array of 'key:value' strings
-   * See convert_key_value_strings() to convert strings to
+   * Convert event string to array.
    *
    * @param string $event_str
+   *   Content of an event.
    *
-   * @return array
+   * @return array<int, mixed>
+   *   Same data as an array.
    */
-  private function convert_event_string_to_array($event_str = '') {
+  private function convert_event_string_to_array($event_str = '') : array {
     if (!empty($event_str)) {
       // Replace new lines with a custom delimiter.
       $event_str = preg_replace("/[\r\n]/", "%%", $event_str);
@@ -289,12 +298,13 @@ class CalFileParser {
   }
 
   /**
-   * Parse Key Value String
-   * accepts an array of strings in the format of 'key:value' and returns an array of keys and values
+   * Parse key-value string.
    *
-   * @param array $event_key_pairs
+   * @param array<int, mixed> $event_key_pairs
+   *   Key value pairs.
    *
-   * @return array
+   * @return array<int, mixed>
+   *   Converted array.
    */
   private function convert_key_value_strings($event_key_pairs = []) {
     $event = [];

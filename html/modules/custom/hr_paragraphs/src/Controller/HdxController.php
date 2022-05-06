@@ -30,6 +30,16 @@ class HdxController extends ControllerBase {
 
   /**
    * Build active facets for Hdx.
+   *
+   * @param string $base_url
+   *   Base URL of the page.
+   * @param array<string, mixed> $filters
+   *   Filters from URL.
+   * @param array<string, mixed> $all_facets
+   *   List of all facets.
+   *
+   * @return array<int, mixed>
+   *   List of active facets.
    */
   public function buildHdxActiveFacets(string $base_url, array $filters, array $all_facets) : array {
     $active_facets = [];
@@ -90,8 +100,21 @@ class HdxController extends ControllerBase {
 
   /**
    * Build facets for Hdx.
+   *
+   * @param string $base_url
+   *   Base URL of the page.
+   * @param array<string, mixed> $embedded_facets
+   *   Parsed facets from request.
+   * @param array<string, mixed> $filters
+   *   Filters from URL.
+   * @param array<string, mixed> $query_filters
+   *   Filters from URL.
+   *
+   * @return array<int, mixed>
+   *   List of facets.
    */
   public function buildHdxFacets(string $base_url, array $embedded_facets, array $filters, array $query_filters) : array {
+    $facets = [];
     $facet_blocks = [];
 
     $allowed_filters = $this->getHdxFilters();
@@ -157,6 +180,16 @@ class HdxController extends ControllerBase {
 
   /**
    * Build Hdx parameters.
+   *
+   * @param int $offset
+   *   Offset for the search.
+   * @param int $limit
+   *   Number of items to return.
+   * @param array<string, mixed> $query_filters
+   *   Filters from the original URL.
+   *
+   * @return array<string, mixed>
+   *   Search parameters.
    */
   public function buildHdxParameters(int $offset, int $limit, array $query_filters) : array {
     $parameters = [
@@ -205,6 +238,12 @@ class HdxController extends ControllerBase {
 
   /**
    * Allowed filters.
+   *
+   * @param string $key
+   *   Optional filter key.
+   *
+   * @return string|array<string, string>|bool
+   *   Filter label or all filters.
    */
   public function getHdxFilters($key = NULL) {
     $filters = [
@@ -230,9 +269,17 @@ class HdxController extends ControllerBase {
 
   /**
    * Execute Hdx query.
+   *
+   * @param array<string, mixed> $parameters
+   *   Search parameters.
+   *
+   * @return array<string, mixed>
+   *   Raw results.
    */
   public function executeHdxQuery(array $parameters) : array {
     $endpoint = 'https://data.humdata.org/api/3/action/package_search';
+    /** @var \Psr\Http\Message\ResponseInterface $response */
+    $response = NULL;
 
     try {
       $response = $this->httpClient->request(
@@ -256,6 +303,12 @@ class HdxController extends ControllerBase {
 
   /**
    * Build Hdx objects.
+   *
+   * @param array<string, mixed> $results
+   *   Raw results.
+   *
+   * @return array<string, mixed>
+   *   Structured results.
    */
   public function buildHdxObjects(array $results) : array {
     $data = [];
@@ -303,6 +356,12 @@ class HdxController extends ControllerBase {
 
   /**
    * Parse Hdx URL.
+   *
+   * @param string $url
+   *   Full URL.
+   *
+   * @return array<string, mixed>
+   *   Parsed query string.
    */
   public function parseHdxUrl(string $url) : array {
     $path = parse_url($url, PHP_URL_PATH);

@@ -24,7 +24,7 @@ class ReliefwebController extends ControllerBase {
   /**
    * Advanced search operator mapping.
    *
-   * @var array
+   * @var array<string, string>
    */
   protected $advancedSearchOperators = [
     'with' => '(',
@@ -46,6 +46,14 @@ class ReliefwebController extends ControllerBase {
 
   /**
    * Build active facets for Reliefweb.
+   *
+   * @param string $base_url
+   *   Base URL of the page.
+   * @param array<string, mixed> $filters
+   *   Filters from URL.
+   *
+   * @return array<int, mixed>
+   *   List of active facets.
    */
   public function buildReliefwebActiveFacets(string $base_url, array $filters) : array {
     $active_facets = [];
@@ -86,8 +94,19 @@ class ReliefwebController extends ControllerBase {
 
   /**
    * Build facets for Reliefweb.
+   *
+   * @param string $base_url
+   *   Base URL of the page.
+   * @param array<string, mixed> $embedded_facets
+   *   Parsed facets from request.
+   * @param array<string, mixed> $filters
+   *   Filters from URL.
+   *
+   * @return array<int, mixed>
+   *   List of facets.
    */
   public function buildReliefwebFacets(string $base_url, array $embedded_facets, array $filters) : array {
+    $facets = [];
     $facet_blocks = [];
 
     $allowed_filters = $this->getReliefwebFilters();
@@ -165,6 +184,16 @@ class ReliefwebController extends ControllerBase {
 
   /**
    * Build reliefweb parameters.
+   *
+   * @param int $offset
+   *   Offset for the search.
+   * @param int $limit
+   *   Number of items to return.
+   * @param array<string, string> $query_filters
+   *   Filters from the original URL.
+   *
+   * @return array<string, mixed>
+   *   Search parameters.
    */
   public function buildReliefwebParameters(int $offset, int $limit, array $query_filters) : array {
     $facet_filters = [];
@@ -247,8 +276,14 @@ class ReliefwebController extends ControllerBase {
 
   /**
    * Allowed filters.
+   *
+   * @param string $key
+   *   Optional filter key.
+   *
+   * @return string|array<string, string>|bool
+   *   Filter label or all filters.
    */
-  public function getReliefwebFilters($key = NULL) {
+  public function getReliefwebFilters(string $key = NULL) {
     $filters = [
       'source.name' => $this->t('Organization'),
       'theme.name' => $this->t('Theme'),
@@ -275,6 +310,12 @@ class ReliefwebController extends ControllerBase {
 
   /**
    * Execute reliefweb query.
+   *
+   * @param array<string, mixed> $parameters
+   *   Search parameters.
+   *
+   * @return array<string, mixed>
+   *   Raw results.
    */
   public function executeReliefwebQuery(array $parameters) : array {
     $endpoint = 'https://api.reliefweb.int/v1/reports';
@@ -305,6 +346,12 @@ class ReliefwebController extends ControllerBase {
 
   /**
    * Build reliefweb objects.
+   *
+   * @param array<string, mixed> $results
+   *   Raw results from API.
+   *
+   * @return array<string, mixed>
+   *   Results.
    */
   public function buildReliefwebObjects(array $results) : array {
     $data = [];
@@ -376,8 +423,14 @@ class ReliefwebController extends ControllerBase {
 
   /**
    * Fix URL for reliefweb.
+   *
+   * @param string $url
+   *   Full URL.
+   *
+   * @return string
+   *   Fixed URL.
    */
-  protected function reliefwebFixUrl($url) {
+  protected function reliefwebFixUrl(string $url) {
     $url = str_replace('#', '%23', $url);
     $url = str_replace(' ', '%20', $url);
     $url = str_replace('http://', 'https://', $url);
@@ -405,6 +458,12 @@ class ReliefwebController extends ControllerBase {
 
   /**
    * Parse reliefweb URL.
+   *
+   * @param string $url
+   *   Full URL.
+   *
+   * @return array<string, mixed>
+   *   Dates with a 'from' or a 'to' key or both.
    */
   public function parseReliefwebUrl(string $url) : array {
     $conditions = [];
@@ -548,13 +607,13 @@ class ReliefwebController extends ControllerBase {
    *
    * @param string $code
    *   Filter code.
-   * @param array $values
+   * @param array<int, string> $values
    *   Filter values.
    *
-   * @return array
+   * @return array<string, string>
    *   Dates with a 'from' or a 'to' key or both.
    */
-  public function validateDateFilterValues($code, array $values) {
+  public function validateDateFilterValues(string $code, array $values) : array {
     if (empty($values)) {
       return [];
     }
@@ -596,9 +655,12 @@ class ReliefwebController extends ControllerBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Get allowed filters and config.
+   *
+   * @return array<string, mixed>
+   *   List of filters.
    */
-  public function getFilters() {
+  public function getFilters() : array {
     return [
       'PC' => [
         'name' => $this->t('Primary country'),

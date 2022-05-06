@@ -8,6 +8,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\group\Entity\Group;
 use GuzzleHttp\ClientInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,7 +64,7 @@ class ParagraphController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller, $reliefweb_controller, $hdx_controller) {
+  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, IcalController $ical_controller, ReliefwebController $reliefweb_controller, HdxController $hdx_controller) {
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
     $this->pagerManager = $pager_manager;
@@ -75,15 +76,7 @@ class ParagraphController extends ControllerBase {
   /**
    * Helper to check if tab is active.
    */
-  protected function tabIsActive($group, $tab) : bool {
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
-      return FALSE;
-    }
-
+  protected function tabIsActive(Group $group, string $tab) : bool {
     if (!$group->hasField('field_enabled_tabs')) {
       return FALSE;
     }
@@ -99,17 +92,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if offices is enabled.
    */
-  public function hasContacts($group) {
+  public function hasContacts(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'offices');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -123,17 +108,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if pages is enabled.
    */
-  public function hasPages($group) {
+  public function hasPages(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'pages');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -147,17 +124,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if assessments is enabled.
    */
-  public function hasAssessments($group) {
+  public function hasAssessments(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'assessments');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -168,17 +137,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if datasets is enabled.
    */
-  public function hasDatasets($group) {
+  public function hasDatasets(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'data');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -188,17 +149,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if documents is enabled.
    */
-  public function hasDocuments($group) {
+  public function hasDocuments(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'documents');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -208,17 +161,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if maps is enabled.
    */
-  public function hasInfographics($group) {
+  public function hasInfographics(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'maps');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -227,18 +172,16 @@ class ParagraphController extends ControllerBase {
 
   /**
    * Check if events is enabled.
+   *
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   *
+   * @return \Drupal\Core\Access\AccessResult
+   *   Access.
    */
-  public function hasEvents($group) {
+  public function hasEvents(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'events');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -251,8 +194,14 @@ class ParagraphController extends ControllerBase {
 
   /**
    * Return all offices of an operation, sector or cluster.
+   *
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   *
+   * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
+   *   Render array or redirect to external site.
    */
-  public function getContacts($group) {
+  public function getContacts(Group $group) : array|TrustedRedirectResponse {
     if ($group->field_offices_page->isEmpty()) {
       return [
         '#type' => 'markup',
@@ -293,9 +242,15 @@ class ParagraphController extends ControllerBase {
   /**
    * Render block for adding content.
    *
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   *
+   * @return array<string, mixed>
+   *   Render array.
+   *
    * @see html/modules/contrib/group/src/Plugin/Block/GroupOperationsBlock.php
    */
-  public function getOperations($group) {
+  public function getOperations(Group $group) : array {
     $build = [];
 
     // The operations available in this block vary per the current user's group
@@ -306,8 +261,7 @@ class ParagraphController extends ControllerBase {
     $cacheable_metadata = new CacheableMetadata();
     $cacheable_metadata->setCacheContexts(['user.group_permissions']);
 
-    /** @var \Drupal\group\Entity\GroupInterface $group */
-    if ($group && $group->id()) {
+    if ($group->id()) {
       $links = [];
 
       // Retrieve the operations and cacheable metadata from the installed
@@ -336,6 +290,7 @@ class ParagraphController extends ControllerBase {
         $build['#links'] = $links;
       }
     }
+
     // Set the cacheable metadata on the build.
     $cacheable_metadata->applyTo($build);
 
@@ -344,8 +299,14 @@ class ParagraphController extends ControllerBase {
 
   /**
    * Return all pages of an operation, sector or cluster.
+   *
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   *
+   * @return array<string, mixed>
+   *   Render array.
    */
-  public function getPages($group) {
+  public function getPages(Group $group) : array {
     if ($group->field_pages_page->isEmpty()) {
       return [
         '#type' => 'markup',
@@ -367,8 +328,16 @@ class ParagraphController extends ControllerBase {
 
   /**
    * Return all datasets of an operation, sector or cluster.
+   *
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Current request.
+   *
+   * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
+   *   Render array or redirect to external site.
    */
-  public function getDatasets($group, Request $request) {
+  public function getDatasets(Group $group, Request $request) : array|TrustedRedirectResponse {
     if ($group->hasField('field_hdx_alternate_source') && !$group->field_hdx_alternate_source->isEmpty()) {
       /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
       $link = $group->field_hdx_alternate_source->first();
@@ -386,7 +355,9 @@ class ParagraphController extends ControllerBase {
       ];
     }
 
-    $url = $group->field_hdx_dataset_link->first()->uri;
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_hdx_dataset_link->first();
+    $url = $link->getUrl()->getUri();
 
     $limit = 10;
     $offset = $request->query->getInt('page', 0) * $limit;
@@ -447,8 +418,16 @@ class ParagraphController extends ControllerBase {
 
   /**
    * Return all documents of an operation, sector or cluster.
+   *
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Current request.
+   *
+   * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
+   *   Render array or redirect to external site.
    */
-  public function getReports($group, Request $request) {
+  public function getReports(Group $group, Request $request) : array|TrustedRedirectResponse {
     if ($group->hasField('field_documents_page') && !$group->field_documents_page->isEmpty()) {
       /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
       $link = $group->field_documents_page->first();
@@ -466,14 +445,24 @@ class ParagraphController extends ControllerBase {
       ];
     }
 
-    $url = $group->field_reliefweb_documents->first()->uri;
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_reliefweb_documents->first();
+    $url = $link->getUrl()->getUri();
     return $this->getReliefwebDocuments($request, $group, $url);
   }
 
   /**
    * Return all documents of an operation, sector or cluster.
+   *
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Current request.
+   *
+   * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
+   *   Render array or redirect to external site.
    */
-  public function getInfographics($group, Request $request) {
+  public function getInfographics(Group $group, Request $request) : array|TrustedRedirectResponse {
     if ($group->hasField('field_infographics') && !$group->field_infographics->isEmpty()) {
       /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
       $link = $group->field_infographics->first();
@@ -484,21 +473,33 @@ class ParagraphController extends ControllerBase {
       }
     }
 
-    if ($group->field_maps_infographics_link->isEmpty()) {
+    if ($group->get('field_maps_infographics_link')->isEmpty()) {
       return [
         '#type' => 'markup',
         '#markup' => $this->t('Reliefweb URL not set.'),
       ];
     }
 
-    $url = $group->field_maps_infographics_link->first()->uri;
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_maps_infographics_link->first();
+    $url = $link->getUrl()->getUri();
     return $this->getReliefwebDocuments($request, $group, $url);
   }
 
   /**
    * Return all reports of an operation, sector or cluster.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Current request.
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   * @param string $url
+   *   Url.
+   *
+   * @return array<string, mixed>
+   *   Render array.
    */
-  public function getReliefwebDocuments(Request $request, $group, $url) {
+  public function getReliefwebDocuments(Request $request, Group $group, string $url) : array {
     $limit = 10;
     $offset = $request->query->getInt('page', 0) * $limit;
     $filters = $request->query->get('filters', []);
@@ -567,8 +568,16 @@ class ParagraphController extends ControllerBase {
 
   /**
    * Return all assessments of an operation, sector or cluster.
+   *
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   Current request.
+   *
+   * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
+   *   Render array or redirect to external site.
    */
-  public function getAssessments($group, Request $request) {
+  public function getAssessments(Group $group, Request $request) : array|TrustedRedirectResponse {
     if ($group->hasField('field_assessments_page') && !$group->field_assessments_page->isEmpty()) {
       /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
       $link = $group->field_assessments_page->first();
@@ -586,18 +595,22 @@ class ParagraphController extends ControllerBase {
       ];
     }
 
-    $url = $group->field_reliefweb_assessments->first()->uri;
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $group->field_reliefweb_assessments->first();
+    $url = $link->getUrl()->getUri();
     return $this->getReliefwebDocuments($request, $group, $url);
   }
 
   /**
    * Return all events of an operation, sector or cluster.
+   *
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   *
+   * @return array<string, mixed>
+   *   Render array.
    */
-  public function getEvents($group) {
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
+  public function getEvents(Group $group) : array {
     // Settings.
     $settings = [
       'header' => [
@@ -617,7 +630,7 @@ class ParagraphController extends ControllerBase {
     $settings['events'] = $datasource_uri;
 
     // Calendar link.
-    $calendar_url = $group->field_calendar_link->uri;
+    $calendar_url = $group->get('field_calendar_link')->first()['uri'];
 
     return [
       'calendar' => [
@@ -651,17 +664,11 @@ class ParagraphController extends ControllerBase {
   /**
    * Proxy iCal requests.
    */
-  public function getIcal($group, Request $request) {
+  public function getIcal(Group $group, Request $request) : JsonResponse {
     $range_start = $request->query->get('start') ?? date('Y-m-d');
     $range_end = $request->query->get('end') ?? date('Y-m-d', time() + 365 * 24 * 60 * 60);
 
-    // Get iCal URL from group.
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
     $output = $this->icalController->getIcalEvents($group, $range_start, $range_end);
-
     return new JsonResponse($output);
   }
 
