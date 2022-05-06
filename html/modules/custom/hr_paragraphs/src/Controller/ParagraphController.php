@@ -5,7 +5,6 @@ namespace Drupal\hr_paragraphs\Controller;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
@@ -65,7 +64,7 @@ class ParagraphController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, $ical_controller, $reliefweb_controller, $hdx_controller) {
+  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, IcalController $ical_controller, ReliefwebController $reliefweb_controller, HdxController $hdx_controller) {
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
     $this->pagerManager = $pager_manager;
@@ -77,15 +76,7 @@ class ParagraphController extends ControllerBase {
   /**
    * Helper to check if tab is active.
    */
-  protected function tabIsActive($group, $tab) : bool {
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
-      return FALSE;
-    }
-
+  protected function tabIsActive(Group $group, string $tab) : bool {
     if (!$group->hasField('field_enabled_tabs')) {
       return FALSE;
     }
@@ -101,17 +92,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if offices is enabled.
    */
-  public function hasContacts($group) {
+  public function hasContacts(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'offices');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -125,17 +108,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if pages is enabled.
    */
-  public function hasPages($group) {
+  public function hasPages(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'pages');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -149,17 +124,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if assessments is enabled.
    */
-  public function hasAssessments($group) {
+  public function hasAssessments(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'assessments');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -170,17 +137,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if datasets is enabled.
    */
-  public function hasDatasets($group) {
+  public function hasDatasets(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'data');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -190,17 +149,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if documents is enabled.
    */
-  public function hasDocuments($group) {
+  public function hasDocuments(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'documents');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -210,17 +161,9 @@ class ParagraphController extends ControllerBase {
   /**
    * Check if maps is enabled.
    */
-  public function hasInfographics($group) {
+  public function hasInfographics(Group $group) : AccessResult {
     $active = $this->tabIsActive($group, 'maps');
     if (!$active) {
-      return AccessResult::forbidden();
-    }
-
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    if (!$group) {
       return AccessResult::forbidden();
     }
 
@@ -721,18 +664,11 @@ class ParagraphController extends ControllerBase {
   /**
    * Proxy iCal requests.
    */
-  public function getIcal(int|EntityInterface $group, Request $request) : JsonResponse {
+  public function getIcal(Group $group, Request $request) : JsonResponse {
     $range_start = $request->query->get('start') ?? date('Y-m-d');
     $range_end = $request->query->get('end') ?? date('Y-m-d', time() + 365 * 24 * 60 * 60);
 
-    // Get iCal URL from group.
-    if (is_numeric($group)) {
-      $group = $this->entityTypeManager->getStorage('group')->load($group);
-    }
-
-    /** @var \Drupal\group\Entity\Group $group */
     $output = $this->icalController->getIcalEvents($group, $range_start, $range_end);
-
     return new JsonResponse($output);
   }
 
