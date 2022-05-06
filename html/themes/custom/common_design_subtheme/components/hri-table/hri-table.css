@@ -6,12 +6,11 @@
   color: var(--brand-primary--dark);
 }
 
-/* Force a min-width on Dataset column */
-.cd-table th:nth-child(1) {
-  width: 33%;
+.cd-table td {
+  vertical-align: top;
 }
 
-/* Dates don't wrap, but otherwise they're as small as possible */
-.cd-table [data-title="Last updated"] {
+.views-field-label,
+.views-field-changed {
   white-space: nowrap;
 }
