@@ -1,6 +1,18 @@
 # Reliefweb Operations
 
-Contains paragraph layout and allows asynchonous translations.
+## Testing
+
+Intergration tests using existing site/config.
+
+```bash
+fin exec XDEBUG_MODE=coverage ./vendor/bin/phpunit --testsuite Existing --verbose
+```
+
+## Drupal check
+
+```bash
+fin exec php vendor/bin/drupal-check -ad -e */tests/*  html/modules/custom/hr_paragraphs
+```
 
 ## Conventional changelog
 
