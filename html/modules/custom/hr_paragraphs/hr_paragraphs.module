@@ -1236,7 +1236,7 @@ function hr_paragraphs_group_create_access(AccountInterface $account, array $con
  *
  * @see hr_paragraphs_group_create_access()
  */
-function hr_paragraphs_module_implements_alter(&$implementations, $hook) {
+function hr_paragraphs_module_implements_alter(array &$implementations, string $hook) {
   if ($hook !== 'group_create_access') {
     return;
   }

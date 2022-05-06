@@ -5,13 +5,13 @@
 Intergration tests using existing site/config.
 
 ```bash
-fin exec XDEBUG_MODE=coverage ./vendor/bin/phpunit --testsuite Existing --verbose
+XDEBUG_MODE=coverage ./vendor/bin/phpunit --testsuite Existing --verbose
 ```
 
 ## Drupal check
 
 ```bash
-fin exec php vendor/bin/drupal-check -ad -e */tests/*  html/modules/custom/hr_paragraphs
+php vendor/bin/drupal-check -ad -e *Widget.php  html/modules/custom/hr_paragraphs/src
 ```
 
 ## Conventional changelog

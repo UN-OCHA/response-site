@@ -193,7 +193,7 @@ class ReliefwebController extends ControllerBase {
    *   Filters from the original URL.
    *
    * @return array<string, mixed>
-   *   Filter label or all filters.
+   *   Search parameters.
    */
   public function buildReliefwebParameters(int $offset, int $limit, array $query_filters) : array {
     $facet_filters = [];
