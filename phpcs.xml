@@ -13,6 +13,13 @@
   <exclude-pattern>assets/*</exclude-pattern>
   <exclude-pattern>gulpfile.js</exclude-pattern>
 
-  <rule ref="Drupal" />
-  <rule ref="DrupalPractice" />
+  <rule ref="Drupal">
+     <exclude name="Drupal.Commenting.VariableComment.IncorrectVarType" />
+     <exclude name="Drupal.Commenting.FunctionComment.ParamTypeSpaces" />
+     <exclude name="Drupal.Commenting.FunctionComment.InvalidReturn" />
+     <exclude name="Drupal.Commenting.FunctionComment.ReturnTypeSpaces" />
+  </rule>
+  <rule ref="DrupalPractice">
+  </rule>
 </ruleset>
+
