@@ -4,6 +4,7 @@ namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\date_recur\DateRecurHelper;
+use Drupal\group\Entity\Group;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -29,8 +30,18 @@ class IcalController extends ControllerBase {
 
   /**
    * Get ICal events.
+   *
+   * @param \Drupal\group\Entity\Group $group
+   *   Group.
+   * @param string $range_start
+   *   Start date as string.
+   * @param string $range_end
+   *   End date as string.
+   *
+   * @return array<int, mixed>
+   *   List of events found.
    */
-  public function getIcalEvents($group, $range_start = NULL, $range_end = NULL) : array {
+  public function getIcalEvents(Group $group, string $range_start = NULL, string $range_end = NULL) : array {
     $range_start = $range_start ?? date('Y-m-d');
     $range_end = $range_end ?? date('Y-m-d', time() + 365 * 24 * 60 * 60);
 
