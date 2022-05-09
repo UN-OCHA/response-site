@@ -790,7 +790,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
     '#theme' => 'hr_paragraphs_rw_list',
     '#data' => $reliefweb_controller->buildReliefwebObjects($results),
     '#view_all' => $paragraph->field_reliefweb_url->first()->uri,
-    '#total' => 10,
+    '#total' => $max_number_of_items,
     '#weight' => 99,
   ];
 }

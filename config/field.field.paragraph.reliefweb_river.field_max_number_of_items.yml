@@ -13,11 +13,13 @@ label: 'Max number of items'
 description: ''
 required: false
 translatable: true
-default_value: {  }
+default_value:
+  -
+    value: 5
 default_value_callback: ''
 settings:
   min: 1
-  max: null
+  max: 50
   prefix: ''
   suffix: ''
 field_type: integer
