@@ -26,3 +26,9 @@
 
 # Ignore the build log.
 /buildlog.txt
+
+# Coverage
+/phpcov.phar
+/code-coverage-report-clover/
+/coverage/
+/html/sites/default/browser_output/
