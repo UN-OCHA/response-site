@@ -74,10 +74,8 @@ third_party_settings:
     group_general:
       children:
         - field_enabled_tabs
-        - path
         - field_archive_group
         - field_archive_message
-        - status
       label: General
       region: content
       parent_name: group_content
@@ -343,13 +341,13 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 2
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 5
+    weight: 7
     region: content
     settings:
       display_label: true
