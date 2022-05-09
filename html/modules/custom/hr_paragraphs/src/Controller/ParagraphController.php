@@ -413,6 +413,20 @@ class ParagraphController extends ControllerBase {
         '#type' => 'pager',
       ],
       '#group' => $group,
+      '#cache' => [
+        'keys' => [
+          'group',
+          $group->id(),
+        ],
+        'context' => [
+          'url.query_args:filter',
+          'url.query_args:sort',
+          'url.query_args:page',
+          'url.query_args:limit',
+          'url.query_args:offset',
+        ],
+        'max-age' => 60,
+      ],
     ];
   }
 
@@ -563,6 +577,20 @@ class ParagraphController extends ControllerBase {
         '#type' => 'pager',
       ],
       '#group' => $group,
+      '#cache' => [
+        'keys' => [
+          'group',
+          $group->id(),
+        ],
+        'context' => [
+          'url.query_args:filter',
+          'url.query_args:sort',
+          'url.query_args:page',
+          'url.query_args:limit',
+          'url.query_args:offset',
+        ],
+        'max-age' => 60,
+      ],
     ];
   }
 
@@ -657,6 +685,20 @@ class ParagraphController extends ControllerBase {
       'calendar_link' => [
         '#theme' => 'fullcalendar_link',
         '#calendar_url' => $calendar_url,
+      ],
+      '#cache' => [
+        'keys' => [
+          'group',
+          $group->id(),
+        ],
+        'context' => [
+          'url.query_args:filter',
+          'url.query_args:sort',
+          'url.query_args:page',
+          'url.query_args:limit',
+          'url.query_args:offset',
+        ],
+        'max-age' => 60,
       ],
     ];
   }
