@@ -938,9 +938,40 @@ function hr_paragraphs_library_info_alter(&$libraries, $extension) {
  * Implements hook_menu_local_tasks_alter().
  */
 function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
+  $weights = [
+    'hr_paragraphs.operation' => -10,
+    'group.view' => 0,
+    'group.edit_form' => 5,
+    'group.delete_form' => 10,
+    'group.version_history' => 15,
+    'views_view:view.group_members.page_1' => 20,
+    'views_view:view.subgroups_of_a_group.page_1' => 30,
+    'views_view:view.group_nodes.page_1' => 40,
+    'content_translation.local_tasks:entity.group.content_translation_overview' => 100,
+    'hr_paragraphs.operation.operations' => 999,
+    'group.content' => 999,
+  ];
+
+  // Re-order tabs.
+  foreach ($data['tabs'][0] as $key => &$tab) {
+    if (isset($weights[$key])) {
+      $tab['#weight'] = $weights[$key];
+    }
+  }
+
+  // Hide add existing content local task.
+  if (isset($data['tabs'][0]['group.view']['#access'])) {
+    $data['tabs'][0]['group.view']['#access'] = FALSE;
+  }
+
   // Hide duplicate local task.
   if (isset($data['tabs'][0]['group.view']['#access'])) {
     $data['tabs'][0]['group.view']['#access'] = FALSE;
+  }
+
+  // Hide all entities.
+  if (isset($data['tabs'][0]['group.content']['#access'])) {
+    $data['tabs'][0]['group.content']['#access'] = FALSE;
   }
 
   // Mark local task active for queries.
@@ -989,6 +1020,10 @@ function hr_paragraphs_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMat
 function hr_paragraphs_menu_local_actions_alter(&$local_actions) {
   if (isset($local_actions['group.add_group'])) {
     unset($local_actions['group.add_group']);
+  }
+
+  if (isset($local_actions['group_content.group_node_relate_page'])) {
+    unset($local_actions['group_content.group_node_relate_page']);
   }
 }
 

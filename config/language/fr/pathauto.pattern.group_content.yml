@@ -1,4 +1,0 @@
-label: 'Contenu de groupe'
-relationships:
-  'group_content:langcode:language':
-    label: Langue

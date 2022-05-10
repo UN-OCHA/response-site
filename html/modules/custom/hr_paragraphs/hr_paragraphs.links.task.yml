@@ -43,8 +43,3 @@ hr_paragraphs.operation.pages:
   route_name: hr_paragraphs.operation.pages
   base_route: entity.group.canonical
   parent_id: hr_paragraphs.operation
-hr_paragraphs.operation.operations:
-  title: 'Operations'
-  route_name: hr_paragraphs.operation.operations
-  base_route: entity.group.canonical
-  weight: 999
