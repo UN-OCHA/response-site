@@ -1268,3 +1268,21 @@ function hr_paragraphs_module_implements_alter(array &$implementations, string $
     unset($implementations['subgroup']);
   }
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
+  $form_ids = [
+    'group_content_operation-group_membership_add_form',
+    'group_content_operation-group_membership_edit_form',
+    'group_content_cluster-group_membership_add_form',
+    'group_content_cluster-group_membership_edit_form',
+  ];
+
+  if (in_array($form_id, $form_ids)) {
+    if (isset($form['path'])) {
+      unset($form['path']);
+    }
+  }
+}
