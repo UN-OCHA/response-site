@@ -277,8 +277,30 @@ class ParagraphController extends ControllerBase {
         foreach ($links as &$link) {
           /** @var \Drupal\Core\StringTranslation\TranslatableMarkup $title */
           $title = $link['title'];
+
+          // Fix subgroup label.
           if ($title->getUntranslatedString() === 'Add @group_type subgroup') {
             $link['title'] = $this->t('Add @group_type', $title->getArguments());
+          }
+
+          // Fix leave label.
+          if ($title->getUntranslatedString() === 'Leave group') {
+            if ($group->bundle() == 'operation') {
+              $link['title'] = $this->t('Leave Operation', $title->getArguments());
+            }
+            else {
+              $link['title'] = $this->t('Leave Cluster or Working Group', $title->getArguments());
+            }
+          }
+
+          // Fix join label.
+          if ($title->getUntranslatedString() === 'Join group') {
+            if ($group->bundle() == 'operation') {
+              $link['title'] = $this->t('Join Operation', $title->getArguments());
+            }
+            else {
+              $link['title'] = $this->t('Join Cluster or Working Group', $title->getArguments());
+            }
           }
         }
 
