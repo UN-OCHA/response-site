@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - filter.format.hr_plain_text
     - node.type.page
     - taxonomy.vocabulary.tags
   module:
@@ -10,6 +11,7 @@ dependencies:
     - contextual
     - entity_reference_revisions
     - file
+    - filter
     - group
     - masquerade
     - menu_link_content
@@ -113,6 +115,7 @@ permissions:
   - 'update paragraph content text_block'
   - 'update paragraph content twitter_feed'
   - 'update paragraph content upcoming_events'
+  - 'use text format hr_plain_text'
   - 'view all revisions'
   - 'view expiring users report'
   - 'view office external entity collection'
