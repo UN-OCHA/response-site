@@ -401,6 +401,7 @@ function hr_paragraphs_group_content_update(EntityInterface $entity) {
 function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
+  $embed_url = '';
 
   if (!$paragraph->field_iframe_url->isEmpty()) {
     $embed_url = $paragraph->get('field_iframe_url')->first()->uri;
@@ -412,6 +413,10 @@ function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
     $embed_url = $settings['embed_url'];
     $width = $settings['width'];
     $height = $settings['height'];
+  }
+
+  if (empty($embed_url)) {
+    return;
   }
 
   if (!$paragraph->field_iframe_aspect_ratio->isEmpty()) {
