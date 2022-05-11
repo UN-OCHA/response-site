@@ -215,7 +215,9 @@ class ParagraphController extends ControllerBase {
     // Redirect external links.
     if ($link->isExternal()) {
       try {
-        return new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to = new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to->addCacheableDependency($group);
+        return $redirect_to;
       }
       catch (\Exception $exception) {
         // Ignore, deleted page.
@@ -366,7 +368,9 @@ class ParagraphController extends ControllerBase {
 
       // Redirect external links.
       if ($link->isExternal()) {
-        return new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to = new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to->addCacheableDependency($group);
+        return $redirect_to;
       }
     }
 
@@ -470,7 +474,9 @@ class ParagraphController extends ControllerBase {
 
       // Redirect external links.
       if ($link->isExternal()) {
-        return new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to = new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to->addCacheableDependency($group);
+        return $redirect_to;
       }
     }
 
@@ -505,7 +511,9 @@ class ParagraphController extends ControllerBase {
 
       // Redirect external links.
       if ($link->isExternal()) {
-        return new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to = new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to->addCacheableDependency($group);
+        return $redirect_to;
       }
     }
 
@@ -634,7 +642,9 @@ class ParagraphController extends ControllerBase {
 
       // Redirect external links.
       if ($link->isExternal()) {
-        return new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to = new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to->addCacheableDependency($group);
+        return $redirect_to;
       }
     }
 
