@@ -952,6 +952,10 @@ function hr_paragraphs_library_info_alter(&$libraries, $extension) {
  * Implements hook_menu_local_tasks_alter().
  */
 function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
+  if (empty($data['tabs'])) {
+    return;
+  }
+
   $weights = [
     'hr_paragraphs.operation' => -10,
     'group.view' => 0,
