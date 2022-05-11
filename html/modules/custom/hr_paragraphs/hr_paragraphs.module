@@ -283,6 +283,38 @@ function hr_paragraphs_group_content_insert(EntityInterface $entity) {
   if ($plugin_id === 'subgroup:cluster') {
     return hr_paragraphs_group_subgroup_alias($entity);
   }
+
+  if ($plugin_id === 'group_membership') {
+    return hr_paragraphs_group_add_member($entity);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hr_paragraphs_group_add_member(EntityInterface $entity) {
+  /** @var \Drupal\group\Entity\GroupContent $entity */
+  $group = $entity->getGroup();
+
+  /** @var \Drupal\user\Entity\User $member */
+  $member = $entity->getEntity();
+
+  \Drupal::logger('hr_members')->info('@member (@uid) added to @group (@gid)', [
+    '@member' => $member->getAccountName(),
+    '@uid' => $member->id(),
+    '@group' => $group->label(),
+    '@gid' => $group->id(),
+  ]);
+
+  if ($member->isBlocked()) {
+    $member->activate();
+    $member->save();
+
+    \Drupal::logger('hr_members')->info('@member (@uid) account automatically unblocked', [
+      '@member' => $member->getAccountName(),
+      '@uid' => $member->id(),
+    ]);
+  }
 }
 
 /**
