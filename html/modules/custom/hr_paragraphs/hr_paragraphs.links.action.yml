@@ -5,3 +5,10 @@ hr_paragraphs.add_operation:
   title: 'Add Operation'
   appears_on:
     - 'entity.group.collection'
+hr_paragraphs.add_cluster:
+  route_name: 'entity.group_content.create_form'
+  route_parameters:
+    plugin_id: 'subgroup:cluster'
+  title: 'Add new Cluster or Working Group'
+  appears_on:
+    - 'view.subgroups_of_a_group.page_1'

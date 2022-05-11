@@ -22,4 +22,12 @@ services:
     class: 'Drupal\hr_paragraphs\Breadcrumb\GroupBreadcrumbBuilder'
     tags:
       - { name: 'breadcrumb_builder', priority: 100 }
-
+  hr_paragraphs.custom_access_group_type:
+    class: Drupal\hr_paragraphs\Access\CustomAccessGroupType
+    arguments: ['@group.group_route_context']
+    tags:
+      - { name: access_check, applies_to: _custom_access_group_type }
+  hr_paragraphs.route_subscriber:
+    class: Drupal\hr_paragraphs\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
