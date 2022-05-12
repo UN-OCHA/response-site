@@ -278,8 +278,6 @@ function create_operations() {
 
   $row_counter = 0;
   while ($row = fgetcsv($handle, 0, ',', '"')) {
-    $row_counter++;
-
     $data = [];
     for ($i = 0; $i < count($row); $i++) {
       $data[$header_lowercase[$i]] = trim($row[$i]);
@@ -293,7 +291,8 @@ function create_operations() {
       continue;
     }
 
-    print "Processing {$data['name']}\n";
+    $row_counter++;
+    print "{$row_counter}. Processing {$data['name']}\n";
 
     // Delete group if it exists.
     if ($group = Group::load($data['id'])) {

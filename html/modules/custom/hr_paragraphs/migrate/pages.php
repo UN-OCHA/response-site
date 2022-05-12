@@ -18,11 +18,13 @@ function create_pages() {
 
   $row_counter = 0;
   while ($row = fgetcsv($handle, 0, ',', '"')) {
-    $row_counter++;
-
     $data = [];
     for ($i = 0; $i < count($row); $i++) {
       $data[$header_lowercase[$i]] = trim($row[$i]);
+    }
+
+    if ($data['type'] != 'hr_page') {
+      continue;
     }
 
     if ($data['operation active'] != 'active') {
@@ -37,7 +39,8 @@ function create_pages() {
       continue;
     }
 
-    print "Processing {$data['name']}\n";
+    $row_counter++;
+    print "{$row_counter}. Processing {$data['name']}\n";
 
     // Delete group if it exists.
     if ($node = Node::load($data['id'])) {
