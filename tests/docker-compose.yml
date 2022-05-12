@@ -4,15 +4,15 @@ networks:
   default:
 
 volumes:
-  operations-test-site-public:
-  operations-test-site-private:
+  response-test-site-public:
+  response-test-site-private:
 
 services:
   redis:
     restart: always
     image: public.ecr.aws/unocha/redis:5
-    hostname: operations-test-redis
-    container_name: operations-test-redis
+    hostname: response-test-redis
+    container_name: response-test-redis
     ports:
       - "6379"
     networks:
@@ -20,27 +20,27 @@ services:
 
   mysql:
     image: public.ecr.aws/unocha/mysql:10.5.12-r0-202109-01
-    hostname: operations-test-mysql
-    container_name: operations-test-mysql
+    hostname: response-test-mysql
+    container_name: response-test-mysql
     environment:
-      - MYSQL_DB=operations
-      - MYSQL_USER=operations
-      - MYSQL_PASS=operations
+      - MYSQL_DB=response
+      - MYSQL_USER=response
+      - MYSQL_PASS=response
     networks:
       - default
 
   drupal:
-    image: public.ecr.aws/unocha/operations-site:local
-    hostname: operations-test-site
-    container_name: operations-test-site
+    image: public.ecr.aws/unocha/response-site:local
+    hostname: response-test-site
+    container_name: response-test-site
     depends_on:
       - redis
       - mysql
     volumes:
       - "./settings:/srv/www/shared/settings:ro"
       # Mount volumes for the private and public files.
-      - "operations-test-site-public:/srv/www/html/sites/default/files:rw"
-      - "operations-test-site-private:/srv/www/html/sites/default/private:rw"
+      - "response-test-site-public:/srv/www/html/sites/default/files:rw"
+      - "response-test-site-private:/srv/www/html/sites/default/private:rw"
       # Mount the folders needed for the tests.
       - "../phpcs.xml:/srv/www/phpcs.xml:ro"
       - "../phpunit.xml:/srv/www/phpunit.xml:ro"
@@ -51,12 +51,12 @@ services:
     environment:
       - TERM=xterm
       - ENVIRONMENT=dev
-      - NGINX_SERVERNAME=operations-test-site,localhost,127.0.0.1
-      - NGINX_OVERRIDE_PROTOCOL=HTTP,operations-test-site,localhost,127.0.0.1
-      - DRUSH_OPTIONS_URI=http://operations-test-site
-      - DRUPAL_DB_DATABASE=operations
-      - DRUPAL_DB_USERNAME=operations
-      - DRUPAL_DB_PASSWORD=operations
+      - NGINX_SERVERNAME=response-test-site,localhost,127.0.0.1
+      - NGINX_OVERRIDE_PROTOCOL=HTTP,response-test-site,localhost,127.0.0.1
+      - DRUSH_OPTIONS_URI=http://response-test-site
+      - DRUPAL_DB_DATABASE=response
+      - DRUPAL_DB_USERNAME=response
+      - DRUPAL_DB_PASSWORD=response
       - DRUPAL_DB_HOST=mysql
       - DRUPAL_DB_DRIVER=mysql
       - PHP_ENVIRONMENT=dev

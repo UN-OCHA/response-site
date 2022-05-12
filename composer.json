@@ -1,6 +1,6 @@
 {
-    "name": "un-ocha/operations-site",
-    "description": "Reliefweb Operations",
+    "name": "un-ocha/response-site",
+    "description": "Reliefweb Response",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/drupal",
