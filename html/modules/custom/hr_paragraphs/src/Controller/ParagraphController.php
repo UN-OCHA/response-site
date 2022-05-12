@@ -444,14 +444,14 @@ class ParagraphController extends ControllerBase {
           'group',
           $group->id(),
         ],
-        'context' => [
+        'contexts' => [
           'url.query_args:filter',
           'url.query_args:sort',
           'url.query_args:page',
           'url.query_args:limit',
           'url.query_args:offset',
         ],
-        'max-age' => 60,
+        'max-age' => 60 * 60,
       ],
     ];
   }
@@ -612,14 +612,15 @@ class ParagraphController extends ControllerBase {
           'group',
           $group->id(),
         ],
-        'context' => [
+        'contexts' => [
+          'url.path',
           'url.query_args:filter',
           'url.query_args:sort',
           'url.query_args:page',
           'url.query_args:limit',
           'url.query_args:offset',
         ],
-        'max-age' => 60,
+        'max-age' => 60 * 60,
       ],
     ];
   }
@@ -723,14 +724,15 @@ class ParagraphController extends ControllerBase {
           'group',
           $group->id(),
         ],
-        'context' => [
+        'contexts' => [
+          'url.path',
           'url.query_args:filter',
           'url.query_args:sort',
           'url.query_args:page',
           'url.query_args:limit',
           'url.query_args:offset',
         ],
-        'max-age' => 60,
+        'max-age' => 60 * 60,
       ],
     ];
   }

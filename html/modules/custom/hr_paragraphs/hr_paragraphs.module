@@ -669,6 +669,11 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
       ];
     }
 
+    // Sort by label.
+    usort($items, function ($a, $b) {
+      return strcmp($a['label'], $b['label']);
+    });
+
     $variables['content']['children'] = [
       '#theme' => 'group_children',
       '#children' => $items,
@@ -762,6 +767,11 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
       'link' => $node->toUrl(),
     ];
   }
+
+  // Sort by label.
+  usort($items, function ($a, $b) {
+    return strcmp($a['label'], $b['label']);
+  });
 
   $variables['content']['nodes'] = [
     '#theme' => 'group_nodes',
