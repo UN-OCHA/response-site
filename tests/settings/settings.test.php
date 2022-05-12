@@ -142,4 +142,4 @@ $settings['file_private_path'] = '/srv/www/html/sites/default/private';
 $settings['config_sync_directory'] = '/srv/www/config';
 
 // Hash salt.
-$settings['hash_salt'] = 'operations-test-site-salt';
+$settings['hash_salt'] = 'response-test-site-salt';
