@@ -43,6 +43,7 @@ function create_clusters() {
     $operation = Group::load($data['operation id']);
     if (!$operation) {
       print "{$row_counter}. Operation {$data['operation id']} not found\n";
+      continue;
     }
 
     // Delete group if it exists.

@@ -869,6 +869,29 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   ];
 
   $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+
+  // Try using canonical URL.
+  if (!isset($results['data']) || empty($results['data'])) {
+    $parameters = $reliefweb_controller->buildReliefwebParameters(0, 1, []);
+
+    // Remove facets.
+    unset($parameters['facets']);
+
+    $parts = explode('/', $url);
+    $id = array_pop($parts);
+
+    $parameters['filter']['conditions'][] = [
+      'field' => 'id',
+      'value' => $id,
+    ];
+
+    $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+  }
+
+  if (empty($results)) {
+    return;
+  }
+
   $docs = $reliefweb_controller->buildReliefwebObjects($results);
   $doc = reset($docs);
 

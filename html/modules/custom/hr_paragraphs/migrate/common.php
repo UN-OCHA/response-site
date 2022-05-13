@@ -2,6 +2,8 @@
 
 // phpcs:ignoreFile
 
+use Drupal\paragraphs\Entity\Paragraph;
+
 function get_country_id_from_iso3($iso3) {
   $iso_to_rw = [
     'AFG' => 13,
@@ -260,4 +262,165 @@ function get_country_id_from_iso3($iso3) {
   }
 
   return '';
+}
+
+function fetch_panes_from_node($nid) {
+  $url = 'http://hrinfo.docksal.site/node/' . $nid . '/panelist';
+
+  $options = array(
+    'headers' => array(
+      'Content-Type' => 'application/json',
+      'Accept' => 'application/json',
+    ),
+  );
+
+  $response = \Drupal::httpClient()->get($url, $options);
+
+  if ($response->getStatusCode() == 200) {
+    return json_decode($response->getBody() . '', TRUE);
+  }
+
+  return FALSE;
+}
+
+function fetch_rw_document_url($hrinfo_url) {
+  /** @var \Drupal\hr_paragraphs\Controller\ReliefwebController */
+  $reliefweb_controller = \Drupal::service('hr_paragraphs.reliefweb_controller');
+  $parameters = $reliefweb_controller->buildReliefwebParameters(0, 1, []);
+
+  // Remove facets.
+  unset($parameters['facets']);
+  $parameters['filter']['conditions'][] = [
+    'field' => 'origin',
+    'value' => $hrinfo_url,
+  ];
+
+
+  $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+  if (empty($results)) {
+    return FALSE;
+  }
+
+  $docs = $reliefweb_controller->buildReliefwebObjects($results);
+  $doc = reset($docs);
+
+  return $doc['url'];
+}
+
+function fix_inline_images_and_urls($html) {
+  $doc = new DOMDocument();
+  $doc->loadHTML($html);
+
+  $tags = $doc->getElementsByTagName('img');
+  foreach ($tags as $tag) {
+    $src = $tag->getAttribute('src');
+    $image = file_get_contents($src);
+
+    /** @var \Drupal\file\Entity\File $file */
+    $file = file_save_data($image);
+
+    $tag->setAttribute('src', $file->createFileUrl());
+  }
+
+  $tags = $doc->getElementsByTagName('a');
+  foreach ($tags as $tag) {
+    $href = $tag->getAttribute('href');
+
+    $href = str_replace('https://www.humanitarianresponse.info/en/operations/', '/', $href);
+    $href = str_replace('https://www.humanitarianresponse.info/fr/operations/', '/', $href);
+    $href = str_replace('https://www.humanitarianresponse.info/ru/operations/', '/', $href);
+    $href = str_replace('https://www.humanitarianresponse.info/es/operations/', '/', $href);
+    $href = str_replace('https://www.humanitarianresponse.info/operations/', '/', $href);
+    $href = str_replace('https://www.humanitarianresponse.info/en/', '/', $href);
+    $href = str_replace('https://www.humanitarianresponse.info/fr/', '/', $href);
+    $href = str_replace('https://www.humanitarianresponse.info/ru/', '/', $href);
+    $href = str_replace('https://www.humanitarianresponse.info/es/', '/', $href);
+    $href = str_replace('https://www.humanitarianresponse.info/', '/', $href);
+
+    $tag->setAttribute('href', $href);
+  }
+
+  return $doc->saveHTML();
+}
+
+function add_panes_to_entity(&$entity) {
+  $panes = fetch_panes_from_node($entity->id());
+  if (!$panes) {
+    return;
+  }
+
+  if (!$panes['panes']) {
+    return;
+  }
+
+  $changed = FALSE;
+  foreach ($panes['panes'] as $pane) {
+    switch ($pane['type']) {
+      case 'hr_layout_rss_feeds':
+        $paragraph = Paragraph::create([
+          'type' => 'rss_feed',
+        ]);
+        if (isset($pane['title']) && !empty($pane['title'])) {
+          $paragraph->set('field_title', $pane['title']);
+        }
+        $paragraph->set('field_rss_link', [
+          'uri' => $pane['rss'],
+        ]);
+
+        $paragraph->isNew();
+        $paragraph->save();
+
+        $entity->field_paragraphs[] = $paragraph;
+        $changed = TRUE;
+        break;
+
+      case 'fieldable_panels_pane':
+      case 'custom':
+        if (empty($pane['title']) && empty($pane['body'])) {
+          break;
+        }
+
+        $paragraph = Paragraph::create([
+          'type' => 'text_block',
+        ]);
+        if (isset($pane['title']) && !empty($pane['title'])) {
+          $paragraph->set('field_title', $pane['title']);
+        }
+        $paragraph->set('field_text', fix_inline_images_and_urls($pane['body']));
+        $paragraph->field_text->format = 'basic_html';
+
+        $paragraph->isNew();
+
+        $entity->field_paragraphs[] = $paragraph;
+        $changed = TRUE;
+        break;
+
+      case 'hr_infographics_key_infographics':
+      case 'hr_documents_key_documents':
+        foreach ($pane['target_ids'] as $target) {
+          $reliefweb_url = fetch_rw_document_url('https://www.humanitarianresponse.info/en/' . $target);
+          if (empty($reliefweb_url)) {
+            continue;
+          }
+
+          $paragraph = Paragraph::create([
+            'type' => 'reliefweb_document',
+          ]);
+          if (isset($pane['title']) && !empty($pane['title'])) {
+            $paragraph->set('field_title', $pane['title']);
+          }
+
+          $paragraph->set('field_reliefweb_url', $reliefweb_url);
+
+          $paragraph->isNew();
+
+          $entity->field_paragraphs[] = $paragraph;
+          $changed = TRUE;
+        }
+    }
+  }
+
+  if ($changed) {
+    $entity->save();
+  }
 }

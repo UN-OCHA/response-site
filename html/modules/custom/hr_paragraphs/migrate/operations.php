@@ -106,7 +106,11 @@ function create_operations() {
     // Add HDX tab.
     $group->set('field_hdx_dataset_link', 'https://data.humdata.org/group/' . strtolower($data['iso3']));
 
+    // Save it.
     $group->setPublished()->save();
+
+    // Add panes.
+    add_panes_to_entity($group);
   }
 
   fclose($handle);
