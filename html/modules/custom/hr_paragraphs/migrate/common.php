@@ -297,7 +297,7 @@ function fetch_rw_document_url($hrinfo_url) {
 
 
   $results = $reliefweb_controller->executeReliefwebQuery($parameters);
-  if (empty($results)) {
+  if (empty($results['data'])) {
     return FALSE;
   }
 
@@ -308,6 +308,10 @@ function fetch_rw_document_url($hrinfo_url) {
 }
 
 function fix_inline_images_and_urls($html) {
+  if (empty($html)) {
+    return $html;
+  }
+
   $doc = new DOMDocument();
   $doc->loadHTML($html, LIBXML_NOERROR);
 
@@ -395,6 +399,8 @@ function add_panes_to_entity(&$entity) {
         $changed = TRUE;
         break;
 
+      case 'hr_documents':
+      case 'hr_infographics':
       case 'hr_infographics_key_infographics':
       case 'hr_documents_key_documents':
         foreach ($pane['target_ids'] as $target) {
@@ -417,6 +423,53 @@ function add_panes_to_entity(&$entity) {
           $entity->field_paragraphs[] = $paragraph;
           $changed = TRUE;
         }
+        break;
+
+      case 'hr_layout_standard':
+        $keys = [
+          'gid',
+          'hno',
+          'monr',
+          'srp',
+          'opr',
+          'orp',
+        ];
+        foreach ($keys as $key) {
+          if (!$pane[$key]) {
+            continue;
+          }
+
+          if (!isset($pane[$key]['entity_bundle']) || $pane[$key]['entity_bundle'] == 'hr_operation') {
+            continue;
+          }
+
+          $reliefweb_url = fetch_rw_document_url('https://www.humanitarianresponse.info/en/' . $pane[$key]['target_id']);
+          if (empty($reliefweb_url)) {
+            continue;
+          }
+
+          $paragraph = Paragraph::create([
+            'type' => 'reliefweb_document',
+          ]);
+          if (isset($pane['title']) && !empty($pane['title'])) {
+            $paragraph->set('field_title', $pane['title']);
+          }
+
+          $paragraph->set('field_reliefweb_url', $reliefweb_url);
+
+          $paragraph->isNew();
+
+          $entity->field_paragraphs[] = $paragraph;
+          $changed = TRUE;
+        }
+        break;
+
+      case 'fts_visualization':
+        // Skip it.
+        break;
+
+      default:
+        print("unsupported type: {$pane['type']}\n");
     }
   }
 

@@ -72,6 +72,9 @@ function create_clusters() {
     $group->set('field_sidebar_from_operation', TRUE);
     $group->setPublished()->save();
 
+    // Fetch and add panes.
+    add_panes_to_entity($group);
+
     // Add cluster to operation.
     $operation = Group::load($data['operation id']);
     if ($operation) {

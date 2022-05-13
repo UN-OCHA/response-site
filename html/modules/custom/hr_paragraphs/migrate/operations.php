@@ -71,7 +71,7 @@ function create_operations() {
       $group->set('field_reliefweb_assessments', 'https://reliefweb.int/updates?advanced-search=%28PC' . $rw_country_id . '%29_%28F5%29');
       $group->set('field_maps_infographics_link', 'https://reliefweb.int/updates?view=maps&advanced-search=%28PC' . $rw_country_id . '%29');
       $group->set('field_reliefweb_documents', 'https://reliefweb.int/updates?advanced-search=%28PC' . $rw_country_id . '%29&view=reports');
-
+/*
       $paragraph_assessments = Paragraph::create([
         'type' => 'reliefweb_river',
         'field_title' => 'ReliefWeb Assessments',
@@ -101,6 +101,7 @@ function create_operations() {
         $paragraph_maps,
         $paragraph_assessments,
       ]);
+*/
     }
 
     // Add HDX tab.
@@ -109,7 +110,7 @@ function create_operations() {
     // Save it.
     $group->setPublished()->save();
 
-    // Add panes.
+    // Fetch and add panes.
     add_panes_to_entity($group);
   }
 
