@@ -885,10 +885,15 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
       'value' => $id,
     ];
 
-    $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+    try {
+      $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+    }
+    catch (\Exception $e) {
+      $results = [];
+    }
   }
 
-  if (empty($results)) {
+  if (empty($results) || empty($results['data'])) {
     return;
   }
 
