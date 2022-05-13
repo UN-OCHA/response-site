@@ -309,7 +309,7 @@ function fetch_rw_document_url($hrinfo_url) {
 
 function fix_inline_images_and_urls($html) {
   $doc = new DOMDocument();
-  $doc->loadHTML($html);
+  $doc->loadHTML($html, LIBXML_NOERROR);
 
   $tags = $doc->getElementsByTagName('img');
   foreach ($tags as $tag) {
