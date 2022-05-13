@@ -131,7 +131,6 @@ class ParagraphController extends ControllerBase {
     }
 
     return AccessResult::allowedIf(!$group->field_assessments_page->isEmpty() || !$group->field_reliefweb_assessments->isEmpty());
-
   }
 
   /**

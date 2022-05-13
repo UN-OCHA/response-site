@@ -5,6 +5,8 @@
 use Drupal\group\Entity\Group;
 use Drupal\node\Entity\Node;
 
+include_once __DIR__ . '/common.php';
+
 function create_pages() {
   $handle = fopen(__DIR__ . '/pages.csv', 'r');
 

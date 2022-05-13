@@ -4,6 +4,8 @@
 
 use Drupal\group\Entity\Group;
 
+include_once __DIR__ . '/common.php';
+
 function create_clusters() {
   $handle = fopen(__DIR__ . '/clusters.csv', 'r');
 
@@ -37,6 +39,12 @@ function create_clusters() {
     $row_counter++;
     print "{$row_counter}. Processing {$data['name']}\n";
 
+    // Load operation.
+    $operation = Group::load($data['operation id']);
+    if (!$operation) {
+      print "{$row_counter}. Operation {$data['operation id']} not found\n";
+    }
+
     // Delete group if it exists.
     if ($group = Group::load($data['id'])) {
       $group->delete();
@@ -48,6 +56,18 @@ function create_clusters() {
       'label' => $data['name'],
     ]);
 
+    // Add ReliefWeb tabs.
+    $group->set('field_reliefweb_assessments', $operation->field_reliefweb_assessments->first()->getUrl()->getUri() . '&search=' . htmlentities($data['name']));
+    $group->set('field_maps_infographics_link', $operation->field_maps_infographics_link->first()->getUrl()->getUri() . '&search=' . htmlentities($data['name']));
+    $group->set('field_reliefweb_documents', $operation->field_reliefweb_documents->first()->getUrl()->getUri() . '&search=' . htmlentities($data['name']));
+
+    $group->set('field_enabled_tabs', [
+      ['value' => 'documents'],
+      ['value' => 'maps'],
+      ['value' => 'assessments'],
+    ]);
+
+    // Use sidebar from operation.
     $group->set('field_sidebar_from_operation', TRUE);
     $group->setPublished()->save();
 
