@@ -37,7 +37,7 @@ function create_clusters() {
     }
 
     $row_counter++;
-    print "{$row_counter}. Processing {$data['name']}\n";
+    print "{$row_counter}. Processing {$data['name']} ({$data['id']})\n";
 
     // Load operation.
     $operation = Group::load($data['operation id']);

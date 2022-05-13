@@ -42,7 +42,7 @@ function create_pages() {
     }
 
     $row_counter++;
-    print "{$row_counter}. Processing {$data['name']}\n";
+    print "{$row_counter}. Processing {$data['name']} ({$data['id']})\n";
 
     // Delete group if it exists.
     if ($node = Node::load($data['id'])) {
@@ -58,7 +58,7 @@ function create_pages() {
     $node->setPublished()->save();
 
     // Fetch and add panes.
-    add_panes_to_entity($group);
+    add_panes_to_entity($node);
 
     // Add cluster to operation.
     $operation = Group::load($data['operation id']);

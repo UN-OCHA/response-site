@@ -313,7 +313,7 @@ function fix_inline_images_and_urls($html) {
   }
 
   $doc = new DOMDocument();
-  $doc->loadHTML($html, LIBXML_NOERROR);
+  $doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'), LIBXML_NOERROR);
 
   $tags = $doc->getElementsByTagName('img');
   foreach ($tags as $tag) {
@@ -380,16 +380,24 @@ function add_panes_to_entity(&$entity) {
 
       case 'fieldable_panels_pane':
       case 'custom':
+      case 'node_body':
         if (empty($pane['title']) && empty($pane['body'])) {
+          break;
+        }
+
+        // Skip tokenized content.
+        if (strpos($pane['body'], '[[{') !== FALSE) {
           break;
         }
 
         $paragraph = Paragraph::create([
           'type' => 'text_block',
         ]);
+
         if (isset($pane['title']) && !empty($pane['title'])) {
           $paragraph->set('field_title', $pane['title']);
         }
+
         $paragraph->set('field_text', fix_inline_images_and_urls($pane['body']));
         $paragraph->field_text->format = 'basic_html';
 
