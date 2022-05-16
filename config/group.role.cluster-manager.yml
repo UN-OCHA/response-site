@@ -13,6 +13,7 @@ group_type: cluster
 permissions_ui: true
 permissions:
   - 'access group_node overview'
+  - 'administer group'
   - 'create group_node:page content'
   - 'create group_node:page entity'
   - 'create paragraph content featured_highlight'
