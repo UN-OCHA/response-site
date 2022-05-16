@@ -265,7 +265,9 @@ function get_country_id_from_iso3($iso3) {
 }
 
 function fetch_panes_from_node($nid) {
-  $url = 'http://hrinfo.docksal.site/node/' . $nid . '/panelist';
+  $config = \Drupal::config('hr_paragraphs.settings');
+  $sync_domain = $config->get('sync_domain', 'http://hrinfo.docksal.site');
+  $url = $sync_domain . '/node/' . $nid . '/panelist';
 
   $options = array(
     'headers' => array(
