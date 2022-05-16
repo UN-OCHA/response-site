@@ -7,18 +7,24 @@ use Drupal\group\Entity\Group;
 include_once __DIR__ . '/common.php';
 
 function create_clusters() {
-  $handle = fopen(__DIR__ . '/clusters.csv', 'r');
+  $handle = load_tsv_file('clusters.tsv');
 
-  // First line is header.
-  $header = fgetcsv($handle, 0, ',', '"');
-  $header_lowercase = array_map('strtolower', $header);
-
-  foreach ($header_lowercase as $index => $field_name) {
-    $header_lowercase[$index] = trim($field_name);
-  }
+  // Headers.
+  $header_lowercase = [
+    "id",
+    "name",
+    "published",
+    "changed",
+    "url",
+    "operation",
+    "operation published",
+    "operation active",
+    "operation url",
+    "operation id",
+  ];
 
   $row_counter = 0;
-  while ($row = fgetcsv($handle, 0, ',', '"')) {
+  while ($row = fgetcsv($handle, 0, "\t")) {
     $data = [];
     for ($i = 0; $i < count($row); $i++) {
       $data[$header_lowercase[$i]] = trim($row[$i]);

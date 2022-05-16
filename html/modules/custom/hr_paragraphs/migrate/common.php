@@ -4,6 +4,16 @@
 
 use Drupal\paragraphs\Entity\Paragraph;
 
+function load_tsv_file($filename) {
+  $config = \Drupal::config('hr_paragraphs.settings');
+  $csv_source_dir = $config->get('csv_source_dir');
+  if (empty($csv_source_dir)) {
+    return fopen(__DIR__ . '/'. $filename, 'r');
+  }
+
+  return fopen(rtrim($csv_source_dir, '/') . '/' . $filename, 'r');
+}
+
 function get_country_id_from_iso3($iso3) {
   $iso_to_rw = [
     'AFG' => 13,
@@ -267,6 +277,10 @@ function get_country_id_from_iso3($iso3) {
 function fetch_panes_from_node($nid) {
   $config = \Drupal::config('hr_paragraphs.settings');
   $sync_domain = $config->get('sync_domain', 'http://hrinfo.docksal.site');
+  $sync_credentials = $config->get('sync_credentials', '');
+  if (!empty($sync_credentials)) {
+    $sync_domain = str_replace('https://', 'https://' . $sync_credentials . '@', $sync_domain);
+  }
   $url = $sync_domain . '/node/' . $nid . '/panelist';
 
   $options = array(
@@ -336,6 +350,15 @@ function fix_inline_images_and_urls($html) {
   $tags = $doc->getElementsByTagName('img');
   foreach ($tags as $tag) {
     $src = $tag->getAttribute('src');
+
+    $config = \Drupal::config('hr_paragraphs.settings');
+    $sync_domain = $config->get('sync_domain', 'http://hrinfo.docksal.site');
+    $sync_credentials = $config->get('sync_credentials', '');
+    if (!empty($sync_credentials)) {
+      $sync_domain = str_replace('https://', 'https://' . $sync_credentials . '@', $sync_domain);
+    }
+    $src = str_replace($config->get('sync_domain', 'http://hrinfo.docksal.site'), $sync_domain, $src);
+
     $image = file_get_contents($src);
 
     /** @var \Drupal\file\Entity\File $file */
@@ -374,6 +397,9 @@ function add_panes_to_entity(&$entity) {
   if (!$panes['panes']) {
     return;
   }
+
+  // Reset all panes.
+  $entity->field_paragraphs = [];
 
   $changed = FALSE;
   foreach ($panes['panes'] as $pane) {

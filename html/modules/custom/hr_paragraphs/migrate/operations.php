@@ -8,18 +8,21 @@ use Drupal\paragraphs\Entity\Paragraph;
 include_once __DIR__ . '/common.php';
 
 function create_operations() {
-  $handle = fopen(__DIR__ . '/operations.csv', 'r');
+  $handle = load_tsv_file('operations.tsv');
 
-  // First line is header.
-  $header = fgetcsv($handle, 0, ',', '"');
-  $header_lowercase = array_map('strtolower', $header);
-
-  foreach ($header_lowercase as $index => $field_name) {
-    $header_lowercase[$index] = trim($field_name);
-  }
+  // Headers.
+  $header_lowercase = [
+    "id",
+    "name",
+    "published",
+    "active",
+    "changed",
+    "url",
+    "iso3",
+  ];
 
   $row_counter = 0;
-  while ($row = fgetcsv($handle, 0, ',', '"')) {
+  while ($row = fgetcsv($handle, 0, "\t")) {
     $data = [];
     for ($i = 0; $i < count($row); $i++) {
       $data[$header_lowercase[$i]] = trim($row[$i]);

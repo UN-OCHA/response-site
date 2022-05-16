@@ -8,18 +8,28 @@ use Drupal\node\Entity\Node;
 include_once __DIR__ . '/common.php';
 
 function create_pages() {
-  $handle = fopen(__DIR__ . '/pages.csv', 'r');
+  $handle = load_tsv_file('pages.tsv');
 
-  // First line is header.
-  $header = fgetcsv($handle, 0, ',', '"');
-  $header_lowercase = array_map('strtolower', $header);
-
-  foreach ($header_lowercase as $index => $field_name) {
-    $header_lowercase[$index] = trim($field_name);
-  }
+  // Headers.
+  $header_lowercase = [
+    "id",
+    "name",
+    "published",
+    "type",
+    "changed",
+    "author",
+    "email",
+    "url",
+    "operation",
+    "operation published",
+    "operation active",
+    "operation url",
+    "operation id",
+    "operation type",
+  ];
 
   $row_counter = 0;
-  while ($row = fgetcsv($handle, 0, ',', '"')) {
+  while ($row = fgetcsv($handle, 0, "\t")) {
     $data = [];
     for ($i = 0; $i < count($row); $i++) {
       $data[$header_lowercase[$i]] = trim($row[$i]);
