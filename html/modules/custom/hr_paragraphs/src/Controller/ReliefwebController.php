@@ -320,6 +320,11 @@ class ReliefwebController extends ControllerBase {
   public function executeReliefwebQuery(array $parameters) : array {
     $endpoint = 'https://api.reliefweb.int/v1/reports';
 
+    // Remove empty filters.
+    if (!isset($parameters['filter']['conditions']) || empty(($parameters['filter']['conditions']))) {
+      unset($parameters['filter']);
+    }
+
     try {
       $response = $this->httpClient->request(
         'GET',

@@ -34,7 +34,7 @@ $group_ids = [
 //  70,
 ];
 
-$group_ids = [152451];
+$group_ids = [39,82];
 foreach ($group_ids as $group_id) {
   $group = Group::load($group_id);
   print("Processing: {$group->label()} ({$group_id})\n");

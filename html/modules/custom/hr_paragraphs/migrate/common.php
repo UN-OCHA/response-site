@@ -307,6 +307,22 @@ function fetch_rw_document_url($hrinfo_url) {
   return $doc['url'];
 }
 
+function fix_title($title) {
+  $allowed_tags = [
+    'a',
+    'div',
+  ];
+
+  // Strip all other tags.
+  $title = strip_tags($title, $allowed_tags);
+
+  // Remove above tags including the content between tags.
+  $regex = '/<[^>]*>[^<]*<[^>]*>/';
+  $title = preg_replace($regex, '', $title);
+
+  return $title;
+}
+
 function fix_inline_images_and_urls($html) {
   if (empty($html)) {
     return $html;
@@ -364,8 +380,8 @@ function add_panes_to_entity(&$entity) {
         $paragraph = Paragraph::create([
           'type' => 'rss_feed',
         ]);
-        if (isset($pane['title']) && !empty($pane['title'])) {
-          $paragraph->set('field_title', $pane['title']);
+        if (isset($pane['title']) && !empty(fix_title($pane['title']))) {
+          $paragraph->set('field_title', fix_title($pane['title']));
         }
         $paragraph->set('field_rss_link', [
           'uri' => $pane['rss'],
@@ -394,8 +410,8 @@ function add_panes_to_entity(&$entity) {
           'type' => 'text_block',
         ]);
 
-        if (isset($pane['title']) && !empty($pane['title'])) {
-          $paragraph->set('field_title', $pane['title']);
+        if (isset($pane['title']) && !empty(fix_title($pane['title']))) {
+          $paragraph->set('field_title', fix_title($pane['title']));
         }
 
         $paragraph->set('field_text', fix_inline_images_and_urls($pane['body']));
@@ -420,8 +436,8 @@ function add_panes_to_entity(&$entity) {
           $paragraph = Paragraph::create([
             'type' => 'reliefweb_document',
           ]);
-          if (isset($pane['title']) && !empty($pane['title'])) {
-            $paragraph->set('field_title', $pane['title']);
+          if (isset($pane['title']) && !empty(fix_title($pane['title']))) {
+            $paragraph->set('field_title', fix_title($pane['title']));
           }
 
           $paragraph->set('field_reliefweb_url', $reliefweb_url);
@@ -431,6 +447,98 @@ function add_panes_to_entity(&$entity) {
           $entity->field_paragraphs[] = $paragraph;
           $changed = TRUE;
         }
+        break;
+
+      case 'hr_reliefweb_key_documents':
+        $filters = [];
+        foreach ($pane['filters'] ?? [] as $key => $value) {
+          if ($key == 'country') {
+            $key = 'primary_country';
+          }
+          if (!empty(trim($value))) {
+            $filters[] = $key . ':"' . $value . '"';
+          }
+        }
+
+        $reliefweb_url = 'https://reliefweb.int/updates?search=' . implode(' AND ', $filters);
+
+        $paragraph = Paragraph::create([
+          'type' => 'reliefweb_river',
+        ]);
+        if (isset($pane['title']) && !empty(fix_title($pane['title']))) {
+          $paragraph->set('field_title', fix_title($pane['title']));
+        }
+
+        $paragraph->set('field_reliefweb_url', $reliefweb_url);
+        $paragraph->set('field_max_number_of_items', $pane['limit'] ?? 5);
+
+        $paragraph->isNew();
+
+        $entity->field_paragraphs[] = $paragraph;
+        $changed = TRUE;
+
+        break;
+
+      case 'hr_layout_reliefweb':
+        $reliefweb_url = 'https://reliefweb.int/updates?search=' . $pane['country'];
+
+        $parts = explode('/', $pane['api_path']);
+        $rw_type = array_pop($parts);
+
+        switch ($rw_type) {
+          case 'reports':
+            $reliefweb_url = 'https://reliefweb.int/updates?view=reports&search=' . $pane['country'];
+            break;
+
+          case 'jobs':
+            // @todo unsupported.
+            $reliefweb_url = 'https://reliefweb.int/jobs?search=' . $pane['country'];
+            break;
+
+          case 'training':
+            $reliefweb_url = 'https://reliefweb.int/training?search=' . $pane['country'];
+            break;
+
+          case 'book':
+            // Fallback to default.
+            break;
+
+          case 'blog':
+            $reliefweb_url = 'https://reliefweb.int/updates?view=headlines?search=' . $pane['country'];
+            break;
+
+          case 'countries':
+            $reliefweb_url = 'https://reliefweb.int/countries?search=' . $pane['country'];
+            break;
+
+          case 'disasters':
+            $reliefweb_url = 'https://reliefweb.int/disasters?search=' . $pane['country'];
+            break;
+
+          case 'sources':
+            // Fallback to default.
+            break;
+
+          case 'references':
+            // Fallback to default.
+            break;
+
+        }
+
+        $paragraph = Paragraph::create([
+          'type' => 'reliefweb_river',
+        ]);
+        if (isset($pane['title']) && !empty(fix_title($pane['title']))) {
+          $paragraph->set('field_title', fix_title($pane['title']));
+        }
+
+        $paragraph->set('field_reliefweb_url', $reliefweb_url);
+        $paragraph->set('field_max_number_of_items', $pane['no_of_items'] ?? 5);
+
+        $paragraph->isNew();
+
+        $entity->field_paragraphs[] = $paragraph;
+        $changed = TRUE;
         break;
 
       case 'hr_layout_standard':
@@ -459,8 +567,8 @@ function add_panes_to_entity(&$entity) {
           $paragraph = Paragraph::create([
             'type' => 'reliefweb_document',
           ]);
-          if (isset($pane['title']) && !empty($pane['title'])) {
-            $paragraph->set('field_title', $pane['title']);
+          if (isset($pane['title']) && !empty(fix_title($pane['title']))) {
+            $paragraph->set('field_title', fix_title($pane['title']));
           }
 
           $paragraph->set('field_reliefweb_url', $reliefweb_url);
