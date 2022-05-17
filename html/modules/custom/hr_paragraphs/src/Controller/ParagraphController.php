@@ -131,7 +131,6 @@ class ParagraphController extends ControllerBase {
     }
 
     return AccessResult::allowedIf(!$group->field_assessments_page->isEmpty() || !$group->field_reliefweb_assessments->isEmpty());
-
   }
 
   /**
@@ -444,14 +443,14 @@ class ParagraphController extends ControllerBase {
           'group',
           $group->id(),
         ],
-        'context' => [
+        'contexts' => [
           'url.query_args:filter',
           'url.query_args:sort',
           'url.query_args:page',
           'url.query_args:limit',
           'url.query_args:offset',
         ],
-        'max-age' => 60,
+        'max-age' => 60 * 60,
       ],
     ];
   }
@@ -612,14 +611,15 @@ class ParagraphController extends ControllerBase {
           'group',
           $group->id(),
         ],
-        'context' => [
+        'contexts' => [
+          'url.path',
           'url.query_args:filter',
           'url.query_args:sort',
           'url.query_args:page',
           'url.query_args:limit',
           'url.query_args:offset',
         ],
-        'max-age' => 60,
+        'max-age' => 60 * 60,
       ],
     ];
   }
@@ -723,14 +723,15 @@ class ParagraphController extends ControllerBase {
           'group',
           $group->id(),
         ],
-        'context' => [
+        'contexts' => [
+          'url.path',
           'url.query_args:filter',
           'url.query_args:sort',
           'url.query_args:page',
           'url.query_args:limit',
           'url.query_args:offset',
         ],
-        'max-age' => 60,
+        'max-age' => 60 * 60,
       ],
     ];
   }
