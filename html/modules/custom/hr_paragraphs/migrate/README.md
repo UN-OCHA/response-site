@@ -20,6 +20,25 @@ Scripts have to be run in order
 2. clusters
 3. pages
 
+### Remove existing content
+
+Node Ids to preserve:
+- 1
+- 37
+- 38
+- 40
+- 42
+- 43
+- 44
+
+```bash
+drush entity:delete node --exclude=1,37,38,40,42,43,44
+drush entity:delete group --bundle=cluster
+drush entity:delete group
+```
+
+PS: `drush entity:delete` does not delete unpublished entities, see https://github.com/drush-ops/drush/issues/5058
+
 ### Operations
 
 Only **active** and **published** operations are migrated.
