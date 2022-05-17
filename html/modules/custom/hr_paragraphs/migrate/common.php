@@ -290,10 +290,15 @@ function fetch_panes_from_node($nid) {
     ),
   );
 
-  $response = \Drupal::httpClient()->get($url, $options);
+  try {
+    $response = \Drupal::httpClient()->get($url, $options);
 
-  if ($response->getStatusCode() == 200) {
-    return json_decode($response->getBody() . '', TRUE);
+    if ($response->getStatusCode() == 200) {
+      return json_decode($response->getBody() . '', TRUE);
+    }
+  }
+  catch (\Exception $e) {
+    return FALSE;
   }
 
   return FALSE;
