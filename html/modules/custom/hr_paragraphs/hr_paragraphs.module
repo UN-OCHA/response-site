@@ -299,6 +299,11 @@ function hr_paragraphs_group_add_member(EntityInterface $entity) {
   /** @var \Drupal\user\Entity\User $member */
   $member = $entity->getEntity();
 
+  // Skip UID 0 and 1.
+  if ($member->id() <= 1) {
+    return;
+  }
+
   \Drupal::logger('hr_members')->info('@member (@uid) added to @group (@gid)', [
     '@member' => $member->getAccountName(),
     '@uid' => $member->id(),
