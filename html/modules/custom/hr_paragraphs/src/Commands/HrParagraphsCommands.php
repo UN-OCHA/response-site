@@ -190,16 +190,16 @@ class HrParagraphsCommands extends DrushCommands {
 
     // Headers.
     $header_lowercase = [
-      "id",
-      "name",
-      "published",
-      "changed",
-      "url",
-      "operation",
-      "operation published",
-      "operation active",
-      "operation url",
-      "operation id",
+      'id',
+      'name',
+      'published',
+      'changed',
+      'url',
+      'operation',
+      'operation published',
+      'operation active',
+      'operation url',
+      'operation id',
     ];
 
     $row_counter = 0;
@@ -306,20 +306,20 @@ class HrParagraphsCommands extends DrushCommands {
 
     // Headers.
     $header_lowercase = [
-      "id",
-      "name",
-      "published",
-      "type",
-      "changed",
-      "author",
-      "email",
-      "url",
-      "operation",
-      "operation published",
-      "operation active",
-      "operation url",
-      "operation id",
-      "operation type",
+      'id',
+      'name',
+      'published',
+      'type',
+      'changed',
+      'author',
+      'email',
+      'url',
+      'operation',
+      'operation published',
+      'operation active',
+      'operation url',
+      'operation id',
+      'operation type',
     ];
 
     $row_counter = 0;
@@ -395,7 +395,100 @@ class HrParagraphsCommands extends DrushCommands {
     }
 
     fclose($handle);
+  }
 
+  /**
+   * Import members from csv.
+   *
+   * @command hr_paragraphs:import-members
+   * @validate-module-enabled hr_paragraphs
+   * @option skip-existing
+   *   Skip existing members.
+   * @option ids
+   *   List of Ids to import
+   * @usage hr_paragraphs:import-members --skip-existing --ids=1,2,3
+   *   Import members.
+   */
+  public function importMembers($options = [
+    'skip-existing' => FALSE,
+    'ids' => '',
+  ]) {
+    $filename = 'membership.tsv';
+    $handle = $this->loadTsvFile($filename);
+
+    // Headers.
+    $header_lowercase = [
+      'group_id',
+      'operation',
+      'url',
+      'uid',
+      'name',
+      'mail',
+      'active',
+      'user url',
+      'rid',
+      'role_name',
+    ];
+
+    $row_counter = 0;
+    while ($row = fgetcsv($handle, 0, "\t")) {
+      $data = [];
+      for ($i = 0; $i < count($row); $i++) {
+        $data[$header_lowercase[$i]] = trim($row[$i]);
+      }
+
+      // Limit Ids if needed.
+      if (!empty($options['ids'])) {
+        if (!in_array($data['uid'], explode(',', $options['ids']))) {
+          continue;
+        }
+      }
+
+      $row_counter++;
+      $this->logger->info("{$row_counter}. Processing {$data['name']} ({$data['uid']})");
+
+      // Load operation.
+      /** @var \Drupal\group\Entity\Group $operation */
+      $operation = $this->entityTypeManager->getStorage('group')->load($data['group_id']);
+      if (!$operation) {
+        $this->logger->info("{$row_counter}. Operation/Cluster {$data['group_id']} not found.");
+        continue;
+      }
+
+      // Load or create user.
+      /** @var \Drupal\user\Entity\User $user */
+      if ($user = $this->entityTypeManager->getStorage('user')->load($data['uid'])) {
+        $this->logger->info("{$row_counter}. {$data['name']} ({$data['uid']}) exists.");
+        if ($options['skip-existing']) {
+          $this->logger->info("{$row_counter}. {$data['name']} ({$data['uid']}) already exists, skipping.");
+          continue;
+        }
+      }
+      else {
+        // Create user.
+        /** @var \Drupal\user\Entity\User $user */
+        $user = $this->entityTypeManager->getStorage('user')->create([
+          'uid' => $data['uid'],
+          'name' => $data['name'],
+          'mail' => $data['mail'],
+        ]);
+
+        $user->activate()->save();
+      }
+
+      // Add user to operation/cluster.
+      $operation->addMember($user);
+
+      if ($data['role_name'] == 'manager') {
+        /** @var \Drupal\group\GroupMembership $member */
+        $member = $operation->getMember($user);
+        $membership = $member->getGroupContent();
+        $membership->group_roles[] = $operation->bundle() . '-manager';
+        $membership->save();
+      }
+    }
+
+    fclose($handle);
   }
 
   /**
