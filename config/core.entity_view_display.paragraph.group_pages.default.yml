@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.group_pages.field_include_subgroups
     - field.field.paragraph.group_pages.field_text
     - field.field.paragraph.group_pages.field_title
     - paragraphs.paragraphs_type.group_pages
@@ -28,4 +29,5 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-hidden: {  }
+hidden:
+  field_include_subgroups: true

@@ -675,8 +675,9 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
     }
 
     // Sort by label.
-    usort($items, function ($a, $b) {
-      return strcmp($a['label'], $b['label']);
+    $collator = new Collator('en_US');
+    usort($items, function ($a, $b) use ($collator) {
+      return $collator->compare($a['label'], $b['label']);
     });
 
     $variables['content']['children'] = [
@@ -720,42 +721,56 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
     }
   }
 
-  if (!$group) {
-    return;
+  $groups = [
+    $group,
+  ];
+
+  // Include pages of subgroups.
+  if ($paragraph->hasField('field_include_subgroups') && $paragraph->field_include_subgroups->value) {
+    /** @var \Drupal\subgroup\Entity\SubgroupHandlerInterface $subgroup_handler */
+    $subgroup_handler = \Drupal::entityTypeManager()->getHandler($group->getEntityTypeId(), 'subgroup');
+    if (!$subgroup_handler->hasDescendants($group)) {
+      return;
+    }
+    $groups = array_merge($groups, $subgroup_handler->getDescendants($group));
   }
 
-  // Exclude special pages.
-  if ($group->hasField('field_offices_page') && !$group->field_offices_page->isEmpty()) {
-    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
-    $link = $group->field_offices_page->first();
+  $nodes = [];
+  foreach ($groups as $group) {
+    // Exclude special pages.
+    if ($group->hasField('field_offices_page') && !$group->field_offices_page->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_offices_page->first();
 
-    if (!$link->isExternal()) {
-      try {
-        $params = $link->getUrl()->getRouteParameters();
-        $exclude_pages[] = $params['node'];
-      }
-      catch (\Exception $exception) {
-        // Ignore, deleted page.
+      if (!$link->isExternal()) {
+        try {
+          $params = $link->getUrl()->getRouteParameters();
+          $exclude_pages[] = $params['node'];
+        }
+        catch (\Exception $exception) {
+          // Ignore, deleted page.
+        }
       }
     }
-  }
 
-  if ($group->hasField('field_pages_page') && !$group->field_pages_page->isEmpty()) {
-    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
-    $link = $group->field_pages_page->first();
+    if ($group->hasField('field_pages_page') && !$group->field_pages_page->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_pages_page->first();
 
-    if (!$link->isExternal()) {
-      try {
-        $params = $link->getUrl()->getRouteParameters();
-        $exclude_pages[] = $params['node'];
-      }
-      catch (\Exception $exception) {
-        // Ignore, deleted page.
+      if (!$link->isExternal()) {
+        try {
+          $params = $link->getUrl()->getRouteParameters();
+          $exclude_pages[] = $params['node'];
+        }
+        catch (\Exception $exception) {
+          // Ignore, deleted page.
+        }
       }
     }
+
+    $nodes = array_merge($nodes, $group->getContentEntities('group_node:page'));
   }
 
-  $nodes = $group->getContentEntities('group_node:page');
   if (empty($nodes)) {
     return;
   }
@@ -774,8 +789,9 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
   }
 
   // Sort by label.
-  usort($items, function ($a, $b) {
-    return strcmp($a['label'], $b['label']);
+  $collator = new Collator('en_US');
+  usort($items, function ($a, $b) use ($collator) {
+    return $collator->compare($a['label'], $b['label']);
   });
 
   $variables['content']['nodes'] = [
