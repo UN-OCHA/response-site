@@ -667,7 +667,9 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
     }
 
     $items = [];
+    $cache_tags = [];
     foreach ($children as $child) {
+      $cache_tags += $child->getCacheTags();
       $items[] = [
         'label' => $child->label->value,
         'link' => $child->toUrl(),
@@ -685,6 +687,8 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
       '#children' => $items,
       '#weight' => 99,
     ];
+
+    $variables['#cache']['tags'] = array_merge($variables['#cache']['tags'] ?? [], $cache_tags);
   }
   catch (MalformedLeafException $exception) {
     return;
@@ -776,12 +780,14 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
   }
 
   $items = [];
+  $cache_tags = [];
   foreach ($nodes as $node) {
     // Skip current page.
     if (in_array($node->id(), $exclude_pages)) {
       continue;
     }
 
+    $cache_tags += $node->getCacheTags();
     $items[] = [
       'label' => $node->title->value,
       'link' => $node->toUrl(),
@@ -799,6 +805,8 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
     '#nodes' => $items,
     '#weight' => 99,
   ];
+
+  $variables['#cache']['tags'] = array_merge($variables['#cache']['tags'] ?? [], $cache_tags);
 }
 
 /**
