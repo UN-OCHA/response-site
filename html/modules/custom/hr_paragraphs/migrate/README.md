@@ -44,7 +44,7 @@ PS: `drush entity:delete` does not delete unpublished entities, see https://gith
 Only **active** and **published** operations are migrated.
 
 ```bash
-drush scr html/modules/custom/hr_paragraphs/migrate/operations.php
+drush hr_paragraphs:import-operations --skip-existing
 ```
 
 - Sidebar is populated with list of clusters and list of pages
@@ -57,7 +57,7 @@ drush scr html/modules/custom/hr_paragraphs/migrate/operations.php
 Only **published** clusters belonging to **active** and **published** operations are migrated.
 
 ```bash
-drush scr html/modules/custom/hr_paragraphs/migrate/clusters.php
+drush hr_paragraphs:import-clusters --skip-existing
 ```
 
 - Sidebar of the operation is being used
@@ -70,7 +70,7 @@ drush scr html/modules/custom/hr_paragraphs/migrate/clusters.php
 Only **published** pages of type **hr_page** belonging to **active** and **published** clusters/operations are migrated.
 
 ```bash
-drush scr html/modules/custom/hr_paragraphs/migrate/pages.php
+drush hr_paragraphs:import-pages --skip-existing
 ```
 
 - Sidebar of the operation is being used
