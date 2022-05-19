@@ -23,6 +23,12 @@ class RouteSubscriber extends RouteSubscriberBase {
     if ($route = $collection->get('entity.group.delete_form')) {
       $route->setRequirement('_permission', 'administer group');
     }
+
+    // Change title of group content create form.
+    if ($route = $collection->get('entity.group_content.create_form')) {
+      $route->setDefault('_title', 'Add Page');
+      $route->setDefault('_title_callback', NULL);
+    }
   }
 
 }
