@@ -22,7 +22,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Nodes
+      title: Pages
       fields:
         title:
           id: title
@@ -673,7 +673,7 @@ display:
             title_enable: false
             title: All
           title_enable: true
-          title: '{{ arguments.gid|placeholder }} nodes'
+          title: '{{ arguments.gid|placeholder }} pages'
           default_argument_type: fixed
           default_argument_options:
             argument: ''
