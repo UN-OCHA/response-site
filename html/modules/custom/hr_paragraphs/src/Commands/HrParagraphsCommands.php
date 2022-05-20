@@ -6,6 +6,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\hr_paragraphs\Controller\ReliefwebController;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\user\Entity\User;
 use Drush\Commands\DrushCommands;
 use GuzzleHttp\ClientInterface;
 
@@ -162,6 +163,9 @@ class HrParagraphsCommands extends DrushCommands {
       // Save it.
       $group->setPublished()->save();
 
+      // Remove anonymous user as member.
+      $group->removeMember(User::getAnonymousUser());
+
       // Fetch and add panes.
       $this->addPanesToEntity($group);
     }
@@ -277,6 +281,9 @@ class HrParagraphsCommands extends DrushCommands {
       $group->set('field_sidebar_from_operation', TRUE);
       $group->setPublished()->save();
 
+      // Remove anonymous user as member.
+      $group->removeMember(User::getAnonymousUser());
+
       // Fetch and add panes.
       $this->addPanesToEntity($group);
 
@@ -317,8 +324,6 @@ class HrParagraphsCommands extends DrushCommands {
       'email',
       'url',
       'operation',
-      'operation published',
-      'operation active',
       'operation url',
       'operation id',
       'operation type',
@@ -343,18 +348,8 @@ class HrParagraphsCommands extends DrushCommands {
         continue;
       }
 
-      // Skip inactive operations.
-      if ($data['operation active'] != 'active') {
-        continue;
-      }
-
       // Skip unpublished pages.
       if ($data['published'] != 1) {
-        continue;
-      }
-
-      // Skip unpublished operations.
-      if ($data['operation published'] != 1) {
         continue;
       }
 
@@ -370,27 +365,28 @@ class HrParagraphsCommands extends DrushCommands {
       }
 
       // Delete node if it exists.
+      /** @var \Drupal\node\Entity\Node */
       if ($node = $this->entityTypeManager->getStorage('node')->load($data['id'])) {
         $this->logger->info("{$row_counter}. {$data['name']} ({$data['id']}) exists.");
         if ($options['skip-existing']) {
           $this->logger->info("{$row_counter}. {$data['name']} ({$data['id']}) already exists, skipping.");
           continue;
         }
-        $node->delete();
       }
+      else {
+        // Create node.
+        /** @var \Drupal\node\Entity\Node */
+        $node = $this->entityTypeManager->getStorage('node')->create([
+          'nid' => $data['id'],
+          'type' => 'page',
+          'title' => $data['name'],
+        ]);
 
-      // Create node.
-      /** @var \Drupal\node\Entity\Node */
-      $node = $this->entityTypeManager->getStorage('node')->create([
-        'nid' => $data['id'],
-        'type' => 'page',
-        'title' => $data['name'],
-      ]);
+        $node->setPublished()->save();
 
-      $node->setPublished()->save();
-
-      // Fetch and add panes.
-      $this->addPanesToEntity($node);
+        // Fetch and add panes.
+        $this->addPanesToEntity($node);
+      }
 
       // Add page to operation/cluster.
       $operation->addContent($node, 'group_node:' . $node->bundle());
