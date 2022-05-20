@@ -148,16 +148,16 @@ class HrParagraphsCommands extends DrushCommands {
         $op_sidebar_children,
       ]);
 
-      // Add ReliefWeb tabs and rivers.
       $rw_country_id = $this->getCountryIdFromIso3($data['iso3']);
       if (!empty($rw_country_id)) {
+        // Add ReliefWeb tabs and rivers.
         $group->set('field_reliefweb_assessments', 'https://reliefweb.int/updates?advanced-search=%28PC' . $rw_country_id . '%29_%28F5%29');
         $group->set('field_maps_infographics_link', 'https://reliefweb.int/updates?view=maps&advanced-search=%28PC' . $rw_country_id . '%29');
         $group->set('field_reliefweb_documents', 'https://reliefweb.int/updates?advanced-search=%28PC' . $rw_country_id . '%29&view=reports');
-      }
 
-      // Add HDX tab.
-      $group->set('field_hdx_dataset_link', 'https://data.humdata.org/group/' . strtolower($data['iso3']));
+        // Add HDX tab.
+        $group->set('field_hdx_dataset_link', 'https://data.humdata.org/group/' . strtolower($data['iso3']));
+      }
 
       // Save it.
       $group->setPublished()->save();
@@ -260,16 +260,18 @@ class HrParagraphsCommands extends DrushCommands {
         'label' => $data['name'],
       ]);
 
-      // Add ReliefWeb tabs.
-      $group->set('field_reliefweb_assessments', $operation->field_reliefweb_assessments->first()->getUrl()->getUri() . '&search=' . htmlentities($data['name']));
-      $group->set('field_maps_infographics_link', $operation->field_maps_infographics_link->first()->getUrl()->getUri() . '&search=' . htmlentities($data['name']));
-      $group->set('field_reliefweb_documents', $operation->field_reliefweb_documents->first()->getUrl()->getUri() . '&search=' . htmlentities($data['name']));
+      // Add ReliefWeb tabs if operation has links.
+      if (!$operation->field_reliefweb_assessments->isEmpty()) {
+        $group->set('field_reliefweb_assessments', $operation->field_reliefweb_assessments->first()->getUrl()->getUri() . '&search=' . htmlentities($data['name']));
+        $group->set('field_maps_infographics_link', $operation->field_maps_infographics_link->first()->getUrl()->getUri() . '&search=' . htmlentities($data['name']));
+        $group->set('field_reliefweb_documents', $operation->field_reliefweb_documents->first()->getUrl()->getUri() . '&search=' . htmlentities($data['name']));
 
-      $group->set('field_enabled_tabs', [
-        ['value' => 'documents'],
-        ['value' => 'maps'],
-        ['value' => 'assessments'],
-      ]);
+        $group->set('field_enabled_tabs', [
+          ['value' => 'documents'],
+          ['value' => 'maps'],
+          ['value' => 'assessments'],
+        ]);
+      }
 
       // Use sidebar from operation.
       $group->set('field_sidebar_from_operation', TRUE);
@@ -442,6 +444,11 @@ class HrParagraphsCommands extends DrushCommands {
         if (!in_array($data['uid'], explode(',', $options['ids']))) {
           continue;
         }
+      }
+
+      // Skip bundle members.
+      if ($data['role_name'] == 'bundle member') {
+        continue;
       }
 
       $row_counter++;

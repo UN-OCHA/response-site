@@ -3,16 +3,15 @@
 ## Export
 
 ```bash
-drush sqlq "select nid, title, status, field_operation_status_value, from_unixtime(changed), concat('https://www.humanitarianresponse.info/node/', nid), field_iso3_value from node inner join field_data_field_operation_status operation_status on operation_status.entity_id = node.nid inner join field_data_field_country country on country.entity_id = node.nid inner join field_data_field_iso3 iso3 on iso3.entity_id = country.field_country_target_id where type = 'hr_operation';" > operations.tsv
+drush sqlq "select nid, title, status, field_operation_status_value, from_unixtime(changed), concat('https://www.humanitarianresponse.info/node/', nid), field_iso3_value from node left join field_data_field_operation_status operation_status on operation_status.entity_id = node.nid left join field_data_field_country country on country.entity_id = node.nid left join field_data_field_iso3 iso3 on iso3.entity_id = country.field_country_target_id where type = 'hr_operation';" > operations.tsv
 
 drush sqlq "select node.nid, node.title, node.status, from_unixtime(node.changed), concat('https://www.humanitarianresponse.info/node/', node.nid), operation.title, operation.status, field_operation_status_value, concat('https://www.humanitarianresponse.info/node/', operation.nid), operation.nid from node inner join og_membership on og_membership.etid = node.nid inner join node operation on og_membership.gid = operation.nid inner join field_data_field_operation_status operation_status on operation_status.entity_id = operation.nid where node.type = 'hr_bundle';" > clusters.tsv
 
 drush sqlq "select og_membership.gid, node.title, concat('https://www.humanitarianresponse.info/node/', node.nid), etid, users.name, users.mail, users.status, concat('https://www.humanitarianresponse.info/user/', users.uid), og_users_roles.rid, og_role.name
 from og_membership inner join node on node.nid = og_membership.gid inner join users on users.uid = og_membership.etid
-inner join field_data_field_operation_status operation_status on operation_status.entity_id = node.nid
 left join og_users_roles on og_users_roles.uid = users.uid and og_users_roles.gid = og_membership.gid
 left join og_role on og_role.rid = og_users_roles.rid
-where users.status = 1 AND node.status = 1 AND users.uid > 1 and field_operation_status_value = 'active'
+where users.status = 1 AND node.status = 1 AND users.uid > 1
 order by users.uid, og_membership.gid, og_role.name;" > membership.tsv
 
 drush sqlq "select node.nid, REPLACE(node.title, '\t', '' ), node.status, node.type, from_unixtime(node.changed), users.name, users.mail, concat('https://www.humanitarianresponse.info/node/', node.nid), operation.title, operation.status, field_operation_status_value, concat('https://www.humanitarianresponse.info/node/', operation.nid), operation.nid, operation.type from node inner join og_membership on og_membership.etid = node.nid inner join node operation on og_membership.gid = operation.nid inner join users on users.uid = node.uid inner join field_data_field_operation_status operation_status on operation_status.entity_id = operation.nid where node.type not in ('hr_bundle', 'hr_operation');" > pages.tsv
