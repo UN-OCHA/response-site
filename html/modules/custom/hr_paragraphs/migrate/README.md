@@ -14,7 +14,7 @@ left join og_role on og_role.rid = og_users_roles.rid
 where users.status = 1 AND node.status = 1 AND users.uid > 1
 order by users.uid, og_membership.gid, og_role.name;" > membership.tsv
 
-drush sqlq "select node.nid, REPLACE(node.title, '\t', '' ), node.status, node.type, from_unixtime(node.changed), users.name, users.mail, concat('https://www.humanitarianresponse.info/node/', node.nid), operation.title, operation.status, field_operation_status_value, concat('https://www.humanitarianresponse.info/node/', operation.nid), operation.nid, operation.type from node inner join og_membership on og_membership.etid = node.nid inner join node operation on og_membership.gid = operation.nid inner join users on users.uid = node.uid inner join field_data_field_operation_status operation_status on operation_status.entity_id = operation.nid where node.type not in ('hr_bundle', 'hr_operation');" > pages.tsv
+drush sqlq "select node.nid, REPLACE(node.title, '\t', '' ), node.status, node.type, from_unixtime(node.changed), users.name, users.mail, concat('https://www.humanitarianresponse.info/node/', node.nid), operation.title, concat('https://www.humanitarianresponse.info/node/', operation.nid), operation.nid, operation.type from node inner join og_membership on og_membership.etid = node.nid inner join node operation on og_membership.gid = operation.nid inner join users on users.uid = node.uid where node.type = 'hr_page';" > pages.tsv
 ```
 
 ## Import
