@@ -14,10 +14,10 @@ bundle: cluster
 label: 'Pages page'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  title: 1
-  link_type: 17
+  title: 0
+  link_type: 1
 field_type: link

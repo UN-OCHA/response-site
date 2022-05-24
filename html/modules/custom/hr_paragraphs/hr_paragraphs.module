@@ -1163,6 +1163,7 @@ function hr_paragraphs_node_is_archived(&$variables) {
   }
 
   $variables['is_archived'] = FALSE;
+  /** @var \Drupal\group\Entity\Storage\GroupContentStorage */
   $storage = \Drupal::entityTypeManager()->getStorage('group_content');
   $activGroupListEntity = $storage->loadByEntity($node);
 
