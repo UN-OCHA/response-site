@@ -21,9 +21,9 @@ class RssController extends ControllerBase {
   /**
    * Static cache.
    *
-   * @var \SimpleXMLElement
+   * @var \SimpleXMLElement[]
    */
-  protected $staticCache;
+  protected $staticCache = [];
 
   /**
    * {@inheritdoc}
@@ -42,14 +42,14 @@ class RssController extends ControllerBase {
    *   XML.
    */
   protected function getXml($url) {
-    if (!empty($this->staticCache)) {
-      return $this->staticCache;
+    if (!empty($this->staticCache[$url])) {
+      return $this->staticCache[$url];
     }
 
     try {
       $response = $this->httpClient->request('GET', $url);
-      $this->staticCache = new \SimpleXmlElement($response->getBody());
-      return $this->staticCache;
+      $this->staticCache[$url] = new \SimpleXmlElement($response->getBody());
+      return $this->staticCache[$url];
     }
     catch (\Exception $exception) {
       return FALSE;
