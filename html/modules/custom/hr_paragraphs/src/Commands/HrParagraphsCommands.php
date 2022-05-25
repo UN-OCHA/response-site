@@ -442,8 +442,8 @@ class HrParagraphsCommands extends DrushCommands {
         }
       }
 
-      // Skip bundle members.
-      if ($data['role_name'] == 'bundle member') {
+      // Skip all but managers.
+      if ($data['role_name'] != 'manager') {
         continue;
       }
 
@@ -488,6 +488,13 @@ class HrParagraphsCommands extends DrushCommands {
         $membership = $member->getGroupContent();
         $membership->group_roles[] = $operation->bundle() . '-manager';
         $membership->save();
+
+        // Add as member to the operation.
+        if ($operation->hasField('subgroup_tree') && !$operation->subgroup_tree->isEmpty()) {
+          /** @var \Drupal\group\Entity\Group $parent */
+          $parent = $this->entityTypeManager->getStorage('group')->load($operation->subgroup_tree->value);
+          $parent->addMember($user);
+        }
       }
     }
 

@@ -37,6 +37,8 @@ Node Ids to preserve:
 - 44
 
 ```bash
+drush entity:delete group_content --bundle=operation-group_membership
+drush entity:delete group_content --bundle=cluster-group_membership
 drush entity:delete node --exclude=1,37,38,40,42,43,44
 drush entity:delete group --bundle=cluster
 drush entity:delete group
