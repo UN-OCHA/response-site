@@ -83,6 +83,15 @@ drush hr_paragraphs:import-pages --skip-existing
 - Sidebar of the operation is being used
 - Panes are added to the home page
 
+### Members
+
+Only managers belonging to **active** and **published** clusters/operations are migrated,
+managers of a cluster are added as member of the operation.
+
+```bash
+drush hr_paragraphs:import-members --verbose
+```
+
 ### Panes
 
 The following panes are being migrated:
