@@ -389,7 +389,9 @@ class HrParagraphsCommands extends DrushCommands {
       }
 
       // Add page to operation/cluster.
-      $operation->addContent($node, 'group_node:' . $node->bundle());
+      if (!$operation->getContentByEntityId('group_node:' . $node->bundle(), $node->id())) {
+        $operation->addContent($node, 'group_node:' . $node->bundle());
+      }
     }
 
     fclose($handle);
