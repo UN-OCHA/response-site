@@ -439,7 +439,7 @@ class ParagraphController extends ControllerBase {
       ],
       '#group' => $group,
       '#cache' => [
-        'keys' => [
+        'tags' => [
           'group',
           $group->id(),
         ],
@@ -607,7 +607,7 @@ class ParagraphController extends ControllerBase {
       ],
       '#group' => $group,
       '#cache' => [
-        'keys' => [
+        'tags' => [
           'group',
           $group->id(),
         ],
@@ -690,7 +690,10 @@ class ParagraphController extends ControllerBase {
     $settings['events'] = $datasource_uri;
 
     // Calendar link.
-    $calendar_url = $group->get('field_calendar_link')->first()['uri'];
+    $calendar_url = '';
+    if ($group->hasField('field_calendar_link') && !$group->field_calendar_link->isEmpty()) {
+      $calendar_url = $group->get('field_calendar_link')->getValue()[0]['uri'];
+    }
 
     return [
       'calendar' => [
@@ -719,7 +722,7 @@ class ParagraphController extends ControllerBase {
         '#calendar_url' => $calendar_url,
       ],
       '#cache' => [
-        'keys' => [
+        'tags' => [
           'group',
           $group->id(),
         ],
