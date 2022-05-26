@@ -9,6 +9,7 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
@@ -1409,5 +1410,47 @@ function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
     if (isset($form['path'])) {
       unset($form['path']);
     }
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view().
+ */
+function hr_paragraphs_preprocess_views_view(&$variables) {
+  /** @var \Drupal\views\Entity\View */
+  $view = $variables['view'];
+  if ($view->id() == 'group_members' && $view->current_display == 'page_1') {
+    if (!isset($view->args[0])) {
+      return;
+    }
+
+    // Load the group.
+    $group_id = $view->args[0];
+    $group = Group::load($group_id);
+    if ($group->bundle() == 'operation') {
+      return;
+    }
+
+    // Get operation.
+    if (!$group->hasField('subgroup_tree') || $group->subgroup_tree->isEmpty()) {
+      return;
+    }
+
+    $parent = Group::load($group->subgroup_tree->value);
+    $url = Url::fromRoute('view.group_members.page_1', [
+      'group' => $parent->id(),
+    ]);
+
+    // Make sure user has access.
+    $userCurrent = \Drupal::currentUser();
+    if (!$url->access($userCurrent)) {
+      return;
+    }
+
+    $link = Link::fromTextAndUrl(t('here'), $url);
+    $variables['cluster_message'] = t('Note: This page lists cluster/working group managers only. <br>Operations managers and site administrators also have access to this cluster/working group.<br>To see the list of managers of %operation click @link', [
+      '%operation' => $parent->label(),
+      '@link' => $link->toString(),
+    ]);
   }
 }
