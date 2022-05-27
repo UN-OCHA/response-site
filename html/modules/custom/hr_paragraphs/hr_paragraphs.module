@@ -1454,3 +1454,12 @@ function hr_paragraphs_preprocess_views_view(&$variables) {
     ]);
   }
 }
+
+/**
+ * Implements hook_group_content_info_alter().
+ */
+function hr_paragraphs_group_content_info_alter(&$definitions) {
+  // Allow blocked users to be added to a group.
+  $definitions['group_membership']['class'] = 'Drupal\hr_paragraphs\Plugin\GroupContentEnabler\AllGroupMembership';
+  $definitions['group_membership']['provider'] = 'hr_paragraphs';
+}
