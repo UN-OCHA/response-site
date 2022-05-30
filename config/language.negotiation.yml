@@ -9,6 +9,7 @@ url:
     fr: fr
     es: es
     ru: ru
+    '': null
   domains:
     en: ''
     fr: ''
