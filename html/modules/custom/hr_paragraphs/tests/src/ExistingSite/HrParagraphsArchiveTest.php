@@ -35,6 +35,7 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
    * Test archived operation.
    */
   public function testWithoutArchived() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $operation_title = 'My operation';
     $archive_message = 'This group has been archived.';
 
@@ -137,25 +138,25 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
 
     // Check operation on landing page.
     $this->drupalGet($operation->toUrl());
-    $this->assertSession()->titleEquals($operation_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($operation_title . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $operation_title);
     $this->assertSession()->pageTextNotContains($archive_message);
 
     // Same checks on about page.
     $this->drupalGet($op_about->toUrl());
-    $this->assertSession()->titleEquals($op_about->getTitle() . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($op_about->getTitle() . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $op_about->getTitle());
     $this->assertSession()->pageTextNotContains($archive_message);
 
     // Same checks on cluster landing page.
     $this->drupalGet($cluster->toUrl());
-    $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $cluster_title);
     $this->assertSession()->pageTextNotContains($archive_message);
 
     // Same checks on about page.
     $this->drupalGet($cl_about->toUrl());
-    $this->assertSession()->titleEquals($cl_about->getTitle() . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($cl_about->getTitle() . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $cl_about->getTitle());
     $this->assertSession()->pageTextNotContains($archive_message);
 
@@ -172,7 +173,7 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
       ]);
 
       $this->drupalGet($url);
-      $this->assertSession()->titleEquals($operation_title . ' - ' . $title . ' | ReliefWeb Operations');
+      $this->assertSession()->titleEquals($operation_title . ' - ' . $title . ' | ' . $site_name);
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
       $this->assertSession()->pageTextNotContains($archive_message);
     }
@@ -190,7 +191,7 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
       ]);
 
       $this->drupalGet($url);
-      $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' - ' . $title . ' | ReliefWeb Operations');
+      $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' - ' . $title . ' | ' . $site_name);
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
       $this->assertSession()->pageTextNotContains($archive_message);
     }
@@ -211,6 +212,7 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
    * Test archived operation.
    */
   public function testOperationArchived() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $operation_title = 'My operation';
     $archive_message = 'Mark operation as archived';
 
@@ -319,25 +321,25 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
 
     // Check operation on landing page.
     $this->drupalGet($operation->toUrl());
-    $this->assertSession()->titleEquals($operation_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($operation_title . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $operation_title);
     $this->assertSession()->pageTextContainsOnce($archive_message);
 
     // Same checks on about page.
     $this->drupalGet($op_about->toUrl());
-    $this->assertSession()->titleEquals($op_about->getTitle() . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($op_about->getTitle() . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $op_about->getTitle());
     $this->assertSession()->pageTextContainsOnce($archive_message);
 
     // Same checks on cluster landing page.
     $this->drupalGet($cluster->toUrl());
-    $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $cluster_title);
     $this->assertSession()->pageTextContainsOnce($archive_message);
 
     // Same checks on about page.
     $this->drupalGet($cl_about->toUrl());
-    $this->assertSession()->titleEquals($cl_about->getTitle() . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($cl_about->getTitle() . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $cl_about->getTitle());
     $this->assertSession()->pageTextContainsOnce($archive_message);
 
@@ -354,7 +356,7 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
       ]);
 
       $this->drupalGet($url);
-      $this->assertSession()->titleEquals($operation_title . ' - ' . $title . ' | ReliefWeb Operations');
+      $this->assertSession()->titleEquals($operation_title . ' - ' . $title . ' | ' . $site_name);
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
       $this->assertSession()->pageTextContainsOnce($archive_message);
     }
@@ -372,7 +374,7 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
       ]);
 
       $this->drupalGet($url);
-      $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' - ' . $title . ' | ReliefWeb Operations');
+      $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' - ' . $title . ' | ' . $site_name);
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
       $this->assertSession()->pageTextContainsOnce($archive_message);
     }
@@ -393,6 +395,7 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
    * Test archived operation.
    */
   public function testClusterArchived() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $operation_title = 'My operation';
     $archive_message = 'Mark cluster as archived';
 
@@ -501,25 +504,25 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
 
     // Check operation on landing page.
     $this->drupalGet($operation->toUrl());
-    $this->assertSession()->titleEquals($operation_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($operation_title . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $operation_title);
     $this->assertSession()->pageTextNotContains($archive_message);
 
     // Same checks on about page.
     $this->drupalGet($op_about->toUrl());
-    $this->assertSession()->titleEquals($op_about->getTitle() . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($op_about->getTitle() . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $op_about->getTitle());
     $this->assertSession()->pageTextNotContains($archive_message);
 
     // Same checks on cluster landing page.
     $this->drupalGet($cluster->toUrl());
-    $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $cluster_title);
     $this->assertSession()->pageTextContainsOnce($archive_message);
 
     // Same checks on about page.
     $this->drupalGet($cl_about->toUrl());
-    $this->assertSession()->titleEquals($cl_about->getTitle() . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($cl_about->getTitle() . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $cl_about->getTitle());
     $this->assertSession()->pageTextContainsOnce($archive_message);
 
@@ -536,7 +539,7 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
       ]);
 
       $this->drupalGet($url);
-      $this->assertSession()->titleEquals($operation_title . ' - ' . $title . ' | ReliefWeb Operations');
+      $this->assertSession()->titleEquals($operation_title . ' - ' . $title . ' | ' . $site_name);
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
       $this->assertSession()->pageTextNotContains($archive_message);
     }
@@ -554,7 +557,7 @@ class HrParagraphsArchiveTest extends ExistingSiteBase {
       ]);
 
       $this->drupalGet($url);
-      $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' - ' . $title . ' | ReliefWeb Operations');
+      $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' - ' . $title . ' | ' . $site_name);
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
       $this->assertSession()->pageTextContainsOnce($archive_message);
     }

@@ -8,16 +8,6 @@ volumes:
   response-test-site-private:
 
 services:
-  redis:
-    restart: always
-    image: public.ecr.aws/unocha/redis:5
-    hostname: response-test-redis
-    container_name: response-test-redis
-    ports:
-      - "6379"
-    networks:
-      - default
-
   mysql:
     image: public.ecr.aws/unocha/mysql:10.5.12-r0-202109-01
     hostname: response-test-mysql
@@ -34,7 +24,6 @@ services:
     hostname: response-test-site
     container_name: response-test-site
     depends_on:
-      - redis
       - mysql
     volumes:
       - "./settings:/srv/www/shared/settings:ro"
