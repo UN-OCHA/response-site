@@ -18,6 +18,7 @@ class HrParagraphsPathAliases extends ExistingSiteBase {
    * Test cluster and node aliases.
    */
   public function testPathAliases() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $operation_title = 'My operation ' . rand(99999, 9999999);
     $group_title = 'My cluster ' . rand(99999, 9999999);
 
@@ -73,7 +74,7 @@ class HrParagraphsPathAliases extends ExistingSiteBase {
 
     // Check landing page.
     $this->drupalGet($group->toUrl());
-    $this->assertSession()->titleEquals($operation_title . ': ' . $group_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($operation_title . ': ' . $group_title . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $group_title);
 
     // Change group title.

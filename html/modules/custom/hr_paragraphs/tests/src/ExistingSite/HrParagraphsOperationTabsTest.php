@@ -18,6 +18,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
    * Test empty operation.
    */
   public function testEmptyOperation() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $group_title = 'Empty operation';
 
     $group = Group::create([
@@ -27,7 +28,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $group->setPublished()->save();
 
     $this->drupalGet($group->toUrl());
-    $this->assertSession()->titleEquals($group_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($group_title . ' | ' . $site_name);
 
     $inactive_tabs = [
       'events',
@@ -46,6 +47,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
    * Test operation tabs.
    */
   public function testOperationTabs() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $group_title = 'Operation with tabs';
 
     $group = Group::create([
@@ -55,7 +57,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $group->setPublished()->save();
 
     $this->drupalGet($group->toUrl());
-    $this->assertSession()->titleEquals($group_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($group_title . ' | ' . $site_name);
 
     $inactive_tabs = [
       'events',
@@ -210,6 +212,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
    * Test operation tabs.
    */
   public function testOperationTabs2() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $group_title = 'Operation with tabs 2';
 
     $group = Group::create([
@@ -219,7 +222,7 @@ class HrParagraphsOperationTabsTest extends ExistingSiteBase {
     $group->setPublished()->save();
 
     $this->drupalGet($group->toUrl());
-    $this->assertSession()->titleEquals($group_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($group_title . ' | ' . $site_name);
 
     $inactive_tabs = [
       'events',
