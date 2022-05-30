@@ -11,3 +11,13 @@ hr_paragraphs.settings:
     csv_source_dir:
       type: string
       label: 'Source directory of csv files'
+field.widget.settings.hr_paragraphs_link_default:
+  type: mapping
+  label: 'Link format settings'
+  mapping:
+    placeholder_url:
+      type: string
+      label: 'Placeholder for URL'
+    placeholder_title:
+      type: label
+      label: 'Placeholder for link text'
