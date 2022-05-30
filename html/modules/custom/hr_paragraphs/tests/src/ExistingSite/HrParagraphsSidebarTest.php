@@ -35,6 +35,7 @@ class HrParagraphsSidebarTest extends ExistingSiteBase {
    * Test empty operation.
    */
   public function testOperationTabTitles() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $operation_title = 'My operation';
 
     $op_sidebar_content = Paragraph::create([
@@ -132,7 +133,7 @@ class HrParagraphsSidebarTest extends ExistingSiteBase {
 
     // Check operation on landing page.
     $this->drupalGet($operation->toUrl());
-    $this->assertSession()->titleEquals($operation_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($operation_title . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $operation_title);
 
     // Pages and contacts do not appear in the sidebar.
@@ -145,7 +146,7 @@ class HrParagraphsSidebarTest extends ExistingSiteBase {
 
     // Same checks on about page.
     $this->drupalGet($op_about->toUrl());
-    $this->assertSession()->titleEquals($op_about->getTitle() . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($op_about->getTitle() . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $op_about->getTitle());
     $this->assertSession()->linkByHrefExists($op_about->toUrl()->toString());
     $this->assertSession()->linkByHrefNotExists($op_contacts->toUrl()->toString());
@@ -154,7 +155,7 @@ class HrParagraphsSidebarTest extends ExistingSiteBase {
 
     // Same checks on cluster landing page.
     $this->drupalGet($cluster->toUrl());
-    $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $cluster_title);
     $this->assertSession()->linkByHrefExists($op_about->toUrl()->toString());
     $this->assertSession()->linkByHrefNotExists($op_contacts->toUrl()->toString());
@@ -163,7 +164,7 @@ class HrParagraphsSidebarTest extends ExistingSiteBase {
 
     // Same checks on about page.
     $this->drupalGet($cl_about->toUrl());
-    $this->assertSession()->titleEquals($cl_about->getTitle() . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($cl_about->getTitle() . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $cl_about->getTitle());
     $this->assertSession()->linkByHrefExists($op_about->toUrl()->toString());
     $this->assertSession()->linkByHrefNotExists($op_contacts->toUrl()->toString());
@@ -183,7 +184,7 @@ class HrParagraphsSidebarTest extends ExistingSiteBase {
       ]);
 
       $this->drupalGet($url);
-      $this->assertSession()->titleEquals($operation_title . ' - ' . $title . ' | ReliefWeb Operations');
+      $this->assertSession()->titleEquals($operation_title . ' - ' . $title . ' | ' . $site_name);
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
     }
 
@@ -213,7 +214,7 @@ class HrParagraphsSidebarTest extends ExistingSiteBase {
       ]);
 
       $this->drupalGet($url);
-      $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' - ' . $title . ' | ReliefWeb Operations');
+      $this->assertSession()->titleEquals($operation_title . ': ' . $cluster_title . ' - ' . $title . ' | ' . $site_name);
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
     }
 

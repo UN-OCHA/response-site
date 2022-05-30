@@ -18,6 +18,7 @@ class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
    * Test empty operation.
    */
   public function testOperationTabTitles() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $group_title = 'My operation';
 
     $contacts = Node::create([
@@ -51,7 +52,7 @@ class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
     $group->addContent($pages, 'group_node:' . $pages->bundle());
 
     $this->drupalGet($group->toUrl());
-    $this->assertSession()->titleEquals($group_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($group_title . ' | ' . $site_name);
     $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $group_title);
 
     $tabs = [
@@ -70,7 +71,7 @@ class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
       ]);
 
       $this->drupalGet($url);
-      $this->assertSession()->titleEquals($group_title . ' - ' . $title . ' | ReliefWeb Operations');
+      $this->assertSession()->titleEquals($group_title . ' - ' . $title . ' | ' . $site_name);
       $this->assertSession()->elementTextEquals('css', 'h1.cd-page-title', $title);
     }
 

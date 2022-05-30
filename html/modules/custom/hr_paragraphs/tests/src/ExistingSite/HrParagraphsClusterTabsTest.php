@@ -18,6 +18,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
    * Test empty cluster.
    */
   public function testEmptyCluster() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $group_title = 'Empty cluster';
 
     $group = Group::create([
@@ -27,7 +28,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
     $group->setPublished()->save();
 
     $this->drupalGet($group->toUrl());
-    $this->assertSession()->titleEquals($group_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($group_title . ' | ' . $site_name);
 
     $inactive_tabs = [
       'events',
@@ -46,6 +47,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
    * Test cluster tabs.
    */
   public function testClusterTabs() {
+    $site_name = \Drupal::config('system.site')->get('name');
     $group_title = 'Cluster with tabs';
 
     $group = Group::create([
@@ -55,7 +57,7 @@ class HrParagraphsClusterTabsTest extends ExistingSiteBase {
     $group->setPublished()->save();
 
     $this->drupalGet($group->toUrl());
-    $this->assertSession()->titleEquals($group_title . ' | ReliefWeb Operations');
+    $this->assertSession()->titleEquals($group_title . ' | ' . $site_name);
 
     $inactive_tabs = [
       'events',
