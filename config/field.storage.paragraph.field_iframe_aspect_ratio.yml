@@ -1,0 +1,30 @@
+uuid: 04f13ac2-d215-4148-a144-4d57188a76c9
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_iframe_aspect_ratio
+field_name: field_iframe_aspect_ratio
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: ratio-16-9
+      label: '16:9'
+    -
+      value: ratio-4-3
+      label: '4:3'
+    -
+      value: ratio-auto
+      label: 'Automatically detect from embed code'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

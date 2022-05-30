@@ -1,0 +1,72 @@
+name: HR.info public
+type: theme
+description: HR.info public theme, an OCHA Common Design subtheme
+core_version_requirement: ^8.8 || ^9
+package: HR.info
+base theme: common_design
+logo: 'img/logos/response-logo.svg'
+
+# Regions
+regions:
+  header_top: Header top
+  header_search: Header search
+  header_logo: Header logo
+  header_navigation: Header navigation
+  highlighted: Highlighted
+  page_title: Page title
+  content: Content
+  sidebar_first: First sidebar
+  sidebar_second: Second sidebar
+  facets: Facets
+  footer_soft: Soft footer
+  footer_navigation: Footer navigation
+
+# Add implementation-specific styles to base-theme, core, or contrib libraries.
+libraries-extend:
+  core/drupal.dropbutton:
+    - common_design_subtheme/hri-dropbutton
+  common_design/cd-pagination:
+    - common_design_subtheme/hri-pagination
+  common_design/cd-bullet-list:
+    - common_design_subtheme/hri-bullet-list
+  common_design/cd-button:
+    - common_design_subtheme/hri-button
+  hr_paragraphs/fullcalendar:
+    - common_design_subtheme/hri-fullcalendar
+
+###
+# Define the default library for the subtheme. If you want to include other
+# libraries by default, add them as dependencies to global-styling.
+#
+# @see common_design_subtheme.libraries.yml
+#
+libraries:
+  - common_design_subtheme/global-styling
+
+###
+# Extend libraries to add site-specific styles to the base-theme components.
+# Now, wherever the CD Teaser is used, both the base-theme component and your
+# modifications will automatically apply. NOTE: the Drupal library must be
+# defined in the libraries.yml file to be used here.
+#
+# @see common_design_subtheme.libraries.yml
+#
+# libraries-extend:
+#   common_design/cd-teaser:
+#     - common_design_subtheme/custom-teaser
+
+###
+# Override libraries to replace specific base-theme components. Now, when the
+# base-theme component would have been used, instead ONLY yours will apply.
+#
+libraries-override:
+  common_design/cd-tabs: common_design_subtheme/cd-tabs
+
+###
+# Custom namespace - requires Components module
+#
+# @see https://www.drupal.org/project/components
+# @see https://www.drupal.org/docs/contributed-modules/components/understanding-twig-namespaces
+#
+# components:
+#   namespaces:

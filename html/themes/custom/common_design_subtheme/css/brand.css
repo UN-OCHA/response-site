@@ -1,0 +1,18 @@
+:root {
+  /**
+   * Site-specific brand colors
+   *
+   * Set these variables and the CD Header/Footer will re-color to your brand.
+   *
+   * In the future the Component library will adhere to these vars as well.
+   */
+  --brand-primary: #055372;
+  --brand-primary--light: #0988bb;
+  --brand-primary--dark: #04415a;
+  --brand-secondary: #f65c51;
+  --brand-secondary--dark: #eb1405;
+  --brand-highlight: var(--cd-blue--bright);
+  --brand-light: #d4e5f7;
+  --brand-grey: var(--cd-blue-grey);
+  --brand-logo-width: 150px;
+}

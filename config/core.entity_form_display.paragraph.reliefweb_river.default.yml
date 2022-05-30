@@ -1,0 +1,52 @@
+uuid: 6b226221-201b-4fe4-9753-4d938ed158e9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.reliefweb_river.field_max_number_of_items
+    - field.field.paragraph.reliefweb_river.field_reliefweb_url
+    - field.field.paragraph.reliefweb_river.field_text
+    - field.field.paragraph.reliefweb_river.field_title
+    - paragraphs.paragraphs_type.reliefweb_river
+  module:
+    - link
+    - text
+id: paragraph.reliefweb_river.default
+targetEntityType: paragraph
+bundle: reliefweb_river
+mode: default
+content:
+  field_max_number_of_items:
+    type: number
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_reliefweb_url:
+    type: link_default
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

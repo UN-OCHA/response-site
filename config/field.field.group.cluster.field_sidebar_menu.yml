@@ -1,0 +1,68 @@
+uuid: 5fe4ff44-b3a2-449a-8277-16d17a357ce6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_sidebar_menu
+    - group.type.cluster
+    - paragraphs.paragraphs_type.child_groups
+    - paragraphs.paragraphs_type.group_pages
+    - paragraphs.paragraphs_type.menu_block
+  module:
+    - entity_reference_revisions
+id: group.cluster.field_sidebar_menu
+field_name: field_sidebar_menu
+entity_type: group
+bundle: cluster
+label: 'Sidebar menu'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      menu_block: menu_block
+      child_groups: child_groups
+      group_pages: group_pages
+    negate: 0
+    target_bundles_drag_drop:
+      child_groups:
+        weight: 14
+        enabled: true
+      featured_highlight:
+        weight: 15
+        enabled: false
+      group_pages:
+        weight: 16
+        enabled: true
+      heading:
+        weight: 17
+        enabled: false
+      iframe:
+        weight: 18
+        enabled: false
+      menu_block:
+        weight: 13
+        enabled: true
+      reliefweb_document:
+        weight: 19
+        enabled: false
+      reliefweb_river:
+        weight: 20
+        enabled: false
+      rss_feed:
+        weight: 21
+        enabled: false
+      text_block:
+        weight: 22
+        enabled: false
+      twitter_feed:
+        weight: 23
+        enabled: false
+      upcoming_events:
+        weight: 24
+        enabled: false
+field_type: entity_reference_revisions

@@ -1,0 +1,19 @@
+uuid: 5adfcbed-78f9-4b23-9b0b-162c747e6b22
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - link
+id: group.field_reliefweb_assessments
+field_name: field_reliefweb_assessments
+entity_type: group
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

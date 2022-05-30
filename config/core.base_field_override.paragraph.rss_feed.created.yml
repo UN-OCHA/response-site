@@ -1,0 +1,18 @@
+uuid: 01618a43-fa15-4d7c-a37f-df8a64c3a862
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.rss_feed
+id: paragraph.rss_feed.created
+field_name: created
+entity_type: paragraph
+bundle: rss_feed
+label: 'Authored on'
+description: 'The time that the Paragraph was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

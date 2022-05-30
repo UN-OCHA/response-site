@@ -1,0 +1,25 @@
+uuid: e62448bc-cc56-43a5-937d-b1216ea840ee
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_max_number_of_items
+    - paragraphs.paragraphs_type.reliefweb_river
+id: paragraph.reliefweb_river.field_max_number_of_items
+field_name: field_max_number_of_items
+entity_type: paragraph
+bundle: reliefweb_river
+label: 'Max number of items'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 5
+default_value_callback: ''
+settings:
+  min: 1
+  max: 50
+  prefix: ''
+  suffix: ''
+field_type: integer

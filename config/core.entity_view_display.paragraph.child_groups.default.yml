@@ -1,0 +1,31 @@
+uuid: b40ce3c7-0f46-40cf-94f4-19ca31364c42
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.child_groups.field_text
+    - field.field.paragraph.child_groups.field_title
+    - paragraphs.paragraphs_type.child_groups
+  module:
+    - text
+id: paragraph.child_groups.default
+targetEntityType: paragraph
+bundle: child_groups
+mode: default
+content:
+  field_text:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

@@ -1,0 +1,17 @@
+/**
+ * Extends common_design/cd-pagination
+ */
+.cd-pager__item a {
+  border-color: var(--brand-light);
+}
+
+.cd-pager__item.is-active a {
+  border-color: var(--brand-primary);
+  background-color: var(--brand-primary);
+}
+
+.cd-pager__item a:hover,
+.cd-pager__item a:focus {
+  border-color: var(--brand-primary--dark);
+  background-color: var(--brand-primary--dark);
+}

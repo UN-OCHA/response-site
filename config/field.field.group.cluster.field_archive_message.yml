@@ -1,0 +1,24 @@
+uuid: 36c170c8-e394-480b-9a05-3ae60d20b235
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_archive_message
+    - group.type.cluster
+  module:
+    - text
+id: group.cluster.field_archive_message
+field_name: field_archive_message
+entity_type: group
+bundle: cluster
+label: 'Archive message'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: "<p>This Cluster / Working group has been archived</p>\r\n"
+    format: basic_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

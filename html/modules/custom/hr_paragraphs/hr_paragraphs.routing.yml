@@ -1,64 +1,63 @@
-hr_paragraphs.operation.offices:
-  path: '/group/{group}/offices'
-  title: 'Offices / Coordination Hubs'
+hr_paragraphs.operation.pages:
+  path: '/group/{group}/pages'
+  title: 'Pages'
   defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getOffices'
-    _title: 'Offices / Coordination Hubs'
+    _controller: 'hr_paragraphs.paragraph_controller:getPages'
+    _title: 'Pages'
   requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasOffices'
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasPages'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
+hr_paragraphs.operation.reports:
+  path: '/group/{group}/reports'
+  title: 'Reports'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getReports'
+    _title: 'Reports'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasDocuments'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
+hr_paragraphs.operation.maps:
+  path: '/group/{group}/maps'
+  title: 'Maps / Infographics'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getInfographics'
+    _title: 'Maps / Infographics'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasInfographics'
   options:
     parameters:
       group:
         type: entity:group
 
 hr_paragraphs.operation.assessments:
-  path: '/group/{group}/assessments/{type}'
+  path: '/group/{group}/assessments'
   title: 'Assessments'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
     _title: 'Assessments'
-    type: 'list'
   requirements:
     _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
   options:
     parameters:
       group:
         type: entity:group
-hr_paragraphs.operation.assessments.list:
-  path: '/group/{group}/assessments/{type}'
-  title: 'Assessments'
+
+hr_paragraphs.operation.data:
+  path: '/group/{group}/data'
+  title: 'Data'
   defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
-    _title: 'Assessments'
-    type: 'list'
+    _controller: 'hr_paragraphs.paragraph_controller:getDatasets'
+    _title: 'Data'
   requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
-  options:
-    parameters:
-      group:
-        type: entity:group
-hr_paragraphs.operation.assessments.table:
-  path: '/group/{group}/assessments/{type}'
-  title: 'Assessments'
-  defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
-    _title: 'Assessments'
-    type: 'table'
-  requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
-  options:
-    parameters:
-      group:
-        type: entity:group
-hr_paragraphs.operation.assessments.map:
-  path: '/group/{group}/assessments/{type}'
-  title: 'Assessments'
-  defaults:
-    _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
-    _title: 'Assessments'
-    type: 'map'
-  requirements:
-    _custom_access: 'hr_paragraphs.paragraph_controller:hasAssessments'
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasDatasets'
   options:
     parameters:
       group:
@@ -76,6 +75,33 @@ hr_paragraphs.operation.events:
     parameters:
       group:
         type: entity:group
+
+hr_paragraphs.operation.contacts:
+  path: '/group/{group}/contacts'
+  title: 'Contacts'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getContacts'
+    _title: 'Contacts'
+  requirements:
+    _custom_access: 'hr_paragraphs.paragraph_controller:hasContacts'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
+hr_paragraphs.operation.operations:
+  path: '/group/{group}/operations'
+  title: 'Operations'
+  defaults:
+    _controller: 'hr_paragraphs.paragraph_controller:getOperations'
+    _title: 'Operations'
+  requirements:
+    _group_permission: 'leave group'
+  options:
+    parameters:
+      group:
+        type: entity:group
+
 hr_paragraphs.operation.ical:
   path: '/group/{group}/ical'
   title: 'Events'
@@ -89,25 +115,10 @@ hr_paragraphs.operation.ical:
       group:
         type: entity:group
 
-hr_paragraphs.assessments.map_data:
-  path: '/rest/assessments/map-data'
+hr_paragraphs.unmasquerade:
+  path: '/unmasq'
   defaults:
-    _controller: 'hr_paragraphs.json_controller:assessmentsMapData'
-    _title: 'Assessments map'
+    _controller: '\Drupal\masquerade\Controller\SwitchController::switchBack'
+    _title: 'Unmasquerade'
   requirements:
-    _permission: 'access content'
-hr_paragraphs.assessments.list_data:
-  path: '/rest/assessments/list-data'
-  defaults:
-    _controller: 'hr_paragraphs.json_controller:assessmentsListData'
-    _title: 'Assessments list'
-  requirements:
-    _permission: 'access content'
-hr_paragraphs.assessments.table_data:
-  path: '/rest/assessments/table-data'
-  defaults:
-    _controller: 'hr_paragraphs.json_controller:assessmentsTableData'
-    _title: 'Assessments table'
-  requirements:
-    _permission: 'access content'
-
+    _custom_access: 'access_check.masquerade.unmasquerade:access'

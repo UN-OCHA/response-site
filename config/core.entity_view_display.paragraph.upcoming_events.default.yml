@@ -1,0 +1,33 @@
+uuid: 8ccac241-672d-42e7-9410-dc813be09f60
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.upcoming_events.field_max_number_of_items
+    - field.field.paragraph.upcoming_events.field_text
+    - field.field.paragraph.upcoming_events.field_title
+    - paragraphs.paragraphs_type.upcoming_events
+  module:
+    - text
+id: paragraph.upcoming_events.default
+targetEntityType: paragraph
+bundle: upcoming_events
+mode: default
+content:
+  field_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_max_number_of_items: true

@@ -1,0 +1,32 @@
+uuid: 2362ca30-7421-4a04-ba94-2e8743bfb2c1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.reliefweb_document.field_reliefweb_url
+    - field.field.paragraph.reliefweb_document.field_text
+    - field.field.paragraph.reliefweb_document.field_title
+    - paragraphs.paragraphs_type.reliefweb_document
+  module:
+    - link
+id: paragraph.reliefweb_document.preview
+targetEntityType: paragraph
+bundle: reliefweb_document
+mode: preview
+content:
+  field_reliefweb_url:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_text: true
+  field_title: true

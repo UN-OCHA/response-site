@@ -1,0 +1,23 @@
+uuid: ee5111e3-4769-4418-a77f-232be076d0c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_assessments_page
+    - group.type.operation
+  module:
+    - link
+id: group.operation.field_assessments_page
+field_name: field_assessments_page
+entity_type: group
+bundle: operation
+label: 'Alternate source'
+description: 'If you want to link to a different source for your assessments, please provide the link.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

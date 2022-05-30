@@ -1,24 +1,14 @@
-hr_paragraphs.operation.assessments.list:
-  title: 'Assessments list'
-  route_name: hr_paragraphs.operation.assessments.list
+hr_paragraphs.add_operation:
+  route_name: 'entity.group.add_form'
+  route_parameters:
+    group_type: 'operation'
+  title: 'Add Operation'
   appears_on:
-    - hr_paragraphs.operation.assessments
-    - hr_paragraphs.operation.assessments.list
-    - hr_paragraphs.operation.assessments.table
-    - hr_paragraphs.operation.assessments.map
-hr_paragraphs.operation.assessments.table:
-  title: 'Assessments table'
-  route_name: hr_paragraphs.operation.assessments.table
+    - 'entity.group.collection'
+hr_paragraphs.add_cluster:
+  route_name: 'entity.group_content.create_form'
+  route_parameters:
+    plugin_id: 'subgroup:cluster'
+  title: 'Add new Cluster or Working Group'
   appears_on:
-    - hr_paragraphs.operation.assessments
-    - hr_paragraphs.operation.assessments.list
-    - hr_paragraphs.operation.assessments.table
-    - hr_paragraphs.operation.assessments.map
-hr_paragraphs.operation.assessments.map:
-  title: 'Assessments map'
-  route_name: hr_paragraphs.operation.assessments.map
-  appears_on:
-    - hr_paragraphs.operation.assessments
-    - hr_paragraphs.operation.assessments.list
-    - hr_paragraphs.operation.assessments.table
-    - hr_paragraphs.operation.assessments.map
+    - 'view.subgroups_of_a_group.page_1'

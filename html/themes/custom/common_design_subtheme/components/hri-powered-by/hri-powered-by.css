@@ -1,0 +1,33 @@
+/**
+ * HR.info "powered by" logos for API-driven content.
+ */
+.hri-powered-by {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.hri-powered-by__text {
+  font-size: var(--cd-font-size--small);
+}
+
+.hri-powered-by__link {
+  display: block;
+  background-color: transparent;
+  background-repeat: no-repeat;
+}
+
+.hri-powered-by--reliefweb .hri-powered-by__link {
+  width: 140px;
+  height: 60px;
+  background-image: url("img/logo-rw.svg");
+  background-position: 50% 0;
+  background-size: cover;
+}
+
+.hri-powered-by--humanitarian-data-exchange .hri-powered-by__link {
+  width: 140px;
+  aspect-ratio: 130 / 28.5;
+  background-image: url("img/logo-hdx.svg");
+  background-position: 50% 50%;
+  background-size: cover;
+}

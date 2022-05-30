@@ -1,0 +1,18 @@
+uuid: 7e600650-a35a-4bd1-a172-be46bb4eeb67
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+id: group.cluster.changed
+field_name: changed
+entity_type: group
+bundle: cluster
+label: 'Changed on'
+description: 'The time that the group was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

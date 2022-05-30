@@ -1,0 +1,23 @@
+uuid: a936c40b-ec54-45d8-a4ee-c59f83f3fc10
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_pages_page
+    - group.type.cluster
+  module:
+    - link
+id: group.cluster.field_pages_page
+field_name: field_pages_page
+entity_type: group
+bundle: cluster
+label: 'Pages page'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 1
+field_type: link

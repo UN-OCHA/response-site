@@ -1,0 +1,10 @@
+uuid: d01d8439-84cd-4122-b896-365c82db8542
+langcode: en
+status: true
+dependencies: {  }
+id: iframe
+label: 'Text - Iframe'
+icon_uuid: null
+icon_default: null
+description: 'Use this to embed an iFrame'
+behavior_plugins: {  }

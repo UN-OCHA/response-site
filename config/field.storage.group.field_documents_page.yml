@@ -1,0 +1,19 @@
+uuid: f59e5091-5ad9-4119-841a-0898c98838b8
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - link
+id: group.field_documents_page
+field_name: field_documents_page
+entity_type: group
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

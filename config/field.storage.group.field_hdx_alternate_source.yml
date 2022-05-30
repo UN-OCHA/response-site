@@ -1,0 +1,19 @@
+uuid: 63cad174-e8cd-4af3-b0f6-afad2f4710e1
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - link
+id: group.field_hdx_alternate_source
+field_name: field_hdx_alternate_source
+entity_type: group
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

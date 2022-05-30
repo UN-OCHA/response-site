@@ -1,0 +1,22 @@
+uuid: 2638bbea-2a9b-4f06-a2c1-14951c41ba63
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - common_design
+_core:
+  default_config_hash: kigu8pTxXt1qGR2NJ5HHdC4G2G1wsDrIjLPKBT5wUBc
+id: common_design_content
+theme: common_design
+region: content
+weight: 1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

@@ -1,0 +1,22 @@
+uuid: 2b18ecd4-3f26-4902-8b0c-89f668c9ed52
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.iframe
+id: paragraph.iframe.status
+field_name: status
+entity_type: paragraph
+bundle: iframe
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

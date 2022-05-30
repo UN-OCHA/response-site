@@ -1,0 +1,24 @@
+uuid: 0b7440db-a053-4126-a651-0f9a081845c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_archive_message
+    - group.type.operation
+  module:
+    - text
+id: group.operation.field_archive_message
+field_name: field_archive_message
+entity_type: group
+bundle: operation
+label: 'Archive message'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: "<p>This operation has been archived</p>\r\n"
+    format: basic_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

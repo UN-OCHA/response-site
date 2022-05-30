@@ -1,0 +1,66 @@
+uuid: a7a6217c-7221-4f08-9684-cc4997d7b1ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_paragraphs
+    - group.type.cluster
+    - paragraphs.paragraphs_type.child_groups
+    - paragraphs.paragraphs_type.twitter_feed
+  module:
+    - entity_reference_revisions
+id: group.cluster.field_paragraphs
+field_name: field_paragraphs
+entity_type: group
+bundle: cluster
+label: 'Custom Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      child_groups: child_groups
+      twitter_feed: twitter_feed
+    negate: 1
+    target_bundles_drag_drop:
+      child_groups:
+        weight: -23
+        enabled: true
+      featured_highlight:
+        weight: -18
+        enabled: false
+      group_pages:
+        weight: -22
+        enabled: false
+      heading:
+        weight: -17
+        enabled: false
+      iframe:
+        weight: -16
+        enabled: false
+      menu_block:
+        weight: -24
+        enabled: false
+      reliefweb_document:
+        weight: -20
+        enabled: false
+      reliefweb_river:
+        weight: -19
+        enabled: false
+      rss_feed:
+        weight: -21
+        enabled: false
+      text_block:
+        weight: -15
+        enabled: false
+      twitter_feed:
+        weight: -14
+        enabled: true
+      upcoming_events:
+        weight: -25
+        enabled: false
+field_type: entity_reference_revisions

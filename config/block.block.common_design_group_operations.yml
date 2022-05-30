@@ -1,0 +1,24 @@
+uuid: ebdbd309-1f80-478d-8ecf-fa87cea41c29
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+  theme:
+    - common_design
+_core:
+  default_config_hash: MjMChFykEa-4UxdnGstVk1FcXqwUF3p_GBJLIFT3_XI
+id: common_design_group_operations
+theme: common_design
+region: content
+weight: -1
+provider: null
+plugin: group_operations
+settings:
+  id: group_operations
+  label: 'Group operations'
+  label_display: visible
+  provider: group
+  context_mapping:
+    group: '@group.group_route_context:group'
+visibility: {  }

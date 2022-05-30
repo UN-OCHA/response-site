@@ -1,0 +1,127 @@
+uuid: 1d889e0a-fae5-4ab0-be5d-07ff35909c49
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.hr_plain_text
+    - node.type.page
+    - taxonomy.vocabulary.tags
+  module:
+    - content_translation
+    - contextual
+    - entity_reference_revisions
+    - file
+    - filter
+    - group
+    - masquerade
+    - menu_link_content
+    - node
+    - override_node_options
+    - paragraphs
+    - paragraphs_type_permissions
+    - path
+    - shortcut
+    - system
+    - taxonomy
+    - toolbar
+    - user_expire
+id: global_editor
+label: 'Global editor'
+weight: 5
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access files overview'
+  - 'access group overview'
+  - 'access site in maintenance mode'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer menu'
+  - 'administer nodes'
+  - 'administer shortcuts'
+  - 'administer taxonomy'
+  - 'administer url aliases'
+  - 'administer users'
+  - 'bypass group access'
+  - 'bypass node access'
+  - 'create operation group'
+  - 'create page content'
+  - 'create paragraph content child_groups'
+  - 'create paragraph content featured_highlight'
+  - 'create paragraph content group_pages'
+  - 'create paragraph content heading'
+  - 'create paragraph content iframe'
+  - 'create paragraph content layout'
+  - 'create paragraph content menu_block'
+  - 'create paragraph content offices'
+  - 'create paragraph content recent_assessments'
+  - 'create paragraph content reliefweb_document'
+  - 'create paragraph content reliefweb_river'
+  - 'create paragraph content rss_feed'
+  - 'create paragraph content text_block'
+  - 'create paragraph content twitter_feed'
+  - 'create paragraph content upcoming_events'
+  - 'create terms in tags'
+  - 'create url aliases'
+  - 'customize shortcut links'
+  - 'delete any page content'
+  - 'delete orphan revisions'
+  - 'delete own page content'
+  - 'delete page revisions'
+  - 'delete paragraph content article_card_list'
+  - 'delete paragraph content child_groups'
+  - 'delete paragraph content featured_highlight'
+  - 'delete paragraph content group_pages'
+  - 'delete paragraph content heading'
+  - 'delete paragraph content iframe'
+  - 'delete paragraph content layout'
+  - 'delete paragraph content menu_block'
+  - 'delete paragraph content offices'
+  - 'delete paragraph content recent_assessments'
+  - 'delete paragraph content reliefweb_document'
+  - 'delete paragraph content reliefweb_river'
+  - 'delete paragraph content rss_feed'
+  - 'delete paragraph content text_block'
+  - 'delete paragraph content twitter_feed'
+  - 'delete paragraph content upcoming_events'
+  - 'delete terms in tags'
+  - 'edit any page content'
+  - 'edit own page content'
+  - 'edit terms in tags'
+  - 'masquerade as any user'
+  - 'masquerade as authenticated'
+  - 'masquerade as content_editor'
+  - 'override page authored by option'
+  - 'revert all revisions'
+  - 'revert page revisions'
+  - 'switch shortcut sets'
+  - 'translate menu_link_content'
+  - 'update paragraph content article_card_list'
+  - 'update paragraph content child_groups'
+  - 'update paragraph content featured_highlight'
+  - 'update paragraph content group_pages'
+  - 'update paragraph content heading'
+  - 'update paragraph content iframe'
+  - 'update paragraph content layout'
+  - 'update paragraph content menu_block'
+  - 'update paragraph content offices'
+  - 'update paragraph content recent_assessments'
+  - 'update paragraph content reliefweb_document'
+  - 'update paragraph content reliefweb_river'
+  - 'update paragraph content rss_feed'
+  - 'update paragraph content text_block'
+  - 'update paragraph content twitter_feed'
+  - 'update paragraph content upcoming_events'
+  - 'use text format hr_plain_text'
+  - 'view all revisions'
+  - 'view expiring users report'
+  - 'view office external entity collection'
+  - 'view own unpublished content'
+  - 'view page revisions'
+  - 'view paragraph content featured_highlight'
+  - 'view the administration theme'
+  - 'view unpublished paragraphs'
+  - 'view user email addresses'

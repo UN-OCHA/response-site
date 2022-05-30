@@ -1,0 +1,14 @@
+uuid: a11eba88-17c2-4096-ae36-433138d26710
+langcode: en
+status: true
+dependencies: {  }
+name: 'Plain text'
+format: hr_plain_text
+weight: 0
+filters:
+  filter_html_escape:
+    id: filter_html_escape
+    provider: filter
+    status: true
+    weight: -10
+    settings: {  }

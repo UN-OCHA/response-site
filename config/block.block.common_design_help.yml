@@ -1,0 +1,22 @@
+uuid: b158719e-138b-47a3-91df-28313869f3d2
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - common_design
+_core:
+  default_config_hash: '-laWx8WA-ikiIEH3NJQ0hVbjqk3iEuBms91LB0B4IQU'
+id: common_design_help
+theme: common_design
+region: content
+weight: -2
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

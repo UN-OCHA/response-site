@@ -15,6 +15,6 @@ label: Operation
 description: ''
 new_revision: true
 creator_membership: true
-creator_wizard: true
+creator_wizard: false
 creator_roles:
-  - operation-admin
+  - operation-manager

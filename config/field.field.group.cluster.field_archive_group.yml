@@ -1,0 +1,23 @@
+uuid: 829e67e8-f4e4-4965-86f5-b28aa0f47e8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_archive_group
+    - group.type.cluster
+id: group.cluster.field_archive_group
+field_name: field_archive_group
+entity_type: group
+bundle: cluster
+label: 'Archive group'
+description: 'Archive this Clusters or Working Group and related content'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,86 @@
+uuid: 7f2c8087-c777-4855-88b7-ee7ac32faece
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group.cluster.field_archive_group
+    - field.field.group.cluster.field_archive_message
+    - field.field.group.cluster.field_assessments_page
+    - field.field.group.cluster.field_calendar_link
+    - field.field.group.cluster.field_documents_page
+    - field.field.group.cluster.field_enabled_tabs
+    - field.field.group.cluster.field_hdx_alternate_source
+    - field.field.group.cluster.field_hdx_dataset_link
+    - field.field.group.cluster.field_ical_url
+    - field.field.group.cluster.field_infographics
+    - field.field.group.cluster.field_maps_infographics_link
+    - field.field.group.cluster.field_offices_page
+    - field.field.group.cluster.field_pages_page
+    - field.field.group.cluster.field_paragraphs
+    - field.field.group.cluster.field_reliefweb_assessments
+    - field.field.group.cluster.field_reliefweb_documents
+    - field.field.group.cluster.field_sidebar_from_operation
+    - field.field.group.cluster.field_sidebar_menu
+    - field.field.group.cluster.subgroup_depth
+    - field.field.group.cluster.subgroup_left
+    - field.field.group.cluster.subgroup_right
+    - field.field.group.cluster.subgroup_tree
+    - group.type.cluster
+  module:
+    - layout_paragraphs
+id: group.cluster.default
+targetEntityType: group
+bundle: cluster
+mode: default
+content:
+  field_paragraphs:
+    type: layout_paragraphs
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_sidebar_menu:
+    type: layout_paragraphs
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  changed: true
+  created: true
+  field_archive_group: true
+  field_archive_message: true
+  field_assessments_page: true
+  field_calendar_link: true
+  field_documents_page: true
+  field_enabled_tabs: true
+  field_hdx_alternate_source: true
+  field_hdx_dataset_link: true
+  field_ical_url: true
+  field_infographics: true
+  field_maps_infographics_link: true
+  field_offices_page: true
+  field_pages_page: true
+  field_reliefweb_assessments: true
+  field_reliefweb_documents: true
+  field_sidebar_from_operation: true
+  langcode: true
+  subgroup_depth: true
+  subgroup_left: true
+  subgroup_right: true
+  subgroup_tree: true
+  uid: true

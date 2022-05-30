@@ -1,0 +1,19 @@
+uuid: 8f05d5f8-6156-4c56-9256-698dcf86d5d7
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+    - node.type.page
+  module:
+    - gnode
+    - node
+id: cluster-group_node-page
+label: 'Cluster or Working Group: Group node (page)'
+description: 'Adds <em class="placeholder">page</em> content to groups both publicly and privately.'
+group_type: cluster
+content_plugin: 'group_node:page'
+plugin_config:
+  group_cardinality: 0
+  entity_cardinality: 1
+  use_creation_wizard: false

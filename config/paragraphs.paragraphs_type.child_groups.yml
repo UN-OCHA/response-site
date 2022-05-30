@@ -1,0 +1,10 @@
+uuid: daa9c835-ff4a-4225-bc5a-e62d7809a1a0
+langcode: en
+status: true
+dependencies: {  }
+id: child_groups
+label: 'Menu - List of clusters and working groups'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

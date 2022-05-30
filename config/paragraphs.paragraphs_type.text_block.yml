@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: text_block
-label: 'Text block'
+label: 'Text - Text block'
 icon_uuid: null
 icon_default: null
 description: ''

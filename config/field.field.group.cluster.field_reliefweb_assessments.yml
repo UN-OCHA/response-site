@@ -1,0 +1,28 @@
+uuid: 36770570-401e-4ecb-847f-b7eec22ff101
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_reliefweb_assessments
+    - group.type.cluster
+  module:
+    - link
+    - link_allowed_hosts
+third_party_settings:
+  link_allowed_hosts:
+    allowed_hosts: reliefweb.int
+    secure_hosts: true
+id: group.cluster.field_reliefweb_assessments
+field_name: field_reliefweb_assessments
+entity_type: group
+bundle: cluster
+label: 'ReliefWeb updates link for Assessments'
+description: 'Link from https://reliefweb.int/updates'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 16
+field_type: link

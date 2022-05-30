@@ -1,0 +1,54 @@
+version: "2.2"
+
+networks:
+  default:
+
+volumes:
+  response-test-site-public:
+  response-test-site-private:
+
+services:
+  mysql:
+    image: public.ecr.aws/unocha/mysql:10.5.12-r0-202109-01
+    hostname: response-test-mysql
+    container_name: response-test-mysql
+    environment:
+      - MYSQL_DB=response
+      - MYSQL_USER=response
+      - MYSQL_PASS=response
+    networks:
+      - default
+
+  drupal:
+    image: public.ecr.aws/unocha/response-site:local
+    hostname: response-test-site
+    container_name: response-test-site
+    depends_on:
+      - mysql
+    volumes:
+      - "./settings:/srv/www/shared/settings:ro"
+      # Mount volumes for the private and public files.
+      - "response-test-site-public:/srv/www/html/sites/default/files:rw"
+      - "response-test-site-private:/srv/www/html/sites/default/private:rw"
+      # Mount the folders needed for the tests.
+      - "../phpcs.xml:/srv/www/phpcs.xml:ro"
+      - "../phpunit.xml:/srv/www/phpunit.xml:ro"
+      - "../.coveralls.yml:/srv/www/.coveralls.yml:ro"
+      # Mount local custom code.
+      - "../html/modules/custom:/srv/www/html/modules/custom:ro"
+      - "../html/themes/custom:/srv/www/html/themes/custom:ro"
+    environment:
+      - TERM=xterm
+      - ENVIRONMENT=dev
+      - NGINX_SERVERNAME=response-test-site,localhost,127.0.0.1
+      - NGINX_OVERRIDE_PROTOCOL=HTTP,response-test-site,localhost,127.0.0.1
+      - DRUSH_OPTIONS_URI=http://response-test-site
+      - DRUPAL_DB_DATABASE=response
+      - DRUPAL_DB_USERNAME=response
+      - DRUPAL_DB_PASSWORD=response
+      - DRUPAL_DB_HOST=mysql
+      - DRUPAL_DB_DRIVER=mysql
+      - PHP_ENVIRONMENT=dev
+      - PHP_XDEBUG=true
+    networks:
+      - default

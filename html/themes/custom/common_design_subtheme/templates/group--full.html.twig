@@ -1,0 +1,96 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a group.
+ *
+ * @overrides html/modules/contrib/group/templates/group.html.twig
+ *
+ * Available variables:
+ * - group: The group entity with limited access to object properties and
+ *   methods. Only "getter" methods (method names starting with "get", "has",
+ *   or "is") and a few common methods such as "id" and "label" are available.
+ *   Calling other methods (such as group.delete) will result in an exception.
+ * - label: The title of the group.
+ * - content: All group items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the
+ *   printing of a given child element.
+ * - url: Direct URL of the current group.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - group: The current template type (also known as a "theming hook").
+ *   - group--[type]: The current group type. For example, if the group is a
+ *     "Classroom" it would result in "group--classroom". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - group--[view_mode]: The View Mode of the group; for example, a
+ *     teaser would result in: "group--teaser", and full: "group--full".
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ *
+ * @see template_preprocess_group()
+ *
+ * @ingroup themeable
+ */
+#}
+{{ attach_library('common_design/cd-alert') }}
+{{ attach_library('common_design_subtheme/hri-layout') }}
+
+{%
+  set classes = [
+    'hri-operation',
+    not group.isPublished() ? 'node--unpublished',
+  ]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+
+  {% if is_archived %}
+    <div class="group--archived">
+      <div class="cd-alert">
+        <div aria-live="polite">
+          <svg class="cd-icon cd-icon--about" aria-hidden="true" focusable="false" width="16" height="16">
+            <use xlink:href="#cd-icon--about"></use>
+          </svg>
+          <div class="cd-alert__container cd-max-width [ cd-flow ]">
+            <div class="cd-alert__message">
+              {{ archive_message|raw }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {{ title_prefix }}
+  {% if not page %}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  <div{{ content_attributes }}>
+    {% block section %}
+      <div class="hri-layout hri-layout--two-col">
+        <div class="hri-layout__main-content">
+          {{ content|without('field_sidebar_menu')}}
+        </div>
+
+        {% if content.field_sidebar_menu[0] is not empty %}
+          <div class="hri-layout__sidebar hri-layout__first" role="complementary">
+            {{ content.field_sidebar_menu }}
+          </div>
+        {% endif %}
+      </div>
+    {% endblock %}
+  </div>
+</div>

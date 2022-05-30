@@ -1,0 +1,11 @@
+/**
+ * HR.info customizations for RSS feed paragraphs.
+ */
+.hri-rss-feed h3 {
+  margin-bottom: 0;
+  font-size: var(--cd-font-size--base);
+}
+
+.hri-rss-feed .external-feed--item-date {
+  font-size: var(--cd-font-size--base);
+}

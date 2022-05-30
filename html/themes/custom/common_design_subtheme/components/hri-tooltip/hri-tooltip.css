@@ -1,0 +1,77 @@
+/**
+ * Tooltips that provide UI feedback.
+ *
+ * NOTE: old left/right keywords are still used, since they have to be applied
+ *       alongside transform functions, which have no concept of reading-dir.
+ */
+.hri-tooltip {
+  /* how far will the tooltip travel when it (dis)appears? */
+  --hri-tooltip-offset: 24px;
+
+  position: relative;
+}
+.hri-tooltip::before,
+.hri-tooltip::after {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  transition: 0.1666s ease-in-out;
+  transition-property: opacity, transform;
+  opacity: 0;
+}
+.hri-tooltip::before {
+  display: inline-block;
+  width: auto;
+  padding: 0.2em 0.4em;
+  content: attr(data-message);
+  white-space: nowrap;
+  color: white;
+  border-radius: 5px;
+  background: var(--cd-black);
+  font-size: 14px;
+}
+
+[dir="ltr"] .hri-tooltip::before {
+  left: 16px;
+  transform: translateX(-89%);
+}
+[dir="rtl"] .hri-tooltip::before {
+  right: 16px;
+  transform: translateX(89%);
+}
+
+.hri-tooltip::after {
+  top: 0;
+  display: block;
+  width: 0;
+  height: 0;
+  content: "";
+  border-top: 10px solid var(--cd-black);
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+[dir="ltr"] .hri-tooltip::after {
+  left: 15px;
+  transform: translateX(-50%);
+}
+[dir="rtl"] .hri-tooltip::after {
+  right: 15px;
+  transform: translateX(50%);
+}
+
+.hri-tooltip.is--showing-message::before,
+.hri-tooltip.is--showing-message::after {
+  opacity: 1;
+}
+[dir="ltr"] .hri-tooltip.is--showing-message::before {
+  transform: translateX(-89%) translateY(calc(-4px - var(--hri-tooltip-offset)));
+}
+[dir="ltr"] .hri-tooltip.is--showing-message::after {
+  transform: translateX(-50%) translateY(calc(16px - var(--hri-tooltip-offset)));
+}
+[dir="rtl"] .hri-tooltip.is--showing-message::before {
+  transform: translateX(89%) translateY(calc(-4px - var(--hri-tooltip-offset)));
+}
+[dir="rtl"] .hri-tooltip.is--showing-message::after {
+  transform: translateX(50%) translateY(calc(16px - var(--hri-tooltip-offset)));
+}

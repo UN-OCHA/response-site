@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Theme override for a field.
+ *
+ * @overrides html/themes/contrib/common_design/templates/field/field.html.twig
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{{ attach_library('common_design_subtheme/hri-twitter-feed') }}
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    label_display == 'inline' ? 'clearfix',
+    'hri-twitter-feed',
+  ]
+%}
+{% for item in items %}
+  {% set twitterAccount = item.content|render|striptags|trim|replace({'@': ''}) %}
+  <h3 class="visually-hidden">Twitter timeline for {{ twitterAccount }}</h3>
+  <div{{ attributes.addClass(classes) }}>
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/{{ twitterAccount }}?ref_src=twsrc%5Etfw">Tweets by {{ twitterAccount }}</a>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
+{% endfor %}

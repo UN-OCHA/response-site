@@ -1,0 +1,134 @@
+global-styling:
+  css:
+    theme:
+      css/brand.css: {}
+  js:
+    js/login_destination.js: {}
+  dependencies:
+    - common_design_subtheme/hri-breadcrumbs
+    - common_design_subtheme/hri-cd-header
+    - common_design_subtheme/hri-global-styling
+    - common_design_subtheme/cd-read-more
+
+cd-read-more:
+  css:
+    theme:
+      components/cd-read-more/cd-read-more.css: {}
+  dependencies:
+    - common_design/cd-read-more
+
+cd-tabs:
+  css:
+    theme:
+      components/cd-tabs/cd-tabs.css: {}
+      components/cd-tabs/hri-tabs.css: {}
+
+hri-breadcrumbs:
+  css:
+    theme:
+      components/hri-breadcrumbs/hri-breadcrumbs.css: {}
+
+hri-cd-header:
+  css:
+    theme:
+      components/hri-cd-header/hri-cd-header.css: {}
+
+hri-bullet-list:
+  css:
+    theme:
+      components/hri-bullet-list/hri-bullet-list.css: {}
+
+hri-button:
+  css:
+    theme:
+      components/hri-button/hri-button.css: {}
+
+hri-calendar:
+  css:
+    theme:
+      components/hri-calendar/hri-calendar.css: {}
+
+hri-dropbutton:
+  css:
+    component:
+      components/hri-dropbutton/hri-dropbutton.css: {}
+
+hri-events:
+  css:
+    component:
+      components/hri-events/hri-events.css: {}
+  js:
+    components/hri-events/hri-events.js: {}
+  dependencies:
+    - common_design_subtheme/hri-tooltip
+    - jquery_ui_dialog/dialog
+
+hri-fullcalendar:
+  css:
+    component:
+      components/hri-fullcalendar/hri-fullcalendar.css: {}
+
+hri-global-styling:
+  css:
+    component:
+      components/hri-global-styling/hri-global-styling.css: {}
+
+hri-highlight:
+  css:
+    component:
+      components/hri-highlight/hri-highlight.css: {}
+
+hri-iframe:
+  css:
+    component:
+      components/hri-iframe/hri-iframe.css: {}
+
+hri-layout:
+  css:
+    component:
+      components/hri-layout/hri-layout.css: {}
+
+hri-pagination:
+  css:
+    theme:
+      components/hri-pagination/hri-pagination.css: {}
+
+hri-powered-by:
+  css:
+    theme:
+      components/hri-powered-by/hri-powered-by.css: {}
+
+hri-river:
+  css:
+    theme:
+      components/hri-river/hri-river.css: {}
+  dependencies:
+    - common_design/cd-button
+    - common_design_subtheme/hri-powered-by
+
+hri-rss-feed:
+  css:
+    theme:
+      components/hri-rss-feed/hri-rss-feed.css: {}
+
+hri-table:
+  css:
+    theme:
+      components/hri-table/hri-table.css: {}
+  dependencies:
+    - common_design/cd-table
+
+hri-text-block:
+  css:
+    theme:
+      components/hri-text-block/hri-text-block.css: {}
+
+hri-tooltip:
+  css:
+    theme:
+      components/hri-tooltip/hri-tooltip.css: {}
+
+hri-twitter-feed:
+  css:
+    theme:
+      components/hri-twitter-feed/hri-twitter-feed.css: {}

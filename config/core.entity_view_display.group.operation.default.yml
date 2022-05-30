@@ -3,10 +3,23 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.operation.field_archive_group
+    - field.field.group.operation.field_archive_message
+    - field.field.group.operation.field_assessments_page
+    - field.field.group.operation.field_calendar_link
+    - field.field.group.operation.field_documents_page
     - field.field.group.operation.field_enabled_tabs
+    - field.field.group.operation.field_hdx_alternate_source
+    - field.field.group.operation.field_hdx_dataset_link
     - field.field.group.operation.field_ical_url
-    - field.field.group.operation.field_operation
+    - field.field.group.operation.field_infographics
+    - field.field.group.operation.field_maps_infographics_link
+    - field.field.group.operation.field_offices_page
+    - field.field.group.operation.field_pages_page
     - field.field.group.operation.field_paragraphs
+    - field.field.group.operation.field_reliefweb_assessments
+    - field.field.group.operation.field_reliefweb_documents
+    - field.field.group.operation.field_sidebar_menu
     - field.field.group.operation.subgroup_depth
     - field.field.group.operation.subgroup_left
     - field.field.group.operation.subgroup_right
@@ -28,6 +41,15 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  field_sidebar_menu:
+    type: layout_paragraphs
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
   label:
     type: string
     label: hidden
@@ -39,9 +61,21 @@ content:
 hidden:
   changed: true
   created: true
+  field_archive_group: true
+  field_archive_message: true
+  field_assessments_page: true
+  field_calendar_link: true
+  field_documents_page: true
   field_enabled_tabs: true
+  field_hdx_alternate_source: true
+  field_hdx_dataset_link: true
   field_ical_url: true
-  field_operation: true
+  field_infographics: true
+  field_maps_infographics_link: true
+  field_offices_page: true
+  field_pages_page: true
+  field_reliefweb_assessments: true
+  field_reliefweb_documents: true
   langcode: true
   subgroup_depth: true
   subgroup_left: true

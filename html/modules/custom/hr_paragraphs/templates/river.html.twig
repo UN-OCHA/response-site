@@ -1,0 +1,98 @@
+<div class="river">
+  <div class="river__results">
+    {% for row in data %}
+      <article class="river__result" data-rw-id="{{ row.id }}">
+        <header>
+          <p class="country">
+            <span class="country--primary">{{ row.primary_country }}</span>
+            {% if row.countries|length > 1 %}
+              + {{ row.countries|slice(1)|length }} more
+            {% endif %}
+          </p>
+          <h4 class="title"><a href="{{ row.url }}">{{ row.title }}</a></h4>
+        </header>
+
+        <div class="content">
+          {% for file in row.files|slice(0, 1) %}
+            {% if file.preview != '' %}
+              <img src="{{ file.preview }}" alt="{{ file.description }}">
+            {% endif %}
+          {% endfor %}
+
+          {% if row.body != '' %}
+            {% if row.body|striptags|split(' ')|length > 36 %}
+              <p>{{ row.body|striptags|split(' ')|slice(0, 36)|join(' ')|raw }}&hellip;</p>
+            {% else %}
+              <p>{{ row.body|striptags|raw }}</p>
+            {% endif %}
+          {% else %}
+            {% for file in row.files|slice(0, 1) %}
+              {% if file.preview != '' %}
+                <p>{{ 'Please see the attached infographic.'|t }}</p>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+
+        <footer>
+          <dl class="meta core">
+            <dt class="format {{ row.format|clean_class }}">{{ 'Format'|t }}:</dt>
+            <dd class="format {{ row.format|clean_class }}">{{ row.format }}</dd>
+
+            <dt class="source">{{ 'Source'|t }}:</dt>
+            <dd class="source">{{ row.sources }}</dd>
+
+            <dt class="date posted">{{ 'Posted'|t }}:</dt>
+            <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+
+            {% if row.files|length > 0 %}
+              <dt class="files">{{ 'Files'|t }}:</dt>
+              <dd class="files">
+                {% for file in row.files %}
+                  <a href="{{ file.url }}" title="{{ file.url }}">
+                    {{ file.filename }}
+                  </a>
+                {% endfor %}
+              </dd>
+            {% endif %}
+          </dl>
+        </footer>
+      </article>
+    {% endfor %}
+
+    {{ pager }}
+  </div>{# .river__results #}
+
+  <div class="river__facets-wrapper">
+    <p class="river__facets-count">
+      <span class="river__facets-count__value">{{ total }}</span> documents found
+    </p>
+
+    {% if active_facets|length > 0 %}
+      <div class="river__facets--active">
+        <details open>
+          <summary>{{ 'Remove filters'|t }} </summary>
+          <ul>
+          {% for link in active_facets %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+          </ul>
+        </details>
+      </div>
+    {% endif %}
+
+    {% for facet in facets %}
+      <div class="river__facets">
+        <details>
+          <summary>{{ facet.title }}</summary>
+          <ul class="river__facet">
+          {% for link in facet.links %}
+            <li class="river__facet-link"><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+          </ul>
+        </details>
+      </div>
+    {% endfor %}
+  </div>{# .river__facets-wrapper #}
+
+</div>{# .river #}

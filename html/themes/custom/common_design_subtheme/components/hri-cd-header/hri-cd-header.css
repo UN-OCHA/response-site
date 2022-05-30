@@ -1,0 +1,15 @@
+/**
+ * HR.info customizations to CD Header
+ */
+.cd-site-header__inner {
+  grid-template-columns: var(--brand-logo-width) 1fr;
+}
+
+.cd-site-logo {
+  width: var(--brand-logo-width);
+  background: none;
+}
+
+.cd-site-logo img {
+  display: block;
+}

@@ -12,4 +12,6 @@ audience: member
 group_type: cluster
 permissions_ui: true
 permissions:
+  - 'leave group'
   - 'view group'
+  - 'view group_node:page entity'

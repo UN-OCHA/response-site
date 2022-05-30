@@ -1,7 +1,33 @@
 services:
   hr_paragraphs.paragraph_controller:
     class: \Drupal\hr_paragraphs\Controller\ParagraphController
-    arguments: ['@entity_type.manager']
-  hr_paragraphs.json_controller:
-    class: \Drupal\hr_paragraphs\Controller\JsonController
-    arguments: ['@entity_type.manager', '@http_client']
+    arguments: ['@entity_type.manager', '@http_client', '@pager.manager', '@hr_paragraphs.ical_controller', '@hr_paragraphs.reliefweb_controller', '@hr_paragraphs.hdx_controller']
+  hr_paragraphs.ical_controller:
+    class: \Drupal\hr_paragraphs\Controller\IcalController
+    arguments: ['@http_client']
+  hr_paragraphs.reliefweb_controller:
+    class: \Drupal\hr_paragraphs\Controller\ReliefwebController
+    arguments: ['@http_client']
+  hr_paragraphs.hdx_controller:
+    class: \Drupal\hr_paragraphs\Controller\HdxController
+    arguments: ['@http_client']
+  hr_paragraphs.rss_controller:
+    class: \Drupal\hr_paragraphs\Controller\RssController
+    arguments: ['@http_client']
+  hr_paragraphs.breadcrumb.groupcontent:
+    class: 'Drupal\hr_paragraphs\Breadcrumb\GroupContentBreadcrumbBuilder'
+    tags:
+      - { name: 'breadcrumb_builder', priority: 100 }
+  hr_paragraphs.breadcrumb.group:
+    class: 'Drupal\hr_paragraphs\Breadcrumb\GroupBreadcrumbBuilder'
+    tags:
+      - { name: 'breadcrumb_builder', priority: 100 }
+  hr_paragraphs.custom_access_group_type:
+    class: Drupal\hr_paragraphs\Access\CustomAccessGroupType
+    arguments: ['@group.group_route_context']
+    tags:
+      - { name: access_check, applies_to: _custom_access_group_type }
+  hr_paragraphs.route_subscriber:
+    class: Drupal\hr_paragraphs\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }

@@ -13,5 +13,5 @@ group_type: operation
 permissions_ui: true
 permissions:
   - 'leave group'
-  - 'update own group_membership content'
   - 'view group'
+  - 'view group_node:page entity'

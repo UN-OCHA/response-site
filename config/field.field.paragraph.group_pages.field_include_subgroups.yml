@@ -1,0 +1,23 @@
+uuid: 6eeb1a56-08db-4a0d-b729-dbb1e35fff2d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_include_subgroups
+    - paragraphs.paragraphs_type.group_pages
+id: paragraph.group_pages.field_include_subgroups
+field_name: field_include_subgroups
+entity_type: paragraph
+bundle: group_pages
+label: 'Include pages from clusters or working groups'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

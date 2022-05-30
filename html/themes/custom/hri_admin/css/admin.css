@@ -1,0 +1,129 @@
+/**
+ * HR.info admin theme styles
+ */
+
+/**
+ * Large images in WYSIWYG
+ *
+ * When large images get initially uploaded to the WYSIWYG editor, it's possible
+ * for the image to enlarge the editor so much that the Save/Cancel buttons are
+ * obscured, making it difficult to proceed without potential loss of content.
+ *
+ * We restrict the editor's height to avoid obscuring the buttons.
+ */
+.js .ui-dialog .ui-widget-content.ui-dialog-content {
+  max-height: calc(100vh - 160px) !important;
+}
+
+
+/**
+ * Paragraphs Editor UI customizations
+ *
+ * Just some basic tweaks to make the Paragraphs in the Editor UI look a bit
+ * more like the final product.
+ */
+.paragraph--view-mode--preview {
+  padding: 1rem;
+}
+
+.field--name-field-paragraphs .field--name-field-title {
+  margin-block-start: 1em;
+  font-size: 2em;
+}
+
+.river__result {
+  max-width: 720px;
+}
+.river__result + .river__result {
+  margin-block-start: 1rem;
+  border-block-start: 1px solid #ddd;
+  padding-block-start: 1rem;
+}
+.river__result .country {
+  display: none;
+}
+.river__result .content {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+}
+
+.river__result .meta > * {
+  display: inline;
+}
+.river__result .meta dt {
+  font-weight: 700;
+}
+.river__result .meta dd {
+  margin: 0;
+  padding: 0;
+  padding-inline-end: 1rem;
+}
+
+.paragraph--type--text-block .align-left {
+  margin-right: 1rem;
+}
+.paragraph--type--text-block .align-right {
+  margin-left: 1rem;
+}
+
+
+.upcoming-events__list {
+  /* layout */
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 720px;
+
+  /* cosmetics */
+  margin: 0 0 1rem 0;
+  padding: 0;
+  border: 1px solid #ddd;
+}
+
+.upcoming-events .event-heading {
+  /* layout */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 1rem;
+
+  /* cosmetics */
+  padding: 0.5rem;
+  background: #eee;
+  font-weight: 700;
+}
+
+.upcoming-event {
+  /* layout */
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2rem;
+  align-items: center;
+
+  /* cosmetics */
+  padding: 0.5rem;
+}
+
+.upcoming-event:hover {
+  color: #222;
+  background-color: #f7f7f7;
+}
+
+.upcoming-event__time {
+  position: relative;
+  flex: 0 0 0;
+  order: -1;
+  white-space: nowrap;
+}
+.upcoming-event__time::after {
+  position: absolute;
+  top: 50%;
+  right: -1.25rem;
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  content: "";
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  background: #666;
+}

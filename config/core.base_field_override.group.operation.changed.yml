@@ -1,0 +1,18 @@
+uuid: 412e697a-1ebb-4744-a665-ae8a5a74348e
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+id: group.operation.changed
+field_name: changed
+entity_type: group
+bundle: operation
+label: 'Changed on'
+description: 'The time that the group was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

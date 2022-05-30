@@ -2,12 +2,7 @@ uuid: 7ef34071-3ca0-4ba6-95a8-9630e48eb1a4
 langcode: en
 status: true
 dependencies:
-  config:
-    - filter.format.restricted_html
   module:
-    - contact
-    - external_entities
-    - filter
     - paragraphs_type_permissions
     - system
 _core:
@@ -18,8 +13,6 @@ weight: 0
 is_admin: false
 permissions:
   - 'access content'
-  - 'access site-wide contact form'
-  - 'use text format restricted_html'
   - 'view assessment external entity'
   - 'view assessment_document external entity'
   - 'view assessment_status external entity'
@@ -35,10 +28,22 @@ permissions:
   - 'view office external entity'
   - 'view operation external entity'
   - 'view organization external entity'
+  - 'view paragraph content article_card_list'
+  - 'view paragraph content child_groups'
+  - 'view paragraph content featured_highlight'
+  - 'view paragraph content group_pages'
   - 'view paragraph content heading'
+  - 'view paragraph content iframe'
   - 'view paragraph content layout'
+  - 'view paragraph content menu_block'
   - 'view paragraph content offices'
+  - 'view paragraph content recent_assessments'
+  - 'view paragraph content reliefweb_document'
+  - 'view paragraph content reliefweb_river'
+  - 'view paragraph content rss_feed'
   - 'view paragraph content text_block'
+  - 'view paragraph content twitter_feed'
+  - 'view paragraph content upcoming_events'
   - 'view population_type external entity'
   - 'view theme external entity'
   - 'view unit_of_measurement external entity'

@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
+    - filter.format.hr_plain_text
   module:
-    - contact
-    - external_entities
     - filter
+    - node
+    - override_node_options
+    - paragraphs
     - paragraphs_type_permissions
     - shortcut
     - system
@@ -20,8 +22,12 @@ is_admin: false
 permissions:
   - 'access content'
   - 'access shortcuts'
-  - 'access site-wide contact form'
+  - 'enter page revision log entry'
+  - 'override page authored on option'
+  - 'override page published option'
+  - 'override page revision option'
   - 'use text format basic_html'
+  - 'use text format hr_plain_text'
   - 'view assessment external entity'
   - 'view assessment_document external entity'
   - 'view assessment_status external entity'
@@ -37,10 +43,25 @@ permissions:
   - 'view office external entity'
   - 'view operation external entity'
   - 'view organization external entity'
+  - 'view own unpublished content'
+  - 'view paragraph content article_card_list'
+  - 'view paragraph content child_groups'
+  - 'view paragraph content featured_highlight'
+  - 'view paragraph content group_pages'
   - 'view paragraph content heading'
+  - 'view paragraph content iframe'
   - 'view paragraph content layout'
+  - 'view paragraph content menu_block'
   - 'view paragraph content offices'
+  - 'view paragraph content recent_assessments'
+  - 'view paragraph content reliefweb_document'
+  - 'view paragraph content reliefweb_river'
+  - 'view paragraph content rss_feed'
   - 'view paragraph content text_block'
+  - 'view paragraph content twitter_feed'
+  - 'view paragraph content upcoming_events'
   - 'view population_type external entity'
+  - 'view the administration theme'
   - 'view theme external entity'
   - 'view unit_of_measurement external entity'
+  - 'view unpublished paragraphs'

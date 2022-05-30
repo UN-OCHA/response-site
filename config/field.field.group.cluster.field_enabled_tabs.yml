@@ -1,0 +1,21 @@
+uuid: c945b681-a049-403f-b4f8-941e929d61a0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_enabled_tabs
+    - group.type.cluster
+  module:
+    - options
+id: group.cluster.field_enabled_tabs
+field_name: field_enabled_tabs
+entity_type: group
+bundle: cluster
+label: 'Enabled tabs'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

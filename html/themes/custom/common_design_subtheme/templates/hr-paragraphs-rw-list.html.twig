@@ -1,0 +1,20 @@
+{{ attach_library('common_design_subtheme/hri-river') }}
+
+<div class="hri-river">
+  <div class="hri-river__results">
+    <h2 class="visually-hidden">ReliefWeb Document</h2>
+
+    {% for row in data %}
+      {% include '@common_design_subtheme/river-row.html.twig' %}
+    {% endfor %}
+
+    {{ pager }}
+
+    {% if view_all %}
+      <a class="cd-button cd-button--icon cd-button--small" href="{{ view_all }}">
+        <span class="cd-button__text">{{ 'View all updates'|t }}</span>
+        <svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>
+      </a>
+    {% endif %}
+  </div>{# .hri-river__results #}
+</div>{# .hri-river #}

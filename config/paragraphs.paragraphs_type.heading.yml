@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: heading
-label: Heading
+label: 'Text - Heading'
 icon_uuid: null
 icon_default: null
 description: 'A generic heading.'

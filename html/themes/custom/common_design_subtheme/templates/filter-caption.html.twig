@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Theme override for a filter caption.
+ *
+ * @overrides html/core/themes/stable/templates/content-edit/filter-caption.html.twig
+ *
+ * Returns HTML for a captioned image, audio, video or other tag. Modifications
+ * include `caption` classes lifted from the Seven admin-theme template:
+ *
+ * @see html/core/themes/seven/templates/classy/content-edit/filter-caption.html.twig
+ *
+ * Available variables
+ * - string node: The complete HTML tag whose contents are being captioned.
+ * - string tag: The name of the HTML tag whose contents are being captioned.
+ * - string caption: The caption text.
+ * - string classes: The classes of the captioned HTML tag.
+ */
+#}
+<figure role="group"{%- if classes %} class="caption caption-{{ tag }} {{ classes }}"{%- endif %}>
+{{ node }}
+<figcaption>{{ caption }}</figcaption>
+</figure>

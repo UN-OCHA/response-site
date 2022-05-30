@@ -3,56 +3,325 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.group.operation.field_archive_group
+    - field.field.group.operation.field_archive_message
+    - field.field.group.operation.field_assessments_page
+    - field.field.group.operation.field_calendar_link
+    - field.field.group.operation.field_documents_page
     - field.field.group.operation.field_enabled_tabs
+    - field.field.group.operation.field_hdx_alternate_source
+    - field.field.group.operation.field_hdx_dataset_link
     - field.field.group.operation.field_ical_url
-    - field.field.group.operation.field_operation
+    - field.field.group.operation.field_infographics
+    - field.field.group.operation.field_maps_infographics_link
+    - field.field.group.operation.field_offices_page
+    - field.field.group.operation.field_pages_page
     - field.field.group.operation.field_paragraphs
+    - field.field.group.operation.field_reliefweb_assessments
+    - field.field.group.operation.field_reliefweb_documents
+    - field.field.group.operation.field_sidebar_menu
     - field.field.group.operation.subgroup_depth
     - field.field.group.operation.subgroup_left
     - field.field.group.operation.subgroup_right
     - field.field.group.operation.subgroup_tree
     - group.type.operation
   module:
+    - field_group
+    - hr_paragraphs
     - layout_paragraphs
+    - link
     - path
-    - select2
+    - text
+third_party_settings:
+  field_group:
+    group_content:
+      children:
+        - group_general
+        - group_pages
+        - group_documents
+        - group_infographics
+        - group_assessments
+        - group_hdx
+        - group_calendar
+        - group_offices
+      label: Content
+      region: content
+      parent_name: ''
+      weight: 2
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        direction: horizontal
+        width_breakpoint: 640
+    group_calendar:
+      children:
+        - field_calendar_link
+        - field_ical_url
+      label: Events
+      region: content
+      parent_name: group_content
+      weight: 27
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: false
+    group_general:
+      children:
+        - field_enabled_tabs
+        - field_archive_group
+        - field_archive_message
+      label: General
+      region: content
+      parent_name: group_content
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: false
+    group_offices:
+      children:
+        - field_offices_page
+      label: Contacts
+      region: content
+      parent_name: group_content
+      weight: 28
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_pages:
+      children:
+        - field_pages_page
+      label: Pages
+      region: content
+      parent_name: group_content
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_documents:
+      children:
+        - field_reliefweb_documents
+        - field_documents_page
+      label: Reports
+      region: content
+      parent_name: group_content
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_infographics:
+      children:
+        - field_maps_infographics_link
+        - field_infographics
+      label: 'Maps / Infographics'
+      region: content
+      parent_name: group_content
+      weight: 23
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_hdx:
+      children:
+        - field_hdx_dataset_link
+        - field_hdx_alternate_source
+      label: Data
+      region: content
+      parent_name: group_content
+      weight: 26
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_assessments:
+      children:
+        - field_reliefweb_assessments
+        - field_assessments_page
+      label: Assessments
+      region: content
+      parent_name: group_content
+      weight: 25
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
 id: group.operation.default
 targetEntityType: group
 bundle: operation
 mode: default
 content:
+  field_archive_group:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_archive_message:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_assessments_page:
+    type: link_default
+    weight: 39
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_calendar_link:
+    type: link_default
+    weight: 4
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_documents_page:
+    type: hr_paragraphs_link_default
+    weight: 29
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_enabled_tabs:
     type: options_buttons
     weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_hdx_alternate_source:
+    type: link_default
+    weight: 35
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_hdx_dataset_link:
+    type: link_default
+    weight: 34
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_ical_url:
     type: string_textfield
-    weight: 2
+    weight: 5
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_operation:
-    type: select2_entity_reference
-    weight: 5
+  field_infographics:
+    type: link_default
+    weight: 32
     region: content
     settings:
-      width: 100%
-      autocomplete: true
-      match_operator: CONTAINS
-      match_limit: 25
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_maps_infographics_link:
+    type: link_default
+    weight: 30
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_offices_page:
+    type: hr_paragraphs_link_default
+    weight: 26
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_pages_page:
+    type: hr_paragraphs_link_default
+    weight: 24
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
     third_party_settings: {  }
   field_paragraphs:
     type: layout_paragraphs
-    weight: 6
+    weight: 3
+    region: content
+    settings:
+      preview_view_mode: preview
+      nesting_depth: 0
+      require_layouts: 0
+      empty_message: ''
+    third_party_settings: {  }
+  field_reliefweb_assessments:
+    type: link_default
+    weight: 38
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_reliefweb_documents:
+    type: link_default
+    weight: 28
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_sidebar_menu:
+    type: layout_paragraphs
+    weight: 4
     region: content
     settings:
       preview_view_mode: default
-      nesting_depth: 4
-      require_layouts: 1
+      nesting_depth: 0
+      require_layouts: 0
       empty_message: ''
     third_party_settings: {  }
   label:
@@ -65,26 +334,26 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 3
+    weight: 1
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 8
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   translation:
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }

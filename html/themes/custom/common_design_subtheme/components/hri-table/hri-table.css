@@ -1,0 +1,16 @@
+/**
+ * Extends common_design/cd-table with customizations for HR.info
+ */
+
+.cd-table th {
+  color: var(--brand-primary--dark);
+}
+
+.cd-table td {
+  vertical-align: top;
+}
+
+.views-field-label,
+.views-field-changed {
+  white-space: nowrap;
+}

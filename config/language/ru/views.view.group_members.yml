@@ -1,3 +1,4 @@
+label: 'Group members'
 display:
   default:
     display_title: Основной
@@ -31,12 +32,19 @@ display:
           label: Обновлено
           separator: ', '
         created:
+          label: Joined
           separator: ', '
+        delete_group_content:
+          text: 'Remove member'
         dropbutton:
           label: Операции
       arguments:
         gid:
           exception:
             title: Все
+      title: Members
   page_1:
     display_title: Страница
+    display_options:
+      menu:
+        title: Members

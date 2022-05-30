@@ -1,0 +1,55 @@
+uuid: 5bd99da7-a5d5-4028-8739-7b50818ebd1a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.featured_highlight.field_destination
+    - field.field.paragraph.featured_highlight.field_image
+    - field.field.paragraph.featured_highlight.field_text
+    - field.field.paragraph.featured_highlight.field_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.featured_highlight
+  module:
+    - image
+    - link
+    - text
+id: paragraph.featured_highlight.default
+targetEntityType: paragraph
+bundle: featured_highlight
+mode: default
+content:
+  field_destination:
+    type: link_default
+    weight: 3
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_image:
+    type: image_image
+    weight: 2
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

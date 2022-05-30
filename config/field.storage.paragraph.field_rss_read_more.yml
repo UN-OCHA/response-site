@@ -1,0 +1,19 @@
+uuid: 34529641-5202-41f6-882d-61ce923d7b5b
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_rss_read_more
+field_name: field_rss_read_more
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

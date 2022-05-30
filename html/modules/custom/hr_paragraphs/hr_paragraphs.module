@@ -5,102 +5,990 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Url;
+use Drupal\group\Entity\Group;
+use Drupal\group\Entity\GroupContent;
+use Drupal\node\Entity\Node;
+use Drupal\path_alias\Entity\PathAlias;
+use Drupal\subgroup\MalformedLeafException;
+
 /**
  * Implements hook_theme().
  */
 function hr_paragraphs_theme($existing, $type, $theme, $path) {
   return [
-    'hr_paragraphs_assessments_map' => [
-      'template' => 'ocha-map',
+    'river' => [
+      'template' => 'river',
       'variables' => [
-        'base_url' => 'http://hrinfo-site.docksal/',
-        'src' => 'http://hrinfo-site.docksal/rest/assessments/map-data?items_per_page=800',
-        'component_url' => '/modules/custom/hr_paragraphs/component/build/',
+        'service' => NULL,
+        'service_url' => NULL,
+        'data' => [],
+        'total' => [],
+        'facets' => [],
+        'active_facets' => [],
+        'pager' => NULL,
+        'group' => NULL,
       ],
     ],
-    'hr_paragraphs_assessments_table' => [
-      'template' => 'ocha-table',
+    'hr_paragraphs_rw_list' => [
+      'template' => 'hr-paragraphs-rw-list',
       'variables' => [
-        'base_url' => 'http://hrinfo-site.docksal/',
-        'src' => 'http://hrinfo-site.docksal/rest/assessments/table-data?items_per_page=800',
-        'component_url' => '/modules/custom/hr_paragraphs/component/build/',
+        'data' => [],
+        'total' => [],
+        'view_all' => NULL,
       ],
     ],
-    'hr_paragraphs_assessments_list' => [
-      'template' => 'ocha-list',
+    'upcoming_events' => [
+      'template' => 'upcoming-events',
       'variables' => [
-        'base_url' => 'http://hrinfo-site.docksal/',
-        'src' => 'http://hrinfo-site.docksal/rest/assessments/list-data?items_per_page=800',
-        'component_url' => '/modules/custom/hr_paragraphs/component/build/',
+        'events' => [],
+        'read_more' => NULL,
+      ],
+    ],
+    'hr_paragraphs_rss_feed' => [
+      'template' => 'hr-paragraphs-rss-feed',
+      'variables' => [
+        'items' => [],
+        'options' => [],
+        'read_more' => NULL,
+      ],
+    ],
+    'hr_paragraphs_iframe' => [
+      'template' => 'hr-paragraphs-iframe',
+      'variables' => [
+        'embed_url' => NULL,
+        'width' => NULL,
+        'height' => NULL,
+        'ratio' => NULL,
+      ],
+    ],
+    'group_children' => [
+      'template' => 'group-children',
+      'variables' => [
+        'children' => [],
+      ],
+    ],
+    'group_nodes' => [
+      'template' => 'group-nodes',
+      'variables' => [
+        'nodes' => [],
+      ],
+    ],
+    'fullcalendar_link' => [
+      'template' => 'fullcalendar-link',
+      'variables' => [
+        'calendar_url' => NULL,
       ],
     ],
   ];
 }
 
 /**
- * Implements hook_preprocess_paragraph__type().
+ * Implements hook_ENTITY_TYPE_insert().
  */
-function hr_paragraphs_preprocess_paragraph__offices(&$variables) {
-  $operation_uuid = FALSE;
-
-  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
-  $paragraph = $variables['paragraph'];
-
-  if (!$paragraph->field_operation->isEmpty()) {
-    $operation_uuid = $paragraph->field_operation->entity->uuid();
-  }
-  else {
-    $operation_uuid = $paragraph->getParentEntity()->field_operation->entity->uuid();
-  }
-
-  if (!$operation_uuid) {
+function hr_paragraphs_group_insert(EntityInterface $entity) {
+  if ($entity->bundle() != 'operation') {
     return;
   }
 
-  $entity_id = 'office';
-  $view_mode = 'teaser';
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+  $source = '/group/' . $entity->id();
 
-  $entity_type_manager = \Drupal::entityTypeManager();
-  $assessment_uuids = $entity_type_manager->getStorage($entity_id)->getQuery()->condition('operations', $operation_uuid)->execute();
-  $offices = $entity_type_manager->getStorage($entity_id)->loadMultiple($assessment_uuids);
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+  $group_alias = $path_alias_manager->getAliasByPath($source);
 
-  $view_builder = $entity_type_manager->getViewBuilder($entity_id);
-  $variables['content']['offices'] = $view_builder->viewMultiple($offices, $view_mode);
+  // Skip if an alias is already set.
+  if ($group_alias !== $source) {
+    return;
+  }
+
+  $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
+  $new_alias = '/' . $page_title;
+
+  /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
+  $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+  $alias_uniquifier->uniquify($new_alias, $source, $langcode);
+
+  $path_alias = PathAlias::create([
+    'path' => $source,
+    'alias' => $new_alias,
+  ]);
+  $path_alias->save();
+
+  // Add aliases for tabs.
+  $tabs = [
+    'events',
+    'contacts',
+    'pages',
+    'reports',
+    'maps',
+    'data',
+    'assessments',
+  ];
+
+  foreach ($tabs as $tab) {
+    $source = '/group/' . $entity->id() . '/' . $tab;
+    $tab_alias = $new_alias . '/' . $tab;
+
+    $existing_alias = $path_alias_manager->getAliasByPath($source);
+
+    // Skip if an alias is already set.
+    if ($existing_alias !== $source) {
+      continue;
+    }
+
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $tab_alias,
+    ]);
+    $path_alias->save();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function hr_paragraphs_group_update(EntityInterface $entity) {
+  /** @var \Drupal\group\Entity\Group $entity */
+  if ($entity->bundle() == 'operation') {
+    return hr_paragraphs_group_insert($entity);
+  }
+
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+  $source = '/group/' . $entity->id();
+
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+  $group_alias = $path_alias_manager->getAliasByPath($source);
+
+  // Skip if an alias is already set.
+  if ($group_alias !== $source) {
+    return;
+  }
+
+  if ($entity->hasField('subgroup_tree') && !$entity->subgroup_tree->isEmpty()) {
+    $subgroup = $entity;
+    $group = Group::load($entity->subgroup_tree->value);
+
+    $path_alias_manager = \Drupal::service('path_alias.manager');
+
+    $group_alias = $path_alias_manager->getAliasByPath('/group/' . $group->id());
+    $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
+    $new_alias = $group_alias . '/' . $page_title;
+
+    $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+    $source = '/group/' . $subgroup->id();
+
+    /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
+    $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+    $alias_uniquifier->uniquify($new_alias, $source, $langcode);
+
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $new_alias,
+    ]);
+    $path_alias->save();
+
+    // Add aliases for tabs.
+    $tabs = [
+      'events',
+      'contacts',
+      'pages',
+      'reports',
+      'maps',
+      'data',
+      'assessments',
+    ];
+
+    foreach ($tabs as $tab) {
+      $source = '/group/' . $entity->id() . '/' . $tab;
+      $tab_alias = $new_alias . '/' . $tab;
+
+      $existing_alias = $path_alias_manager->getAliasByPath($source);
+
+      // Skip if an alias is already set.
+      if ($existing_alias !== $source) {
+        continue;
+      }
+
+      $path_alias = PathAlias::create([
+        'path' => $source,
+        'alias' => $tab_alias,
+      ]);
+      $path_alias->save();
+    }
+  }
+
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function hr_paragraphs_node_update(EntityInterface $entity) {
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+  $source = '/node/' . $entity->id();
+
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+  $node_alias = $path_alias_manager->getAliasByPath($source);
+
+  // Skip if an alias is already set.
+  if ($node_alias !== $source) {
+    return;
+  }
+
+  $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
+
+  $group_content_array = GroupContent::loadByEntity($entity);
+  $group_content = reset($group_content_array);
+  if ($group_content) {
+    $group = $group_content->getGroup();
+    $group_alias = $path_alias_manager->getAliasByPath('/group/' . $group->id());
+
+    // Make sure group has a proper alias.
+    if ($group_alias == '/group/' . $group->id()) {
+      return;
+    }
+
+    $new_alias = $group_alias . '/' . $page_title;
+
+    /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
+    $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+    $alias_uniquifier->uniquify($new_alias, $source, $langcode);
+
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $new_alias,
+    ]);
+
+    $path_alias->save();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hr_paragraphs_group_content_insert(EntityInterface $entity) {
+  /** @var \Drupal\group\Entity\GroupContent $entity */
+  $plugin_id = $entity->getGroupContentType()->getContentPluginId();
+
+  if ($plugin_id === 'group_node:page') {
+    return hr_paragraphs_group_content_alias($entity);
+  }
+
+  if ($plugin_id === 'subgroup:cluster') {
+    return hr_paragraphs_group_subgroup_alias($entity);
+  }
+
+  if ($plugin_id === 'group_membership') {
+    return hr_paragraphs_group_add_member($entity);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hr_paragraphs_group_add_member(EntityInterface $entity) {
+  /** @var \Drupal\group\Entity\GroupContent $entity */
+  $group = $entity->getGroup();
+
+  /** @var \Drupal\user\Entity\User $member */
+  $member = $entity->getEntity();
+
+  // Skip UID 0 and 1.
+  if ($member->id() <= 1) {
+    return;
+  }
+
+  \Drupal::logger('hr_members')->info('@member (@uid) added to @group (@gid)', [
+    '@member' => $member->getAccountName(),
+    '@uid' => $member->id(),
+    '@group' => $group->label(),
+    '@gid' => $group->id(),
+  ]);
+
+  if ($member->isBlocked()) {
+    $member->activate();
+    $member->save();
+
+    \Drupal::logger('hr_members')->info('@member (@uid) account automatically unblocked', [
+      '@member' => $member->getAccountName(),
+      '@uid' => $member->id(),
+    ]);
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
+  /** @var \Drupal\group\Entity\GroupContent $entity */
+  $plugin_id = $entity->getGroupContentType()->getContentPluginId();
+  if ($plugin_id != 'subgroup:cluster') {
+    return;
+  }
+
+  $subgroup = $entity->getEntity();
+  $group = $entity->getGroup();
+
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+
+  $group_alias = $path_alias_manager->getAliasByPath('/group/' . $group->id());
+  $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
+  $new_alias = $group_alias . '/' . $page_title;
+
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+  $source = '/group/' . $subgroup->id();
+
+  /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
+  $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+  $alias_uniquifier->uniquify($new_alias, $source, $langcode);
+
+  $path_alias = PathAlias::create([
+    'path' => $source,
+    'alias' => $new_alias,
+  ]);
+  $path_alias->save();
+
+  // Add aliases for tabs.
+  $tabs = [
+    'events',
+    'contacts',
+    'pages',
+    'reports',
+    'maps',
+    'data',
+    'assessments',
+  ];
+
+  foreach ($tabs as $tab) {
+    $source = '/group/' . $entity->id() . '/' . $tab;
+    $tab_alias = $new_alias . '/' . $tab;
+
+    $existing_alias = $path_alias_manager->getAliasByPath($source);
+
+    // Skip if an alias is already set.
+    if ($existing_alias !== $source) {
+      continue;
+    }
+
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $tab_alias,
+    ]);
+    $path_alias->save();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function hr_paragraphs_group_content_alias(EntityInterface $entity) {
+  /** @var \Drupal\group\Entity\GroupContent $entity */
+  $plugin_id = $entity->getGroupContentType()->getContentPluginId();
+  if ($plugin_id != 'group_node:page') {
+    return;
+  }
+
+  $node = $entity->getEntity();
+  $group = $entity->getGroup();
+
+  $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+  $source = '/node/' . $node->id();
+
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+  $node_alias = $path_alias_manager->getAliasByPath($source);
+
+  // Skip if an alias is already set.
+  if ($node_alias !== $source) {
+    return;
+  }
+
+  $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($node->label());
+
+  $group_alias = $path_alias_manager->getAliasByPath('/group/' . $group->id());
+  $new_alias = $group_alias . '/' . $page_title;
+
+  /** @var \Drupal\pathauto\AliasUniquifier $alias_uniquifier */
+  $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
+  $alias_uniquifier->uniquify($new_alias, $source, $langcode);
+
+  $path_alias = PathAlias::create([
+    'path' => $source,
+    'alias' => $new_alias,
+  ]);
+
+  $path_alias->save();
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function hr_paragraphs_group_content_update(EntityInterface $entity) {
+  return hr_paragraphs_group_content_insert($entity);
 }
 
 /**
  * Implements hook_preprocess_paragraph__type().
  */
-function hr_paragraphs_preprocess_paragraph__recent_assessments(&$variables) {
-  $operation_uuid = FALSE;
+function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $embed_url = '';
+
+  if (!$paragraph->field_iframe_url->isEmpty()) {
+    $embed_url = $paragraph->get('field_iframe_url')->first()->uri;
+    $width = '100%';
+    $height = '500px';
+  }
+  elseif (!$paragraph->field_embed_code->isEmpty()) {
+    $settings = hr_paragraphs_handle_iframe($paragraph->field_embed_code->value);
+    $embed_url = $settings['embed_url'];
+    $width = $settings['width'];
+    $height = $settings['height'];
+  }
+
+  if (empty($embed_url)) {
+    return;
+  }
+
+  if (!$paragraph->field_iframe_aspect_ratio->isEmpty()) {
+    $ratio = $paragraph->field_iframe_aspect_ratio->value;
+  }
+  else {
+    $ratio = 'ratio-16-9';
+  }
+
+  $variables['content']['embed'] = [
+    '#theme' => 'hr_paragraphs_iframe',
+    '#embed_url' => $embed_url,
+    '#width' => $width,
+    '#height' => $height,
+    '#ratio' => $ratio,
+    '#weight' => 99,
+  ];
+}
+
+/**
+ * Validate iframe code and wrap it.
+ */
+function hr_paragraphs_handle_iframe($html) {
+  $flags = LIBXML_NONET | LIBXML_NOBLANKS | LIBXML_NOERROR | LIBXML_NOWARNING;
+  $prefix = '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head><body>';
+  $suffix = '</body></html>';
+  $dom = new \DOMDocument();
+  $dom->loadHTML($prefix . $html . $suffix, $flags);
+
+  $iframes = $dom->getElementsByTagName('iframe');
+  $iframe = $iframes[0];
+  if (!$iframe) {
+    return [
+      'embed_url' => '',
+      'width' => 0,
+      'height' => 0,
+    ];
+  }
+
+  return [
+    'embed_url' => $iframe->getAttribute('src'),
+    'width' => intval($iframe->getAttribute('width'), 10),
+    'height' => intval($iframe->getAttribute('height'), 10),
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  if ($paragraph->field_rss_link->isEmpty()) {
+    return;
+  }
+
+  $rss_options = $paragraph->field_rss_options->getValue();
+  foreach ($rss_options as &$rss_option) {
+    $rss_option = $rss_option['value'];
+  }
+
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
+  $options = [
+    'display_date' => FALSE,
+    'display_description' => FALSE,
+    'display_each_item_full' => FALSE,
+    'display_read_more' => FALSE,
+  ];
+
+  /** @var \Drupal\hr_paragraphs\Controller\RssController $rss_controller */
+  $rss_controller = \Drupal::service('hr_paragraphs.rss_controller');
+  $items = $rss_controller->getRssItems($paragraph->field_rss_link->first()->uri);
+
+  if (empty($items)) {
+    return;
+  }
+
+  if (in_array('display_date', $rss_options)) {
+    $options['display_date'] = TRUE;
+  }
+
+  // Slice array.
+  $items = array_slice($items, 0, $max_number_of_items);
+
+  $variables['content']['embed'] = [
+    '#theme' => 'hr_paragraphs_rss_feed',
+    '#items' => $items,
+    '#options' => $options,
+    '#weight' => 99,
+  ];
+
+  // Add 'read more' if needed.
+  if (in_array('display_read_more', $rss_options)) {
+    $read_more_url = '';
+
+    if ($paragraph->field_rss_read_more->isEmpty()) {
+      $channel_link = $rss_controller->getRssChannelLink($paragraph->field_rss_link->first()->uri);
+      if (!empty($channel_link)) {
+        $read_more_url = $channel_link;
+        $options['display_read_more'] = TRUE;
+      }
+    }
+    else {
+      $read_more_url = $paragraph->field_rss_read_more->first()->uri;
+      $options['display_read_more'] = TRUE;
+    }
+
+    if ($options['display_read_more']) {
+      $variables['content']['embed']['#read_more'] = [
+        'url' => $read_more_url,
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $group = $paragraph->getParentEntity();
+
+  if (!$group) {
+    return;
+  }
+
+  if ($group->field_ical_url->isEmpty()) {
+    return;
+  }
+
+  /** @var \Drupal\hr_paragraphs\Controller\IcalController $ical_controller */
+  $ical_controller = \Drupal::service('hr_paragraphs.ical_controller');
+  $start = date('Y-m-d');
+  $end = date('Y-m-d', time() + 30 * 24 * 60 * 60);
+
+  try {
+    $events = $ical_controller->getIcalEvents($group, $start, $end);
+  }
+  catch (\Exception $exception) {
+    // Fail silently.
+    return [];
+  }
+
+  // Sort by start time.
+  usort($events, function ($a, $b) {
+    return strtotime($b['start']) < strtotime($a['start']) ? 1 : -1;
+  });
+
+  // Limit to 5 by default.
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
+
+  // Slice array.
+  $events = array_slice($events, 0, $max_number_of_items);
+
+  $variables['content']['upcoming'] = [
+    '#theme' => 'upcoming_events',
+    '#events' => $events,
+    '#read_more' => [
+      'title' => 'More events',
+      'url' => Url::fromRoute('hr_paragraphs.operation.events', [
+        'group' => $group->id(),
+      ]),
+    ],
+    '#weight' => 99,
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  /** @var \Drupal\group\Entity\Group */
+  $group = $paragraph->getParentEntity();
+
+  // For preview mode.
+  if (!$group) {
+    return;
+  }
+
+  // If we are on page, get the group.
+  if (get_class($group) == 'Drupal\node\Entity\Node') {
+    $group_content_array = GroupContent::loadByEntity($group);
+    $group_content = reset($group_content_array);
+    if ($group_content) {
+      $group = $group_content->getGroup();
+    }
+    else {
+      return;
+    }
+  }
+
+  if (!$group) {
+    return;
+  }
+
+  try {
+    /** @var \Drupal\subgroup\Entity\SubgroupHandlerInterface $subgroup_handler */
+    $subgroup_handler = \Drupal::entityTypeManager()->getHandler($group->getEntityTypeId(), 'subgroup');
+    if (!$subgroup_handler->hasDescendants($group)) {
+      return;
+    }
+    $children = $subgroup_handler->getDescendants($group);
+
+    if (empty($children)) {
+      return;
+    }
+
+    $items = [];
+    $cache_tags = [];
+    foreach ($children as $child) {
+      $cache_tags += $child->getCacheTags();
+      $items[] = [
+        'label' => $child->label->value,
+        'link' => $child->toUrl(),
+      ];
+    }
+
+    // Sort by label.
+    $collator = new Collator('en_US');
+    usort($items, function ($a, $b) use ($collator) {
+      return $collator->compare($a['label'], $b['label']);
+    });
+
+    $variables['content']['children'] = [
+      '#theme' => 'group_children',
+      '#children' => $items,
+      '#weight' => 99,
+    ];
+
+    $variables['#cache']['tags'] = array_merge($variables['#cache']['tags'] ?? [], $cache_tags);
+  }
+  catch (MalformedLeafException $exception) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
+  $exclude_pages = [];
 
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  if (!$paragraph->field_operation->isEmpty()) {
-    $operation_uuid = $paragraph->field_operation->entity->uuid();
-  }
-  else {
-    $operation_uuid = $paragraph->getParentEntity()->field_operation->entity->uuid();
-  }
+  /** @var \Drupal\group\Entity\Group $group */
+  $group = $paragraph->getParentEntity();
 
-  if (!$operation_uuid) {
+  // For preview mode.
+  if (!$group) {
     return;
   }
 
-  $entity_id = 'assessment';
-  $view_mode = 'teaser';
+  // If we are on page, get the group.
+  if (get_class($group) == 'Drupal\node\Entity\Node') {
+    $exclude_pages[] = $group->id();
+    $group_content_array = GroupContent::loadByEntity($group);
+    $group_content = reset($group_content_array);
+    if ($group_content) {
+      $group = $group_content->getGroup();
+    }
+    else {
+      return;
+    }
+  }
 
-  $entity_type_manager = \Drupal::entityTypeManager();
-  $assessment_uuids = $entity_type_manager->getStorage($entity_id)->getQuery()
-    ->condition('operations', $operation_uuid)
-    ->range(0, 10)
-    ->sort('changed', 'DESC')
-    ->execute();
-  $assessments = $entity_type_manager->getStorage($entity_id)->loadMultiple($assessment_uuids);
+  $groups = [
+    $group,
+  ];
 
-  $view_builder = $entity_type_manager->getViewBuilder($entity_id);
-  $variables['content']['assessments'] = $view_builder->viewMultiple($assessments, $view_mode);
+  // Include pages of subgroups.
+  if ($paragraph->hasField('field_include_subgroups') && $paragraph->field_include_subgroups->value) {
+    /** @var \Drupal\subgroup\Entity\SubgroupHandlerInterface $subgroup_handler */
+    $subgroup_handler = \Drupal::entityTypeManager()->getHandler($group->getEntityTypeId(), 'subgroup');
+    if (!$subgroup_handler->hasDescendants($group)) {
+      return;
+    }
+    $groups = array_merge($groups, $subgroup_handler->getDescendants($group));
+  }
+
+  $nodes = [];
+  foreach ($groups as $group) {
+    // Exclude special pages.
+    if ($group->hasField('field_offices_page') && !$group->field_offices_page->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_offices_page->first();
+
+      if (!$link->isExternal()) {
+        try {
+          $params = $link->getUrl()->getRouteParameters();
+          $exclude_pages[] = $params['node'];
+        }
+        catch (\Exception $exception) {
+          // Ignore, deleted page.
+        }
+      }
+    }
+
+    if ($group->hasField('field_pages_page') && !$group->field_pages_page->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_pages_page->first();
+
+      if (!$link->isExternal()) {
+        try {
+          $params = $link->getUrl()->getRouteParameters();
+          $exclude_pages[] = $params['node'];
+        }
+        catch (\Exception $exception) {
+          // Ignore, deleted page.
+        }
+      }
+    }
+
+    $nodes = array_merge($nodes, $group->getContentEntities('group_node:page'));
+  }
+
+  if (empty($nodes)) {
+    return;
+  }
+
+  $items = [];
+  $cache_tags = [];
+  foreach ($nodes as $node) {
+    // Skip current page.
+    if (in_array($node->id(), $exclude_pages)) {
+      continue;
+    }
+
+    $cache_tags += $node->getCacheTags();
+    $items[] = [
+      'label' => $node->title->value,
+      'link' => $node->toUrl(),
+    ];
+  }
+
+  // Sort by label.
+  $collator = new Collator('en_US');
+  usort($items, function ($a, $b) use ($collator) {
+    return $collator->compare($a['label'], $b['label']);
+  });
+
+  $variables['content']['nodes'] = [
+    '#theme' => 'group_nodes',
+    '#nodes' => $items,
+    '#weight' => 99,
+  ];
+
+  $variables['#cache']['tags'] = array_merge($variables['#cache']['tags'] ?? [], $cache_tags);
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  // Exclude special pages.
+  if (!$paragraph->hasField('field_reliefweb_url') || $paragraph->field_reliefweb_url->isEmpty()) {
+    return;
+  }
+
+  // Set max number of items to 5 by default.
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
+
+  $url = $paragraph->field_reliefweb_url->first()->uri;
+  /** @var \Drupal\hr_paragraphs\Controller\ReliefwebController */
+  $reliefweb_controller = \Drupal::service('hr_paragraphs.reliefweb_controller');
+  $conditions = $reliefweb_controller->parseReliefwebUrl($url);
+  $parameters = $reliefweb_controller->buildReliefwebParameters(0, $max_number_of_items, []);
+
+  // Remove facets.
+  unset($parameters['facets']);
+
+  // Check for search paramater as well.
+  if (isset($conditions['_query'])) {
+    $parameters['query'] = [
+      'value' => $conditions['_query'],
+      'operator' => 'AND',
+    ];
+    unset($conditions['_query']);
+  }
+
+  foreach ($conditions as $condition) {
+    $negative_operators = [
+      'and-without',
+      'or-without',
+    ];
+    $negate = FALSE;
+
+    if (in_array($condition['operator'], $negative_operators)) {
+      $negate = TRUE;
+    }
+
+    $parameters['filter']['conditions'][] = [
+      'field' => $condition['field'],
+      'value' => $condition['value'],
+      'negate' => $negate,
+    ];
+  }
+
+  $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+
+  $variables['content']['rw_list'] = [
+    '#theme' => 'hr_paragraphs_rw_list',
+    '#data' => $reliefweb_controller->buildReliefwebObjects($results),
+    '#view_all' => $paragraph->field_reliefweb_url->first()->uri,
+    '#total' => $max_number_of_items,
+    '#weight' => 99,
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  // Exclude special pages.
+  if (!$paragraph->hasField('field_reliefweb_url') || $paragraph->field_reliefweb_url->isEmpty()) {
+    return;
+  }
+
+  $url = $paragraph->field_reliefweb_url->first()->uri;
+
+  /** @var \Drupal\hr_paragraphs\Controller\ReliefwebController */
+  $reliefweb_controller = \Drupal::service('hr_paragraphs.reliefweb_controller');
+  $parameters = $reliefweb_controller->buildReliefwebParameters(0, 1, []);
+
+  // Remove facets.
+  unset($parameters['facets']);
+
+  $parameters['filter']['conditions'][] = [
+    'field' => 'url_alias',
+    'value' => $url,
+  ];
+
+  $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+
+  // Try using canonical URL.
+  if (!isset($results['data']) || empty($results['data'])) {
+    $parameters = $reliefweb_controller->buildReliefwebParameters(0, 1, []);
+
+    // Remove facets.
+    unset($parameters['facets']);
+
+    $parts = explode('/', $url);
+    $id = array_pop($parts);
+
+    $parameters['filter']['conditions'][] = [
+      'field' => 'id',
+      'value' => $id,
+    ];
+
+    try {
+      $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+    }
+    catch (\Exception $e) {
+      $results = [];
+    }
+  }
+
+  if (empty($results) || empty($results['data'])) {
+    return;
+  }
+
+  $docs = $reliefweb_controller->buildReliefwebObjects($results);
+  $doc = reset($docs);
+
+  $variables['content']['rw_list'] = [
+    '#theme' => 'hr_paragraphs_rw_list',
+    '#data' => [$doc],
+    '#total' => NULL,
+    '#view_all' => NULL,
+    '#weight' => 99,
+  ];
+}
+
+/**
+ * Validate date filter values.
+ *
+ * @param string $code
+ *   Filter code.
+ * @param array $values
+ *   Filter values.
+ *
+ * @return array
+ *   Dates with a 'from' or a 'to' key or both.
+ */
+function hr_paragraphs_validate_date_filter_values($code, array $values) {
+  if (empty($values)) {
+    return [];
+  }
+  // We only accept one range.
+  $values = $values[0];
+
+  $values = array_map(function ($value) {
+    if (strlen($value) !== 8 || !ctype_digit($value)) {
+      return NULL;
+    }
+    $date = date_create_immutable_from_format('Ymd|', $value, timezone_open('UTC'));
+    return $date;
+  }, explode('-', $values, 2));
+
+  $dates = [];
+  if (count($values) === 1) {
+    if (!empty($values[0])) {
+      $dates['from'] = $values[0];
+      $dates['to'] = $values[0];
+    }
+  }
+  else {
+    // If the to date is before the from date, we inverse the dates.
+    if (!empty($values[0]) && !empty($values[1]) && $values[1] < $values[0]) {
+      $temp = $values[0];
+      $values[0] = $values[1];
+      $values[1] = $temp;
+    }
+
+    if (!empty($values[0])) {
+      $dates['from'] = $values[0];
+    }
+    if (!empty($values[1])) {
+      $dates['to'] = $values[1];
+    }
+  }
+
+  return $dates;
 }
 
 /**
@@ -126,4 +1014,443 @@ function hr_paragraphs_library_info_alter(&$libraries, $extension) {
     }
   }
   $libraries['fullcalendar_load']['js'] = $new_js;
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
+  if (empty($data['tabs'])) {
+    return;
+  }
+
+  $weights = [
+    'hr_paragraphs.operation' => -10,
+    'group.view' => 0,
+    'group.edit_form' => 5,
+    'group.delete_form' => 10,
+    'group.version_history' => 15,
+    'views_view:view.group_members.page_1' => 20,
+    'views_view:view.subgroups_of_a_group.page_1' => 30,
+    'views_view:view.group_nodes.page_1' => 40,
+    'content_translation.local_tasks:entity.group.content_translation_overview' => 100,
+    'hr_paragraphs.operation.operations' => 999,
+    'group.content' => 999,
+  ];
+
+  // Re-order tabs.
+  foreach ($data['tabs'][0] as $key => &$tab) {
+    if (isset($weights[$key])) {
+      $tab['#weight'] = $weights[$key];
+    }
+  }
+
+  // Hide add existing content local task.
+  if (isset($data['tabs'][0]['group.view']['#access'])) {
+    $data['tabs'][0]['group.view']['#access'] = FALSE;
+  }
+
+  // Hide duplicate local task.
+  if (isset($data['tabs'][0]['group.view']['#access'])) {
+    $data['tabs'][0]['group.view']['#access'] = FALSE;
+  }
+
+  // Hide all entities.
+  if (isset($data['tabs'][0]['group.content']['#access'])) {
+    $data['tabs'][0]['group.content']['#access'] = FALSE;
+  }
+
+  // Mark local task active for queries.
+  $supported_routes = [
+    'hr_paragraphs.operation.pages',
+    'hr_paragraphs.operation.reports',
+    'hr_paragraphs.operation.maps',
+    'hr_paragraphs.operation.assessments',
+    'hr_paragraphs.operation.data',
+    'hr_paragraphs.operation.events',
+    'hr_paragraphs.operation.contacts',
+    'hr_paragraphs.operation.ical',
+  ];
+
+  if (in_array($route_name, $supported_routes)) {
+    if ($data['tabs'][1][$route_name]['#active']) {
+      $data['tabs'][1][$route_name]['#link']['localized_options']['attributes']['class'] = ['is-active'];
+    }
+  }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function hr_paragraphs_system_breadcrumb_alter(Breadcrumb &$breadcrumb, RouteMatchInterface $route_match, array $context) {
+  if (empty($breadcrumb)) {
+    return;
+  }
+
+  if ($route_match->getRouteName() !== 'entity.group.add_form') {
+    return;
+  }
+
+  $links = $breadcrumb->getLinks();
+  if (!empty($links[1])) {
+    $title = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), $route_match->getRouteObject());
+    $links[1]->setText($title);
+    $breadcrumb = new Breadcrumb();
+    $breadcrumb->setLinks($links);
+  }
+}
+
+/**
+ * Implements hook_menu_local_actions_alter().
+ */
+function hr_paragraphs_menu_local_actions_alter(&$local_actions) {
+  if (isset($local_actions['group.add_group'])) {
+    unset($local_actions['group.add_group']);
+  }
+
+  if (isset($local_actions['group_content.group_node_relate_page'])) {
+    unset($local_actions['group_content.group_node_relate_page']);
+  }
+
+  if (isset($local_actions['group_content.group_node_add_page'])) {
+    $local_actions['group_content.group_node_add_page']['title'] = t('Add new page');
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function hr_paragraphs_preprocess_node(&$variables) {
+  hr_paragraphs_node_sidebar($variables);
+  hr_paragraphs_node_is_archived($variables);
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function hr_paragraphs_node_sidebar(&$variables) {
+  if ($variables['view_mode'] != 'full') {
+    return;
+  }
+
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  $group_content_array = GroupContent::loadByEntity($node);
+  $group_content = reset($group_content_array);
+  if ($group_content) {
+    $group = $group_content->getGroup();
+
+    if ($group->hasField('field_sidebar_from_operation') && !$group->field_sidebar_from_operation->isEmpty() && $group->field_sidebar_from_operation->value) {
+      if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+        $group = Group::load($group->subgroup_tree->value);
+      }
+    }
+
+    if ($group->hasField('field_sidebar_menu') && !$group->field_sidebar_menu->isEmpty()) {
+      $variables['field_sidebar_menu'] = $group->field_sidebar_menu->view();
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function hr_paragraphs_node_is_archived(&$variables) {
+  $node = $variables['node'];
+
+  if (!($node instanceof Node)) {
+    return;
+  }
+
+  $variables['is_archived'] = FALSE;
+  /** @var \Drupal\group\Entity\Storage\GroupContentStorage */
+  $storage = \Drupal::entityTypeManager()->getStorage('group_content');
+  $activGroupListEntity = $storage->loadByEntity($node);
+
+  // Not a group node.
+  if (empty($activGroupListEntity)) {
+    return;
+  }
+
+  foreach ($activGroupListEntity as $groupContent) {
+    $group = $groupContent->getGroup();
+    if (!$group->hasField('field_archive_group')) {
+      continue;
+    }
+
+    // Allow it if part of at least 1 non-archived group.
+    if (!$group->field_archive_group->value) {
+      // Check parent.
+      if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+        $group = Group::load($group->subgroup_tree->value);
+        if ($group->hasField('field_archive_group') && !$group->field_archive_group->value) {
+          return;
+        }
+      }
+      else {
+        return;
+      }
+    }
+  }
+
+  $variables['is_archived'] = TRUE;
+  $variables['archive_message'] = t('This group has been archived.');
+  if (!$group->field_archive_message->isEmpty()) {
+    $variables['archive_message'] = $group->field_archive_message->value;
+  }
+}
+
+/**
+ * Implements hook_preprocess_group().
+ */
+function hr_paragraphs_preprocess_group(&$variables) {
+  hr_paragraphs_group_sidebar($variables);
+  hr_paragraphs_group_is_archived($variables);
+}
+
+/**
+ * Implements hook_preprocess_group().
+ */
+function hr_paragraphs_group_sidebar(&$variables) {
+  if ($variables['view_mode'] != 'full') {
+    return;
+  }
+
+  /** @var \Drupal\group\Entity\GroupInterface $group */
+  $group = $variables['elements']['#group'];
+
+  if ($group->hasField('field_sidebar_from_operation') && !$group->field_sidebar_from_operation->isEmpty() && $group->field_sidebar_from_operation->value) {
+    if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+      $group = Group::load($group->subgroup_tree->value);
+      if ($group->hasField('field_sidebar_menu') && !$group->field_sidebar_menu->isEmpty()) {
+        $variables['content']['field_sidebar_menu'] = $group->field_sidebar_menu->view();
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_group().
+ */
+function hr_paragraphs_group_is_archived(&$variables) {
+  /** @var \Drupal\group\Entity\GroupInterface $group */
+  $group = $variables['elements']['#group'] ?? $variables['group'];
+
+  if (!$group) {
+    return;
+  }
+
+  if (!$group->hasField('field_archive_group')) {
+    return;
+  }
+
+  $variables['is_archived'] = FALSE;
+  if (!$group->field_archive_group->value) {
+    // Check parent.
+    if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+      $group = Group::load($group->subgroup_tree->value);
+      if ($group->hasField('field_archive_group') && !$group->field_archive_group->value) {
+        return;
+      }
+    }
+    else {
+      return;
+    }
+  }
+
+  $variables['is_archived'] = TRUE;
+  $variables['archive_message'] = t('This group has been archived.');
+  if (!$group->field_archive_message->isEmpty()) {
+    $variables['archive_message'] = $group->field_archive_message->value;
+  }
+}
+
+/**
+ * Parse query string, allowing duplicate keys.
+ */
+function hr_paragraphs_parse_str($string) {
+  $results = [];
+  $parts = explode('&', $string);
+
+  foreach ($parts as $part) {
+    if (strpos($part, '=') === FALSE) {
+      continue;
+    }
+
+    // Split into name and value.
+    [$name, $value] = explode('=', $part, 2);
+
+    // Decode value.
+    $value = urldecode($value);
+
+    // If name already exists.
+    if (isset($results[$name])) {
+      // Stick multiple values into an array.
+      if (is_array($results[$name])) {
+        $results[$name][] = $value;
+      }
+      else {
+        $results[$name] = [$results[$name], $value];
+      }
+    }
+    // Otherwise, simply stick it in a scalar.
+    else {
+      $results[$name] = $value;
+    }
+  }
+
+  return $results;
+}
+
+/**
+ * Implements template_preprocess_html().
+ */
+function hr_paragraphs_preprocess_html(&$variables) {
+  /** @var Drupal\group\Entity\Group $group */
+  $group = \Drupal::request()->attributes->get('group');
+  if (!$group) {
+    return;
+  }
+
+  /** @var \Drupal\Core\Routing\RouteMatch $route_match */
+  $route_match = \Drupal::routeMatch();
+  if (!$route_match) {
+    return;
+  }
+
+  // Only act on group homepage and tabs.
+  if (strpos($route_match->getRouteName(), 'hr_paragraphs.operation.') === FALSE && strpos($route_match->getRouteName(), 'entity.group.canonical') === FALSE) {
+    return;
+  }
+
+  // Add operation name for cluster homepage.
+  if (strpos($route_match->getRouteName(), 'entity.group.canonical') !== FALSE) {
+    if ($group->bundle() == 'cluster' && $group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+      $operation = Group::load($group->subgroup_tree->value);
+      $variables['head_title']['title'] = $operation->label->value . ': ' . $variables['head_title']['title'];
+    }
+
+    return;
+  }
+
+  if ($group->bundle() == 'cluster' && $group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+    $operation = Group::load($group->subgroup_tree->value);
+    $variables['head_title']['title'] = $operation->label->value . ': ' . $group->label->value . ' - ' . $variables['head_title']['title'];
+  }
+  else {
+    $variables['head_title']['title'] = $group->label->value . ' - ' . $variables['head_title']['title'];
+  }
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function hr_paragraphs_theme_registry_alter(&$theme_registry) {
+  if (!isset($theme_registry['fullcalendar_calendar'])) {
+    return;
+  }
+
+  $theme_registry['fullcalendar_calendar']['variables']['group'] = NULL;
+}
+
+/**
+ * Implements hook_preprocess_river().
+ */
+function hr_paragraphs_preprocess_river(&$variables) {
+  hr_paragraphs_group_is_archived($variables);
+}
+
+/**
+ * Implements hook_preprocess_fullcalendar_calendar().
+ */
+function hr_paragraphs_preprocess_fullcalendar_calendar(&$variables) {
+  hr_paragraphs_group_is_archived($variables);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_create_access().
+ *
+ * @see subgroup_group_create_access()
+ */
+function hr_paragraphs_group_create_access(AccountInterface $account, array $context, $entity_bundle) {
+  /** @var \Drupal\group\Entity\GroupInterface $entity */
+  $group_type = \Drupal::entityTypeManager()->getStorage('group_type')->load($entity_bundle);
+
+  return AccessResult::neutral()->addCacheableDependency($group_type);
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ *
+ * @see hr_paragraphs_group_create_access()
+ */
+function hr_paragraphs_module_implements_alter(array &$implementations, string $hook) {
+  if ($hook !== 'group_create_access') {
+    return;
+  }
+
+  if (isset($implementations['subgroup'])) {
+    unset($implementations['subgroup']);
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
+  $form_ids = [
+    'group_content_operation-group_membership_add_form',
+    'group_content_operation-group_membership_edit_form',
+    'group_content_cluster-group_membership_add_form',
+    'group_content_cluster-group_membership_edit_form',
+  ];
+
+  if (in_array($form_id, $form_ids)) {
+    if (isset($form['path'])) {
+      unset($form['path']);
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_views_view().
+ */
+function hr_paragraphs_preprocess_views_view(&$variables) {
+  /** @var \Drupal\views\Entity\View */
+  $view = $variables['view'];
+  if ($view->id() == 'group_members' && $view->current_display == 'page_1') {
+    if (!isset($view->args[0])) {
+      return;
+    }
+
+    // Load the group.
+    $group_id = $view->args[0];
+    $group = Group::load($group_id);
+    if ($group->bundle() == 'operation') {
+      return;
+    }
+
+    // Get operation.
+    if (!$group->hasField('subgroup_tree') || $group->subgroup_tree->isEmpty()) {
+      return;
+    }
+
+    $parent = Group::load($group->subgroup_tree->value);
+    $url = Url::fromRoute('view.group_members.page_1', [
+      'group' => $parent->id(),
+    ]);
+
+    // Make sure user has access.
+    $userCurrent = \Drupal::currentUser();
+    if (!$url->access($userCurrent)) {
+      return;
+    }
+
+    $link = Link::fromTextAndUrl(t('here'), $url);
+    $variables['cluster_message'] = t('Note: This page lists cluster/working group managers only. <br>Operations managers and site administrators also have access to this cluster/working group.<br>To see the list of managers of %operation click @link', [
+      '%operation' => $parent->label(),
+      '@link' => $link->toString(),
+    ]);
+  }
 }

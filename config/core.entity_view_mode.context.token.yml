@@ -1,0 +1,10 @@
+uuid: 76b4b3f8-2060-4609-a555-1312424d649f
+langcode: en
+status: true
+dependencies:
+  module:
+    - external_entities
+id: context.token
+label: Token
+targetEntityType: context
+cache: true
