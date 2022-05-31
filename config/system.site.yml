@@ -3,7 +3,7 @@ _core:
 langcode: en
 uuid: 2c660645-429a-41a3-a911-cc3ccf2de31a
 name: 'ReliefWeb Response'
-mail: admin@example.com
+mail: 'donotreply+response@reliefweb.int'
 slogan: ''
 page:
   403: ''
