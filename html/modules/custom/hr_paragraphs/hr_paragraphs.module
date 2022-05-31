@@ -9,7 +9,6 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
@@ -1440,18 +1439,26 @@ function hr_paragraphs_preprocess_views_view(&$variables) {
     $url = Url::fromRoute('view.group_members.page_1', [
       'group' => $parent->id(),
     ]);
+    $operation_manager = TRUE;
 
     // Make sure user has access.
     $userCurrent = \Drupal::currentUser();
     if (!$url->access($userCurrent)) {
-      return;
+      $url = Url::fromRoute('entity.group.canonical', [
+        'group' => $parent->id(),
+      ]);
+      $operation_manager = FALSE;
+
+      if (!$url->access($userCurrent)) {
+        return;
+      }
     }
 
-    $link = Link::fromTextAndUrl(t('here'), $url);
-    $variables['cluster_message'] = t('Note: This page lists cluster/working group managers only. <br>Operations managers and site administrators also have access to this cluster/working group.<br>To see the list of managers of %operation click @link', [
-      '%operation' => $parent->label(),
-      '@link' => $link->toString(),
-    ]);
+    $variables['cluster_message'] = [
+      'operation_manager' => $operation_manager,
+      'operation' => $parent->label(),
+      'link' => $url->toString(),
+    ];
   }
 }
 
