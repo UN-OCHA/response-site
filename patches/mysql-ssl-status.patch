@@ -1,0 +1,73 @@
+diff --git a/core/lib/Drupal/Core/Database/Driver/mysql/Connection.php b/core/lib/Drupal/Core/Database/Driver/mysql/Connection.php
+index 5585ae0c54..202235e6c1 100644
+--- a/core/lib/Drupal/Core/Database/Driver/mysql/Connection.php
++++ b/core/lib/Drupal/Core/Database/Driver/mysql/Connection.php
+@@ -74,6 +74,15 @@ class Connection extends DatabaseConnection {
+    */
+   private $serverVersion;
+ 
++  /**
++   * Stores connection info after it has been retrieved from the server, if SSL is enabled.
++   *
++   * @var string
++   *
++   * @see \Drupal\Core\Database\Driver\mysql\Connection::connection
++   */
++  private $serverConnection;
++
+   /**
+    * The minimal possible value for the max_allowed_packet setting of MySQL.
+    *
+@@ -264,6 +273,13 @@ public function version() {
+     return $this->getServerVersion();
+   }
+ 
++  /**
++   * {@inheritdoc}
++   */
++  public function connection() {
++    return $this->getServerConnection();
++  }
++
+   /**
+    * Determines whether the MySQL distribution is MariaDB or not.
+    *
+@@ -303,6 +319,19 @@ protected function getServerVersion(): string {
+     return $this->serverVersion;
+   }
+ 
++  /**
++   * Gets connection encryption information.
++   *
++   * @return string
++   *   The session SSL_CIPHER information.
++   */
++  protected function getServerConnection(): string {
++    if (!$this->serverConnection) {
++      $this->serverConnection = $this->connection->query("SHOW SESSION STATUS LIKE 'SSL_CIPHER'")->fetchColumn(1);
++    }
++    return $this->serverConnection;
++  }
++
+   public function databaseType() {
+     return 'mysql';
+   }
+diff --git a/core/modules/system/system.install b/core/modules/system/system.install
+index 57119b8691..f7594fb01f 100644
+--- a/core/modules/system/system.install
++++ b/core/modules/system/system.install
+@@ -443,7 +443,14 @@ function system_requirements($phase) {
+     $requirements['database_system_version'] = [
+       'title' => t('Database system version'),
+       'value' => Database::getConnection()->version(),
++      'description' => t('Connection is not encrypted.'),
+     ];
++    if (Database::getConnection()->connection()) {
++      $requirements['database_system_version']['description'] = t('Connection is encrypted with %connection.', ['%connection' => Database::getConnection()->connection() ]);
++    }
++    else {
++      $requirements['database_system_version']['severity'] = REQUIREMENT_WARNING;
++    }
+ 
+     $errors = $tasks->engineVersionRequirementsCheck();
+     $error_count = count($errors);

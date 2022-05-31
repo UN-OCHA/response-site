@@ -2,13 +2,17 @@
     "patches": {
         "drupal/core" : {
             "https://www.drupal.org/project/drupal/issues/2544110": "https://www.drupal.org/files/issues/2021-02-11/2544110-100.patch",
-            "Include database SSL/TLS info on status report": "https://git.drupalcode.org/issue/drupal-3268481/-/commit/6defd3dcf7cec4743294b16a6d092d7c2f1cec4e.diff"
+            "Include database SSL/TLS info on status report": "./patches/mysql-ssl-status.patch"
         },
         "drupal/layout_paragraphs" : {
             "Async translation - https://www.drupal.org/project/layout_paragraphs/issues/3178277": "./patches/3178277-6.patch"
         },
         "drupal/group": {
             "https://www.drupal.org/project/subgroup/issues/3163044#comment-14499262": "https://www.drupal.org/files/issues/2022-05-04/i3278723.patch"
+        },
+        "drupal/user_expire": {
+            "Allow the notification email to be customised": "https://git.drupalcode.org/project/user_expire/-/merge_requests/5.diff",
+            "Reset expiration when user is reactivated": "https://git.drupalcode.org/project/user_expire/-/merge_requests/6.diff"
         }
     }
 }
