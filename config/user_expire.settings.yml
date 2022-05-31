@@ -1,7 +1,11 @@
 _core:
   default_config_hash: PeDvVH4C3IZ7QFkvC1BUv3BZJVc7jLwQmJAEttVuVOw
 frequency: 172800
+mail:
+  subject: '[site:name]: Account expiration warning'
+  body: "Hello [user:display-name],\r\n\r\nBecause you have not logged in recently, your account at [site:name] will be deactivated in the near future.\r\n\r\nIf you still use this site, please log in [site:login-url] within the next week.\r\n\r\nIf you are not able to log in before your account is deactivated you will need to contact [site:mail] to have your access restored.\r\n\r\n-- [site:name] team"
 offset: 604800
+send_mail: 1
 user_expire_roles:
   authenticated: 2592000
   content_editor: 2592000
