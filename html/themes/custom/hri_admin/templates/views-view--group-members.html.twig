@@ -51,7 +51,13 @@
   {% if cluster_message %}
     <div data-drupal-messages="">
       <div role="contentinfo" aria-label="Warning message" class="messages messages--warning">
-        {{ cluster_message }}
+        <p>Note: This page lists cluster/working group managers only.</p>
+        <p>Operations managers and site administrators also have access to this cluster/working group.</p>
+        {% if cluster_message.operation_manager %}
+          <p>To see the members of <em>{{ cluster_message.operation }}</em> click <a href="{{ cluster_message.link }}">{{ 'here'|t }}</a></p>
+        {% else %}
+          <p>To see the operation <em>{{ cluster_message.operation }}</em> click <a href="{{ cluster_message.link }}">{{ 'here'|t }}</a></p>
+        {% endif %}
       </div>
     </div>
   {% endif %}
