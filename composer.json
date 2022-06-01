@@ -126,7 +126,10 @@
                 "web-root": "html/"
             }
         },
-        "installer-types": ["bower-asset", "npm-asset"],
+        "installer-types": [
+            "bower-asset",
+            "npm-asset"
+        ],
         "installer-paths": {
             "html/core": [
                 "type:drupal-core"
@@ -194,5 +197,5 @@
         "phpunit/phpunit": "^9.5",
         "weitzman/drupal-test-traits": "^1.5"
     },
-    "version": "v0.0.1"
+    "version": "v0.0.2"
 }

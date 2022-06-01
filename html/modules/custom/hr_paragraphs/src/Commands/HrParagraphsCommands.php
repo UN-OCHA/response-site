@@ -182,12 +182,15 @@ class HrParagraphsCommands extends DrushCommands {
    *   Skip existing clusters.
    * @option ids
    *   List of Ids to import
-   * @usage hr_paragraphs:import-clusters --skip-existing --ids=1,2,3
+   * @option ops-ids
+   *   List of operation Ids to import
+   * @usage hr_paragraphs:import-clusters --skip-existing --ids=1,2,3 --ops-ids=7,8,9
    *   Import clusters.
    */
   public function importClusters($options = [
     'skip-existing' => FALSE,
     'ids' => '',
+    'ops-ids' => '',
   ]) {
     $filename = 'clusters.tsv';
     $handle = $this->loadTsvFile($filename);
@@ -216,6 +219,13 @@ class HrParagraphsCommands extends DrushCommands {
       // Limit Ids if needed.
       if (!empty($options['ids'])) {
         if (!in_array($data['id'], explode(',', $options['ids']))) {
+          continue;
+        }
+      }
+
+      // Limit Operation Ids if needed.
+      if (!empty($options['ops-ids'])) {
+        if (!in_array($data['operation id'], explode(',', $options['ops-ids']))) {
           continue;
         }
       }
@@ -303,12 +313,15 @@ class HrParagraphsCommands extends DrushCommands {
    *   Skip existing pages.
    * @option ids
    *   List of Ids to import
-   * @usage hr_paragraphs:import-pages --skip-existing --ids=1,2,3
+   * @option group-ids
+   *   List of Group Ids to import
+   * @usage hr_paragraphs:import-pages --skip-existing --ids=1,2,3 --group-ids=7,8,9
    *   Import pages.
    */
   public function importPages($options = [
     'skip-existing' => FALSE,
     'ids' => '',
+    'group-ids' => '',
   ]) {
     $filename = 'pages.tsv';
     $handle = $this->loadTsvFile($filename);
@@ -339,6 +352,13 @@ class HrParagraphsCommands extends DrushCommands {
       // Limit Ids if needed.
       if (!empty($options['ids'])) {
         if (!in_array($data['id'], explode(',', $options['ids']))) {
+          continue;
+        }
+      }
+
+      // Limit Group Ids if needed.
+      if (!empty($options['group-ids'])) {
+        if (!in_array($data['operation id'], explode(',', $options['group-ids']))) {
           continue;
         }
       }
@@ -406,12 +426,15 @@ class HrParagraphsCommands extends DrushCommands {
    *   Skip existing members.
    * @option ids
    *   List of Ids to import
-   * @usage hr_paragraphs:import-members --skip-existing --ids=1,2,3
+   * @option group-ids
+   *   List of Group Ids to import
+   * @usage hr_paragraphs:import-members --skip-existing --ids=1,2,3 --group-ids=7,8,9
    *   Import members.
    */
   public function importMembers($options = [
     'skip-existing' => FALSE,
     'ids' => '',
+    'group-ids' => '',
   ]) {
     $filename = 'membership.tsv';
     $handle = $this->loadTsvFile($filename);
@@ -440,6 +463,13 @@ class HrParagraphsCommands extends DrushCommands {
       // Limit Ids if needed.
       if (!empty($options['ids'])) {
         if (!in_array($data['uid'], explode(',', $options['ids']))) {
+          continue;
+        }
+      }
+
+      // Limit Group Ids if needed.
+      if (!empty($options['group-ids'])) {
+        if (!in_array($data['group_id'], explode(',', $options['group-ids']))) {
           continue;
         }
       }

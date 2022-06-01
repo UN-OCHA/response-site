@@ -19,11 +19,6 @@ class RouteSubscriber extends RouteSubscriberBase {
       $route->setRequirement('_custom_access_group_type', 'TRUE');
     }
 
-    // Deny group managers access to delete form.
-    if ($route = $collection->get('entity.group.delete_form')) {
-      $route->setRequirement('_permission', 'administer group');
-    }
-
     // Change title of group content create form.
     if ($route = $collection->get('entity.group_content.create_form')) {
       $route->setDefault('_title', 'Add Page');
