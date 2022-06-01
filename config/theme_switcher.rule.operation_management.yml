@@ -14,7 +14,7 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: "/group/*/revisions\r\n/group/*/members\r\n/group/*/nodes\r\n/group/*/operations\r\n/group/*/clusters"
+    pages: "/group/*/revisions\r\n/group/*/members\r\n/group/*/nodes\r\n/group/*/operations\r\n/group/*/clusters\r\n/user/*/my-operations\r\n/user/*/my-clusters"
   user_role:
     id: user_role
     negate: false
