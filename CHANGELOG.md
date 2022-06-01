@@ -4,6 +4,13 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.0.2](https://github.com/operations-site/compare/v0.1.0...v0.1.1) (2022-06-01)
+### Features
+
+* Bump admin_denied to the latest stable release. ([1c8840](https://github.com/operations-site/commit/1c884066fa5677bdaaff05fd180d0424f32118eb))
+* Delete group [#RWR-146](https://https://humanitarian.atlassian.net/browse/RWR-146) ([2122ea](https://github.com/operations-site/commit/2122ea1c9f175459f50024f675a490710c3b6ae1))
+* Limit groups during migration ([f68ba7](https://github.com/operations-site/commit/f68ba7df2bb7204002bc8bfcd54e0d5ac8418cc8))
+
 ## [0.0.1](https://github.com/UN-OCHA/response-site/releases/tag/v0.0.1) (2022-05-26)
 ### ⚠ BREAKING CHANGES
 
