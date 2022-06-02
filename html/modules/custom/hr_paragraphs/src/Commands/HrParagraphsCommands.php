@@ -92,6 +92,11 @@ class HrParagraphsCommands extends DrushCommands {
         $data[$header_lowercase[$i]] = trim($row[$i]);
       }
 
+      // Skip missing operations.
+      if (!isset($data['id'])) {
+        continue;
+      }
+
       // Limit Ids if needed.
       if (!empty($options['ids'])) {
         if (!in_array($data['id'], explode(',', $options['ids']))) {
@@ -214,6 +219,11 @@ class HrParagraphsCommands extends DrushCommands {
       $data = [];
       for ($i = 0; $i < count($row); $i++) {
         $data[$header_lowercase[$i]] = trim($row[$i]);
+      }
+
+      // Skip missing operations.
+      if (!isset($data['operation id'])) {
+        continue;
       }
 
       // Limit Ids if needed.
@@ -349,6 +359,11 @@ class HrParagraphsCommands extends DrushCommands {
         $data[$header_lowercase[$i]] = trim($row[$i]);
       }
 
+      // Skip missing operations.
+      if (!isset($data['operation id'])) {
+        continue;
+      }
+
       // Limit Ids if needed.
       if (!empty($options['ids'])) {
         if (!in_array($data['id'], explode(',', $options['ids']))) {
@@ -359,7 +374,10 @@ class HrParagraphsCommands extends DrushCommands {
       // Limit Group Ids if needed.
       if (!empty($options['group-ids'])) {
         if (!in_array($data['operation id'], explode(',', $options['group-ids']))) {
-          continue;
+          // Check parent Id as well.
+          if (!in_array($this->getGroupParentId($data['operation id']), explode(',', $options['group-ids']))) {
+            continue;
+          }
         }
       }
 
@@ -460,6 +478,11 @@ class HrParagraphsCommands extends DrushCommands {
         $data[$header_lowercase[$i]] = trim($row[$i]);
       }
 
+      // Skip missing operations.
+      if (!isset($data['group_id'])) {
+        continue;
+      }
+
       // Limit Ids if needed.
       if (!empty($options['ids'])) {
         if (!in_array($data['uid'], explode(',', $options['ids']))) {
@@ -470,7 +493,10 @@ class HrParagraphsCommands extends DrushCommands {
       // Limit Group Ids if needed.
       if (!empty($options['group-ids'])) {
         if (!in_array($data['group_id'], explode(',', $options['group-ids']))) {
-          continue;
+          // Check parent Id as well.
+          if (!in_array($this->getGroupParentId($data['group_id']), explode(',', $options['group-ids']))) {
+            continue;
+          }
         }
       }
 
@@ -518,8 +544,19 @@ class HrParagraphsCommands extends DrushCommands {
         /** @var \Drupal\group\GroupMembership $member */
         $member = $operation->getMember($user);
         $membership = $member->getGroupContent();
-        $membership->group_roles[] = $operation->bundle() . '-manager';
-        $membership->save();
+
+        $role_found = FALSE;
+        /** @var \Drupal\group\Entity\GroupRole $role */
+        foreach ($membership->group_roles->referencedEntities() as $role) {
+          if ($role->id() == $operation->bundle() . '-manager') {
+            $role_found = TRUE;
+            break;
+          }
+        }
+        if (!$role_found) {
+          $membership->group_roles[] = $operation->bundle() . '-manager';
+          $membership->save();
+        }
 
         // Add as member to the operation.
         if ($operation->hasField('subgroup_tree') && !$operation->subgroup_tree->isEmpty()) {
@@ -531,6 +568,31 @@ class HrParagraphsCommands extends DrushCommands {
     }
 
     fclose($handle);
+  }
+
+  /**
+   * Get parent Id of a group.
+   */
+  protected function getGroupParentId($group_id) {
+    if (empty($group_id)) {
+      return FALSE;
+    }
+
+    /** @var \Drupal\group\Entity\Group $group */
+    $group = $this->entityTypeManager->getStorage('group')->load($group_id);
+    if (!$group) {
+      return FALSE;
+    }
+
+    // Check parent.
+    if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+      $parent = $this->entityTypeManager->getStorage('group')->load($group->subgroup_tree->value);
+      if ($parent) {
+        return $parent->id();
+      }
+    }
+
+    return FALSE;
   }
 
   /**
