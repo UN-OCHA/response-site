@@ -22,6 +22,22 @@ php vendor/bin/drupal-check -ad -e *Widget.php  html/modules/custom/hr_paragraph
 - `composer run release:minor` to create new release and bump minor version
 - `composer run release:major` to create new release and bump major version
 
+## New release
+
+On develop branch run the following
+
+```bash
+today=$(date +%d-%m-%Y)
+git checkout -b $today-prep-release
+composer run release
+git add composer.json
+git add CHANGELOG.md
+git commit -m 'chore: $today prep release'
+git push origin $today-prep-release
+```
+
+Merge to dev, [create PR to merge to main](https://github.com/UN-OCHA/response-site/compare/main...develop)
+
 ### Commit messages
 
 Full info availabel at https://www.conventionalcommits.org/en/v1.0.0/
