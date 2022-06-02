@@ -4,6 +4,11 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.0.3](https://github.com/operations-site/compare/v0.0.2...v0.0.3) (2022-06-02)
+### Features
+
+* Group-ids can be parent ids ([2d3b45](https://github.com/operations-site/commit/2d3b45078266ee571d57709a41b992cd613daccf))
+
 ## [0.0.2](https://github.com/operations-site/compare/v0.1.0...v0.1.1) (2022-06-01)
 ### Features
 
