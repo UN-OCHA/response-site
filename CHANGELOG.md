@@ -4,6 +4,15 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.0.4](https://github.com/operations-site/compare/v0.0.3...v0.0.4) (2022-06-07)
+### Features
+
+* Hide XML warnings ([68511c](https://github.com/operations-site/commit/68511cc9b1c0952c770eddaa63867d7f341ef643))
+
+### Chores
+
+* Update core and contrib ([84ab68](https://github.com/operations-site/commit/84ab6804cfe19b6de2e3b5be3ebd15071c3389e5))
+
 ## [0.0.3](https://github.com/operations-site/compare/v0.0.2...v0.0.3) (2022-06-02)
 ### Features
 
