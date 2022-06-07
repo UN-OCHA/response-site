@@ -33,11 +33,13 @@ git checkout -b $today-prep-release
 composer run release:patch
 git add composer.json
 git add CHANGELOG.md
-git commit -m 'chore: $today prep release'
+git commit -m "chore: $today prep release"
 git push origin $today-prep-release
 ```
 
 Merge to dev, [create PR to merge to main](https://github.com/UN-OCHA/response-site/compare/main...develop)
+
+Merge to main, [Tag a new release](gh_release)
 
 ### Commit messages
 
