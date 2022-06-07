@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2e840649a69a57d427d4ea2fcb457e3",
+    "content-hash": "49753549a0b35e5d181c773017abd887",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4215,6 +4215,62 @@
             "homepage": "https://www.drupal.org/project/token",
             "support": {
                 "source": "https://git.drupalcode.org/project/token"
+            }
+        },
+        {
+            "name": "drupal/twig_tweak",
+            "version": "3.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/twig_tweak.git",
+                "reference": "3.1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/twig_tweak-3.1.3.zip",
+                "reference": "3.1.3",
+                "shasum": "9f2f6813bf6d40faded73b0fd36e6c669565c7f7"
+            },
+            "require": {
+                "drupal/core": "^9.0",
+                "ext-json": "*",
+                "php": ">=7.3",
+                "symfony/polyfill-php80": "^1.17",
+                "twig/twig": "^2.12"
+            },
+            "suggest": {
+                "symfony/var-dumper": "Better dump() function for debugging Twig variables"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "3.1.3",
+                    "datestamp": "1635338145",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Chi",
+                    "homepage": "https://www.drupal.org/user/556138"
+                }
+            ],
+            "description": "A Twig extension with some useful functions and filters for Drupal development.",
+            "homepage": "https://www.drupal.org/project/twig_tweak",
+            "keywords": [
+                "Drupal",
+                "Twig"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/twig_tweak",
+                "issues": "https://www.drupal.org/project/issues/twig_tweak"
             }
         },
         {
@@ -9560,16 +9616,16 @@
         },
         {
             "name": "unocha/common_design",
-            "version": "v7.0.0",
+            "version": "v7.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/common_design.git",
-                "reference": "c52fd2c5302fc0a832272a70e9062372ce8946a2"
+                "reference": "b6b3a4f5c9b6360fa02155535de689b55d5983c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/c52fd2c5302fc0a832272a70e9062372ce8946a2",
-                "reference": "c52fd2c5302fc0a832272a70e9062372ce8946a2",
+                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/b6b3a4f5c9b6360fa02155535de689b55d5983c2",
+                "reference": "b6b3a4f5c9b6360fa02155535de689b55d5983c2",
                 "shasum": ""
             },
             "require": {
@@ -9583,9 +9639,9 @@
             "description": "OCHA Common Design base theme for Drupal 8",
             "support": {
                 "issues": "https://github.com/UN-OCHA/common_design/issues",
-                "source": "https://github.com/UN-OCHA/common_design/tree/v7.0.0"
+                "source": "https://github.com/UN-OCHA/common_design/tree/v7.0.1"
             },
-            "time": "2022-04-21T13:23:47+00:00"
+            "time": "2022-04-26T07:53:53+00:00"
         },
         {
             "name": "webflo/drupal-finder",
