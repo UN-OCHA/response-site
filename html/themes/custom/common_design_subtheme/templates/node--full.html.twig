@@ -104,7 +104,7 @@
   {% endif %}
   {{ title_suffix }}
 
-  {{ local_tasks }}
+  {{ drupal_block('local_tasks_block') }}
 
   {% if is_archived %}
     <div class="group--archived">

@@ -61,6 +61,7 @@
         "drupal/social_auth_hid": "^3.0",
         "drupal/subgroup": "^1.0",
         "drupal/theme_switcher": "^1.2",
+        "drupal/twig_tweak": "^3.1",
         "drupal/user_expire": "^1.0",
         "drush/drush": "11",
         "fullcalendar/fullcalendar": "^3.10.0",
