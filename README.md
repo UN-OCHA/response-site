@@ -27,9 +27,10 @@ php vendor/bin/drupal-check -ad -e *Widget.php  html/modules/custom/hr_paragraph
 On develop branch run the following
 
 ```bash
+git fetch --all
 today=$(date +%d-%m-%Y)
 git checkout -b $today-prep-release
-composer run release
+composer run release:patch
 git add composer.json
 git add CHANGELOG.md
 git commit -m 'chore: $today prep release'
