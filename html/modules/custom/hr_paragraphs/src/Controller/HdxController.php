@@ -230,6 +230,17 @@ class HdxController extends ControllerBase {
           }
           break;
 
+        case 'ext_subnational':
+        case 'ext_geodata':
+        case 'ext_requestdata':
+        case 'ext_quickcharts':
+        case 'ext_showcases':
+        case 'ext_administrative_divisions':
+        case 'ext_hxl':
+        case 'ext_sadd':
+        case 'ext_cod':
+          $parameters[$key] = $values;
+          break;
       }
     }
 
