@@ -1,0 +1,10 @@
+uuid: b69859b7-8689-4d31-b5a3-e3a8331bbd6c
+langcode: en
+status: true
+dependencies: {  }
+id: hdx_river
+label: 'HDX Feed'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

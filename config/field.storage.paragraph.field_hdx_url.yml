@@ -1,0 +1,19 @@
+uuid: 3293023c-bee2-4db5-8184-ece53bc87cda
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.field_hdx_url
+field_name: field_hdx_url
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
