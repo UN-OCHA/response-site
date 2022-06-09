@@ -2,6 +2,8 @@ uuid: 8bd05ad8-108e-406d-b65e-aaee2a277622
 langcode: en
 status: true
 dependencies:
+  config:
+    - field.storage.group_content.group_roles
   module:
     - group
     - user
@@ -532,7 +534,7 @@ display:
       access:
         type: group_permission
         options:
-          group_permission: 'administer members'
+          group_permission: 'view group_membership content'
       cache:
         type: tag
         options: {  }
