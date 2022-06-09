@@ -1,0 +1,21 @@
+uuid: 87f14a87-f6ad-4014-a94c-e0c4b134e7f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.hdx_river
+  module:
+    - text
+id: paragraph.hdx_river.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: hdx_river
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

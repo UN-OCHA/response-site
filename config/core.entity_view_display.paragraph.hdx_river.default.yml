@@ -1,0 +1,35 @@
+uuid: 16373166-458e-4fc8-b4bf-b8f061b4502b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.hdx_river.field_hdx_url
+    - field.field.paragraph.hdx_river.field_max_number_of_items
+    - field.field.paragraph.hdx_river.field_text
+    - field.field.paragraph.hdx_river.field_title
+    - paragraphs.paragraphs_type.hdx_river
+  module:
+    - text
+id: paragraph.hdx_river.default
+targetEntityType: paragraph
+bundle: hdx_river
+mode: default
+content:
+  field_text:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_hdx_url: true
+  field_max_number_of_items: true

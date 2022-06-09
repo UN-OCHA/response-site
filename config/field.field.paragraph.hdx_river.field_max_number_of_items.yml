@@ -1,0 +1,25 @@
+uuid: ebd306eb-7dca-486e-b067-d6fcb8ce803b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_max_number_of_items
+    - paragraphs.paragraphs_type.hdx_river
+id: paragraph.hdx_river.field_max_number_of_items
+field_name: field_max_number_of_items
+entity_type: paragraph
+bundle: hdx_river
+label: 'Max number of items'
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: 5
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer
