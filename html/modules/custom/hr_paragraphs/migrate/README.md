@@ -125,6 +125,10 @@ For text fields:
 
 ## Migrate example
 
+Look up the node id from the corresponding page in HRInfo, easiest is to look at the body class using inspector.
+
+After executing the Jenkins job, make sure to check the logs.
+
 ### Single operation
 
 https://www.humanitarianresponse.info/en/operations/el-salvador
