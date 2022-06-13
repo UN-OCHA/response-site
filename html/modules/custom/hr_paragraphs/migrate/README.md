@@ -118,10 +118,19 @@ The following are not being migrated:
   * `fts_visualization`
   *-* `existing_bean`
 
-Todo:
-
-
 For text fields:
 
 - inline images are detected and saved locally
 - internal links to `https://www.humanitarianresponse.info` are rewritten to relative urls
+
+##
+Migrate example
+
+https://www.humanitarianresponse.info/en/operations/el-salvador
+
+```bash
+drush hr_paragraphs:import-operations --skip-existing --ids=79 --verbose
+drush hr_paragraphs:import-clusters --skip-existing --ops-ids=79 --verbose
+drush hr_paragraphs:import-members --group-ids=79 --verbose
+drush hr_paragraphs:import-pages --group-ids=79 --verbose
+```
