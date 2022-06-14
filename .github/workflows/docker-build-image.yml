@@ -30,3 +30,5 @@ jobs:
         flowdock_token: ${{ secrets.FLOWDOCK_TOKEN }}
         flowdock_icon_success: 'blossom'
         flowdock_icon_failure: 'warning'
+        slack_bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
+        slack_channel_name: ${{ secrets.SLACK_CHANNEL }}
