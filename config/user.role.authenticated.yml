@@ -48,6 +48,7 @@ permissions:
   - 'view paragraph content child_groups'
   - 'view paragraph content featured_highlight'
   - 'view paragraph content group_pages'
+  - 'view paragraph content hdx_river'
   - 'view paragraph content heading'
   - 'view paragraph content iframe'
   - 'view paragraph content layout'

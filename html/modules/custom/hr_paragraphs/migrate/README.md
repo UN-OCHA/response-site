@@ -118,10 +118,35 @@ The following are not being migrated:
   * `fts_visualization`
   *-* `existing_bean`
 
-Todo:
-
-
 For text fields:
 
 - inline images are detected and saved locally
 - internal links to `https://www.humanitarianresponse.info` are rewritten to relative urls
+
+## Migrate example
+
+Look up the node id from the corresponding page in HRInfo, easiest is to look at the body class using inspector.
+
+After executing the Jenkins job, make sure to check the logs.
+
+### Single operation
+
+https://www.humanitarianresponse.info/en/operations/el-salvador
+
+```bash
+drush hr_paragraphs:import-operations --skip-existing --ids=79 --verbose
+drush hr_paragraphs:import-clusters --skip-existing --ops-ids=79 --verbose
+drush hr_paragraphs:import-members --group-ids=79 --verbose
+drush hr_paragraphs:import-pages --group-ids=79 --verbose
+```
+
+### Multiple operations
+
+Note: No spaces around `,`
+
+```bash
+drush hr_paragraphs:import-operations --ids=1462,1450,1460 --verbose
+drush hr_paragraphs:import-clusters --ops-ids=1462,1450,1460 --verbose
+drush hr_paragraphs:import-members --group-ids=1462,1450,1460 --verbose
+drush hr_paragraphs:import-pages --group-ids=1462,1450,1460 --verbose
+```

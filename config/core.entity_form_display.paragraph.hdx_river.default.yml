@@ -1,0 +1,52 @@
+uuid: 5f7d4667-6216-4a67-b03c-ccc1c43bce7a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.hdx_river.field_hdx_url
+    - field.field.paragraph.hdx_river.field_max_number_of_items
+    - field.field.paragraph.hdx_river.field_text
+    - field.field.paragraph.hdx_river.field_title
+    - paragraphs.paragraphs_type.hdx_river
+  module:
+    - link
+    - text
+id: paragraph.hdx_river.default
+targetEntityType: paragraph
+bundle: hdx_river
+mode: default
+content:
+  field_hdx_url:
+    type: link_default
+    weight: 2
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_max_number_of_items:
+    type: number
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

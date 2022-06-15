@@ -812,11 +812,42 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
 /**
  * Implements hook_preprocess_paragraph__type().
  */
+function hr_paragraphs_preprocess_paragraph__hdx_river(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  // Make sure link is set.
+  if (!$paragraph->hasField('field_hdx_url') || $paragraph->field_hdx_url->isEmpty()) {
+    return;
+  }
+
+  // Set max number of items to 5 by default.
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
+
+  $url = $paragraph->field_hdx_url->first()->uri;
+  /** @var \Drupal\hr_paragraphs\Controller\HdxController */
+  $hdx_controller = \Drupal::service('hr_paragraphs.hdx_controller');
+  $query_filters = $hdx_controller->parseHdxUrl($url);
+  $parameters = $hdx_controller->buildHdxParameters(0, $max_number_of_items, $query_filters);
+  $results = $hdx_controller->executeHdxQuery($parameters);
+
+  $variables['content']['rw_list'] = [
+    '#theme' => 'hr_paragraphs_rw_list',
+    '#data' => $hdx_controller->buildHdxObjects($results),
+    '#view_all' => $paragraph->field_hdx_url->first()->uri,
+    '#total' => $max_number_of_items,
+    '#weight' => 99,
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
 function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  // Exclude special pages.
+  // Make sure link is set.
   if (!$paragraph->hasField('field_reliefweb_url') || $paragraph->field_reliefweb_url->isEmpty()) {
     return;
   }
@@ -878,7 +909,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  // Exclude special pages.
+  // Make sure link is set.
   if (!$paragraph->hasField('field_reliefweb_url') || $paragraph->field_reliefweb_url->isEmpty()) {
     return;
   }
