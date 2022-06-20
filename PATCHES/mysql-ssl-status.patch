@@ -1,0 +1,76 @@
+diff --git a/core/modules/mysql/src/Driver/Database/mysql/Connection.php b/core/modules/mysql/src/Driver/Database/mysql/Connection.php
+index 4fbb2221ee..abd53121e0 100644
+--- a/core/modules/mysql/src/Driver/Database/mysql/Connection.php
++++ b/core/modules/mysql/src/Driver/Database/mysql/Connection.php
+@@ -73,6 +73,15 @@ class Connection extends DatabaseConnection {
+    */
+   private $serverVersion;
+ 
++  /**
++   * Stores connection info after it has been retrieved from the server, if SSL is enabled.
++   *
++   * @var string
++   *
++   * @see \Drupal\Core\Database\Driver\mysql\Connection::connectionInfo
++   */
++  private $serverConnectionInfo;
++
+   /**
+    * The minimal possible value for the max_allowed_packet setting of MySQL.
+    *
+@@ -272,6 +281,13 @@ public function version() {
+     return $this->getServerVersion();
+   }
+ 
++  /**
++   * {@inheritdoc}
++   */
++  public function connectionInfo() {
++    return $this->getServerConnectionInfo();
++  }
++
+   /**
+    * Determines whether the MySQL distribution is MariaDB or not.
+    *
+@@ -311,6 +327,19 @@ protected function getServerVersion(): string {
+     return $this->serverVersion;
+   }
+ 
++  /**
++   * Gets connection encryption information.
++   *
++   * @return string
++   *   The session SSL_CIPHER information.
++   */
++  protected function getServerConnectionInfo(): string {
++    if (!$this->serverConnectionInfo) {
++      $this->serverConnectionInfo = $this->connection->query("SHOW SESSION STATUS LIKE 'SSL_CIPHER'")->fetchColumn(1);
++    }
++    return $this->serverConnectionInfo;
++  }
++
+   public function databaseType() {
+     return 'mysql';
+   }
+diff --git a/core/modules/system/system.install b/core/modules/system/system.install
+index 7339468a92..54a4f729f1 100644
+--- a/core/modules/system/system.install
++++ b/core/modules/system/system.install
+@@ -531,8 +531,17 @@ function system_requirements($phase) {
+     $requirements['database_system_version'] = [
+       'title' => t('Database system version'),
+       'value' => Database::getConnection()->version(),
++      'description' => t('Connection is not encrypted.'),
+     ];
+ 
++    // Check whether the database connection is encrypted and adjust the requirements array based on findings.
++    if (Database::getConnection()->connectionInfo()) {
++      $requirements['database_system_version']['description'] = t('Connection is encrypted with %connection.', ['%connection' => Database::getConnection()->connectionInfo() ]);
++    }
++    else {
++      $requirements['database_system_version']['severity'] = REQUIREMENT_WARNING;
++    }
++
+     $errors = $tasks->engineVersionRequirementsCheck();
+     $error_count = count($errors);
+     if ($error_count > 0) {
