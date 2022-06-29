@@ -13,6 +13,7 @@ dependencies:
     - file
     - filter
     - group
+    - locale
     - masquerade
     - menu_link_content
     - node
@@ -100,6 +101,7 @@ permissions:
   - 'revert all revisions'
   - 'revert page revisions'
   - 'switch shortcut sets'
+  - 'translate interface'
   - 'translate menu_link_content'
   - 'update paragraph content article_card_list'
   - 'update paragraph content child_groups'
