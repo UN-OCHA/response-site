@@ -39,13 +39,22 @@ class GroupBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     if ($group->subgroup_tree->value && $group->subgroup_tree->value !== $group->id()) {
       $parent_group = Group::load($group->subgroup_tree->value);
-      $breadcrumb->addLink($parent_group->toLink());
+      $breadcrumb->addLink(Link::createFromRoute($parent_group->label(), 'entity.group.canonical', [
+        'group' => $parent_group->id(),
+      ]));
       $breadcrumb->addCacheableDependency($parent_group);
     }
 
-    $breadcrumb->addLink($group->toLink());
+    $breadcrumb->addLink(Link::createFromRoute($group->label(), 'entity.group.canonical', [
+      'group' => $group->id(),
+    ]));
+
     $breadcrumb->addCacheableDependency($group);
-    $breadcrumb->addCacheContexts(['route']);
+    $breadcrumb->addCacheContexts([
+      'route',
+      'url.path.parent',
+      'languages',
+    ]);
 
     if (strpos($route_match->getRouteName(), 'hr_paragraphs.operation.') !== FALSE) {
       $breadcrumb->addLink(Link::createFromRoute($route_match->getRouteObject()->getDefault('_title'), $route_match->getRouteName(), [
