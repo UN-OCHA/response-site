@@ -48,6 +48,7 @@ permissions:
   - 'administer users'
   - 'bypass group access'
   - 'bypass node access'
+  - 'create content translations'
   - 'create operation group'
   - 'create page content'
   - 'create paragraph content child_groups'
