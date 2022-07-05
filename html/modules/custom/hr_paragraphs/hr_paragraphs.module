@@ -1095,7 +1095,75 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
 
   if (in_array($route_name, $supported_routes)) {
     if ($data['tabs'][1][$route_name]['#active']) {
-      $data['tabs'][1][$route_name]['#link']['localized_options']['attributes']['class'] = ['is-active'];
+      if (!isset($data['tabs'][1][$route_name]['#link']['localized_options']['attributes']['class'])) {
+        $data['tabs'][1][$route_name]['#link']['localized_options']['attributes']['class'] = [];
+      }
+
+      $data['tabs'][1][$route_name]['#link']['localized_options']['attributes']['class'][] = 'is-active';
+    }
+  }
+
+  // Mark link as being external if needed.
+  $group = \Drupal::routeMatch()->getParameter('group');
+  if ($group) {
+    foreach ($supported_routes as $tab_name) {
+      if (!isset($data['tabs'][1][$tab_name])) {
+        continue;
+      }
+
+      if (!isset($data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['class'])) {
+        $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['class'] = [];
+      }
+
+      switch ($tab_name) {
+        case 'hr_paragraphs.operation.reports':
+          if ($group->hasField('field_documents_page') && !$group->field_documents_page->isEmpty()) {
+            $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['class'][] = 'is-external';
+            $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['target'] = '_blank';
+          }
+          break;
+
+        case 'hr_paragraphs.operation.maps':
+          if ($group->hasField('field_infographics') && !$group->field_infographics->isEmpty()) {
+            $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['class'][] = 'is-external';
+            $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['target'] = '_blank';
+          }
+          break;
+
+        case 'hr_paragraphs.operation.assessments':
+          if ($group->hasField('field_assessments_page') && !$group->field_assessments_page->isEmpty()) {
+            $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['class'][] = 'is-external';
+            $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['target'] = '_blank';
+          }
+          break;
+
+        case 'hr_paragraphs.operation.data':
+          if ($group->hasField('field_calendar_alternate_link') && !$group->field_calendar_alternate_link->isEmpty()) {
+            $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['class'][] = 'is-external';
+            $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['target'] = '_blank';
+          }
+          break;
+
+        case 'hr_paragraphs.operation.events':
+          if ($group->hasField('field_calendar_alternate_link') && !$group->field_calendar_alternate_link->isEmpty()) {
+            $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['class'][] = 'is-external';
+            $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['target'] = '_blank';
+          }
+          break;
+
+        case 'hr_paragraphs.operation.contacts':
+          if ($group->hasField('field_offices_page') && !$group->field_offices_page->isEmpty()) {
+            /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+            $link = $group->field_offices_page->first();
+            if ($link->isExternal()) {
+              $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['class'][] = 'is-external';
+              $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['target'] = '_blank';
+            }
+          }
+
+          break;
+
+      }
     }
   }
 }
