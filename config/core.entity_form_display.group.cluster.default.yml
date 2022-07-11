@@ -6,6 +6,7 @@ dependencies:
     - field.field.group.cluster.field_archive_group
     - field.field.group.cluster.field_archive_message
     - field.field.group.cluster.field_assessments_page
+    - field.field.group.cluster.field_calendar_alternate_link
     - field.field.group.cluster.field_calendar_link
     - field.field.group.cluster.field_documents_page
     - field.field.group.cluster.field_enabled_tabs
@@ -141,6 +142,7 @@ third_party_settings:
       children:
         - field_calendar_link
         - field_ical_url
+        - field_calendar_alternate_link
       label: Events
       region: content
       parent_name: group_content
@@ -206,6 +208,14 @@ content:
   field_assessments_page:
     type: link_default
     weight: 36
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_calendar_alternate_link:
+    type: link_default
+    weight: 7
     region: content
     settings:
       placeholder_url: ''

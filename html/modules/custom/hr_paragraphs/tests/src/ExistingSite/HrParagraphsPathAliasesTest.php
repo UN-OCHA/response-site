@@ -12,7 +12,7 @@ use weitzman\DrupalTestTraits\ExistingSiteBase;
 /**
  * Tests RSS feed.
  */
-class HrParagraphsPathAliases extends ExistingSiteBase {
+class HrParagraphsPathAliasesTest extends ExistingSiteBase {
 
   /**
    * Test cluster and node aliases.

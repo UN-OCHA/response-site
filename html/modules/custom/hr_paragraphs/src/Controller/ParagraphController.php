@@ -188,7 +188,7 @@ class ParagraphController extends ControllerBase {
       return AccessResult::forbidden();
     }
 
-    return AccessResult::allowedIf(!$group->field_ical_url->isEmpty());
+    return AccessResult::allowedIf(!$group->field_ical_url->isEmpty() || !$group->field_calendar_alternate_link->isEmpty());
   }
 
   /**
@@ -667,10 +667,22 @@ class ParagraphController extends ControllerBase {
    * @param \Drupal\group\Entity\Group $group
    *   Group.
    *
-   * @return array<string, mixed>
-   *   Render array.
+   * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
+   *   Render array or redirect to external site.
    */
-  public function getEvents(Group $group) : array {
+  public function getEvents(Group $group) : array|TrustedRedirectResponse {
+    if ($group->hasField('field_calendar_alternate_link') && !$group->field_calendar_alternate_link->isEmpty()) {
+      /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+      $link = $group->field_calendar_alternate_link->first();
+
+      // Redirect external links.
+      if ($link->isExternal()) {
+        $redirect_to = new TrustedRedirectResponse($link->getUrl()->getUri());
+        $redirect_to->addCacheableDependency($group);
+        return $redirect_to;
+      }
+    }
+
     // Settings.
     $settings = [
       'header' => [

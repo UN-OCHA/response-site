@@ -26,7 +26,7 @@ content:
     settings:
       preview_view_mode: preview
       nesting_depth: 0
-      require_layouts: 0
+      require_layouts: 1
       empty_message: ''
     third_party_settings: {  }
   langcode:
