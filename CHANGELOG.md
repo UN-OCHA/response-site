@@ -4,6 +4,25 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.0.6](https://github.com/operations-site/compare/v0.0.5...v0.0.6) (2022-07-11)
+### Features
+
+* Allow global editor to translate interface ([28b27f](https://github.com/operations-site/commit/28b27f2959dd6d12156b468687156b9011353943))
+* Alternate source for events [#RWR-160](https://https://humanitarian.atlassian.net/browse/RWR-160) ([4b4a30](https://github.com/operations-site/commit/4b4a30f8a51e927dca47a797ff7cb931b6a03b16))
+* Mark external tabs as being external [#RWR-160](https://https://humanitarian.atlassian.net/browse/RWR-160) ([58f09b](https://github.com/operations-site/commit/58f09b8ae1a74b6607da99043595665d57a628cc))
+* Multilingual breadcrumbs [#RWR-157](https://https://humanitarian.atlassian.net/browse/RWR-157) ([c920c1](https://github.com/operations-site/commit/c920c19dfecfb59103f8de6f2f5a1d7f22329b12))
+* Multilingual menus [#RWR-157](https://https://humanitarian.atlassian.net/browse/RWR-157) ([631aae](https://github.com/operations-site/commit/631aae601f3edb4246cf455d40354ed83be63101))
+* Multilingual tabs [#RWR-157](https://https://humanitarian.atlassian.net/browse/RWR-157) ([b7c389](https://github.com/operations-site/commit/b7c38992bbadac12ab7d38637565ce987a440102))
+
+### Bug Fixes
+
+* Auto update failed on patch, so updated manually ([3ad632](https://github.com/operations-site/commit/3ad632700129c9cb6c67382b336484084aaaa22b))
+* Remove divs around description list items so the intended layout takes effect ([4e5c74](https://github.com/operations-site/commit/4e5c7484717d00920b350ee0c399898a9829353d))
+
+### Chores
+
+* Debug failing test ([a351bb](https://github.com/operations-site/commit/a351bb2e30f73cae2f8acc1dcc2ee29bf30319c5))
+
 ## [0.0.4](https://github.com/operations-site/compare/v0.0.3...v0.0.4) (2022-06-07)
 ### Features
 
