@@ -403,12 +403,18 @@ class ParagraphController extends ControllerBase {
     $parameters = $this->hdxController->buildHdxParameters($offset, $limit, $query_filters);
 
     // Add filters.
+    $hdx_query_filters = $this->hdxController->getHdxQueryFilters();
     foreach ($filters as $key => $filter) {
-      if (is_array($filter)) {
-        $parameters['fq_list'][] = $key . ':"' . implode('" AND "', $filter) . '"';
+      if (in_array($key, $hdx_query_filters)) {
+        $parameters[$key] = $filter;
       }
       else {
-        $parameters['fq_list'][] = $key . ':"' . $filter . '"';
+        if (is_array($filter)) {
+          $parameters['fq_list'][] = $key . ':"' . implode('" AND "', $filter) . '"';
+        }
+        else {
+          $parameters['fq_list'][] = $key . ':"' . $filter . '"';
+        }
       }
     }
 
