@@ -1,6 +1,6 @@
 services:
   hr_paragraphs.commands:
     class: \Drupal\hr_paragraphs\Commands\HrParagraphsCommands
-    arguments: ['@config.factory', '@entity_type.manager', '@http_client', '@hr_paragraphs.reliefweb_controller']
+    arguments: ['@config.factory', '@entity_type.manager', '@http_client', '@file.repository', '@file_system', '@hr_paragraphs.reliefweb_controller']
     tags:
       - { name: drush.command }
