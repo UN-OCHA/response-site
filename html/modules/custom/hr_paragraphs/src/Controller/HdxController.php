@@ -332,13 +332,10 @@ class HdxController extends ControllerBase {
       'organization' => $this->t('Organizations'),
       'vocab_Topics' => $this->t('Tags'),
       'license_id' => $this->t('Licenses'),
-      'subnational' => $this->t('Sub-national'),
-      'has_geodata' => $this->t('Geodata'),
-      'extras_is_requestdata_type' => $this->t('HDX connect'),
-      'has_quickcharts' => $this->t('Quickcharts'),
-      'has_showcases' => $this->t('Showcases'),
       'cod' => $this->t('CODs'),
       'ext_cod' => $this->t('CODs'),
+      'subnational' => $this->t('Sub-national'),
+      'has_geodata' => $this->t('Geodata'),
     ];
 
     if ($key) {
@@ -362,12 +359,9 @@ class HdxController extends ControllerBase {
    */
   protected function getHdxYesNoFilters() {
     $filters = [
+      'cod',
       'subnational',
       'has_geodata',
-      'extras_is_requestdata_type',
-      'has_quickcharts',
-      'has_showcases',
-      'cod',
     ];
 
     return $filters;
