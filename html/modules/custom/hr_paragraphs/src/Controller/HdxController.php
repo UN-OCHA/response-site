@@ -43,11 +43,20 @@ class HdxController extends ControllerBase {
    */
   public function buildHdxActiveFacets(string $base_url, array $filters, array $all_facets) : array {
     $active_facets = [];
+    $yes_no_filters = $this->getHdxYesNoFilters();
+    $hdx_query_filters = $this->getHdxQueryFilters();
 
     foreach ($filters as $key => $keywords) {
       if (is_string($keywords)) {
         $name = $filters[$key];
-        if (isset($all_facets[$key])) {
+
+        if (in_array($key, $yes_no_filters) || in_array($key, $hdx_query_filters)) {
+          $name = $this->getHdxFilters($key) . ': ' . $this->t('No');
+          if ($keywords == '1' || $keywords == 'true') {
+            $name = $this->getHdxFilters($key) . ': ' . $this->t('Yes');
+          }
+        }
+        elseif (isset($all_facets[$key])) {
           foreach ($all_facets[$key]['items'] as $item) {
             if ($item['name'] == $name) {
               $name = $item['display_name'];
@@ -117,20 +126,45 @@ class HdxController extends ControllerBase {
     $facets = [];
     $facet_blocks = [];
 
+    $yes_no_filters = $this->getHdxYesNoFilters();
+    $hdx_query_filters = $this->getHdxQueryFilters();
+
     $allowed_filters = $this->getHdxFilters();
     foreach (array_keys($allowed_filters) as $key) {
-      $facets[$key] = $embedded_facets[$key];
+      if (isset($embedded_facets[$key])) {
+        $facets[$key] = $embedded_facets[$key];
+      }
+    }
+
+    foreach (array_keys($hdx_query_filters) as $key) {
+      foreach ($embedded_facets['queries'] as $query_facet) {
+        if ($key == $query_facet['name']) {
+          $facets[$hdx_query_filters[$key]] = [
+            'items' => [
+              [
+                'display_name' => '1',
+                'name' => '1',
+                'count' => $query_facet['count'],
+              ],
+              [
+                'display_name' => '0',
+                'name' => '0',
+              ],
+            ],
+          ];
+        }
+      }
     }
 
     foreach ($facets as $name => $facet) {
       $links = [];
 
-      // Sort facets.
-      uasort($facet['items'], function ($a, $b) {
-        return strcmp($a['display_name'], $b['display_name']);
-      });
-
       if (isset($facet['items']) && count($facet['items']) > 1) {
+        // Sort facets.
+        uasort($facet['items'], function ($a, $b) {
+          return strcmp($a['display_name'], $b['display_name']);
+        });
+
         foreach ($facet['items'] as $term) {
           $filter = [
             $name => $term['name'],
@@ -156,8 +190,20 @@ class HdxController extends ControllerBase {
             }
           }
 
+          $title = $term['display_name'];
+          if (in_array($name, $yes_no_filters) || in_array($name, $hdx_query_filters)) {
+            $title = $this->t('No');
+            if ($term['display_name'] == '1' || $term['display_name'] == 'true') {
+              $title = $this->t('Yes');
+            }
+          }
+
+          if (isset($term['count'])) {
+            $title = $title . ' (' . $term['count'] . ')';
+          }
+
           $links[] = [
-            'title' => $term['display_name'] . ' (' . $term['count'] . ')',
+            'title' => $title,
             'url' => Url::fromUserInput($base_url, [
               'query' => [
                 'filters' => array_merge_recursive($filters, $filter),
@@ -192,10 +238,25 @@ class HdxController extends ControllerBase {
    *   Search parameters.
    */
   public function buildHdxParameters(int $offset, int $limit, array $query_filters) : array {
+    $filter_to_facet = [
+      'ext_subnational' => 'subnational',
+      'ext_geodata' => 'has_geodata',
+      'ext_requestdata' => 'extras_is_requestdata_type',
+      'ext_quickcharts' => 'has_quickcharts',
+      'ext_showcases' => 'has_showcases',
+    ];
+
+    $filter_to_query = [
+      'ext_hxl' => '{!key=hxl} vocab_Topics:hxl',
+      'ext_sadd' => '{!key=sadd} vocab_Topics:"sex and age disaggregated data - sadd"',
+      'ext_cod' => '{!key=cod} vocab_Topics:"common operational dataset - cod"',
+    ];
+
     $parameters = [
       'q' => '',
       'fq' => '+dataset_type:dataset -extras_archived:true',
       'fq_list' => [],
+      'facet.query' => [],
       'facet.field' => [
         'groups',
         'res_format',
@@ -208,6 +269,14 @@ class HdxController extends ControllerBase {
       'start' => $offset,
       'rows' => $limit,
     ];
+
+    foreach ($filter_to_facet as $facet) {
+      $parameters['facet.field'][] = $facet;
+    }
+
+    foreach ($filter_to_query as $facet) {
+      $parameters['facet.query'][] = $facet;
+    }
 
     // Pasted filters from URL are using OR.
     foreach ($query_filters as $key => $values) {
@@ -263,6 +332,13 @@ class HdxController extends ControllerBase {
       'organization' => $this->t('Organizations'),
       'vocab_Topics' => $this->t('Tags'),
       'license_id' => $this->t('Licenses'),
+      'subnational' => $this->t('Sub-national'),
+      'has_geodata' => $this->t('Geodata'),
+      'extras_is_requestdata_type' => $this->t('HDX connect'),
+      'has_quickcharts' => $this->t('Quickcharts'),
+      'has_showcases' => $this->t('Showcases'),
+      'cod' => $this->t('CODs'),
+      'ext_cod' => $this->t('CODs'),
     ];
 
     if ($key) {
@@ -276,6 +352,39 @@ class HdxController extends ControllerBase {
     else {
       return $filters;
     }
+  }
+
+  /**
+   * Yes/No filters.
+   *
+   * @return array<string>
+   *   All yes/no filters.
+   */
+  protected function getHdxYesNoFilters() {
+    $filters = [
+      'subnational',
+      'has_geodata',
+      'extras_is_requestdata_type',
+      'has_quickcharts',
+      'has_showcases',
+      'cod',
+    ];
+
+    return $filters;
+  }
+
+  /**
+   * Query filters.
+   *
+   * @return array<string>
+   *   All query filters.
+   */
+  public function getHdxQueryFilters() {
+    $filters = [
+      'cod' => 'ext_cod',
+    ];
+
+    return $filters;
   }
 
   /**
