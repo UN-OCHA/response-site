@@ -184,6 +184,12 @@ class CalFileParser {
         $this->_user_timezone = $this->_file_timezone;
       }
     }
+    elseif (preg_match('/TZID:(.+)/i', $file_contents, $timezone) === 1) {
+      $this->_file_timezone = trim($timezone[1]);
+      if ($this->_user_timezone == NULL) {
+        $this->_user_timezone = $this->_file_timezone;
+      }
+    }
     else {
       $this->_file_timezone = $this->_user_timezone;
     }
