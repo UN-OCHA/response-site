@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - filter.format.hr_plain_text
+    - node.type.landing_page
     - node.type.page
     - taxonomy.vocabulary.tags
   module:
@@ -49,6 +50,7 @@ permissions:
   - 'bypass group access'
   - 'bypass node access'
   - 'create content translations'
+  - 'create landing_page content'
   - 'create operation group'
   - 'create page content'
   - 'create paragraph content child_groups'
@@ -70,8 +72,11 @@ permissions:
   - 'create terms in tags'
   - 'create url aliases'
   - 'customize shortcut links'
+  - 'delete any landing_page content'
   - 'delete any page content'
+  - 'delete landing_page revisions'
   - 'delete orphan revisions'
+  - 'delete own landing_page content'
   - 'delete own page content'
   - 'delete page revisions'
   - 'delete paragraph content article_card_list'
@@ -92,14 +97,18 @@ permissions:
   - 'delete paragraph content twitter_feed'
   - 'delete paragraph content upcoming_events'
   - 'delete terms in tags'
+  - 'edit any landing_page content'
   - 'edit any page content'
+  - 'edit own landing_page content'
   - 'edit own page content'
   - 'edit terms in tags'
   - 'masquerade as any user'
   - 'masquerade as authenticated'
   - 'masquerade as content_editor'
+  - 'override landing_page authored by option'
   - 'override page authored by option'
   - 'revert all revisions'
+  - 'revert landing_page revisions'
   - 'revert page revisions'
   - 'switch shortcut sets'
   - 'translate interface'
@@ -124,6 +133,7 @@ permissions:
   - 'use text format hr_plain_text'
   - 'view all revisions'
   - 'view expiring users report'
+  - 'view landing_page revisions'
   - 'view office external entity collection'
   - 'view own unpublished content'
   - 'view page revisions'

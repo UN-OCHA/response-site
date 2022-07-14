@@ -6,6 +6,7 @@ dependencies:
     - field.storage.group.field_paragraphs
     - group.type.cluster
     - paragraphs.paragraphs_type.child_groups
+    - paragraphs.paragraphs_type.layout
     - paragraphs.paragraphs_type.twitter_feed
   module:
     - entity_reference_revisions
@@ -25,34 +26,38 @@ settings:
     target_bundles:
       child_groups: child_groups
       twitter_feed: twitter_feed
+      layout: layout
     negate: 1
     target_bundles_drag_drop:
       child_groups:
-        weight: -20
+        weight: -23
         enabled: true
       featured_highlight:
-        weight: -25
+        weight: -28
         enabled: false
       group_pages:
-        weight: -19
-        enabled: false
-      hdx_river:
-        weight: -24
-        enabled: false
-      heading:
-        weight: -23
-        enabled: false
-      iframe:
         weight: -22
         enabled: false
+      hdx_river:
+        weight: -25
+        enabled: false
+      heading:
+        weight: -29
+        enabled: false
+      iframe:
+        weight: -24
+        enabled: false
+      layout:
+        weight: -16
+        enabled: true
       menu_block:
         weight: -21
         enabled: false
       reliefweb_document:
-        weight: -17
+        weight: -20
         enabled: false
       reliefweb_river:
-        weight: -16
+        weight: -19
         enabled: false
       rss_feed:
         weight: -18
@@ -61,7 +66,7 @@ settings:
         weight: -27
         enabled: false
       twitter_feed:
-        weight: -15
+        weight: -17
         enabled: true
       upcoming_events:
         weight: -26
