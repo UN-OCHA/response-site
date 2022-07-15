@@ -1,0 +1,88 @@
+/**
+ * HR.info Card
+ *
+ * There isn't a corresponding Paragraph Type for this component. Instead, the
+ * Featured Highlight uses it as an alternate display mode.
+ *
+ * @see html/themes/custom/common_design_subtheme/templates/paragraph--landing-page--featured-highlight.html.twig
+ */
+.hri-card {
+  --hri-card-border-color: #ddd;
+  --hri-card-padding: 1.5rem;
+
+  height: 100%;
+  border: 1px solid var(--hri-card-border-color);
+}
+
+/**
+ * Have our card contents stretch to fill the flex item, and set its position
+ * for the read-more link defined below.
+ */
+.hri-card__content {
+  position: relative;
+  height: 100%;
+}
+
+/* Image */
+.hri-card .hri-hero-image {
+  position: relative;
+  margin-bottom: var(--hri-card-padding);
+}
+.hri-card img::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  border: 1px solid #ddd;
+  background: var(--cd-grey--light);
+}
+.hri-card img::after {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  content: "Broken image:  " attr(alt);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #888;
+}
+
+/* Article title */
+.hri-card .hri-card__title {
+  margin: 1.25rem 0 1.5rem;
+  padding: 0 var(--hri-card-padding);
+  color: var(--cd-black);
+  font-size: var(--cd-font-size--base);
+  font-weight: 700;
+}
+
+/* Text summary */
+.hri-card__summary {
+  margin: 0 0 2.25rem;
+  padding: 0 var(--hri-card-padding);
+  font-size: 1rem;
+}
+
+/**
+ * We're using an invisible hyperlink that stretches over the top of each card
+ * so that the entire surface is clickable/tappable.
+ */
+.hri-card__link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: transparent;
+}
+.hri-card__link:hover {
+  color: transparent;
+  outline: 3px solid var(--hri-card-border-color);
+}
+.hri-card__link:focus,
+.hri-card__link:active {
+  color: transparent;
+  outline: 3px solid black;
+}
