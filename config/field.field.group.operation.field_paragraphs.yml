@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.storage.group.field_paragraphs
     - group.type.operation
+    - paragraphs.paragraphs_type.card_list
+    - paragraphs.paragraphs_type.layout
     - paragraphs.paragraphs_type.twitter_feed
   module:
     - entity_reference_revisions
@@ -23,8 +25,13 @@ settings:
   handler_settings:
     target_bundles:
       twitter_feed: twitter_feed
+      card_list: card_list
+      layout: layout
     negate: 1
     target_bundles_drag_drop:
+      card_list:
+        weight: 16
+        enabled: true
       child_groups:
         weight: -20
         enabled: false
@@ -43,6 +50,9 @@ settings:
       iframe:
         weight: -22
         enabled: false
+      layout:
+        weight: 23
+        enabled: true
       menu_block:
         weight: -21
         enabled: false

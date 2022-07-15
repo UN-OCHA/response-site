@@ -1,19 +1,17 @@
-uuid: 1bee561f-4e3b-4195-aa9c-196443f67337
+uuid: de85ad35-83fe-41a1-b152-c64460e30269
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_paragraphs
-    - node.type.page
+    - field.storage.paragraph.field_paragraphs
     - paragraphs.paragraphs_type.card_list
-    - paragraphs.paragraphs_type.layout
-    - paragraphs.paragraphs_type.twitter_feed
+    - paragraphs.paragraphs_type.featured_highlight
   module:
     - entity_reference_revisions
-id: node.page.field_paragraphs
+id: paragraph.card_list.field_paragraphs
 field_name: field_paragraphs
-entity_type: node
-bundle: page
+entity_type: paragraph
+bundle: card_list
 label: 'Custom Content'
 description: ''
 required: false
@@ -24,54 +22,52 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      twitter_feed: twitter_feed
-      card_list: card_list
-      layout: layout
-    negate: 1
+      featured_highlight: featured_highlight
+    negate: 0
     target_bundles_drag_drop:
       card_list:
         weight: 16
-        enabled: true
+        enabled: false
       child_groups:
-        weight: -20
+        weight: 17
         enabled: false
       featured_highlight:
-        weight: -25
-        enabled: false
+        weight: 18
+        enabled: true
       group_pages:
-        weight: -19
+        weight: 19
         enabled: false
       hdx_river:
-        weight: -24
+        weight: 20
         enabled: false
       heading:
-        weight: -23
+        weight: 21
         enabled: false
       iframe:
-        weight: -22
+        weight: 22
         enabled: false
       layout:
         weight: 23
-        enabled: true
+        enabled: false
       menu_block:
-        weight: -21
+        weight: 24
         enabled: false
       reliefweb_document:
-        weight: -18
+        weight: 25
         enabled: false
       reliefweb_river:
-        weight: -17
+        weight: 26
         enabled: false
       rss_feed:
-        weight: -16
+        weight: 27
         enabled: false
       text_block:
-        weight: -27
+        weight: 28
         enabled: false
       twitter_feed:
-        weight: -15
-        enabled: true
+        weight: 29
+        enabled: false
       upcoming_events:
-        weight: -26
+        weight: 30
         enabled: false
 field_type: entity_reference_revisions

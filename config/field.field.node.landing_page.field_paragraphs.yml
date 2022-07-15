@@ -27,46 +27,49 @@ settings:
       twitter_feed: twitter_feed
     negate: 1
     target_bundles_drag_drop:
-      child_groups:
-        weight: -23
-        enabled: false
-      featured_highlight:
-        weight: -28
-        enabled: false
-      group_pages:
-        weight: -22
-        enabled: false
-      hdx_river:
-        weight: -25
-        enabled: false
-      heading:
+      card_list:
         weight: -29
         enabled: false
-      iframe:
+      child_groups:
         weight: -24
         enabled: false
+      featured_highlight:
+        weight: -30
+        enabled: false
+      group_pages:
+        weight: -23
+        enabled: false
+      hdx_river:
+        weight: -26
+        enabled: false
+      heading:
+        weight: -31
+        enabled: false
+      iframe:
+        weight: -25
+        enabled: false
       layout:
-        weight: -17
+        weight: -18
         enabled: true
       menu_block:
-        weight: -21
+        weight: -22
         enabled: false
       reliefweb_document:
-        weight: -20
+        weight: -21
         enabled: false
       reliefweb_river:
-        weight: -19
+        weight: -20
         enabled: false
       rss_feed:
-        weight: -18
+        weight: -19
         enabled: false
       text_block:
-        weight: -27
+        weight: -28
         enabled: false
       twitter_feed:
-        weight: -16
+        weight: -17
         enabled: true
       upcoming_events:
-        weight: -26
+        weight: -27
         enabled: false
 field_type: entity_reference_revisions
