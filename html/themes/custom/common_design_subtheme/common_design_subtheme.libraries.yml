@@ -48,6 +48,16 @@ hri-calendar:
     theme:
       components/hri-calendar/hri-calendar.css: {}
 
+hri-card:
+  css:
+    theme:
+      components/hri-card/hri-card.css: {}
+
+hri-card-list:
+  css:
+    theme:
+      components/hri-card-list/hri-card-list.css: {}
+
 hri-dropbutton:
   css:
     component:
@@ -72,6 +82,11 @@ hri-global-styling:
   css:
     component:
       components/hri-global-styling/hri-global-styling.css: {}
+
+hri-heading:
+  css:
+    component:
+      components/hri-heading/hri-heading.css: {}
 
 hri-highlight:
   css:

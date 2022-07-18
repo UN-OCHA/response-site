@@ -1,0 +1,18 @@
+uuid: 2aafd9bb-4f3a-474b-a663-e5074957e30b
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.twitter_feed
+id: paragraph.twitter_feed.created
+field_name: created
+entity_type: paragraph
+bundle: twitter_feed
+label: 'Authored on'
+description: 'The time that the Paragraph was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

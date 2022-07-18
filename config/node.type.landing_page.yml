@@ -1,0 +1,17 @@
+uuid: ad2a5f71-6347-418b-828c-bad2d3d4c33b
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Landing Page'
+type: landing_page
+description: 'Use this for the Homepage or another dashboard-like page. Unlike a plain Page, the Landing Page can contain a multi-column layout'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

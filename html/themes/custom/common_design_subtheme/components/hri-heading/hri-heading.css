@@ -1,0 +1,36 @@
+/**
+ * HR.info Heading Paragraph type.
+ */
+
+/**
+ * For the Landing Page content-type we're applying some extra styles.
+ *
+ * @see html/themes/custom/common_design_subtheme/templates/paragraph--landing-page--heading.html.twig
+ */
+.heading--with-link {
+  position: relative;
+}
+
+.heading--with-link .field-title__link {
+  position: absolute;
+  top: 10px;
+  font-style: italic;
+}
+
+@media screen and (min-width: 1024px) {
+  .heading--with-link .field-title__link {
+    top: 16px;
+  }
+}
+
+.heading--with-link .field-title__link:hover {
+  text-decoration: none;
+}
+
+[dir="ltr"] .heading--with-link .field-title__link {
+  right: 0;
+}
+
+[dir="rtl"] .heading--with-link .field-title__link {
+  left: 0;
+}

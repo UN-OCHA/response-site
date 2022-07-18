@@ -1,0 +1,22 @@
+uuid: 11723a2c-1e09-4512-8541-3c9fbe75af4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.hdx_river
+id: paragraph.hdx_river.status
+field_name: status
+entity_type: paragraph
+bundle: hdx_river
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

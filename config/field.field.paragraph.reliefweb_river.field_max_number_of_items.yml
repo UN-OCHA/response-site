@@ -12,7 +12,7 @@ bundle: reliefweb_river
 label: 'Max number of items'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value:
   -
     value: 5
