@@ -99,9 +99,10 @@ class IcalController extends ControllerBase {
 
         foreach ($generator as $occurrence) {
           $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
+            'title' => $event['SUMMARY'] ?? '',
+            'description' => $event['DESCRIPTION'] ?? '',
+            'location' => $event['LOCATION'] ?? '',
+            'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
             'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
             'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
             'attachments' => $attachments,
@@ -123,9 +124,10 @@ class IcalController extends ControllerBase {
           }
 
           $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
+            'title' => $event['SUMMARY'] ?? '',
+            'description' => $event['DESCRIPTION'] ?? '',
+            'location' => $event['LOCATION'] ?? '',
+            'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
             'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
             'attachments' => $attachments,
@@ -133,9 +135,10 @@ class IcalController extends ControllerBase {
         }
         else {
           $output[] = [
-            'title' => $event['SUMMARY'],
-            'description' => $event['DESCRIPTION'],
-            'location' => $event['LOCATION'],
+            'title' => $event['SUMMARY'] ?? '',
+            'description' => $event['DESCRIPTION'] ?? '',
+            'location' => $event['LOCATION'] ?? '',
+            'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
             'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
             'attachments' => $attachments,
@@ -145,6 +148,17 @@ class IcalController extends ControllerBase {
     }
 
     return $output;
+  }
+
+  /**
+   * Calculate color value from string.
+   */
+  protected function setBackgroundColor($category) {
+    if (empty($category)) {
+      return '';
+    }
+
+    return '#' . substr(md5($category), 0, 6);
   }
 
 }

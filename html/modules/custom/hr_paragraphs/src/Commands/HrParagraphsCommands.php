@@ -4,6 +4,9 @@ namespace Drupal\hr_paragraphs\Commands;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\File\FileSystem;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\file\FileRepositoryInterface;
 use Drupal\hr_paragraphs\Controller\ReliefwebController;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\user\Entity\User;
@@ -39,6 +42,20 @@ class HrParagraphsCommands extends DrushCommands {
   protected $httpClient;
 
   /**
+   * File repository.
+   *
+   * @var \Drupal\Core\file\FileRepositoryInterface
+   */
+  protected $fileRepository;
+
+  /**
+   * File system.
+   *
+   * @var \Drupal\Core\file\FileSystemInterface
+   */
+  protected $fileSystem;
+
+  /**
    * Reliefweb controller.
    *
    * @var \Drupal\hr_paragraphs\Controller\ReliefwebController
@@ -48,10 +65,12 @@ class HrParagraphsCommands extends DrushCommands {
   /**
    * {@inheritdoc}
    */
-  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, ClientInterface $http_client, ReliefwebController $reliefweb_controller) {
+  public function __construct(ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, ClientInterface $http_client, FileRepositoryInterface $file_repository, FileSystem $file_system, ReliefwebController $reliefweb_controller) {
     $this->configFactory = $config_factory;
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
+    $this->fileRepository = $file_repository;
+    $this->fileSystem = $file_system;
     $this->reliefwebController = $reliefweb_controller;
   }
 
@@ -698,6 +717,12 @@ class HrParagraphsCommands extends DrushCommands {
     foreach ($tags as $tag) {
       $src = $tag->getAttribute('src');
 
+      // Set destination.
+      $file_name = basename($src);
+      $destination = 'public://images/' . date('Y-m-d');
+      $this->fileSystem->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY);
+      $destination .= '/' . $file_name;
+
       $sync_domain = $this->configFactory->get('hr_paragraphs.settings')->get('sync_domain', 'http://hrinfo.docksal.site');
       $sync_credentials = $this->configFactory->get('hr_paragraphs.settings')->get('sync_credentials', '');
       if (!empty($sync_credentials)) {
@@ -705,10 +730,9 @@ class HrParagraphsCommands extends DrushCommands {
       }
       $src = str_replace($this->configFactory->get('hr_paragraphs.settings')->get('sync_domain', 'http://hrinfo.docksal.site'), $sync_domain, $src);
 
+      // Get and save file.
       $image = file_get_contents($src);
-
-      /** @var \Drupal\file\Entity\File $file */
-      $file = file_save_data($image);
+      $file = $this->fileRepository->writeData($image, $destination);
 
       $tag->setAttribute('src', $file->createFileUrl());
     }
