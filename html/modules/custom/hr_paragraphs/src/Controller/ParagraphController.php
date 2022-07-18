@@ -5,7 +5,7 @@ namespace Drupal\hr_paragraphs\Controller;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Pager\PagerManagerInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\group\Entity\Group;
@@ -64,7 +64,7 @@ class ParagraphController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(EntityTypeManager $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, IcalController $ical_controller, ReliefwebController $reliefweb_controller, HdxController $hdx_controller) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, ClientInterface $http_client, PagerManagerInterface $pager_manager, IcalController $ical_controller, ReliefwebController $reliefweb_controller, HdxController $hdx_controller) {
     $this->entityTypeManager = $entity_type_manager;
     $this->httpClient = $http_client;
     $this->pagerManager = $pager_manager;
