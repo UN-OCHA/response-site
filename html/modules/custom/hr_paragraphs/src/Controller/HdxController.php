@@ -173,7 +173,8 @@ class HdxController extends ControllerBase {
     }
 
     if (!empty($combined['items'])) {
-      $facets['combined'] = $combined;
+      // Push to front.
+      $facets = ['combined' => $combined] + $facets;
     }
 
     foreach ($facets as $name => $facet) {
