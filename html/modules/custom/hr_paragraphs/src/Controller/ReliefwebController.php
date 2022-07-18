@@ -286,13 +286,13 @@ class ReliefwebController extends ControllerBase {
   public function getReliefwebFilters(string $key = NULL) {
     $filters = [
       'source.name' => $this->t('Organization'),
-      'theme.name' => $this->t('Theme'),
-      'format.name' => $this->t('Format'),
+      'disaster.name' => $this->t('Disaster'),
       'disaster_type' => $this->t('Disaster type'),
+      'theme.name' => $this->t('Theme'),
+      'format.name' => $this->t('Content format'),
       'language.name' => $this->t('Language'),
       'date.original' => $this->t('Original date'),
       'date.changed' => $this->t('Posting date'),
-      'disaster.name' => $this->t('Disaster'),
     ];
 
     if ($key) {
