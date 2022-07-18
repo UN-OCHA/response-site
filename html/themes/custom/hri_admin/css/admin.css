@@ -75,7 +75,7 @@
   gap: 1rem;
 }
 .paragraph--type--card-list .field--name-field-paragraphs .field__item {
-  flex: 1 1 calc(50% - (1rem * var(--hri-admin-card-list-num-cols) - 1rem));
+  flex: 0 1 calc((100% / var(--hri-admin-card-list-num-cols)) - (1rem * var(--hri-admin-card-list-num-cols) - 1rem));
 }
 .paragraph--type--card-list .paragraph--type--featured-highlight {
   display: flex;
