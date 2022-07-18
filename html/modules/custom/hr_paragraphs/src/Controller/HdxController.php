@@ -177,10 +177,16 @@ class HdxController extends ControllerBase {
     }
 
     foreach ($facets as $name => $facet) {
+      // Special case for combined filter.
+      $is_combined = FALSE;
+      if ($name === 'combined') {
+        $is_combined = TRUE;
+      }
+
       $links = [];
       $block_title = $this->getHdxFilters($name);
 
-      if (isset($facet['items']) && count($facet['items']) > 1) {
+      if (isset($facet['items']) && ($is_combined || count($facet['items']) > 1)) {
         // Sort facets.
         uasort($facet['items'], function ($a, $b) {
           return strcmp($a['display_name'], $b['display_name']);
@@ -238,7 +244,7 @@ class HdxController extends ControllerBase {
           ];
         }
 
-        if (count($links) > 1) {
+        if (($is_combined && count($links) > 0) || count($links) > 1) {
           $facet_blocks[$name] = [
             'title' => $block_title,
             'links' => $links,
