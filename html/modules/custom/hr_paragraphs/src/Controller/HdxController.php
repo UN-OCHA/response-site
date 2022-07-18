@@ -173,7 +173,8 @@ class HdxController extends ControllerBase {
     }
 
     if (!empty($combined['items'])) {
-      $facets['combined'] = $combined;
+      // Push to front.
+      $facets = ['combined' => $combined] + $facets;
     }
 
     foreach ($facets as $name => $facet) {
@@ -185,6 +186,7 @@ class HdxController extends ControllerBase {
 
       $links = [];
       $block_title = $this->getHdxFilters($name);
+      $block_display_open = FALSE;
 
       if (isset($facet['items']) && ($is_combined || count($facet['items']) > 1)) {
         // Sort facets.
@@ -202,6 +204,7 @@ class HdxController extends ControllerBase {
 
           if ($filter_name === 'combined') {
             $block_title = $this->t('Featured');
+            $block_display_open = TRUE;
             $filter_name = $term_name;
             $filter = [
               $filter_name => 1,
@@ -248,6 +251,7 @@ class HdxController extends ControllerBase {
           $facet_blocks[$name] = [
             'title' => $block_title,
             'links' => $links,
+            'open' => $block_display_open,
           ];
         }
       }
