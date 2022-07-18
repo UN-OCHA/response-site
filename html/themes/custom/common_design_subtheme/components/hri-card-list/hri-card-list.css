@@ -21,5 +21,5 @@
 }
 
 .paragraph--type--card-list .field--name-field-paragraphs .field__item {
-  flex: 1 1 calc(50% - (1rem * var(--hri-card-list-num-cols) - 1rem));
+  flex: 1 1 calc((100% / var(--hri-card-list-num-cols)) - (1rem * var(--hri-card-list-num-cols) - 1rem));
 }
