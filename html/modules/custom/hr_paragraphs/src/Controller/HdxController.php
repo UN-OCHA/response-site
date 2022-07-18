@@ -51,9 +51,8 @@ class HdxController extends ControllerBase {
         $name = $filters[$key];
 
         if (in_array($key, $yes_no_filters) || in_array($key, $hdx_query_filters)) {
-          $name = $this->getHdxFilters($key) . ': ' . $this->t('No');
           if ($keywords == '1' || $keywords == 'true') {
-            $name = $this->getHdxFilters($key) . ': ' . $this->t('Yes');
+            $name = $this->getHdxFilters($key);
           }
         }
         elseif (isset($all_facets[$key])) {
@@ -156,8 +155,30 @@ class HdxController extends ControllerBase {
       }
     }
 
+    // Combine Yes/No filters.
+    $combined = [
+      'title' => 'Featured',
+      'items' => [],
+    ];
+    foreach ($yes_no_filters as $yes_no_filter) {
+      if (isset($facets[$yes_no_filter])) {
+        $combined['items'][] = [
+          'display_name' => $this->getHdxFilters($yes_no_filter),
+          'name' => $yes_no_filter,
+          'count' => $facets[$yes_no_filter]['items'][0]['count'],
+        ];
+
+        unset($facets[$yes_no_filter]);
+      }
+    }
+
+    if (!empty($combined['items'])) {
+      $facets['combined'] = $combined;
+    }
+
     foreach ($facets as $name => $facet) {
       $links = [];
+      $block_title = $this->getHdxFilters($name);
 
       if (isset($facet['items']) && count($facet['items']) > 1) {
         // Sort facets.
@@ -166,37 +187,42 @@ class HdxController extends ControllerBase {
         });
 
         foreach ($facet['items'] as $term) {
+          $term_name = $term['name'];
+          $filter_name = $name;
+
           $filter = [
-            $name => $term['name'],
+            $filter_name => $term_name,
           ];
 
+          if ($filter_name === 'combined') {
+            $block_title = $this->t('Featured');
+            $filter_name = $term_name;
+            $filter = [
+              $filter_name => 1,
+            ];
+          }
+
           // Check if facet is already active.
-          if (isset($filters[$name])) {
-            if (is_string($filters[$name]) && $filters[$name] == $filter[$name]) {
+          if (isset($filters[$filter_name])) {
+            if (is_string($filters[$filter_name]) && $filters[$filter_name] == $filter[$filter_name]) {
               continue;
             }
-            if (is_array($filters[$name]) && in_array($filter[$name], $filters[$name])) {
+            if (is_array($filters[$filter_name]) && in_array($filter[$filter_name], $filters[$filter_name])) {
               continue;
             }
           }
 
           // Remove facets part of the original url.
-          if (isset($query_filters[$name])) {
-            if (is_string($query_filters[$name]) && $query_filters[$name] == $filter[$name]) {
+          if (isset($query_filters[$filter_name])) {
+            if (is_string($query_filters[$filter_name]) && $query_filters[$filter_name] == $filter[$filter_name]) {
               continue;
             }
-            if (is_array($query_filters[$name]) && in_array($filter[$name], $query_filters[$name])) {
+            if (is_array($query_filters[$filter_name]) && in_array($filter[$filter_name], $query_filters[$filter_name])) {
               continue;
             }
           }
 
           $title = $term['display_name'];
-          if (in_array($name, $yes_no_filters) || in_array($name, $hdx_query_filters)) {
-            $title = $this->t('No');
-            if ($term['display_name'] == '1' || $term['display_name'] == 'true') {
-              $title = $this->t('Yes');
-            }
-          }
 
           if (isset($term['count'])) {
             $title = $title . ' (' . $term['count'] . ')';
@@ -214,7 +240,7 @@ class HdxController extends ControllerBase {
 
         if (count($links) > 1) {
           $facet_blocks[$name] = [
-            'title' => $this->getHdxFilters($name),
+            'title' => $block_title,
             'links' => $links,
           ];
         }
@@ -360,6 +386,7 @@ class HdxController extends ControllerBase {
   protected function getHdxYesNoFilters() {
     $filters = [
       'cod',
+      'ext_cod',
       'subnational',
       'has_geodata',
     ];
