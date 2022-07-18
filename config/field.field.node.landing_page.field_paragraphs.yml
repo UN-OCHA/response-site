@@ -5,8 +5,11 @@ dependencies:
   config:
     - field.storage.node.field_paragraphs
     - node.type.landing_page
+    - paragraphs.paragraphs_type.child_groups
+    - paragraphs.paragraphs_type.group_pages
     - paragraphs.paragraphs_type.layout
     - paragraphs.paragraphs_type.twitter_feed
+    - paragraphs.paragraphs_type.upcoming_events
   module:
     - entity_reference_revisions
 id: node.landing_page.field_paragraphs
@@ -23,53 +26,56 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
+      upcoming_events: upcoming_events
       layout: layout
+      child_groups: child_groups
+      group_pages: group_pages
       twitter_feed: twitter_feed
     negate: 1
     target_bundles_drag_drop:
       card_list:
-        weight: -29
+        weight: -31
         enabled: false
       child_groups:
-        weight: -24
-        enabled: false
+        weight: -22
+        enabled: true
       featured_highlight:
-        weight: -30
+        weight: -29
         enabled: false
       group_pages:
-        weight: -23
-        enabled: false
+        weight: -21
+        enabled: true
       hdx_river:
-        weight: -26
+        weight: -27
         enabled: false
       heading:
-        weight: -31
+        weight: -26
         enabled: false
       iframe:
         weight: -25
         enabled: false
       layout:
-        weight: -18
+        weight: -24
         enabled: true
       menu_block:
-        weight: -22
+        weight: -23
         enabled: false
       reliefweb_document:
-        weight: -21
-        enabled: false
-      reliefweb_river:
         weight: -20
         enabled: false
-      rss_feed:
+      reliefweb_river:
         weight: -19
         enabled: false
+      rss_feed:
+        weight: -18
+        enabled: false
       text_block:
-        weight: -28
+        weight: -30
         enabled: false
       twitter_feed:
         weight: -17
         enabled: true
       upcoming_events:
-        weight: -27
-        enabled: false
+        weight: -28
+        enabled: true
 field_type: entity_reference_revisions
