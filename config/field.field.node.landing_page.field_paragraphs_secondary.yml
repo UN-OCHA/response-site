@@ -5,8 +5,12 @@ dependencies:
   config:
     - field.storage.node.field_paragraphs_secondary
     - node.type.landing_page
+    - paragraphs.paragraphs_type.card_list
+    - paragraphs.paragraphs_type.child_groups
+    - paragraphs.paragraphs_type.group_pages
     - paragraphs.paragraphs_type.layout
     - paragraphs.paragraphs_type.twitter_feed
+    - paragraphs.paragraphs_type.upcoming_events
   module:
     - entity_reference_revisions
 id: node.landing_page.field_paragraphs_secondary
@@ -23,19 +27,26 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
+      upcoming_events: upcoming_events
+      child_groups: child_groups
+      group_pages: group_pages
       layout: layout
       twitter_feed: twitter_feed
+      card_list: card_list
     negate: 1
     target_bundles_drag_drop:
+      card_list:
+        weight: 16
+        enabled: true
       child_groups:
         weight: -23
-        enabled: false
+        enabled: true
       featured_highlight:
         weight: -28
         enabled: false
       group_pages:
         weight: -22
-        enabled: false
+        enabled: true
       hdx_river:
         weight: -25
         enabled: false
@@ -68,5 +79,5 @@ settings:
         enabled: true
       upcoming_events:
         weight: -26
-        enabled: false
+        enabled: true
 field_type: entity_reference_revisions
