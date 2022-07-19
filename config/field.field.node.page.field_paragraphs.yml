@@ -33,13 +33,13 @@ settings:
         weight: -31
         enabled: true
       child_groups:
-        weight: -22
+        weight: -23
         enabled: false
       featured_highlight:
         weight: -28
         enabled: false
       group_pages:
-        weight: -21
+        weight: -22
         enabled: false
       hdx_river:
         weight: -27
@@ -51,19 +51,19 @@ settings:
         weight: -25
         enabled: false
       layout:
-        weight: -24
+        weight: -18
         enabled: true
       menu_block:
-        weight: -23
+        weight: -24
         enabled: false
       reliefweb_document:
-        weight: -20
+        weight: -21
         enabled: false
       reliefweb_river:
-        weight: -19
+        weight: -20
         enabled: false
       rss_feed:
-        weight: -18
+        weight: -19
         enabled: false
       text_block:
         weight: -30
