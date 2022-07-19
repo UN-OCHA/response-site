@@ -1560,3 +1560,52 @@ function hr_paragraphs_group_content_info_alter(&$definitions) {
   $definitions['group_membership']['class'] = 'Drupal\hr_paragraphs\Plugin\GroupContentEnabler\AllGroupMembership';
   $definitions['group_membership']['provider'] = 'hr_paragraphs';
 }
+
+/**
+ * Remove any layout paragraph.
+ */
+function hr_paragraphs_remove_layout_paragraph_from_node($id) {
+  hr_paragraphs_remove_layout_paragraph_from_entity('node', $id);
+}
+
+/**
+ * Remove any layout paragraph.
+ */
+function hr_paragraphs_remove_layout_paragraph_from_group($id) {
+  hr_paragraphs_remove_layout_paragraph_from_entity('group', $id);
+}
+
+/**
+ * Remove any layout paragraph.
+ */
+function hr_paragraphs_remove_layout_paragraph_from_entity($entity_type, $id) {
+  $storage = \Drupal::entityTypeManager()->getStorage($entity_type);
+  $entity = $storage->load($id);
+
+  if (!$entity) {
+    return;
+  }
+
+  if (!$entity->hasField('field_paragraphs')) {
+    return;
+  }
+
+  $paras = $entity->field_paragraphs->referencedEntities();
+  foreach ($paras as $delta => $para) {
+    if ($para->bundle() == 'layout') {
+      unset($paras[$delta]);
+    }
+    else {
+      $para->setAllBehaviorSettings([
+        'layout_paragraphs' => [
+          'parent_uuid' => NULL,
+          'region' => NULL,
+        ],
+      ]);
+      $para->save();
+    }
+  }
+
+  $entity->field_paragraphs = $paras;
+  $entity->save();
+}
