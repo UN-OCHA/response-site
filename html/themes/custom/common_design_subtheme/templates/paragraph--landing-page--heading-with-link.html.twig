@@ -24,7 +24,7 @@
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
       {{ content.field_title }}
-      <a class="field-title__link" href="/locations">{{ 'View all Operations →'|t }}</a>
+      {{ content.field_destination }}
     {% endblock %}
   </div>
 {% endblock paragraph %}

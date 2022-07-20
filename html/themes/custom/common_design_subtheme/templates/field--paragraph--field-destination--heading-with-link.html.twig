@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Theme override for field_destination inside Heading with Link paragraphs.
+ *
+ * @overrides html/themes/contrib/common_design/templates/field/field.html.twig
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{% for item in items %}
+  {{ item.content }}
+{% endfor %}
