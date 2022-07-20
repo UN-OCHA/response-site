@@ -13,27 +13,35 @@
   }
 }
 
-.hri-layout--two-col > * {
-  flex: 1 1 auto;
-}
-
-.hri-layout--two-col > .hri-layout__first {
+.hri-layout .hri-layout__first {
   order: -1;
 }
 
-.hri-layout--two-col > .hri-layout__sidebar {
+.hri-layout .hri-layout__sidebar {
   padding: 1rem;
   background-color: var(--cd-grey--light);
   font-size: 1rem;
+}
+
+.hri-layout__sidebar .field--name-field-title {
+  margin-top: 0;
+  font-size: var(--cd-font-size--large);
+}
+
+
+/**
+ * Two-col
+ *
+ * Two-col is the layout used by Clusters / Working Groups. You see it on any
+ * CWG tab that has facets and is "powered by" another service like RW or HDX.
+ */
+
+.hri-layout--two-col > * {
+  flex: 1 1 auto;
 }
 
 @media (min-width: 880px) {
   .hri-layout--two-col > .hri-layout__sidebar {
     flex: 0 0 360px;
   }
-}
-
-.hri-layout__sidebar .field--name-field-title {
-  margin-top: 0;
-  font-size: var(--cd-font-size--large);
 }

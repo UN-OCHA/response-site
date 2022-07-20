@@ -1,0 +1,22 @@
+uuid: 39384c00-c26f-41a4-a6b1-5e955358d80f
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.reliefweb_document
+id: paragraph.reliefweb_document.status
+field_name: status
+entity_type: paragraph
+bundle: reliefweb_document
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

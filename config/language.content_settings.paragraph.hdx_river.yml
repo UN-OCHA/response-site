@@ -1,0 +1,18 @@
+uuid: e207315d-52b9-4b04-8aed-b1a1a958a1e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.hdx_river
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: paragraph.hdx_river
+target_entity_type_id: paragraph
+target_bundle: hdx_river
+default_langcode: site_default
+language_alterable: false

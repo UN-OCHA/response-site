@@ -26,3 +26,18 @@ function hr_paragraphs_update_9001() {
     }
   }
 }
+
+/**
+ * Change content type to page.
+ */
+function hr_paragraphs_update_9002() {
+  $query = \Drupal::entityQuery('node')->condition('nid', 1);
+  $results = $query->execute();
+
+  foreach ($results as $nid) {
+    $node = Node::load($nid);
+    $node->set('type', 'landing_page');
+    $node->setNewRevision();
+    $node->save();
+  }
+}

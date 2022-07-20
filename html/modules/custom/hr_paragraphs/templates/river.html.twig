@@ -83,7 +83,7 @@
 
     {% for facet in facets %}
       <div class="river__facets">
-        <details>
+        <details {% if facet.open %}open{% endif %}>
           <summary>{{ facet.title }}</summary>
           <ul class="river__facet">
           {% for link in facet.links %}

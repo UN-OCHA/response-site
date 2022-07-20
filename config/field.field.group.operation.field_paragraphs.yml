@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.storage.group.field_paragraphs
     - group.type.operation
+    - paragraphs.paragraphs_type.card_list
+    - paragraphs.paragraphs_type.layout
     - paragraphs.paragraphs_type.twitter_feed
   module:
     - entity_reference_revisions
@@ -22,46 +24,54 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
+      card_list: card_list
+      layout: layout
       twitter_feed: twitter_feed
     negate: 1
     target_bundles_drag_drop:
+      card_list:
+        weight: -31
+        enabled: true
       child_groups:
-        weight: -20
-        enabled: false
-      featured_highlight:
-        weight: -25
-        enabled: false
-      group_pages:
-        weight: -19
-        enabled: false
-      hdx_river:
-        weight: -24
-        enabled: false
-      heading:
         weight: -23
         enabled: false
-      iframe:
+      featured_highlight:
+        weight: -28
+        enabled: false
+      group_pages:
         weight: -22
         enabled: false
-      menu_block:
-        weight: -21
-        enabled: false
-      reliefweb_document:
-        weight: -18
-        enabled: false
-      reliefweb_river:
-        weight: -17
-        enabled: false
-      rss_feed:
-        weight: -16
-        enabled: false
-      text_block:
+      hdx_river:
         weight: -27
         enabled: false
+      heading:
+        weight: -26
+        enabled: false
+      iframe:
+        weight: -25
+        enabled: false
+      layout:
+        weight: -18
+        enabled: true
+      menu_block:
+        weight: -24
+        enabled: false
+      reliefweb_document:
+        weight: -21
+        enabled: false
+      reliefweb_river:
+        weight: -20
+        enabled: false
+      rss_feed:
+        weight: -19
+        enabled: false
+      text_block:
+        weight: -30
+        enabled: false
       twitter_feed:
-        weight: -15
+        weight: -17
         enabled: true
       upcoming_events:
-        weight: -26
+        weight: -29
         enabled: false
 field_type: entity_reference_revisions

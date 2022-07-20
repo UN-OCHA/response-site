@@ -1,0 +1,18 @@
+uuid: 3ad20f9f-0d96-4ac7-92e3-ae54bd3e2445
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.content_type.cluster-group_node-page
+id: group_content.cluster-group_node-page.label
+field_name: label
+entity_type: group_content
+bundle: cluster-group_node-page
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,25 @@
+/**
+ * HR.info Card List
+ *
+ * Used on the Landing Page content type to reformat Featured Highlight paras
+ * into something more suited for a homepage/dashboard.
+ */
+
+/* unset default styles that apply to top-level paragraphs */
+.paragraph--type--card-list .field--name-field-paragraphs > .field__item + .field__item {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.paragraph--type--card-list .field--name-field-paragraphs {
+  --hri-card-list-num-cols: 2;
+
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+}
+
+.paragraph--type--card-list .field--name-field-paragraphs .field__item {
+  flex: 0 1 calc((100% / var(--hri-card-list-num-cols)) - (1rem * var(--hri-card-list-num-cols) - 1rem));
+}

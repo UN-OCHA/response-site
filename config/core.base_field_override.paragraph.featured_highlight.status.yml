@@ -1,0 +1,22 @@
+uuid: 76d625ce-2e82-4473-993a-96a6f944ba3e
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.featured_highlight
+id: paragraph.featured_highlight.status
+field_name: status
+entity_type: paragraph
+bundle: featured_highlight
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

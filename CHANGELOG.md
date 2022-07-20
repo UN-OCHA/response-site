@@ -4,6 +4,33 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.0.8](https://github.com/operations-site/compare/v0.0.7...v0.0.8) (2022-07-20)
+### Features
+
+* Add a Card List paragraph type for Landing Page ([c5dfb2](https://github.com/operations-site/commit/c5dfb25bcb5d72162e000c509f63f4f9643aa265))
+* Combine featured HDX filters [#RWR-166](https://https://humanitarian.atlassian.net/browse/RWR-166) ([0bcd25](https://github.com/operations-site/commit/0bcd2542a961e33fcb039fc4baf7028a952c990d))
+* Display featured facets first on HDX ([0c0c65](https://github.com/operations-site/commit/0c0c65adefaea4a21ab248381e1f332f1d680d10))
+* Display featured facets opened on HDX ([656f90](https://github.com/operations-site/commit/656f9071e5d6e9bb1def8fb51f4c91f1a0575169))
+* Landing Page content type ([aad11d](https://github.com/operations-site/commit/aad11df34c5978a95c360515245e206996630ac9))
+* Order RW facets ([6a47c4](https://github.com/operations-site/commit/6a47c4bd4eab65ed6df74f71bf0e91b9e186207c))
+* Remove layout paragraph [#RWR-164](https://https://humanitarian.atlassian.net/browse/RWR-164) ([40a53a](https://github.com/operations-site/commit/40a53a9362483459644df7b37d161ce3c79bcb97))
+* Show featured HDX filters [#RWR-166](https://https://humanitarian.atlassian.net/browse/RWR-166) ([384415](https://github.com/operations-site/commit/3844159a35160134e0c80a5dd03dfcc4253e69e3))
+* Switch node 1 to new type ([ffde95](https://github.com/operations-site/commit/ffde95ec47a528cd3b290f5b92817c015d4ea669))
+
+### Bug Fixes
+
+* Alphabetize the Para types inside all Entity types ([dd4672](https://github.com/operations-site/commit/dd4672ac76d1b0b73b6873ae4c2e1683c29c2b4f))
+* Card List now behaves as intended if columns were added ([5e7a67](https://github.com/operations-site/commit/5e7a6700ba9e80f54dfc71daf50eb1dfd10d48fa))
+* Card List should create fixed-width Cards ([5113b4](https://github.com/operations-site/commit/5113b42c5f5b540920785949daf72a7822067f44))
+* Reorder Paragraphs inside all Entity types ([1729e2](https://github.com/operations-site/commit/1729e2e4ab32cfc1ea61185785477e0e39f84140))
+* Restrict secondary-col options on Landing Page CT ([e753b1](https://github.com/operations-site/commit/e753b1d18dfb8b714e64d834c40ce9a07a46d7a8))
+* Special styles for Paragraphs within Landing Page ([bf6dc2](https://github.com/operations-site/commit/bf6dc2fdc1c15adaa8d77f6cd6bea1401cdb8a54))
+* Style the Card List paragraph type ([edd541](https://github.com/operations-site/commit/edd541fef7b94382285d27a456cf2ebb7d23ab6f))
+
+### Chores
+
+* Use interface for injection ([a0ac17](https://github.com/operations-site/commit/a0ac172aa32dcfc66b8501e832f7902cbb05b38a))
+
 ## [0.0.6](https://github.com/operations-site/compare/v0.0.5...v0.0.6) (2022-07-11)
 ### Features
 

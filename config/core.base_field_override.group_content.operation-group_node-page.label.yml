@@ -1,0 +1,18 @@
+uuid: d7977ec0-790e-4f96-b39d-39449b7a5374
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.content_type.operation-group_node-page
+id: group_content.operation-group_node-page.label
+field_name: label
+entity_type: group_content
+bundle: operation-group_node-page
+label: Title
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
