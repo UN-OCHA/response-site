@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.group.field_paragraphs
     - group.type.cluster
-    - paragraphs.paragraphs_type.card_list
     - paragraphs.paragraphs_type.child_groups
     - paragraphs.paragraphs_type.layout
     - paragraphs.paragraphs_type.twitter_feed
@@ -25,7 +24,6 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      card_list: card_list
       child_groups: child_groups
       layout: layout
       twitter_feed: twitter_feed
@@ -33,7 +31,7 @@ settings:
     target_bundles_drag_drop:
       card_list:
         weight: -31
-        enabled: true
+        enabled: false
       child_groups:
         weight: -23
         enabled: true
