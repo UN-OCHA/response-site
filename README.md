@@ -37,9 +37,11 @@ git commit -m "chore: $today prep release"
 git push origin $today-prep-release
 ```
 
-Merge to dev, [create PR to merge to main](https://github.com/UN-OCHA/response-site/compare/main...develop)
-
-Merge to main, [Tag a new release](./gh_release)
+- Merge to dev
+- [create PR to merge to main](https://github.com/UN-OCHA/response-site/compare/main...develop)
+- Merge to main,
+- [Tag a new release](./gh_release)
+- Deploy
 
 ### Commit messages
 
