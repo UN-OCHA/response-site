@@ -1,0 +1,10 @@
+uuid: a547724d-e5b9-4678-8ad3-efdcb571ad2d
+langcode: en
+status: true
+dependencies: {  }
+id: heading_with_link
+label: 'Heading with Link'
+icon_uuid: null
+icon_default: null
+description: 'A generic Heading with a Link next to the text.'
+behavior_plugins: {  }

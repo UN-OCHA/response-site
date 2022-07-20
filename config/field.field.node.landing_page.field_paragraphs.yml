@@ -34,48 +34,51 @@ settings:
     negate: 1
     target_bundles_drag_drop:
       card_list:
-        weight: -31
+        weight: -33
         enabled: false
       child_groups:
-        weight: -23
+        weight: -24
         enabled: true
       featured_highlight:
-        weight: -28
-        enabled: false
-      group_pages:
-        weight: -22
-        enabled: true
-      hdx_river:
-        weight: -27
-        enabled: false
-      heading:
-        weight: -26
-        enabled: false
-      iframe:
-        weight: -25
-        enabled: false
-      layout:
-        weight: -18
-        enabled: true
-      menu_block:
-        weight: -24
-        enabled: false
-      reliefweb_document:
-        weight: -21
-        enabled: false
-      reliefweb_river:
-        weight: -20
-        enabled: false
-      rss_feed:
-        weight: -19
-        enabled: false
-      text_block:
         weight: -30
         enabled: false
+      group_pages:
+        weight: -23
+        enabled: true
+      hdx_river:
+        weight: -29
+        enabled: false
+      heading:
+        weight: -28
+        enabled: false
+      heading_with_link:
+        weight: -27
+        enabled: false
+      iframe:
+        weight: -26
+        enabled: false
+      layout:
+        weight: -19
+        enabled: true
+      menu_block:
+        weight: -25
+        enabled: false
+      reliefweb_document:
+        weight: -22
+        enabled: false
+      reliefweb_river:
+        weight: -21
+        enabled: false
+      rss_feed:
+        weight: -20
+        enabled: false
+      text_block:
+        weight: -32
+        enabled: false
       twitter_feed:
-        weight: -17
+        weight: -18
         enabled: true
       upcoming_events:
-        weight: -29
+        weight: -31
         enabled: true
 field_type: entity_reference_revisions
