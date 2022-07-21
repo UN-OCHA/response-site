@@ -52,29 +52,31 @@
     ]
   %}
 {% endif %}
-{% if title %}
-  <h3>{{ title }}</h3>
-{% endif %}
-<div{{ attributes.addClass(classes) }}>
-  {% if options.alignment == 'horizontal' %}
-    {% for row in items %}
-      <div{{ row.attributes.addClass(row_classes, options.row_class_default ? 'row-' ~ loop.index) }}>
-        {% for column in row.content %}
-          <div{{ column.attributes.addClass(col_classes, options.col_class_default ? 'col-' ~ loop.index) }}>
-            {{- column.content -}}
-          </div>
-        {% endfor %}
-      </div>
-    {% endfor %}
-  {% else %}
-    {% for column in items %}
-      <div{{ column.attributes.addClass(col_classes, options.col_class_default ? 'col-' ~ loop.index) }}>
-        {% for row in column.content %}
-          <div{{ row.attributes.addClass(row_classes, options.row_class_default ? 'row-' ~ loop.index) }}>
-            {{- row.content -}}
-          </div>
-        {% endfor %}
-      </div>
-    {% endfor %}
+<li id="group-{{ title|render|striptags|trim }}" class="rw-river-country-list__group">
+  {% if title %}
+    <h2 class="rw-river-country-list__group__title">{{ title }}</h2>
   {% endif %}
-</div>
+  <div{{ attributes.addClass(classes) }}>
+    {% if options.alignment == 'horizontal' %}
+      {% for row in items %}
+        <div{{ row.attributes.addClass(row_classes, options.row_class_default ? 'row-' ~ loop.index) }}>
+          {% for column in row.content %}
+            <div{{ column.attributes.addClass(col_classes, options.col_class_default ? 'col-' ~ loop.index) }}>
+              {{- column.content -}}
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <ul class="rw-river-country-list__group__list">
+      {% for column in items %}
+        <li{{ column.attributes.addClass('rw-river-country-list__country') }}>
+          {% for row in column.content %}
+            {{- row.content -}}
+          {% endfor %}
+        </li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</li>

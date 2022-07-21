@@ -32,16 +32,18 @@
  * @see template_preprocess_views_view()
  */
 #}
+{{ attach_library('common_design_subtheme/rw-country') }}
 {%
   set classes = [
-    'view',
-    'view-' ~ id|clean_class,
-    'view-id-' ~ id,
-    'view-display-id-' ~ display_id,
-    dom_id ? 'js-view-dom-id-' ~ dom_id
+    'rw-river-page',
+    'rw-river-page--countries',
+    'rw-river-page--countries--all',
+    'rw-river-page--with-views',
+    'rw-river-page--with-letter-navigation',
+    'rw-river-page--with-links',
   ]
 %}
-<div{{ attributes.addClass(classes) }}>
+<section{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if title %}
     {{ title }}
@@ -64,9 +66,9 @@
   {% endif %}
 
   {% if rows %}
-    <div class="view-content [ cd-flow ]">
+    <ul class="rw-river rw-river-country-list">
       {{ rows }}
-    </div>
+    </ul>
   {% elseif empty %}
     <div class="view-empty">
       {{ empty }}
@@ -89,4 +91,4 @@
       {{ footer }}
     </div>
   {% endif %}
-</div>
+</section>

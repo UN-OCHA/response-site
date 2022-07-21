@@ -323,7 +323,7 @@ display:
               rendered: true
               rendered_strip: false
           columns: 4
-          automatic_width: true
+          automatic_width: false
           alignment: vertical
           row_class_custom: ''
           row_class_default: true
@@ -332,7 +332,7 @@ display:
       row:
         type: fields
         options:
-          default_field_elements: true
+          default_field_elements: false
           inline:
             label: label
             field_archive_group: field_archive_group

@@ -147,3 +147,15 @@ hri-twitter-feed:
   css:
     theme:
       components/hri-twitter-feed/hri-twitter-feed.css: {}
+
+rw-brand:
+  css:
+    theme:
+      components/rw-brand/rw-brand.css: {}
+
+rw-country:
+  css:
+    theme:
+      components/rw-country/rw-country-list.css: {}
+  dependencies:
+    - common_design_subtheme/rw-brand
