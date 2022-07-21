@@ -617,7 +617,7 @@ class HrParagraphsCommands extends DrushCommands {
       return;
     }
 
-    // Either ids or group-ids need to be set.
+    // Don't allow account-active / account-blocked to be used simultaneously
     if (!empty($options['account-active']) && !empty($options['account-blocked'])) {
       $this->logger->error('You cannot use --account-active and --account-blocked at the same time.');
       return;
