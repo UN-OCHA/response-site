@@ -746,7 +746,9 @@ class HrParagraphsCommands extends DrushCommands {
         }
 
         $user->save();
+        $already_imported[] = $user->id();
       }
+
     }
 
     fclose($handle);
