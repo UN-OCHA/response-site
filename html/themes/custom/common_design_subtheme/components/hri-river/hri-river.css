@@ -109,6 +109,12 @@
   padding: 0;
   font-size: var(--cd-font-size--small);
 }
+/* unset cd-typography defaults for dl tag */
+@media screen and (min-width: 576px) {
+  .hri-river__result dl.meta {
+    display: block;
+  }
+}
 .hri-river__result .meta div {
   display: inline;
   white-space: nowrap;
@@ -129,7 +135,7 @@
   margin: 0 0.5rem;
   content: "•";
 }
-.hri-river__result .meta div:last-of-type dd::after {
+.hri-river__result .meta dd:last-of-type::after {
   content: none;
 }
 
