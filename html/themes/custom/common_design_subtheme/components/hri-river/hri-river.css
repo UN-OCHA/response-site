@@ -135,7 +135,7 @@
   margin: 0 0.5rem;
   content: "•";
 }
-.hri-river__result .meta div:last-of-type dd::after {
+.hri-river__result .meta dd:last-of-type::after {
   content: none;
 }
 
