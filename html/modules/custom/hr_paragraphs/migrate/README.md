@@ -110,6 +110,12 @@ Any existing user will not be recreated or updated.
 hr_paragraphs:import-users --account-active|--account-blocked --ids=1,2,3 --emails=user@example.com --group-ids=7,8,9
 ```
 
+To migrate all users, use `--migrate-all`
+
+```bash
+hr_paragraphs:import-users --migrate-all --account-active|--account-blocked
+```
+
 ### Panes
 
 The following panes are being migrated:

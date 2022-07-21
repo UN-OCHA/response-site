@@ -596,8 +596,14 @@ class HrParagraphsCommands extends DrushCommands {
    * @validate-module-enabled hr_paragraphs
    * @option skip-existing
    *   Skip existing users.
+   * @option account-active
+   *   Mark user active.
+   * @option account-blocked
+   *   Block the user.
    * @option ids
    *   List of Ids to import
+   * @option emails
+   *   List of email addresses to import
    * @option group-ids
    *   List of Group Ids to import
    * @usage hr_paragraphs:import-users --account-active|--account-blocked --ids=1,2,3 --emails=user@example.com --group-ids=7,8,9
@@ -605,6 +611,7 @@ class HrParagraphsCommands extends DrushCommands {
    */
   public function importUsers($options = [
     'skip-existing' => TRUE,
+    'migrate-all' => FALSE,
     'account-active' => FALSE,
     'account-blocked' => FALSE,
     'ids' => '',
@@ -615,16 +622,18 @@ class HrParagraphsCommands extends DrushCommands {
     // Always skip existing users.
     $options['skip-existing'] = TRUE;
 
-    // Either ids, group-ids, or emails need to be set.
-    if (empty($options['ids']) && empty($options['group-ids']) && empty($options['emails'])) {
-      $this->logger->error('Either --ids or --group-ids need to be set.');
-      return;
-    }
-
     // Don't allow account-active / account-blocked to be used simultaneously.
     if (!empty($options['account-active']) && !empty($options['account-blocked'])) {
       $this->logger->error('You cannot use --account-active and --account-blocked at the same time.');
       return;
+    }
+
+    if (!isset($options['migrate-all']) || !$options['migrate-all']) {
+      // Either ids, group-ids, or emails need to be set.
+      if (empty($options['ids']) && empty($options['group-ids']) && empty($options['emails'])) {
+        $this->logger->error('Either --ids or --group-ids need to be set.');
+        return;
+      }
     }
 
     $filename = 'membership.tsv';
@@ -659,26 +668,28 @@ class HrParagraphsCommands extends DrushCommands {
         }
       }
 
-      // Limit Ids if needed.
-      if (!empty($options['ids'])) {
-        if (!in_array($data['uid'], explode(',', $options['ids']))) {
-          continue;
-        }
-      }
-
-      // Limit emails if needed.
-      if (!empty($options['emails'])) {
-        if (!in_array($data['mail'], explode(',', $options['emails']))) {
-          continue;
-        }
-      }
-
-      // Limit Group Ids if needed.
-      if (!empty($options['group-ids'])) {
-        if (!in_array($data['group_id'], explode(',', $options['group-ids']))) {
-          // Check parent Id as well.
-          if (!in_array($this->getGroupParentId($data['group_id']), explode(',', $options['group-ids']))) {
+      if (!isset($options['migrate-all']) || !$options['migrate-all']) {
+        // Limit Ids if needed.
+        if (!empty($options['ids'])) {
+          if (!in_array($data['uid'], explode(',', $options['ids']))) {
             continue;
+          }
+        }
+
+        // Limit emails if needed.
+        if (!empty($options['emails'])) {
+          if (!in_array($data['mail'], explode(',', $options['emails']))) {
+            continue;
+          }
+        }
+
+        // Limit Group Ids if needed.
+        if (!empty($options['group-ids'])) {
+          if (!in_array($data['group_id'], explode(',', $options['group-ids']))) {
+            // Check parent Id as well.
+            if (!in_array($this->getGroupParentId($data['group_id']), explode(',', $options['group-ids']))) {
+              continue;
+            }
           }
         }
       }
