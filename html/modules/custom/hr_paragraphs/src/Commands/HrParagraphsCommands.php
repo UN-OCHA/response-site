@@ -600,24 +600,28 @@ class HrParagraphsCommands extends DrushCommands {
    *   List of Ids to import
    * @option group-ids
    *   List of Group Ids to import
-   * @usage hr_paragraphs:import-users --skip-existing --account-active|--account-blocked --ids=1,2,3 --group-ids=7,8,9
+   * @usage hr_paragraphs:import-users --account-active|--account-blocked --ids=1,2,3 --emails=user@example.com --group-ids=7,8,9
    *   Import users.
    */
   public function importUsers($options = [
-    'skip-existing' => FALSE,
+    'skip-existing' => TRUE,
     'account-active' => FALSE,
     'account-blocked' => FALSE,
     'ids' => '',
     'group-ids' => '',
+    'emails' => '',
   ]) {
 
-    // Either ids or group-ids need to be set.
-    if (empty($options['ids']) && empty($options['group-ids'])) {
+    // Always skip existing users.
+    $options['skip-existing'] = TRUE;
+
+    // Either ids, group-ids, or emails need to be set.
+    if (empty($options['ids']) && empty($options['group-ids']) && empty($options['emails'])) {
       $this->logger->error('Either --ids or --group-ids need to be set.');
       return;
     }
 
-    // Don't allow account-active / account-blocked to be used simultaneously
+    // Don't allow account-active / account-blocked to be used simultaneously.
     if (!empty($options['account-active']) && !empty($options['account-blocked'])) {
       $this->logger->error('You cannot use --account-active and --account-blocked at the same time.');
       return;
@@ -648,6 +652,13 @@ class HrParagraphsCommands extends DrushCommands {
         $data[$header_lowercase[$i]] = trim($row[$i]);
       }
 
+      // Skip already imported ones.
+      if (!empty($already_imported)) {
+        if (!in_array($data['uid'], $already_imported)) {
+          continue;
+        }
+      }
+
       // Limit Ids if needed.
       if (!empty($options['ids'])) {
         if (!in_array($data['uid'], explode(',', $options['ids']))) {
@@ -655,9 +666,9 @@ class HrParagraphsCommands extends DrushCommands {
         }
       }
 
-      // Skip already imported ones.
-      if (!empty($already_imported)) {
-        if (!in_array($data['uid'], $already_imported)) {
+      // Limit emails if needed.
+      if (!empty($options['emails'])) {
+        if (!in_array($data['mail'], explode(',', $options['emails']))) {
           continue;
         }
       }

@@ -96,8 +96,18 @@ drush hr_paragraphs:import-members --verbose
 
 All existing users on the old D7 site need to be migrated, since we use the same uid on both sites.
 
+You can migrate users by:
+
+- User Id `--ids`
+- Email address `==emails`
+- The group they belong to, all users even non-managers will be migrated. `--group-ids``
+
+By default the account will be active, to block the user during migration use `--account-blocked`
+
+Any existing user will not be recreated or updated.
+
 ```bash
-hr_paragraphs:import-users --skip-existing --account-active|--account-blocked --ids=1,2,3 --group-ids=7,8,9
+hr_paragraphs:import-users --account-active|--account-blocked --ids=1,2,3 --emails=user@example.com --group-ids=7,8,9
 ```
 
 ### Panes
