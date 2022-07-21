@@ -92,6 +92,14 @@ managers of a cluster are added as member of the operation.
 drush hr_paragraphs:import-members --verbose
 ```
 
+### Users
+
+All existing users on the old D7 site need to be migrated, since we use the same uid on both sites.
+
+```bash
+hr_paragraphs:import-users --skip-existing --account-active|--account-blocked --ids=1,2,3 --group-ids=7,8,9
+```
+
 ### Panes
 
 The following panes are being migrated:

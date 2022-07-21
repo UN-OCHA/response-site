@@ -590,6 +590,127 @@ class HrParagraphsCommands extends DrushCommands {
   }
 
   /**
+   * Import users from csv.
+   *
+   * @command hr_paragraphs:import-users
+   * @validate-module-enabled hr_paragraphs
+   * @option skip-existing
+   *   Skip existing users.
+   * @option ids
+   *   List of Ids to import
+   * @option group-ids
+   *   List of Group Ids to import
+   * @usage hr_paragraphs:import-users --skip-existing --account-active|--account-blocked --ids=1,2,3 --group-ids=7,8,9
+   *   Import users.
+   */
+  public function importUsers($options = [
+    'skip-existing' => FALSE,
+    'account-active' => FALSE,
+    'account-blocked' => FALSE,
+    'ids' => '',
+    'group-ids' => '',
+  ]) {
+
+    // Either ids or group-ids need to be set.
+    if (empty($options['ids']) && empty($options['group-ids'])) {
+      $this->logger->error('Either --ids or --group-ids need to be set.');
+      return;
+    }
+
+    // Either ids or group-ids need to be set.
+    if (!empty($options['account-active']) && !empty($options['account-blocked'])) {
+      $this->logger->error('You cannot use --account-active and --account-blocked at the same time.');
+      return;
+    }
+
+    $filename = 'membership.tsv';
+    $handle = $this->loadTsvFile($filename);
+
+    // Headers.
+    $header_lowercase = [
+      'group_id',
+      'operation',
+      'url',
+      'uid',
+      'name',
+      'mail',
+      'active',
+      'user url',
+      'rid',
+      'role_name',
+    ];
+
+    $row_counter = 0;
+    $already_imported = [];
+    while ($row = fgetcsv($handle, 0, "\t")) {
+      $data = [];
+      for ($i = 0; $i < count($row); $i++) {
+        $data[$header_lowercase[$i]] = trim($row[$i]);
+      }
+
+      // Limit Ids if needed.
+      if (!empty($options['ids'])) {
+        if (!in_array($data['uid'], explode(',', $options['ids']))) {
+          continue;
+        }
+      }
+
+      // Skip already imported ones.
+      if (!empty($already_imported)) {
+        if (!in_array($data['uid'], $already_imported)) {
+          continue;
+        }
+      }
+
+      // Limit Group Ids if needed.
+      if (!empty($options['group-ids'])) {
+        if (!in_array($data['group_id'], explode(',', $options['group-ids']))) {
+          // Check parent Id as well.
+          if (!in_array($this->getGroupParentId($data['group_id']), explode(',', $options['group-ids']))) {
+            continue;
+          }
+        }
+      }
+
+      $row_counter++;
+      $this->logger->info("{$row_counter}. Processing {$data['name']} ({$data['uid']})");
+
+      // Load or create user.
+      /** @var \Drupal\user\Entity\User $user */
+      if ($user = $this->entityTypeManager->getStorage('user')->load($data['uid'])) {
+        $this->logger->info("{$row_counter}. {$data['name']} ({$data['uid']}) exists.");
+        if ($options['skip-existing']) {
+          $this->logger->info("{$row_counter}. {$data['name']} ({$data['uid']}) already exists, skipping.");
+          continue;
+        }
+      }
+      else {
+        // Create user.
+        /** @var \Drupal\user\Entity\User $user */
+        $user = $this->entityTypeManager->getStorage('user')->create([
+          'uid' => $data['uid'],
+          'name' => $data['name'],
+          'mail' => $data['mail'],
+        ]);
+
+        if (!empty($options['account-active']) && $options['account-active']) {
+          $user->activate();
+        }
+        if (!empty($options['account-blocked']) && $options['account-blocked']) {
+          $user->block();
+        }
+        else {
+          $user->activate();
+        }
+
+        $user->save();
+      }
+    }
+
+    fclose($handle);
+  }
+
+  /**
    * Get parent Id of a group.
    */
   protected function getGroupParentId($group_id) {
