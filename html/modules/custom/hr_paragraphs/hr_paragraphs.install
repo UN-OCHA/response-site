@@ -41,3 +41,17 @@ function hr_paragraphs_update_9002() {
     $node->save();
   }
 }
+
+/**
+ * Add user with uid 999999.
+ */
+function hr_paragraphs_update_9003() {
+  /** @var \Drupal\user\Entity\User $user */
+  $user = \Drupal::entityTypeManager()->getStorage('user')->create([
+    'uid' => 999999,
+    'name' => 'D7 offset - Do not delete',
+    'mail' => 'no@example.com',
+  ]);
+
+  $user->block()->save();
+}
