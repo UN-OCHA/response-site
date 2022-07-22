@@ -33,6 +33,7 @@
  */
 #}
 {{ attach_library('common_design_subtheme/rw-country') }}
+{{ attach_library('common_design_subtheme/rw-river') }}
 {{ attach_library('common_design_subtheme/rw-river-letter-navigation') }}
 {%
   set classes = [
@@ -55,6 +56,12 @@
       {{ header }}
     </div>
   {% endif %}
+
+  <div class="rw-river-views">
+    <ul id="rw-river-views__list">
+      <li class="rw-river-views__list__item rw-river-views__list__item--selected"><a href="/operations" class="rw-river-views__link" data-view="all" data-default="">All Operations</a></li>
+    </ul>
+  </div>
 
   {# @see html/themes/custom/common_design_subtheme/components/rw-river-letter-navigation/rw-river-create-letter-navigation.js #}
   <div class="rw-river-letter-navigation-wrapper" id="rw-river-letter-navigation-wrapper"></div>

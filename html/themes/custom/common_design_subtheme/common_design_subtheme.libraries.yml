@@ -160,6 +160,12 @@ rw-country:
   dependencies:
     - common_design_subtheme/rw-brand
 
+rw-river:
+  css:
+    theme:
+      components/rw-river/rw-river.css: {}
+      components/rw-river/rw-river-views.css: {}
+
 rw-river-letter-navigation:
   css:
     theme:
