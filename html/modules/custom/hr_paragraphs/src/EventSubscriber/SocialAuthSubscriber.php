@@ -2,6 +2,7 @@
 
 namespace Drupal\hr_paragraphs\EventSubscriber;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Mail\MailManager;
 use Drupal\social_auth\Event\SocialAuthEvents;
 use Drupal\social_auth\Event\UserEvent;
@@ -14,6 +15,13 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class SocialAuthSubscriber implements EventSubscriberInterface {
 
   /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * Mail manager.
    *
    * @var \Drupal\Core\Mail\MailManager
@@ -23,10 +31,13 @@ class SocialAuthSubscriber implements EventSubscriberInterface {
   /**
    * SocialAuthSubscriber constructor.
    *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   Config.
    * @param \Drupal\Core\Mail\MailManager $mail_manager
    *   The mail manager service.
    */
-  public function __construct(MailManager $mail_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, MailManager $mail_manager) {
+    $this->configFactory = $config_factory;
     $this->mailManager = $mail_manager;
   }
 
@@ -68,7 +79,10 @@ class SocialAuthSubscriber implements EventSubscriberInterface {
       'mail' => $event->getUser()->getInitialEmail(),
     ];
 
-    $this->mailManager->mail('hr_paragraphs', 'user_created', 'info@humanitarianresponse.info', 'en', $params);
+    $to = $this->configFactory->get('hr_paragraphs.settings')->get('notification_email');
+    if (!empty($to)) {
+      $this->mailManager->mail('hr_paragraphs', 'user_created', $to, 'en', $params);
+    }
   }
 
 }
