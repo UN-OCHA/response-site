@@ -519,6 +519,16 @@ class HrParagraphsCommands extends DrushCommands {
         }
       }
 
+      // Make sure mandatory fields are set.
+      if (!isset($data['uid']) || !isset($data['name']) || !isset($data['mail'])) {
+        $this->logger->info('Some mandatory fields are missing');
+        continue;
+      }
+      elseif (empty($data['uid']) || empty($data['name']) || empty($data['mail'])) {
+        $this->logger->info('Some mandatory fields are missing');
+        continue;
+      }
+
       // Skip all but managers.
       if ($data['role_name'] != 'manager') {
         continue;
@@ -668,6 +678,16 @@ class HrParagraphsCommands extends DrushCommands {
         }
       }
 
+      // Make sure mandatory fields are set.
+      if (!isset($data['uid']) || !isset($data['name']) || !isset($data['mail'])) {
+        $this->logger->info('Some mandatory fields are missing');
+        continue;
+      }
+      elseif (empty($data['uid']) || empty($data['name']) || empty($data['mail'])) {
+        $this->logger->info('Some mandatory fields are missing');
+        continue;
+      }
+
       if (!isset($options['migrate-all']) || !$options['migrate-all']) {
         // Limit Ids if needed.
         if (!empty($options['ids'])) {
@@ -726,7 +746,9 @@ class HrParagraphsCommands extends DrushCommands {
         }
 
         $user->save();
+        $already_imported[] = $user->id();
       }
+
     }
 
     fclose($handle);
