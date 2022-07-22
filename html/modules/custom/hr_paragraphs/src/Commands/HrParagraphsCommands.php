@@ -502,6 +502,16 @@ class HrParagraphsCommands extends DrushCommands {
         continue;
       }
 
+      // Make sure mandatory fields are set.
+      if (!isset($data['uid']) || !isset($data['name']) || !isset($data['mail'])) {
+        $this->logger->info('Some mandatory fields are missing');
+        continue;
+      }
+      elseif (empty($data['uid']) || empty($data['name']) || empty($data['mail'])) {
+        $this->logger->info('Some mandatory fields are missing');
+        continue;
+      }
+
       // Limit Ids if needed.
       if (!empty($options['ids'])) {
         if (!in_array($data['uid'], explode(',', $options['ids']))) {
@@ -517,16 +527,6 @@ class HrParagraphsCommands extends DrushCommands {
             continue;
           }
         }
-      }
-
-      // Make sure mandatory fields are set.
-      if (!isset($data['uid']) || !isset($data['name']) || !isset($data['mail'])) {
-        $this->logger->info('Some mandatory fields are missing');
-        continue;
-      }
-      elseif (empty($data['uid']) || empty($data['name']) || empty($data['mail'])) {
-        $this->logger->info('Some mandatory fields are missing');
-        continue;
       }
 
       // Skip all but managers.
@@ -671,13 +671,6 @@ class HrParagraphsCommands extends DrushCommands {
         $data[$header_lowercase[$i]] = trim($row[$i]);
       }
 
-      // Skip already imported ones.
-      if (!empty($already_imported)) {
-        if (!in_array($data['uid'], $already_imported)) {
-          continue;
-        }
-      }
-
       // Make sure mandatory fields are set.
       if (!isset($data['uid']) || !isset($data['name']) || !isset($data['mail'])) {
         $this->logger->info('Some mandatory fields are missing');
@@ -685,6 +678,11 @@ class HrParagraphsCommands extends DrushCommands {
       }
       elseif (empty($data['uid']) || empty($data['name']) || empty($data['mail'])) {
         $this->logger->info('Some mandatory fields are missing');
+        continue;
+      }
+
+      // Skip already imported ones.
+      if (in_array($data['uid'], $already_imported)) {
         continue;
       }
 
