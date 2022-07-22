@@ -159,3 +159,11 @@ rw-country:
       components/rw-country/rw-country-list.css: {}
   dependencies:
     - common_design_subtheme/rw-brand
+
+rw-river-letter-navigation:
+  css:
+    theme:
+      components/rw-river-letter-navigation/rw-river-letter-navigation.css: {}
+  js:
+    components/rw-river-letter-navigation/rw-river-create-letter-navigation.js: {}
+    components/rw-river-letter-navigation/rw-river-letter-navigation.js: {}

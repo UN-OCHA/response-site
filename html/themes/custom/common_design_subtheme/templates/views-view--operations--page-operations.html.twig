@@ -33,6 +33,7 @@
  */
 #}
 {{ attach_library('common_design_subtheme/rw-country') }}
+{{ attach_library('common_design_subtheme/rw-river-letter-navigation') }}
 {%
   set classes = [
     'rw-river-page',
@@ -54,6 +55,10 @@
       {{ header }}
     </div>
   {% endif %}
+
+  {# @see html/themes/custom/common_design_subtheme/components/rw-river-letter-navigation/rw-river-create-letter-navigation.js #}
+  <div class="rw-river-letter-navigation-wrapper" id="rw-river-letter-navigation-wrapper"></div>
+
   {% if exposed %}
     <div class="view-filters">
       {{ exposed }}
