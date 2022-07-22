@@ -1,4 +1,4 @@
-uuid: a51d6e0c-2d4d-4873-ba4c-f6b9007fdf60
+uuid: cb46f568-8171-4663-91a6-8b804543e885
 langcode: en
 status: true
 dependencies:
@@ -8,10 +8,10 @@ dependencies:
     - system.menu.main
   module:
     - group
-id: operations
-label: Operations
+id: locations
+label: Locations
 module: views
-description: 'Overviews of all Operations'
+description: 'Overview of all Operations'
 tag: ''
 base_table: groups_field_data
 base_field: id
@@ -357,18 +357,18 @@ display:
         - 'languages:language_interface'
       tags:
         - 'config:field.storage.group.field_archive_group'
-  page_operations:
-    id: page_operations
-    display_title: Operations
+  page_locations:
+    id: page_locations
+    display_title: Locations
     display_plugin: page
     position: 1
     display_options:
       display_description: ''
       display_extenders: {  }
-      path: operations
+      path: locations
       menu:
         type: normal
-        title: Operations
+        title: Locations
         description: ''
         weight: 0
         expanded: false
