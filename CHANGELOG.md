@@ -4,6 +4,22 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.0.9](https://github.com/operations-site/compare/v0.0.8...v0.0.9) (2022-07-22)
+### Features
+
+* Drush command to import users [#RWR-172](https://https://humanitarian.atlassian.net/browse/RWR-172) ([7fd979](https://github.com/operations-site/commit/7fd979275a2333a91ee17111c515644766161da3))
+* Import all users [#RWR-172](https://https://humanitarian.atlassian.net/browse/RWR-172) ([69f11b](https://github.com/operations-site/commit/69f11bff3ade8ea1984bc623197498adece6a232))
+* Import users by email [#RWR-172](https://https://humanitarian.atlassian.net/browse/RWR-172) ([9ca0c7](https://github.com/operations-site/commit/9ca0c714272446de368479bec6a635c21352bcb7))
+
+### Bug Fixes
+
+* Remove trailing bullet from meta ([c1ee3c](https://github.com/operations-site/commit/c1ee3c60e8da95314a8fb45d6ab4c956127bc5a0))
+* Un-flex the River meta fields ([e7902f](https://github.com/operations-site/commit/e7902fac6ca714282af5531ce0641b3952456ccb))
+
+### Chores
+
+* Create user with id 999999 [#RWR-172](https://https://humanitarian.atlassian.net/browse/RWR-172) ([4ee3d6](https://github.com/operations-site/commit/4ee3d6951c0166be7a092d3b6a304d748224725b))
+
 ## [0.0.8](https://github.com/operations-site/compare/v0.0.7...v0.0.8) (2022-07-20)
 ### Features
 
