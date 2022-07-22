@@ -31,3 +31,9 @@ services:
     class: Drupal\hr_paragraphs\Routing\RouteSubscriber
     tags:
       - { name: event_subscriber }
+  helper.event_subscriber:
+    class: Drupal\hr_paragraphs\EventSubscriber\SocialAuthSubscriber
+    arguments:
+      - '@plugin.manager.mail'
+    tags:
+      - { name: 'event_subscriber' }
