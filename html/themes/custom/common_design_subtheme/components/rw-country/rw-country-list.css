@@ -1,0 +1,77 @@
+/* stylelint-disable max-line-length */
+/**
+ * RW Country List
+ *
+ * Taken directly from RW9. Any cusotmizations will appear in a separate file.
+ *
+ * @see https://github.com/UN-OCHA/rwint9-site/blob/38e66da1b0fa4d6f316aaa7c961db859e2ef5d4b/html/themes/custom/common_design_subtheme/components/rw-country/rw-country-list.css
+ */
+.rw-river-page--countries > ul {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 12px -12px -12px -12px;
+  padding: 0;
+  list-style: none;
+}
+.rw-river-page--countries > ul ul,
+.rw-river-page--countries > ul li {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rw-river-page--countries > ul > li {
+  padding: 12px;
+}
+.rw-river-page--countries > ul > li:target:before {
+  position: absolute;
+  z-index: -1;
+  top: 8px;
+  right: 0;
+  bottom: 12px;
+  left: 0;
+  content: "";
+  border: 4px solid var(--cd-reliefweb-brand-grey--light);
+}
+.rw-river-page--countries > ul .rw-river-country-list__group__title {
+  margin: 8px 0 24px 0;
+  padding: 0 0 16px 0;
+  border-bottom: 1px solid var(--cd-reliefweb-brand-grey--dark);
+  font-size: var(--cd-font-size--large);
+  font-weight: bold;
+}
+.rw-river-page--countries > ul li li {
+  margin: 0 0 8px 0;
+  padding-bottom: 8px;
+}
+.rw-river-page--countries > ul li li:last-child {
+  margin: 0;
+  border-bottom: none;
+}
+.rw-river-page--countries > ul li a {
+  line-height: 1.5;
+}
+
+@media screen and (min-width: 480px) {
+  .rw-river-page--countries > ul {
+    columns: 2;
+    column-gap: 8px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .rw-river-page--countries > ul {
+    columns: 3;
+    column-gap: 8px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .rw-river-page--countries > ul {
+    columns: 4;
+    column-gap: 8px;
+  }
+}
