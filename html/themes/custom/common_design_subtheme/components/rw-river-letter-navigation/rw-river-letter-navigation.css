@@ -1,0 +1,109 @@
+/* stylelint-disable max-line-length */
+/**
+ * RW River Letter Navigation
+ *
+ * @see https://raw.githubusercontent.com/UN-OCHA/rwint9-site/41d232253529a2b86e0954954491f229611e0b52/html/themes/custom/common_design_subtheme/components/rw-river-letter-navigation/rw-river-letter-navigation.css
+ */
+
+/* Go to letter navigation */
+.rw-river-letter-navigation h3 {
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+  line-height: 40px;
+}
+.rw-river-letter-navigation h3:after {
+  content: ":";
+}
+.rw-river-letter-navigation ul {
+  display: inline-block;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40px, min-content));
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: middle;
+  background: rgba(230, 236, 239, 0.2);
+}
+.rw-river-letter-navigation li {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+.rw-river-letter-navigation li a {
+  display: inline-block;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 8px;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 40px;
+}
+.rw-river-letter-navigation li a.rw-river-letter-navigation__link--active,
+.rw-river-letter-navigation li a:focus,
+.rw-river-letter-navigation li a:active,
+.rw-river-letter-navigation li a:hover {
+  text-decoration: none;
+  background: var(--cd-reliefweb-brand-grey--light);
+  font-weight: bold;
+}
+
+@media screen and (max-width: 479px) {
+  .js .rw-river-letter-navigation__btn {
+    display: block;
+    height: 40px;
+    margin: 0 auto;
+    padding: 0 8px;
+    border: 1px solid var(--cd-reliefweb-brand-grey--light);
+    background: white;
+    font-size: 16px;
+  }
+  .rw-river-letter-navigation__btn[aria-expanded] .cd-icon--arrow-down {
+    fill: var(--cd-reliefweb-brand-grey--dark);
+  }
+  [dir="ltr"] .rw-river-letter-navigation__btn[aria-expanded] .cd-icon--arrow-down {
+    margin-left: 0.5rem;
+  }
+  [dir="rtl"] .rw-river-letter-navigation__btn[aria-expanded] .cd-icon--arrow-down {
+    margin-right: 0.5rem;
+  }
+  .js .rw-river-letter-navigation {
+    position: absolute;
+    z-index: 4;
+    right: 12px;
+    left: 12px;
+    background: white;
+    -webkit-box-shadow: 0 0 6px 2px var(--cd-reliefweb-brand-grey--light);
+    box-shadow: 0 0 6px 2px var(--cd-reliefweb-brand-grey--light);
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .js .rw-river-letter-navigation {
+    --dropdown: false;
+  }
+}
+
+@media all and (min-width: 480px) and (-ms-high-contrast: none) {
+  /* This is needed for IE11
+  No support for CSS custom properties means
+  --dropdown: false; property on nav container is not recognised
+  so the cd-dropdown.js creates a toggler button on desktop
+  This hides it when that happens.
+  */
+  .rw-river-letter-navigation__btn {
+    display: none;
+  }
+
+  /* This is needed for IE11
+  No support for CSS custom properties means
+  --dropdown: false; property on nav container is not recognised
+  so the cd-dropdown.js does not run the updateToggler function
+  which toggles the data-cd-hidden attribute.
+  This displays the nav regardless of that attribute value.
+  */
+  .rw-river-letter-navigation[data-cd-hidden="true"] {
+    display: block;
+  }
+}
