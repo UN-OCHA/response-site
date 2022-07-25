@@ -168,12 +168,22 @@
   text-decoration: none;
 }
 .hri-river__file-icon {
+  position: relative;
+  top: 1px;
   display: inline-block;
   width: 12px;
   height: 12px;
   background: transparent url("rw-icons-sprite.svg") -72px -60px no-repeat;
+}
+
+/* external URL symbols */
+.hri-river__external-url {
   position: relative;
   top: 1px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: transparent url("rw-icons-sprite.svg") -84px -108px no-repeat;
 }
 
 /**
