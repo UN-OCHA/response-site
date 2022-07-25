@@ -171,5 +171,4 @@ rw-river-letter-navigation:
     theme:
       components/rw-river-letter-navigation/rw-river-letter-navigation.css: {}
   js:
-    components/rw-river-letter-navigation/rw-river-create-letter-navigation.js: {}
     components/rw-river-letter-navigation/rw-river-letter-navigation.js: {}
