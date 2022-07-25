@@ -1,0 +1,55 @@
+_core:
+  default_config_hash: yOPH6uEZYRHbg2OFP-bze0jGr06fI-Gr_66W-vA8Faw
+report-only:
+  enable: true
+  directives:
+    connect-src:
+      base: self
+      sources:
+        - '*.google-analytics.com'
+        - '*.doubleclick.net'
+        - '*.analytics.google.com'
+    font-src:
+      base: self
+      sources:
+        - fonts.gstatic.com
+    img-src:
+      base: self
+      sources:
+        - 'data:'
+        - '*.google-analytics.com'
+        - reliefweb.int
+    object-src:
+      base: none
+    script-src:
+      base: self
+      sources:
+        - fonts.googleapis.com
+        - '*.gstatic.com'
+        - '*.google.com'
+        - '*.google-analytics.com'
+        - cdn.jsdelivr.net
+        - googletagmanager.com
+    script-src-attr:
+      base: self
+    script-src-elem:
+      base: self
+    style-src:
+      base: self
+    style-src-attr:
+      base: self
+    style-src-elem:
+      base: self
+    frame-ancestors:
+      base: self
+  reporting:
+    plugin: sitelog
+enforce:
+  enable: true
+  directives:
+    object-src:
+      base: none
+    frame-ancestors:
+      base: self
+  reporting:
+    plugin: sitelog

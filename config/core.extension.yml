@@ -10,6 +10,7 @@ module:
   components: 0
   config: 0
   contextual: 0
+  csp: 0
   ctools: 0
   date_recur: 0
   datetime: 0
@@ -61,7 +62,6 @@ module:
   path: 0
   path_alias: 0
   rdf: 0
-  seckit: 0
   select2: 0
   shortcut: 0
   social_api: 0
