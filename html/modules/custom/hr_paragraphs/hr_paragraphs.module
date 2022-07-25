@@ -1609,3 +1609,18 @@ function hr_paragraphs_remove_layout_paragraph_from_entity($entity_type, $id) {
   $entity->field_paragraphs = $paras;
   $entity->save();
 }
+
+/**
+ * Implements hook_mail().
+ */
+function hr_paragraphs_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'user_created':
+      $message['subject'] = t('New HID login on Response site');
+      $message['body'][] = t("Dear team\n\nThere is new user created on the site.");
+      $message['body'][] = t("\n\nEmail address: @mail.", [
+        '@mail' => $params['mail'],
+      ]);
+      break;
+  }
+}
