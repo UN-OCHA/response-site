@@ -65,8 +65,42 @@
     </ul>
   </div>
 
-  {# @see html/themes/custom/common_design_subtheme/components/rw-river-letter-navigation/rw-river-create-letter-navigation.js #}
-  <div class="rw-river-letter-navigation-wrapper" id="rw-river-letter-navigation-wrapper"></div>
+  <div class="rw-river-letter-navigation-wrapper" id="rw-river-letter-navigation-wrapper">
+    {% set id = 'letter-navigation' %}
+    <nav{{ attributes
+      .addClass([
+        'rw-river-letter-navigation',
+      ])
+      .setAttribute('id', id)
+      .setAttribute('aria-labelledby', id ~ '-title')
+    }}>
+      <h2{{ title_attributes
+        .addClass([
+          'rw-river-letter-navigation__title',
+          'visually-hidden',
+        ])
+        .setAttribute('id',  id ~ '-title')
+      }}>Jump to letter</h2>
+
+      <ul class="rw-river-letter-navigation__list">
+      {% for row in rows %}
+        <li class="rw-river-letter-navigation__list__item"><a{{ create_attribute()
+          .addClass([
+            'rw-river-letter-navigation__link'
+          ])
+          .setAttribute('href', '#group-' ~ row['#title']|render|striptags|trim)
+        }}>{{ row['#title']|render|striptags|trim }}</a></li>
+      {% endfor %}
+        <li class="rw-river-letter-navigation__list__item"><a{{ create_attribute()
+          .addClass([
+            'rw-river-letter-navigation__link'
+          ])
+          .setAttribute('href', '#')
+        }}>{{ 'All'|t }}</a></li>
+      </ul>
+    </nav>
+    </ul>
+  </div>
 
   {% if exposed %}
     <div class="view-filters">

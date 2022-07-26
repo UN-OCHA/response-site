@@ -15,7 +15,9 @@
 .rw-river-letter-navigation h3:after {
   content: ":";
 }
-.rw-river-letter-navigation ul {
+/* selector differs from original to overcome equal strength rule which should
+   apply to the content of this page, but not the navigation */
+.rw-river-letter-navigation ul.rw-river-letter-navigation__list {
   display: inline-block;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(40px, min-content));
