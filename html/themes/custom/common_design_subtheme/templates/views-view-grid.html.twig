@@ -70,11 +70,11 @@
     {% else %}
       <ul class="rw-river-country-list__group__list">
       {% for column in items %}
-        <li{{ column.attributes.addClass('rw-river-country-list__country') }}>
-          {% for row in column.content %}
+        {% for row in column.content %}
+          <li{{ column.attributes.addClass('rw-river-country-list__country') }}>
             {{- row.content -}}
-          {% endfor %}
-        </li>
+          </li>
+        {% endfor %}
       {% endfor %}
       </ul>
     {% endif %}
