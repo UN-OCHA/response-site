@@ -5,6 +5,7 @@ global-styling:
   js:
     js/login_destination.js: {}
   dependencies:
+    - common_design_subtheme/rw-brand
     - common_design_subtheme/hri-breadcrumbs
     - common_design_subtheme/hri-cd-header
     - common_design_subtheme/hri-global-styling
@@ -165,6 +166,8 @@ rw-river:
     theme:
       components/rw-river/rw-river.css: {}
       components/rw-river/rw-river-views.css: {}
+  dependencies:
+    - common_design_subtheme/rw-brand
 
 rw-river-letter-navigation:
   css:
@@ -173,3 +176,5 @@ rw-river-letter-navigation:
   js:
     components/rw-river-letter-navigation/rw-river-create-letter-navigation.js: {}
     components/rw-river-letter-navigation/rw-river-letter-navigation.js: {}
+  dependencies:
+    - common_design_subtheme/rw-brand
