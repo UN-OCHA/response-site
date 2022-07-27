@@ -5,7 +5,6 @@ dependencies:
   config:
     - field.storage.node.field_paragraphs
     - node.type.page
-    - paragraphs.paragraphs_type.card_list
     - paragraphs.paragraphs_type.layout
     - paragraphs.paragraphs_type.twitter_feed
   module:
@@ -24,14 +23,13 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      card_list: card_list
       layout: layout
       twitter_feed: twitter_feed
     negate: 1
     target_bundles_drag_drop:
       card_list:
         weight: -31
-        enabled: true
+        enabled: false
       child_groups:
         weight: -23
         enabled: false

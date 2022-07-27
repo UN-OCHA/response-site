@@ -5,6 +5,7 @@ global-styling:
   js:
     js/login_destination.js: {}
   dependencies:
+    - common_design_subtheme/rw-brand
     - common_design_subtheme/hri-breadcrumbs
     - common_design_subtheme/hri-cd-header
     - common_design_subtheme/hri-global-styling
@@ -118,6 +119,7 @@ hri-river:
     theme:
       components/hri-river/hri-river.css: {}
   dependencies:
+    - common_design_subtheme/rw-brand
     - common_design/cd-button
     - common_design_subtheme/hri-powered-by
 
@@ -147,3 +149,32 @@ hri-twitter-feed:
   css:
     theme:
       components/hri-twitter-feed/hri-twitter-feed.css: {}
+
+rw-brand:
+  css:
+    theme:
+      components/rw-brand/rw-brand.css: {}
+
+rw-country:
+  css:
+    theme:
+      components/rw-country/rw-country-list.css: {}
+  dependencies:
+    - common_design_subtheme/rw-brand
+
+rw-river:
+  css:
+    theme:
+      components/rw-river/rw-river.css: {}
+      components/rw-river/rw-river-views.css: {}
+  dependencies:
+    - common_design_subtheme/rw-brand
+
+rw-river-letter-navigation:
+  css:
+    theme:
+      components/rw-river-letter-navigation/rw-river-letter-navigation.css: {}
+  js:
+    components/rw-river-letter-navigation/rw-river-letter-navigation.js: {}
+  dependencies:
+    - common_design_subtheme/rw-brand

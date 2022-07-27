@@ -4,6 +4,9 @@
             "https://www.drupal.org/project/drupal/issues/2544110": "https://www.drupal.org/files/issues/2021-02-11/2544110-100.patch",
             "Include database SSL/TLS info on status report": "./PATCHES/mysql-ssl-status.patch"
         },
+        "drupal/csp": {
+            "Simplify log format": "PATCHES/csp-log-format.patch"
+        },
         "drupal/layout_paragraphs" : {
             "Async translation - https://www.drupal.org/project/layout_paragraphs/issues/3178277": "./PATCHES/3178277-6.patch"
         },

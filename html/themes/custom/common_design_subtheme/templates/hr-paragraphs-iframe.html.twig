@@ -13,7 +13,7 @@
     'hri-iframe--' ~ ratio,
   ]
 %}
-<div class="{{ classes|join(' ') }}">
+<div{{ create_attribute().addClass(classes) }}>
   <iframe
     class="hri-iframe__iframe"
     sandbox="allow-scripts allow-same-origin"
@@ -25,6 +25,7 @@
     referrerpolicy="no-referrer"
     frameborder="0"
     target="_blank"
-    src="{{ embed_url }}">
+    src="{{ embed_url }}"
+    title="{{ 'Embedded media'|t }}">
   </iframe>
 </div>
