@@ -147,7 +147,7 @@
   margin: -2px 6px 0 0;
   content: "";
   vertical-align: middle;
-  background: rgba(0, 0, 0, 0) url("rw-icons-sprite.svg") -328px -32px no-repeat;
+  background: rgba(0, 0, 0, 0) url("../rw-brand/rw-icons-sprite.svg") -328px -32px no-repeat;
 }
 
 .hri-river__result .meta dd.format.map::before {
@@ -173,7 +173,7 @@
   display: inline-block;
   width: 12px;
   height: 12px;
-  background: transparent url("rw-icons-sprite.svg") -72px -60px no-repeat;
+  background: transparent url("../rw-brand/rw-icons-sprite.svg") -72px -60px no-repeat;
 }
 
 /* external URL symbols */
@@ -183,7 +183,7 @@
   display: inline-block;
   width: 12px;
   height: 12px;
-  background: transparent url("rw-icons-sprite.svg") -84px -108px no-repeat;
+  background: transparent url("../rw-brand/rw-icons-sprite.svg") -84px -108px no-repeat;
 }
 
 /**
