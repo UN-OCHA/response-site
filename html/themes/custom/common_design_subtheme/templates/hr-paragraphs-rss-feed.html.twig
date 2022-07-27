@@ -9,7 +9,7 @@
       <div class="external-feed--item-title">
         <h3>
           {% if options.display_date %}{{ item.date|date('d-M-Y') }} - {% endif %}
-          <a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href="{{ item.link }}">{{ item.title }}</a>
+          <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer external nofollow" class="external-feed--item-link">{{ item.title }}</a>
         </h3>
       </div>
 
