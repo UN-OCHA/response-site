@@ -17,7 +17,7 @@
     </p>
     <h3 class="title">
       <a href="{{ row.url }}">{{ row.title }}</a>
-      <span class="hri-river__external-url"></span>
+      <span class="hri__external-url"></span>
     </h3>
   </header>
 
@@ -58,9 +58,9 @@
       <dt class="files">{{ 'Files'|t }}:</dt>
       <dd class="files">
         {% for file in row.files|slice(0,1) %}
-          <a class="hri-river__file" href="{{ file.url }}" title="{{ file.name }}">
+          <a class="hri-river__file cd-button cd-button--small cd-button--icon" href="{{ file.url }}" title="{{ file.name }}">
             <span class="visually-hidden">{{ 'Download'|t }}</span>
-            <span class="hri-river__file-icon"></span>
+            <span class="cd-button__icon hri-river__file-icon"></span>
           </a>
         {% endfor %}
         {% if row.files|length > 1 %}

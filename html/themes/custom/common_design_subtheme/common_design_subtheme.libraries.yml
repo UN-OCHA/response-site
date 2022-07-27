@@ -119,6 +119,7 @@ hri-river:
     theme:
       components/hri-river/hri-river.css: {}
   dependencies:
+    - common_design_subtheme/rw-brand
     - common_design/cd-button
     - common_design_subtheme/hri-powered-by
 
