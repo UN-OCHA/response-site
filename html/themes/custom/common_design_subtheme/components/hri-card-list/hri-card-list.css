@@ -14,14 +14,15 @@
 
 .paragraph--type--card-list .field--name-field-paragraphs {
   --hri-card-list-num-cols: 1;
+  --hri-card-list-gap-size: 1rem;
 
   display: flex;
   flex-flow: row wrap;
-  gap: 1rem;
+  gap: var(--hri-card-list-gap-size);
 }
 
 .paragraph--type--card-list .field--name-field-paragraphs .field__item {
-  flex: 1 1 calc((100% / var(--hri-card-list-num-cols)) - (1rem * var(--hri-card-list-num-cols) - 1rem));
+  flex: 1 1 calc((100% / var(--hri-card-list-num-cols)) - (var(--hri-card-list-gap-size) * (var(--hri-card-list-num-cols) - 1)));
 }
 
 @media screen and (min-width: 480px) {
