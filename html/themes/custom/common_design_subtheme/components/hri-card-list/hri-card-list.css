@@ -13,7 +13,7 @@
 }
 
 .paragraph--type--card-list .field--name-field-paragraphs {
-  --hri-card-list-num-cols: 2;
+  --hri-card-list-num-cols: 1;
 
   display: flex;
   flex-flow: row wrap;
@@ -21,5 +21,11 @@
 }
 
 .paragraph--type--card-list .field--name-field-paragraphs .field__item {
-  flex: 0 1 calc((100% / var(--hri-card-list-num-cols)) - (1rem * var(--hri-card-list-num-cols) - 1rem));
+  flex: 1 1 calc((100% / var(--hri-card-list-num-cols)) - (1rem * var(--hri-card-list-num-cols) - 1rem));
+}
+
+@media screen and (min-width: 480px) {
+  .paragraph--type--card-list .field--name-field-paragraphs {
+    --hri-card-list-num-cols: 2;
+  }
 }
