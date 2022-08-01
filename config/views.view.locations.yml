@@ -163,7 +163,7 @@ display:
           admin_label: 'Archive status'
           plugin_id: field
           label: ''
-          exclude: true
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -208,7 +208,7 @@ display:
           settings:
             format: custom
             format_custom_false: ''
-            format_custom_true: Archived
+            format_custom_true: (archived)
           group_column: value
           group_columns: {  }
           group_rows: true
