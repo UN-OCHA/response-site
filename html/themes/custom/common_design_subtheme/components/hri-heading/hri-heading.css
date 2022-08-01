@@ -8,19 +8,20 @@
  * @see html/themes/custom/common_design_subtheme/templates/paragraph--landing-page--heading.html.twig
  */
 .heading--with-link {
-  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.heading--with-link .field--name-field-title {
+  margin-bottom: 0;
 }
 
 .heading--with-link .field-title__link {
-  position: absolute;
-  top: 10px;
+  font-size: 1rem;
   font-style: italic;
-}
-
-@media screen and (min-width: 1024px) {
-  .heading--with-link .field-title__link {
-    top: 16px;
-  }
 }
 
 .heading--with-link .field-title__link:hover {
