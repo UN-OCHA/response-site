@@ -363,7 +363,7 @@ class HdxController extends ControllerBase {
    */
   public function getHdxFilters($key = NULL) {
     $filters = [
-      'groups' => $this->t('Groups'),
+      'groups' => $this->t('Locations'),
       'res_format' => $this->t('Formats'),
       'organization' => $this->t('Organizations'),
       'vocab_Topics' => $this->t('Tags'),
