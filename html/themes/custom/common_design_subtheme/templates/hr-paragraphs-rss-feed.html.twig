@@ -10,6 +10,7 @@
         <h3>
           {% if options.display_date %}{{ item.date|date('d-M-Y') }} - {% endif %}
           <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer external nofollow" class="external-feed--item-link">{{ item.title }}</a>
+          <span class="hri__external-url"></span>
         </h3>
       </div>
 

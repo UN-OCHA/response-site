@@ -1,20 +1,24 @@
-uuid: cb46f568-8171-4663-91a6-8b804543e885
+uuid: bfa9e390-a23b-490a-af5a-9a6218e04c58
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.group.field_archive_group
-    - group.type.operation
-    - system.menu.main
+    - core.entity_view_mode.node.teaser
+    - paragraphs.paragraphs_type.layout
+    - system.menu.admin
+    - user.role.administrator
+    - user.role.global_editor
   module:
-    - group
-id: locations
-label: Locations
+    - node
+    - paragraphs
+    - user
+id: audit_paragraphs
+label: 'Audit Paragraphs'
 module: views
-description: 'Overview of all Operations'
+description: ''
 tag: ''
-base_table: groups_field_data
-base_field: id
+base_table: node_field_data
+base_field: nid
 display:
   default:
     id: default
@@ -22,20 +26,20 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: Locations
+      title: 'Contains a Layout'
       fields:
-        label_1:
-          id: label_1
-          table: groups_field_data
-          field: label
+        nid:
+          id: nid
+          table: node_field_data
+          field: nid
           relationship: none
           group_type: group
-          admin_label: 'First letter of Operation name'
-          entity_type: group
-          entity_field: label
+          admin_label: ''
+          entity_type: node
+          entity_field: nid
           plugin_id: field
-          label: ''
-          exclude: true
+          label: ID
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -45,7 +49,7 @@ display:
             external: false
             replace_spaces: false
             path_case: none
-            trim_whitespace: true
+            trim_whitespace: false
             alt: ''
             rel: ''
             link_class: ''
@@ -53,21 +57,21 @@ display:
             suffix: ''
             target: ''
             nl2br: false
-            max_length: 1
-            word_boundary: false
-            ellipsis: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
             more_link: false
             more_link_text: ''
             more_link_path: ''
             strip_tags: false
-            trim: true
+            trim: false
             preserve_tags: ''
             html: false
           element_type: ''
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -76,9 +80,10 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: string
+          type: number_integer
           settings:
-            link_to_entity: false
+            thousand_separator: ''
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -89,17 +94,81 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        label:
-          id: label
-          table: groups_field_data
-          field: label
+        title:
+          id: title
+          table: node_field_data
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: null
-          entity_field: label
+          entity_type: node
+          entity_field: title
           plugin_id: field
-          label: ''
+          label: Title
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: false
+            ellipsis: false
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        edit_node:
+          id: edit_node
+          table: node
+          field: edit_node
+          relationship: none
+          group_type: group
+          admin_label: 'Edit link'
+          entity_type: node
+          plugin_id: entity_link_edit
+          label: Actions
           exclude: false
           alter:
             alter_text: false
@@ -140,90 +209,14 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_archive_group:
-          id: field_archive_group
-          table: group__field_archive_group
-          field: field_archive_group
-          relationship: none
-          group_type: group
-          admin_label: 'Archive status'
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: true
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: true
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: boolean
-          settings:
-            format: custom
-            format_custom_false: ''
-            format_custom_true: (archived)
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
+          text: Edit
+          output_url_as_text: false
+          absolute: false
       pager:
-        type: none
+        type: some
         options:
           offset: 0
-          items_per_page: null
+          items_per_page: 20
       exposed_form:
         type: basic
         options:
@@ -235,35 +228,39 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: role
+        options:
+          role:
+            administrator: administrator
+            global_editor: global_editor
       cache:
         type: tag
         options: {  }
       empty: {  }
       sorts:
-        label:
-          id: label
-          table: groups_field_data
-          field: label
+        created:
+          id: created
+          table: node_field_data
+          field: created
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: group
-          entity_field: label
-          plugin_id: standard
-          order: ASC
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
+          granularity: second
       arguments: {  }
       filters:
         status:
           id: status
-          table: groups_field_data
+          table: node_field_data
           field: status
-          entity_type: group
+          entity_type: node
           entity_field: status
           plugin_id: boolean
           value: '1'
@@ -274,17 +271,17 @@ display:
             operator_list: {  }
         type:
           id: type
-          table: groups_field_data
+          table: paragraphs_item_field_data
           field: type
-          relationship: none
+          relationship: field_paragraphs
           group_type: group
-          admin_label: ''
-          entity_type: group
+          admin_label: 'Contains a Layout Paragraph'
+          entity_type: paragraph
           entity_field: type
           plugin_id: bundle
           operator: in
           value:
-            operation: operation
+            layout: layout
           group: 1
           exposed: false
           expose:
@@ -315,29 +312,48 @@ display:
             default_group_multiple: {  }
             group_items: {  }
       style:
-        type: grid
+        type: table
         options:
-          grouping:
-            -
-              field: label_1
-              rendered: true
-              rendered_strip: false
-          columns: 4
-          automatic_width: false
-          alignment: vertical
-          row_class_custom: ''
-          row_class_default: true
-          col_class_custom: ''
-          col_class_default: true
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            nid: nid
+            title: title
+            edit_node: edit_node
+          default: title
+          info:
+            nid:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            edit_node:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
       row:
-        type: fields
+        type: 'entity:node'
         options:
-          default_field_elements: false
-          inline:
-            label: label
-            field_archive_group: field_archive_group
-          separator: ''
-          hide_empty: false
+          view_mode: teaser
       query:
         type: views_query
         options:
@@ -346,8 +362,30 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
-      header: {  }
+      relationships:
+        field_paragraphs:
+          id: field_paragraphs
+          table: node__field_paragraphs
+          field: field_paragraphs
+          relationship: none
+          group_type: group
+          admin_label: 'Contains Paragraphs'
+          plugin_id: standard
+          required: true
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: '<br>This table displays all Nodes that contain at least one Layout inside their Custom Content field.<br><br>'
+            format: basic_html
+          tokenize: false
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -355,30 +393,34 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-      tags:
-        - 'config:field.storage.group.field_archive_group'
-  page_locations:
-    id: page_locations
-    display_title: Locations
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.roles
+      tags: {  }
+  page_paragraphs_with_layout:
+    id: page_paragraphs_with_layout
+    display_title: 'Contains a Layout'
     display_plugin: page
     position: 1
     display_options:
       display_description: ''
       display_extenders: {  }
-      path: locations
+      path: admin/reports/contains-layout
       menu:
         type: normal
-        title: Locations
-        description: ''
+        title: 'Audit: Layout Paragraphs'
+        description: 'Displays all Nodes which contain Layouts'
         weight: 0
         expanded: false
-        menu_name: main
-        parent: ''
+        menu_name: admin
+        parent: system.admin_reports
         context: '0'
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-      tags:
-        - 'config:field.storage.group.field_archive_group'
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.roles
+      tags: {  }
