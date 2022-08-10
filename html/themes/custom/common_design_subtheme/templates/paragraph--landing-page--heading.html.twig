@@ -3,7 +3,7 @@
  * @file
  * Display a Heading within the Landing Page content type.
  *
- * @overrides html/modules/contrib/paragraphs/templates/paragraph.html.twig
+ * @overrides html/themes/custom/common_design_subtheme/templates/paragraph.html.twig
  *
  * @see template_preprocess_paragraph()
  *
@@ -21,7 +21,7 @@
   ]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
+  <div{{ attributes.addClass(classes).setAttribute('data-type', paragraph.bundle) }}>
     {% block content %}
       {{ content.field_title }}
       <a class="field-title__link" href="/locations">{{ 'View all Operations →'|t }}</a>

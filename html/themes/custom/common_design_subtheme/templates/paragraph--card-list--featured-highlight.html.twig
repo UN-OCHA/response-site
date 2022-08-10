@@ -3,7 +3,7 @@
  * @file
  * Display a Featured Highlight within the Card List.
  *
- * @overrides html/modules/contrib/paragraphs/templates/paragraph.html.twig
+ * @overrides html/themes/custom/common_design_subtheme/templates/paragraph.html.twig
  *
  * @see template_preprocess_paragraph()
  *
@@ -22,7 +22,7 @@
   ]
 %}
 {% block paragraph %}
-  <article{{ attributes.addClass(classes) }}>
+  <article{{ attributes.addClass(classes).setAttribute('data-type', paragraph.bundle) }}>
     {% block content %}
       {% set destination = content.field_destination|render|striptags|trim %}
       <div{{ content_attributes.addClass('node__content').addClass('hri-card__content') }}>
