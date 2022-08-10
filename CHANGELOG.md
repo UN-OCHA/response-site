@@ -4,6 +4,24 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.2.0](https://github.com/response-site/compare/v0.1.0...v0.2.0) (2022-08-09)
+### Features
+
+* Admin-only Report to find nodes containing Layout paras ([f907a0](https://github.com/response-site/commit/f907a0c5c872714190d243fedf11591ec992610a))
+
+### Bug Fixes
+
+* Add csp exceptions for unsafe-inline ([1b2671](https://github.com/response-site/commit/1b26713ca5bdb10cf65d1e8049cd5ee1ad91d3a3))
+* Archive text needs leading whitespace ([7440cf](https://github.com/response-site/commit/7440cf8ebc6b415a507f0a83cfd71e4c18e03fa7))
+* Card List is more declarative ([f38c80](https://github.com/response-site/commit/f38c80aa9f12f32007adba970b8ad1ac6fe900e5))
+* Column headers / sorting ([38d234](https://github.com/response-site/commit/38d234ec29936f65de8ceaf1db23f4ef9bd703f0))
+* Display Archive status on Location list ([b19386](https://github.com/response-site/commit/b19386c1d55cf112f7852eb700d673d73db9afc5))
+* Display RW document title/text fields in Editor previews ([002307](https://github.com/response-site/commit/002307f63c47e960b67977c85753a473f435eca9))
+* Heading with Link behaves better on mobile ([8f0522](https://github.com/response-site/commit/8f0522f72018c5840e6541b49ce9c04cab301a37))
+* Label change for HDX filters ([948439](https://github.com/response-site/commit/9484394558f691a9c13af477bbbf0e0d49bb2516))
+* Title margins for Editor previews ([9b8b63](https://github.com/response-site/commit/9b8b63285abf72455ec2f8e0efc8337a6ff99186))
+* Use RW breakpoint for Card List ([36dbda](https://github.com/response-site/commit/36dbdabee750e2814e109c8f60d7735894e1cfed))
+
 ## [0.0.9](https://github.com/operations-site/compare/v0.0.8...v0.0.9) (2022-07-22)
 ### Features
 

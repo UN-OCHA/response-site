@@ -27,8 +27,8 @@
 }
 
 .field--name-field-paragraphs .field--name-field-title {
-  margin-block-start: 1em;
-  font-size: 2em;
+  margin: 1rem 0;
+  font-size: 1.75em;
 }
 
 .river__result {
