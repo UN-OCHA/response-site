@@ -1,0 +1,29 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a paragraph.
+ *
+ * @overrides html/themes/custom/common_design_subtheme/templates/paragraph.html.twig
+ *
+ * @see template_preprocess_paragraph()
+ *
+ * @ingroup themeable
+ */
+#}
+{{ attach_library('common_design_subtheme/hri-toc') }}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+{% block paragraph %}
+  <nav{{ attributes.addClass(classes).setAttribute('data-type', paragraph.bundle).setAttribute('id', 'paragraph-' ~ paragraph.id()) }}>
+    {% block content %}
+      {{ content }}
+      <ul class="cd-bullet-list hri-toc__list"></ul>
+    {% endblock %}
+  </nav>
+{% endblock paragraph %}

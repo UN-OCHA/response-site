@@ -49,7 +49,11 @@
   ]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes).setAttribute('data-type', paragraph.bundle) }}>
+  <div{{ attributes
+    .addClass(classes)
+    .setAttribute('data-type', paragraph.bundle)
+    .setAttribute('id', 'paragraph-' ~ paragraph.id())
+  }}>
     {% block content %}
       {{ content }}
     {% endblock %}

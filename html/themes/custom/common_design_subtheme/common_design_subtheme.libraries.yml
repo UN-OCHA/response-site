@@ -140,6 +140,10 @@ hri-text-block:
     theme:
       components/hri-text-block/hri-text-block.css: {}
 
+hri-toc:
+  js:
+    components/hri-toc/hri-toc.js: {}
+
 hri-tooltip:
   css:
     theme:

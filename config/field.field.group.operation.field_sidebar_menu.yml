@@ -8,6 +8,7 @@ dependencies:
     - paragraphs.paragraphs_type.child_groups
     - paragraphs.paragraphs_type.group_pages
     - paragraphs.paragraphs_type.menu_block
+    - paragraphs.paragraphs_type.table_of_contents
   module:
     - entity_reference_revisions
 id: group.operation.field_sidebar_menu
@@ -27,8 +28,12 @@ settings:
       menu_block: menu_block
       child_groups: child_groups
       group_pages: group_pages
+      table_of_contents: table_of_contents
     negate: 0
     target_bundles_drag_drop:
+      card_list:
+        weight: 18
+        enabled: false
       child_groups:
         weight: 14
         enabled: true
@@ -38,11 +43,17 @@ settings:
       group_pages:
         weight: 16
         enabled: true
+      hdx_river:
+        weight: 22
+        enabled: false
       heading:
         weight: 17
         enabled: false
       iframe:
         weight: 18
+        enabled: false
+      layout:
+        weight: 25
         enabled: false
       menu_block:
         weight: 13
@@ -56,6 +67,9 @@ settings:
       rss_feed:
         weight: 21
         enabled: false
+      table_of_contents:
+        weight: 17
+        enabled: true
       text_block:
         weight: 22
         enabled: false
