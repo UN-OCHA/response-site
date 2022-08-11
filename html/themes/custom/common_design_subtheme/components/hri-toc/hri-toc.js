@@ -12,10 +12,12 @@
   // Loop through Paragraphs in the main content column and collect essential
   // info about them.
   paragraphs.forEach(function (el) {
-    if (el.dataset.type !== '') {
+    var paragraphTitle = el.querySelector('.field--name-field-title') && el.querySelector('.field--name-field-title').innerText;
+
+    if (paragraphTitle !== null) {
       toc.push({
         id: el.id,
-        title: el.querySelector('h2').innerText
+        title: paragraphTitle
       });
     }
   });
