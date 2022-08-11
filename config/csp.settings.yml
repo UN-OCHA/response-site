@@ -12,17 +12,22 @@ report-only:
     font-src:
       base: self
       sources:
+        - 'data:'
         - fonts.gstatic.com
     img-src:
       base: self
       sources:
         - 'data:'
         - '*.google-analytics.com'
+        - gstatic.com
         - reliefweb.int
+        - ytimg.com
     object-src:
       base: none
     script-src:
       base: self
+      flags:
+        - unsafe-inline
       sources:
         - fonts.googleapis.com
         - '*.gstatic.com'
@@ -32,12 +37,16 @@ report-only:
         - googletagmanager.com
     script-src-attr:
       base: self
+      flags:
+        - unsafe-inline
     script-src-elem:
       base: self
       flags:
         - unsafe-inline
     style-src:
       base: self
+      flags:
+        - unsafe-inline
     style-src-attr:
       base: self
       flags:
