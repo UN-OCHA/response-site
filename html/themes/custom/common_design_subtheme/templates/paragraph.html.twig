@@ -52,7 +52,7 @@
   <div{{ attributes
     .addClass(classes)
     .setAttribute('data-type', paragraph.bundle)
-    .setAttribute('id', 'paragraph-' ~ paragraph.id())
+    .setAttribute('id', paragraph.bundle ~ '-' ~ paragraph.id())
   }}>
     {% block content %}
       {{ content }}

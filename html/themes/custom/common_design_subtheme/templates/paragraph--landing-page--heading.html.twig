@@ -21,7 +21,11 @@
   ]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes).setAttribute('data-type', paragraph.bundle) }}>
+  <div{{ attributes
+    .addClass(classes)
+    .setAttribute('data-type', paragraph.bundle)
+    .setAttribute('id', paragraph.bundle ~ '-' ~ paragraph.id())
+  }}>
     {% block content %}
       {{ content.field_title }}
       <a class="field-title__link" href="/locations">{{ 'View all Operations →'|t }}</a>

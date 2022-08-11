@@ -20,7 +20,11 @@
   ]
 %}
 {% block paragraph %}
-  <nav{{ attributes.addClass(classes).setAttribute('data-type', paragraph.bundle).setAttribute('id', 'paragraph-' ~ paragraph.id()) }}>
+  <nav{{ attributes
+    .addClass(classes)
+    .setAttribute('data-type', paragraph.bundle)
+    .setAttribute('id', paragraph.bundle ~ '-' ~ paragraph.id())
+  }}>
     {% block content %}
       {{ content }}
       <ul class="cd-bullet-list hri-toc__list"></ul>

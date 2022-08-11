@@ -22,7 +22,11 @@
   ]
 %}
 {% block paragraph %}
-  <div{{ attributes.addClass(classes).setAttribute('data-type', paragraph.bundle) }}>
+  <div{{ attributes
+    .addClass(classes)
+    .setAttribute('data-type', paragraph.bundle)
+    .setAttribute('id', paragraph.bundle ~ '-' ~ paragraph.id())
+  }}>
     {% block content %}
       {% set destination = content.field_destination|render|striptags|trim %}
       <div class="hri-highlight__content">
