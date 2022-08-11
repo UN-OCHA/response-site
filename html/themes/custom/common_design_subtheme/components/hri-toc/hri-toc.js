@@ -39,7 +39,7 @@
       // query resolves to false.
       const tocLinks = document.querySelectorAll('.hri-toc__list a');
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches === false) {
-        tocLinks.forEach(link => {
+        tocLinks.forEach(function (link) {
           link.addEventListener('click', function (ev) {
             ev.preventDefault();
             var target = '#' + link.getAttribute('href').split('#')[1];
