@@ -9,6 +9,7 @@ dependencies:
     - paragraphs.paragraphs_type.child_groups
     - paragraphs.paragraphs_type.group_pages
     - paragraphs.paragraphs_type.layout
+    - paragraphs.paragraphs_type.table_of_contents
     - paragraphs.paragraphs_type.twitter_feed
     - paragraphs.paragraphs_type.upcoming_events
   module:
@@ -33,6 +34,7 @@ settings:
       group_pages: group_pages
       layout: layout
       twitter_feed: twitter_feed
+      table_of_contents: table_of_contents
     negate: 1
     target_bundles_drag_drop:
       card_list:
@@ -71,6 +73,9 @@ settings:
       rss_feed:
         weight: -19
         enabled: false
+      table_of_contents:
+        weight: 29
+        enabled: true
       text_block:
         weight: -30
         enabled: false
