@@ -8,6 +8,7 @@ dependencies:
     - paragraphs.paragraphs_type.child_groups
     - paragraphs.paragraphs_type.group_pages
     - paragraphs.paragraphs_type.menu_block
+    - paragraphs.paragraphs_type.table_of_contents
   module:
     - entity_reference_revisions
 id: group.cluster.field_sidebar_menu
@@ -27,42 +28,55 @@ settings:
       menu_block: menu_block
       child_groups: child_groups
       group_pages: group_pages
+      table_of_contents: table_of_contents
     negate: 0
     target_bundles_drag_drop:
+      card_list:
+        weight: -27
+        enabled: false
       child_groups:
-        weight: 14
+        weight: -32
         enabled: true
       featured_highlight:
-        weight: 15
+        weight: -29
         enabled: false
       group_pages:
-        weight: 16
+        weight: -31
         enabled: true
+      hdx_river:
+        weight: -22
+        enabled: false
       heading:
-        weight: 17
+        weight: -28
         enabled: false
       iframe:
-        weight: 18
+        weight: -26
+        enabled: false
+      layout:
+        weight: -18
         enabled: false
       menu_block:
-        weight: 13
+        weight: -33
         enabled: true
       reliefweb_document:
-        weight: 19
+        weight: -25
         enabled: false
       reliefweb_river:
-        weight: 20
+        weight: -24
         enabled: false
       rss_feed:
-        weight: 21
+        weight: -23
         enabled: false
+      table_of_contents:
+        weight: -30
+        enabled: true
       text_block:
-        weight: 22
+        weight: -21
         enabled: false
       twitter_feed:
-        weight: 23
+        weight: -20
         enabled: false
       upcoming_events:
-        weight: 24
+        weight: -19
         enabled: false
 field_type: entity_reference_revisions
