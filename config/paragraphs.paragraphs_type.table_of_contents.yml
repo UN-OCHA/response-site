@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: table_of_contents
-label: 'Table of Contents'
+label: 'Menu - Table of Contents'
 icon_uuid: null
 icon_default: null
 description: 'Automatically constructs a Table of Contents from the headings you add to your content.'
