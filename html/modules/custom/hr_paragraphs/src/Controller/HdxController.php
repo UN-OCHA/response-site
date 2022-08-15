@@ -328,7 +328,7 @@ class HdxController extends ControllerBase {
         case 'vocab_Topics':
         case 'license_id':
           if (is_array($values)) {
-            $parameters['fq_list'][] = $key . ':"' . implode('" OR "', $values) . '"';
+            $parameters['fq_list'][] = $key . ':"' . implode('" OR ' . $key . ':"', $values) . '"';
           }
           else {
             $parameters['fq_list'][] = $key . ':"' . $values . '"';
