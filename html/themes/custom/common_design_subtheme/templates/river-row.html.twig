@@ -12,7 +12,7 @@
     <p class="country">
       <span class="country--primary">{{ row.primary_country }}</span>
       {% if row.countries|length > 1 %}
-        + {{ row.countries|slice(1)|length }} more
+        {{ '+ @count more'|t({'@count': row.countries|slice(1)|length}) }}
       {% endif %}
     </p>
     <h3 class="title">
@@ -64,7 +64,7 @@
           </a>
         {% endfor %}
         {% if row.files|length > 1 %}
-          <em>&nbsp;+ {{ row.files|length - 1 }} more</em>
+          <em>&nbsp;{{ '+ @count more'|t({'@count': row.files|length - 1}) }}</em>
         {% endif %}
       </dd>
       {% endif %}
