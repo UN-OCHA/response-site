@@ -21,8 +21,7 @@ class RouteSubscriber extends RouteSubscriberBase {
 
     // Change title of group content create form.
     if ($route = $collection->get('entity.group_content.create_form')) {
-      $route->setDefault('_title', 'Add Page');
-      $route->setDefault('_title_callback', NULL);
+      $route->setDefault('_title_callback', '\Drupal\hr_paragraphs\Controller\GroupContentTitleController::createFormTitle');
     }
   }
 
