@@ -65,7 +65,11 @@
 
   <div class="river__facets-wrapper">
     <p class="river__facets-count">
-      <span class="river__facets-count__value">{{ total }}</span> documents found
+      {% if total == 1 %}
+        <span class="hri-river__facets-count__value">{{ total }}</span> {{ 'document found'|t }}
+      {% else %}
+        <span class="hri-river__facets-count__value">{{ total }}</span> {{ 'documents found'|t }}
+      {% endif %}
     </p>
 
     {% if active_facets|length > 0 %}

@@ -25,7 +25,7 @@
   </a>
 
   <div class="hri-river__results hri-layout__main-content" id="hri-river-results" aria-labelledby="hri-river-results-heading">
-    <h2 id="hri-river-results-heading" class="visually-hidden">{{ service }} results</h2>
+    <h2 id="hri-river-results-heading" class="visually-hidden">{{ '@service results'|t({'@service': service}) }}</h2>
 
     {% for row in data %}
       {% include '@common_design_subtheme/river-row.html.twig' %}
@@ -39,18 +39,21 @@
   </a>
 
   <div class="hri-river__facets-wrapper hri-layout__sidebar hri-layout__first" id="hri-river-filters" aria-labelledby="hri-river-filters-heading">
-    <h2 id="hri-river-filters-heading" class="visually-hidden">{{ service }} filters</h2>
+    <h2 id="hri-river-filters-heading" class="visually-hidden">{{ '@service filters'|t({'@service': service}) }}</h2>
 
     <div class="hri-powered-by hri-powered-by--{{ service|clean_class }}">
-      <span class="hri-powered-by__text">Powered by</span>
+      <span class="hri-powered-by__text">{{ 'Powered by'|t }}</span>
       <a class="hri-powered-by__link" href="{{ service_url }}">
         <span class="visually-hidden">{{ service }}</span>
       </a>
     </div>
 
     <p class="hri-river__facets-count">
-      {% set pluralize = total == 1 ? '' : 's' %}
-      <span class="hri-river__facets-count__value">{{ total }}</span> document{{ pluralize }} found
+      {% if total == 1 %}
+        <span class="hri-river__facets-count__value">{{ total }}</span> {{ 'document found'|t }}
+      {% else %}
+        <span class="hri-river__facets-count__value">{{ total }}</span> {{ 'documents found'|t }}
+      {% endif %}
     </p>
 
     {% if active_facets|length > 0 %}

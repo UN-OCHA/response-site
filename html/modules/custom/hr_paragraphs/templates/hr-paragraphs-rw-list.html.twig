@@ -6,7 +6,7 @@
           <p class="country">
             <span class="country--primary">{{ row.primary_country }}</span>
             {% if row.countries|length > 1 %}
-              + {{ row.countries|slice(1)|length }} more
+              {{ '+ @count more'|t({'@count': row.countries|slice(1)|length}) }}
             {% endif %}
           </p>
           <h4 class="title"><a href="{{ row.url }}">{{ row.title }}</a></h4>
