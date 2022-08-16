@@ -98,7 +98,7 @@
             "@git-hooks"
         ]
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
         "bin-dir": "vendor/bin/",
