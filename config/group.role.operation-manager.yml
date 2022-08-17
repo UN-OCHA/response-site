@@ -71,6 +71,7 @@ permissions:
   - 'update paragraph content text_block'
   - 'update paragraph content twitter_feed'
   - 'update paragraph content upcoming_events'
+  - 'view any unpublished group'
   - 'view group'
   - 'view group revisions'
   - 'view group_membership content'
