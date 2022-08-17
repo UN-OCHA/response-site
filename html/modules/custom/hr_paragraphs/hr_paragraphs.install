@@ -73,3 +73,52 @@ function hr_paragraphs_update_9004() {
   $field_schema['paragraph_revision__field_iframe_url']['fields']['field_iframe_url_uri']['length'] = 4096;
   $storage_schema->set($key, $field_schema);
 }
+
+/**
+ * Change all links to 4096 characters.
+ */
+function hr_paragraphs_update_9005() {
+  $storage_schema = \Drupal::keyValue('entity.storage_schema.sql');
+  $entity_field_manager = \Drupal::service('entity_field.manager');
+  $entity_field_map = $entity_field_manager->getFieldMapByFieldType('link');
+  foreach ($entity_field_map as $entity_type_id => $fields) {
+    foreach ($fields as $field_name => $field_info) {
+      $table_name = "{$entity_type_id}__{$field_name}";
+      $revison_name = "{$entity_type_id}_revision__{$field_name}";
+      $column_name = "{$field_name}_uri";
+
+      switch ($entity_type_id) {
+        case 'menu_link_content':
+          $table_name = 'menu_link_content_data';
+          $revison_name = 'menu_link_content_field_revision';
+          $column_name = 'link__uri';
+          break;
+
+        case 'shortcut':
+          $table_name = 'shortcut_field_data';
+          $revison_name = '';
+          $column_name = 'link__uri';
+          break;
+
+      }
+
+      // Alter database.
+      $database = \Drupal::database();
+      $database->query("ALTER TABLE {$table_name} MODIFY {$column_name} VARCHAR(4096)");
+      if (!empty($revison_name)) {
+        $database->query("ALTER TABLE {$revison_name} MODIFY {$column_name} VARCHAR(4096)");
+      }
+
+      // Update storage.
+      $key = $entity_type_id . '.field_schema_data.' . $field_name;
+      $field_schema = $storage_schema->get($key);
+
+      $field_schema[$table_name]['fields'][$column_name]['length'] = 4096;
+      if (!empty($revison_name)) {
+        $field_schema[$revison_name]['fields'][$column_name]['length'] = 4096;
+      }
+
+      $storage_schema->set($key, $field_schema);
+    }
+  }
+}
