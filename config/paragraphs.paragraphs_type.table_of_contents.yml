@@ -1,0 +1,10 @@
+uuid: cee0f170-0731-4399-a643-a9bb082f8739
+langcode: en
+status: true
+dependencies: {  }
+id: table_of_contents
+label: 'Menu - Table of Contents'
+icon_uuid: null
+icon_default: null
+description: 'Automatically constructs a Table of Contents from the headings you add to your content.'
+behavior_plugins: {  }

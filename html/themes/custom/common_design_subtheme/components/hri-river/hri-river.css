@@ -62,14 +62,14 @@
 
 /* all results but the first */
 .hri-river__result + .hri-river__result {
-  border-top: 1px solid var(--brand-light);
+  border-top: 1px solid var(--brand-grey);
 }
 
 .hri-river__result .country {
   display: inline;
   margin-inline-end: 0.75em;
   padding: 0.25em 1em;
-  background: var(--brand-light);
+  background: var(--brand-grey);
   font-size: var(--cd-font-size--small);
 }
 .hri-river__result .country--primary {

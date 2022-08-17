@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Display a Heading within the Landing Page content type.
+ * Default theme implementation to display a paragraph.
  *
  * @overrides html/themes/custom/common_design_subtheme/templates/paragraph.html.twig
  *
@@ -10,25 +10,24 @@
  * @ingroup themeable
  */
 #}
-{{ attach_library('common_design_subtheme/hri-heading') }}
+{{ attach_library('common_design_subtheme/hri-toc') }}
 {%
   set classes = [
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished',
-    'heading--with-link',
+    not paragraph.isPublished() ? 'paragraph--unpublished'
   ]
 %}
 {% block paragraph %}
-  <div{{ attributes
+  <nav{{ attributes
     .addClass(classes)
     .setAttribute('data-type', paragraph.bundle)
     .setAttribute('id', paragraph.bundle ~ '-' ~ paragraph.id())
   }}>
     {% block content %}
-      {{ content.field_title }}
-      <a class="field-title__link" href="/locations">{{ 'View all Operations →'|t }}</a>
+      {{ content }}
+      <ul class="cd-bullet-list hri-toc__list"></ul>
     {% endblock %}
-  </div>
+  </nav>
 {% endblock paragraph %}

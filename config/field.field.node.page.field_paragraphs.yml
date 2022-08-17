@@ -6,6 +6,7 @@ dependencies:
     - field.storage.node.field_paragraphs
     - node.type.page
     - paragraphs.paragraphs_type.layout
+    - paragraphs.paragraphs_type.table_of_contents
     - paragraphs.paragraphs_type.twitter_feed
   module:
     - entity_reference_revisions
@@ -25,6 +26,7 @@ settings:
     target_bundles:
       layout: layout
       twitter_feed: twitter_feed
+      table_of_contents: table_of_contents
     negate: 1
     target_bundles_drag_drop:
       card_list:
@@ -63,6 +65,9 @@ settings:
       rss_feed:
         weight: -19
         enabled: false
+      table_of_contents:
+        weight: 29
+        enabled: true
       text_block:
         weight: -30
         enabled: false

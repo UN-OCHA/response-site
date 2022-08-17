@@ -55,3 +55,21 @@ function hr_paragraphs_update_9003() {
 
   $user->block()->save();
 }
+
+/**
+ * Change IFrame URL to 4096 characters.
+ */
+function hr_paragraphs_update_9004() {
+  // Alter database.
+  $database = \Drupal::database();
+  $database->query('ALTER TABLE paragraph__field_iframe_url MODIFY field_iframe_url_uri VARCHAR(4096)');
+  $database->query('ALTER TABLE paragraph_revision__field_iframe_url MODIFY field_iframe_url_uri VARCHAR(4096)');
+
+  // Update storage.
+  $key = 'paragraph.field_schema_data.field_iframe_url';
+  $storage_schema = \Drupal::keyValue('entity.storage_schema.sql');
+  $field_schema = $storage_schema->get($key);
+  $field_schema['paragraph__field_iframe_url']['fields']['field_iframe_url_uri']['length'] = 4096;
+  $field_schema['paragraph_revision__field_iframe_url']['fields']['field_iframe_url_uri']['length'] = 4096;
+  $storage_schema->set($key, $field_schema);
+}

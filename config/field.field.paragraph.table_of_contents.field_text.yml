@@ -1,0 +1,21 @@
+uuid: bfedd03d-592f-4ef8-b7ed-efaf359b797a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.table_of_contents
+  module:
+    - text
+id: paragraph.table_of_contents.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: table_of_contents
+label: Text
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

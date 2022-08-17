@@ -22,7 +22,7 @@ function common_design_subtheme_preprocess_html(&$vars) {
     'rel' => 'alternate icon',
     'href' => '/' . $theme_path . '/favicon.ico',
     'type' => 'image/vnd.microsoft.icon',
-    'sizes' => 'all',
+    'sizes' => 'any',
   ];
 
   // Construct a <link> for our SVG favicon.
