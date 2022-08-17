@@ -26,7 +26,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Contains a Layout'
+      title: 'Audit Paragraphs'
       fields:
         nid:
           id: nid
@@ -403,6 +403,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      title: 'Contains CSS'
       filters:
         status:
           id: status
@@ -501,6 +502,7 @@ display:
           1: AND
           2: OR
       defaults:
+        title: false
         filters: false
         filter_groups: false
         header: false
@@ -541,11 +543,13 @@ display:
       tags: {  }
   page_paragraphs_with_layout:
     id: page_paragraphs_with_layout
-    display_title: 'Contains a Layout'
+    display_title: 'Contains Layouts'
     display_plugin: page
     position: 1
     display_options:
+      title: 'Contains Layouts'
       defaults:
+        title: false
         header: false
       display_description: ''
       header:
