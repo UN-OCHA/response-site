@@ -85,7 +85,8 @@ display:
             thousand_separator: ''
             prefix_suffix: true
           group_column: value
-          group_columns: {  }
+          group_columns:
+            entity_id: entity_id
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -503,9 +504,11 @@ display:
           2: OR
       defaults:
         title: false
+        group_by: false
         filters: false
         filter_groups: false
         header: false
+      group_by: true
       display_description: ''
       header:
         area:
