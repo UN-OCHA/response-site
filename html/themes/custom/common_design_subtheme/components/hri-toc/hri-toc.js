@@ -17,7 +17,13 @@
       paragraphs.forEach(function (el) {
         var paragraphTitle = el.querySelector('.field--name-field-title') && el.querySelector('.field--name-field-title').innerText;
 
-        if (paragraphTitle !== null) {
+        // Skip a paragraph if:
+        // - it has no title
+        // - it's a ToC
+        if (paragraphTitle === null || el.dataset.type === 'table_of_contents') {
+          // Do nothing.
+        }
+        else {
           toc.push({
             id: el.id,
             title: paragraphTitle
