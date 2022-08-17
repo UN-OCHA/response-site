@@ -10,7 +10,7 @@ dependencies:
     - field.field.paragraph.iframe.field_title
     - paragraphs.paragraphs_type.iframe
   module:
-    - link
+    - hr_paragraphs
     - text
 id: paragraph.iframe.default
 targetEntityType: paragraph
@@ -32,7 +32,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_iframe_url:
-    type: link_default
+    type: hr_paragraphs_long_link
     weight: 2
     region: content
     settings:
