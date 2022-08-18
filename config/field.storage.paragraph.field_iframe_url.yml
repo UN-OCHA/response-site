@@ -3,14 +3,14 @@ langcode: en
 status: true
 dependencies:
   module:
-    - link
+    - hr_paragraphs
     - paragraphs
 id: paragraph.field_iframe_url
 field_name: field_iframe_url
 entity_type: paragraph
-type: link
+type: long_link
 settings: {  }
-module: link
+module: hr_paragraphs
 locked: false
 cardinality: 1
 translatable: true
