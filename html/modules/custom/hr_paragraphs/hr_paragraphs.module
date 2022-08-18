@@ -1624,12 +1624,3 @@ function hr_paragraphs_mail($key, &$message, $params) {
       break;
   }
 }
-
-/**
- * Implements hook_field_info_alter().
- */
-function hr_paragraphs_field_info_alter(&$info) {
-  if (isset($info['link'])) {
-    $info['link']['class'] = '\Drupal\hr_paragraphs\LongLinkItem';
-  }
-}
