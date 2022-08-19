@@ -166,6 +166,11 @@ rw-country:
   dependencies:
     - common_design_subtheme/rw-brand
 
+rw-key-figures:
+  css:
+    theme:
+      components/rw-key-figures/rw-key-figures.css: {}
+
 rw-river:
   css:
     theme:

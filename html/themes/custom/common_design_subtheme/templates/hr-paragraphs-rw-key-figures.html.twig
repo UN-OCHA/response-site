@@ -1,0 +1,25 @@
+{{ attach_library('common_design_subtheme/rw-key-figures') }}
+
+<div class="rw-key-figures">
+  <ul class="rw-key-figures__list">
+    {% for row in data %}
+      <li class="key-figure">
+        <figure class="rw-key-figures__figure rw-key-figures__figure--standard">
+          <figcaption class="rw-key-figures__figure__label">{{ row.title }}</figcaption>
+          <div class="rw-key-figures__figure__content">
+            <p>
+              <data value="{{ row.value }}" class="rw-key-figures__figure__value">{{ row.value }}</data>
+            </p>
+          </div>
+          <footer class="rw-key-figures__figure__footer">
+            <time class="rw-key-figures__figure__updated" datetime="{{ row.date }}">Updated {{ row.date|date('d M Y') }}</time>
+            <cite class="rw-key-figures__figure__source">
+              <span class="visually-hidden">Source:</span>
+              <a href="{{ row.url }}">{{ row.source }}</a>
+            </cite>
+          </footer>
+        </figure>
+      </li>
+    {% endfor %}
+  </ul>
+</div>{# .rw-key-figures #}

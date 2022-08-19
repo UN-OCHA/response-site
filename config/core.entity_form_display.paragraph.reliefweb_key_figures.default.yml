@@ -1,0 +1,49 @@
+uuid: 8fe5a5ff-1897-45d7-a1de-8fb1608124ae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.reliefweb_key_figures.field_country
+    - field.field.paragraph.reliefweb_key_figures.field_max_number_of_items
+    - field.field.paragraph.reliefweb_key_figures.field_text
+    - field.field.paragraph.reliefweb_key_figures.field_title
+    - paragraphs.paragraphs_type.reliefweb_key_figures
+  module:
+    - text
+id: paragraph.reliefweb_key_figures.default
+targetEntityType: paragraph
+bundle: reliefweb_key_figures
+mode: default
+content:
+  field_country:
+    type: options_select
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_max_number_of_items:
+    type: number
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_text:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
