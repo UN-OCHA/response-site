@@ -1,0 +1,21 @@
+<div class="hr-paragraphs-rw-key-figures key-figures">
+  <ul class="key-figures__results">
+    {% for row in data %}
+      <li class="key-figure">
+        <figure>
+          <figcaption>{{ row.title }}</figcaption>
+          <div class="key-figure__content">
+            <strong class="key-figure__value">{{ row.value }}</strong>
+          </div>
+          <footer>
+            <time datetime="{{ row.date }}">Updated {{ row.date|date('d M Y') }}</time>
+            <cite>
+              <span class="visually-hidden">Source:</span>
+              <a href="{{ row.url }}">{{ row.source }}</a>
+            </cite>
+          </footer>
+        </figure>
+      </li>
+    {% endfor %}
+  </ul>
+</div>{# .key-figures #}

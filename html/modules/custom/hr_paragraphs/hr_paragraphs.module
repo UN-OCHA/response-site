@@ -44,6 +44,14 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'view_all' => NULL,
       ],
     ],
+    'hr_paragraphs_rw_key_figures' => [
+      'template' => 'hr-paragraphs-rw-key-figures',
+      'variables' => [
+        'data' => [],
+        'total' => [],
+        'view_all' => NULL,
+      ],
+    ],
     'upcoming_events' => [
       'template' => 'upcoming-events',
       'variables' => [
@@ -956,6 +964,35 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
     '#data' => [$doc],
     '#total' => NULL,
     '#view_all' => NULL,
+    '#weight' => 99,
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__reliefweb_key_figures(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  // Make sure Country is set.
+  if (!$paragraph->hasField('field_country') || $paragraph->field_country->isEmpty()) {
+    return;
+  }
+
+  // Fetch country from user input.
+  $key_figures_country = $paragraph->field_country->value;
+
+  // Set max number of items to 5 by default.
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
+
+  /** @var \Drupal\hr_paragraphs\Controller\KeyFiguresController */
+  $key_figures_controller = \Drupal::service('hr_paragraphs.key_figures_controller');
+  $results = $key_figures_controller->getKeyFigures($key_figures_country);
+
+  $variables['content']['key_figures'] = [
+    '#theme' => 'hr_paragraphs_rw_key_figures',
+    '#data' => $key_figures_controller->buildKeyFigures($results, $max_number_of_items),
     '#weight' => 99,
   ];
 }

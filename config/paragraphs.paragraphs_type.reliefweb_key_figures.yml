@@ -1,0 +1,10 @@
+uuid: 5f604541-cbb7-4700-8989-bbd83b2dd1ed
+langcode: en
+status: true
+dependencies: {  }
+id: reliefweb_key_figures
+label: 'ReliefWeb - Key Figures'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }
