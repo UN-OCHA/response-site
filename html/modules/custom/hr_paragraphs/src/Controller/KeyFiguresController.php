@@ -4,6 +4,8 @@ namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\RequestException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Page controller for Key Figures.
