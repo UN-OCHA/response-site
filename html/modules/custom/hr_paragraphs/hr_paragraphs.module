@@ -994,6 +994,9 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_key_figures(&$variables) 
     '#theme' => 'hr_paragraphs_rw_key_figures',
     '#data' => $key_figures_controller->buildKeyFigures($results, $max_number_of_items),
     '#weight' => 99,
+    '#cache' => [
+      'max-age' => 12 * 60 * 60,
+    ],
   ];
 }
 
