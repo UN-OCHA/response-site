@@ -4,13 +4,13 @@
 
 Intergration tests using existing site/config.
 
-```bash
+```sh {name=runtests}
 XDEBUG_MODE=coverage ./vendor/bin/phpunit --testsuite Existing --verbose
 ```
 
 ## Drupal check
 
-```bash
+```sh {name=drupalcheck}
 php vendor/bin/drupal-check -ad -e *Widget.php  html/modules/custom/hr_paragraphs/src
 ```
 
@@ -26,7 +26,7 @@ php vendor/bin/drupal-check -ad -e *Widget.php  html/modules/custom/hr_paragraph
 
 On develop branch run the following
 
-```bash
+```sh {name=changelog}
 git fetch --all
 today=$(date +%d-%m-%Y)
 git checkout -b $today-prep-release
@@ -35,6 +35,7 @@ git add composer.json
 git add CHANGELOG.md
 git commit -m "chore: $today prep release"
 git push origin $today-prep-release
+gh_pr
 ```
 
 - Merge to dev
