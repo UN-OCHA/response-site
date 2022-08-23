@@ -8,7 +8,7 @@
           <figcaption class="rw-key-figures__figure__label">{{ row.title }}</figcaption>
           <div class="rw-key-figures__figure__content">
             <p>
-              <data value="{{ row.value }}" class="rw-key-figures__figure__value">{{ row.value }}</data>
+              <data value="{{ row.value }}" class="rw-key-figures__figure__value">{{ row.value|number_format(0, '.', ',') }}</data>
             </p>
           </div>
           <footer class="rw-key-figures__figure__footer">
