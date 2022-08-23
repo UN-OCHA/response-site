@@ -90,3 +90,23 @@ function hr_paragraphs_update_9005() {
 
   $new_field_storage->save();
 }
+
+/**
+ * Delete wrong aliases.
+ */
+function hr_paragraphs_update_9006() {
+  /** @var \Drupal\path_alias\Entity\PathAlias[] $aliases */
+  $aliases = Drupal::entityTypeManager()->getStorage('path_alias')->loadMultiple();
+  foreach ($aliases as $alias) {
+    if ($alias->getAlias() === $alias->getPath()) {
+      $alias->delete();
+    }
+    elseif (strpos($alias->getPath(), '/group/') === 0) {
+      $parts = explode('/', $alias->getPath());
+      $group = Drupal::entityTypeManager()->getStorage('group')->load($parts[2]);
+      if (!$group) {
+        $alias->delete();
+      }
+    }
+  }
+}
