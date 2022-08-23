@@ -120,11 +120,14 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
     $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
     $alias_uniquifier->uniquify($new_alias, $source, $langcode);
 
-    $path_alias = PathAlias::create([
-      'path' => $source,
-      'alias' => $new_alias,
-    ]);
-    $path_alias->save();
+    if ($source !== $new_alias) {
+      $path_alias = PathAlias::create([
+        'path' => $source,
+        'alias' => $new_alias,
+      ]);
+
+      $path_alias->save();
+    }
   }
 
   // Add aliases for tabs.
@@ -162,11 +165,14 @@ function hr_paragraphs_add_aliases_for_tabs(Group $group) {
       continue;
     }
 
-    $path_alias = PathAlias::create([
-      'path' => $source,
-      'alias' => $tab_alias,
-    ]);
-    $path_alias->save();
+    if ($source !== $tab_alias) {
+      $path_alias = PathAlias::create([
+        'path' => $source,
+        'alias' => $tab_alias,
+      ]);
+
+      $path_alias->save();
+    }
   }
 }
 
@@ -205,12 +211,14 @@ function hr_paragraphs_group_update(EntityInterface $entity) {
       $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
       $alias_uniquifier->uniquify($new_alias, $source, $langcode);
 
-      $path_alias = PathAlias::create([
-        'path' => $source,
-        'alias' => $new_alias,
-      ]);
-      $path_alias->save();
+      if ($source !== $new_alias) {
+        $path_alias = PathAlias::create([
+          'path' => $source,
+          'alias' => $new_alias,
+        ]);
 
+        $path_alias->save();
+      }
     }
   }
 
@@ -252,12 +260,14 @@ function hr_paragraphs_node_update(EntityInterface $entity) {
     $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
     $alias_uniquifier->uniquify($new_alias, $source, $langcode);
 
-    $path_alias = PathAlias::create([
-      'path' => $source,
-      'alias' => $new_alias,
-    ]);
+    if ($source !== $new_alias) {
+      $path_alias = PathAlias::create([
+        'path' => $source,
+        'alias' => $new_alias,
+      ]);
 
-    $path_alias->save();
+      $path_alias->save();
+    }
   }
 }
 
@@ -340,11 +350,14 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
   $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
   $alias_uniquifier->uniquify($new_alias, $source, $langcode);
 
-  $path_alias = PathAlias::create([
-    'path' => $source,
-    'alias' => $new_alias,
-  ]);
-  $path_alias->save();
+  if ($source !== $new_alias) {
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $new_alias,
+    ]);
+
+    $path_alias->save();
+  }
 
   // Add aliases for tabs.
   $tabs = [
@@ -358,7 +371,7 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
   ];
 
   foreach ($tabs as $tab) {
-    $source = '/group/' . $entity->id() . '/' . $tab;
+    $source = '/group/' . $subgroup->id() . '/' . $tab;
     $tab_alias = $new_alias . '/' . $tab;
 
     $existing_alias = $path_alias_manager->getAliasByPath($source);
@@ -368,11 +381,14 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
       continue;
     }
 
-    $path_alias = PathAlias::create([
-      'path' => $source,
-      'alias' => $tab_alias,
-    ]);
-    $path_alias->save();
+    if ($source !== $tab_alias) {
+      $path_alias = PathAlias::create([
+        'path' => $source,
+        'alias' => $tab_alias,
+      ]);
+
+      $path_alias->save();
+    }
   }
 }
 
@@ -409,12 +425,14 @@ function hr_paragraphs_group_content_alias(EntityInterface $entity) {
   $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
   $alias_uniquifier->uniquify($new_alias, $source, $langcode);
 
-  $path_alias = PathAlias::create([
-    'path' => $source,
-    'alias' => $new_alias,
-  ]);
+  if ($source !== $new_alias) {
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $new_alias,
+    ]);
 
-  $path_alias->save();
+    $path_alias->save();
+  }
 }
 
 /**
