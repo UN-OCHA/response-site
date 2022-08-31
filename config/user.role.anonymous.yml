@@ -41,6 +41,7 @@ permissions:
   - 'view paragraph content offices'
   - 'view paragraph content recent_assessments'
   - 'view paragraph content reliefweb_document'
+  - 'view paragraph content reliefweb_key_figures'
   - 'view paragraph content reliefweb_river'
   - 'view paragraph content rss_feed'
   - 'view paragraph content table_of_contents'

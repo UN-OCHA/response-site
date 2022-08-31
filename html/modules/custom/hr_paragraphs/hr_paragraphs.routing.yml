@@ -1,6 +1,5 @@
 hr_paragraphs.operation.pages:
   path: '/group/{group}/pages'
-  title: 'Pages'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getPages'
     _title: 'Pages'
@@ -13,7 +12,6 @@ hr_paragraphs.operation.pages:
 
 hr_paragraphs.operation.reports:
   path: '/group/{group}/reports'
-  title: 'Reports'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getReports'
     _title: 'Reports'
@@ -26,7 +24,6 @@ hr_paragraphs.operation.reports:
 
 hr_paragraphs.operation.maps:
   path: '/group/{group}/maps'
-  title: 'Maps / Infographics'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getInfographics'
     _title: 'Maps / Infographics'
@@ -39,7 +36,6 @@ hr_paragraphs.operation.maps:
 
 hr_paragraphs.operation.assessments:
   path: '/group/{group}/assessments'
-  title: 'Assessments'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getAssessments'
     _title: 'Assessments'
@@ -52,7 +48,6 @@ hr_paragraphs.operation.assessments:
 
 hr_paragraphs.operation.data:
   path: '/group/{group}/data'
-  title: 'Data'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getDatasets'
     _title: 'Data'
@@ -65,7 +60,6 @@ hr_paragraphs.operation.data:
 
 hr_paragraphs.operation.events:
   path: '/group/{group}/events'
-  title: 'Events'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getEvents'
     _title: 'Events'
@@ -78,7 +72,6 @@ hr_paragraphs.operation.events:
 
 hr_paragraphs.operation.contacts:
   path: '/group/{group}/contacts'
-  title: 'Contacts'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getContacts'
     _title: 'Contacts'
@@ -91,7 +84,6 @@ hr_paragraphs.operation.contacts:
 
 hr_paragraphs.operation.operations:
   path: '/group/{group}/operations'
-  title: 'Operations'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getOperations'
     _title: 'Operations'
@@ -104,7 +96,6 @@ hr_paragraphs.operation.operations:
 
 hr_paragraphs.operation.ical:
   path: '/group/{group}/ical'
-  title: 'Events'
   defaults:
     _controller: 'hr_paragraphs.paragraph_controller:getIcal'
     _title: 'Events'

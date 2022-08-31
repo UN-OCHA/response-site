@@ -9,7 +9,7 @@
       // Initialize with a few variables.
       const toc = [];
       const paragraphs = document.querySelectorAll('.field--name-field-paragraphs > .field__item > *');
-      const target = document.querySelector('.hri-toc__list');
+      const targets = document.querySelectorAll('.hri-toc__list');
       let output = '';
 
       // Loop through Paragraphs in the main content column and collect essential
@@ -17,7 +17,13 @@
       paragraphs.forEach(function (el) {
         var paragraphTitle = el.querySelector('.field--name-field-title') && el.querySelector('.field--name-field-title').innerText;
 
-        if (paragraphTitle !== null) {
+        // Skip a paragraph if:
+        // - it has no title
+        // - it's a ToC
+        if (paragraphTitle === null || el.dataset.type === 'table_of_contents') {
+          // Do nothing.
+        }
+        else {
           toc.push({
             id: el.id,
             title: paragraphTitle
@@ -30,8 +36,10 @@
         output += '<li><a href="#' + item.id + '">' + item.title + '</a></li>';
       });
 
-      // Append to DOM
-      target.innerHTML = output;
+      // Append to DOM of all ToC Paragraphs on page.
+      targets.forEach(function (target) {
+        target.innerHTML = output;
+      });
 
       // Set up smooth-scrolling for ToC.
       //
@@ -42,8 +50,8 @@
         tocLinks.forEach(function (link) {
           link.addEventListener('click', function (ev) {
             ev.preventDefault();
-            var target = '#' + link.getAttribute('href').split('#')[1];
-            document.querySelector(target).scrollIntoView({behavior: 'smooth'});
+            var linkTarget = '#' + link.getAttribute('href').split('#')[1];
+            document.querySelector(linkTarget).scrollIntoView({behavior: 'smooth'});
           });
         });
       }

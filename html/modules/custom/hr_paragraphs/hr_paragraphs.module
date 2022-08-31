@@ -44,6 +44,14 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'view_all' => NULL,
       ],
     ],
+    'hr_paragraphs_rw_key_figures' => [
+      'template' => 'hr-paragraphs-rw-key-figures',
+      'variables' => [
+        'data' => [],
+        'total' => [],
+        'view_all' => NULL,
+      ],
+    ],
     'upcoming_events' => [
       'template' => 'upcoming-events',
       'variables' => [
@@ -112,11 +120,14 @@ function hr_paragraphs_group_insert(EntityInterface $entity) {
     $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
     $alias_uniquifier->uniquify($new_alias, $source, $langcode);
 
-    $path_alias = PathAlias::create([
-      'path' => $source,
-      'alias' => $new_alias,
-    ]);
-    $path_alias->save();
+    if ($source !== $new_alias) {
+      $path_alias = PathAlias::create([
+        'path' => $source,
+        'alias' => $new_alias,
+      ]);
+
+      $path_alias->save();
+    }
   }
 
   // Add aliases for tabs.
@@ -154,11 +165,14 @@ function hr_paragraphs_add_aliases_for_tabs(Group $group) {
       continue;
     }
 
-    $path_alias = PathAlias::create([
-      'path' => $source,
-      'alias' => $tab_alias,
-    ]);
-    $path_alias->save();
+    if ($source !== $tab_alias) {
+      $path_alias = PathAlias::create([
+        'path' => $source,
+        'alias' => $tab_alias,
+      ]);
+
+      $path_alias->save();
+    }
   }
 }
 
@@ -197,12 +211,14 @@ function hr_paragraphs_group_update(EntityInterface $entity) {
       $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
       $alias_uniquifier->uniquify($new_alias, $source, $langcode);
 
-      $path_alias = PathAlias::create([
-        'path' => $source,
-        'alias' => $new_alias,
-      ]);
-      $path_alias->save();
+      if ($source !== $new_alias) {
+        $path_alias = PathAlias::create([
+          'path' => $source,
+          'alias' => $new_alias,
+        ]);
 
+        $path_alias->save();
+      }
     }
   }
 
@@ -244,12 +260,14 @@ function hr_paragraphs_node_update(EntityInterface $entity) {
     $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
     $alias_uniquifier->uniquify($new_alias, $source, $langcode);
 
-    $path_alias = PathAlias::create([
-      'path' => $source,
-      'alias' => $new_alias,
-    ]);
+    if ($source !== $new_alias) {
+      $path_alias = PathAlias::create([
+        'path' => $source,
+        'alias' => $new_alias,
+      ]);
 
-    $path_alias->save();
+      $path_alias->save();
+    }
   }
 }
 
@@ -332,11 +350,14 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
   $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
   $alias_uniquifier->uniquify($new_alias, $source, $langcode);
 
-  $path_alias = PathAlias::create([
-    'path' => $source,
-    'alias' => $new_alias,
-  ]);
-  $path_alias->save();
+  if ($source !== $new_alias) {
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $new_alias,
+    ]);
+
+    $path_alias->save();
+  }
 
   // Add aliases for tabs.
   $tabs = [
@@ -350,7 +371,7 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
   ];
 
   foreach ($tabs as $tab) {
-    $source = '/group/' . $entity->id() . '/' . $tab;
+    $source = '/group/' . $subgroup->id() . '/' . $tab;
     $tab_alias = $new_alias . '/' . $tab;
 
     $existing_alias = $path_alias_manager->getAliasByPath($source);
@@ -360,11 +381,14 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
       continue;
     }
 
-    $path_alias = PathAlias::create([
-      'path' => $source,
-      'alias' => $tab_alias,
-    ]);
-    $path_alias->save();
+    if ($source !== $tab_alias) {
+      $path_alias = PathAlias::create([
+        'path' => $source,
+        'alias' => $tab_alias,
+      ]);
+
+      $path_alias->save();
+    }
   }
 }
 
@@ -401,12 +425,14 @@ function hr_paragraphs_group_content_alias(EntityInterface $entity) {
   $alias_uniquifier = \Drupal::service('pathauto.alias_uniquifier');
   $alias_uniquifier->uniquify($new_alias, $source, $langcode);
 
-  $path_alias = PathAlias::create([
-    'path' => $source,
-    'alias' => $new_alias,
-  ]);
+  if ($source !== $new_alias) {
+    $path_alias = PathAlias::create([
+      'path' => $source,
+      'alias' => $new_alias,
+    ]);
 
-  $path_alias->save();
+    $path_alias->save();
+  }
 }
 
 /**
@@ -957,6 +983,38 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
     '#total' => NULL,
     '#view_all' => NULL,
     '#weight' => 99,
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph__type().
+ */
+function hr_paragraphs_preprocess_paragraph__reliefweb_key_figures(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  // Make sure Country is set.
+  if (!$paragraph->hasField('field_country') || $paragraph->field_country->isEmpty()) {
+    return;
+  }
+
+  // Fetch country from user input.
+  $key_figures_country = $paragraph->field_country->value;
+
+  // Set max number of items to 5 by default.
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
+
+  /** @var \Drupal\hr_paragraphs\Controller\KeyFiguresController */
+  $key_figures_controller = \Drupal::service('hr_paragraphs.key_figures_controller');
+  $results = $key_figures_controller->getKeyFigures($key_figures_country);
+
+  $variables['content']['key_figures'] = [
+    '#theme' => 'hr_paragraphs_rw_key_figures',
+    '#data' => $key_figures_controller->buildKeyFigures($results, $max_number_of_items),
+    '#weight' => 99,
+    '#cache' => [
+      'max-age' => 12 * 60 * 60,
+    ],
   ];
 }
 
@@ -1626,10 +1684,46 @@ function hr_paragraphs_mail($key, &$message, $params) {
 }
 
 /**
- * Implements hook_field_info_alter().
+ * Implements hook_form_FORM_ID_alter().
  */
-function hr_paragraphs_field_info_alter(&$info) {
-  if (isset($info['link'])) {
-    $info['link']['class'] = '\Drupal\hr_paragraphs\LongLinkItem';
+function hr_paragraphs_form_views_exposed_form_alter(&$form, $form_state, $form_id) {
+  if ($form['#id'] === 'views-exposed-form-groups-page-1') {
+    $form['status']['#options'][1] = t('Published');
+    $form['status']['#options'][0] = t('Unpublished');
+
+    $form['archived']['#options'][1] = t('Yes');
+    $form['archived']['#options'][0] = t('No');
+  }
+  elseif ($form['#id'] === 'views-exposed-form-content-page-1') {
+    // Load all groups.
+    $groups = Group::loadMultiple();
+
+    // Build options.
+    foreach ($groups as $group) {
+      $value = $group->label();
+
+      if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+        if ($group->id() != $group->subgroup_tree->value) {
+          $parent = Group::load($group->subgroup_tree->value);
+          $value = $parent->label() . ' > ' . $value;
+        }
+      }
+
+      if (!empty($value)) {
+        $options[$group->id()] = $value;
+      }
+    }
+
+    // Sort and add an All option.
+    asort($options);
+    $options = ['' => 'All'] + $options;
+
+    // Output as select list.
+    if (isset($form['gid'])) {
+      $form['gid']['#type'] = 'select';
+      $form['gid']['#options'] = $options;
+      $form['gid']['#size'] = 1;
+
+    }
   }
 }

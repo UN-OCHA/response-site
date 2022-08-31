@@ -6,6 +6,7 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\File\FileSystem;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\file\Entity\File;
 use Drupal\file\FileRepositoryInterface;
 use Drupal\hr_paragraphs\Controller\ReliefwebController;
 use Drupal\paragraphs\Entity\Paragraph;
@@ -880,8 +881,13 @@ class HrParagraphsCommands extends DrushCommands {
     foreach ($tags as $tag) {
       $src = $tag->getAttribute('src');
 
-      // Set destination.
+      // Fix filename if needed.
       $file_name = basename($src);
+      if (strpos($file_name, '?') !== FALSE) {
+        $file_name = substr($file_name, 0, strpos($file_name, '?'));
+      }
+
+      // Set destination.
       $destination = 'public://images/' . date('Y-m-d');
       $this->fileSystem->prepareDirectory($destination, FileSystemInterface::CREATE_DIRECTORY);
       $destination .= '/' . $file_name;
@@ -895,9 +901,33 @@ class HrParagraphsCommands extends DrushCommands {
 
       // Get and save file.
       $image = file_get_contents($src);
-      $file = $this->fileRepository->writeData($image, $destination);
+      $this->logger->notice(print_r([
+        $src,
+        $destination,
+        mb_strlen($image),
+      ], TRUE));
 
+      /** @var \Drupal\file\Entity\File $tempFile */
+      $temporaryFile = 'temporary://' . $file_name;
+      $tempFile = $this->fileRepository->writeData($image, $temporaryFile, FileSystemInterface::EXISTS_REPLACE);
+
+      // Resize image.
+      /** @var \Drupal\image\Entity\ImageStyle $style */
+      $style = $this->entityTypeManager->getStorage('image_style')->load('migrate_max_size');
+      $style->createDerivative($temporaryFile, $destination);
+      $file = File::create([
+        'uid' => 1,
+        'filename' => $file_name,
+        'uri' => $destination,
+        'status' => 1,
+      ]);
+      $file->save();
+
+      // Update src.
       $tag->setAttribute('src', $file->createFileUrl());
+
+      // Delete temp file.
+      $tempFile->delete();
     }
 
     $tags = $doc->getElementsByTagName('a');

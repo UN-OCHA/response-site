@@ -26,7 +26,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Contains a Layout'
+      title: 'Audit Paragraphs'
       fields:
         nid:
           id: nid
@@ -85,7 +85,8 @@ display:
             thousand_separator: ''
             prefix_suffix: true
           group_column: value
-          group_columns: {  }
+          group_columns:
+            entity_id: entity_id
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -236,7 +237,20 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: 'No content found!'
+            format: basic_html
+          tokenize: false
       sorts:
         created:
           id: created
@@ -372,20 +386,7 @@ display:
           admin_label: 'Contains Paragraphs'
           plugin_id: standard
           required: true
-      header:
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text
-          empty: true
-          content:
-            value: '<br>This table displays all Nodes that contain at least one Layout inside their Custom Content field.<br><br>'
-            format: basic_html
-          tokenize: false
+      header: {  }
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -397,13 +398,177 @@ display:
         - 'user.node_grants:view'
         - user.roles
       tags: {  }
-  page_paragraphs_with_layout:
-    id: page_paragraphs_with_layout
-    display_title: 'Contains a Layout'
+  page_paragraphs_with_css:
+    id: page_paragraphs_with_css
+    display_title: 'Contains CSS'
     display_plugin: page
     position: 1
     display_options:
+      title: 'Contains CSS'
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        field_text_value:
+          id: field_text_value
+          table: paragraph__field_text
+          field: field_text_value
+          relationship: field_paragraphs
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: contains
+          value: '<style'
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_text_value_1:
+          id: field_text_value_1
+          table: paragraph__field_text
+          field: field_text_value
+          relationship: field_paragraphs
+          group_type: group
+          admin_label: ''
+          plugin_id: string
+          operator: contains
+          value: style=
+          group: 2
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+          2: OR
+      defaults:
+        title: false
+        group_by: false
+        filters: false
+        filter_groups: false
+        header: false
+      group_by: true
       display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: '<br>This page displays all content that contains CSS in any <code>field_text</code>.<br><br>'
+            format: basic_html
+          tokenize: false
+      display_extenders: {  }
+      path: admin/reports/contains-css
+      menu:
+        type: normal
+        title: 'Audit: Custom CSS'
+        description: 'Displays all Nodes which contain CSS in a Custom Block paragraph'
+        weight: 0
+        expanded: false
+        menu_name: admin
+        parent: system.admin_reports
+        context: '0'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url.query_args
+        - 'user.node_grants:view'
+        - user.roles
+      tags: {  }
+  page_paragraphs_with_layout:
+    id: page_paragraphs_with_layout
+    display_title: 'Contains Layouts'
+    display_plugin: page
+    position: 1
+    display_options:
+      title: 'Contains Layouts'
+      defaults:
+        title: false
+        header: false
+      display_description: ''
+      header:
+        area:
+          id: area
+          table: views
+          field: area
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text
+          empty: true
+          content:
+            value: '<br>This page displays all Groups/Nodes that contain at least one Layout inside their Custom Content field.<br><br>'
+            format: basic_html
+          tokenize: false
       display_extenders: {  }
       path: admin/reports/contains-layout
       menu:

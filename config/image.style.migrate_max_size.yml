@@ -1,0 +1,15 @@
+uuid: 991029f8-c25b-40aa-9b8c-4043338dd0bb
+langcode: en
+status: true
+dependencies: {  }
+name: migrate_max_size
+label: 'Migrate Max Size'
+effects:
+  0744b59a-cd46-44c6-b8d1-5031d162f4f7:
+    uuid: 0744b59a-cd46-44c6-b8d1-5031d162f4f7
+    id: image_scale
+    weight: 1
+    data:
+      width: 2000
+      height: 2000
+      upscale: false

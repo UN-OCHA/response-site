@@ -5,6 +5,7 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
+use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
 
 /**
@@ -72,4 +73,40 @@ function hr_paragraphs_update_9004() {
   $field_schema['paragraph__field_iframe_url']['fields']['field_iframe_url_uri']['length'] = 4096;
   $field_schema['paragraph_revision__field_iframe_url']['fields']['field_iframe_url_uri']['length'] = 4096;
   $storage_schema->set($key, $field_schema);
+}
+
+/**
+ * Change IFrame URL to new field type.
+ */
+function hr_paragraphs_update_9005() {
+  $field_storage = Drupal::entityTypeManager()->getStorage('field_storage_config')->load('paragraph.field_iframe_url');
+  $new_field_storage = $field_storage->toArray();
+  $new_field_storage['type'] = 'long_link';
+  $new_field_storage['module'] = 'hr_paragraphs';
+
+  $new_field_storage = FieldStorageConfig::create($new_field_storage);
+  $new_field_storage->original = $new_field_storage;
+  $new_field_storage->enforceIsNew(FALSE);
+
+  $new_field_storage->save();
+}
+
+/**
+ * Delete wrong aliases.
+ */
+function hr_paragraphs_update_9006() {
+  /** @var \Drupal\path_alias\Entity\PathAlias[] $aliases */
+  $aliases = Drupal::entityTypeManager()->getStorage('path_alias')->loadMultiple();
+  foreach ($aliases as $alias) {
+    if ($alias->getAlias() === $alias->getPath()) {
+      $alias->delete();
+    }
+    elseif (strpos($alias->getPath(), '/group/') === 0) {
+      $parts = explode('/', $alias->getPath());
+      $group = Drupal::entityTypeManager()->getStorage('group')->load($parts[2]);
+      if (!$group) {
+        $alias->delete();
+      }
+    }
+  }
 }

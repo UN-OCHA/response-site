@@ -673,7 +673,7 @@ display:
           exposed: true
           expose:
             operator_id: ''
-            label: Published
+            label: 'Published status'
             description: ''
             use_operator: false
             operator: status_op

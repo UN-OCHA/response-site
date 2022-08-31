@@ -1,0 +1,21 @@
+uuid: 9da65864-c534-4f0e-b6de-3c0ab472668b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_country
+    - paragraphs.paragraphs_type.reliefweb_key_figures
+  module:
+    - options
+id: paragraph.reliefweb_key_figures.field_country
+field_name: field_country
+entity_type: paragraph
+bundle: reliefweb_key_figures
+label: Country
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
