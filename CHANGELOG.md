@@ -4,6 +4,36 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.2.2](https://github.com/operations-site/compare/v0.2.1...v0.2.2) (2022-08-31)
+### Features
+
+* Access unpublished groups [#RWR-194](https://https://humanitarian.atlassian.net/browse/RWR-194) ([e8646f](https://github.com/operations-site/commit/e8646f3c3efb8a67596c254286e26a247b0cea89))
+* Add uses, add caching [#RWR-196](https://https://humanitarian.atlassian.net/browse/RWR-196) ([98ab30](https://github.com/operations-site/commit/98ab3001b1b624bc3cf99c3375939fe05910066b))
+* Allow anon to view key figures [#RWR-196](https://https://humanitarian.atlassian.net/browse/RWR-196) ([4d7d79](https://github.com/operations-site/commit/4d7d797829302d68d35da3644c357dc92491795b))
+* Allow links up to 4096 characters [#RWR-188](https://https://humanitarian.atlassian.net/browse/RWR-188) ([987360](https://github.com/operations-site/commit/98736024045746081dd5aa8e68c37d8fc4994177))
+* Change field type for Iframe URL [#RWR-188](https://https://humanitarian.atlassian.net/browse/RWR-188) ([35e5b8](https://github.com/operations-site/commit/35e5b8d261781dfb0a286659c48dea6abbc567aa))
+* Exposed filters on groups [#RWR-198](https://https://humanitarian.atlassian.net/browse/RWR-198) ([742f6e](https://github.com/operations-site/commit/742f6e2b5efcab8447824aa86156a377bfa946cb))
+* Filter by group on admin/content [#RWR-204](https://https://humanitarian.atlassian.net/browse/RWR-204) ([2c0930](https://github.com/operations-site/commit/2c093025cb1957a01341459220b80d00d092ae0f))
+* Key Figures paragraph that pulls from RW API ([25af12](https://github.com/operations-site/commit/25af12e341f941c427eb13a9e38deb54d7dbc8f6))
+* Only manual links [#RWR-207](https://https://humanitarian.atlassian.net/browse/RWR-207) ([9a164c](https://github.com/operations-site/commit/9a164c68b81d7babc52216f351c665f9e3081d77))
+
+### Bug Fixes
+
+* Aggregate the CSS audit so each entity appears once ([d4406b](https://github.com/operations-site/commit/d4406bd3f8d090c49bc6b283538ebc7ba66b45fd))
+* JS should work when multiple ToCs are on page ([fa400a](https://github.com/operations-site/commit/fa400abbfc5d5b1ce59f7f0ecd5be4777d7c5bf7))
+* Theme the Key Figures paragraph ([849da2](https://github.com/operations-site/commit/849da2cb921af9808afe2617cecc1f06f4a67d20))
+* ToC can appear in any Paragraphs field site-wide ([b2d844](https://github.com/operations-site/commit/b2d844867fbbd95522aa805d921af7c47f752d66))
+* Update page titles of Audit views ([0ebae9](https://github.com/operations-site/commit/0ebae9d787a5875a0e251e8da4950e6fed49b612))
+
+### Chores
+
+* Add a new Audit to see what content uses custom CSS ([872756](https://github.com/operations-site/commit/872756b392456b1b305225816ac28d84dcb36cfb))
+* Add support for https://github.com/stateful/rdme ([af3504](https://github.com/operations-site/commit/af350477ab4a2fc09db50e2adc866f91ee3fd59d))
+* Base_route not needed ([33329b](https://github.com/operations-site/commit/33329bbaf25512f61b4ca2e44dbadecc8e2634ba))
+* Title not needed ([dd122e](https://github.com/operations-site/commit/dd122e670e4d2443d1b2a46f7697b25612b8ee8f))
+* Update all drupal modules and dependencies ([522b81](https://github.com/operations-site/commit/522b812165b3d946039ae6503a3b7552f456ae6f))
+* Update all outdated drupal/* packages. ([fc24d0](https://github.com/operations-site/commit/fc24d078793fdecab764b97b9b744f18dccb4061))
+
 ## [0.2.0](https://github.com/response-site/compare/v0.1.0...v0.2.0) (2022-08-09)
 ### Features
 
