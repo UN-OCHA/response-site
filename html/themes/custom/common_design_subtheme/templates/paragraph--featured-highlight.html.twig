@@ -28,7 +28,7 @@
     .setAttribute('id', paragraph.bundle ~ '-' ~ paragraph.id())
   }}>
     {% block content %}
-      {% set destination = paragraph.field_destination.uri %}
+      {% set destination = paragraph.field_destination.0.url %}
       <div class="hri-highlight__content">
         <a href="{{ destination }}">{{ content.field_title }}</a>
         {{ content.field_text }}
