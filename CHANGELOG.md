@@ -4,7 +4,7 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
-## [0.2.2](https://github.com/operations-site/compare/v0.2.1...v0.2.2) (2022-08-31)
+## [0.2.2](https://github.com/UN-OCHA/response-site/compare/v0.2.1...v0.2.2) (2022-08-31)
 ### Features
 
 * Access unpublished groups [#RWR-194](https://https://humanitarian.atlassian.net/browse/RWR-194) ([e8646f](https://github.com/operations-site/commit/e8646f3c3efb8a67596c254286e26a247b0cea89))
