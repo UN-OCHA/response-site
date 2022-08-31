@@ -1694,4 +1694,36 @@ function hr_paragraphs_form_views_exposed_form_alter(&$form, $form_state, $form_
     $form['archived']['#options'][1] = t('Yes');
     $form['archived']['#options'][0] = t('No');
   }
+  elseif ($form['#id'] === 'views-exposed-form-content-page-1') {
+    // Load all groups.
+    $groups = Group::loadMultiple();
+
+    // Build options.
+    foreach ($groups as $group) {
+      $value = $group->label();
+
+      if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+        if ($group->id() != $group->subgroup_tree->value) {
+          $parent = Group::load($group->subgroup_tree->value);
+          $value = $parent->label() . ' > ' . $value;
+        }
+      }
+
+      if (!empty($value)) {
+        $options[$group->id()] = $value;
+      }
+    }
+
+    // Sort and add an All option.
+    asort($options);
+    $options = ['' => 'All'] + $options;
+
+    // Output as select list.
+    if (isset($form['gid'])) {
+      $form['gid']['#type'] = 'select';
+      $form['gid']['#options'] = $options;
+      $form['gid']['#size'] = 1;
+
+    }
+  }
 }
