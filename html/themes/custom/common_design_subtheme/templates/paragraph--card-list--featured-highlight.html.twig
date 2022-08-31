@@ -28,7 +28,7 @@
     .setAttribute('id', paragraph.bundle ~ '-' ~ paragraph.id())
   }}>
     {% block content %}
-      {% set destination = paragraph.field_destination.uri %}
+      {% set destination = paragraph.field_destination.0.url %}
       <div{{ content_attributes.addClass('node__content').addClass('hri-card__content') }}>
         {{ content.field_image }}
         <h3 class="hri-card__title">{{ content.field_title.0 }}</h3>
