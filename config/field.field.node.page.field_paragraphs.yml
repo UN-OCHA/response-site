@@ -5,6 +5,8 @@ dependencies:
   config:
     - field.storage.node.field_paragraphs
     - node.type.page
+    - paragraphs.paragraphs_type.child_groups
+    - paragraphs.paragraphs_type.group_pages
     - paragraphs.paragraphs_type.layout
     - paragraphs.paragraphs_type.twitter_feed
   module:
@@ -24,6 +26,8 @@ settings:
   handler_settings:
     target_bundles:
       layout: layout
+      child_groups: child_groups
+      group_pages: group_pages
       twitter_feed: twitter_feed
     negate: 1
     target_bundles_drag_drop:
@@ -32,13 +36,13 @@ settings:
         enabled: false
       child_groups:
         weight: -26
-        enabled: false
+        enabled: true
       featured_highlight:
         weight: -32
         enabled: false
       group_pages:
         weight: -25
-        enabled: false
+        enabled: true
       hdx_river:
         weight: -31
         enabled: false
