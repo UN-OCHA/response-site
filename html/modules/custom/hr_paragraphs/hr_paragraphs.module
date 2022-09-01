@@ -13,7 +13,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
-use Drupal\group\Entity\GroupContent;
+use Drupal\group\Entity\GroupRelationship;
 use Drupal\node\Entity\Node;
 use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
@@ -243,7 +243,7 @@ function hr_paragraphs_node_update(EntityInterface $entity) {
 
   $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
 
-  $group_content_array = GroupContent::loadByEntity($entity);
+  $group_content_array = GroupRelationship::loadByEntity($entity);
   $group_content = reset($group_content_array);
   if ($group_content) {
     $group = $group_content->getGroup();
@@ -275,8 +275,8 @@ function hr_paragraphs_node_update(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_insert().
  */
 function hr_paragraphs_group_content_insert(EntityInterface $entity) {
-  /** @var \Drupal\group\Entity\GroupContent $entity */
-  $plugin_id = $entity->getGroupContentType()->getContentPluginId();
+  /** @var \Drupal\group\Entity\GroupRelationship $entity */
+  $plugin_id = $entity->getRelationshipType()->getPluginId();
 
   if ($plugin_id === 'group_node:page') {
     return hr_paragraphs_group_content_alias($entity);
@@ -295,7 +295,7 @@ function hr_paragraphs_group_content_insert(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_insert().
  */
 function hr_paragraphs_group_add_member(EntityInterface $entity) {
-  /** @var \Drupal\group\Entity\GroupContent $entity */
+  /** @var \Drupal\group\Entity\GroupRelationship $entity */
   $group = $entity->getGroup();
 
   /** @var \Drupal\user\Entity\User $member */
@@ -328,8 +328,8 @@ function hr_paragraphs_group_add_member(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_insert().
  */
 function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
-  /** @var \Drupal\group\Entity\GroupContent $entity */
-  $plugin_id = $entity->getGroupContentType()->getContentPluginId();
+  /** @var \Drupal\group\Entity\GroupRelationship $entity */
+  $plugin_id = $entity->getRelationshipType()->getPluginId();
   if ($plugin_id != 'subgroup:cluster') {
     return;
   }
@@ -396,8 +396,8 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_insert().
  */
 function hr_paragraphs_group_content_alias(EntityInterface $entity) {
-  /** @var \Drupal\group\Entity\GroupContent $entity */
-  $plugin_id = $entity->getGroupContentType()->getContentPluginId();
+  /** @var \Drupal\group\Entity\GroupRelationship $entity */
+  $plugin_id = $entity->getRelationshipType()->getPluginId();
   if ($plugin_id != 'group_node:page') {
     return;
   }
@@ -650,7 +650,7 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
 
   // If we are on page, get the group.
   if (get_class($group) == 'Drupal\node\Entity\Node') {
-    $group_content_array = GroupContent::loadByEntity($group);
+    $group_content_array = GroupRelationship::loadByEntity($group);
     $group_content = reset($group_content_array);
     if ($group_content) {
       $group = $group_content->getGroup();
@@ -730,7 +730,7 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
   // If we are on page, get the group.
   if (get_class($group) == 'Drupal\node\Entity\Node') {
     $exclude_pages[] = $group->id();
-    $group_content_array = GroupContent::loadByEntity($group);
+    $group_content_array = GroupRelationship::loadByEntity($group);
     $group_content = reset($group_content_array);
     if ($group_content) {
       $group = $group_content->getGroup();
@@ -1288,7 +1288,7 @@ function hr_paragraphs_node_sidebar(&$variables) {
     return;
   }
 
-  $group_content_array = GroupContent::loadByEntity($node);
+  $group_content_array = GroupRelationship::loadByEntity($node);
   $group_content = reset($group_content_array);
   if ($group_content) {
     $group = $group_content->getGroup();

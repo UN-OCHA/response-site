@@ -8,7 +8,7 @@ use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\group\Entity\Group;
-use Drupal\group\Entity\GroupContent;
+use Drupal\group\Entity\GroupRelationship;
 
 /**
  * Provides a custom breadcrumb builder for group content type paths.
@@ -25,7 +25,7 @@ class GroupContentBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       return FALSE;
     }
 
-    $group_content_array = GroupContent::loadByEntity($node);
+    $group_content_array = GroupRelationship::loadByEntity($node);
     $group_content = reset($group_content_array);
 
     if (!$group_content) {
@@ -44,7 +44,7 @@ class GroupContentBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     $node = $route_match->getParameter('node');
 
-    $group_content_array = GroupContent::loadByEntity($node);
+    $group_content_array = GroupRelationship::loadByEntity($node);
     $group_content = reset($group_content_array);
     $group = $group_content->getGroup();
 

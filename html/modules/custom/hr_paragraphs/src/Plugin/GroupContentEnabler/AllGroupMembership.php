@@ -2,7 +2,7 @@
 
 namespace Drupal\hr_paragraphs\Plugin\GroupContentEnabler;
 
-use Drupal\group\Plugin\GroupContentEnabler\GroupMembership;
+use Drupal\group\Plugin\Group\Relation\GroupMembership;
 
 /**
  * Allow selecting blocked users..
