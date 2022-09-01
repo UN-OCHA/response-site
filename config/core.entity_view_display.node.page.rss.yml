@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.rss
+    - field.field.node.page.field_hide_sidebar
     - field.field.node.page.field_paragraphs
     - node.type.page
   module:
@@ -19,5 +20,6 @@ content:
     weight: 100
     region: content
 hidden:
+  field_hide_sidebar: true
   field_paragraphs: true
   langcode: true
