@@ -1283,6 +1283,11 @@ function hr_paragraphs_node_sidebar(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
 
+  // Page without sidebar.
+  if ($node->hasField('field_hide_sidebar') && !$node->field_hide_sidebar->isEmpty() && $node->field_hide_sidebar->value) {
+    return;
+  }
+
   $group_content_array = GroupContent::loadByEntity($node);
   $group_content = reset($group_content_array);
   if ($group_content) {
