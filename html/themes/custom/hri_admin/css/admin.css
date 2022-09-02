@@ -147,3 +147,16 @@
   border-radius: 9999px;
   background: #666;
 }
+
+/* Make sure editor sees paragraph, even if empty */
+.paragraph-preview-indicator {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.js-lpb-component {
+  border: dotted green;
+  min-height: 30px;
+  margin-bottom: 20px;
+}
