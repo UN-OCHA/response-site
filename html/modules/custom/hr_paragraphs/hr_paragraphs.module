@@ -1734,7 +1734,7 @@ function hr_paragraphs_mail($key, &$message, $params) {
  * Implements hook_form_FORM_ID_alter().
  */
 function hr_paragraphs_form_views_exposed_form_alter(&$form, $form_state, $form_id) {
-  if ($form['#id'] === 'views-exposed-form-groups-page-1') {
+  if ($form['#id'] === 'views-exposed-form-groups-page-1' || $form['#id'] === 'views-exposed-form-subgroups-of-a-group-page-1') {
     $form['status']['#options'][1] = t('Published');
     $form['status']['#options'][0] = t('Unpublished');
 
