@@ -31,6 +31,13 @@
     </div>
   {% endif %}
 
+  {% if can_edit %}
+    {{ attach_library('common_design_subtheme/node-edit-link') }}
+    <div class="node-edit--link">
+      <a href="{{ path('entity.node.edit_form', {'node': node.id}) }}?destination={{ path('<current>') }}">{{ 'Edit this page'|t }}</a>
+    </div>
+  {% endif %}
+
   <div{{ content_attributes }}>
     {{ content }}
   </div>
