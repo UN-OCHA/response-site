@@ -534,11 +534,7 @@ class ParagraphController extends ControllerBase {
   public function getReliefwebDocuments(Request $request, Group $group, string $url) : array {
     $limit = 10;
     $offset = $request->query->getInt('page', 0) * $limit;
-    $filters = $request->query->get('filters', []);
-    $base_url = $request->getRequestUri();
-
-    // Active facets.
-    $active_facets = $this->reliefwebController->buildReliefwebActiveFacets($base_url, $filters);
+    $filters = [];
 
     $parameters = $this->reliefwebController->buildReliefwebParameters($offset, $limit, $filters);
 
@@ -577,11 +573,9 @@ class ParagraphController extends ControllerBase {
     $count = $results['totalCount'];
     $this->pagerManager->createPager($count, $limit);
 
-    // Re-order facets.
+    // Facets.
     $facets = [];
-    if (isset($results['embedded'])) {
-      $facets = $this->reliefwebController->buildReliefwebFacets($base_url, $results['embedded'], $filters);
-    }
+    $active_facets = [];
 
     return [
       '#theme' => 'river',
