@@ -34,6 +34,8 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'active_facets' => [],
         'pager' => NULL,
         'group' => NULL,
+        'view_all' => NULL,
+        'set_name' => NULL,
       ],
     ],
     'hr_paragraphs_rw_list' => [

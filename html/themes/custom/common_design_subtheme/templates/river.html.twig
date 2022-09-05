@@ -20,10 +20,6 @@
 {% endif %}
 
 <div class="hri-river hri-layout hri-layout--two-col">
-  <a href="#hri-river-filters" class="visually-hidden focusable skip-link">
-    {{ 'Skip to filters'|t }}
-  </a>
-
   <div class="hri-river__results hri-layout__main-content" id="hri-river-results" aria-labelledby="hri-river-results-heading">
     <h2 id="hri-river-results-heading" class="visually-hidden">{{ '@service results'|t({'@service': service}) }}</h2>
 
@@ -34,53 +30,24 @@
     {{ pager }}
   </div>{# .hri-river__results #}
 
-  <a href="#hri-river-results" class="visually-hidden focusable skip-link">
-    {{ 'Skip to results'|t }}
-  </a>
-
   <div class="hri-river__facets-wrapper hri-layout__sidebar hri-layout__first" id="hri-river-filters" aria-labelledby="hri-river-filters-heading">
     <h2 id="hri-river-filters-heading" class="visually-hidden">{{ '@service filters'|t({'@service': service}) }}</h2>
 
     <div class="hri-powered-by hri-powered-by--{{ service|clean_class }}">
-      <span class="hri-powered-by__text">{{ 'Powered by'|t }}</span>
-      <a class="hri-powered-by__link" href="{{ service_url }}">
+      <span class="visually-hidden">{{ service }}</span>
+      <div class="hri-powered-by__link" href="{{ service_url }}">
         <span class="visually-hidden">{{ service }}</span>
-      </a>
+      </div>
     </div>
 
-    <p class="hri-river__facets-count">
-      {% if total == 1 %}
-        <span class="hri-river__facets-count__value">{{ total }}</span> {{ 'document found'|t }}
-      {% else %}
-        <span class="hri-river__facets-count__value">{{ total }}</span> {{ 'documents found'|t }}
-      {% endif %}
-    </p>
+    {# Variables are already translated. #}
+    <p>This selection of {{ set_name|lower }} for {{ group.label() }} is powered by {{ service }}.</p>
 
-    {% if active_facets|length > 0 %}
-      <div class="hri-river__facets--active">
-        <details open>
-          <summary>{{ 'Remove filters'|t }} </summary>
-          <ul>
-          {% for link in active_facets %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-          {% endfor %}
-          </ul>
-        </details>
-      </div>
-    {% endif %}
+    <a class="cd-button cd-button--icon cd-button--small" href="{{ view_all }}" target="_blank">
+      <span class="cd-button__text">{{ 'Refine the list with filters'|t }}</span>
+      <svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>
+    </a>
 
-    {% for facet in facets %}
-      <div class="hri-river__facets">
-        <details {% if facet.open %}open{% endif %}>
-          <summary>{{ facet.title }}</summary>
-          <ul class="hri-river__facet">
-          {% for link in facet.links %}
-            <li class="hri-river__facet-link"><a href="{{ link.url }}">{{ link.title }}</a></li>
-          {% endfor %}
-          </ul>
-        </details>
-      </div>
-    {% endfor %}
   </div>{# .hri-river__facets-wrapper #}
 
 </div>{# .hri-river #}
