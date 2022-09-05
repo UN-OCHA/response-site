@@ -1312,6 +1312,23 @@ function hr_paragraphs_menu_local_actions_alter(&$local_actions) {
 function hr_paragraphs_preprocess_node(&$variables) {
   hr_paragraphs_node_sidebar($variables);
   hr_paragraphs_node_is_archived($variables);
+  hr_paragraphs_user_can_edit($variables);
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function hr_paragraphs_user_can_edit(&$variables) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  /** @var \Drupal\user\Entity\User $current_user */
+  $current_user = \Drupal::currentUser();
+
+  $variables['can_edit'] = FALSE;
+  if ($node->access('update', $current_user)) {
+    $variables['can_edit'] = TRUE;
+  }
 }
 
 /**
