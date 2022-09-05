@@ -1238,7 +1238,7 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
           break;
 
         case 'hr_paragraphs.operation.data':
-          if ($group->hasField('field_calendar_alternate_link') && !$group->field_calendar_alternate_link->isEmpty()) {
+          if ($group->hasField('field_hdx_alternate_source') && !$group->field_hdx_alternate_source->isEmpty()) {
             $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['class'][] = 'is-external';
             $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['target'] = '_blank';
           }
