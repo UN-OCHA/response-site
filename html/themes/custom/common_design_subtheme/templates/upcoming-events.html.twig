@@ -7,11 +7,17 @@
  */
 #}
 {{ attach_library('common_design_subtheme/hri-events') }}
+{{ attach_library('common_design_subtheme/timezone-info') }}
 {{ attach_library('common_design/cd-button') }}
 
 {% set previousEventStart = '' %}
 
 <div class="hri-events">
+  {% if events|length > 0 %}
+    <div class="timezone-info">
+      Timezone: <span class="timezone-info-name">{{ events[0].timezone }}</span>
+    </div>
+  {% endif %}
   <ul class="hri-events__list">
     {% for event in events %}
       {% set random = random() %}

@@ -187,3 +187,8 @@ rw-river-letter-navigation:
     components/rw-river-letter-navigation/rw-river-letter-navigation.js: {}
   dependencies:
     - common_design_subtheme/rw-brand
+
+timezone-info:
+  css:
+    theme:
+      components/timezone-info/timezone-info.css: {}
