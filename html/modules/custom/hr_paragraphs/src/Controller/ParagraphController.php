@@ -437,6 +437,8 @@ class ParagraphController extends ControllerBase {
       '#service' => 'Humanitarian Data Exchange',
       '#service_url' => 'https://data.humdata.org',
       '#data' => $this->hdxController->buildHdxObjects($results),
+      '#set_name' => $this->t('Data'),
+      '#view_all' => $url,
       '#total' => $count,
       '#facets' => $facets,
       '#active_facets' => $active_facets,
@@ -495,7 +497,10 @@ class ParagraphController extends ControllerBase {
     /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
     $link = $group->field_reliefweb_documents->first();
     $url = $link->getUrl()->getUri();
-    return $this->getReliefwebDocuments($request, $group, $url);
+
+    $data = $this->getReliefwebDocuments($request, $group, $url);
+    $data['#set_name'] = $this->t('Reports');
+    return $data;
   }
 
   /**
@@ -532,7 +537,10 @@ class ParagraphController extends ControllerBase {
     /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
     $link = $group->field_maps_infographics_link->first();
     $url = $link->getUrl()->getUri();
-    return $this->getReliefwebDocuments($request, $group, $url);
+
+    $data = $this->getReliefwebDocuments($request, $group, $url);
+    $data['#set_name'] = $this->t('Maps / Infographics');
+    return $data;
   }
 
   /**
@@ -612,6 +620,7 @@ class ParagraphController extends ControllerBase {
         '#type' => 'pager',
       ],
       '#group' => $group,
+      '#view_all' => $url,
       '#cache' => [
         'tags' => [
           'group',
@@ -664,7 +673,10 @@ class ParagraphController extends ControllerBase {
     /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
     $link = $group->field_reliefweb_assessments->first();
     $url = $link->getUrl()->getUri();
-    return $this->getReliefwebDocuments($request, $group, $url);
+
+    $data = $this->getReliefwebDocuments($request, $group, $url);
+    $data['#set_name'] = $this->t('Assessments');
+    return $data;
   }
 
   /**
