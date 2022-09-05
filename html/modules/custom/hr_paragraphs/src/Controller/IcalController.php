@@ -105,6 +105,7 @@ class IcalController extends ControllerBase {
             'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
             'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
             'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
+            'timezone' => $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
           ];
 
@@ -130,6 +131,7 @@ class IcalController extends ControllerBase {
             'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
             'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
+            'timezone' => $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
           ];
         }
@@ -141,10 +143,17 @@ class IcalController extends ControllerBase {
             'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
             'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
+            'timezone' => $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
           ];
         }
       }
+    }
+
+    // Add local time without timezone info.
+    foreach ($output as &$row) {
+      $row['local_start'] = substr($row['start'], 0, 19);
+      $row['local_end'] = substr($row['end'], 0, 19);
     }
 
     return $output;
