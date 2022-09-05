@@ -386,9 +386,6 @@ class ParagraphController extends ControllerBase {
 
     $limit = 10;
     $offset = $request->query->getInt('page', 0) * $limit;
-    $filters = $request->query->get('filters', []);
-
-    $base_url = $request->getRequestUri();
 
     // Base filter from entered URL.
     $query_filters = $this->hdxController->parseHdxUrl($url);
@@ -401,36 +398,14 @@ class ParagraphController extends ControllerBase {
 
     // Build Hdx query.
     $parameters = $this->hdxController->buildHdxParameters($offset, $limit, $query_filters);
-
-    // Add filters.
-    $hdx_query_filters = $this->hdxController->getHdxQueryFilters();
-    foreach ($filters as $key => $filter) {
-      if (in_array($key, $hdx_query_filters)) {
-        $parameters[$key] = $filter;
-      }
-      else {
-        if (is_array($filter)) {
-          $parameters['fq_list'][] = $key . ':"' . implode('" AND "', $filter) . '"';
-        }
-        else {
-          $parameters['fq_list'][] = $key . ':"' . $filter . '"';
-        }
-      }
-    }
-
     $results = $this->hdxController->executeHdxQuery($parameters);
 
     // Active facets.
-    $active_facets = $this->hdxController->buildHdxActiveFacets($base_url, $filters, $results['search_facets'] ?? []);
+    $active_facets = [];
+    $facets = [];
 
     $count = $results['count'];
     $this->pagerManager->createPager($count, $limit);
-
-    // Re-order facets.
-    $facets = [];
-    if (isset($results['search_facets'])) {
-      $facets = $this->hdxController->buildHdxFacets($base_url, $results['search_facets'], $filters, $query_filters);
-    }
 
     return [
       '#theme' => 'river',
