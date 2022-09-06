@@ -31,6 +31,15 @@
         }
       });
 
+      if (toc.length <= 1) {
+        // Remove toc.
+        targets.forEach(function (target) {
+          target.parentElement.remove();
+        });
+
+        return;
+      }
+
       // For all items found, construct some HTML.
       toc.forEach(function (item) {
         output += '<li><a href="#' + item.id + '">' + item.title + '</a></li>';
