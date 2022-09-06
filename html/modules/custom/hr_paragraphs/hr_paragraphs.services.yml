@@ -4,19 +4,19 @@ services:
     arguments: ['@entity_type.manager', '@http_client', '@pager.manager', '@hr_paragraphs.ical_controller', '@hr_paragraphs.reliefweb_controller', '@hr_paragraphs.hdx_controller']
   hr_paragraphs.ical_controller:
     class: \Drupal\hr_paragraphs\Controller\IcalController
-    arguments: ['@http_client']
+    arguments: ['@http_client', '@logger.factory']
   hr_paragraphs.reliefweb_controller:
     class: \Drupal\hr_paragraphs\Controller\ReliefwebController
-    arguments: ['@http_client']
+    arguments: ['@http_client', '@logger.factory']
   hr_paragraphs.hdx_controller:
     class: \Drupal\hr_paragraphs\Controller\HdxController
-    arguments: ['@http_client']
+    arguments: ['@http_client', '@logger.factory']
   hr_paragraphs.rss_controller:
     class: \Drupal\hr_paragraphs\Controller\RssController
-    arguments: ['@http_client']
+    arguments: ['@http_client', '@logger.factory']
   hr_paragraphs.key_figures_controller:
     class: \Drupal\hr_paragraphs\Controller\KeyFiguresController
-    arguments: ['@http_client']
+    arguments: ['@http_client', '@logger.factory']
   hr_paragraphs.breadcrumb.groupcontent:
     class: 'Drupal\hr_paragraphs\Breadcrumb\GroupContentBreadcrumbBuilder'
     tags:

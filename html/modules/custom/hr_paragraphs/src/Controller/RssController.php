@@ -3,6 +3,7 @@
 namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\hr_paragraphs\RssItem;
 use GuzzleHttp\ClientInterface;
 
@@ -19,6 +20,13 @@ class RssController extends ControllerBase {
   protected $httpClient;
 
   /**
+   * The logger factory.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelFactory
+   */
+  protected $loggerFactory;
+
+  /**
    * Static cache.
    *
    * @var \SimpleXMLElement[]
@@ -28,8 +36,9 @@ class RssController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(ClientInterface $http_client) {
+  public function __construct(ClientInterface $http_client, LoggerChannelFactoryInterface $logger_factory) {
     $this->httpClient = $http_client;
+    $this->loggerFactory = $logger_factory;
   }
 
   /**
@@ -47,12 +56,21 @@ class RssController extends ControllerBase {
     }
 
     try {
+      $this->loggerFactory->get('hr_paragraphs_rss')->notice('Fetching data from @url', [
+        '@url' => $url,
+      ]);
+
       libxml_use_internal_errors(TRUE);
       $response = $this->httpClient->request('GET', $url);
       $this->staticCache[$url] = new \SimpleXmlElement($response->getBody());
       return $this->staticCache[$url];
     }
     catch (\Exception $exception) {
+      $this->loggerFactory->get('hr_paragraphs_rss')->error('Fetching data from $url failed with @message', [
+        '@url' => $url,
+        '@message' => $exception->getMessage(),
+      ]);
+
       return FALSE;
     }
   }

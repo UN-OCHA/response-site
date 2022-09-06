@@ -3,6 +3,7 @@
 namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Url;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
@@ -22,10 +23,18 @@ class HdxController extends ControllerBase {
   protected $httpClient;
 
   /**
+   * The logger factory.
+   *
+   * @var \Drupal\Core\Logger\LoggerChannelFactory
+   */
+  protected $loggerFactory;
+
+  /**
    * {@inheritdoc}
    */
-  public function __construct(ClientInterface $http_client) {
+  public function __construct(ClientInterface $http_client, LoggerChannelFactoryInterface $logger_factory) {
     $this->httpClient = $http_client;
+    $this->loggerFactory = $logger_factory;
   }
 
   /**
@@ -433,6 +442,10 @@ class HdxController extends ControllerBase {
     $response = NULL;
 
     try {
+      $this->loggerFactory->get('hr_paragraphs_hdx')->notice('Fetching data from @url', [
+        '@url' => $endpoint,
+      ]);
+
       $response = $this->httpClient->request(
         'POST',
         $endpoint,
@@ -442,6 +455,11 @@ class HdxController extends ControllerBase {
       );
     }
     catch (RequestException $exception) {
+      $this->loggerFactory->get('hr_paragraphs_hdx')->error('Fetching data from $url failed with @message', [
+        '@url' => $endpoint,
+        '@message' => $exception->getMessage(),
+      ]);
+
       if ($exception->getCode() === 404) {
         throw new NotFoundHttpException();
       }
