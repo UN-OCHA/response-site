@@ -34,8 +34,14 @@
       if (toc.length <= 1) {
         // Remove toc.
         targets.forEach(function (target) {
-          target.parentElement.remove();
+          target.parentElement.parentElement.parentElement.remove();
         });
+
+        // Remove sidebar if empty.
+        const sidebar = document.querySelector('.hri-layout__sidebar');
+        if (sidebar && sidebar.childElementCount == 0) {
+          sidebar.remove();
+        }
 
         return;
       }
