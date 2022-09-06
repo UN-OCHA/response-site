@@ -423,8 +423,7 @@ class ParagraphController extends ControllerBase {
       '#group' => $group,
       '#cache' => [
         'tags' => [
-          'group',
-          $group->id(),
+          'group:' . $group->id(),
         ],
         'contexts' => [
           'url.query_args:filter',
@@ -592,8 +591,7 @@ class ParagraphController extends ControllerBase {
       '#view_all' => $url,
       '#cache' => [
         'tags' => [
-          'group',
-          $group->id(),
+          'group:' . $group->id(),
         ],
         'contexts' => [
           'url.path',
@@ -722,8 +720,7 @@ class ParagraphController extends ControllerBase {
       ],
       '#cache' => [
         'tags' => [
-          'group',
-          $group->id(),
+          'group:' . $group->id(),
         ],
         'contexts' => [
           'url.path',
