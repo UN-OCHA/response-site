@@ -4,7 +4,6 @@ namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Url;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
@@ -21,13 +20,6 @@ class ReliefwebController extends ControllerBase {
    * @var \GuzzleHttp\ClientInterface
    */
   protected $httpClient;
-
-  /**
-   * The logger factory.
-   *
-   * @var \Drupal\Core\Logger\LoggerChannelFactory
-   */
-  protected $loggerFactory;
 
   /**
    * Advanced search operator mapping.
@@ -48,9 +40,8 @@ class ReliefwebController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(ClientInterface $http_client, LoggerChannelFactoryInterface $logger_factory) {
+  public function __construct(ClientInterface $http_client) {
     $this->httpClient = $http_client;
-    $this->loggerFactory = $logger_factory;
   }
 
   /**
@@ -335,7 +326,7 @@ class ReliefwebController extends ControllerBase {
     }
 
     try {
-      $this->loggerFactory->get('hr_paragraphs_reliefweb')->notice('Fetching data from @url', [
+      $this->getLogger('hr_paragraphs_reliefweb')->notice('Fetching data from @url', [
         '@url' => $endpoint,
       ]);
 
@@ -348,7 +339,7 @@ class ReliefwebController extends ControllerBase {
       );
     }
     catch (RequestException $exception) {
-      $this->loggerFactory->get('hr_paragraphs_reliefweb')->error('Fetching data from $url failed with @message', [
+      $this->getLogger('hr_paragraphs_reliefweb')->error('Fetching data from $url failed with @message', [
         '@url' => $endpoint,
         '@message' => $exception->getMessage(),
       ]);

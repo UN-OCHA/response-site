@@ -4,7 +4,6 @@
 
 namespace Drupal\Tests\hr_paragraphs\ExistingSite;
 
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
 use Drupal\hr_paragraphs\Controller\IcalController;
@@ -42,8 +41,7 @@ class HrParagraphsICalTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
-    $ical_controller = new IcalController($this->httpClient, $logger);
+    $ical_controller = new IcalController($this->httpClient);
     $this->container->set('hr_paragraphs.ical_controller', $ical_controller);
     \Drupal::setContainer($this->container);
   }
@@ -59,8 +57,7 @@ class HrParagraphsICalTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
-    $ical_controller = new IcalController($this->httpClient, $logger);
+    $ical_controller = new IcalController($this->httpClient);
     $this->container->set('hr_paragraphs.ical_controller', $ical_controller);
     \Drupal::setContainer($this->container);
   }
@@ -76,8 +73,7 @@ class HrParagraphsICalTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
-    $ical_controller = new IcalController($this->httpClient, $logger);
+    $ical_controller = new IcalController($this->httpClient);
     $this->container->set('hr_paragraphs.ical_controller', $ical_controller);
     \Drupal::setContainer($this->container);
   }

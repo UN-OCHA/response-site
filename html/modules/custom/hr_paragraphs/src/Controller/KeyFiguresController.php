@@ -3,7 +3,6 @@
 namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -21,18 +20,10 @@ class KeyFiguresController extends ControllerBase {
   protected $httpClient;
 
   /**
-   * The logger factory.
-   *
-   * @var \Drupal\Core\Logger\LoggerChannelFactory
-   */
-  protected $loggerFactory;
-
-  /**
    * {@inheritdoc}
    */
-  public function __construct(ClientInterface $http_client, LoggerChannelFactoryInterface $logger_factory) {
+  public function __construct(ClientInterface $http_client) {
     $this->httpClient = $http_client;
-    $this->loggerFactory = $logger_factory;
   }
 
   /**
@@ -51,7 +42,7 @@ class KeyFiguresController extends ControllerBase {
     $fullUrl = $endpoint . $iso3 . '/figures.json';
 
     try {
-      $this->loggerFactory->get('hr_paragraphs_keyfigures')->notice('Fetching data from @url', [
+      $this->getLogger('hr_paragraphs_keyfigures')->notice('Fetching data from @url', [
         '@url' => $fullUrl,
       ]);
 
@@ -61,7 +52,7 @@ class KeyFiguresController extends ControllerBase {
       );
     }
     catch (RequestException $exception) {
-      $this->loggerFactory->get('hr_paragraphs_keyfigures')->error('Fetching data from $url failed with @message', [
+      $this->getLogger('hr_paragraphs_keyfigures')->error('Fetching data from $url failed with @message', [
         '@url' => $fullUrl,
         '@message' => $exception->getMessage(),
       ]);

@@ -3,7 +3,6 @@
 namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\date_recur\DateRecurHelper;
 use Drupal\group\Entity\Group;
 use GuzzleHttp\ClientInterface;
@@ -23,18 +22,10 @@ class IcalController extends ControllerBase {
   protected $httpClient;
 
   /**
-   * The logger factory.
-   *
-   * @var \Drupal\Core\Logger\LoggerChannelFactory
-   */
-  protected $loggerFactory;
-
-  /**
    * {@inheritdoc}
    */
-  public function __construct(ClientInterface $http_client, LoggerChannelFactoryInterface $logger_factory) {
+  public function __construct(ClientInterface $http_client) {
     $this->httpClient = $http_client;
-    $this->loggerFactory = $logger_factory;
   }
 
   /**
@@ -58,7 +49,7 @@ class IcalController extends ControllerBase {
 
     // Fetch and parse iCal.
     try {
-      $this->loggerFactory->get('hr_paragraphs_ical')->notice('Fetching data from @url', [
+      $this->getLogger('hr_paragraphs_ical')->notice('Fetching data from @url', [
         '@url' => $url,
       ]);
 
@@ -68,7 +59,7 @@ class IcalController extends ControllerBase {
       );
     }
     catch (RequestException $exception) {
-      $this->loggerFactory->get('hr_paragraphs_ical')->error('Fetching data from $url failed with @message', [
+      $this->getLogger('hr_paragraphs_ical')->error('Fetching data from $url failed with @message', [
         '@url' => $url,
         '@message' => $exception->getMessage(),
       ]);

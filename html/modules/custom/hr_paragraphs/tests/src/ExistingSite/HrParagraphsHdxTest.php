@@ -4,7 +4,6 @@
 
 namespace Drupal\Tests\hr_paragraphs\ExistingSite;
 
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
 use Drupal\hr_paragraphs\Controller\HdxController;
@@ -42,8 +41,7 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
-    $hdx_controller = new HdxController($this->httpClient, $logger);
+    $hdx_controller = new HdxController($this->httpClient);
     $this->container->set('hr_paragraphs.hdx_controller', $hdx_controller);
     \Drupal::setContainer($this->container);
   }
@@ -59,8 +57,7 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
-    $hdx_controller = new HdxController($this->httpClient, $logger);
+    $hdx_controller = new HdxController($this->httpClient);
     $this->container->set('hr_paragraphs.hdx_controller', $hdx_controller);
     \Drupal::setContainer($this->container);
   }
@@ -76,8 +73,7 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
-    $hdx_controller = new HdxController($this->httpClient, $logger);
+    $hdx_controller = new HdxController($this->httpClient);
     $this->container->set('hr_paragraphs.hdx_controller', $hdx_controller);
     \Drupal::setContainer($this->container);
   }
@@ -116,6 +112,7 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $output = $this->renderGroupTab($group);
     $this->assertStringContainsString('Afghanistan - Subnational Administrative Boundaries', $output);
     $this->assertStringContainsString('Afghanistan administrative level 0-2 and UNAMA region gazetteer and P-code geoservices', $output);
+    $this->assertStringContainsString('Remove XLSX', $output);
 
     $url = Url::fromRoute('hr_paragraphs.operation.data', [
       'group' => $group->id(),
@@ -145,6 +142,7 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $this->assertStringContainsString('Please make sure the HDX dataset URL is valid.', $output);
     $this->assertStringNotContainsString('Afghanistan - Subnational Administrative Boundaries', $output);
     $this->assertStringNotContainsString('Afghanistan administrative level 0-2 and UNAMA region gazetteer and P-code geoservices', $output);
+    $this->assertStringNotContainsString('Remove XLSX', $output);
 
     $url = Url::fromRoute('hr_paragraphs.operation.data', [
       'group' => $group->id(),
@@ -168,8 +166,7 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
 
     $handlerStack = HandlerStack::create($mock);
     $http_client = new Client(['handler' => $handlerStack]);
-    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
-    $hdx_controller = new HdxController($http_client, $logger);
+    $hdx_controller = new HdxController($http_client);
 
     $paragraph_controller = new ParagraphController(
       \Drupal::service('entity_type.manager'),
