@@ -4,6 +4,7 @@
 
 namespace Drupal\Tests\hr_paragraphs\ExistingSite;
 
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
 use Drupal\hr_paragraphs\Controller\HdxController;
@@ -41,7 +42,8 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $hdx_controller = new HdxController($this->httpClient);
+    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
+    $hdx_controller = new HdxController($this->httpClient, $logger);
     $this->container->set('hr_paragraphs.hdx_controller', $hdx_controller);
     \Drupal::setContainer($this->container);
   }
@@ -57,7 +59,8 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $hdx_controller = new HdxController($this->httpClient);
+    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
+    $hdx_controller = new HdxController($this->httpClient, $logger);
     $this->container->set('hr_paragraphs.hdx_controller', $hdx_controller);
     \Drupal::setContainer($this->container);
   }
@@ -73,7 +76,8 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $hdx_controller = new HdxController($this->httpClient);
+    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
+    $hdx_controller = new HdxController($this->httpClient, $logger);
     $this->container->set('hr_paragraphs.hdx_controller', $hdx_controller);
     \Drupal::setContainer($this->container);
   }
@@ -164,7 +168,8 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
 
     $handlerStack = HandlerStack::create($mock);
     $http_client = new Client(['handler' => $handlerStack]);
-    $hdx_controller = new HdxController($http_client);
+    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
+    $hdx_controller = new HdxController($http_client, $logger);
 
     $paragraph_controller = new ParagraphController(
       \Drupal::service('entity_type.manager'),

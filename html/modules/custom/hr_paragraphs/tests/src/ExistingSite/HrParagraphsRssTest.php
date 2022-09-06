@@ -4,6 +4,7 @@
 
 namespace Drupal\Tests\hr_paragraphs\ExistingSite;
 
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\group\Entity\Group;
 use Drupal\hr_paragraphs\Controller\RssController;
 use Drupal\paragraphs\Entity\Paragraph;
@@ -41,7 +42,8 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $rss_controller = new RssController($this->httpClient);
+    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
+    $rss_controller = new RssController($this->httpClient, $logger);
     $this->container->set('hr_paragraphs.rss_controller', $rss_controller);
     \Drupal::setContainer($this->container);
   }
@@ -57,7 +59,8 @@ class HrParagraphsRssTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $rss_controller = new RssController($this->httpClient);
+    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
+    $rss_controller = new RssController($this->httpClient, $logger);
     $this->container->set('hr_paragraphs.rss_controller', $rss_controller);
     \Drupal::setContainer($this->container);
   }

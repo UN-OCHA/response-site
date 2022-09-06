@@ -4,6 +4,7 @@
 
 namespace Drupal\Tests\hr_paragraphs\ExistingSite;
 
+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
 use Drupal\hr_paragraphs\Controller\ParagraphController;
@@ -120,7 +121,8 @@ class HrParagraphsRWMapsTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $reliefweb_controller = new ReliefwebController($this->httpClient);
+    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
+    $reliefweb_controller = new ReliefwebController($this->httpClient, $logger);
     $this->container->set('hr_paragraphs.reliefweb_controller', $reliefweb_controller);
     \Drupal::setContainer($this->container);
 
@@ -158,7 +160,8 @@ class HrParagraphsRWMapsTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $reliefweb_controller = new ReliefwebController($this->httpClient);
+    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
+    $reliefweb_controller = new ReliefwebController($this->httpClient, $logger);
     $this->container->set('hr_paragraphs.reliefweb_controller', $reliefweb_controller);
     \Drupal::setContainer($this->container);
 
@@ -182,7 +185,8 @@ class HrParagraphsRWMapsTest extends ExistingSiteBase {
 
     $handlerStack = HandlerStack::create($mock);
     $http_client = new Client(['handler' => $handlerStack]);
-    $reliefweb_controller = new ReliefwebController($http_client);
+    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
+    $reliefweb_controller = new ReliefwebController($this->httpClient, $logger);
 
     $paragraph_controller = new ParagraphController(
       \Drupal::service('entity_type.manager'),
@@ -219,7 +223,8 @@ class HrParagraphsRWMapsTest extends ExistingSiteBase {
 
     $handlerStack = HandlerStack::create($mock);
     $http_client = new Client(['handler' => $handlerStack]);
-    $reliefweb_controller = new ReliefwebController($http_client);
+    $logger = $this->createMock(LoggerChannelFactoryInterface::class);
+    $reliefweb_controller = new ReliefwebController($this->httpClient, $logger);
 
     $paragraph_controller = new ParagraphController(
       \Drupal::service('entity_type.manager'),
