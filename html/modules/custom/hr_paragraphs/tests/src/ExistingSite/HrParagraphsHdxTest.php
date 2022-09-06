@@ -112,7 +112,6 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $output = $this->renderGroupTab($group);
     $this->assertStringContainsString('Afghanistan - Subnational Administrative Boundaries', $output);
     $this->assertStringContainsString('Afghanistan administrative level 0-2 and UNAMA region gazetteer and P-code geoservices', $output);
-    $this->assertStringContainsString('Remove XLSX', $output);
 
     $url = Url::fromRoute('hr_paragraphs.operation.data', [
       'group' => $group->id(),
@@ -142,7 +141,6 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     $this->assertStringContainsString('Please make sure the HDX dataset URL is valid.', $output);
     $this->assertStringNotContainsString('Afghanistan - Subnational Administrative Boundaries', $output);
     $this->assertStringNotContainsString('Afghanistan administrative level 0-2 and UNAMA region gazetteer and P-code geoservices', $output);
-    $this->assertStringNotContainsString('Remove XLSX', $output);
 
     $url = Url::fromRoute('hr_paragraphs.operation.data', [
       'group' => $group->id(),
