@@ -66,8 +66,9 @@
   </div>
 
   <div class="rw-river-letter-navigation-wrapper" id="rw-river-letter-navigation-wrapper">
+    {% set nav_attributes = create_attribute() %}
     {% set id = 'letter-navigation' %}
-    <nav{{ attributes
+    <nav{{ nav_attributes
       .addClass([
         'rw-river-letter-navigation',
       ])
