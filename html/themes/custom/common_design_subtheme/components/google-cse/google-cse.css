@@ -8,7 +8,6 @@
 
 div#___gcse_0 {
   position: relative;
-  width: calc(var(--cd-max-content-width) - var(--brand-logo-width) - 240px);
   max-height: var(--cd-site-header-height);
 }
 
@@ -17,11 +16,13 @@ div#___gcse_0 {
 }
 
 .gsc-control-cse {
-  padding: 12px 0 0 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
 }
 
 form.gsc-search-box {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .gsc-input {
@@ -34,7 +35,9 @@ form.gsc-search-box {
 }
 
 .gsc-search-button-v2 {
-  padding: 7px 27px !important;
+  height: 44px !important;
+  padding-right: 16px !important;
+  padding-left: 16px !important;
 }
 .gsc-search-button-v2,
 .gsc-search-button-v2:hover,
@@ -45,4 +48,9 @@ form.gsc-search-box {
 
 .gs-webResult.gs-result a.gs-title:link {
   color: var(--brand-primary--dark) !important;
+}
+
+.gsc-results-wrapper-visible {
+  position: relative;
+  top: -4px;
 }
