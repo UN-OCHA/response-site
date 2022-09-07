@@ -1,0 +1,48 @@
+/* stylelint-disable selector-id-pattern */
+/**
+ * Override Google custom search engine
+ *
+ * All selectors are exact duplicates of the Google-provided selectors so that
+ * we can override them.
+ */
+
+div#___gcse_0 {
+  position: relative;
+  width: calc(var(--cd-max-content-width) - var(--brand-logo-width) - 240px);
+  max-height: var(--cd-site-header-height);
+}
+
+.gsc-adBlock {
+  display: none !important;
+}
+
+.gsc-control-cse {
+  padding: 12px 0 0 0 !important;
+}
+
+form.gsc-search-box {
+  margin-bottom: 0;
+}
+
+.gsc-input {
+  font-size: 20px;
+}
+
+/* override CD Table default margin */
+.gsc-input table {
+  margin-bottom: 0;
+}
+
+.gsc-search-button-v2 {
+  padding: 7px 27px !important;
+}
+.gsc-search-button-v2,
+.gsc-search-button-v2:hover,
+.gsc-search-button-v2:focus {
+  border-color: var(--brand-secondary) !important;
+  background-color: var(--brand-secondary) !important;
+}
+
+.gs-webResult.gs-result a.gs-title:link {
+  color: var(--brand-primary--dark) !important;
+}
