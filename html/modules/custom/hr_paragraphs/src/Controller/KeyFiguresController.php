@@ -42,12 +42,21 @@ class KeyFiguresController extends ControllerBase {
     $fullUrl = $endpoint . $iso3 . '/figures.json';
 
     try {
+      $this->getLogger('hr_paragraphs_keyfigures')->notice('Fetching data from @url', [
+        '@url' => $fullUrl,
+      ]);
+
       $response = $this->httpClient->request(
         'GET',
         $fullUrl,
       );
     }
     catch (RequestException $exception) {
+      $this->getLogger('hr_paragraphs_keyfigures')->error('Fetching data from $url failed with @message', [
+        '@url' => $fullUrl,
+        '@message' => $exception->getMessage(),
+      ]);
+
       if ($exception->getCode() === 404) {
         throw new NotFoundHttpException();
       }

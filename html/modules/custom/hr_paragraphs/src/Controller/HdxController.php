@@ -433,6 +433,10 @@ class HdxController extends ControllerBase {
     $response = NULL;
 
     try {
+      $this->getLogger('hr_paragraphs_hdx')->notice('Fetching data from @url', [
+        '@url' => $endpoint,
+      ]);
+
       $response = $this->httpClient->request(
         'POST',
         $endpoint,
@@ -442,6 +446,11 @@ class HdxController extends ControllerBase {
       );
     }
     catch (RequestException $exception) {
+      $this->getLogger('hr_paragraphs_hdx')->error('Fetching data from $url failed with @message', [
+        '@url' => $endpoint,
+        '@message' => $exception->getMessage(),
+      ]);
+
       if ($exception->getCode() === 404) {
         throw new NotFoundHttpException();
       }
