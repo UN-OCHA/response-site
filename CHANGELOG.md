@@ -4,6 +4,34 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.2.3](https://github.com/UN-OCHA/response-site/compare/v0.2.2...v0.2.3) (2022-09-07)
+### Features
+
+* Display timezone on upcoming events [#RWR-214](https://https://humanitarian.atlassian.net/browse/RWR-214) ([7c8fc1](https://github.com/UN-OCHA/response-site/commit/7c8fc1eee535e08d1cfc1f716fd600fd7df13d36))
+* Edit link on operation view mode ([2d1e8a](https://github.com/UN-OCHA/response-site/commit/2d1e8a45376300ad041199898431e3a4182857f7))
+* Exposed filter on clusters [#RWR-198](https://https://humanitarian.atlassian.net/browse/RWR-198) ([bf0845](https://github.com/UN-OCHA/response-site/commit/bf08450af361e26a0f8c16e1a64917d756731ba9))
+* Hide sidebar on pages [#RWR-208](https://https://humanitarian.atlassian.net/browse/RWR-208) ([47c589](https://github.com/UN-OCHA/response-site/commit/47c589c364c43dd78967199c0d53d75c87a8de28))
+* Hide toc when it doesn't make sense [#RWR-221](https://https://humanitarian.atlassian.net/browse/RWR-221) ([ed8551](https://github.com/UN-OCHA/response-site/commit/ed85514cec5aa87a38bcb7e8e20f0adfbaea4ec8), [16e8cb](https://github.com/UN-OCHA/response-site/commit/16e8cbd6c80bc641af68c16932298d53d16d153f))
+* Make empty paragraphs visible for editors [#RWR-210](https://https://humanitarian.atlassian.net/browse/RWR-210) ([0b28e4](https://github.com/UN-OCHA/response-site/commit/0b28e440a44599b35ab47673d2c4e2b7c96a8d05))
+* No facets, link to source [#RWR-206](https://https://humanitarian.atlassian.net/browse/RWR-206), [#RWR-213](https://https://humanitarian.atlassian.net/browse/RWR-213), [#RWR-206](https://https://humanitarian.atlassian.net/browse/RWR-206), [#RWR-213](https://https://humanitarian.atlassian.net/browse/RWR-213) ([be48b7](https://github.com/UN-OCHA/response-site/commit/be48b75583cdf7dff157d5e1da58d265d8980f46), [d2bc2f](https://github.com/UN-OCHA/response-site/commit/d2bc2f625d071c2b96ba43062fc2dc4cbde97483))
+* Remove facet code [#RWR-206](https://https://humanitarian.atlassian.net/browse/RWR-206), [#RWR-213](https://https://humanitarian.atlassian.net/browse/RWR-213) ([690996](https://github.com/UN-OCHA/response-site/commit/6909961591e4cf07b603bea9b8f12ddb36ef4081))
+* Remove facet code for RW [#RWR-206](https://https://humanitarian.atlassian.net/browse/RWR-206), [#RWR-213](https://https://humanitarian.atlassian.net/browse/RWR-213) ([e52cad](https://github.com/UN-OCHA/response-site/commit/e52cad2349a1c0797195dfde049ca18022ea2045))
+* Remove facet tests [#RWR-206](https://https://humanitarian.atlassian.net/browse/RWR-206), [#RWR-213](https://https://humanitarian.atlassian.net/browse/RWR-213) ([70f500](https://github.com/UN-OCHA/response-site/commit/70f50013476afec083ed6fe079a5c2c9553672bb))
+* Remove list of [#RWR-207](https://https://humanitarian.atlassian.net/browse/RWR-207) ([09eacb](https://github.com/UN-OCHA/response-site/commit/09eacb9295bbd57767ad63833d02e78dc5fd8bc3))
+* Use local time for upcoming events [#RWR-214](https://https://humanitarian.atlassian.net/browse/RWR-214) ([b45b1e](https://github.com/UN-OCHA/response-site/commit/b45b1e8f1c61b15712c7774fa00973a73cc9fc5b))
+
+### Bug Fixes
+
+* Avoid duplicating top-level classes on Locations letter nav ([b189f1](https://github.com/UN-OCHA/response-site/commit/b189f1138eaff0b8c9d8314a210f42ba9acd0449))
+* Fold TZ into hri-events component and move to left where times display ([290320](https://github.com/UN-OCHA/response-site/commit/290320d397f955d5ee7db940e82ce999155a631f))
+* Re-run SVG sprite task ([47f7ba](https://github.com/UN-OCHA/response-site/commit/47f7bafd8a2697695992c6710753fe545763708e))
+* Remove dropdown CSS from RW letter-navigation ([e73438](https://github.com/UN-OCHA/response-site/commit/e73438e5cd420809f84c08663ae888526b82242e))
+
+### Chores
+
+* Add logging to API calls [#RWR-216](https://https://humanitarian.atlassian.net/browse/RWR-216), [#RWR-216](https://https://humanitarian.atlassian.net/browse/RWR-216) ([5a1bae](https://github.com/UN-OCHA/response-site/commit/5a1bae0d55bf0fba5ce3db69c2662fcf95eebd95), [dc4d92](https://github.com/UN-OCHA/response-site/commit/dc4d92f135051a9f4762f772c9cc438e04328486))
+* Update all outdated drupal/* packages. ([331dbe](https://github.com/UN-OCHA/response-site/commit/331dbeb87366ea85389e0bce234a0e2cc42a3922))
+
 ## [0.2.2](https://github.com/UN-OCHA/response-site/compare/v0.2.1...v0.2.2) (2022-08-31)
 ### Features
 
