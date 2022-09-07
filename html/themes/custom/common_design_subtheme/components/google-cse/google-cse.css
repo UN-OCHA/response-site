@@ -25,6 +25,13 @@ form.gsc-search-box {
   margin-bottom: 0 !important;
 }
 
+@media screen and (min-width: 1200px) {
+  form.gsc-search-box {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+}
+
 .gsc-input {
   font-size: 20px;
 }
@@ -46,11 +53,18 @@ form.gsc-search-box {
   background-color: var(--brand-secondary) !important;
 }
 
-.gs-webResult.gs-result a.gs-title:link {
-  color: var(--brand-primary--dark) !important;
+.gsc-above-wrapper-area,
+.gsc-wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
 .gsc-results-wrapper-visible {
   position: relative;
   top: -4px;
+  background: #fff;
+}
+
+.gs-webResult.gs-result a.gs-title:link {
+  color: var(--brand-primary--dark) !important;
 }
