@@ -34,6 +34,8 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'active_facets' => [],
         'pager' => NULL,
         'group' => NULL,
+        'view_all' => NULL,
+        'set_name' => NULL,
       ],
     ],
     'hr_paragraphs_rw_list' => [
@@ -440,6 +442,48 @@ function hr_paragraphs_group_content_alias(EntityInterface $entity) {
  */
 function hr_paragraphs_group_content_update(EntityInterface $entity) {
   return hr_paragraphs_group_content_insert($entity);
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ */
+function hr_paragraphs_preprocess_paragraph(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  $view_mode = $variables['view_mode'];
+  if ($view_mode === 'preview') {
+
+    // Check emptiness.
+    $is_empty = TRUE;
+    $outputted_fields = array_keys($variables['content']);
+
+    foreach ($paragraph->getFields(FALSE) as $field) {
+      if (in_array($field->getName(), $outputted_fields)) {
+        if (!$field->isEmpty()) {
+          $is_empty = FALSE;
+        }
+      }
+    }
+
+    if ($is_empty) {
+      $variables['content']['empty_indicator'] = [
+        '#type' => 'markup',
+        '#markup' => t('No preview available'),
+        '#weight' => -100,
+        '#prefix' => '<div class="paragraph-empty-indicator">',
+        '#suffix' => '</div>',
+      ];
+    }
+
+    $variables['content']['indicator'] = [
+      '#type' => 'markup',
+      '#markup' => $paragraph->getParagraphType()->label(),
+      '#weight' => -100,
+      '#prefix' => '<div class="paragraph-preview-indicator">',
+      '#suffix' => '</div>',
+    ];
+  }
 }
 
 /**
@@ -1196,7 +1240,7 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
           break;
 
         case 'hr_paragraphs.operation.data':
-          if ($group->hasField('field_calendar_alternate_link') && !$group->field_calendar_alternate_link->isEmpty()) {
+          if ($group->hasField('field_hdx_alternate_source') && !$group->field_hdx_alternate_source->isEmpty()) {
             $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['class'][] = 'is-external';
             $data['tabs'][1][$tab_name]['#link']['localized_options']['attributes']['target'] = '_blank';
           }
@@ -1270,6 +1314,23 @@ function hr_paragraphs_menu_local_actions_alter(&$local_actions) {
 function hr_paragraphs_preprocess_node(&$variables) {
   hr_paragraphs_node_sidebar($variables);
   hr_paragraphs_node_is_archived($variables);
+  hr_paragraphs_user_can_edit($variables);
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function hr_paragraphs_user_can_edit(&$variables) {
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
+  /** @var \Drupal\user\Entity\User $current_user */
+  $current_user = \Drupal::currentUser();
+
+  $variables['can_edit'] = FALSE;
+  if ($node->access('update', $current_user)) {
+    $variables['can_edit'] = TRUE;
+  }
 }
 
 /**
@@ -1282,6 +1343,11 @@ function hr_paragraphs_node_sidebar(&$variables) {
 
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
+
+  // Page without sidebar.
+  if ($node->hasField('field_hide_sidebar') && !$node->field_hide_sidebar->isEmpty() && $node->field_hide_sidebar->value) {
+    return;
+  }
 
   $group_content_array = GroupContent::loadByEntity($node);
   $group_content = reset($group_content_array);
@@ -1687,7 +1753,7 @@ function hr_paragraphs_mail($key, &$message, $params) {
  * Implements hook_form_FORM_ID_alter().
  */
 function hr_paragraphs_form_views_exposed_form_alter(&$form, $form_state, $form_id) {
-  if ($form['#id'] === 'views-exposed-form-groups-page-1') {
+  if ($form['#id'] === 'views-exposed-form-groups-page-1' || $form['#id'] === 'views-exposed-form-subgroups-of-a-group-page-1') {
     $form['status']['#options'][1] = t('Published');
     $form['status']['#options'][0] = t('Unpublished');
 

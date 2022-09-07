@@ -326,6 +326,10 @@ class ReliefwebController extends ControllerBase {
     }
 
     try {
+      $this->getLogger('hr_paragraphs_reliefweb')->notice('Fetching data from @url', [
+        '@url' => $endpoint,
+      ]);
+
       $response = $this->httpClient->request(
         'GET',
         $endpoint,
@@ -335,6 +339,11 @@ class ReliefwebController extends ControllerBase {
       );
     }
     catch (RequestException $exception) {
+      $this->getLogger('hr_paragraphs_reliefweb')->error('Fetching data from $url failed with @message', [
+        '@url' => $endpoint,
+        '@message' => $exception->getMessage(),
+      ]);
+
       if ($exception->getCode() === 404) {
         throw new NotFoundHttpException();
       }

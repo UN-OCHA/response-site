@@ -49,12 +49,21 @@ class IcalController extends ControllerBase {
 
     // Fetch and parse iCal.
     try {
+      $this->getLogger('hr_paragraphs_ical')->notice('Fetching data from @url', [
+        '@url' => $url,
+      ]);
+
       $response = $this->httpClient->request(
         'GET',
         $url,
       );
     }
     catch (RequestException $exception) {
+      $this->getLogger('hr_paragraphs_ical')->error('Fetching data from $url failed with @message', [
+        '@url' => $url,
+        '@message' => $exception->getMessage(),
+      ]);
+
       if ($exception->getCode() === 404) {
         throw new NotFoundHttpException();
       }
@@ -105,6 +114,7 @@ class IcalController extends ControllerBase {
             'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
             'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
             'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
+            'timezone' => $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
           ];
 
@@ -130,6 +140,7 @@ class IcalController extends ControllerBase {
             'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
             'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
+            'timezone' => $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
           ];
         }
@@ -141,10 +152,17 @@ class IcalController extends ControllerBase {
             'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
             'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
+            'timezone' => $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
           ];
         }
       }
+    }
+
+    // Add local time without timezone info.
+    foreach ($output as &$row) {
+      $row['local_start'] = substr($row['start'], 0, 19);
+      $row['local_end'] = substr($row['end'], 0, 19);
     }
 
     return $output;

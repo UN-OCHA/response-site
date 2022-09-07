@@ -31,6 +31,21 @@
         }
       });
 
+      if (toc.length <= 1) {
+        // Remove toc.
+        targets.forEach(function (target) {
+          target.parentElement.parentElement.parentElement.remove();
+        });
+
+        // Remove sidebar if empty.
+        const sidebar = document.querySelector('.hri-layout__sidebar');
+        if (sidebar && sidebar.childElementCount == 0) {
+          sidebar.remove();
+        }
+
+        return;
+      }
+
       // For all items found, construct some HTML.
       toc.forEach(function (item) {
         output += '<li><a href="#' + item.id + '">' + item.title + '</a></li>';

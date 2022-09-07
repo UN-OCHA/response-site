@@ -12,16 +12,21 @@
 {% set previousEventStart = '' %}
 
 <div class="hri-events">
+  {% if events|length > 0 %}
+    <div class="hri-events__timezone-info">
+      {{ 'Time zone:'|t }} <span class="hri-events__timezone-value">{{ events[0].timezone }}</span>
+    </div>
+  {% endif %}
   <ul class="hri-events__list">
     {% for event in events %}
       {% set random = random() %}
-      {% if previousEventStart != event.start|date("d M Y") %}
+      {% if previousEventStart != event.local_start|date("d M Y") %}
         <li class="hri-events__heading event-heading">
           <div class="event-heading__date">
-            {{ event.start|date("d M Y") }}
+            {{ event.local_start|date("d M Y") }}
           </div>
           <div class="event-heading__day">
-            {{ event.start|date("l")|t }}
+            {{ event.local_start|date("l")|t }}
           </div>
         </li>
       {% endif %}
@@ -32,16 +37,16 @@
       <li class="hri-events__event hri-event{{ event_has_desc }}">
         <span class="hri-event__title" data-for="hri-event__desc{{ random }}" title="{{ event_details }}">{{ event.title }}</span>
         <span class="hri-event__time">
-          <time datetime="{{ event.start|date("c") }}">{{ event.start|date("h:i A") }}</time>
+          <time datetime="{{ event.local_start|date("c") }}">{{ event.local_start|date("h:i A") }}</time>
           <span class="visually-hidden">{{ 'until'|t }}</span>-
-          <time datetime="{{ event.end|date("c") }}">{{ event.end|date("h:i A") }}</time>
+          <time datetime="{{ event.local_end|date("c") }}">{{ event.local_end|date("h:i A") }}</time>
         </span>
         <span class="hri-event__desc visually-hidden" id="hri-event__desc{{ random }}">
           {{ event.description|replace({'<br><br>': '<br>'})|replace({'<br><br>': '<br>'})|replace({'<br><br>': '<br>'})|replace({'<br><br>': '<br>'})|raw }}
         </span>
         {% if event_has_desc %}
           <span class="hri-event__copy">
-            <button class="cd-button cd-button--icon cd-button--small cd-button--icon-no-margin hri-tooltip" data-message="{{ 'Event details copied to clipboard'|t }}" data-details="{{ event.title }} — {{ event.start|date("h:i A") }} — {{ event_details }}" title="{{ 'Copy event details'|t }}">
+            <button class="cd-button cd-button--icon cd-button--small cd-button--icon-no-margin hri-tooltip" data-message="{{ 'Event details copied to clipboard'|t }}" data-details="{{ event.title }} — {{ event.local_start|date("h:i A") }} — {{ event_details }}" title="{{ 'Copy event details'|t }}">
               <span class="visually-hidden">{{ 'Copy event details'|t }}</span>
               <svg class="cd-icon cd-icon--copy" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copy"></use></svg>
             </button>
@@ -49,7 +54,7 @@
         {% endif %}
       </li>
 
-      {% set previousEventStart = event.start|date("d M Y") %}
+      {% set previousEventStart = event.local_start|date("d M Y") %}
     {% endfor %}
   </ul>
 

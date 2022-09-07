@@ -6,6 +6,14 @@
   padding-bottom: 1rem;
 }
 
+.hri-events__timezone-info {
+  font-size: 0.9rem;
+}
+
+.hri-events__timezone-value {
+  font-weight: 700;
+}
+
 .hri-events__list {
   /* layout */
   display: flex;

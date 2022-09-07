@@ -386,9 +386,6 @@ class ParagraphController extends ControllerBase {
 
     $limit = 10;
     $offset = $request->query->getInt('page', 0) * $limit;
-    $filters = $request->query->get('filters', []);
-
-    $base_url = $request->getRequestUri();
 
     // Base filter from entered URL.
     $query_filters = $this->hdxController->parseHdxUrl($url);
@@ -401,42 +398,22 @@ class ParagraphController extends ControllerBase {
 
     // Build Hdx query.
     $parameters = $this->hdxController->buildHdxParameters($offset, $limit, $query_filters);
-
-    // Add filters.
-    $hdx_query_filters = $this->hdxController->getHdxQueryFilters();
-    foreach ($filters as $key => $filter) {
-      if (in_array($key, $hdx_query_filters)) {
-        $parameters[$key] = $filter;
-      }
-      else {
-        if (is_array($filter)) {
-          $parameters['fq_list'][] = $key . ':"' . implode('" AND "', $filter) . '"';
-        }
-        else {
-          $parameters['fq_list'][] = $key . ':"' . $filter . '"';
-        }
-      }
-    }
-
     $results = $this->hdxController->executeHdxQuery($parameters);
 
     // Active facets.
-    $active_facets = $this->hdxController->buildHdxActiveFacets($base_url, $filters, $results['search_facets'] ?? []);
+    $active_facets = [];
+    $facets = [];
 
     $count = $results['count'];
     $this->pagerManager->createPager($count, $limit);
-
-    // Re-order facets.
-    $facets = [];
-    if (isset($results['search_facets'])) {
-      $facets = $this->hdxController->buildHdxFacets($base_url, $results['search_facets'], $filters, $query_filters);
-    }
 
     return [
       '#theme' => 'river',
       '#service' => 'Humanitarian Data Exchange',
       '#service_url' => 'https://data.humdata.org',
       '#data' => $this->hdxController->buildHdxObjects($results),
+      '#set_name' => $this->t('Data'),
+      '#view_all' => $url,
       '#total' => $count,
       '#facets' => $facets,
       '#active_facets' => $active_facets,
@@ -446,8 +423,7 @@ class ParagraphController extends ControllerBase {
       '#group' => $group,
       '#cache' => [
         'tags' => [
-          'group',
-          $group->id(),
+          'group:' . $group->id(),
         ],
         'contexts' => [
           'url.query_args:filter',
@@ -495,7 +471,10 @@ class ParagraphController extends ControllerBase {
     /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
     $link = $group->field_reliefweb_documents->first();
     $url = $link->getUrl()->getUri();
-    return $this->getReliefwebDocuments($request, $group, $url);
+
+    $data = $this->getReliefwebDocuments($request, $group, $url);
+    $data['#set_name'] = $this->t('Reports');
+    return $data;
   }
 
   /**
@@ -532,7 +511,10 @@ class ParagraphController extends ControllerBase {
     /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
     $link = $group->field_maps_infographics_link->first();
     $url = $link->getUrl()->getUri();
-    return $this->getReliefwebDocuments($request, $group, $url);
+
+    $data = $this->getReliefwebDocuments($request, $group, $url);
+    $data['#set_name'] = $this->t('Maps / Infographics');
+    return $data;
   }
 
   /**
@@ -551,11 +533,7 @@ class ParagraphController extends ControllerBase {
   public function getReliefwebDocuments(Request $request, Group $group, string $url) : array {
     $limit = 10;
     $offset = $request->query->getInt('page', 0) * $limit;
-    $filters = $request->query->get('filters', []);
-    $base_url = $request->getRequestUri();
-
-    // Active facets.
-    $active_facets = $this->reliefwebController->buildReliefwebActiveFacets($base_url, $filters);
+    $filters = [];
 
     $parameters = $this->reliefwebController->buildReliefwebParameters($offset, $limit, $filters);
 
@@ -594,11 +572,9 @@ class ParagraphController extends ControllerBase {
     $count = $results['totalCount'];
     $this->pagerManager->createPager($count, $limit);
 
-    // Re-order facets.
+    // Facets.
     $facets = [];
-    if (isset($results['embedded'])) {
-      $facets = $this->reliefwebController->buildReliefwebFacets($base_url, $results['embedded'], $filters);
-    }
+    $active_facets = [];
 
     return [
       '#theme' => 'river',
@@ -612,10 +588,10 @@ class ParagraphController extends ControllerBase {
         '#type' => 'pager',
       ],
       '#group' => $group,
+      '#view_all' => $url,
       '#cache' => [
         'tags' => [
-          'group',
-          $group->id(),
+          'group:' . $group->id(),
         ],
         'contexts' => [
           'url.path',
@@ -664,7 +640,10 @@ class ParagraphController extends ControllerBase {
     /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
     $link = $group->field_reliefweb_assessments->first();
     $url = $link->getUrl()->getUri();
-    return $this->getReliefwebDocuments($request, $group, $url);
+
+    $data = $this->getReliefwebDocuments($request, $group, $url);
+    $data['#set_name'] = $this->t('Assessments');
+    return $data;
   }
 
   /**
@@ -741,8 +720,7 @@ class ParagraphController extends ControllerBase {
       ],
       '#cache' => [
         'tags' => [
-          'group',
-          $group->id(),
+          'group:' . $group->id(),
         ],
         'contexts' => [
           'url.path',

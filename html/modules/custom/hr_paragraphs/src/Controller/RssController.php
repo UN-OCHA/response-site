@@ -47,12 +47,21 @@ class RssController extends ControllerBase {
     }
 
     try {
+      $this->getLogger('hr_paragraphs_rss')->notice('Fetching data from @url', [
+        '@url' => $url,
+      ]);
+
       libxml_use_internal_errors(TRUE);
       $response = $this->httpClient->request('GET', $url);
       $this->staticCache[$url] = new \SimpleXmlElement($response->getBody());
       return $this->staticCache[$url];
     }
     catch (\Exception $exception) {
+      $this->getLogger('hr_paragraphs_rss')->error('Fetching data from $url failed with @message', [
+        '@url' => $url,
+        '@message' => $exception->getMessage(),
+      ]);
+
       return FALSE;
     }
   }
