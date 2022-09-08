@@ -1,0 +1,244 @@
+<?php
+
+/**
+ * @file
+ * Response Analytics module file.
+ */
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Cache\CacheableMetadata;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Component\Serialization\Json;
+use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\group\Entity\Group;
+use Drupal\group\Entity\GroupContent;
+
+/**
+ * Add datalayer dimensions for google tag manager.
+ *
+ * Note: the google_tag module store snippets on files for caching even when
+ * instructed to add the snippets inline. As a result we cannot easily add
+ * custom dimensions per entity so we inject them ourselves here.
+ */
+function hr_analytics_page_attachments(array &$attachments) {
+  /** @var \Drupal\google_tag\Entity\Container $container */
+  $container = \Drupal::entityTypeManager()
+    ?->getStorage('google_tag_container')
+    ?->load('default');
+
+  // Check if we should add the custom dimensions.
+  if (!isset($container) || !$container->insertSnippet()) {
+    return;
+  }
+
+  $dimensions = [];
+  $dimensions += hr_analytics_get_entity_dimensions();
+  $dimensions += hr_analytics_get_user_dimensions();
+
+  $datalayer = array_filter($dimensions);
+  if (!empty($datalayer)) {
+    // Sort the dimensions.
+    ksort($datalayer, SORT_NATURAL);
+
+    // Add the datalayer javascript.
+    $datalayer_json = Json::encode($datalayer);
+    if (!empty($datalayer_json)) {
+      $variable = $container->variableClean('data_layer');
+      $content = $variable . ' = [' . $datalayer_json . '];';
+
+      $attachments['#attached']['html_head'][] = [
+        [
+          '#type' => 'html_tag',
+          '#weight' => 8,
+          '#tag' => 'script',
+          '#value' => new FormattableMarkup($content, []),
+          '#attributes' => [
+            'type' => 'text/javascript',
+          ],
+        ],
+        'response_datalayer',
+      ];
+    }
+  }
+}
+
+/**
+ * Get the dimensions for the route entity if defined.
+ *
+ * @return array
+ *   Dimensions for the entity.
+ */
+function hr_analytics_get_entity_dimensions() {
+  $dimensions = [];
+
+  // Get the entity for the current request if any.
+  $entity = hr_analytics_get_entity_from_route();
+  if (!isset($entity)) {
+    return [];
+  }
+
+  // We only handle dimensions on nodes and terms.
+  $entity_type_id = $entity->getEntityTypeId();
+  if ($entity_type_id !== 'node' && $entity_type_id !== 'taxonomy_term' && $entity_type_id !== 'group') {
+    return [];
+  }
+
+  $cache = \Drupal::cache();
+  $cache_id = 'hr_analytics:entity:' . $entity->uuid();
+
+  // Try to load the computed dimensions from the cache.
+  $cache_object = $cache->get($cache_id);
+  if (!empty($cache_object->data)) {
+    return $cache_object->data;
+  }
+
+  // Use the untranslated entity for consistent dimensions.
+  if (!empty($entity) && $entity instanceof ContentEntityInterface) {
+    $entity = $entity->getUntranslated();
+  }
+
+  // Cache metadata accumulator.
+  $cache_metadata = CacheableMetadata::createFromObject($entity);
+
+  $dimensions = [
+    'dimension4' => $entity->language()->getId(),
+  ];
+
+  // Set the dimensions for the entity.
+  $group = NULL;
+  if ($entity_type_id === 'group') {
+    /** @var \Drupal\group\Entity\Group $group */
+    $group = $entity;
+    $dimensions['dimension1'] = $group->getGroupType()->label();
+  }
+  else {
+    $dimensions['dimension1'] = $entity->getEntityType()->getLabel();
+
+    $group_content_array = GroupContent::loadByEntity($entity);
+    $group_content = reset($group_content_array);
+    if ($group_content) {
+      $group = $group_content->getGroup();
+    }
+  }
+
+  if ($group) {
+    $dimensions['dimension5'] = $group->label();
+    $dimensions['dimension6'] = $group->label();
+
+    // Check parent.
+    if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+      $parent = Group::load($group->subgroup_tree->value);
+      if ($parent) {
+        $dimensions['dimension5'] = $parent->label();
+      }
+    }
+  }
+
+  $dimensions = array_filter($dimensions);
+
+  // Cache the dimensions permanently until the entity or its dependencies are
+  // changed.
+  $cache->set($cache_id, $dimensions, Cache::PERMANENT, $cache_metadata->getCacheTags());
+
+  return $dimensions;
+}
+
+/**
+ * Get the dimensions for the current user.
+ *
+ * @return array
+ *   Dimensions for the user.
+ */
+function hr_analytics_get_user_dimensions() {
+  $user = \Drupal::currentUser();
+
+  $cache = \Drupal::cache();
+  $cache_id = 'hr_analytics:user:' . $user->id();
+
+  // Try to load the computed dimensions from the cache.
+  $cache_object = \Drupal::cache()->get($cache_id);
+  if (!empty($cache_object->data)) {
+    return $cache_object->data;
+  }
+
+  // Retrieve the roles for the current user account.
+  $roles = [];
+  if (!$user->isAuthenticated()) {
+    $roles[] = 'anonymous user';
+  }
+  else {
+    $roles[] = 'authenticated user';
+
+    $role_ids = $user->getRoles(TRUE);
+    if (!empty($role_ids)) {
+      $role_entities = \Drupal::entityTypeManager()
+        ->getStorage('user_role')
+        ->loadMultiple($role_ids);
+      foreach ($role_entities as $role_entity) {
+        $roles[] = (string) $role_entity->label();
+      }
+    }
+  }
+
+  $dimensions = ['dimension12' => implode(', ', $roles)];
+
+  // Cache the dimensions permanently until the user is changed.
+  $cache->set($cache_id, $dimensions, Cache::PERMANENT, ['user:' . $user->id()]);
+
+  return $dimensions;
+}
+
+/**
+ * Get the term labels from an entity reference field.
+ *
+ * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
+ *   Entity.
+ * @param string $field
+ *   Field.
+ * @param \Drupal\Core\Cache\CacheableMetadata $cache_metadata
+ *   The accumulated cache metadata.
+ *
+ * @return string
+ *   Comma separated list of term names.
+ */
+function hr_analytics_get_terms(FieldableEntityInterface $entity, $field, CacheableMetadata $cache_metadata) {
+  $terms = [];
+  if ($entity->hasField($field) && !$entity->get($field)->isEmpty()) {
+    foreach ($entity->get($field)->referencedEntities() as $term) {
+      $terms[] = (string) $term->getUntranslated()->label();
+      $cache_metadata->addCacheTags($term->getCacheTags());
+    }
+  }
+  return implode(', ', $terms);
+}
+
+/**
+ * Gets entity from route.
+ */
+function hr_analytics_get_entity_from_route() {
+  $route_match = \Drupal::routeMatch();
+
+  $route = $route_match->getRouteObject();
+  if (empty($route)) {
+    return NULL;
+  }
+
+  $parameters = $route->getOption('parameters');
+  if (empty($parameters)) {
+    return NULL;
+  }
+
+  foreach ($parameters as $name => $options) {
+    if (isset($options['type']) && strpos($options['type'], 'entity:') === 0) {
+      $entity = $route_match->getParameter($name);
+      if (!empty($entity) && $entity instanceof EntityInterface) {
+        return $entity;
+      }
+      else {
+        return NULL;
+      }
+    }
+  }
+}
