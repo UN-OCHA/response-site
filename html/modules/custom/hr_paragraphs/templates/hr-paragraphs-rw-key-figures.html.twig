@@ -1,21 +1,34 @@
+{{ attach_library('common_design_subtheme/rw-key-figures') }}
+
 <div class="hr-paragraphs-rw-key-figures key-figures">
-  <ul class="key-figures__results">
-    {% for row in data %}
-      <li class="key-figure">
-        <figure>
-          <figcaption>{{ row.title }}</figcaption>
-          <div class="key-figure__content">
-            <strong class="key-figure__value">{{ row.value }}</strong>
-          </div>
-          <footer>
-            <time datetime="{{ row.date }}">Updated {{ row.date|date('d M Y') }}</time>
-            <cite>
-              <span class="visually-hidden">Source:</span>
-              <a href="{{ row.url }}">{{ row.source }}</a>
-            </cite>
-          </footer>
-        </figure>
-      </li>
+  <ul class="rw-key-figures__list">
+    {% for figure in data %}
+    <li>
+      <figure class="rw-key-figures__figure rw-key-figures__figure--{{ figure.status }}">
+        <figcaption class="rw-key-figures__figure__label">{{ figure.name }}</figcaption>
+        <div class="rw-key-figures__figure__content">
+          <p>
+            <data value="{{ figure.value }}" class="rw-key-figures__figure__value">{{ figure.value|number_format }}</data>
+            {% if figure.trend %}
+              <small class="rw-key-figures__figure__trend"><span class="rw-key-figures__figure__trend__message">{{ figure.trend.message }}</span> <span class="rw-key-figures__figure__trend__since">{{ figure.trend.since }}</span></small>
+            {% endif %}
+          </p>
+          {% if figure.sparkline %}
+          <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" width="120" fill="none" stroke="#999" aria-hidden="true">
+            <polyline points="{{ figure.sparkline.points|join(' ') }}"/>
+          </svg>
+          {% endif %}
+        </div>
+        <footer class="rw-key-figures__figure__footer">
+          <time datetime="{{ figure.date|date('c') }}" class="rw-key-figures__figure__updated">{{ figure.updated }}</time>
+          <cite class="rw-key-figures__figure__source"><span class="visually-hidden">{{ 'Source: '|t }} </span><a href="{{ figure.url }}">{{ figure.source }}</a></cite>
+        </footer>
+      </figure>
+    </li>
     {% endfor %}
   </ul>
+
+  <footer class="view-more rw-key-figures__links">
+    <a href="https://reliefweb.int/country/{{ country }}#key-figures">{{ 'View all figures'|t }}</a>
+  </footer>
 </div>{# .key-figures #}

@@ -49,6 +49,8 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
     'hr_paragraphs_rw_key_figures' => [
       'template' => 'hr-paragraphs-rw-key-figures',
       'variables' => [
+        'country_iso' => NULL,
+        'country_name' => NULL,
         'data' => [],
         'total' => [],
         'view_all' => NULL,
@@ -1045,8 +1047,11 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_key_figures(&$variables) 
   // Fetch country from user input.
   $key_figures_country = $paragraph->field_country->value;
 
-  // Set max number of items to 5 by default.
-  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
+  // Fetch label of the user input.
+  $key_figures_country_labels = $paragraph->getFieldDefinition('field_country')->getFieldStorageDefinition()->getSetting('allowed_values');
+
+  // Set max number of items to 4 by default.
+  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 4;
 
   /** @var \Drupal\hr_paragraphs\Controller\KeyFiguresController */
   $key_figures_controller = \Drupal::service('hr_paragraphs.key_figures_controller');
@@ -1054,6 +1059,8 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_key_figures(&$variables) 
 
   $variables['content']['key_figures'] = [
     '#theme' => 'hr_paragraphs_rw_key_figures',
+    '#country_iso' => $key_figures_country,
+    '#country_name' => $key_figures_country_labels[$key_figures_country],
     '#data' => $key_figures_controller->buildKeyFigures($results, $max_number_of_items),
     '#weight' => 99,
     '#cache' => [
