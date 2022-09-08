@@ -24,6 +24,11 @@ cd-tabs:
       components/cd-tabs/cd-tabs.css: {}
       components/cd-tabs/hri-tabs.css: {}
 
+google-cse:
+  css:
+    theme:
+      components/google-cse/google-cse.css: {}
+
 hri-breadcrumbs:
   css:
     theme:
