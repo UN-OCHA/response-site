@@ -29,11 +29,6 @@
   </ul>
 
   <footer class="view-more rw-key-figures__links">
-    {% if more %}
-    <a href="{{ url('<current>', {}, {'query': {'figures': 'all'}, 'fragment': id}) }}">{{ 'View all @country figures'|t({'@country': country}) }}</a>
-    {% endif %}
-    {% if dataset %}
-    <a href="{{ dataset.url }}" target="_blank" rel="noopener">{{ dataset.title }}</a>
-    {% endif %}
+    <a href="https://reliefweb.int/country/{{ country_iso|lower }}?figures=all#key-figures">{{ 'View all @country figures'|t({'@country': country_name}) }}</a>
   </footer>
 </div>{# .rw-key-figures #}

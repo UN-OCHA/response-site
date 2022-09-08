@@ -36,3 +36,27 @@
   height: 12px;
   background: transparent url("../rw-brand/rw-icons-sprite.svg") -84px -108px no-repeat;
 }
+
+/**
+ * View more
+ */
+.view-more {
+  width: 100%;
+  text-align: center;
+}
+
+.view-more a {
+  font-size: var(--cd-font-size--small);
+  font-style: italic;
+}
+
+.view-more a:after {
+  display: inline-block;
+  overflow: hidden;
+  width: 12px;
+  height: 12px;
+  margin: 0 0 0 6px;
+  content: "";
+  vertical-align: middle;
+  background: transparent url("../rw-brand/rw-icons-sprite.svg") -84px -108px no-repeat;
+}
