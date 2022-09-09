@@ -9,7 +9,7 @@
       <div class="external-feed--item-title">
         <h3>
           {% if options.display_date %}{{ item.date|date('d-M-Y') }} - {% endif %}
-          <a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href="{{ item.link }}">{{ item.title }}</a>
+          <a rel="{% if 'reliefweb.int' not in item.link %}noopener noreferrer external nofollow{% endif %}" class="external-feed--item-link" href=" {{ item.link }}">{{ item.title }}</a>
           <span class="hri__external-url"></span>
         </h3>
       </div>
@@ -33,7 +33,7 @@
 
   {% if read_more %}
     <div class="external-feed--readmore">
-      <a class="cd-button cd-button--icon cd-button--small" rel="noopener noreferrer external nofollow" href="{{ read_more.url }}">
+      <a class="cd-button cd-button--icon cd-button--small" rel="{% if 'reliefweb.int' not in read_more.url %}noopener noreferrer external nofollow{% endif %}" href="{{ read_more.url }}">
         <span class="cd-button__text">{{ 'View all updates'|t }}</span>
         <svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>
       </a>
