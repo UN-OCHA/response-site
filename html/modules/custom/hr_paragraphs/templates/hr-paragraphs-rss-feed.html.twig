@@ -4,7 +4,8 @@
       <li class="external-feed--item">
       <div class="external-feed--item-title">
         <h3>
-          {% if options.display_date %}{{ item.date|date('d-M-Y') }} - {% endif %}<a rel="noopener noreferrer external nofollow" class="external-feed--item-link" href=" {{ item.link }}">{{ item.title }}</a>
+          {% if options.display_date %}{{ item.date|date('d-M-Y') }} - {% endif %}
+          <a rel="{% if not (item.link starts with 'https://reliefweb.int') %}noopener noreferrer external nofollow{% endif %}" class="external-feed--item-link" href="{{ item.link }}">{{ item.title }}</a>
         </h3>
       </div>
 
@@ -27,7 +28,7 @@
 
   {% if options.display_read_more %}
     <div class="external-feed--readmore">
-      <a class="cd-read-more" rel="noopener noreferrer external nofollow" href="{{ read_more.url }}">
+      <a class="cd-read-more" rel="{% if not (read_more.url starts with 'https://reliefweb.int') %}noopener noreferrer external nofollow{% endif %}" href="{{ read_more.url }}">
         {{ read_more.title }}
       </a>
     </div>
