@@ -5,7 +5,7 @@
       <div class="external-feed--item-title">
         <h3>
           {% if options.display_date %}{{ item.date|date('d-M-Y') }} - {% endif %}
-          <a rel="{% if 'reliefweb.int' not in item.link %}noopener noreferrer external nofollow{% endif %}" class="external-feed--item-link" href=" {{ item.link }}">{{ item.title }}</a>
+          <a rel="{% if 'reliefweb.int' not in item.link %}noopener noreferrer external nofollow{% endif %}" class="external-feed--item-link" href="{{ item.link }}">{{ item.title }}</a>
         </h3>
       </div>
 
