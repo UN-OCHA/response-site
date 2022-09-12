@@ -85,25 +85,14 @@ function hr_analytics_get_entity_dimensions() {
     return [];
   }
 
-  $cache = \Drupal::cache();
-  $cache_id = 'hr_analytics:entity:' . $entity->uuid();
-
-  // Try to load the computed dimensions from the cache.
-  $cache_object = $cache->get($cache_id);
-  if (!empty($cache_object->data)) {
-    return $cache_object->data;
-  }
-
   // Use the untranslated entity for consistent dimensions.
   if (!empty($entity) && $entity instanceof ContentEntityInterface) {
     $entity = $entity->getUntranslated();
   }
 
-  // Cache metadata accumulator.
-  $cache_metadata = CacheableMetadata::createFromObject($entity);
-
   $dimensions = [
-    'dimension4' => $entity->language()->getId(),
+    'dimension3' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
+    'dimension4' => hr_analytics_get_tab_from_route(),
   ];
 
   // Set the dimensions for the entity.
@@ -114,7 +103,7 @@ function hr_analytics_get_entity_dimensions() {
     $dimensions['dimension1'] = $group->getGroupType()->label();
   }
   else {
-    $dimensions['dimension1'] = $entity->getEntityType()->getLabel();
+    $dimensions['dimension1'] = 'Page';
 
     $group_content_array = GroupContent::loadByEntity($entity);
     $group_content = reset($group_content_array);
@@ -124,23 +113,19 @@ function hr_analytics_get_entity_dimensions() {
   }
 
   if ($group) {
-    $dimensions['dimension5'] = $group->label();
     $dimensions['dimension6'] = $group->label();
 
     // Check parent.
     if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
       $parent = Group::load($group->subgroup_tree->value);
       if ($parent) {
-        $dimensions['dimension5'] = $parent->label();
+        $dimensions['dimension5'] = $group->label();
+        $dimensions['dimension6'] = $parent->label();
       }
     }
   }
 
   $dimensions = array_filter($dimensions);
-
-  // Cache the dimensions permanently until the entity or its dependencies are
-  // changed.
-  $cache->set($cache_id, $dimensions, Cache::PERMANENT, $cache_metadata->getCacheTags());
 
   return $dimensions;
 }
@@ -241,4 +226,28 @@ function hr_analytics_get_entity_from_route() {
       }
     }
   }
+}
+
+/**
+ * Gets tab from route.
+ */
+function hr_analytics_get_tab_from_route() {
+  $route_match = \Drupal::routeMatch();
+
+  // Only act on group homepage and tabs.
+  if (strpos($route_match->getRouteName(), 'hr_paragraphs.operation.') === FALSE && strpos($route_match->getRouteName(), 'entity.group.canonical') === FALSE) {
+    return NULL;
+  }
+
+  $supported_routes = [
+    'hr_paragraphs.operation.pages' => 'Pages',
+    'hr_paragraphs.operation.reports' => 'Reports',
+    'hr_paragraphs.operation.maps' => 'Maps / Infographics',
+    'hr_paragraphs.operation.assessments' => 'Assessments',
+    'hr_paragraphs.operation.data' => 'Data',
+    'hr_paragraphs.operation.events' => 'Events',
+    'hr_paragraphs.operation.contacts' => 'Contacts',
+  ];
+
+  return $supported_routes[$route_match->getRouteName()] ?? NULL;
 }
