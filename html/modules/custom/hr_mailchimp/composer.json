@@ -1,0 +1,11 @@
+{
+    "name": "drupal/hr_mailchimp",
+    "type": "drupal-module",
+    "description": "RWR Mailchimp integration.",
+    "homepage": "https://www.drupal.org/project/drupal",
+    "license": "GPL-2.0-or-later",
+    "prefer-stable": true,
+    "require": {
+        "mailchimp/marketing": "^3.0"
+    }
+}

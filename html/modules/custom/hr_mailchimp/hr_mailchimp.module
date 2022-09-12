@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * Response Mailchimp module file.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Site\Settings;
+use Drupal\user\Entity\User;
+use MailchimpMarketing\ApiClient;
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function hr_mailchimp_user_presave(EntityInterface $account) {
+  /** @var \Drupal\user\Entity\User $account */
+  if ($account->isNew() && $account->isActive()) {
+    hr_mailchimp_subscribe_user($account);
+  }
+  elseif (!$account->isNew() && $account->isActive() && $account->original->isBlocked()) {
+    hr_mailchimp_subscribe_user($account);
+  }
+}
+
+/**
+ * Add or update user.
+ */
+function hr_mailchimp_subscribe_user(User $account) {
+  $prefix = Settings::get('hr_mailchimp_prefix');
+  $list_id = Settings::get('hr_mailchimp_list_id');
+  $tag = Settings::get('hr_mailchimp_tag');
+  $api_key = Settings::get('hr_mailchimp_api_key');
+
+  // All are mandatory.
+  if (empty($prefix) || empty($list_id) || empty($tag) || empty($api_key)) {
+    return;
+  }
+
+  $email = $account->getEmail();
+
+  $client = new ApiClient();
+  $client->setConfig([
+    'apiKey' => $api_key,
+    'server' => $prefix,
+  ]);
+
+  try {
+    $client->lists->setListMember($list_id, $email, [
+      'email_address' => $email,
+      'status_if_new' => 'subscribed',
+      'skip_merge_validation' => TRUE,
+      'tags' => [
+        $tag,
+      ],
+    ]);
+  }
+  catch (\Exception $e) {
+    // Fail silently.
+  }
+}
