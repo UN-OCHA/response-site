@@ -73,9 +73,9 @@ form.gsc-search-box {
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--brand-primary--light);
   background: #fff;
-  box-shadow: 0 4px 7px #0002;
+  box-shadow: 0 3px 8px #0002;
 }
 
 .gs-webResult.gs-result a.gs-title:link {
-  color: var(--brand-primary--dark) !important;
+  color: var(--brand-secondary--dark) !important;
 }
