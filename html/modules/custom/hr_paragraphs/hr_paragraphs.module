@@ -1337,6 +1337,7 @@ function hr_paragraphs_user_can_edit(&$variables) {
   $variables['can_edit'] = FALSE;
   if ($node->access('update', $current_user)) {
     $variables['can_edit'] = TRUE;
+    return;
   }
 }
 
