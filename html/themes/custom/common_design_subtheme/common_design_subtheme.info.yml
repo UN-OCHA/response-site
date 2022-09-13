@@ -21,19 +21,6 @@ regions:
   footer_soft: Soft footer
   footer_navigation: Footer navigation
 
-# Add implementation-specific styles to base-theme, core, or contrib libraries.
-libraries-extend:
-  core/drupal.dropbutton:
-    - common_design_subtheme/hri-dropbutton
-  common_design/cd-pagination:
-    - common_design_subtheme/hri-pagination
-  common_design/cd-bullet-list:
-    - common_design_subtheme/hri-bullet-list
-  common_design/cd-button:
-    - common_design_subtheme/hri-button
-  hr_paragraphs/fullcalendar:
-    - common_design_subtheme/hri-fullcalendar
-
 ###
 # Define the default library for the subtheme. If you want to include other
 # libraries by default, add them as dependencies to global-styling.
@@ -51,9 +38,17 @@ libraries:
 #
 # @see common_design_subtheme.libraries.yml
 #
-# libraries-extend:
-#   common_design/cd-teaser:
-#     - common_design_subtheme/custom-teaser
+libraries-extend:
+  core/drupal.dropbutton:
+    - common_design_subtheme/hri-dropbutton
+  common_design/cd-pagination:
+    - common_design_subtheme/hri-pagination
+  common_design/cd-bullet-list:
+    - common_design_subtheme/hri-bullet-list
+  common_design/cd-button:
+    - common_design_subtheme/hri-button
+  hr_paragraphs/fullcalendar:
+    - common_design_subtheme/hri-fullcalendar
 
 ###
 # Override libraries to replace specific base-theme components. Now, when the

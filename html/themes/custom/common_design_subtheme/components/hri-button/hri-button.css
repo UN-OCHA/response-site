@@ -2,20 +2,17 @@
  * Extends the base CD Button component.
  */
 .cd-button {
-  background-color: var(--brand-primary);
-}
-.cd-button:hover {
-  background-color: var(--brand-primary--light);
+  background-color: var(--brand-secondary);
 }
 
-.cd-button--light {
-  color: var(--cd-primary-color--dark);
-  background-color: var(--cd-primary-color--lighter);
+.cd-button:hover {
+  background-color: var(--brand-secondary--light);
 }
-.cd-button--light:hover,
-.cd-button--light:focus {
-  color: var(--cd-primary-color--dark);
-  background-color: var(--cd-primary-color--light);
+
+.cd-button:focus {
+  border-color: var(--brand-secondary--dark);
+  outline: 0 solid var(--brand-secondary--light);
+  background-color: var(--brand-secondary--light);
 }
 
 .cd-button--icon.cd-button--small.cd-button--icon-no-margin span + svg {

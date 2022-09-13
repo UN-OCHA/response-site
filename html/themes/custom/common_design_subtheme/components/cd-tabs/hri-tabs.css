@@ -4,6 +4,16 @@
 ul.tabs > li > a {
   padding-inline-start: 0.75rem;
   padding-inline-end: 0.75rem;
+  color: var(--brand-secondary);
+}
+
+ul.tabs > li > a.is-active,
+ul.tabs > li > a:hover {
+  color: var(--brand-secondary);
+}
+
+ul.tabs > li > a:focus {
+  outline: 3px solid var(--brand-secondary);
 }
 
 /**

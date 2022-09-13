@@ -69,7 +69,7 @@
   height: var(--hri-event-dot-size);
   transform: translateY(-50%);
   border-radius: 9999px;
-  background: var(--brand-primary);
+  background: var(--brand-secondary);
 }
 [dir="ltr"] .hri-event__time::after {
   right: calc(((var(--hri-event-gap) - var(--hri-event-dot-size)) / -2) - var(--hri-event-dot-size));

@@ -1,4 +1,4 @@
-/* stylelint-disable selector-id-pattern */
+/* stylelint-disable selector-id-pattern, selector-class-pattern */
 /**
  * Override Google custom search engine
  *
@@ -32,13 +32,21 @@ form.gsc-search-box {
   }
 }
 
+.gsib_a {
+  padding: 9px !important;
+}
+
 .gsc-input {
-  font-size: 20px;
+  padding-right: 0 !important;
 }
 
 /* override CD Table default margin */
 .gsc-input table {
   margin-bottom: 0;
+}
+
+.gsc-search-button {
+  margin-left: 0 !important;
 }
 
 .gsc-search-button-v2 {
@@ -62,9 +70,12 @@ form.gsc-search-box {
 .gsc-results-wrapper-visible {
   position: relative;
   top: -4px;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--brand-primary--light);
   background: #fff;
+  box-shadow: 0 3px 8px #0002;
 }
 
 .gs-webResult.gs-result a.gs-title:link {
-  color: var(--brand-primary--dark) !important;
+  color: var(--brand-secondary--dark) !important;
 }
