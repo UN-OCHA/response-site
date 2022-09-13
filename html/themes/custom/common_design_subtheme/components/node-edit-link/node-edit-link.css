@@ -1,3 +1,7 @@
+.region-content article {
+  position: relative;
+}
+
 .node-edit--link {
   position: absolute;
   top: 5px;
