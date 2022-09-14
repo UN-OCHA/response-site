@@ -36,8 +36,15 @@ form.gsc-search-box {
   padding: 9px !important;
 }
 
+/* mobile+en.css */
+.gsc-input-box {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 .gsc-input {
   padding-right: 0 !important;
+  background-image: none !important;
 }
 
 /* override CD Table default margin */
@@ -77,5 +84,5 @@ form.gsc-search-box {
 }
 
 .gs-webResult.gs-result a.gs-title:link {
-  color: var(--brand-secondary--dark) !important;
+  color: var(--brand-primary--dark) !important;
 }

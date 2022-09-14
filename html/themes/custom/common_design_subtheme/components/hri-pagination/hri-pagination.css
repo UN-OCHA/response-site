@@ -6,12 +6,12 @@
 }
 
 .cd-pager__item.is-active a {
-  border-color: var(--brand-secondary);
-  background-color: var(--brand-secondary);
+  border-color: var(--brand-primary);
+  background-color: var(--brand-primary);
 }
 
 .cd-pager__item a:hover,
 .cd-pager__item a:focus {
-  border-color: var(--brand-secondary--dark);
-  background-color: var(--brand-secondary--dark);
+  border-color: var(--brand-primary--dark);
+  background-color: var(--brand-primary--dark);
 }
