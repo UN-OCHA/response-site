@@ -3,13 +3,6 @@
  */
 
 /**
- * Override base theme default link color.
- */
-a {
-  color: var(--brand-secondary--dark);
-}
-
-/**
  * Provide separators between each Paragraph on ANY Paragraphs field.
  */
 .field--name-field-paragraphs > .field__item + .field__item {
