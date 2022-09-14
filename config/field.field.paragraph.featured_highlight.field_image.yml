@@ -12,7 +12,7 @@ field_name: field_image
 entity_type: paragraph
 bundle: featured_highlight
 label: Image
-description: ''
+description: '<strong>Image will be displayed 480×240 (a 2:1 aspect ratio).</strong> If necessary the source image will be cropped from the bottom, so that the top portion is guaranteed to be visible.'
 required: true
 translatable: false
 default_value: {  }
@@ -24,7 +24,7 @@ settings:
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''
-  min_resolution: ''
+  min_resolution: 480x240
   alt_field: true
   alt_field_required: true
   title_field: false

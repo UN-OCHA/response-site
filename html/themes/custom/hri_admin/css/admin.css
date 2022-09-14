@@ -3,6 +3,16 @@
  */
 
 /**
+ * We use CD components occasionally, so declare any CSS Custom Props we might
+ * need to use.
+ */
+:root {
+  --cd-gray--dark: #144372;
+  --cd-blue--bright: #82b5e9;
+}
+
+
+/**
  * Large images in WYSIWYG
  *
  * When large images get initially uploaded to the WYSIWYG editor, it's possible
