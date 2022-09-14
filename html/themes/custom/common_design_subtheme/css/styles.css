@@ -14,19 +14,6 @@ a:hover, a:focus {
 }
 
 /**
- * Custom styles for HR.info OCHA Services menu
- */
-.cd-button.cd-ocha-dropdown__see-all {
-  background-color: var(--brand-primary--light);
-  color: var(--brand-primary--dark);
-}
-
-.cd-button.cd-ocha-dropdown__see-all:focus {
-  border-color: var(--brand-primary--dark);
-}
-
-
-/**
  * Provide separators between each Paragraph on ANY Paragraphs field.
  */
 .field--name-field-paragraphs > .field__item + .field__item {
