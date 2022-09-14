@@ -9,10 +9,6 @@ a {
   color: var(--brand-secondary--dark);
 }
 
-a:hover, a:focus {
-  color: var(--brand-secondary);
-}
-
 /**
  * Provide separators between each Paragraph on ANY Paragraphs field.
  */
