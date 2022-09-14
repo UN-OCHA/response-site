@@ -46,7 +46,7 @@ function hr_mailchimp_subscribe_user(User $account) {
   ]);
 
   try {
-    $client->lists->setListMember($list_id, $email, [
+    $response = $client->lists->setListMember($list_id, $email, [
       'email_address' => $email,
       'status_if_new' => 'subscribed',
       'skip_merge_validation' => TRUE,
@@ -54,8 +54,28 @@ function hr_mailchimp_subscribe_user(User $account) {
         $tag,
       ],
     ]);
+
+    if ($response->id) {
+      \Drupal::logger('hr_mailchimp')->info('@email (@uid) added to MailChimp (@tag)', [
+        '@email' => $email,
+        '@uid' => $account->id(),
+        '@tag' => $tag,
+      ]);
+    }
+    else {
+      \Drupal::logger('hr_mailchimp')->notice('@email (@uid) was not added to MailChimp (@tag)', [
+        '@email' => $email,
+        '@uid' => $account->id(),
+        '@tag' => $tag,
+      ]);
+    }
   }
   catch (\Exception $e) {
-    // Fail silently.
+    \Drupal::logger('hr_mailchimp')->error('Unable to add @email (@uid) to MailChimp (@tag), @error', [
+      '@email' => $email,
+      '@uid' => $account->id(),
+      '@tag' => $tag,
+      '@error' => $e->getMessage(),
+    ]);
   }
 }
