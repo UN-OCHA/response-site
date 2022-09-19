@@ -24,9 +24,10 @@
 }
 
 /* Image */
-.hri-card .hri-hero-image {
+.hri-card .field--type-image {
   position: relative;
   margin-bottom: var(--hri-card-padding);
+  aspect-ratio: 2 / 1;
 }
 .hri-card img::before {
   position: absolute;
@@ -35,7 +36,7 @@
   bottom: 0;
   left: 0;
   content: "";
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   background: var(--cd-grey--light);
 }
 .hri-card img::after {
