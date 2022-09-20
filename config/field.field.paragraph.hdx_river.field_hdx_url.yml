@@ -19,7 +19,7 @@ bundle: hdx_river
 label: 'HDX Url'
 description: 'Supported URLs with filters applied: https://data.humdata.org/dataset, https://data.humdata.org/group/COUNTRY'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

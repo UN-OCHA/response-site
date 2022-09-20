@@ -1,9 +1,9 @@
-uuid: 56b1fe89-9681-4a4f-bf3e-b3f21ae33acc
+uuid: 93c04784-f1e6-4703-a932-2a8264e835be
 langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.rss_feed
+    - paragraphs.paragraphs_type.reliefweb_key_figures
   module:
     - content_translation
 third_party_settings:
@@ -11,8 +11,8 @@ third_party_settings:
     enabled: true
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: paragraph.rss_feed
+id: paragraph.reliefweb_key_figures
 target_entity_type_id: paragraph
-target_bundle: rss_feed
+target_bundle: reliefweb_key_figures
 default_langcode: site_default
 language_alterable: true
