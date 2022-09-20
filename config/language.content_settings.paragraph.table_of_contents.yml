@@ -1,18 +1,18 @@
-uuid: 56b1fe89-9681-4a4f-bf3e-b3f21ae33acc
+uuid: 6146ab70-d0a5-426f-921a-659b58940610
 langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.rss_feed
+    - paragraphs.paragraphs_type.table_of_contents
   module:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: true
+    enabled: false
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: paragraph.rss_feed
+id: paragraph.table_of_contents
 target_entity_type_id: paragraph
-target_bundle: rss_feed
+target_bundle: table_of_contents
 default_langcode: site_default
-language_alterable: true
+language_alterable: false

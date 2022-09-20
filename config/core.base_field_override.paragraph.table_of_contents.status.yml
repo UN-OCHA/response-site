@@ -1,17 +1,17 @@
-uuid: b4950f21-4002-4f87-8a9b-895f3a7253f7
+uuid: 86fe9bf1-2203-4d7e-a75e-707d2cbbf0cb
 langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.reliefweb_river
-id: paragraph.reliefweb_river.status
+    - paragraphs.paragraphs_type.table_of_contents
+id: paragraph.table_of_contents.status
 field_name: status
 entity_type: paragraph
-bundle: reliefweb_river
+bundle: table_of_contents
 label: Published
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value:
   -
     value: 1

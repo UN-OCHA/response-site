@@ -6,7 +6,14 @@ dependencies:
     - field.storage.paragraph.field_image
     - paragraphs.paragraphs_type.featured_highlight
   module:
+    - content_translation
     - image
+third_party_settings:
+  content_translation:
+    translation_sync:
+      alt: alt
+      title: title
+      file: '0'
 id: paragraph.featured_highlight.field_image
 field_name: field_image
 entity_type: paragraph
@@ -14,7 +21,7 @@ bundle: featured_highlight
 label: Image
 description: '<strong>Image will be displayed 480×240 (a 2:1 aspect ratio).</strong> If necessary the source image will be cropped from the bottom, so that the top portion is guaranteed to be visible.'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
