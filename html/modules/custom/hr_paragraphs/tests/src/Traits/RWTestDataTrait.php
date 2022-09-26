@@ -35,7 +35,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2019-12-20T21:06:14+00:00"
+            "changed": "2019-12-20T21:06:14+00:00",
+            "original": "2018-09-30T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"
@@ -78,7 +79,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2019-02-24T15:57:11+00:00"
+            "changed": "2019-02-24T15:57:11+00:00",
+            "original": "2017-05-01T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"
@@ -112,7 +114,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2015-06-30T01:20:42+00:00"
+            "changed": "2015-06-30T01:20:42+00:00",
+            "original": "2015-06-07T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"
@@ -163,7 +166,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2017-08-06T08:28:54+00:00"
+            "changed": "2017-08-06T08:28:54+00:00",
+            "original": "2011-06-20T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"
@@ -196,7 +200,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2011-03-21T15:46:57+00:00"
+            "changed": "2011-03-21T15:46:57+00:00",
+            "original": "2009-10-31T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"
@@ -227,7 +232,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2011-03-21T15:27:53+00:00"
+            "changed": "2011-03-21T15:27:53+00:00",
+            "original": "2009-01-31T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"
@@ -262,7 +268,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2021-08-31T09:41:03+00:00"
+            "changed": "2021-08-31T09:41:03+00:00",
+            "original": "2007-10-05T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"
@@ -298,7 +305,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2011-03-21T15:06:15+00:00"
+            "changed": "2011-03-21T15:06:15+00:00",
+            "original": "2007-08-31T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"
@@ -331,7 +339,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2011-03-21T15:44:46+00:00"
+            "changed": "2011-03-21T15:44:46+00:00",
+            "original": "2005-12-31T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"
@@ -362,7 +371,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2005-11-18T05:00:00+00:00"
+            "changed": "2005-11-18T05:00:00+00:00",
+            "original": "2005-11-18T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"
@@ -2208,7 +2218,8 @@ trait RWTestDataTrait {
         "score": 1,
         "fields": {
           "date": {
-            "changed": "2017-08-06T08:28:54+00:00"
+            "changed": "2017-08-06T08:28:54+00:00",
+            "original": "2011-06-20T00:00:00+00:00"
           },
           "country": [{
             "name": "Afghanistan"

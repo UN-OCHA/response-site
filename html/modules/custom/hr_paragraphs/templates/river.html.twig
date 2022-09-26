@@ -43,7 +43,7 @@
             <dd class="source">{{ row.sources }}</dd>
 
             <dt class="date posted">{{ 'Posted'|t }}:</dt>
-            <dd class="date posted">{{ row.date_changed|date("d M Y") }}</dd>
+            <dd class="date posted">{{ row.date_original|date("d M Y") }}</dd>
 
             {% if row.files|length > 0 %}
               <dt class="files">{{ 'Files'|t }}:</dt>

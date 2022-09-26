@@ -480,6 +480,7 @@ class HdxController extends ControllerBase {
         'url' => 'https://data.humdata.org/dataset/' . $row['name'],
         'title' => $row['title'],
         'body' => check_markup($row['notes'] ?? '', 'markdown'),
+        'date_original' => $row['review_date'] ?? $row['metadata_modified'],
         'date_changed' => $row['review_date'] ?? $row['metadata_modified'],
         'organization' => $row['organization']['name'],
         'organization_img' => $row['organization']['image_url'],
