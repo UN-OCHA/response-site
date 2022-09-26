@@ -600,6 +600,9 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
     '#items' => $items,
     '#options' => $options,
     '#weight' => 99,
+    '#cache' => [
+      'max-age' => 60 * 60,
+    ],
   ];
 
   // Add 'read more' if needed.
@@ -676,6 +679,9 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
       ]),
     ],
     '#weight' => 99,
+    '#cache' => [
+      'max-age' => 60 * 60,
+    ],
   ];
 }
 
@@ -900,6 +906,9 @@ function hr_paragraphs_preprocess_paragraph__hdx_river(&$variables) {
     '#view_all' => $paragraph->field_hdx_url->first()->uri,
     '#total' => $max_number_of_items,
     '#weight' => 99,
+    '#cache' => [
+      'max-age' => 60 * 60,
+    ],
   ];
 }
 
@@ -962,6 +971,9 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
     '#view_all' => $paragraph->field_reliefweb_url->first()->uri,
     '#total' => $max_number_of_items,
     '#weight' => 99,
+    '#cache' => [
+      'max-age' => 60 * 60,
+    ],
   ];
 }
 
@@ -1029,6 +1041,9 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
     '#total' => NULL,
     '#view_all' => NULL,
     '#weight' => 99,
+    '#cache' => [
+      'max-age' => 60 * 60,
+    ],
   ];
 }
 
@@ -1167,6 +1182,11 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
     'hr_paragraphs.operation.operations' => 999,
     'group.content' => 999,
   ];
+
+  // Pages is pages.
+  if (isset($data['tabs'][0]['views_view:view.group_nodes.page_1'])) {
+    $data['tabs'][0]['views_view:view.group_nodes.page_1']['#link']['title'] = t('Pages');
+  }
 
   // Re-order tabs.
   foreach ($data['tabs'][0] as $key => &$tab) {
