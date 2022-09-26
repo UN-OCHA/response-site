@@ -20,20 +20,20 @@
 <div class="text-format-wrapper form-item">
   {{ children }}
 
+  {% if description %}
   <div class="cd-alert">
     <div aria-live="polite">
       <div class="cd-alert__container cd-max-width [ cd-flow ]">
         <div class="cd-alert__message">
-          {% if description %}
             {%
               set classes = [
                 aria_description ? 'description',
               ]
             %}
             <div{{ attributes.addClass(classes) }}>{{ description }}</div>
-          {% endif %}
         </div>
       </div>
     </div>
   </div>
+  {% endif %}
 </div>
