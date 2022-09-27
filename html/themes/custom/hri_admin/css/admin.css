@@ -25,6 +25,22 @@
   border-radius: 3px;
 }
 
+
+/**
+ * Move description of the "Custom Content" fields on Operations so it sites
+ * above the content.
+ */
+#edit-field-paragraphs .fieldset-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+#edit-field-paragraphs .fieldset-wrapper > .description {
+  order: -1;
+}
+
+
 /**
  * Large images in WYSIWYG
  *
