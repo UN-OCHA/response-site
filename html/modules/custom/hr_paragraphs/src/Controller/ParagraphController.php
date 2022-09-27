@@ -396,45 +396,55 @@ class ParagraphController extends ControllerBase {
       ];
     }
 
-    // Build Hdx query.
-    $parameters = $this->hdxController->buildHdxParameters($offset, $limit, $query_filters);
-    $results = $this->hdxController->executeHdxQuery($parameters);
+    try {
+      // Build Hdx query.
+      $parameters = $this->hdxController->buildHdxParameters($offset, $limit, $query_filters);
+      $results = $this->hdxController->executeHdxQuery($parameters);
 
-    // Active facets.
-    $active_facets = [];
-    $facets = [];
+      // Active facets.
+      $active_facets = [];
+      $facets = [];
 
-    $count = $results['count'];
-    $this->pagerManager->createPager($count, $limit);
+      $count = $results['count'];
+      $this->pagerManager->createPager($count, $limit);
 
-    return [
-      '#theme' => 'river',
-      '#service' => 'Humanitarian Data Exchange',
-      '#service_url' => 'https://data.humdata.org',
-      '#data' => $this->hdxController->buildHdxObjects($results),
-      '#set_name' => $this->t('Data'),
-      '#view_all' => $url,
-      '#total' => $count,
-      '#facets' => $facets,
-      '#active_facets' => $active_facets,
-      '#pager' => [
-        '#type' => 'pager',
-      ],
-      '#group' => $group,
-      '#cache' => [
-        'tags' => [
-          'group:' . $group->id(),
+      return [
+        '#theme' => 'river',
+        '#service' => 'Humanitarian Data Exchange',
+        '#service_url' => 'https://data.humdata.org',
+        '#data' => $this->hdxController->buildHdxObjects($results),
+        '#set_name' => $this->t('Data'),
+        '#view_all' => $url,
+        '#total' => $count,
+        '#facets' => $facets,
+        '#active_facets' => $active_facets,
+        '#pager' => [
+          '#type' => 'pager',
         ],
-        'contexts' => [
-          'url.query_args:filter',
-          'url.query_args:sort',
-          'url.query_args:page',
-          'url.query_args:limit',
-          'url.query_args:offset',
+        '#group' => $group,
+        '#cache' => [
+          'tags' => [
+            'group:' . $group->id(),
+          ],
+          'contexts' => [
+            'url.query_args:filter',
+            'url.query_args:sort',
+            'url.query_args:page',
+            'url.query_args:limit',
+            'url.query_args:offset',
+          ],
+          'max-age' => 60 * 60,
         ],
-        'max-age' => 60 * 60,
-      ],
-    ];
+      ];
+    }
+    catch (\Exception $exception) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('HDX data is currently not available.'),
+        '#prefix' => '<div class="response-error response-error-api response-error-hdx">',
+        '#suffix' => '</div>',
+      ];
+    }
   }
 
   /**
@@ -567,43 +577,53 @@ class ParagraphController extends ControllerBase {
       ];
     }
 
-    $results = $this->reliefwebController->executeReliefwebQuery($parameters);
+    try {
+      $results = $this->reliefwebController->executeReliefwebQuery($parameters);
 
-    $count = $results['totalCount'];
-    $this->pagerManager->createPager($count, $limit);
+      $count = $results['totalCount'];
+      $this->pagerManager->createPager($count, $limit);
 
-    // Facets.
-    $facets = [];
-    $active_facets = [];
+      // Facets.
+      $facets = [];
+      $active_facets = [];
 
-    return [
-      '#theme' => 'river',
-      '#service' => 'ReliefWeb',
-      '#service_url' => 'https://reliefweb.int',
-      '#data' => $this->reliefwebController->buildReliefwebObjects($results),
-      '#total' => $count,
-      '#facets' => $facets,
-      '#active_facets' => $active_facets,
-      '#pager' => [
-        '#type' => 'pager',
-      ],
-      '#group' => $group,
-      '#view_all' => $url,
-      '#cache' => [
-        'tags' => [
-          'group:' . $group->id(),
+      return [
+        '#theme' => 'river',
+        '#service' => 'ReliefWeb',
+        '#service_url' => 'https://reliefweb.int',
+        '#data' => $this->reliefwebController->buildReliefwebObjects($results),
+        '#total' => $count,
+        '#facets' => $facets,
+        '#active_facets' => $active_facets,
+        '#pager' => [
+          '#type' => 'pager',
         ],
-        'contexts' => [
-          'url.path',
-          'url.query_args:filter',
-          'url.query_args:sort',
-          'url.query_args:page',
-          'url.query_args:limit',
-          'url.query_args:offset',
+        '#group' => $group,
+        '#view_all' => $url,
+        '#cache' => [
+          'tags' => [
+            'group:' . $group->id(),
+          ],
+          'contexts' => [
+            'url.path',
+            'url.query_args:filter',
+            'url.query_args:sort',
+            'url.query_args:page',
+            'url.query_args:limit',
+            'url.query_args:offset',
+          ],
+          'max-age' => 60 * 60,
         ],
-        'max-age' => 60 * 60,
-      ],
-    ];
+      ];
+    }
+    catch (\Exception $exception) {
+      return [
+        '#type' => 'markup',
+        '#markup' => $this->t('ReliefWeb data is currently not available.'),
+        '#prefix' => '<div class="response-error response-error-api response-error-reliefweb">',
+        '#suffix' => '</div>',
+      ];
+    }
   }
 
   /**
