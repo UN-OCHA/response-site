@@ -82,25 +82,50 @@
             $('#modalStartDate').html(startdate);
             $('#modalEndDate').html(enddate);
 
-            // Display the modal
+            // Display the modal.
             $('#fullCalModal').dialog({
               title: event.title,
             });
           }
         })
       },
+      customButtons: {
+        iCalButton: {
+          text: 'ical',
+          click: function() {
+            // Populate the modal dialog.
+            $('#icalSource').html(calendarSettings.ical_source);
+
+            // Display the modal,
+            $('#iCalModal').dialog({
+              title: 'Copy source link',
+            });
+          }
+        }
+      },
     });
 
-    // Use the hash parameters, if they exist. Hash is of the form:
-    //   <viewName>/<ISO-date>
-    //   Ex. month/2015-06
-    var origHash = window.location.hash;
-    if (origHash.length > 1) {
-      var params = origHash.substring(1).split('/');
-      // @todo validate
-      $.extend(calendarSettings, {
-        defaultView: params[0],
-        defaultDate: params[1]
+    // Add copy to clipboard.
+    let copyButton = document.querySelector('.fullcalendar__copy button');
+    if (copyButton) {
+      copyButton.addEventListener('click', function (e) {
+        try {
+          let src = document.getElementById('icalSource');
+
+          var tempInput = document.createElement('input');
+          document.body.appendChild(tempInput);
+          tempInput.value = src.innerHTML;
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+
+          e.preventDefault();
+          e.stopPropagation();
+          $('#iCalModal').dialog('close');
+        }
+        catch (err) {
+          // Fail silently.
+        }
       });
     }
 

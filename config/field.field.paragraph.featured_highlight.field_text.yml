@@ -12,9 +12,9 @@ field_name: field_text
 entity_type: paragraph
 bundle: featured_highlight
 label: Text
-description: ''
+description: 'When displayed, this Text field will end at the last full sentence before the 280 character limit.'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

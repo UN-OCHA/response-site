@@ -673,7 +673,7 @@ class ParagraphController extends ControllerBase {
       'header' => [
         'left' => 'prev,next today',
         'center' => 'title',
-        'right' => 'month,agendaWeek,agendaDay,listMonth',
+        'right' => 'month,agendaWeek,agendaDay,listMonth,iCalButton',
       ],
       'plugins' => [
         'listPlugin',
@@ -685,6 +685,7 @@ class ParagraphController extends ControllerBase {
     // Set source to proxy.
     $datasource_uri = '/group/' . $group->id() . '/ical';
     $settings['events'] = $datasource_uri;
+    $settings['ical_source'] = $group->field_ical_url->value;
 
     // Calendar link.
     $calendar_url = '';
@@ -713,6 +714,19 @@ class ParagraphController extends ControllerBase {
             'hr_paragraphs/fullcalendar',
           ],
         ],
+      ],
+      'ical_popup' => [
+        '#type' => 'inline_template',
+        '#template' => '
+          <div id="iCalModal" style="display:none;">
+          <div>Source: <span id="icalSource"></span></div>
+          <span class="fullcalendar__copy">
+            <button class="cd-button cd-button--icon cd-button--small cd-button--icon-no-margin hri-tooltip" data-message="ICal link copied to clipboard" title="Copy link" data-source="' . $group->field_ical_url->value . '">
+              <span class="visually-hidden">Copy link</span>
+              <svg class="cd-icon cd-icon--copy" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copy"></use></svg>
+            </button>
+          </span>
+        </div>',
       ],
       'calendar_link' => [
         '#theme' => 'fullcalendar_link',

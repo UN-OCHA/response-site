@@ -6,6 +6,7 @@ report-only:
     connect-src:
       base: self
       sources:
+        - analytics.google.com
         - '*.google-analytics.com'
         - '*.doubleclick.net'
         - '*.analytics.google.com'
@@ -43,6 +44,13 @@ report-only:
       base: self
       flags:
         - unsafe-inline
+      sources:
+        - fonts.googleapis.com
+        - '*.gstatic.com'
+        - '*.google.com'
+        - '*.google-analytics.com'
+        - cdn.jsdelivr.net
+        - googletagmanager.com
     style-src:
       base: self
       flags:

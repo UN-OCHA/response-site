@@ -67,11 +67,12 @@
         "fullcalendar/fullcalendar": "^3.10.0",
         "galbar/jsonpath": "^2.0",
         "league/commonmark": "1.6",
+        "mailchimp/marketing": "^3.0",
         "npm-asset/moment": "^2.29",
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",
         "rlanvin/php-rrule": "2.3.1",
-        "unocha/common_design": "^7.0"
+        "unocha/common_design": "^7"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -198,5 +199,5 @@
         "phpunit/phpunit": "^9.5",
         "weitzman/drupal-test-traits": "^1.5"
     },
-    "version": "0.2.3"
+    "version": "0.3.0"
 }

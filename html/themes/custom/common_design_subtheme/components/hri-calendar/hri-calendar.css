@@ -4,3 +4,13 @@
 .hri-calendar__read-more {
   margin-top: 1rem;
 }
+
+.ui-dialog {
+  min-width: max(350px, 40vw);
+  border-color: var(--brand-primary);
+}
+
+.ui-dialog-titlebar {
+  color: var(--cd-white);
+  background: var(--brand-primary);
+}

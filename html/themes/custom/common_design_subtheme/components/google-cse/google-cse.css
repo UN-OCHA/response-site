@@ -1,0 +1,88 @@
+/* stylelint-disable selector-id-pattern, selector-class-pattern */
+/**
+ * Override Google custom search engine
+ *
+ * All selectors are exact duplicates of the Google-provided selectors so that
+ * we can override them.
+ */
+
+div#___gcse_0 {
+  position: relative;
+  max-height: var(--cd-site-header-height);
+}
+
+.gsc-adBlock {
+  display: none !important;
+}
+
+.gsc-control-cse {
+  padding: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+form.gsc-search-box {
+  margin-bottom: 0 !important;
+}
+
+@media screen and (min-width: 1200px) {
+  form.gsc-search-box {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+}
+
+.gsib_a {
+  padding: 9px !important;
+}
+
+/* mobile+en.css */
+.gsc-input-box {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.gsc-input {
+  padding-right: 0 !important;
+  background-image: none !important;
+}
+
+/* override CD Table default margin */
+.gsc-input table {
+  margin-bottom: 0;
+}
+
+.gsc-search-button {
+  margin-left: 0 !important;
+}
+
+.gsc-search-button-v2 {
+  height: 44px !important;
+  padding-right: 16px !important;
+  padding-left: 16px !important;
+}
+.gsc-search-button-v2,
+.gsc-search-button-v2:hover,
+.gsc-search-button-v2:focus {
+  border-color: var(--brand-secondary) !important;
+  background-color: var(--brand-secondary) !important;
+}
+
+.gsc-above-wrapper-area,
+.gsc-wrapper {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.gsc-results-wrapper-visible {
+  position: relative;
+  top: -4px;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--brand-primary--light);
+  background: #fff;
+  box-shadow: 0 3px 8px #0002;
+}
+
+.gs-webResult.gs-result a.gs-title:link {
+  color: var(--brand-primary--dark) !important;
+}

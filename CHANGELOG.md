@@ -4,6 +4,52 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.0](https://github.com/UN-OCHA/response-site/compare/v0.2.3...v0.3.0) (2022-09-26)
+
+### Features
+
+* Add google search ([994061](https://github.com/UN-OCHA/response-site/commit/9940613fc4e077723f6ed5d653be5a4fdff6be5d))
+* Add ical button to calendar [#RWR-232](https://https://humanitarian.atlassian.net/browse/RWR-232) ([bb7457](https://github.com/UN-OCHA/response-site/commit/bb7457bfa5de41bf13d6a7e994447617fb1a317b))
+* Add logging for mailchimp [#RWR-223](https://https://humanitarian.atlassian.net/browse/RWR-223) ([b2faa0](https://github.com/UN-OCHA/response-site/commit/b2faa03a981953b3f0f2f34a3dfa2dbbc890d22c))
+* Cache external data for 1 hour [#RW-674](https://https://humanitarian.atlassian.net/browse/RW-674) ([ca8328](https://github.com/UN-OCHA/response-site/commit/ca832824e515099b47cc8211ee63961adbbced00))
+* GTM datalayer [#RWR-222](https://https://humanitarian.atlassian.net/browse/RWR-222), [#RWR-222](https://https://humanitarian.atlassian.net/browse/RWR-222) ([e1d4ce](https://github.com/UN-OCHA/response-site/commit/e1d4ce254551012e9726ffec7c3226273f962ab0), [15d1e2](https://github.com/UN-OCHA/response-site/commit/15d1e28bd1758281bbffbf506c362310b7711adf))
+* Styling calendar popup [#RWR-226](https://https://humanitarian.atlassian.net/browse/RWR-226) ([680de4](https://github.com/UN-OCHA/response-site/commit/680de40a4ce0a99d94accede84aa5117680c9cea))
+* Subscribe to mailchimp [#RWR-223](https://https://humanitarian.atlassian.net/browse/RWR-223) ([fefc08](https://github.com/UN-OCHA/response-site/commit/fefc08eea87e090a27948f1a60bc3425824be8a1))
+* Use pages as tab name [#RWR-235](https://https://humanitarian.atlassian.net/browse/RWR-235) ([d9ede6](https://github.com/UN-OCHA/response-site/commit/d9ede667f3266054571ef55de1fe80bd25122ea4))
+
+### Bug Fixes
+
+* Add Help text to Feat Highlight and make it more prominent than default ([03c5c5](https://github.com/UN-OCHA/response-site/commit/03c5c57dcfe8f2d1a3b80177d1e3d708b4c4b0bd))
+* Add Pakistan to Key Figures config ([49ff26](https://github.com/UN-OCHA/response-site/commit/49ff264f9d04d6ae6812c276cccb3d4fdddcf61b))
+* Card List should only enforce flex on its direct child fields ([e4b08d](https://github.com/UN-OCHA/response-site/commit/e4b08de098a09f716fd8e0cb942299c2e3d95d61))
+* Clickable Card broken images shouldn't overlap text ([31dbf7](https://github.com/UN-OCHA/response-site/commit/31dbf7402d353b0060c04e37762b7cd03059fbbb))
+* Display View All link on Key Figures ([f9a874](https://github.com/UN-OCHA/response-site/commit/f9a874389b83827e1d92a39507df9964d4dc8bff))
+* Don't be so paranoid with reliefweb.int external links ([662ead](https://github.com/UN-OCHA/response-site/commit/662ead50cf22fed35882e779ca940072c03bec53))
+* Don't render CD Alert unless it contains content ([cb8939](https://github.com/UN-OCHA/response-site/commit/cb893937ab5511d644921177ad9cefcb55fb8e14))
+* Integrate search a little better ([ef8ed0](https://github.com/UN-OCHA/response-site/commit/ef8ed0c764b577c6f5e78265bf7e5f85caf98e42))
+* More google CSE tweaks from mobile testing ([16a5d8](https://github.com/UN-OCHA/response-site/commit/16a5d832ccd53005b31b5a659afb437dacc29277))
+* More styles for desktop ([ee6f9e](https://github.com/UN-OCHA/response-site/commit/ee6f9e94b567258446b75d8c6865077ec0578e29))
+* New brand colors to differentiate from RW ([e90238](https://github.com/UN-OCHA/response-site/commit/e90238f42ba202738c11999453fa4f347b752e95))
+* Re-color google custom search ([07a875](https://github.com/UN-OCHA/response-site/commit/07a875260ecebb5eba1ff45058d23a6a150c2a00))
+* Re-color OCHA Services see-all button ([e25e5a](https://github.com/UN-OCHA/response-site/commit/e25e5a40b30e50cece90dad8def92e1df3f81849))
+* Remove whitespace from href attr ([220628](https://github.com/UN-OCHA/response-site/commit/2206285f26885f0a4398c12ab756706155cd58e9))
+* Restore all elements of Key Figures: last-update and sparklines ([0ad376](https://github.com/UN-OCHA/response-site/commit/0ad3769f910feb3329f5597577b9f0044240491b))
+* Restore links to RW blue ([47a3ff](https://github.com/UN-OCHA/response-site/commit/47a3ffcad5b6f1b503de1e0b1595358abe829c76))
+* Restore other components to be blue ([265978](https://github.com/UN-OCHA/response-site/commit/265978b15dcae3c02f5c22b527d36ce4a75f4aaf))
+* Restore SVG sprite ([4dc384](https://github.com/UN-OCHA/response-site/commit/4dc3842639f82fd29e7207dd35d3f6fdb715387e))
+* RW rivers should display date.original ([104a3a](https://github.com/UN-OCHA/response-site/commit/104a3ab34c8aef2ba137fc080a5cfc4e1ea2af65))
+* Safer conditional for verifying external links ([682f58](https://github.com/UN-OCHA/response-site/commit/682f58d0a46f22e8d0b7919e221f9828e9b5ff49))
+* Standardize descriptions across the Editor UI ([01c740](https://github.com/UN-OCHA/response-site/commit/01c7407edfb857f4a5ca775083ec858d19e8fc28))
+* Style Google CSE for desktop ([673dd9](https://github.com/UN-OCHA/response-site/commit/673dd9cb73fc328aaeb3e9413b88fecee882ea82))
+* Wrap Google CSE into standard CD search dropdown ([de5c83](https://github.com/UN-OCHA/response-site/commit/de5c831dcf7e855d0df939116d830ca7382f2175))
+
+### Chores
+
+* Reconfig how custom global styles are applied ([98b4bd](https://github.com/UN-OCHA/response-site/commit/98b4bdb243220a89411e7de5bc4224daab3ee783))
+* Remove RU language ([9e5864](https://github.com/UN-OCHA/response-site/commit/9e5864fa0a8a5f3916e15ad8d038f3b211a0027f))
+* Update all outdated drupal/* packages. ([515452](https://github.com/UN-OCHA/response-site/commit/5154525db5c5ac65fee976dfce372a5f3ac9417f), [772e4e](https://github.com/UN-OCHA/response-site/commit/772e4e3c10ad83166279d1ddc6bf35a96df70426), [549257](https://github.com/UN-OCHA/response-site/commit/549257509f594645fcdc4279cc57e7ebf78f2735))
+* Upgrade CD to latest release ([c61174](https://github.com/UN-OCHA/response-site/commit/c611741f6427c9179e9334d69b0cd765c85279d1))
+
 ## [0.2.3](https://github.com/UN-OCHA/response-site/compare/v0.2.2...v0.2.3) (2022-09-07)
 ### Features
 

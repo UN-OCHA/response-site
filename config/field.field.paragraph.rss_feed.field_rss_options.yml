@@ -14,7 +14,7 @@ bundle: rss_feed
 label: 'RSS options'
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: display_date

@@ -14,7 +14,7 @@ bundle: rss_feed
 label: 'RSS read more'
 description: 'Link back to the source, by entering your own URL. If left empty the RSS Channel link will be used.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

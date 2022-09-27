@@ -31,6 +31,8 @@ module:
   google_tag: 0
   group: 0
   help: 0
+  hr_analytics: 0
+  hr_mailchimp: 0
   hr_paragraphs: 0
   image: 0
   jquery_ui: 0

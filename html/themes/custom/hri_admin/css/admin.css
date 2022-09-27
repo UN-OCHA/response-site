@@ -3,6 +3,29 @@
  */
 
 /**
+ * We use CD components occasionally, so declare any CSS Custom Props we might
+ * need to use.
+ */
+:root {
+  --cd-grey--light: #f2f2f2;
+  --cd-grey--bright: #ccc;
+  --cd-grey--mid: #595959;
+  --cd-grey--dark: #4a4a4a;
+  --cd-blue--bright: #82b5e9;
+}
+
+
+/**
+ * Make descriptions more noticeable.
+ */
+.description {
+  padding: .25rem .5rem;
+  border: 1px solid var(--cd-grey--bright);
+  border-inline-start-width: 0.5rem;
+  border-radius: 3px;
+}
+
+/**
  * Large images in WYSIWYG
  *
  * When large images get initially uploaded to the WYSIWYG editor, it's possible
@@ -26,11 +49,13 @@
   padding: 1rem;
 }
 
+/* Title */
 .field--name-field-paragraphs .field--name-field-title {
   margin: 1rem 0;
   font-size: 1.75em;
 }
 
+/* Rivers */
 .river__result {
   max-width: 720px;
 }
@@ -60,6 +85,7 @@
   padding-inline-end: 1rem;
 }
 
+/* Text */
 .paragraph--type--text-block .align-left {
   margin-right: 1rem;
 }
@@ -67,6 +93,7 @@
   margin-left: 1rem;
 }
 
+/* Card List */
 .paragraph--type--card-list .field--name-field-paragraphs {
   --hri-admin-card-list-num-cols: 2;
 
@@ -88,6 +115,7 @@
   content: "Destination: ";
 }
 
+/* Upcoming Events */
 .upcoming-events__list {
   /* layout */
   display: flex;
@@ -159,4 +187,32 @@
   border: dotted green;
   min-height: 30px;
   margin-bottom: 20px;
+}
+
+/* ReliefWeb Key Figures */
+.rw-key-figures__list {
+  --rwkf-num-cols: 1;
+  --rwkf-gap-size: 1rem;
+
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--rwkf-gap-size);
+  margin: 0;
+  padding: 0;
+}
+@media screen and (min-width: 768px) {
+  .rw-key-figures__list {
+    --rwkf-num-cols: 2;
+  }
+}
+.rw-key-figures__list > li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  flex: 0 1 calc((100% / var(--rwkf-num-cols)) - (var(--rwkf-gap-size) * (var(--rwkf-num-cols) - 1)));
+  border: 2px solid #0003;
+}
+.rw-key-figures__figure__label {
+  font-weight: 700;
+  font-size: 1.25em;
 }

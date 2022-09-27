@@ -2,13 +2,13 @@ global-styling:
   css:
     theme:
       css/brand.css: {}
+      css/styles.css: {}
   js:
     js/login_destination.js: {}
   dependencies:
     - common_design_subtheme/rw-brand
     - common_design_subtheme/hri-breadcrumbs
     - common_design_subtheme/hri-cd-header
-    - common_design_subtheme/hri-global-styling
     - common_design_subtheme/cd-read-more
 
 cd-read-more:
@@ -23,6 +23,11 @@ cd-tabs:
     theme:
       components/cd-tabs/cd-tabs.css: {}
       components/cd-tabs/hri-tabs.css: {}
+
+google-cse:
+  css:
+    theme:
+      components/google-cse/google-cse.css: {}
 
 hri-breadcrumbs:
   css:
@@ -78,11 +83,6 @@ hri-fullcalendar:
   css:
     component:
       components/hri-fullcalendar/hri-fullcalendar.css: {}
-
-hri-global-styling:
-  css:
-    component:
-      components/hri-global-styling/hri-global-styling.css: {}
 
 hri-heading:
   css:
