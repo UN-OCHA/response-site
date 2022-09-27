@@ -36,7 +36,7 @@ class KeyFiguresController extends ControllerBase {
    *   Raw results.
    */
   public function getKeyFigures(string $iso3) : array {
-    $endpoint = 'sdfdsdsfdsfhttps://raw.githubusercontent.com/reliefweb/crisis-app-data/v2/edition/world/countries/';
+    $endpoint = 'https://raw.githubusercontent.com/reliefweb/crisis-app-data/v2/edition/world/countries/';
 
     // Construct full URL.
     $fullUrl = $endpoint . $iso3 . '/figures.json';
