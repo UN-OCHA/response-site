@@ -481,6 +481,7 @@ class HdxController extends ControllerBase {
         'title' => $row['title'],
         'body' => check_markup($row['notes'] ?? '', 'markdown'),
         'date_original' => $row['review_date'] ?? $row['metadata_modified'],
+        'date_created' => $row['review_date'] ?? $row['metadata_modified'],
         'date_changed' => $row['review_date'] ?? $row['metadata_modified'],
         'organization' => $row['organization']['name'],
         'organization_img' => $row['organization']['image_url'],
