@@ -1024,52 +1024,38 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
     'value' => $url,
   ];
 
-  $results = $reliefweb_controller->executeReliefwebQuery($parameters);
-
-  // Try using canonical URL.
-  if (!isset($results['data']) || empty($results['data'])) {
+  try {
+    $results = $reliefweb_controller->executeReliefwebQuery($parameters);
     $parameters = $reliefweb_controller->buildReliefwebParameters(0, 1, []);
 
     // Remove facets.
     unset($parameters['facets']);
 
-    $parts = explode('/', $url);
-    $id = array_pop($parts);
+    if (empty($results) || empty($results['data'])) {
+      return;
+    }
 
-    $parameters['filter']['conditions'][] = [
-      'field' => 'id',
-      'value' => $id,
+    $docs = $reliefweb_controller->buildReliefwebObjects($results);
+    $doc = reset($docs);
+
+    $variables['content']['rw_list'] = [
+      '#theme' => 'hr_paragraphs_rw_list',
+      '#data' => [$doc],
+      '#total' => NULL,
+      '#view_all' => NULL,
+      '#weight' => 99,
+      '#cache' => [
+        'max-age' => 60 * 60,
+      ],
     ];
-
-    try {
-      $results = $reliefweb_controller->executeReliefwebQuery($parameters);
-
-      if (empty($results) || empty($results['data'])) {
-        return;
-      }
-
-      $docs = $reliefweb_controller->buildReliefwebObjects($results);
-      $doc = reset($docs);
-
-      $variables['content']['rw_list'] = [
-        '#theme' => 'hr_paragraphs_rw_list',
-        '#data' => [$doc],
-        '#total' => NULL,
-        '#view_all' => NULL,
-        '#weight' => 99,
-        '#cache' => [
-          'max-age' => 60 * 60,
-        ],
-      ];
-    }
-    catch (\Exception $exception) {
-      $variables['content']['rw_list'] = [
-        '#type' => 'markup',
-        '#markup' => t('ReliefWeb data is currently not available.'),
-        '#prefix' => '<div class="response-error response-error-api response-error-reliefweb">',
-        '#suffix' => '</div>',
-      ];
-    }
+  }
+  catch (\Exception $exception) {
+    $variables['content']['rw_list'] = [
+      '#type' => 'markup',
+      '#markup' => t('ReliefWeb data is currently not available.'),
+      '#prefix' => '<div class="response-error response-error-api response-error-reliefweb">',
+      '#suffix' => '</div>',
+    ];
   }
 }
 
