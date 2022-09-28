@@ -7,14 +7,13 @@
   gap: 2rem;
 }
 
-@media (min-width: 880px) {
+@media (min-width: 1024px) {
   .hri-layout {
     flex-flow: row nowrap;
   }
-}
-
-.hri-layout .hri-layout__first {
-  order: -1;
+  .hri-layout .hri-layout__first {
+    order: -1;
+  }
 }
 
 .hri-layout .hri-layout__sidebar {
@@ -28,20 +27,18 @@
   font-size: var(--cd-font-size--large);
 }
 
-
 /**
  * Two-col
  *
  * Two-col is the layout used by Clusters / Working Groups. You see it on any
  * CWG tab that has facets and is "powered by" another service like RW or HDX.
  */
-
 .hri-layout--two-col > * {
   flex: 1 1 auto;
 }
 
-@media (min-width: 880px) {
+@media (min-width: 1024px) {
   .hri-layout--two-col > .hri-layout__sidebar {
-    flex: 0 0 360px;
+    flex: 0 0 285px;
   }
 }
