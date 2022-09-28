@@ -80,7 +80,8 @@ class SocialAuthSubscriber implements EventSubscriberInterface {
     ];
 
     $to = $this->configFactory->get('hr_paragraphs.settings')->get('notification_email');
-    if (!empty($to)) {
+    $enabled = $this->configFactory->get('hr_paragraphs.settings')->get('notification_new_user_enabled');
+    if ($enabled && !empty($to)) {
       $this->mailManager->mail('hr_paragraphs', 'user_created', $to, 'en', $params);
     }
   }
