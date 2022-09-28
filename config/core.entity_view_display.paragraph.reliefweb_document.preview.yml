@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.reliefweb_document.field_reliefweb_url
+    - field.field.paragraph.reliefweb_document.field_show_thumbnails
     - field.field.paragraph.reliefweb_document.field_text
     - field.field.paragraph.reliefweb_document.field_title
     - paragraphs.paragraphs_type.reliefweb_document
@@ -43,4 +44,5 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-hidden: {  }
+hidden:
+  field_show_thumbnails: true

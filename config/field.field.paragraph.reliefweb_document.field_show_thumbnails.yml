@@ -1,0 +1,23 @@
+uuid: bcbb9dcc-f193-4f3b-9f7f-df36d0cce2e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_show_thumbnails
+    - paragraphs.paragraphs_type.reliefweb_document
+id: paragraph.reliefweb_document.field_show_thumbnails
+field_name: field_show_thumbnails
+entity_type: paragraph
+bundle: reliefweb_document
+label: 'Show thumbnail?'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Show
+  off_label: Hide
+field_type: boolean
