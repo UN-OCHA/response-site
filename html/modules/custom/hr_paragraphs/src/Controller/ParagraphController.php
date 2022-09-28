@@ -593,7 +593,7 @@ class ParagraphController extends ControllerBase {
         '#theme' => 'river',
         '#service' => 'ReliefWeb',
         '#service_url' => 'https://reliefweb.int',
-        '#data' => $this->reliefwebController->buildReliefwebObjects($results, TRUE),
+        '#data' => $this->reliefwebController->buildReliefwebObjects($results, FALSE),
         '#total' => $count,
         '#facets' => $facets,
         '#active_facets' => $active_facets,

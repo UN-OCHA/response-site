@@ -1,23 +1,23 @@
-uuid: 036eba8c-53bb-4206-bf03-13e7afd92ba8
+uuid: 01eb56d1-2834-4a80-bcbe-5aedefa754f2
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_show_thumbnails
+    - field.storage.paragraph.field_hide_thumbnails
     - paragraphs.paragraphs_type.reliefweb_river
-id: paragraph.reliefweb_river.field_show_thumbnails
-field_name: field_show_thumbnails
+id: paragraph.reliefweb_river.field_hide_thumbnails
+field_name: field_hide_thumbnails
 entity_type: paragraph
 bundle: reliefweb_river
-label: 'Show thumbnails?'
+label: 'Hide Thumbnails?'
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: 1
+    value: 0
 default_value_callback: ''
 settings:
-  on_label: Show
-  off_label: Hide
+  on_label: Hide
+  off_label: Show
 field_type: boolean

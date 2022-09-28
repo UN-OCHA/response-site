@@ -1,11 +1,11 @@
-uuid: 1c91e1d0-1ebf-499c-b186-c31b238d6992
+uuid: d34044e3-8bb0-4c18-965e-a8174f47f6d9
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
-id: paragraph.field_show_thumbnails
-field_name: field_show_thumbnails
+id: paragraph.field_hide_thumbnails
+field_name: field_hide_thumbnails
 entity_type: paragraph
 type: boolean
 settings: {  }

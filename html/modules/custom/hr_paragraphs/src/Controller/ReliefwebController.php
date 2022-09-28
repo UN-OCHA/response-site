@@ -364,13 +364,13 @@ class ReliefwebController extends ControllerBase {
    *
    * @param array<string, mixed> $results
    *   Raw results from API.
-   * @param bool $thumbs
+   * @param bool $hide_thumbs
    *   Whether to display thumbnails or not.
    *
    * @return array<string, mixed>
    *   Results.
    */
-  public function buildReliefwebObjects(array $results, bool $thumbs) : array {
+  public function buildReliefwebObjects(array $results, bool $hide_thumbs) : array {
     $data = [];
 
     foreach ($results['data'] as $row) {
@@ -385,7 +385,7 @@ class ReliefwebController extends ControllerBase {
         'date_changed' => $row['fields']['date']['changed'],
         'format' => $row['fields']['format'][0]['name'],
         'primary_country' => $row['fields']['primary_country']['name'],
-        'show_thumbnails' => $thumbs,
+        'hide_thumbnails' => $hide_thumbs,
       ];
 
       if (isset($row['fields']['source'])) {

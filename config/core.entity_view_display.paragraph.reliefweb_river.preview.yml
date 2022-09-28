@@ -4,9 +4,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.reliefweb_river.field_hide_thumbnails
     - field.field.paragraph.reliefweb_river.field_max_number_of_items
     - field.field.paragraph.reliefweb_river.field_reliefweb_url
-    - field.field.paragraph.reliefweb_river.field_show_thumbnails
     - field.field.paragraph.reliefweb_river.field_text
     - field.field.paragraph.reliefweb_river.field_title
     - paragraphs.paragraphs_type.reliefweb_river
@@ -46,5 +46,5 @@ content:
     weight: 0
     region: content
 hidden:
+  field_hide_thumbnails: true
   field_max_number_of_items: true
-  field_show_thumbnails: true

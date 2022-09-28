@@ -13,7 +13,7 @@
         </header>
         {% if row.body != '' %}
           <div class="content">
-            {% if row.show_thumbnails %}
+            {% if not row.hide_thumbnails %}
               {% for file in row.files|slice(0, 1) %}
                 {% if file.preview != '' %}
                   <img src="{{ file.preview }}" alt="{{ file.description }}">
