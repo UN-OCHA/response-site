@@ -13,11 +13,13 @@
         </header>
         {% if row.body != '' %}
           <div class="content">
-            {% for file in row.files|slice(0, 1) %}
-              {% if file.preview != '' %}
-                <img src="{{ file.preview }}" alt="{{ file.description }}">
-              {% endif %}
-            {% endfor %}
+            {% if not row.hide_thumbnails %}
+              {% for file in row.files|slice(0, 1) %}
+                {% if file.preview != '' %}
+                  <img src="{{ file.preview }}" alt="{{ file.description }}">
+                {% endif %}
+              {% endfor %}
+            {% endif %}
 
             {% if row.body|striptags|split(' ')|length > 36 %}
               <p>{{ row.body|striptags|split(' ')|slice(0, 36)|join(' ')|raw }}&hellip;</p>

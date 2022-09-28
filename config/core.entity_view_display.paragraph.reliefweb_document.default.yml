@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.reliefweb_document.field_hide_thumbnails
     - field.field.paragraph.reliefweb_document.field_reliefweb_url
     - field.field.paragraph.reliefweb_document.field_text
     - field.field.paragraph.reliefweb_document.field_title
@@ -30,4 +31,5 @@ content:
     weight: 0
     region: content
 hidden:
+  field_hide_thumbnails: true
   field_reliefweb_url: true
