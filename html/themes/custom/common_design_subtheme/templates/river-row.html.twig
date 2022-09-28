@@ -22,11 +22,13 @@
   </header>
 
   <div class="content">
-    {% for file in row.files|slice(0, 1) %}
-      {% if file.preview != '' %}
-        <img src="{{ file.preview }}" alt="{{ file.description }}">
-      {% endif %}
-    {% endfor %}
+    {% if row.show_thumbnails %}
+      {% for file in row.files|slice(0, 1) %}
+        {% if file.preview != '' %}
+          <img src="{{ file.preview }}" alt="{{ file.description }}">
+        {% endif %}
+      {% endfor %}
+    {% endif %}
 
     {% if row.body != '' %}
       {% if row.body|striptags|split(' ')|length > 36 %}

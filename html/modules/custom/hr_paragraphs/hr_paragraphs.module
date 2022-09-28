@@ -976,10 +976,11 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
 
   try {
     $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+    $show_thumbs = $paragraph->field_show_thumbnails->value == 1 ? TRUE : FALSE;
 
     $variables['content']['rw_list'] = [
       '#theme' => 'hr_paragraphs_rw_list',
-      '#data' => $reliefweb_controller->buildReliefwebObjects($results),
+      '#data' => $reliefweb_controller->buildReliefwebObjects($results, $show_thumbs),
       '#view_all' => $paragraph->field_reliefweb_url->first()->uri,
       '#total' => $max_number_of_items,
       '#weight' => 99,
@@ -1027,6 +1028,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   try {
     $results = $reliefweb_controller->executeReliefwebQuery($parameters);
     $parameters = $reliefweb_controller->buildReliefwebParameters(0, 1, []);
+    $show_thumbs = $paragraph->field_show_thumbnails->value == 1 ? TRUE : FALSE;
 
     // Remove facets.
     unset($parameters['facets']);
@@ -1035,7 +1037,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
       return;
     }
 
-    $docs = $reliefweb_controller->buildReliefwebObjects($results);
+    $docs = $reliefweb_controller->buildReliefwebObjects($results, $show_thumbs);
     $doc = reset($docs);
 
     $variables['content']['rw_list'] = [
