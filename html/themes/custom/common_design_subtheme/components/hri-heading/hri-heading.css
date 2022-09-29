@@ -8,6 +8,8 @@
  * @see html/themes/custom/common_design_subtheme/templates/paragraph--landing-page--heading.html.twig
  */
 .heading--with-link {
+  --hri-heading-padding: 0.5ch;
+
   display: flex;
   flex-flow: row wrap;
   align-items: baseline;
@@ -20,6 +22,8 @@
 }
 
 .heading--with-link .field-title__link {
+  padding-inline-end: var(--hri-heading-padding);
+  white-space: nowrap;
   font-size: 1rem;
   font-style: italic;
 }
@@ -28,10 +32,21 @@
   text-decoration: none;
 }
 
-[dir="ltr"] .heading--with-link .field-title__link {
-  right: 0;
+.heading--with-link .field-title__link::after {
+  position: relative;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  content: "";
+  background: transparent url("../rw-brand/rw-icons-sprite.svg") no-repeat;
 }
 
-[dir="rtl"] .heading--with-link .field-title__link {
-  left: 0;
+[dir="ltr"] .heading--with-link .field-title__link::after {
+  left: var(--hri-heading-padding);
+  background-position: -84px -120px;
+}
+
+[dir="rtl"] .heading--with-link .field-title__link::after {
+  right: var(--hri-heading-padding);
+  background-position: -84px -132px;
 }
