@@ -10,13 +10,17 @@
  * @ingroup themeable
  */
 #}
+{# We're imitating default styles for a WYSIWYG field to style the bullets. #}
+{{ attach_library('common_design_subtheme/hri-text-block') }}
 {{ attach_library('common_design_subtheme/hri-toc') }}
+
 {%
   set classes = [
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    'field--name-field-text',
   ]
 %}
 {% block paragraph %}
@@ -27,7 +31,7 @@
   }}>
     {% block content %}
       {{ content }}
-      <ul class="cd-bullet-list hri-toc__list"></ul>
+      <ul class="hri-toc__list"></ul>
     {% endblock %}
   </nav>
 {% endblock paragraph %}

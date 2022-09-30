@@ -39,11 +39,6 @@ hri-cd-header:
     theme:
       components/hri-cd-header/hri-cd-header.css: {}
 
-hri-bullet-list:
-  css:
-    theme:
-      components/hri-bullet-list/hri-bullet-list.css: {}
-
 hri-button:
   css:
     theme:

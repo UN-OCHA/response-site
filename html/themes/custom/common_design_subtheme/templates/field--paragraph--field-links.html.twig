@@ -8,10 +8,13 @@
  * @see template_preprocess_field()
  */
 #}
-{{ attach_library('common_design/cd-bullet-list') }}
+{# We're imitating default styles for a WYSIWYG field to style the bullets. #}
+{{ attach_library('common_design_subtheme/hri-text-block') }}
 
-<ul class="cd-bullet-list">
-  {% for item in items %}
-    <li{{ item.attributes }}>{{ item.content }}</li>
-  {% endfor %}
-</ul>
+<div class="field field--name-field-text field--type-text-long field--label-hidden field__item">
+  <ul>
+    {% for item in items %}
+      <li{{ item.attributes }}>{{ item.content }}</li>
+    {% endfor %}
+  </ul>
+</div>
