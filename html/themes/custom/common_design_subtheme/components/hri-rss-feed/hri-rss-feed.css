@@ -6,6 +6,31 @@
   font-size: var(--cd-font-size--base);
 }
 
+.hri-rss-feed .external-feed--list {
+  padding-inline-start: 1.2rem;
+  list-style: none;
+}
+
+.hri-rss-feed .external-feed--item-title h3 {
+  position: relative;
+}
+
+.hri-rss-feed .external-feed--item-title h3::before {
+  position: absolute;
+  top: -4px;
+  content: "•";
+  color: var(--brand-secondary);
+  font-size: 1.5em;
+}
+
+[dir="ltr"] .hri-rss-feed .external-feed--item-title h3::before {
+  left: -1rem;
+}
+
+[dir="rtl"] .hri-rss-feed .external-feed--item-title h3::before {
+  right: -1rem;
+}
+
 .hri-rss-feed .external-feed--item-date {
   font-size: var(--cd-font-size--base);
 }
