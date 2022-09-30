@@ -22,7 +22,8 @@
 }
 
 .paragraph--type--card-list .field--name-field-paragraphs > .field__item {
-  flex: 1 1 calc((100% / var(--hri-card-list-num-cols)) - (var(--hri-card-list-gap-size) * (var(--hri-card-list-num-cols) - 1)));
+  /* stylelint-disable-next-line max-line-length */
+  flex: 0 1 calc((100% / var(--hri-card-list-num-cols)) - var(--hri-card-list-gap-size) + var(--hri-card-list-gap-size) / var(--hri-card-list-num-cols));
 }
 
 @media screen and (min-width: 480px) {
