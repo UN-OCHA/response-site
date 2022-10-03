@@ -1,0 +1,51 @@
+label: Parráfos
+display:
+  default:
+    display_title: Máster
+    display_options:
+      title: Parráfos
+      fields:
+        id:
+          label: ID
+          separator: ', '
+        parent_id:
+          label: Padre
+          separator: ', '
+        parent_type:
+          label: 'Tipo de padre'
+          separator: ', '
+        status:
+          label: Publicado
+          separator: ', '
+        type:
+          label: Tipo
+          separator: ', '
+        nothing:
+          label: Acción
+          alter:
+            text: eliminar
+            alt: eliminar
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page_label: 'Elementos por página'
+            items_per_page_options_all_label: '- Todo -'
+            offset_label: Desplazamiento
+      exposed_form:
+        options:
+          submit_button: Aplicar
+          reset_button_label: Restablecer
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      filters:
+        type:
+          expose:
+            label: Tipo
+  page_admin_paragraphs:
+    display_options:
+      menu:
+        title: Parráfos

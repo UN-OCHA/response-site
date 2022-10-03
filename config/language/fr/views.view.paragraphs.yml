@@ -1,0 +1,51 @@
+label: Paragraphs
+display:
+  default:
+    display_title: Maître
+    display_options:
+      title: Paragraphs
+      fields:
+        id:
+          label: 'Identifiant (ID)'
+          separator: ', '
+        parent_id:
+          label: Parent
+          separator: ', '
+        parent_type:
+          label: 'Type du parent'
+          separator: ', '
+        status:
+          label: Publié
+          separator: ', '
+        type:
+          label: Type
+          separator: ', '
+        nothing:
+          label: Action
+          alter:
+            text: supprimer
+            alt: supprimer
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page_label: 'Éléments par page'
+            items_per_page_options_all_label: '- Tout -'
+            offset_label: Décalage
+      exposed_form:
+        options:
+          submit_button: Appliquer
+          reset_button_label: Réinitialiser
+          exposed_sorts_label: 'Trier par'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      filters:
+        type:
+          expose:
+            label: Type
+  page_admin_paragraphs:
+    display_options:
+      menu:
+        title: Paragraphs
