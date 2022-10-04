@@ -9,10 +9,10 @@
     {% set previousEventStart = '' %}
 
     {% for event in events %}
-      {% if previousEventStart != event.start|date("d M Y") %}
+      {% if previousEventStart != event.start|date("j M Y") %}
         <li class="hri-events__heading event-heading">
           <div class="event-heading__date">
-            {{ event.start|date("d M Y") }}
+            {{ event.start|date("j M Y") }}
           </div>
           <div class="event-heading__day">
             {{ event.start|date("l")|t }}
@@ -29,7 +29,7 @@
         </span>
       </li>
 
-      {% set previousEventStart = event.start|date("d M Y") %}
+      {% set previousEventStart = event.start|date("j M Y") %}
     {% endfor %}
   </ul>
   <a href="{{ read_more.url }}">{{ 'View all events'|t }}</a>

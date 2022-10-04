@@ -55,6 +55,7 @@
         "drupal/masquerade": "^2.0@beta",
         "drupal/memcache": "^2.3",
         "drupal/override_node_options": "^2.6",
+        "drupal/paragraphs_admin": "^1.4",
         "drupal/paragraphs_asymmetric_translation_widgets": "^1.0@beta",
         "drupal/pathauto": "^1.8",
         "drupal/select2": "^1.13",

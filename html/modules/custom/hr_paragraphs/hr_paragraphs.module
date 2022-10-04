@@ -894,22 +894,33 @@ function hr_paragraphs_preprocess_paragraph__hdx_river(&$variables) {
   $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
 
   $url = $paragraph->field_hdx_url->first()->uri;
-  /** @var \Drupal\hr_paragraphs\Controller\HdxController */
-  $hdx_controller = \Drupal::service('hr_paragraphs.hdx_controller');
-  $query_filters = $hdx_controller->parseHdxUrl($url);
-  $parameters = $hdx_controller->buildHdxParameters(0, $max_number_of_items, $query_filters);
-  $results = $hdx_controller->executeHdxQuery($parameters);
 
-  $variables['content']['rw_list'] = [
-    '#theme' => 'hr_paragraphs_rw_list',
-    '#data' => $hdx_controller->buildHdxObjects($results),
-    '#view_all' => $paragraph->field_hdx_url->first()->uri,
-    '#total' => $max_number_of_items,
-    '#weight' => 99,
-    '#cache' => [
-      'max-age' => 60 * 60,
-    ],
-  ];
+  try {
+    /** @var \Drupal\hr_paragraphs\Controller\HdxController */
+    $hdx_controller = \Drupal::service('hr_paragraphs.hdx_controller');
+    $query_filters = $hdx_controller->parseHdxUrl($url);
+    $parameters = $hdx_controller->buildHdxParameters(0, $max_number_of_items, $query_filters);
+    $results = $hdx_controller->executeHdxQuery($parameters);
+
+    $variables['content']['rw_list'] = [
+      '#theme' => 'hr_paragraphs_rw_list',
+      '#data' => $hdx_controller->buildHdxObjects($results),
+      '#view_all' => $paragraph->field_hdx_url->first()->uri,
+      '#total' => $max_number_of_items,
+      '#weight' => 99,
+      '#cache' => [
+        'max-age' => 60 * 60,
+      ],
+    ];
+  }
+  catch (\Exception $exception) {
+    $variables['content']['rw_list'] = [
+      '#type' => 'markup',
+      '#markup' => t('HDX data is currently not available.'),
+      '#prefix' => '<div class="response-error response-error-api response-error-hdx">',
+      '#suffix' => '</div>',
+    ];
+  }
 }
 
 /**
@@ -963,18 +974,29 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
     ];
   }
 
-  $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+  try {
+    $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+    $hide_thumbs = $paragraph->field_hide_thumbnails->value == 1 ? TRUE : FALSE;
 
-  $variables['content']['rw_list'] = [
-    '#theme' => 'hr_paragraphs_rw_list',
-    '#data' => $reliefweb_controller->buildReliefwebObjects($results),
-    '#view_all' => $paragraph->field_reliefweb_url->first()->uri,
-    '#total' => $max_number_of_items,
-    '#weight' => 99,
-    '#cache' => [
-      'max-age' => 60 * 60,
-    ],
-  ];
+    $variables['content']['rw_list'] = [
+      '#theme' => 'hr_paragraphs_rw_list',
+      '#data' => $reliefweb_controller->buildReliefwebObjects($results, $hide_thumbs),
+      '#view_all' => $paragraph->field_reliefweb_url->first()->uri,
+      '#total' => $max_number_of_items,
+      '#weight' => 99,
+      '#cache' => [
+        'max-age' => 60 * 60,
+      ],
+    ];
+  }
+  catch (\Exception $exception) {
+    $variables['content']['rw_list'] = [
+      '#type' => 'markup',
+      '#markup' => t('ReliefWeb data is currently not available.'),
+      '#prefix' => '<div class="response-error response-error-api response-error-reliefweb">',
+      '#suffix' => '</div>',
+    ];
+  }
 }
 
 /**
@@ -1003,48 +1025,40 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
     'value' => $url,
   ];
 
-  $results = $reliefweb_controller->executeReliefwebQuery($parameters);
-
-  // Try using canonical URL.
-  if (!isset($results['data']) || empty($results['data'])) {
+  try {
+    $results = $reliefweb_controller->executeReliefwebQuery($parameters);
     $parameters = $reliefweb_controller->buildReliefwebParameters(0, 1, []);
+    $hide_thumbs = $paragraph->field_hide_thumbnails->value == 1 ? TRUE : FALSE;
 
     // Remove facets.
     unset($parameters['facets']);
 
-    $parts = explode('/', $url);
-    $id = array_pop($parts);
+    if (empty($results) || empty($results['data'])) {
+      return;
+    }
 
-    $parameters['filter']['conditions'][] = [
-      'field' => 'id',
-      'value' => $id,
+    $docs = $reliefweb_controller->buildReliefwebObjects($results, $hide_thumbs);
+    $doc = reset($docs);
+
+    $variables['content']['rw_list'] = [
+      '#theme' => 'hr_paragraphs_rw_list',
+      '#data' => [$doc],
+      '#total' => NULL,
+      '#view_all' => NULL,
+      '#weight' => 99,
+      '#cache' => [
+        'max-age' => 60 * 60,
+      ],
     ];
-
-    try {
-      $results = $reliefweb_controller->executeReliefwebQuery($parameters);
-    }
-    catch (\Exception $e) {
-      $results = [];
-    }
   }
-
-  if (empty($results) || empty($results['data'])) {
-    return;
+  catch (\Exception $exception) {
+    $variables['content']['rw_list'] = [
+      '#type' => 'markup',
+      '#markup' => t('ReliefWeb data is currently not available.'),
+      '#prefix' => '<div class="response-error response-error-api response-error-reliefweb">',
+      '#suffix' => '</div>',
+    ];
   }
-
-  $docs = $reliefweb_controller->buildReliefwebObjects($results);
-  $doc = reset($docs);
-
-  $variables['content']['rw_list'] = [
-    '#theme' => 'hr_paragraphs_rw_list',
-    '#data' => [$doc],
-    '#total' => NULL,
-    '#view_all' => NULL,
-    '#weight' => 99,
-    '#cache' => [
-      'max-age' => 60 * 60,
-    ],
-  ];
 }
 
 /**
@@ -1068,20 +1082,30 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_key_figures(&$variables) 
   // Set max number of items to 4 by default.
   $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 4;
 
-  /** @var \Drupal\hr_paragraphs\Controller\KeyFiguresController */
-  $key_figures_controller = \Drupal::service('hr_paragraphs.key_figures_controller');
-  $results = $key_figures_controller->getKeyFigures($key_figures_country);
+  try {
+    /** @var \Drupal\hr_paragraphs\Controller\KeyFiguresController */
+    $key_figures_controller = \Drupal::service('hr_paragraphs.key_figures_controller');
+    $results = $key_figures_controller->getKeyFigures($key_figures_country);
 
-  $variables['content']['key_figures'] = [
-    '#theme' => 'hr_paragraphs_rw_key_figures',
-    '#country_iso' => $key_figures_country,
-    '#country_name' => $key_figures_country_labels[$key_figures_country],
-    '#data' => $key_figures_controller->buildKeyFigures($results, $max_number_of_items),
-    '#weight' => 99,
-    '#cache' => [
-      'max-age' => 12 * 60 * 60,
-    ],
-  ];
+    $variables['content']['key_figures'] = [
+      '#theme' => 'hr_paragraphs_rw_key_figures',
+      '#country_iso' => $key_figures_country,
+      '#country_name' => $key_figures_country_labels[$key_figures_country],
+      '#data' => $key_figures_controller->buildKeyFigures($results, $max_number_of_items),
+      '#weight' => 99,
+      '#cache' => [
+        'max-age' => 12 * 60 * 60,
+      ],
+    ];
+  }
+  catch (\Exception $exception) {
+    $variables['content']['key_figures'] = [
+      '#type' => 'markup',
+      '#markup' => t('Key figure data is currently not available.'),
+      '#prefix' => '<div class="response-error response-error-api response-error-fts">',
+      '#suffix' => '</div>',
+    ];
+  }
 }
 
 /**
@@ -1182,11 +1206,6 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
     'hr_paragraphs.operation.operations' => 999,
     'group.content' => 999,
   ];
-
-  // Pages is pages.
-  if (isset($data['tabs'][0]['views_view:view.group_nodes.page_1'])) {
-    $data['tabs'][0]['views_view:view.group_nodes.page_1']['#link']['title'] = t('Pages');
-  }
 
   // Re-order tabs.
   foreach ($data['tabs'][0] as $key => &$tab) {
@@ -1446,6 +1465,7 @@ function hr_paragraphs_node_is_archived(&$variables) {
  * Implements hook_preprocess_group().
  */
 function hr_paragraphs_preprocess_group(&$variables) {
+
   hr_paragraphs_group_sidebar($variables);
   hr_paragraphs_group_is_archived($variables);
 }
