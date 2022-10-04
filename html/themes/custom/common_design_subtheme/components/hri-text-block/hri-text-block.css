@@ -39,28 +39,9 @@
 .field--name-field-text ul {
   margin: 0 0 1rem;
   padding: 0;
-  list-style: none;
 }
 
 .field--name-field-text ul li {
-  position: relative;
-  margin-inline-start: 0.25rem;
+  margin-inline-start: 1.125em;
   padding: 0;
-  padding-inline-start: 1rem;
-}
-
-.field--name-field-text ul li::before {
-  position: absolute;
-  top: -5px;
-  content: "•";
-  color: var(--brand-secondary);
-  font-size: 1.5em;
-}
-
-[dir="ltr"] .field--name-field-text ul li::before {
-  left: 0;
-}
-
-[dir="rtl"] .field--name-field-text ul li::before {
-  right: 0;
 }
