@@ -484,6 +484,7 @@ class ParagraphController extends ControllerBase {
 
     $data = $this->getReliefwebDocuments($request, $group, $url);
     $data['#set_name'] = $this->t('Reports');
+
     return $data;
   }
 
@@ -524,6 +525,7 @@ class ParagraphController extends ControllerBase {
 
     $data = $this->getReliefwebDocuments($request, $group, $url);
     $data['#set_name'] = $this->t('Maps / Infographics');
+
     return $data;
   }
 
@@ -591,7 +593,7 @@ class ParagraphController extends ControllerBase {
         '#theme' => 'river',
         '#service' => 'ReliefWeb',
         '#service_url' => 'https://reliefweb.int',
-        '#data' => $this->reliefwebController->buildReliefwebObjects($results),
+        '#data' => $this->reliefwebController->buildReliefwebObjects($results, FALSE),
         '#total' => $count,
         '#facets' => $facets,
         '#active_facets' => $active_facets,
@@ -663,6 +665,7 @@ class ParagraphController extends ControllerBase {
 
     $data = $this->getReliefwebDocuments($request, $group, $url);
     $data['#set_name'] = $this->t('Assessments');
+
     return $data;
   }
 

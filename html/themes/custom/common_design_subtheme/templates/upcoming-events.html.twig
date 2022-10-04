@@ -20,10 +20,10 @@
   <ul class="hri-events__list">
     {% for event in events %}
       {% set random = random() %}
-      {% if previousEventStart != event.local_start|date("d M Y") %}
+      {% if previousEventStart != event.local_start|date("j M Y") %}
         <li class="hri-events__heading event-heading">
           <div class="event-heading__date">
-            {{ event.local_start|date("d M Y") }}
+            {{ event.local_start|date("j M Y") }}
           </div>
           <div class="event-heading__day">
             {{ event.local_start|date("l")|t }}
@@ -54,7 +54,7 @@
         {% endif %}
       </li>
 
-      {% set previousEventStart = event.local_start|date("d M Y") %}
+      {% set previousEventStart = event.local_start|date("j M Y") %}
     {% endfor %}
   </ul>
 

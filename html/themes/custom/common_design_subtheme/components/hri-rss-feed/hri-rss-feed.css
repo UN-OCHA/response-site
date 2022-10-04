@@ -6,6 +6,6 @@
   font-size: var(--cd-font-size--base);
 }
 
-.hri-rss-feed .external-feed--item-date {
-  font-size: var(--cd-font-size--base);
+.hri-rss-feed .external-feed--list {
+  padding-inline-start: 1.125em;
 }

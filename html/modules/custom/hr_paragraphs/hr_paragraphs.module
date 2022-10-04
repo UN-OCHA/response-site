@@ -976,10 +976,11 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
 
   try {
     $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+    $hide_thumbs = $paragraph->field_hide_thumbnails->value == 1 ? TRUE : FALSE;
 
     $variables['content']['rw_list'] = [
       '#theme' => 'hr_paragraphs_rw_list',
-      '#data' => $reliefweb_controller->buildReliefwebObjects($results),
+      '#data' => $reliefweb_controller->buildReliefwebObjects($results, $hide_thumbs),
       '#view_all' => $paragraph->field_reliefweb_url->first()->uri,
       '#total' => $max_number_of_items,
       '#weight' => 99,
@@ -1027,6 +1028,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   try {
     $results = $reliefweb_controller->executeReliefwebQuery($parameters);
     $parameters = $reliefweb_controller->buildReliefwebParameters(0, 1, []);
+    $hide_thumbs = $paragraph->field_hide_thumbnails->value == 1 ? TRUE : FALSE;
 
     // Remove facets.
     unset($parameters['facets']);
@@ -1035,7 +1037,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
       return;
     }
 
-    $docs = $reliefweb_controller->buildReliefwebObjects($results);
+    $docs = $reliefweb_controller->buildReliefwebObjects($results, $hide_thumbs);
     $doc = reset($docs);
 
     $variables['content']['rw_list'] = [
@@ -1204,11 +1206,6 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
     'hr_paragraphs.operation.operations' => 999,
     'group.content' => 999,
   ];
-
-  // Pages is pages.
-  if (isset($data['tabs'][0]['views_view:view.group_nodes.page_1'])) {
-    $data['tabs'][0]['views_view:view.group_nodes.page_1']['#link']['title'] = t('Pages');
-  }
 
   // Re-order tabs.
   foreach ($data['tabs'][0] as $key => &$tab) {
@@ -1468,6 +1465,7 @@ function hr_paragraphs_node_is_archived(&$variables) {
  * Implements hook_preprocess_group().
  */
 function hr_paragraphs_preprocess_group(&$variables) {
+
   hr_paragraphs_group_sidebar($variables);
   hr_paragraphs_group_is_archived($variables);
 }

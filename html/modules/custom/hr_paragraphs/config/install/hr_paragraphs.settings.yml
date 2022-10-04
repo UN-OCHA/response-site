@@ -1,3 +1,5 @@
 sync_domain: 'http://hrinfo.docksal.site'
 sync_credentials: ''
 csv_source_dir: ''
+notification_email: ''
+notification_new_user_enabled: true

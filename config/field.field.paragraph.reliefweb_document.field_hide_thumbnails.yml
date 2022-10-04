@@ -1,0 +1,23 @@
+uuid: 76b381ad-56c6-489d-8c95-65012872708c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_hide_thumbnails
+    - paragraphs.paragraphs_type.reliefweb_document
+id: paragraph.reliefweb_document.field_hide_thumbnails
+field_name: field_hide_thumbnails
+entity_type: paragraph
+bundle: reliefweb_document
+label: 'Hide Thumbnail?'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Hide
+  off_label: Show
+field_type: boolean

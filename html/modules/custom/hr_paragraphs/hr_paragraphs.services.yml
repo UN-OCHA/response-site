@@ -34,10 +34,17 @@ services:
     class: Drupal\hr_paragraphs\Routing\RouteSubscriber
     tags:
       - { name: event_subscriber }
-  helper.event_subscriber:
+  hr_paragraphs.social_auth_subscriber:
     class: Drupal\hr_paragraphs\EventSubscriber\SocialAuthSubscriber
     arguments:
       - '@config.factory'
       - '@plugin.manager.mail'
     tags:
       - { name: 'event_subscriber' }
+  hr_paragraphs.override_language:
+    class: \Drupal\hr_paragraphs\Config\LanguageConfigOverrides
+    arguments:
+      - '@config.factory'
+      - '@language.default'
+    tags:
+      - { name: config.factory.override, priority: 2 }

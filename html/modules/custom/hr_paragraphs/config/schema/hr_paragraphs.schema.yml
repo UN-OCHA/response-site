@@ -11,6 +11,13 @@ hr_paragraphs.settings:
     csv_source_dir:
       type: string
       label: 'Source directory of csv files'
+    notification_email:
+      type: string
+      label: 'Email used for notifications'
+    notification_new_user_enabled:
+      type: boolean
+      label: 'Send notification for new users'
+
 field.widget.settings.hr_paragraphs_link_default:
   type: mapping
   label: 'Link format settings'

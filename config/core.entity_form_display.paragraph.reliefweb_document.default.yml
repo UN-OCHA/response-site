@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.reliefweb_document.field_hide_thumbnails
     - field.field.paragraph.reliefweb_document.field_reliefweb_url
     - field.field.paragraph.reliefweb_document.field_text
     - field.field.paragraph.reliefweb_document.field_title
@@ -15,6 +16,13 @@ targetEntityType: paragraph
 bundle: reliefweb_document
 mode: default
 content:
+  field_hide_thumbnails:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
   field_reliefweb_url:
     type: link_default
     weight: 2
@@ -38,6 +46,11 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
