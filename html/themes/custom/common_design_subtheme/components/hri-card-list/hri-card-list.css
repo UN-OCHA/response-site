@@ -33,3 +33,9 @@
     --hri-card-list-num-cols: 2;
   }
 }
+
+@media screen and (min-width: 750px) {
+  .paragraph--type--card-list--col-3 {
+    --hri-card-list-num-cols: 3;
+  }
+}
