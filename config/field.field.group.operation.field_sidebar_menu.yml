@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.group.field_sidebar_menu
     - group.type.operation
+    - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.menu_block
     - paragraphs.paragraphs_type.table_of_contents
   module:
@@ -25,11 +26,12 @@ settings:
     target_bundles:
       menu_block: menu_block
       table_of_contents: table_of_contents
+      call_to_action: call_to_action
     negate: 0
     target_bundles_drag_drop:
       call_to_action:
         weight: -31
-        enabled: false
+        enabled: true
       card_list:
         weight: -30
         enabled: false
