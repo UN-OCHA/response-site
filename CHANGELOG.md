@@ -4,6 +4,40 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.4.0](https://github.com/UN-OCHA/response-site/compare/v0.3.0...v0.4.0) (2022-10-04)
+
+### Features
+
+* Add flag to disable notification for new users [#RWR-175](https://https://humanitarian.atlassian.net/browse/RWR-175) ([2bb81d](https://github.com/UN-OCHA/response-site/commit/2bb81d7a04c827e6ed87cb1601bb2ede08f70831))
+* Add paragraph overview [#RWR-251](https://https://humanitarian.atlassian.net/browse/RWR-251) ([0ae82c](https://github.com/UN-OCHA/response-site/commit/0ae82cfbbe99dbfa022724923c20af4b28b74513))
+* Allow Editor to toggle thumbnails on RW river/document paras ([1205ce](https://github.com/UN-OCHA/response-site/commit/1205ce55cf73d7608752005550728352b6f5e7d7))
+* Allow updates to be run manually ([b8e498](https://github.com/UN-OCHA/response-site/commit/b8e498617ca670a7fc2878ca3f54bfb8c3e7de00))
+* Handle exceptions [#RWR-238](https://https://humanitarian.atlassian.net/browse/RWR-238), [#RWR-238](https://https://humanitarian.atlassian.net/browse/RWR-238) ([31fd2d](https://github.com/UN-OCHA/response-site/commit/31fd2dcf7997ffdf8459752faa64064e4301e972), [9ae554](https://github.com/UN-OCHA/response-site/commit/9ae554b3bb730de5b16fa7e46ff6305ffebc3b97))
+* Translate views tab names [#RWR-246](https://https://humanitarian.atlassian.net/browse/RWR-246) ([ec40c1](https://github.com/UN-OCHA/response-site/commit/ec40c12624c7f4f698887c88525b1c9f4af48f53))
+
+### Bug Fixes
+
+* Card List layout fixes ([abef9a](https://github.com/UN-OCHA/response-site/commit/abef9a1522c177ea287c954ec47216be4204ffc3))
+* Change label from Operations to Locations ([612d9a](https://github.com/UN-OCHA/response-site/commit/612d9afe57e7e46cf4ba8134bd6479c2d23ae71b))
+* Conform to CD layout dimensions/breakpoints ([a01393](https://github.com/UN-OCHA/response-site/commit/a0139369f386a961420cc79c7924e51d8e47b0ea))
+* Format dates like RW ([bb55c0](https://github.com/UN-OCHA/response-site/commit/bb55c0d761436eb977974bcc9e2eab6ecd85483b))
+* Honor new thumbnails field in templates ([30aea8](https://github.com/UN-OCHA/response-site/commit/30aea8af4d434c34fb271c40f6f2b1869a5671f1))
+* Make the heading more identical to RW while we're at it ([d3f2b1](https://github.com/UN-OCHA/response-site/commit/d3f2b14356cd84f3e908ba96741dd724ad6ab007))
+* Remove chevrons from bulleted lists ([8bbb73](https://github.com/UN-OCHA/response-site/commit/8bbb7388987071e5c6f6297f6d32fcaeeb63aa27))
+* Revert color to currentColor ([ebc652](https://github.com/UN-OCHA/response-site/commit/ebc652573d8eddaa85b30a08f5538a54becb94e8))
+* Show => Hide ([94c889](https://github.com/UN-OCHA/response-site/commit/94c8891a9a96707904a4f8d5569e4b156b196a26))
+* Use same Posted date as RW ([3e2cd9](https://github.com/UN-OCHA/response-site/commit/3e2cd9952ba8916e5f0bcb06220903aade0bf087))
+
+##### Admin
+
+* Move Archive-related fields to a dedicated tab ([03d720](https://github.com/UN-OCHA/response-site/commit/03d7206510db23b8444cc0c72bbdea00e3c54d77))
+* Move Custom Content help text to be under title ([e49cd3](https://github.com/UN-OCHA/response-site/commit/e49cd372c57791cba1706a86d478f7f42d14a373))
+
+### Chores
+
+* Delete inactive templates ([096e69](https://github.com/UN-OCHA/response-site/commit/096e69db3f69a1c46e7f379d3883ac08061154b5))
+* Update all outdated drupal/* packages. ([c4016b](https://github.com/UN-OCHA/response-site/commit/c4016b5854184027e5f5fea054d3750218585f24))
+
 ## [0.3.0](https://github.com/UN-OCHA/response-site/compare/v0.2.3...v0.3.0) (2022-09-26)
 
 ### Features
