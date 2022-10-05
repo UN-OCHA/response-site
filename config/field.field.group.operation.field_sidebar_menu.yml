@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.group.field_sidebar_menu
     - group.type.operation
+    - paragraphs.paragraphs_type.call_to_action
     - paragraphs.paragraphs_type.menu_block
     - paragraphs.paragraphs_type.table_of_contents
   module:
@@ -25,57 +26,61 @@ settings:
     target_bundles:
       menu_block: menu_block
       table_of_contents: table_of_contents
+      call_to_action: call_to_action
     negate: 0
     target_bundles_drag_drop:
+      call_to_action:
+        weight: -31
+        enabled: true
       card_list:
-        weight: -27
+        weight: -30
         enabled: false
       child_groups:
-        weight: -32
+        weight: -36
         enabled: false
       featured_highlight:
-        weight: -29
+        weight: -33
         enabled: false
       group_pages:
-        weight: -31
+        weight: -35
         enabled: false
       hdx_river:
-        weight: -22
-        enabled: false
-      heading:
-        weight: -28
-        enabled: false
-      iframe:
-        weight: -26
-        enabled: false
-      layout:
-        weight: -18
-        enabled: false
-      menu_block:
-        weight: -33
-        enabled: true
-      reliefweb_document:
-        weight: -25
-        enabled: false
-      reliefweb_key_figures:
-        weight: 28
-        enabled: false
-      reliefweb_river:
         weight: -24
         enabled: false
-      rss_feed:
-        weight: -23
+      heading:
+        weight: -32
         enabled: false
-      table_of_contents:
-        weight: -30
-        enabled: true
-      text_block:
-        weight: -21
+      iframe:
+        weight: -29
         enabled: false
-      twitter_feed:
+      layout:
         weight: -20
         enabled: false
+      menu_block:
+        weight: -37
+        enabled: true
+      reliefweb_document:
+        weight: -28
+        enabled: false
+      reliefweb_key_figures:
+        weight: -26
+        enabled: false
+      reliefweb_river:
+        weight: -27
+        enabled: false
+      rss_feed:
+        weight: -25
+        enabled: false
+      table_of_contents:
+        weight: -34
+        enabled: true
+      text_block:
+        weight: -23
+        enabled: false
+      twitter_feed:
+        weight: -22
+        enabled: false
       upcoming_events:
-        weight: -19
+        weight: -21
         enabled: false
 field_type: entity_reference_revisions

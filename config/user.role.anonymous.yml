@@ -29,6 +29,7 @@ permissions:
   - 'view operation external entity'
   - 'view organization external entity'
   - 'view paragraph content article_card_list'
+  - 'view paragraph content call_to_action'
   - 'view paragraph content card_list'
   - 'view paragraph content child_groups'
   - 'view paragraph content featured_highlight'
