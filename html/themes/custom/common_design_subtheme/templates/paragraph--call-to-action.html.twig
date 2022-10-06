@@ -11,6 +11,7 @@
  */
 #}
 {{ attach_library('common_design/cd-button') }}
+{{ attach_library('common_design_subtheme/hri-cta') }}
 {%
   set classes = [
     'paragraph',
@@ -28,7 +29,7 @@
     .setAttribute('id', paragraph.bundle ~ '-' ~ paragraph.id())
   }}>
     {% block content %}
-      <a id="cta--{{ paragraph.id() }}" class="cd-button call-to-action" href="{{ destination }}">{{ link_text }}</a>
+      <a id="cta--{{ paragraph.id() }}" class="cd-button call-to-action" href="{{ destination }}" target="_blank">{{ link_text }}</a>
     {% endblock %}
   </div>
 {% endblock paragraph %}

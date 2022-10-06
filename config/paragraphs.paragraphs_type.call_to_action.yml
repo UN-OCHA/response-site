@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: call_to_action
-label: 'Call to Action'
+label: 'Subscribe button'
 icon_uuid: null
 icon_default: null
 description: 'A button which entices visitors to perform actions such as newsletter signups.'
