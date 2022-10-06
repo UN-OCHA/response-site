@@ -38,7 +38,6 @@ third_party_settings:
     group_content:
       children:
         - group_general
-        - group_pages
         - group_documents
         - group_infographics
         - group_assessments
@@ -108,9 +107,9 @@ third_party_settings:
       children:
         - field_pages_page
       label: Pages
-      region: content
-      parent_name: group_content
-      weight: 21
+      region: hidden
+      parent_name: ''
+      weight: 9
       format_type: tab
       format_settings:
         classes: ''
@@ -305,14 +304,6 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  field_pages_page:
-    type: hr_paragraphs_link_default
-    weight: 24
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
   field_paragraphs:
     type: layout_paragraphs
     weight: 3
@@ -366,23 +357,24 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 8
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 9
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   translation:
-    weight: 7
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_pages_page: true
   subgroup_depth: true
   subgroup_left: true
   subgroup_right: true
