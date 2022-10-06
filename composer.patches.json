@@ -17,7 +17,7 @@
         },
         "drupal/user_expire": {
             "Allow the notification email to be customised": "https://git.drupalcode.org/project/user_expire/-/merge_requests/5.diff",
-            "Reset expiration when user is reactivated": "https://git.drupalcode.org/project/user_expire/-/merge_requests/6.diff"
+            "Reset expiration when user is reactivated": "PATCHES/user_expire-2855005-keep-unblocked-11.patch"
         }
     }
 }
