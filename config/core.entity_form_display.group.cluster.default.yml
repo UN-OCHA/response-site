@@ -43,7 +43,7 @@ third_party_settings:
       label: Data
       region: content
       parent_name: group_content
-      weight: 27
+      weight: 26
       format_type: tab
       format_settings:
         classes: ''
@@ -59,7 +59,7 @@ third_party_settings:
       label: 'Maps / Infographics'
       region: content
       parent_name: group_content
-      weight: 25
+      weight: 24
       format_type: tab
       format_settings:
         classes: ''
@@ -75,7 +75,7 @@ third_party_settings:
       label: Assessments
       region: content
       parent_name: group_content
-      weight: 26
+      weight: 25
       format_type: tab
       format_settings:
         classes: ''
@@ -91,7 +91,7 @@ third_party_settings:
       label: Reports
       region: content
       parent_name: group_content
-      weight: 24
+      weight: 23
       format_type: tab
       format_settings:
         classes: ''
@@ -109,6 +109,7 @@ third_party_settings:
         - group_hdx
         - group_calendar
         - group_offices
+        - group_archive
       label: Content
       region: content
       parent_name: ''
@@ -123,8 +124,6 @@ third_party_settings:
     group_general:
       children:
         - field_enabled_tabs
-        - field_archive_group
-        - field_archive_message
       label: General
       region: content
       parent_name: group_content
@@ -145,7 +144,7 @@ third_party_settings:
       label: Events
       region: content
       parent_name: group_content
-      weight: 28
+      weight: 27
       format_type: tab
       format_settings:
         classes: ''
@@ -160,7 +159,7 @@ third_party_settings:
       label: Contacts
       region: content
       parent_name: group_content
-      weight: 29
+      weight: 28
       format_type: tab
       format_settings:
         classes: ''
@@ -176,6 +175,22 @@ third_party_settings:
       region: hidden
       parent_name: ''
       weight: 9
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_archive:
+      children:
+        - field_archive_group
+        - field_archive_message
+      label: Archive
+      region: content
+      parent_name: group_content
+      weight: 29
       format_type: tab
       format_settings:
         classes: ''
