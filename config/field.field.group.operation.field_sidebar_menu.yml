@@ -30,10 +30,10 @@ settings:
     negate: 0
     target_bundles_drag_drop:
       call_to_action:
-        weight: -31
+        weight: -25
         enabled: true
       card_list:
-        weight: -30
+        weight: -31
         enabled: false
       child_groups:
         weight: -36
@@ -51,7 +51,7 @@ settings:
         weight: -32
         enabled: false
       iframe:
-        weight: -29
+        weight: -30
         enabled: false
       layout:
         weight: -20
@@ -60,16 +60,16 @@ settings:
         weight: -37
         enabled: true
       reliefweb_document:
-        weight: -28
+        weight: -29
         enabled: false
       reliefweb_key_figures:
-        weight: -26
-        enabled: false
-      reliefweb_river:
         weight: -27
         enabled: false
+      reliefweb_river:
+        weight: -28
+        enabled: false
       rss_feed:
-        weight: -25
+        weight: -26
         enabled: false
       table_of_contents:
         weight: -34
