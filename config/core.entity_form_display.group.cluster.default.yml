@@ -103,7 +103,6 @@ third_party_settings:
     group_content:
       children:
         - group_general
-        - group_pages
         - group_documents
         - group_infographics
         - group_assessments
@@ -174,9 +173,9 @@ third_party_settings:
       children:
         - field_pages_page
       label: Pages
-      region: content
-      parent_name: group_content
-      weight: 23
+      region: hidden
+      parent_name: ''
+      weight: 9
       format_type: tab
       format_settings:
         classes: ''
@@ -291,14 +290,6 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-  field_pages_page:
-    type: hr_paragraphs_link_default
-    weight: 8
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
   field_paragraphs:
     type: layout_paragraphs
     weight: 3
@@ -378,6 +369,7 @@ content:
 hidden:
   changed: true
   created: true
+  field_pages_page: true
   subgroup_depth: true
   subgroup_left: true
   subgroup_right: true
