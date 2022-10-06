@@ -18,9 +18,10 @@
 
 
 /**
- * Make descriptions more noticeable.
+ * Make descriptions more noticeable when editing certain entities.
  */
-.description {
+.path-node .description,
+.path-group .description {
   padding: .25rem .5rem;
   border: 1px solid var(--cd-grey--bright);
   border-inline-start-width: 0.5rem;
