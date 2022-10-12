@@ -1020,10 +1020,21 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   // Remove facets.
   unset($parameters['facets']);
 
-  $parameters['filter']['conditions'][] = [
-    'field' => 'url_alias',
-    'value' => $url,
-  ];
+  // URl might link to /node.
+  if (strpos($url, '/node/') !== FALSE) {
+    $parts = explode('/', $url);
+    $nid = array_pop($parts);
+    $parameters['filter']['conditions'][] = [
+      'field' => 'id',
+      'value' => $nid,
+    ];
+  }
+  else {
+    $parameters['filter']['conditions'][] = [
+      'field' => 'url_alias',
+      'value' => $url,
+    ];
+  }
 
   try {
     $results = $reliefweb_controller->executeReliefwebQuery($parameters);
