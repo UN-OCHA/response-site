@@ -32,57 +32,60 @@ settings:
     negate: 1
     target_bundles_drag_drop:
       call_to_action:
-        weight: -22
-        enabled: false
-      card_list:
-        weight: -37
-        enabled: false
-      child_groups:
-        weight: -28
-        enabled: true
-      featured_highlight:
-        weight: -34
-        enabled: false
-      group_pages:
-        weight: -27
-        enabled: true
-      hdx_river:
-        weight: -33
-        enabled: false
-      heading:
-        weight: -32
-        enabled: false
-      iframe:
-        weight: -31
-        enabled: false
-      layout:
-        weight: -30
-        enabled: true
-      menu_block:
-        weight: -29
-        enabled: false
-      reliefweb_document:
-        weight: -26
-        enabled: false
-      reliefweb_key_figures:
-        weight: -24
-        enabled: false
-      reliefweb_river:
-        weight: -25
-        enabled: false
-      rss_feed:
         weight: -23
         enabled: false
-      table_of_contents:
-        weight: -21
+      card_list:
+        weight: -39
         enabled: false
-      text_block:
+      child_groups:
+        weight: -30
+        enabled: true
+      featured_highlight:
         weight: -36
         enabled: false
+      group_pages:
+        weight: -29
+        enabled: true
+      hdx_river:
+        weight: -35
+        enabled: false
+      heading:
+        weight: -34
+        enabled: false
+      iframe:
+        weight: -33
+        enabled: false
+      layout:
+        weight: -32
+        enabled: true
+      menu_block:
+        weight: -31
+        enabled: false
+      reliefweb_document:
+        weight: -28
+        enabled: false
+      reliefweb_key_figures:
+        weight: -26
+        enabled: false
+      reliefweb_river:
+        weight: -27
+        enabled: false
+      rss_feed:
+        weight: -25
+        enabled: false
+      search_results:
+        weight: -24
+        enabled: false
+      table_of_contents:
+        weight: -22
+        enabled: false
+      text_block:
+        weight: -38
+        enabled: false
       twitter_feed:
-        weight: -20
+        weight: -21
         enabled: true
       upcoming_events:
-        weight: -35
+        weight: -37
         enabled: false
 field_type: entity_reference_revisions
