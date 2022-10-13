@@ -50,7 +50,7 @@
 %}
 
 {{ attach_library('common_design_subtheme/google-cse') }}
-{% set gcseID = 'https://cse.google.com/cse.js?cx=' ~ paragraph.field_gcse_id.value %}
+{% set gcse_src = 'https://cse.google.com/cse.js?cx=' ~ paragraph.field_gcse_id.value %}
 
 {% block paragraph %}
   <div{{ attributes
@@ -61,7 +61,7 @@
     {% block content %}
 
       {# BEGIN Google embed code #}
-      <script async defer src="{{ gcseID }}"></script>
+      <script async defer src="{{ gcse_src }}"></script>
       <div class="gcse-searchbox-only"></div>
       {# END Google embed code #}
 
