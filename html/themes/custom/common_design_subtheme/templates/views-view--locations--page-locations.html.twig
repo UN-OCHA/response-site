@@ -57,13 +57,16 @@
     </div>
   {% endif %}
 
-  <div class="rw-river-views">
-    <ul id="rw-river-views__list">
-      <li class="rw-river-views__list__item rw-river-views__list__item--selected">
-        <a href="/locations" class="rw-river-views__link" data-view="all">{{ 'All Locations'|t }}</a>
-      </li>
-    </ul>
-  </div>
+  <header class="rw-river-page__header">
+    <h1 class="rw-page-title rw-river-page__title visually-hidden">{{ 'Locations'|t }}</h1>
+    <nav class="rw-river-views" id="river-views">
+      <ul id="rw-river-views__list">
+        <li class="rw-river-views__list__item rw-river-views__list__item--selected">
+          <a href="/locations" class="rw-river-views__link" data-view="all" data-default>{{ 'All Locations'|t }}</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
   <div class="rw-river-letter-navigation-wrapper" id="rw-river-letter-navigation-wrapper">
     {% set nav_attributes = create_attribute() %}
