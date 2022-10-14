@@ -65,6 +65,7 @@ permissions:
   - 'view paragraph content reliefweb_key_figures'
   - 'view paragraph content reliefweb_river'
   - 'view paragraph content rss_feed'
+  - 'view paragraph content search_results'
   - 'view paragraph content table_of_contents'
   - 'view paragraph content text_block'
   - 'view paragraph content twitter_feed'
