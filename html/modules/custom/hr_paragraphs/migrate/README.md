@@ -1,5 +1,14 @@
 # Migrations
 
+## Quick
+
+```bash
+hr_paragraphs:import-operations --verbose --skip-existing --ids=25
+hr_paragraphs:import-clusters --skip-existing --verbose --ops-ids=25
+hr_paragraphs:import-pages --verbose --skip-existing --group-ids=25
+hr_paragraphs:import-members --verbose --group-ids=25
+```
+
 ## Export
 
 ```bash

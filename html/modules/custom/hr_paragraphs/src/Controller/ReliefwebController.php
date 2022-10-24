@@ -371,7 +371,7 @@ class ReliefwebController extends ControllerBase {
    * @return array<string, mixed>
    *   Results.
    */
-  public function buildReliefwebObjects(array $results, bool $hide_thumbs) : array {
+  public function buildReliefwebObjects(array $results, bool $hide_thumbs = FALSE) : array {
     $data = [];
 
     foreach ($results['data'] as $row) {
