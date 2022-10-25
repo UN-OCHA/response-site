@@ -1,0 +1,12 @@
+.path-frontpage .cd-block-title,
+.rw-page-title.cd-block-title {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--cd-reliefweb-brand-red--dark);
+  font-size: var(--cd-font-size--large);
+}
+
+.rw-river--headlines h2.cd-block-title,
+.rw-page-title.cd-block-title {
+  margin-bottom: 24px;
+  font-size: var(--cd-font-size--2xbase);
+}

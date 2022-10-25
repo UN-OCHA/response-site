@@ -94,6 +94,11 @@ hri-highlight:
     component:
       components/hri-highlight/hri-highlight.css: {}
 
+hri-homepage:
+  css:
+    component:
+      components/hri-homepage/hri-homepage.css: {}
+
 hri-iframe:
   css:
     component:
