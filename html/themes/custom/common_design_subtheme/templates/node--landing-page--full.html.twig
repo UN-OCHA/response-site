@@ -81,11 +81,18 @@
     'cd-article'
   ]
 %}
+{%
+  set homepage = [
+    is_front ? '[ cd-flow ] rw-river rw-river--headlines'
+  ]
+%}
+
 {{ attach_library('common_design/cd-alert') }}
 {{ attach_library('common_design/cd-article') }}
 {{ attach_library('common_design/cd-author') }}
 {{ attach_library('common_design/cd-typography') }}
 {{ attach_library('common_design_subtheme/hri-layout') }}
+{{ attach_library('common_design_subtheme/hri-homepage') }}
 
 {% set unochaDate = node.getCreatedTime|date('j F Y') %}
 <article{{ attributes.addClass(classes) }}>
@@ -142,7 +149,8 @@
   <div{{ content_attributes }}>
     {% block section %}
       <div class="hri-layout hri-layout--two-col">
-        <div class="hri-layout__main-content hri-layout__first">
+
+        <div{{ attributes.addClass('hri-layout__main-content', 'hri-layout__first', homepage) }}>
           {{ content|without('field_paragraphs_secondary') }}
         </div>
 
