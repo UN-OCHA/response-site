@@ -1,12 +1,37 @@
 .path-frontpage .cd-block-title,
 .rw-page-title.cd-block-title {
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--cd-reliefweb-brand-red--dark);
+  /* border-bottom: 1px solid var(--cd-reliefweb-brand-red--dark); */
   font-size: var(--cd-font-size--large);
+  font-weight: 700;
 }
 
 .rw-river--headlines h2.cd-block-title,
 .rw-page-title.cd-block-title {
+  font-size: var(--cd-font-size--2xbase);
+}
+
+.rw-river--headlines .heading--with-link {
+  border-bottom: 1px solid var(--cd-reliefweb-brand-red--dark);
   margin-bottom: 24px;
   font-size: var(--cd-font-size--2xbase);
+}
+
+.hri-layout__sidebar .cd-block-title,
+.rw-page-title.cd-block-title {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--cd-reliefweb-brand-red--dark);
+  font-size: var(--cd-font-size--large);
+  font-weight: 700;
+}
+
+@media (min-width: 1024px) {
+  .path-frontpage .hri-layout--two-col>.hri-layout__sidebar {
+    flex: 0 0 399px;
+  }
+}
+
+/* Temp - vertical rhythm for list items in sidebar */
+.paragraph ul li {
+  margin: 1rem 0 0;
 }
