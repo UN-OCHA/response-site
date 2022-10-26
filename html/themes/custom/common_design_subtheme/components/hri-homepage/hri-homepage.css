@@ -8,7 +8,7 @@
   border-top: 0 none;
 }
 
- /* Override layout rules for a wider sidebar like RW*/
+/* Override layout rules for a wider sidebar like RW */
 @media (min-width: 1024px) {
   .path-frontpage .hri-layout--two-col > .hri-layout__sidebar {
     flex: 0 0 399px;
@@ -21,13 +21,13 @@
 
 /* Make block titles looks like ToC */
 .paragraph--type--menu-block .cd-block-title {
-  text-transform: uppercase;
-  font-size: 15px;
   margin: 0 0 1rem 0;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-bottom: 0 none;
+  font-size: 15px;
   font-weight: bold;
   line-height: 1.3;
-  border-bottom: 0 none;
 }
 
 /* Temp - vertical rhythm for list items in sidebar.
@@ -40,4 +40,3 @@
 .field--type-text-long ul li {
   margin: 0 0 0.75rem 0;
 }
-

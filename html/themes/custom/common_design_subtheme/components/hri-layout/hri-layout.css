@@ -51,10 +51,11 @@
  */
 .hri-layout--two-col > .hri-layout__sidebar {
   flex: 0 0 228px;
+  padding: 0 1rem 0 0;
   border-right: 1px solid var(--brand-grey);
   background-color: transparent;
-  padding: 0 1rem 0 0;
 }
+
 @media (min-width: 1024px) {
   .hri-layout--two-col > .hri-layout__sidebar {
     flex: 0 0 228px;
