@@ -11,6 +11,27 @@
   border-top: 1px solid var(--brand-grey);
 }
 
+.field--name-field-paragraphs-secondary > .field__item + .field__item {
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.path-frontpage .hri-layout__main-content .field--name-field-paragraphs > .field__item + .field__item {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0 none;
+}
+
+/* Gives Paragraphs with their own Title field vertical rhythm and styles
+  the same as .paragraph--type--heading */
+.paragraph--type--reliefweb-document .field--name-field-title + div,
+.paragraph--type--text-block .field--name-field-title + div,
+.paragraph--type--upcoming-events .field--name-field-title + div {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--brand-grey);
+}
+
 /**
  * Tighten up the headings for each Paragraph
  */
