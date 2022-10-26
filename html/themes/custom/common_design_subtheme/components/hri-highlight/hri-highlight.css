@@ -4,6 +4,10 @@
 .hri-highlight {
   display: flex;
   flex-flow: row wrap;
+
+  /* This, in addition with the .field__item margin-top increases the vertical
+    rhythm to 1.5rem */
+  padding-bottom: 0.5rem;
 }
 
 .hri-highlight__image {
