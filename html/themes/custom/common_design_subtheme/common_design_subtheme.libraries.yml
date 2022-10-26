@@ -90,6 +90,11 @@ hri-heading:
     component:
       components/hri-heading/hri-heading.css: {}
 
+hri-headline:
+  css:
+    component:
+      components/hri-headline/hri-headline.css: {}
+
 hri-highlight:
   css:
     component:

@@ -1,0 +1,14 @@
+/**
+ * HR.info RW Headline styles.
+ */
+
+ .rw-river--headlines h2.cd-block-title {
+  font-size: var(--cd-font-size--2xbase);
+  border-bottom: 0 none;
+}
+
+.rw-river--headlines .heading--with-link {
+  border-bottom: 1px solid var(--cd-reliefweb-brand-red--dark);
+  margin-bottom: 24px;
+  font-size: var(--cd-font-size--2xbase);
+}
