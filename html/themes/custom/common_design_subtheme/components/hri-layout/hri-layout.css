@@ -49,14 +49,12 @@
 /**
  * Suggest to change so sidebar looks more like RW.
  */
-
 .hri-layout--two-col > .hri-layout__sidebar {
   flex: 0 0 228px;
   border-right: 1px solid var(--brand-grey);
   background-color: transparent;
   padding: 0 1rem 0 0;
 }
-
 @media (min-width: 1024px) {
   .hri-layout--two-col > .hri-layout__sidebar {
     flex: 0 0 228px;

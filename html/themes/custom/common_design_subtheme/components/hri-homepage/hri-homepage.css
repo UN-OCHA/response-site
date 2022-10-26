@@ -19,11 +19,6 @@
   border-right: 0 none;
 }
 
-/* Page title adjustments */
-.cd-page-title {
-  border-bottom: 1px solid var(--brand-highlight);
-}
-
 /* Make block titles looks like ToC */
 .paragraph--type--menu-block .cd-block-title {
   text-transform: uppercase;
