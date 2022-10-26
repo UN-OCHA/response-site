@@ -10,6 +10,7 @@ global-styling:
     - common_design_subtheme/hri-breadcrumbs
     - common_design_subtheme/hri-cd-header
     - common_design_subtheme/cd-read-more
+    - common_design_subtheme/hri-homepage
 
 cd-read-more:
   css:
@@ -96,7 +97,7 @@ hri-highlight:
 
 hri-homepage:
   css:
-    component:
+    theme:
       components/hri-homepage/hri-homepage.css: {}
 
 hri-iframe:
