@@ -53,7 +53,7 @@ All notable changes to this project will be documented in this file.
 
 * Bump @xmldom/xmldom ([52fd7e](https://github.com/UN-OCHA/response-site/commit/52fd7e0d9abc7f8dc9db5c7ed33443794f4fdba5))
 
-## [0.4.0](https://github.com/UN-OCHA/response-site/compare/v0.3.0...v0.4.0) (2022-10-04)
+## [0.3.1](https://github.com/UN-OCHA/response-site/compare/v0.3.0...v0.3.1) (2022-10-04)
 
 ### Features
 
