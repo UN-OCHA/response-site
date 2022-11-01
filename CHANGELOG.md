@@ -4,6 +4,55 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.3](https://github.com/UN-OCHA/response-site/compare/v0.3.2...v0.3.3) (2022-11-01)
+
+### Features
+
+* Call to Action paragraph type ([a33606](https://github.com/UN-OCHA/response-site/commit/a336061351c5351785e4155ebd366bb2f08e7f39))
+* Card List can be 3-column ([4ce237](https://github.com/UN-OCHA/response-site/commit/4ce2373280917040241ecc44375bc3d0bc5890c3))
+* Check node access as well on create [#RWR-255](https://https://humanitarian.atlassian.net/browse/RWR-255) ([a62889](https://github.com/UN-OCHA/response-site/commit/a628891c89aa79e623d935f3d14125bde44d2aa7))
+* Empty sidebar on migration [#RWR-262](https://https://humanitarian.atlassian.net/browse/RWR-262) ([37f24d](https://github.com/UN-OCHA/response-site/commit/37f24dfa761f238f26753ab37d51619ad7fcf999))
+* Export group members [#RWR-258](https://https://humanitarian.atlassian.net/browse/RWR-258) ([bf0afe](https://github.com/UN-OCHA/response-site/commit/bf0afe8fda568c48b250903fbbb85ed1c6bdad96))
+* GCSE scripts and search block markup, results in page template override ([166dcd](https://github.com/UN-OCHA/response-site/commit/166dcd7c28b62359c326b5a785e172121ea007bb))
+* Hide pages option [#RWR-242](https://https://humanitarian.atlassian.net/browse/RWR-242) ([3fc3fa](https://github.com/UN-OCHA/response-site/commit/3fc3faf2b9aad9e569b86619cf13719bde83f096))
+* Hide pages tab [#RWR-242](https://https://humanitarian.atlassian.net/browse/RWR-242) ([1deddf](https://github.com/UN-OCHA/response-site/commit/1deddfa8002daf38e022ef148d0a0127a3b74dc0))
+* Paragraph type for GCSE search results and template override to attach scripts and styles ([5ead3a](https://github.com/UN-OCHA/response-site/commit/5ead3a5ec3515c1a111ae95fc9bcd86461d3d071))
+
+### Bug Fixes
+
+* Add a unique HTML ID to CTA buttons ([6b5832](https://github.com/UN-OCHA/response-site/commit/6b5832e3accda00f52aa39d38fa6cfa53bbefea9))
+* Add hidden title, match RW markup better ([05d753](https://github.com/UN-OCHA/response-site/commit/05d753f37a95030e6140641567f08ef029a42ea6))
+* Add some padding to CTA buttons ([2e996b](https://github.com/UN-OCHA/response-site/commit/2e996b5fdc13c41ac26a4b4e92852e89c1d0c5e3))
+* Allow CTAs in sidebars of Ops and C/WGs ([43b364](https://github.com/UN-OCHA/response-site/commit/43b364b41420a62733574c7a74d05679f895ada8))
+* Better tpl logic for Card List 3-col ([beab34](https://github.com/UN-OCHA/response-site/commit/beab3494e539a028fec1a55707a9c2caab1b01db))
+* Locations page should only show entries for current UI language ([0c358f](https://github.com/UN-OCHA/response-site/commit/0c358fcdf106571ce2b05bf7a547f454c959e133))
+* Open CTAs in new tabs ([349f5e](https://github.com/UN-OCHA/response-site/commit/349f5edb7b7089dc6e0025112717de7e0cf4924e))
+* Perms for Search Results paragraph type ([7ee9db](https://github.com/UN-OCHA/response-site/commit/7ee9dbb2e51d6cda53d61fedb124a18e4880e9a2))
+* Remove lang filter and print translations individually ([5c14ca](https://github.com/UN-OCHA/response-site/commit/5c14ca6f4ba4dc17672e4519bc7f56db94245e68))
+* Rename CTA to Subscribe and re-order based on new alpha sorting ([4683af](https://github.com/UN-OCHA/response-site/commit/4683afa57c84cc7f521a4850852c80206816745b))
+* Restrict Description styles to node/group entities ([bea206](https://github.com/UN-OCHA/response-site/commit/bea206e7432fdf85967cb60cc4197ce9ad333802))
+
+##### Admin
+
+* Editors see 3-col Card List when it was selected ([bab4fb](https://github.com/UN-OCHA/response-site/commit/bab4fb11b30259ba6e9faf52302dc7d7f488445a))
+* Reorder and properly restrict Search Results para ([8870d7](https://github.com/UN-OCHA/response-site/commit/8870d7981a7164d7a613a2610a0dd189d487df4c))
+
+### Chores
+
+* Add trans tags for search labels ([234a0b](https://github.com/UN-OCHA/response-site/commit/234a0b4366fd092e25b1b0172c9a2b3017901e9d))
+* Comment out some GCSE styles not needed for 2 page search layout ([6d0684](https://github.com/UN-OCHA/response-site/commit/6d068403d6b0e4d03136277da5c07b6a82db9b64))
+* Remove duplicate script ([1e1e92](https://github.com/UN-OCHA/response-site/commit/1e1e92aa60ead3a0294c1793c79026cfe7d03358))
+* Remove GCSE script from page template in favour of paragraph type ([9aff64](https://github.com/UN-OCHA/response-site/commit/9aff64bea7233d6556b86a1075fe6ce15f0f8ef9))
+* Reset page template to exclude main block override ([4bd6d6](https://github.com/UN-OCHA/response-site/commit/4bd6d6c209e175a4653eac1b3662b1fb9e5534f2))
+* Set target to blank where hri__external-url span exists ([c53ca8](https://github.com/UN-OCHA/response-site/commit/c53ca85a3d7167d21d13aae24cefbf7b566312a3))
+* Update all outdated drupal/* packages. ([98bad8](https://github.com/UN-OCHA/response-site/commit/98bad8b11f002c738e97ac7c0d6c5f43d513747d), [35e956](https://github.com/UN-OCHA/response-site/commit/35e956e08b40674a3806db85381d8f1054f6a757), [bad65e](https://github.com/UN-OCHA/response-site/commit/bad65ecddcb5882ee3e614d0c9412f1a82138593))
+* Update geofield module ([304daa](https://github.com/UN-OCHA/response-site/commit/304daa94b82eaf34043992b101982fd07a20754a))
+* Update user expire ([e6d523](https://github.com/UN-OCHA/response-site/commit/e6d5230c927f0e871cb42f170558a3f1abb2ecc0))
+
+##### Deps-dev
+
+* Bump @xmldom/xmldom ([52fd7e](https://github.com/UN-OCHA/response-site/commit/52fd7e0d9abc7f8dc9db5c7ed33443794f4fdba5))
+
 ## [0.4.0](https://github.com/UN-OCHA/response-site/compare/v0.3.0...v0.4.0) (2022-10-04)
 
 ### Features
