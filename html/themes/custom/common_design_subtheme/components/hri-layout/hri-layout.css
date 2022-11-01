@@ -49,7 +49,7 @@
 /**
  * Suggest to change so sidebar looks more like RW.
  */
-.hri-layout--two-col > .hri-layout__sidebar {
+/* .hri-layout--two-col > .hri-layout__sidebar {
   flex: 0 0 228px;
   padding: 0 1rem 0 0;
   border-right: 1px solid var(--brand-grey);
@@ -60,13 +60,13 @@
   .hri-layout--two-col > .hri-layout__sidebar {
     flex: 0 0 228px;
   }
-}
+} */
 
 /**
   * These rules accommodate where the right border on sidebar meets the bottom
   * border of tabs.
   */
-.path-group ul.tabs.secondary {
+/* .path-group ul.tabs.secondary {
   margin-bottom: 0;
 }
 
@@ -75,4 +75,4 @@
 .hri-river.hri-layout--two-col .hri-layout__main-content,
 .hri-river.hri-layout--two-col .hri-layout__sidebar {
   padding-top: 2rem;
-}
+} */
