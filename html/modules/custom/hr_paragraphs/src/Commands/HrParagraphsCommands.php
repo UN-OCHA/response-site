@@ -156,24 +156,6 @@ class HrParagraphsCommands extends DrushCommands {
         'label' => $data['name'],
       ]);
 
-      // Add sidebar.
-      $op_sidebar_content = Paragraph::create([
-        'type' => 'group_pages',
-      ]);
-      $op_sidebar_content->isNew();
-      $op_sidebar_content->save();
-
-      $op_sidebar_children = Paragraph::create([
-        'type' => 'child_groups',
-      ]);
-      $op_sidebar_children->isNew();
-      $op_sidebar_children->save();
-
-      $group->set('field_sidebar_menu', [
-        $op_sidebar_content,
-        $op_sidebar_children,
-      ]);
-
       $rw_country_id = $this->getCountryIdFromIso3($data['iso3']);
       if (!empty($rw_country_id)) {
         // Add ReliefWeb tabs and rivers.

@@ -1,0 +1,10 @@
+uuid: 9ac2d6bd-9c6a-4418-aba5-06fa52df4b9e
+langcode: en
+status: true
+dependencies: {  }
+id: search_results
+label: 'Search results'
+icon_uuid: null
+icon_default: null
+description: 'Search results from Google Custom Search Engine'
+behavior_plugins: {  }

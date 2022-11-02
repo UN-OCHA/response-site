@@ -12,13 +12,16 @@
   --cd-grey--mid: #595959;
   --cd-grey--dark: #4a4a4a;
   --cd-blue--bright: #82b5e9;
+  --hri-card-list-num-cols: 2;
+  --hri-card-list-gap-size: 1rem;
 }
 
 
 /**
- * Make descriptions more noticeable.
+ * Make descriptions more noticeable when editing certain entities.
  */
-.description {
+.path-node .description,
+.path-group .description {
   padding: .25rem .5rem;
   border: 1px solid var(--cd-grey--bright);
   border-inline-start-width: 0.5rem;
@@ -111,15 +114,17 @@
 
 /* Card List */
 .paragraph--type--card-list .field--name-field-paragraphs {
-  --hri-admin-card-list-num-cols: 2;
-
   display: flex;
   flex-flow: row wrap;
   gap: 1rem;
 }
-.paragraph--type--card-list .field--name-field-paragraphs .field__item {
-  flex: 0 1 calc((100% / var(--hri-admin-card-list-num-cols)) - (1rem * var(--hri-admin-card-list-num-cols) - 1rem));
+.paragraph--type--card-list .field--name-field-paragraphs > .field__item {
+  flex: 0 1 calc((100% / var(--hri-card-list-num-cols)) - var(--hri-card-list-gap-size) + var(--hri-card-list-gap-size) / var(--hri-card-list-num-cols));
 }
+.paragraph--type--card-list--col-3 .field--name-field-paragraphs {
+  --hri-card-list-num-cols: 3;
+}
+
 .paragraph--type--card-list .paragraph--type--featured-highlight {
   display: flex;
   flex-flow: column nowrap;
