@@ -5,6 +5,11 @@
  * into something more suited for a homepage/dashboard.
  */
 
+:root {
+  --hri-card-list-num-cols: 1;
+  --hri-card-list-gap-size: 1rem;
+}
+
 /* unset default styles that apply to top-level paragraphs */
 .paragraph--type--card-list .field--name-field-paragraphs > .field__item + .field__item {
   margin-top: 0;
@@ -13,9 +18,6 @@
 }
 
 .paragraph--type--card-list .field--name-field-paragraphs {
-  --hri-card-list-num-cols: 1;
-  --hri-card-list-gap-size: 1rem;
-
   display: flex;
   flex-flow: row wrap;
   gap: var(--hri-card-list-gap-size);
@@ -27,7 +29,13 @@
 }
 
 @media screen and (min-width: 480px) {
-  .paragraph--type--card-list .field--name-field-paragraphs {
+  .paragraph--type--card-list {
     --hri-card-list-num-cols: 2;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .paragraph--type--card-list--col-3 {
+    --hri-card-list-num-cols: 3;
   }
 }

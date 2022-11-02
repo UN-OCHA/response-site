@@ -1,0 +1,19 @@
+uuid: 763fcdd6-4fe4-4784-8459-4144b0fd2f46
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_gcse_id
+    - paragraphs.paragraphs_type.search_results
+id: paragraph.search_results.field_gcse_id
+field_name: field_gcse_id
+entity_type: paragraph
+bundle: search_results
+label: 'GCSE ID'
+description: 'The ID value <code>cse.js?cx=ID</code>'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

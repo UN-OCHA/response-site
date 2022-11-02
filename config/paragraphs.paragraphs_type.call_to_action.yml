@@ -1,0 +1,10 @@
+uuid: 63c69500-fd2b-4683-8889-9cb1d67cd36c
+langcode: en
+status: true
+dependencies: {  }
+id: call_to_action
+label: 'Subscribe button'
+icon_uuid: null
+icon_default: null
+description: 'A button which entices visitors to perform actions such as newsletter signups.'
+behavior_plugins: {  }

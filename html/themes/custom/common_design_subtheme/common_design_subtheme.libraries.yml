@@ -59,6 +59,11 @@ hri-card-list:
     theme:
       components/hri-card-list/hri-card-list.css: {}
 
+hri-cta:
+  css:
+    theme:
+      components/hri-cta/hri-cta.css: {}
+
 hri-dropbutton:
   css:
     component:

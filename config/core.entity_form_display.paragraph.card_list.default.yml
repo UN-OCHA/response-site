@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.card_list.field_numcols
     - field.field.paragraph.card_list.field_paragraphs
     - paragraphs.paragraphs_type.card_list
   module:
@@ -12,9 +13,15 @@ targetEntityType: paragraph
 bundle: card_list
 mode: default
 content:
+  field_numcols:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_paragraphs:
     type: paragraphs
-    weight: 0
+    weight: 1
     region: content
     settings:
       title: Paragraph
@@ -29,6 +36,11 @@ content:
       features:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
+    third_party_settings: {  }
+  translation:
+    weight: 2
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true

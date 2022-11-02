@@ -34,7 +34,9 @@
       if (toc.length <= 1) {
         // Remove toc.
         targets.forEach(function (target) {
-          target.parentElement.parentElement.parentElement.remove();
+          if (target.closest('div.field__item')) {
+            target.closest('div.field__item').remove();
+          }
         });
 
         // Remove sidebar if empty.

@@ -8,6 +8,7 @@ dependencies:
     - paragraphs.paragraphs_type.child_groups
     - paragraphs.paragraphs_type.group_pages
     - paragraphs.paragraphs_type.layout
+    - paragraphs.paragraphs_type.search_results
     - paragraphs.paragraphs_type.twitter_feed
     - paragraphs.paragraphs_type.upcoming_events
   module:
@@ -30,58 +31,65 @@ settings:
       layout: layout
       child_groups: child_groups
       group_pages: group_pages
+      search_results: search_results
       twitter_feed: twitter_feed
     negate: 1
     target_bundles_drag_drop:
-      card_list:
-        weight: -35
-        enabled: false
-      child_groups:
-        weight: -26
-        enabled: true
-      featured_highlight:
-        weight: -32
-        enabled: false
-      group_pages:
-        weight: -25
-        enabled: true
-      hdx_river:
-        weight: -31
-        enabled: false
-      heading:
-        weight: -30
-        enabled: false
-      iframe:
-        weight: -29
-        enabled: false
-      layout:
-        weight: -28
-        enabled: true
-      menu_block:
-        weight: -27
-        enabled: false
-      reliefweb_document:
-        weight: -24
-        enabled: false
-      reliefweb_key_figures:
-        weight: -22
-        enabled: false
-      reliefweb_river:
+      call_to_action:
         weight: -23
         enabled: false
-      rss_feed:
-        weight: -21
+      card_list:
+        weight: -39
         enabled: false
-      table_of_contents:
-        weight: -20
+      child_groups:
+        weight: -30
+        enabled: true
+      featured_highlight:
+        weight: -36
         enabled: false
-      text_block:
+      group_pages:
+        weight: -29
+        enabled: true
+      hdx_river:
+        weight: -35
+        enabled: false
+      heading:
         weight: -34
         enabled: false
+      iframe:
+        weight: -33
+        enabled: false
+      layout:
+        weight: -32
+        enabled: true
+      menu_block:
+        weight: -31
+        enabled: false
+      reliefweb_document:
+        weight: -28
+        enabled: false
+      reliefweb_key_figures:
+        weight: -26
+        enabled: false
+      reliefweb_river:
+        weight: -27
+        enabled: false
+      rss_feed:
+        weight: -25
+        enabled: false
+      search_results:
+        weight: -24
+        enabled: true
+      table_of_contents:
+        weight: -22
+        enabled: false
+      text_block:
+        weight: -38
+        enabled: false
       twitter_feed:
-        weight: -19
+        weight: -21
         enabled: true
       upcoming_events:
-        weight: -33
+        weight: -37
         enabled: true
 field_type: entity_reference_revisions

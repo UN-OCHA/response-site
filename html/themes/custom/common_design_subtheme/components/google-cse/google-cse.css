@@ -6,10 +6,10 @@
  * we can override them.
  */
 
-div#___gcse_0 {
+/* div#___gcse_0 {
   position: relative;
   max-height: var(--cd-site-header-height);
-}
+} */
 
 .gsc-adBlock {
   display: none !important;
@@ -74,14 +74,14 @@ form.gsc-search-box {
   margin: 0 auto;
 }
 
-.gsc-results-wrapper-visible {
+/* .gsc-results-wrapper-visible {
   position: relative;
   top: -4px;
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--brand-primary--light);
   background: #fff;
   box-shadow: 0 3px 8px #0002;
-}
+} */
 
 .gs-webResult.gs-result a.gs-title:link {
   color: var(--brand-primary--dark) !important;

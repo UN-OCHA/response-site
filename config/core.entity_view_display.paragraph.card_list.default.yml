@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.card_list.field_numcols
     - field.field.paragraph.card_list.field_paragraphs
     - paragraphs.paragraphs_type.card_list
   module:
@@ -21,4 +22,5 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-hidden: {  }
+hidden:
+  field_numcols: true

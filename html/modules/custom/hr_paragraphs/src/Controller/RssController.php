@@ -105,13 +105,18 @@ class RssController extends ControllerBase {
       return $items;
     }
 
-    foreach ($xml->channel->item as $entry) {
-      $items[] = new RssItem(
-        (string) $entry->title,
-        (string) $entry->link,
-        (string) $entry->description,
-        strtotime($entry->pubDate),
-      );
+    try {
+      foreach ($xml->channel->item as $entry) {
+        $items[] = new RssItem(
+          (string) $entry->title,
+          (string) $entry->link,
+          (string) $entry->description,
+          strtotime($entry->pubDate),
+        );
+      }
+    }
+    catch (\Exception $e) {
+      return $items;
     }
 
     return $items;
