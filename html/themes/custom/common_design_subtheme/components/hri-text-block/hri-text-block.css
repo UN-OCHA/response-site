@@ -36,7 +36,7 @@
  * - margins between list-items are more compact
  * - reading-dir syntax used for padding
  */
-.field--name-field-text ul {
+/* .field--name-field-text ul {
   margin: 0 0 2rem;
   padding: 0;
 }
@@ -44,4 +44,4 @@
 .field--name-field-text ul li {
   margin-inline-start: 1.125em;
   padding: 0;
-}
+} */

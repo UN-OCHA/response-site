@@ -19,24 +19,13 @@
   border-right: 0 none;
 }
 
-/* Make block titles looks like ToC */
-.paragraph--type--menu-block .cd-block-title {
-  margin: 0 0 1rem 0;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  border-bottom: 0 none;
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 1.3;
-}
-
 /* Temp - vertical rhythm for list items in sidebar.
   Hopefully this can find a place in the  base theme */
-.field--name-field-text ul {
+/* .field--name-field-text ul {
   margin: 0 0 2rem;
   padding: 0;
-}
+} */
 
-.field--type-text-long ul li {
+/* .field--type-text-long ul li {
   margin: 0 0 0.75rem 0;
-}
+} */
