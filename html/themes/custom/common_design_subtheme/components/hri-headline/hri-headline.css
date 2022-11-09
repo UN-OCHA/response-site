@@ -3,6 +3,7 @@
  */
 
 .rw-river--headlines h2.cd-block-title {
+  padding-bottom: 0.5rem;
   border-bottom: 0 none;
   font-size: var(--cd-font-size--2xbase);
 }
