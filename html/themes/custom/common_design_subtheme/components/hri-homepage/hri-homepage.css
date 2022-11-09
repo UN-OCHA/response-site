@@ -14,18 +14,3 @@
     flex: 0 0 399px;
   }
 }
-
-.path-frontpage .hri-layout--two-col > .hri-layout__sidebar {
-  border-right: 0 none;
-}
-
-/* Temp - vertical rhythm for list items in sidebar.
-  Hopefully this can find a place in the  base theme */
-/* .field--name-field-text ul {
-  margin: 0 0 2rem;
-  padding: 0;
-} */
-
-/* .field--type-text-long ul li {
-  margin: 0 0 0.75rem 0;
-} */

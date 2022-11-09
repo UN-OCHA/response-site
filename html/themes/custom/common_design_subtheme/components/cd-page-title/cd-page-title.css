@@ -5,15 +5,3 @@
 .cd-page-title {
   border-bottom: 1px solid var(--brand-highlight);
 }
-
-/**
-  * These rules accommodate where the right border on sidebar meets the bottom
-  * border of page title.
-  */
-/* .node--view-mode-full .cd-page-title {
-  margin-bottom: 0;
-} */
-/* .node--view-mode-full .cd-page-title + div .hri-layout__main-content,
-.node--view-mode-full .cd-page-title + div .hri-layout__sidebar {
-  padding-top: 2rem;
-} */
