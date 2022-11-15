@@ -1038,6 +1038,54 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
 
   try {
     $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+
+    // Alias might no longer exist, fetch node id.
+    if (empty($results['data'])) {
+      $redirect = FALSE;
+
+      try {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+
+        curl_exec($ch);
+        $redirect = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+        curl_close($ch);
+
+        \Drupal::logger('hr_paragraphs')->info('ReliefWeb document has a new URL, changed from @old to @new on @url', [
+          '@old' => $url,
+          '@new' => $redirect,
+          '@url' => $paragraph->getParentEntity()->toUrl()->setAbsolute()->toString(),
+        ]);
+
+        // Remove last condition and add new one.
+        array_pop($parameters['filter']['conditions']);
+        $parameters['filter']['conditions'][] = [
+          'field' => 'url_alias',
+          'value' => $redirect,
+        ];
+
+        // Re-run the query.
+        $results = $reliefweb_controller->executeReliefwebQuery($parameters);
+
+        // Update the old URL if we have a result.
+        if (!empty($results['data'])) {
+          $paragraph->field_reliefweb_url->set(0, $redirect);
+          $paragraph->save();
+        }
+      }
+      catch (\Exception $e) {
+        $variables['content']['rw_list'] = [
+          '#type' => 'markup',
+          '#markup' => t('ReliefWeb data is currently not available.'),
+          '#prefix' => '<div class="response-error response-error-api response-error-reliefweb">',
+          '#suffix' => '</div>',
+        ];
+      }
+    }
+
     $parameters = $reliefweb_controller->buildReliefwebParameters(0, 1, []);
     $hide_thumbs = $paragraph->field_hide_thumbnails->value == 1 ? TRUE : FALSE;
 
