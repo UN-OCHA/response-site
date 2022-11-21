@@ -45,6 +45,8 @@ libraries-extend:
     - common_design_subtheme/hri-pagination
   common_design/cd-button:
     - common_design_subtheme/hri-button
+  common_design/cd-page-title:
+    - common_design_subtheme/cd-page-title
   hr_paragraphs/fullcalendar:
     - common_design_subtheme/hri-fullcalendar
 

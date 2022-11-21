@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6be6b1d72f1422c9997f69ad538224e0",
+    "content-hash": "12f1e43abd12d09119555d04b6a4809d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3883,10 +3883,6 @@
                     "name": "Christian Fritsch",
                     "homepage": "https://www.drupal.org/user/2103716",
                     "email": "christian.fritsch@burda.com"
-                },
-                {
-                    "name": "thunderbot",
-                    "homepage": "https://www.drupal.org/user/3511180"
                 }
             ],
             "description": "Integration with the select2 JavaScript library.",
@@ -9890,16 +9886,16 @@
         },
         {
             "name": "unocha/common_design",
-            "version": "v7.2.1",
+            "version": "v7.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/common_design.git",
-                "reference": "b789a3009fc2d0482338c15ae8a80131aa4699e7"
+                "reference": "f4ef51b95fb8eaab0c4b034e573b4dbefedad6e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/b789a3009fc2d0482338c15ae8a80131aa4699e7",
-                "reference": "b789a3009fc2d0482338c15ae8a80131aa4699e7",
+                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/f4ef51b95fb8eaab0c4b034e573b4dbefedad6e3",
+                "reference": "f4ef51b95fb8eaab0c4b034e573b4dbefedad6e3",
                 "shasum": ""
             },
             "require": {
@@ -9913,9 +9909,9 @@
             "description": "OCHA Common Design base theme for Drupal 8",
             "support": {
                 "issues": "https://github.com/UN-OCHA/common_design/issues",
-                "source": "https://github.com/UN-OCHA/common_design/tree/v7.2.1"
+                "source": "https://github.com/UN-OCHA/common_design/tree/v7.3.0"
             },
-            "time": "2022-08-01T07:55:32+00:00"
+            "time": "2022-11-16T10:44:02+00:00"
         },
         {
             "name": "webflo/drupal-finder",
@@ -16459,5 +16455,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
