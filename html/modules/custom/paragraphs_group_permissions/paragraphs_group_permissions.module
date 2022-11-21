@@ -51,8 +51,14 @@ function paragraphs_group_permissions_paragraph_access(ParagraphInterface $entit
     return $permissions[$account->id()][$type][$operation];
   }
 
-  // @todo Allow access if user has group permission.
+  // Walk up all nested paragraphs.
   $parent = $entity->getParentEntity();
+  $safety = 10;
+  while ($safety-- > 0 && $parent::class === 'Drupal\paragraphs\Entity\Paragraph') {
+    /** @var \Drupal\paragraphs\Entity\Paragraph $parent */
+    $parent = $parent->getParentEntity();
+  }
+
   if (!$parent) {
     return AccessResult::neutral();
   }
