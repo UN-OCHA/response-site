@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b92003a302a16c523b40081429767a33",
+    "content-hash": "0d0afa2d0ddd5fc134caaf9b0d8610d3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9679,16 +9679,16 @@
         },
         {
             "name": "unocha/common_design",
-            "version": "v7.2.1",
+            "version": "v7.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/common_design.git",
-                "reference": "b789a3009fc2d0482338c15ae8a80131aa4699e7"
+                "reference": "f4ef51b95fb8eaab0c4b034e573b4dbefedad6e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/b789a3009fc2d0482338c15ae8a80131aa4699e7",
-                "reference": "b789a3009fc2d0482338c15ae8a80131aa4699e7",
+                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/f4ef51b95fb8eaab0c4b034e573b4dbefedad6e3",
+                "reference": "f4ef51b95fb8eaab0c4b034e573b4dbefedad6e3",
                 "shasum": ""
             },
             "require": {
@@ -9702,9 +9702,9 @@
             "description": "OCHA Common Design base theme for Drupal 8",
             "support": {
                 "issues": "https://github.com/UN-OCHA/common_design/issues",
-                "source": "https://github.com/UN-OCHA/common_design/tree/v7.2.1"
+                "source": "https://github.com/UN-OCHA/common_design/tree/v7.3.0"
             },
-            "time": "2022-08-01T07:55:32+00:00"
+            "time": "2022-11-16T10:44:02+00:00"
         },
         {
             "name": "webflo/drupal-finder",
@@ -16238,5 +16238,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
