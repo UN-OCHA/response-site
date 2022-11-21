@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.5](https://github.com/UN-OCHA/response-site/compare/v0.3.4...v0.3.5) (2022-11-21)
+
+### Chores
+
+* Update all outdated drupal/* packages. ([3cafba](https://github.com/UN-OCHA/response-site/commit/3cafba1b28f0c501f2c5dca15ba794e4e21b7984))
+
 ## [0.3.3](https://github.com/UN-OCHA/response-site/compare/v0.3.2...v0.3.3) (2022-11-01)
 
 ### Features
