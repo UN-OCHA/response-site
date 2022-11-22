@@ -13,15 +13,17 @@
     'hri-iframe--' ~ ratio,
   ]
 %}
-<div{{ create_attribute().addClass(classes) }}>
+<div{{ create_attribute()
+  .addClass(classes)
+  .setAttribute('data-width', width)
+  .setAttribute('data-height', height)
+}}>
   <iframe
     class="hri-iframe__iframe"
     sandbox="allow-scripts allow-same-origin"
     allow="autoplay; encrypted-media;"
     width="{{ width }}"
-    data-width="{{ width }}"
     height="{{ height }}"
-    data-height="{{ height }}"
     referrerpolicy="no-referrer"
     frameborder="0"
     target="_blank"
