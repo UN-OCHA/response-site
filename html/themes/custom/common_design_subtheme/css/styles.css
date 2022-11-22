@@ -11,11 +11,6 @@
   border-top: 1px solid var(--brand-grey);
 }
 
-/* .field--name-field-paragraphs-secondary > .field__item + .field__item {
-  margin-top: 2rem;
-  padding-top: 1rem;
-} */
-
 /* Gives Paragraphs with their own Title field vertical rhythm and styles
   the same as .paragraph--type--heading */
 .paragraph--type--reliefweb-document .field--name-field-title + div,
