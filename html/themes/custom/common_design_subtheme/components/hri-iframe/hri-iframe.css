@@ -13,9 +13,8 @@
   aspect-ratio: 4 / 3;
 }
 
-.hri-iframe--ratio-auto {
-  aspect-ratio: calc(attr(data-width) / attr(data-height));
-}
+/* JS will handle this case */
+/* .hri-iframe--ratio-auto {} */
 
 .hri-iframe__iframe {
   width: 100%;

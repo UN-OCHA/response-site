@@ -114,6 +114,8 @@ hri-iframe:
   css:
     component:
       components/hri-iframe/hri-iframe.css: {}
+  js:
+    components/hri-iframe/hri-iframe.js: {}
 
 hri-layout:
   css:
