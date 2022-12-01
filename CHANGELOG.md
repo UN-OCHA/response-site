@@ -4,6 +4,23 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.6](https://github.com/UN-OCHA/response-site/compare/v0.3.5-hotfix...v0.3.6) (2022-12-01)
+
+### Features
+
+* New cod filter format [#RWR-282](https://https://humanitarian.atlassian.net/browse/RWR-282) ([6a37cd](https://github.com/UN-OCHA/response-site/commit/6a37cda283c99c53ae4ef1991b5d43e1940096c9))
+
+### Bug Fixes
+
+* Adopt new RW-based styles for Homepage ([80871e](https://github.com/UN-OCHA/response-site/commit/80871ef3987954b89752fe6e1b0c4ca8c5d95661))
+* Hri-iframe auto aspect-ratio now driven by JS (#438) ([2b61ed](https://github.com/UN-OCHA/response-site/commit/2b61ed51f7c968aab7c342ef5cef75e4c86f45a8))
+* Remove query parameters of URL used in reliefweb document paragraphs ([da49b0](https://github.com/UN-OCHA/response-site/commit/da49b08cfcf786d6748ae1016a8eafcaf94334ad))
+
+### Chores
+
+* Remove commented out rules for final tidy (#439) ([1fa0c5](https://github.com/UN-OCHA/response-site/commit/1fa0c5eeee328cb443008e480bfc1331b7da9e70))
+* Update all outdated drupal/* packages. ([3c5dab](https://github.com/UN-OCHA/response-site/commit/3c5dabd1685d03a9b35f1ba846fbe42f1a9d905a), [d328d0](https://github.com/UN-OCHA/response-site/commit/d328d03ad63086795b584169d04459fdc85fb21a))
+
 ## [0.3.5](https://github.com/UN-OCHA/response-site/compare/v0.3.4...v0.3.5) (2022-11-21)
 
 ### Chores
