@@ -5,6 +5,7 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
+use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Entity\EntityInterface;
@@ -1012,6 +1013,9 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
   }
 
   $url = $paragraph->field_reliefweb_url->first()->uri;
+
+  // Remove query parameters.
+  $url = UrlHelper::parse($url)['path'];
 
   /** @var \Drupal\hr_paragraphs\Controller\ReliefwebController */
   $reliefweb_controller = \Drupal::service('hr_paragraphs.reliefweb_controller');
