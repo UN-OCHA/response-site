@@ -154,6 +154,7 @@ class HrParagraphsCommands extends DrushCommands {
         'id' => $data['id'],
         'type' => 'operation',
         'label' => $data['name'],
+        'langcode' => 'en',
       ]);
 
       $rw_country_id = $this->getCountryIdFromIso3($data['iso3']);
@@ -284,6 +285,7 @@ class HrParagraphsCommands extends DrushCommands {
         'id' => $data['id'],
         'type' => 'cluster',
         'label' => $data['name'],
+        'langcode' => 'en',
       ]);
 
       // Add ReliefWeb tabs if operation has links.
@@ -420,6 +422,7 @@ class HrParagraphsCommands extends DrushCommands {
           'nid' => $data['id'],
           'type' => 'page',
           'title' => $data['name'],
+          'langcode' => 'en',
         ]);
 
         $node->setPublished()->save();

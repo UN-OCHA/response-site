@@ -1,0 +1,7 @@
+/**
+ * Extension to cd-page-title component for HR.info specific branding.
+ */
+
+.cd-page-title {
+  border-bottom: 1px solid var(--brand-highlight);
+}

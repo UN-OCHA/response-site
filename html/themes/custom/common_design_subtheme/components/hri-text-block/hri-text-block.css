@@ -27,21 +27,3 @@
 .field--name-field-text .align-right {
   margin-left: 1rem;
 }
-
-/**
- * Re-implements CD Bullet List so that it applies to WYSIWYG fields.
- *
- * Changes:
- *
- * - margins between list-items are more compact
- * - reading-dir syntax used for padding
- */
-.field--name-field-text ul {
-  margin: 0 0 1rem;
-  padding: 0;
-}
-
-.field--name-field-text ul li {
-  margin-inline-start: 1.125em;
-  padding: 0;
-}

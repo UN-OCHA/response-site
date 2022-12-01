@@ -335,6 +335,15 @@ class HdxController extends ControllerBase {
           }
           break;
 
+        case 'cod_level':
+          if (is_array($values)) {
+            $parameters['fq_list'][] = '{!tag=cod_level}' . $key . ':"' . implode('" OR ' . $key . ':"', $values) . '"';
+          }
+          else {
+            $parameters['fq_list'][] = '{!tag=cod_level}' . $key . ':"' . $values . '"';
+          }
+          break;
+
         case 'ext_subnational':
         case 'ext_geodata':
         case 'ext_requestdata':

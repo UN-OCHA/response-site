@@ -10,6 +10,12 @@ global-styling:
     - common_design_subtheme/hri-breadcrumbs
     - common_design_subtheme/hri-cd-header
     - common_design_subtheme/cd-read-more
+    - common_design_subtheme/hri-homepage
+
+cd-page-title:
+  css:
+    theme:
+      components/cd-page-title/cd-page-title.css: {}
 
 cd-read-more:
   css:
@@ -89,15 +95,27 @@ hri-heading:
     component:
       components/hri-heading/hri-heading.css: {}
 
+hri-headline:
+  css:
+    component:
+      components/hri-headline/hri-headline.css: {}
+
 hri-highlight:
   css:
     component:
       components/hri-highlight/hri-highlight.css: {}
 
+hri-homepage:
+  css:
+    theme:
+      components/hri-homepage/hri-homepage.css: {}
+
 hri-iframe:
   css:
     component:
       components/hri-iframe/hri-iframe.css: {}
+  js:
+    components/hri-iframe/hri-iframe.js: {}
 
 hri-layout:
   css:

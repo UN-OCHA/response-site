@@ -22,11 +22,6 @@
   font-size: 1rem;
 }
 
-.hri-layout__sidebar .field--name-field-title {
-  margin-top: 0;
-  font-size: var(--cd-font-size--large);
-}
-
 /**
  * Two-col
  *
