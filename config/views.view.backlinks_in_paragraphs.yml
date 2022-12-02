@@ -44,7 +44,7 @@ display:
           entity_field: id
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -76,7 +76,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -86,7 +86,9 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: number_integer
-          settings: {  }
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -108,7 +110,7 @@ display:
           entity_field: parent_id
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -172,7 +174,7 @@ display:
           entity_field: parent_type
           plugin_id: field
           label: ''
-          exclude: false
+          exclude: true
           alter:
             alter_text: false
             text: ''
@@ -233,7 +235,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: ''
+          label: IFrame
           exclude: false
           alter:
             alter_text: false
@@ -300,7 +302,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: ''
+          label: Links
           exclude: false
           alter:
             alter_text: false
@@ -367,7 +369,7 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: field
-          label: ''
+          label: 'RSS link'
           exclude: false
           alter:
             alter_text: false
@@ -563,11 +565,11 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: custom
-          label: 'Custom text'
+          label: ''
           exclude: false
           alter:
             alter_text: true
-            text: 'View page'
+            text: 'View group/page'
             make_link: true
             path: '/{{ parent_type }}/{{ parent_id }}'
             absolute: false
@@ -596,7 +598,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
