@@ -8,13 +8,15 @@ dependencies:
     - field.storage.paragraph.field_rss_link
     - field.storage.paragraph.field_rss_read_more
     - field.storage.paragraph.field_text
-    - user.role.administrator
-    - user.role.global_editor
   module:
+    - csv_serialization
     - link
     - paragraphs
+    - rest
+    - serialization
     - text
     - user
+    - views_data_export
 id: backlinks_in_paragraphs
 label: 'Backlinks in paragraphs'
 module: views
@@ -634,11 +636,9 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: role
+        type: perm
         options:
-          role:
-            administrator: administrator
-            global_editor: global_editor
+          perm: 'create page content'
       cache:
         type: tag
         options: {  }
@@ -952,7 +952,51 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.roles
+        - user.permissions
+      tags:
+        - 'config:field.storage.paragraph.field_iframe_url'
+        - 'config:field.storage.paragraph.field_links'
+        - 'config:field.storage.paragraph.field_rss_link'
+        - 'config:field.storage.paragraph.field_rss_read_more'
+        - 'config:field.storage.paragraph.field_text'
+  data_export_1:
+    id: data_export_1
+    display_title: 'Data export'
+    display_plugin: data_export
+    position: 2
+    display_options:
+      style:
+        type: data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: true
+            trim: true
+            encoding: utf8
+            utf8_bom: '0'
+            use_serializer_encode_only: false
+      display_extenders: {  }
+      path: admin/content/backlinks.csv
+      displays:
+        page_1: page_1
+        default: '0'
+      filename: backlinks.csv
+      automatic_download: true
+      store_in_public_file_directory: null
+      custom_redirect_path: false
+      redirect_to_display: page_1
+      include_query_params: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - request_format
+        - user.permissions
       tags:
         - 'config:field.storage.paragraph.field_iframe_url'
         - 'config:field.storage.paragraph.field_links'
@@ -982,7 +1026,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
-        - user.roles
+        - user.permissions
       tags:
         - 'config:field.storage.paragraph.field_iframe_url'
         - 'config:field.storage.paragraph.field_links'
