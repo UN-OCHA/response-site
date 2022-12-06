@@ -940,6 +940,7 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
   $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 5;
 
   $url = $paragraph->field_reliefweb_url->first()->uri;
+
   /** @var \Drupal\hr_paragraphs\Controller\ReliefwebController */
   $reliefweb_controller = \Drupal::service('hr_paragraphs.reliefweb_controller');
   $conditions = $reliefweb_controller->parseReliefwebUrl($url);
@@ -1076,8 +1077,10 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
 
         // Update the old URL if we have a result.
         if (!empty($results['data'])) {
-          $paragraph->field_reliefweb_url->set(0, $redirect);
-          $paragraph->save();
+          if (!$paragraph->isNew()) {
+            $paragraph->field_reliefweb_url->set(0, $redirect);
+            $paragraph->save();
+          }
         }
       }
       catch (\Exception $e) {
