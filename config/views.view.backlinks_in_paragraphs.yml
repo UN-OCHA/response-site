@@ -934,20 +934,40 @@ display:
           replica: false
           query_tags: {  }
       relationships: {  }
-      header:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text_custom
-          empty: false
-          content: "<p>On the page you can </p>\r\n<ol>\r\n<li>Hit F12 to open dev tools</li>\r\n<li>Open console</li>\r\n<li>Paste <code>document.querySelectorAll('a[href*=\"https://www.humanitarianresponse.info/\"]').forEach((e) => {e.style.color = 'red';e.style.border='solid 1px red';})</code></li>\r\n<li>Hit enter</li>\r\n</ol>"
-          tokenize: false
+      header: {  }
       footer: {  }
       display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url.query_args
+        - user.permissions
+      tags:
+        - 'config:field.storage.paragraph.field_iframe_url'
+        - 'config:field.storage.paragraph.field_links'
+        - 'config:field.storage.paragraph.field_rss_link'
+        - 'config:field.storage.paragraph.field_rss_read_more'
+        - 'config:field.storage.paragraph.field_text'
+  admin_table:
+    id: admin_table
+    display_title: 'Admin Table'
+    display_plugin: page
+    position: 1
+    display_options:
+      display_description: ''
+      display_extenders: {  }
+      path: admin/content/backlinks
+      menu:
+        type: tab
+        title: 'Links to hrinfo'
+        description: ''
+        weight: 0
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
@@ -998,36 +1018,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - request_format
-        - user.permissions
-      tags:
-        - 'config:field.storage.paragraph.field_iframe_url'
-        - 'config:field.storage.paragraph.field_links'
-        - 'config:field.storage.paragraph.field_rss_link'
-        - 'config:field.storage.paragraph.field_rss_read_more'
-        - 'config:field.storage.paragraph.field_text'
-  page_1:
-    id: page_1
-    display_title: Page
-    display_plugin: page
-    position: 1
-    display_options:
-      display_extenders: {  }
-      path: admin/content/backlinks
-      menu:
-        type: tab
-        title: 'Links to hrinfo'
-        description: ''
-        weight: 0
-        expanded: false
-        menu_name: main
-        parent: ''
-        context: '0'
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url.query_args
         - user.permissions
       tags:
         - 'config:field.storage.paragraph.field_iframe_url'

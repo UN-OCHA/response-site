@@ -237,3 +237,11 @@
   font-weight: 700;
   font-size: 1.25em;
 }
+
+/**
+ * Backlinks to HR.info
+ */
+.view-display-id-admin_table a[href*="https://www.humanitarianresponse.info"] {
+  color: white;
+  background: #f43;
+}
