@@ -1436,4 +1436,321 @@ class HrParagraphsCommands extends DrushCommands {
     return '';
   }
 
+  /**
+   * Get list of backlinks.
+   *
+   * @command hr_paragraphs:backlinks
+   * @validate-module-enabled hr_paragraphs
+   * @usage hr_paragraphs:backlinks
+   *   Get a list of backlinks.
+   */
+  public function getBacklinks() {
+    $headers = [
+      [
+        'type' => 'type',
+        'title' => 'title',
+        'link' => 'link',
+        'paragraph' => 'paragraph',
+        'url' => 'url',
+        'label' => 'label',
+      ],
+    ];
+    $groups = $this->getBacklinksForGroups();
+    $nodes = $this->getBacklinksForNodes();
+
+    return array_merge($headers, $groups, $nodes);
+  }
+
+  /**
+   * Get list of backlinks for groups.
+   *
+   * @command hr_paragraphs:backlinks-group
+   * @validate-module-enabled hr_paragraphs
+   * @usage hr_paragraphs:backlinks-group
+   *   Get a list of backlinks for groups.
+   */
+  public function getBacklinksForGroups() {
+    $row_counter = 0;
+    $records = [];
+
+    // Main content.
+    $query = $this->entityTypeManager->getStorage('group')->getQuery();
+    $condition_group = $query->orConditionGroup('OR');
+    $condition_group->condition('field_paragraphs.entity:paragraph.field_links.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs.entity:paragraph.field_iframe_url.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs.entity:paragraph.field_rss_link.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs.entity:paragraph.field_rss_read_more.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs.entity:paragraph.field_text.value', '%https://www.humanitarianresponse.info/%', 'LIKE');
+
+    $query->condition($condition_group);
+    $group_ids = array_values($query->execute());
+
+    // Sidebar.
+    $query = $this->entityTypeManager->getStorage('group')->getQuery();
+    $condition_group = $query->orConditionGroup('OR');
+    $condition_group->condition('field_sidebar_menu.entity:paragraph.field_links.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_sidebar_menu.entity:paragraph.field_iframe_url.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_sidebar_menu.entity:paragraph.field_rss_link.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_sidebar_menu.entity:paragraph.field_rss_read_more.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_sidebar_menu.entity:paragraph.field_text.value', '%https://www.humanitarianresponse.info/%', 'LIKE');
+
+    $query->condition($condition_group);
+    $group_ids = array_unique(array_merge($group_ids, array_values($query->execute())));
+
+    $groups = $this->entityTypeManager->getStorage('group')->loadMultiple($group_ids);
+
+    /** @var \Drupal\group\Entity\Group $group */
+    foreach ($groups as $group) {
+      $row_counter++;
+      $this->logger->info("{$row_counter}. Processing {$group->label()} ({$group->id()})");
+
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      foreach ($group->field_paragraphs->referencedEntities() as $paragraph) {
+        // Text field.
+        if ($paragraph->hasField('field_text') && !$paragraph->field_text->isEmpty()) {
+          $doc = new \DOMDocument();
+          $doc->loadHTML(mb_convert_encoding($paragraph->field_text->value, 'HTML-ENTITIES', 'UTF-8'), LIBXML_NOERROR);
+
+          $tags = $doc->getElementsByTagName('img');
+          foreach ($tags as $tag) {
+            $src = $tag->getAttribute('src');
+            if (strpos($src, 'https://www.humanitarianresponse.info/') !== FALSE) {
+              $records[] = [
+                'type' => 'group',
+                'title' => $group->label(),
+                'link' => $group->toUrl()->setAbsolute()->toString(),
+                'paragraph' => 'Text block',
+                'url' => $src,
+                'label' => $paragraph->label(),
+              ];
+            }
+          }
+
+          $tags = $doc->getElementsByTagName('a');
+          foreach ($tags as $tag) {
+            $href = $tag->getAttribute('href');
+            if (strpos($href, 'https://www.humanitarianresponse.info/') !== FALSE) {
+              $records[] = [
+                'type' => 'group',
+                'title' => $group->label(),
+                'link' => $group->toUrl()->setAbsolute()->toString(),
+                'paragraph' => 'Text block',
+                'url' => $href,
+                'label' => $tag->nodeValue,
+              ];
+            }
+          }
+        }
+
+        switch ($paragraph->bundle()) {
+          case 'menu_block':
+            foreach ($paragraph->field_links->getValue() as $link) {
+              if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
+                $records[] = [
+                  'type' => 'group',
+                  'title' => $group->label(),
+                  'link' => $group->toUrl()->setAbsolute()->toString(),
+                  'paragraph' => 'Menu - Links',
+                  'url' => $link['uri'],
+                  'label' => $link['title'],
+                ];
+              }
+            }
+            break;
+
+          case 'iframe':
+            foreach ($paragraph->field_iframe_url->getValue() as $link) {
+              if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
+                $records[] = [
+                  'type' => 'group',
+                  'title' => $group->label(),
+                  'link' => $group->toUrl()->setAbsolute()->toString(),
+                  'paragraph' => 'IFrame',
+                  'url' => $link['uri'],
+                  'label' => $paragraph->field_title->value,
+                ];
+              }
+            }
+            break;
+
+          case 'rss_feed':
+            foreach ($paragraph->field_rss_link->getValue() as $link) {
+              if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
+                $records[] = [
+                  'type' => 'group',
+                  'title' => $group->label(),
+                  'link' => $group->toUrl()->setAbsolute()->toString(),
+                  'paragraph' => 'RSS',
+                  'url' => $link['uri'],
+                  'label' => $paragraph->field_title->value,
+                ];
+              }
+            }
+            foreach ($paragraph->field_rss_read_more->getValue() as $link) {
+              if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
+                $records[] = [
+                  'type' => 'group',
+                  'title' => $group->label(),
+                  'link' => $group->toUrl()->setAbsolute()->toString(),
+                  'paragraph' => 'RSS read more',
+                  'url' => $link['uri'],
+                  'label' => $paragraph->field_title->value,
+                ];
+              }
+            }
+            break;
+
+        }
+      }
+    }
+
+    return $records;
+  }
+
+  /**
+   * Get list of backlinks for nodes.
+   *
+   * @command hr_paragraphs:backlinks-node
+   * @validate-module-enabled hr_paragraphs
+   * @usage hr_paragraphs:backlinks-node
+   *   Get a list of backlinks for nodes.
+   */
+  public function getBacklinksForNodes() {
+    $row_counter = 0;
+    $records = [];
+
+    // Main content.
+    $query = $this->entityTypeManager->getStorage('node')->getQuery();
+    $condition_group = $query->orConditionGroup('OR');
+    $condition_group->condition('field_paragraphs.entity:paragraph.field_links.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs.entity:paragraph.field_iframe_url.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs.entity:paragraph.field_rss_link.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs.entity:paragraph.field_rss_read_more.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs.entity:paragraph.field_text.value', '%https://www.humanitarianresponse.info/%', 'LIKE');
+
+    $query->condition($condition_group);
+    $node_ids = array_values($query->execute());
+
+    // Sidebar.
+    $query = $this->entityTypeManager->getStorage('node')->getQuery();
+    $condition_group = $query->orConditionGroup('OR');
+    $condition_group->condition('field_paragraphs_secondary.entity:paragraph.field_links.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs_secondary.entity:paragraph.field_iframe_url.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs_secondary.entity:paragraph.field_rss_link.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs_secondary.entity:paragraph.field_rss_read_more.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('field_paragraphs_secondary.entity:paragraph.field_text.value', '%https://www.humanitarianresponse.info/%', 'LIKE');
+
+    $query->condition($condition_group);
+    $node_ids = array_unique(array_merge($node_ids, array_values($query->execute())));
+
+    $nodes = $this->entityTypeManager->getStorage('node')->loadMultiple($node_ids);
+
+    /** @var \Drupal\node\Entity\Node $node */
+    foreach ($nodes as $node) {
+      $row_counter++;
+      $this->logger->info("{$row_counter}. Processing {$node->label()} ({$node->id()})");
+
+      /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+      foreach ($node->field_paragraphs->referencedEntities() as $paragraph) {
+        // Text field.
+        if ($paragraph->hasField('field_text') && !$paragraph->field_text->isEmpty()) {
+          $doc = new \DOMDocument();
+          $doc->loadHTML(mb_convert_encoding($paragraph->field_text->value, 'HTML-ENTITIES', 'UTF-8'), LIBXML_NOERROR);
+
+          $tags = $doc->getElementsByTagName('img');
+          foreach ($tags as $tag) {
+            $src = $tag->getAttribute('src');
+            if (strpos($src, 'https://www.humanitarianresponse.info/') !== FALSE) {
+              $records[] = [
+                'type' => 'node',
+                'title' => $node->label(),
+                'link' => $node->toUrl()->setAbsolute()->toString(),
+                'paragraph' => 'Text block',
+                'url' => $src,
+                'label' => $paragraph->label(),
+              ];
+            }
+          }
+
+          $tags = $doc->getElementsByTagName('a');
+          foreach ($tags as $tag) {
+            $href = $tag->getAttribute('href');
+            if (strpos($href, 'https://www.humanitarianresponse.info/') !== FALSE) {
+              $records[] = [
+                'type' => 'node',
+                'title' => $node->label(),
+                'link' => $node->toUrl()->setAbsolute()->toString(),
+                'paragraph' => 'Text block',
+                'url' => $href,
+                'label' => $tag->nodeValue,
+              ];
+            }
+          }
+        }
+
+        switch ($paragraph->bundle()) {
+          case 'menu_block':
+            foreach ($paragraph->field_links->getValue() as $link) {
+              if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
+                $records[] = [
+                  'type' => 'node',
+                  'title' => $node->label(),
+                  'link' => $node->toUrl()->setAbsolute()->toString(),
+                  'paragraph' => 'Menu - Links',
+                  'url' => $link['uri'],
+                  'label' => $link['title'],
+                ];
+              }
+            }
+            break;
+
+          case 'iframe':
+            foreach ($paragraph->field_iframe_url->getValue() as $link) {
+              if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
+                $records[] = [
+                  'type' => 'node',
+                  'title' => $node->label(),
+                  'link' => $node->toUrl()->setAbsolute()->toString(),
+                  'paragraph' => 'IFrame',
+                  'url' => $link['uri'],
+                  'label' => $paragraph->field_title->value,
+                ];
+              }
+            }
+            break;
+
+          case 'rss_feed':
+            foreach ($paragraph->field_rss_link->getValue() as $link) {
+              if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
+                $records[] = [
+                  'type' => 'node',
+                  'title' => $node->label(),
+                  'link' => $node->toUrl()->setAbsolute()->toString(),
+                  'paragraph' => 'RSS',
+                  'url' => $link['uri'],
+                  'label' => $paragraph->field_title->value,
+                ];
+              }
+            }
+            foreach ($paragraph->field_rss_read_more->getValue() as $link) {
+              if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
+                $records[] = [
+                  'type' => 'node',
+                  'title' => $node->label(),
+                  'link' => $node->toUrl()->setAbsolute()->toString(),
+                  'paragraph' => 'RSS read more',
+                  'url' => $link['uri'],
+                  'label' => $paragraph->field_title->value,
+                ];
+              }
+            }
+            break;
+
+        }
+      }
+    }
+
+    return $records;
+  }
+
 }
