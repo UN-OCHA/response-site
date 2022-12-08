@@ -1447,12 +1447,12 @@ class HrParagraphsCommands extends DrushCommands {
   public function getBacklinks() {
     $headers = [
       [
-        'type' => 'type',
-        'title' => 'title',
-        'link' => 'link',
-        'paragraph' => 'paragraph',
-        'url' => 'url',
-        'label' => 'label',
+        'type' => 'Type (group or page)',
+        'title' => 'Group/Page title',
+        'link' => 'Link to group/page',
+        'paragraph' => 'Paragraph type',
+        'url' => 'Backlink',
+        'label' => 'Label of link of paragraph',
       ],
     ];
     $groups = $this->getBacklinksForGroups();
@@ -1662,7 +1662,7 @@ class HrParagraphsCommands extends DrushCommands {
             $src = $tag->getAttribute('src');
             if (strpos($src, 'https://www.humanitarianresponse.info/') !== FALSE) {
               $records[] = [
-                'type' => 'node',
+                'type' => 'page',
                 'title' => $node->label(),
                 'link' => $node->toUrl()->setAbsolute()->toString(),
                 'paragraph' => 'Text block',
@@ -1677,7 +1677,7 @@ class HrParagraphsCommands extends DrushCommands {
             $href = $tag->getAttribute('href');
             if (strpos($href, 'https://www.humanitarianresponse.info/') !== FALSE) {
               $records[] = [
-                'type' => 'node',
+                'type' => 'page',
                 'title' => $node->label(),
                 'link' => $node->toUrl()->setAbsolute()->toString(),
                 'paragraph' => 'Text block',
@@ -1693,7 +1693,7 @@ class HrParagraphsCommands extends DrushCommands {
             foreach ($paragraph->field_links->getValue() as $link) {
               if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
                 $records[] = [
-                  'type' => 'node',
+                  'type' => 'page',
                   'title' => $node->label(),
                   'link' => $node->toUrl()->setAbsolute()->toString(),
                   'paragraph' => 'Menu - Links',
@@ -1708,7 +1708,7 @@ class HrParagraphsCommands extends DrushCommands {
             foreach ($paragraph->field_iframe_url->getValue() as $link) {
               if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
                 $records[] = [
-                  'type' => 'node',
+                  'type' => 'page',
                   'title' => $node->label(),
                   'link' => $node->toUrl()->setAbsolute()->toString(),
                   'paragraph' => 'IFrame',
@@ -1723,7 +1723,7 @@ class HrParagraphsCommands extends DrushCommands {
             foreach ($paragraph->field_rss_link->getValue() as $link) {
               if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
                 $records[] = [
-                  'type' => 'node',
+                  'type' => 'page',
                   'title' => $node->label(),
                   'link' => $node->toUrl()->setAbsolute()->toString(),
                   'paragraph' => 'RSS',
@@ -1735,7 +1735,7 @@ class HrParagraphsCommands extends DrushCommands {
             foreach ($paragraph->field_rss_read_more->getValue() as $link) {
               if (strpos($link['uri'], 'https://www.humanitarianresponse.info/') !== FALSE) {
                 $records[] = [
-                  'type' => 'node',
+                  'type' => 'page',
                   'title' => $node->label(),
                   'link' => $node->toUrl()->setAbsolute()->toString(),
                   'paragraph' => 'RSS read more',
