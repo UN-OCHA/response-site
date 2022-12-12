@@ -2,9 +2,9 @@ uuid: adc46858-d138-4b68-ab46-693a12eb5aa2
 langcode: en
 status: true
 dependencies: {  }
-machine: live
+machine: production
 description: null
-name: Live
+name: Prod
 weight: '10'
 url: 'https://response.reliefweb.int'
 fg_color: '#ffffff'
