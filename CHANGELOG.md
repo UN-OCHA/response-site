@@ -4,6 +4,23 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.7](https://github.com/UN-OCHA/response-site/compare/v0.3.6...v0.3.7) (2022-12-12)
+
+### Features
+
+* Display content linking back to hrinfo [#RWR-285](https://https://humanitarian.atlassian.net/browse/RWR-285), [#RWR-285](https://https://humanitarian.atlassian.net/browse/RWR-285), [#RWR-285](https://https://humanitarian.atlassian.net/browse/RWR-285) ([b85bc1](https://github.com/UN-OCHA/response-site/commit/b85bc11a453576ca72df657edea2de8715d0c660), [d92bbf](https://github.com/UN-OCHA/response-site/commit/d92bbfeecfc9d834f8df6bf518c47880eb86dd40), [86d734](https://github.com/UN-OCHA/response-site/commit/86d734777df2604316d3ae91854bea0d143a00a4))
+* Generate report for backlinks [#RWR-285](https://https://humanitarian.atlassian.net/browse/RWR-285) ([383445](https://github.com/UN-OCHA/response-site/commit/3834456a0e58317511f8854804fcce0346b9d727))
+
+### Chores
+
+* Better labals for report for backlinks [#RWR-285](https://https://humanitarian.atlassian.net/browse/RWR-285) ([89053e](https://github.com/UN-OCHA/response-site/commit/89053ea103e324c5f7ae9a9ae8df97def1254ba2))
+* Make csp rules consistent ([3bb380](https://github.com/UN-OCHA/response-site/commit/3bb380e995d9a65128920c1cf94192a6fcfafbf1))
+* Update all outdated drupal/* packages. ([eef048](https://github.com/UN-OCHA/response-site/commit/eef048e855eddc25ae6685206a7d0356a7b76979))
+
+##### Deps
+
+* Bump minimatch ([e9c67f](https://github.com/UN-OCHA/response-site/commit/e9c67f86a47fafd531d4f8d78d608c5481263abc))
+
 ## [0.3.6](https://github.com/UN-OCHA/response-site/compare/v0.3.5-hotfix...v0.3.6) (2022-12-01)
 
 ### Features
