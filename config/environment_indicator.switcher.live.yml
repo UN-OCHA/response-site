@@ -1,0 +1,11 @@
+uuid: adc46858-d138-4b68-ab46-693a12eb5aa2
+langcode: en
+status: true
+dependencies: {  }
+machine: live
+description: null
+name: Live
+weight: '10'
+url: 'https://response.reliefweb.int'
+fg_color: '#ffffff'
+bg_color: '#6937ac'
