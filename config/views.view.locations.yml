@@ -168,7 +168,7 @@ display:
           exclude: false
           alter:
             alter_text: true
-            text: '{% if langcode__value != "en" %}({{ langcode }}){% endif %}'
+            text: '{% if langcode__value != "en" %}&nbsp;({{ langcode }}){% endif %}'
             make_link: false
             path: ''
             absolute: false
