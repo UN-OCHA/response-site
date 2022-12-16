@@ -6,6 +6,6 @@ machine: demo
 description: null
 name: Demo
 weight: '6'
-url: 'https://demo.response-reliefweb-int.ahconu.org/'
+url: 'https://demo.response-reliefweb-int.ahconu.org'
 fg_color: '#000000'
 bg_color: '#34ccc1'

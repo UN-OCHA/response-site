@@ -6,6 +6,6 @@ machine: dev
 description: null
 name: Dev
 weight: '0'
-url: 'https://dev.response-reliefweb-int.ahconu.org/'
+url: 'https://dev.response-reliefweb-int.ahconu.org'
 fg_color: '#ffffff'
 bg_color: '#db7b18'
