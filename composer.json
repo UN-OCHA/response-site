@@ -41,6 +41,7 @@
         "drupal/core-recommended": "^9",
         "drupal/csp": "^1.16",
         "drupal/date_recur": "^3.2",
+        "drupal/environment_indicator": "^4.0",
         "drupal/external_entities": "^2.0@alpha",
         "drupal/field_group": "^3.2",
         "drupal/fullcalendar_api": "^2.0@alpha",
@@ -74,7 +75,8 @@
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",
         "rlanvin/php-rrule": "2.3.1",
-        "unocha/common_design": "^7.3.0"
+        "unocha/common_design": "^7.3.0",
+        "unocha/ocha_search": "^1.0"
     },
     "conflict": {
         "drupal/drupal": "*"
