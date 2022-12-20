@@ -1933,6 +1933,10 @@ function hr_paragraphs_entity_base_field_info(EntityTypeInterface $entity_type) 
   if ($entity_type->id() === 'group') {
     return hr_paragraphs_custom_group_fields();
   }
+
+  if ($entity_type->id() === 'user') {
+    return hr_paragraphs_custom_user_fields();
+  }
 }
 
 /**
@@ -1959,6 +1963,31 @@ function hr_paragraphs_custom_group_fields() {
     ->setDescription(t('List of paragraph types in use'))
     ->setRevisionable(TRUE)
     ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => -5,
+    ]
+  );
+
+  return $fields;
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function hr_paragraphs_custom_user_fields() {
+  $fields = [];
+
+  // Enabled tabs.
+  $fields['manager_for'] = BaseFieldDefinition::create('entity_reference')
+    ->setLabel(t('Manager of'))
+    ->setDescription(t('Manager of the following groups'))
+    ->setRevisionable(TRUE)
+    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+    ->setSettings([
+      'target_type' => 'group',
+      'default_value' => 0,
+    ])
     ->setDisplayOptions('view', [
       'label' => 'above',
       'weight' => -5,
@@ -2055,6 +2084,36 @@ function hr_paragraphs_group_presave(EntityInterface $entity) {
     $langcode = $entity->language()->getId();
     if (!$entity->isNew() && $original && $original->hasTranslation($langcode)) {
       $original_value = $original->getTranslation($langcode)->get('changed')->value;
+      $entity->set('changed', $original_value);
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function hr_paragraphs_user_presave(EntityInterface $entity) {
+  $manager_for = [];
+
+  /** @var \Drupal\group\GroupMembershipLoader */
+  $group_membership_service = \Drupal::service('group.membership_loader');
+  $group_memberships = $group_membership_service->loadByUser($entity, [
+    'operation-manager',
+    'cluster-manager',
+  ]);
+
+  foreach ($group_memberships as $group_membership) {
+    $manager_for[] = $group_membership->getGroup();
+  }
+
+  $entity->set('manager_for', $manager_for);
+
+  // Revert changed time during update.
+  if ($entity->isMigrating) {
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $original */
+    $original = $entity->original;
+    if (!$entity->isNew() && $original) {
+      $original_value = $original->get('changed')->value;
       $entity->set('changed', $original_value);
     }
   }

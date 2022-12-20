@@ -148,7 +148,7 @@ function hr_paragraphs_update_9008(&$sandbox) {
     return;
   }
 
-  /** @var \Drupal\group\Entity\Group $user */
+  /** @var \Drupal\group\Entity\Group $groups[] */
   $groups = \Drupal::entityTypeManager()->getStorage('group')->loadMultiple($ids);
   foreach ($groups as $group) {
     $group->isMigrating = TRUE;
@@ -157,6 +157,63 @@ function hr_paragraphs_update_9008(&$sandbox) {
   }
 
   \Drupal::messenger()->addMessage($sandbox['current'] . ' groups processed.');
+
+  if ($sandbox['current'] >= $sandbox['total']) {
+    $sandbox['#finished'] = 1;
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}
+
+/**
+ * Add computed fields to users.
+ */
+function hr_paragraphs_update_9009() {
+  $storage_definitions = hr_paragraphs_custom_user_fields();
+
+  foreach ($storage_definitions as $field_name => $storage_definition) {
+    \Drupal::entityDefinitionUpdateManager()
+      ->installFieldStorageDefinition($field_name, 'user', 'user', $storage_definition);
+  }
+}
+
+/**
+ * Update users for manager groups.
+ */
+function hr_paragraphs_update_9010(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $ids = \Drupal::entityQuery('user')->execute();
+    $sandbox['total'] = count($ids);
+    $sandbox['current'] = 0;
+
+    if (empty($sandbox['total'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+  }
+
+  $ids = \Drupal::entityQuery('user')
+    ->range($sandbox['current'], 25)
+    ->sort('uid')
+    ->execute();
+
+  if (empty($sandbox['total'])) {
+    $sandbox['#finished'] = 1;
+    return;
+  }
+
+  /** @var \Drupal\user\Entity\User $users */
+  $users = \Drupal::entityTypeManager()->getStorage('user')->loadMultiple($ids);
+  foreach ($users as $user) {
+    if ($user->manager_for->isEmpty()) {
+      $user->isMigrating = TRUE;
+      $user->save();
+    }
+    $sandbox['current']++;
+  }
+
+  \Drupal::messenger()->addMessage($sandbox['current'] . ' users processed.');
 
   if ($sandbox['current'] >= $sandbox['total']) {
     $sandbox['#finished'] = 1;
