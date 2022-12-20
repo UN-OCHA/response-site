@@ -623,6 +623,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
+      block_category: 'Dashboards: Response'
     cache_metadata:
       max-age: -1
       contexts:
@@ -664,13 +665,18 @@ display:
       path: admin/content/reports/latest-editor
       menu:
         type: tab
-        title: Clusters
+        title: 'Latest editor'
         description: ''
         weight: 0
         expanded: false
         menu_name: main
         parent: ''
         context: '0'
+      tab_options:
+        type: tab
+        title: 'Latest editor'
+        description: ''
+        weight: 0
     cache_metadata:
       max-age: -1
       contexts:

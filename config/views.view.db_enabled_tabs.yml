@@ -604,6 +604,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
+      block_category: 'Dashboards: Response'
     cache_metadata:
       max-age: -1
       contexts:
@@ -645,7 +646,7 @@ display:
       path: admin/content/reports/enabled-tabs
       menu:
         type: tab
-        title: Clusters
+        title: 'Enabled tabs'
         description: ''
         weight: 0
         expanded: false

@@ -555,6 +555,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
+      block_category: 'Dashboards: Response'
     cache_metadata:
       max-age: -1
       contexts:
@@ -596,7 +597,7 @@ display:
       path: admin/content/reports/used-paragraphs
       menu:
         type: tab
-        title: Clusters
+        title: 'Used paragraph types'
         description: ''
         weight: 0
         expanded: false

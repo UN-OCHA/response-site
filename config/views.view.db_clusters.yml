@@ -534,6 +534,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
+      block_category: 'Dashboards: Response'
     cache_metadata:
       max-age: -1
       contexts:
@@ -579,8 +580,8 @@ display:
         description: ''
         weight: 0
         expanded: false
-        menu_name: main
-        parent: ''
+        menu_name: admin
+        parent: 'menu_link_content:121a4780-c512-4804-a5cd-677d93413f8a'
         context: '0'
     cache_metadata:
       max-age: -1
