@@ -2093,6 +2093,11 @@ function hr_paragraphs_group_presave(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_presave().
  */
 function hr_paragraphs_user_presave(EntityInterface $entity) {
+  // Skip for new users.
+  if ($entity->isNew()) {
+    return;
+  }
+
   $manager_for = [];
 
   /** @var \Drupal\group\GroupMembershipLoader */
