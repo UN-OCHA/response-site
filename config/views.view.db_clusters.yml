@@ -10,7 +10,7 @@ id: db_clusters
 label: 'DB clusters'
 module: views
 description: ''
-tag: ''
+tag: dashboard
 base_table: groups_field_data
 base_field: id
 display:

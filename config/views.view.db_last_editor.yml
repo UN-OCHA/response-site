@@ -9,7 +9,7 @@ id: db_last_editor
 label: 'DB Last editor'
 module: views
 description: ''
-tag: ''
+tag: dashboard
 base_table: groups_field_data
 base_field: id
 display:
