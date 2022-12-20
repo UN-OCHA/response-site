@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - dashboards.dashboard.global_editors
     - filter.format.hr_plain_text
     - group.type.cluster
     - group.type.operation
@@ -13,6 +14,7 @@ dependencies:
   module:
     - content_translation
     - contextual
+    - dashboards
     - entity_reference_revisions
     - file
     - filter
@@ -52,6 +54,7 @@ permissions:
   - 'administer users'
   - 'bypass group access'
   - 'bypass node access'
+  - 'can view global_editors dashboard'
   - 'create content translations'
   - 'create landing_page content'
   - 'create operation group'
