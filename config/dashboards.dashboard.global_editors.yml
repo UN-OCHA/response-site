@@ -119,6 +119,32 @@ sections:
           items_per_page: none
         weight: 4
         additional: {  }
+      002a9004-5635-469a-9ed9-e404ebf52c83:
+        uuid: 002a9004-5635-469a-9ed9-e404ebf52c83
+        region: first
+        configuration:
+          id: 'views_block:db_new_groups-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 4
+        additional: {  }
+      e0a28c80-aa9b-4a38-bcc6-c339f5b724e6:
+        uuid: e0a28c80-aa9b-4a38-bcc6-c339f5b724e6
+        region: second
+        configuration:
+          id: 'views_block:db_group_managers-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 5
+        additional: {  }
     third_party_settings: {  }
   -
     layout_id: layout_3
