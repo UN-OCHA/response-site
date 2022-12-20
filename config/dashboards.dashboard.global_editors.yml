@@ -1,0 +1,52 @@
+uuid: 6e65c493-71f2-4ee6-9ed6-635f880e73af
+langcode: en
+status: true
+dependencies: {  }
+id: global_editors
+admin_label: 'Global editors'
+category: ''
+frontend: false
+weight: 0
+sections:
+  -
+    layout_id: layout_twocol_section
+    layout_settings:
+      label: ''
+      context_mapping: {  }
+      column_widths: 50-50
+    components:
+      23e3e2dc-466b-47d2-b233-af348ddc0eef:
+        uuid: 23e3e2dc-466b-47d2-b233-af348ddc0eef
+        region: second
+        configuration:
+          id: 'views_block:db_clusters-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 0
+        additional: {  }
+      01838d7d-2e65-4ca8-b29d-9dd9d4a3436c:
+        uuid: 01838d7d-2e65-4ca8-b29d-9dd9d4a3436c
+        region: first
+        configuration:
+          id: 'views_block:db_groups_never_updated-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 0
+        additional: {  }
+    third_party_settings: {  }
+  -
+    layout_id: layout_3
+    layout_settings:
+      label: ''
+      context_mapping: {  }
+      reverse: 0
+    components: {  }
+    third_party_settings: {  }
