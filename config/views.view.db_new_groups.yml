@@ -564,7 +564,7 @@ display:
       defaults:
         pager: false
       display_extenders: {  }
-      path: admin/content/reports/groups-never-updated
+      path: admin/content/reports/new-groups
       menu:
         type: tab
         title: 'New groups'
