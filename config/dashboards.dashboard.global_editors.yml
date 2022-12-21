@@ -197,6 +197,19 @@ sections:
           items_per_page: none
         weight: 7
         additional: {  }
+      174969fd-5ba9-4898-8182-248f6300f8f2:
+        uuid: 174969fd-5ba9-4898-8182-248f6300f8f2
+        region: second
+        configuration:
+          id: 'views_block:db_links-block_3'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 8
+        additional: {  }
     third_party_settings: {  }
   -
     layout_id: layout_3
