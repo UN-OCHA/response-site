@@ -18,7 +18,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Used paragraph types'
+      title: 'Used paragraph types on groups'
       fields:
         label:
           id: label
@@ -594,7 +594,7 @@ display:
       defaults:
         pager: false
       display_extenders: {  }
-      path: admin/content/reports/used-paragraphs
+      path: admin/content/reports/used-paragraphs-groups
       menu:
         type: tab
         title: 'Used paragraph types'

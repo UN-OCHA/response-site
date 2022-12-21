@@ -53,6 +53,7 @@
         "drupal/jquery_ui_dialog": "^1.0",
         "drupal/layout_paragraphs": "^2.0@beta",
         "drupal/link_allowed_hosts": "^1.0@beta",
+        "drupal/linkchecker": "^1.0@beta",
         "drupal/maintenance200": "^1.1",
         "drupal/masquerade": "^2.0@beta",
         "drupal/memcache": "^2.3",

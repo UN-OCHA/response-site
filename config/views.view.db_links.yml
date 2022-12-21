@@ -1,45 +1,300 @@
-uuid: 8bd05ad8-108e-406d-b65e-aaee2a277622
+uuid: 465938ee-6dda-4350-b359-cc062437f2b0
 langcode: en
 status: true
 dependencies:
-  config:
-    - field.storage.group_content.group_roles
   module:
-    - csv_serialization
-    - group
-    - rest
-    - serialization
-    - user
-    - views_data_export
-_core:
-  default_config_hash: zIcnLmbW8inPRIQdPSVbKPuG2o5G5wHGJED4Jlgb2SY
-id: group_members
-label: 'Group members'
-module: group
+    - dynamic_entity_reference
+    - linkchecker
+id: db_links
+label: 'DB Links'
+module: views
 description: ''
 tag: ''
-base_table: group_content_field_data
-base_field: id
+base_table: linkchecker_link
+base_field: lid
 display:
   default:
     id: default
-    display_title: Master
+    display_title: Default
     display_plugin: default
     position: 0
     display_options:
-      title: Members
+      title: 'Dead Links'
       fields:
-        name:
-          id: name
-          table: users_field_data
-          field: name
-          relationship: gc__user
+        url:
+          id: url
+          table: linkchecker_link
+          field: url
+          relationship: none
           group_type: group
           admin_label: ''
-          entity_type: user
-          entity_field: name
+          entity_type: linkcheckerlink
+          entity_field: url
           plugin_id: field
-          label: User
+          label: URL
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 80
+            word_boundary: false
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: true
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        code:
+          id: code
+          table: linkchecker_link
+          field: code
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: linkcheckerlink
+          entity_field: code
+          plugin_id: field
+          label: 'Status code'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        last_check:
+          id: last_check
+          table: linkchecker_link
+          field: last_check
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: linkcheckerlink
+          entity_field: last_check
+          plugin_id: field
+          label: 'Last checked'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: medium
+            custom_date_format: ''
+            timezone: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        fail_count:
+          id: fail_count
+          table: linkchecker_link
+          field: fail_count
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: linkcheckerlink
+          entity_field: fail_count
+          plugin_id: field
+          label: 'Fail count'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        entity_field:
+          id: entity_field
+          table: linkchecker_link
+          field: entity_field
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: linkcheckerlink
+          entity_field: entity_field
+          plugin_id: field
+          label: 'Entity field'
           exclude: false
           alter:
             alter_text: false
@@ -82,8 +337,7 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: string
-          settings:
-            link_to_entity: true
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -94,15 +348,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        group_roles:
-          id: group_roles
-          table: group_content__group_roles
-          field: group_roles
+        entity_id__target_id:
+          id: entity_id__target_id
+          table: linkchecker_link
+          field: entity_id__target_id
           relationship: none
           group_type: group
           admin_label: ''
+          entity_type: linkcheckerlink
+          entity_field: entity_id
           plugin_id: field
-          label: Roles
+          label: 'Entity id'
           exclude: false
           alter:
             alter_text: false
@@ -139,82 +395,15 @@ display:
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
-          empty: '<div class="item-list"><ul><li>&lt;none&gt;</li></ul></div>'
+          empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: entity_reference_label
+          type: dynamic_entity_reference_label
           settings:
-            link: false
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: ul
-          separator: ', '
-          field_api_classes: false
-        changed:
-          id: changed
-          table: group_content_field_data
-          field: changed
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: group_content
-          entity_field: changed
-          plugin_id: field
-          label: Updated
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp
-          settings:
-            date_format: short
-            custom_date_format: ''
-            timezone: ''
-          group_column: value
+            link: true
+          group_column: ''
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -224,17 +413,16 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        created:
-          id: created
-          table: group_content_field_data
-          field: created
+        linkcheckerlink_page_entity_label:
+          id: linkcheckerlink_page_entity_label
+          table: linkchecker_link
+          field: linkcheckerlink_page_entity_label
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: group_content
-          entity_field: created
-          plugin_id: field
-          label: Joined
+          entity_type: linkcheckerlink
+          plugin_id: linkcheckerlink_page_entity_label
+          label: Page
           exclude: false
           alter:
             alter_text: false
@@ -275,247 +463,17 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp
-          settings:
-            date_format: short
-            custom_date_format: ''
-            timezone: ''
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        view_group_content:
-          id: view_group_content
-          table: group_content
-          field: view_group_content
-          relationship: none
-          group_type: group
-          admin_label: 'View member link'
-          entity_type: group_content
-          plugin_id: entity_link
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: 'View member'
-          output_url_as_text: false
-          absolute: false
-        edit_group_content:
-          id: edit_group_content
-          table: group_content
-          field: edit_group_content
-          relationship: none
-          group_type: group
-          admin_label: 'Edit member link'
-          entity_type: group_content
-          plugin_id: entity_link_edit
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: 'Edit member'
-        delete_group_content:
-          id: delete_group_content
-          table: group_content
-          field: delete_group_content
-          relationship: none
-          group_type: group
-          admin_label: 'Remove member link'
-          entity_type: group_content
-          plugin_id: entity_link_delete
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: 'Remove member'
-        dropbutton:
-          id: dropbutton
-          table: views
-          field: dropbutton
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: dropbutton
-          label: Operations
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          destination: true
-          fields:
-            view_group_content: view_group_content
-            edit_group_content: edit_group_content
-            delete_group_content: delete_group_content
-            name: '0'
-            group_roles: '0'
-            changed: '0'
-            created: '0'
+          link_to_entity: 1
       pager:
-        type: full
+        type: mini
         options:
           offset: 0
-          items_per_page: 50
+          items_per_page: 10
           total_pages: null
           id: 0
           tags:
             next: ››
             previous: ‹‹
-            first: '« First'
-            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -524,7 +482,6 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          quantity: 9
       exposed_form:
         type: basic
         options:
@@ -536,64 +493,74 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: group_permission
-        options:
-          group_permission: 'view group_membership content'
+        type: none
+        options: {  }
       cache:
         type: tag
         options: {  }
-      empty:
-        area_text_custom:
-          id: area_text_custom
-          table: views
-          field: area_text_custom
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: text_custom
-          empty: true
-          content: 'No members available.'
-          tokenize: false
+      empty: {  }
       sorts: {  }
-      arguments:
-        gid:
-          id: gid
-          table: group_content_field_data
-          field: gid
+      arguments: {  }
+      filters:
+        status:
+          id: status
+          table: linkchecker_link
+          field: status
+          entity_type: linkcheckerlink
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        code:
+          id: code
+          table: linkchecker_link
+          field: code
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: group_content
-          entity_field: gid
+          entity_type: linkcheckerlink
+          entity_field: code
           plugin_id: numeric
-          default_action: 'access denied'
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: true
-          title: '{{ arguments.gid|placeholder }} members'
-          default_argument_type: fixed
-          default_argument_options:
-            argument: ''
-          default_argument_skip_url: false
-          summary_options:
-            base_path: ''
-            count: true
-            override: false
-            items_per_page: 25
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: false
-          validate:
-            type: none
-            fail: 'not found'
-          validate_options: {  }
-          break_phrase: false
-          not: false
-      filters: {  }
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: '400'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       style:
         type: table
         options:
@@ -601,83 +568,72 @@ display:
           row_class: ''
           default_row_class: true
           columns:
-            name: name
-            group_roles: group_roles
-            changed: changed
-            created: created
-            view_group_content: view_group_content
-            edit_group_content: edit_group_content
-            delete_group_content: delete_group_content
-            dropbutton: dropbutton
+            url: url
+            code: code
+            last_check: last_check
+            fail_count: fail_count
+            entity_field: entity_field
+            entity_id__target_id: entity_id__target_id
+            linkcheckerlink_page_entity_label: linkcheckerlink_page_entity_label
           default: '-1'
           info:
-            name:
+            url:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            group_roles:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            changed:
+            code:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            created:
+            last_check:
               sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            view_group_content:
+            fail_count:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            entity_field:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            edit_group_content:
+            entity_id__target_id:
               sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
-            delete_group_content:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            dropbutton:
-              sortable: false
+            linkcheckerlink_page_entity_label:
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
               responsive: ''
           override: true
-          sticky: true
+          sticky: false
           summary: ''
-          empty_table: true
+          empty_table: false
           caption: ''
           description: ''
       row:
         type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
       query:
         type: views_query
         options:
@@ -686,19 +642,13 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      relationships:
-        gc__user:
-          id: gc__user
-          table: group_content_field_data
-          field: gc__user
-          relationship: none
-          group_type: group
-          admin_label: 'Member account'
-          entity_type: group_content
-          plugin_id: group_content_to_entity
-          required: true
-          group_content_plugins:
-            group_membership: group_membership
+      relationships: {  }
+      use_ajax: true
+      use_more: true
+      use_more_always: true
+      use_more_text: more
+      link_display: page_1
+      link_url: ''
       header: {  }
       footer: {  }
       display_extenders: {  }
@@ -707,135 +657,215 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - route.group
-        - url
         - url.query_args
-        - user.group_permissions
-      tags:
-        - 'config:field.storage.group_content.group_roles'
-  data_export_1:
-    id: data_export_1
-    display_title: 'Data export'
-    display_plugin: data_export
-    position: 2
+      tags: {  }
+  block_1:
+    id: block_1
+    display_title: Block
+    display_plugin: block
+    position: 1
     display_options:
-      fields:
-        name:
-          id: name
-          table: users_field_data
-          field: name
-          relationship: gc__user
-          group_type: group
-          admin_label: ''
-          entity_type: user
-          entity_field: name
-          plugin_id: field
-          label: User
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: user_name
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-      style:
-        type: data_export
-        options:
-          formats:
-            csv: csv
-          csv_settings:
-            delimiter: ','
-            enclosure: '"'
-            escape_char: \
-            strip_tags: true
-            trim: true
-            encoding: utf8
-            utf8_bom: '0'
-            use_serializer_encode_only: false
-      defaults:
-        fields: false
       display_extenders: {  }
-      path: group/%group/members.csv
-      displays:
-        page_1: page_1
-        default: '0'
-      filename: members.csv
-      automatic_download: true
-      store_in_public_file_directory: null
-      custom_redirect_path: false
-      redirect_to_display: page_1
-      include_query_params: false
+      block_category: 'Dashboards: Response'
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - request_format
-        - route.group
-        - url
-        - user.group_permissions
+        - url.query_args
+      tags: {  }
+  block_2:
+    id: block_2
+    display_title: Block
+    display_plugin: block
+    position: 1
+    display_options:
+      title: Redirects
+      filters:
+        status:
+          id: status
+          table: linkchecker_link
+          field: status
+          entity_type: linkcheckerlink
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        code:
+          id: code
+          table: linkchecker_link
+          field: code
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: linkcheckerlink
+          entity_field: code
+          plugin_id: numeric
+          operator: between
+          value:
+            min: '300'
+            max: '399'
+            value: '400'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        title: false
+        filters: false
+        filter_groups: false
+      display_extenders: {  }
+      block_category: 'Dashboards: Response'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url.query_args
       tags: {  }
   page_1:
     id: page_1
     display_title: Page
     display_plugin: page
-    position: 1
+    position: 3
     display_options:
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 50
+          total_pages: null
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      filters:
+        status:
+          id: status
+          table: linkchecker_link
+          field: status
+          entity_type: linkcheckerlink
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+        code:
+          id: code
+          table: linkchecker_link
+          field: code
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: linkcheckerlink
+          entity_field: code
+          plugin_id: numeric
+          operator: '>='
+          value:
+            min: ''
+            max: ''
+            value: '300'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        pager: false
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+        filters: false
+        filter_groups: false
+      use_more: false
+      use_more_always: true
+      use_more_text: more
       display_extenders: {  }
-      path: group/%group/members
+      path: admin/content/reports/links
       menu:
         type: tab
-        title: Members
+        title: Links
         description: ''
-        weight: 20
-        enabled: true
+        weight: 0
         expanded: false
         menu_name: main
         parent: ''
@@ -845,9 +875,5 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - route.group
-        - url
         - url.query_args
-        - user.group_permissions
-      tags:
-        - 'config:field.storage.group_content.group_roles'
+      tags: {  }

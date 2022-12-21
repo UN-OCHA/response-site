@@ -145,6 +145,58 @@ sections:
           items_per_page: none
         weight: 5
         additional: {  }
+      2f03e7df-0f45-4932-84c8-a6fed88e8d1a:
+        uuid: 2f03e7df-0f45-4932-84c8-a6fed88e8d1a
+        region: first
+        configuration:
+          id: 'views_block:db_used_paragraphs_on_pages-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 5
+        additional: {  }
+      1234ab4f-eb2d-4b6a-aa42-29923200b6d7:
+        uuid: 1234ab4f-eb2d-4b6a-aa42-29923200b6d7
+        region: second
+        configuration:
+          id: 'views_block:db_translated_pages-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 6
+        additional: {  }
+      3d330f07-9cee-4a8e-af37-f75865c916fb:
+        uuid: 3d330f07-9cee-4a8e-af37-f75865c916fb
+        region: first
+        configuration:
+          id: 'views_block:db_links-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 6
+        additional: {  }
+      d80ef7d8-c942-4a7f-8f10-153fd662c792:
+        uuid: d80ef7d8-c942-4a7f-8f10-153fd662c792
+        region: second
+        configuration:
+          id: 'views_block:db_links-block_2'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 7
+        additional: {  }
     third_party_settings: {  }
   -
     layout_id: layout_3
