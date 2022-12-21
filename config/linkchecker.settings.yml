@@ -30,6 +30,7 @@ check:
     example.com
     example.net
     example.org
+    dev.response-reliefweb-int.ahconu.org
   library: core
   interval: 2419200
   useragent: 'Drupal (+https://drupal.org/)'
