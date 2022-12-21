@@ -330,6 +330,11 @@ function hr_paragraphs_group_add_member(EntityInterface $entity) {
       '@uid' => $member->id(),
     ]);
   }
+  else {
+    // Save member so manager_for gets updated.
+    // @see hr_paragraphs_user_presave()
+    $member->save();
+  }
 }
 
 /**
