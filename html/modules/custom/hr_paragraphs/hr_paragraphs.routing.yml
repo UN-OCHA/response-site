@@ -113,3 +113,11 @@ hr_paragraphs.unmasquerade:
     _title: 'Unmasquerade'
   requirements:
     _custom_access: 'access_check.masquerade.unmasquerade:access'
+
+hr_paragraphs.dashboards:
+  path: '/admin/content/reports'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Reports'
+  requirements:
+    _permission: 'can view global_editors dashboard'
