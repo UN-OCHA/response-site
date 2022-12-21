@@ -278,3 +278,11 @@ function hr_paragraphs_update_9012(&$sandbox) {
     $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
   }
 }
+
+/**
+ * Hide fields on display.
+ */
+function hr_paragraphs_update_9013() {
+  hr_paragraphs_update_9007();
+  hr_paragraphs_update_9011();
+}

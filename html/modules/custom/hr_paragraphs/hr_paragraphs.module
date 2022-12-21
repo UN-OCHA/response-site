@@ -1959,24 +1959,14 @@ function hr_paragraphs_custom_group_fields() {
     ->setLabel(t('Enabled tabs'))
     ->setDescription(t('Enabled and active tabs'))
     ->setRevisionable(TRUE)
-    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
-    ->setDisplayOptions('view', [
-      'label' => 'above',
-      'weight' => -5,
-    ]
-  );
+    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
 
   // Used paragraph types.
   $fields['used_paragraphs'] = BaseFieldDefinition::create('string')
     ->setLabel(t('Used paragraphs'))
     ->setDescription(t('List of paragraph types in use'))
     ->setRevisionable(TRUE)
-    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
-    ->setDisplayOptions('view', [
-      'label' => 'above',
-      'weight' => -5,
-    ]
-  );
+    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
 
   return $fields;
 }
@@ -2017,12 +2007,7 @@ function hr_paragraphs_custom_node_fields() {
     ->setLabel(t('Used paragraphs'))
     ->setDescription(t('List of paragraph types in use'))
     ->setRevisionable(TRUE)
-    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
-    ->setDisplayOptions('view', [
-      'label' => 'above',
-      'weight' => -5,
-    ]
-  );
+    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
 
   return $fields;
 }
