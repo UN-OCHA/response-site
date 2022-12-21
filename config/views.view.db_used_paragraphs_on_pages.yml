@@ -1,16 +1,18 @@
-uuid: 62ce42ab-68f1-4237-b39e-deea4ea90609
+uuid: 63f8c62f-787e-4b2d-bf93-b015e38b31a6
 langcode: en
 status: true
 dependencies:
   module:
+    - group
+    - node
     - user
-id: db_group_managers
-label: 'DB Group Managers'
+id: db_used_paragraphs_on_pages
+label: 'DB used paragraphs on pages'
 module: views
 description: ''
 tag: ''
-base_table: users_field_data
-base_field: uid
+base_table: node_field_data
+base_field: nid
 display:
   default:
     id: default
@@ -18,84 +20,19 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Group Managers'
+      title: 'Used paragraphs on pages'
       fields:
-        name:
-          id: name
-          table: users_field_data
-          field: name
-          relationship: none
+        gid:
+          id: gid
+          table: group_content_field_data
+          field: gid
+          relationship: group_content
           group_type: group
           admin_label: ''
-          entity_type: user
-          entity_field: name
+          entity_type: group_content
+          entity_field: gid
           plugin_id: field
-          label: Name
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: false
-            ellipsis: false
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        manager_for_target_id:
-          id: manager_for_target_id
-          table: user__manager_for
-          field: manager_for_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: user
-          entity_field: manager_for
-          plugin_id: field
-          label: 'Manager of'
+          label: 'Operation / Cluster or Working Group'
           exclude: false
           alter:
             alter_text: false
@@ -150,6 +87,185 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: field
+          label: Title
+          exclude: false
+          alter:
+            alter_text: false
+            make_link: false
+            absolute: false
+            word_boundary: false
+            ellipsis: false
+            strip_tags: false
+            trim: false
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        used_paragraphs_value:
+          id: used_paragraphs_value
+          table: node__used_paragraphs
+          field: used_paragraphs_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: used_paragraphs
+          plugin_id: field
+          label: 'Used paragraphs'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        changed:
+          id: changed
+          table: node_field_data
+          field: changed
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: changed
+          plugin_id: field
+          label: Changed
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: medium
+            custom_date_format: ''
+            timezone: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
       pager:
         type: mini
         options:
@@ -158,8 +274,8 @@ display:
           total_pages: null
           id: 0
           tags:
-            next: 'Next ›'
-            previous: '‹ Previous'
+            next: ››
+            previous: ‹‹
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -181,34 +297,35 @@ display:
       access:
         type: perm
         options:
-          perm: 'access user profiles'
+          perm: 'access content'
       cache:
         type: tag
         options: {  }
       empty: {  }
       sorts:
-        name:
-          id: name
-          table: users_field_data
-          field: name
+        created:
+          id: created
+          table: node_field_data
+          field: created
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: user
-          entity_field: name
-          plugin_id: standard
-          order: ASC
+          entity_type: node
+          entity_field: created
+          plugin_id: date
+          order: DESC
           expose:
             label: ''
             field_identifier: ''
           exposed: false
+          granularity: second
       arguments: {  }
       filters:
         status:
           id: status
-          table: users_field_data
+          table: node_field_data
           field: status
-          entity_type: user
+          entity_type: node
           entity_field: status
           plugin_id: boolean
           value: '1'
@@ -217,29 +334,29 @@ display:
             operator: ''
             operator_limit_selection: false
             operator_list: {  }
-        name:
-          id: name
-          table: users_field_data
-          field: name
+        title:
+          id: title
+          table: node_field_data
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
-          entity_type: user
-          entity_field: name
+          entity_type: node
+          entity_field: title
           plugin_id: string
           operator: contains
           value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: name_op
-            label: Name
+            operator_id: title_op
+            label: Title
             description: ''
             use_operator: false
-            operator: name_op
+            operator: title_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: name
+            identifier: title
             required: false
             remember: false
             multiple: false
@@ -261,54 +378,51 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        manager_for_target_id:
-          id: manager_for_target_id
-          table: user__manager_for
-          field: manager_for_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: user
-          entity_field: manager_for
-          plugin_id: numeric
-          operator: '>'
-          value:
-            min: ''
-            max: ''
-            value: '0'
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
       style:
         type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          columns:
+            gid: gid
+            title: title
+            used_paragraphs_value: used_paragraphs_value
+            changed: changed
+          default: '-1'
+          info:
+            gid:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            title:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            used_paragraphs_value:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            changed:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          override: true
+          sticky: false
+          summary: ''
+          empty_table: false
+          caption: ''
+          description: ''
       row:
         type: fields
       query:
@@ -316,17 +430,40 @@ display:
         options:
           query_comment: ''
           disable_sql_rewrite: false
-          distinct: true
+          distinct: false
           replica: false
           query_tags: {  }
-      relationships: {  }
+      relationships:
+        group_content:
+          id: group_content
+          table: node_field_data
+          field: group_content
+          relationship: none
+          group_type: group
+          admin_label: 'Content group content'
+          entity_type: node
+          plugin_id: group_content_to_entity_reverse
+          required: false
+          group_content_plugins:
+            'group_node:landing_page': '0'
+            'group_node:page': '0'
       use_ajax: true
       use_more: true
       use_more_always: true
       use_more_text: more
       link_display: page_1
       link_url: ''
-      header: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Displaying @start - @end of @total'
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -336,6 +473,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
         - user.permissions
       tags: {  }
   block_1:
@@ -344,22 +482,7 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      display_extenders:
-        views_merge_rows:
-          merge_rows: false
-          field_config:
-            name:
-              merge_option: filter
-              exclude_first: false
-              prefix: ''
-              separator: ', '
-              suffix: ''
-            gid:
-              merge_option: merge_unique
-              exclude_first: false
-              prefix: ''
-              separator: ', '
-              suffix: ''
+      display_extenders: {  }
       block_category: 'Dashboards: Response'
     cache_metadata:
       max-age: -1
@@ -368,6 +491,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
         - user.permissions
       tags: {  }
   page_1:
@@ -384,8 +508,8 @@ display:
           total_pages: null
           id: 0
           tags:
-            next: 'Next ›'
-            previous: '‹ Previous'
+            next: ››
+            previous: ‹‹
             first: '« First'
             last: 'Last »'
           expose:
@@ -405,26 +529,11 @@ display:
       use_more: false
       use_more_always: true
       use_more_text: more
-      display_extenders:
-        views_merge_rows:
-          merge_rows: false
-          field_config:
-            name:
-              merge_option: filter
-              exclude_first: false
-              prefix: ''
-              separator: ', '
-              suffix: ''
-            gid:
-              merge_option: merge
-              exclude_first: false
-              prefix: ''
-              separator: ', '
-              suffix: ''
-      path: admin/content/reports/group-managers
+      display_extenders: {  }
+      path: admin/content/reports/used-paragraphs-pages
       menu:
         type: tab
-        title: 'Group Managers'
+        title: 'Used paragraph types on pages'
         description: ''
         weight: 0
         expanded: false
@@ -438,5 +547,6 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
         - user.permissions
       tags: {  }

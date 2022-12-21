@@ -1935,12 +1935,16 @@ function hr_paragraphs_form_views_exposed_form_alter(&$form, $form_state, $form_
  * Implements hook_entity_base_field_info().
  */
 function hr_paragraphs_entity_base_field_info(EntityTypeInterface $entity_type) {
-  if ($entity_type->id() === 'group') {
-    return hr_paragraphs_custom_group_fields();
-  }
+  switch ($entity_type->id()) {
+    case 'group':
+      return hr_paragraphs_custom_group_fields();
 
-  if ($entity_type->id() === 'user') {
-    return hr_paragraphs_custom_user_fields();
+    case 'user':
+      return hr_paragraphs_custom_user_fields();
+
+    case 'node':
+      return hr_paragraphs_custom_node_fields();
+
   }
 }
 
@@ -1993,6 +1997,27 @@ function hr_paragraphs_custom_user_fields() {
       'target_type' => 'group',
       'default_value' => 0,
     ])
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => -5,
+    ]
+  );
+
+  return $fields;
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function hr_paragraphs_custom_node_fields() {
+  $fields = [];
+
+  // Used paragraph types.
+  $fields['used_paragraphs'] = BaseFieldDefinition::create('string')
+    ->setLabel(t('Used paragraphs'))
+    ->setDescription(t('List of paragraph types in use'))
+    ->setRevisionable(TRUE)
+    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
     ->setDisplayOptions('view', [
       'label' => 'above',
       'weight' => -5,
@@ -2124,6 +2149,63 @@ function hr_paragraphs_user_presave(EntityInterface $entity) {
     $original = $entity->original;
     if (!$entity->isNew() && $original) {
       $original_value = $original->get('changed')->value;
+      $entity->set('changed', $original_value);
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function hr_paragraphs_node_presave(EntityInterface $entity) {
+  // Store used paragraphs.
+  $used_paragraphs = [];
+  if ($entity->hasField('field_paragraphs') && !$entity->field_paragraphs->isEmpty()) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+    $paragraphs = $entity->field_paragraphs->referencedEntities();
+    foreach ($paragraphs as $paragraph) {
+      if (!isset($used_paragraphs[$paragraph->bundle()])) {
+        $used_paragraphs[$paragraph->bundle()] = [
+          'label' => $paragraph->getParagraphType()->label(),
+          'count' => 1,
+        ];
+      }
+      else {
+        $used_paragraphs[$paragraph->bundle()]['count']++;
+      }
+    }
+  }
+
+  if ($entity->hasField('field_paragraphs_secondary') && !$entity->field_paragraphs_secondary->isEmpty()) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+    $paragraphs = $entity->field_paragraphs_secondary->referencedEntities();
+    foreach ($paragraphs as $paragraph) {
+      if (!isset($used_paragraphs[$paragraph->bundle()])) {
+        $used_paragraphs[$paragraph->bundle()] = [
+          'label' => $paragraph->getParagraphType()->label(),
+          'count' => 1,
+        ];
+      }
+      else {
+        $used_paragraphs[$paragraph->bundle()]['count']++;
+      }
+    }
+  }
+
+  $formatted = [];
+  foreach ($used_paragraphs as $used_paragraph) {
+    $formatted[] = $used_paragraph['label'] . ' (' . $used_paragraph['count'] . ')';
+  }
+  sort($formatted);
+  $entity->set('used_paragraphs', $formatted);
+
+  // Revert changed time during update.
+  if ($entity->isMigrating) {
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $original */
+    $original = $entity->original;
+    $langcode = $entity->language()->getId();
+    if (!$entity->isNew() && $original && $original->hasTranslation($langcode)) {
+      $original_value = $original->getTranslation($langcode)->get('changed')->value;
       $entity->set('changed', $original_value);
     }
   }
