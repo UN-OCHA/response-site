@@ -17,11 +17,11 @@
             "https://www.drupal.org/project/group/issues/3210808": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch"
         },
         "drupal/layout_paragraphs" : {
-            "Async translation - https://www.drupal.org/project/layout_paragraphs/issues/3178277": "./PATCHES/3178277-6.patch"
+            "Async translation - https://www.drupal.org/project/layout_paragraphs/issues/3178277": "./PATCHES/layout-paragraphs-translations-14.patch"
         },
         "drupal/user_expire": {
             "Allow the notification email to be customised": "https://git.drupalcode.org/project/user_expire/-/merge_requests/5.diff",
-            "Reset expiration when user is reactivated": "https://git.drupalcode.org/project/user_expire/-/merge_requests/6.diff"
+             "Reset expiration when user is reactivated": "https://git.drupalcode.org/project/user_expire/-/merge_requests/6.diff"
         }
     }
 }

@@ -14,7 +14,8 @@ WORKDIR /srv/www
 RUN rm -rf ./vendor && \
     # Update composer to avoid issues with missing drupal files.
     # @see https://github.com/drupal-composer/drupal-project/issues/282
-    composer install --no-interaction
+    composer --version && \
+    composer install --no-interaction --no-dev
 
 # Copy settings to default site location.
 RUN cp -a docker/settings.php docker/services.yml docker/memcache.services.yml html/sites/default
