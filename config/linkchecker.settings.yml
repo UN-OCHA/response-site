@@ -33,11 +33,11 @@ check:
     dev.response-reliefweb-int.ahconu.org
   library: core
   interval: 2419200
-  useragent: 'Drupal (+https://drupal.org/)'
+  useragent: 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'
 error:
-  action_status_code_301: 0
+  action_status_code_301: 1
   action_status_code_404: 0
   ignore_response_codes: "200\r\n206\r\n302\r\n304\r\n401\r\n403"
-  impersonate_account: 6xKizrR6haxXZJWD
+  impersonate_account: '1'
 logging:
   level: 6
