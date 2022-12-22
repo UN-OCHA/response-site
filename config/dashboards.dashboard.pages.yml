@@ -1,0 +1,43 @@
+uuid: 5ed1eb3a-0720-46fe-a7fe-13a7fcee81ad
+langcode: en
+status: true
+dependencies: {  }
+id: pages
+admin_label: Pages
+category: ''
+frontend: false
+weight: 0
+sections:
+  -
+    layout_id: layout_onecol
+    layout_settings:
+      label: ''
+      context_mapping: {  }
+    components:
+      3fa9c8b5-804d-4f05-86af-5b67c0e88771:
+        uuid: 3fa9c8b5-804d-4f05-86af-5b67c0e88771
+        region: content
+        configuration:
+          id: 'views_block:db_translated_pages-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 0
+        additional: {  }
+      70e0dcac-efea-436a-9986-f89815634ed6:
+        uuid: 70e0dcac-efea-436a-9986-f89815634ed6
+        region: content
+        configuration:
+          id: 'views_block:db_used_paragraphs_on_pages-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 1
+        additional: {  }
+    third_party_settings: {  }
