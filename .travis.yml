@@ -39,7 +39,7 @@ script:
   - sleep 10
 
   # Install the dev dependencies.
-  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -T exec drupal composer install
+  - docker-compose -p response-test -f tests/docker-compose.yml -w /srv/www -T exec drupal composer install
 
   # Ensure the drupal coding standards config is installed.
   # - docker exec -it -u appuser -w /srv/www response-test-site ./vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer
