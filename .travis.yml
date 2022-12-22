@@ -39,7 +39,8 @@ script:
   - sleep 10
 
   # Install the dev dependencies.
-  - docker exec -it -w /srv/www response-test-site composer install
+  # Remove temporarily as breaking build and unnecessary: OPS-8951.
+  # - docker exec -it -w /srv/www response-test-site composer install
 
   # Ensure the drupal coding standards config is installed.
   # - docker exec -it -u appuser -w /srv/www response-test-site ./vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer
