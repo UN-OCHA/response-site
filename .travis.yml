@@ -39,31 +39,31 @@ script:
   - sleep 10
 
   # Install the dev dependencies.
-  - docker exec -it -w /srv/www response-test-site composer install
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -T drupal composer install
 
   # Ensure the drupal coding standards config is installed.
   # - docker exec -it -u appuser -w /srv/www response-test-site ./vendor/bin/phpcs --config-set installed_paths vendor/drupal/coder/coder_sniffer
 
   # Check coding standards.
-  - docker exec -it -u appuser -w /srv/www response-test-site ./vendor/bin/phpcs -p --report=full ./html/modules/custom ./html/themes/custom
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -T drupal ./vendor/bin/phpcs -p --report=full ./html/modules/custom ./html/themes/custom
 
   # Run unit tests.
-  - docker exec -it -u root -w /srv/www response-test-site mkdir -p /srv/www/html/sites/default/files/browser_output
-  - docker exec -it -u root -w /srv/www -e BROWSERTEST_OUTPUT_DIRECTORY=/srv/www/html/sites/default/files/browser_output response-test-site ./vendor/bin/phpunit --testsuite Unit --debug
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -T drupal mkdir -p /srv/www/html/sites/default/files/browser_output
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -e BROWSERTEST_OUTPUT_DIRECTORY=/srv/www/html/sites/default/files/browser_output -T drupal ./vendor/bin/phpunit --testsuite Unit --debug
 
   # Install the site with the existing config.
-  - docker exec -it response-test-site drush -y si --existing-config
-  - docker exec -it response-test-site drush -y en dblog
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -T drupal drush -y si --existing-config
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -T drupal drush -y en dblog
 
   # Ensure the file directories are writable.
-  - docker exec -it response-test-site chmod -R 777 /srv/www/html/sites/default/files /srv/www/html/sites/default/private
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -T drupal chmod -R 777 /srv/www/html/sites/default/files /srv/www/html/sites/default/private
 
   # Create the build logs directory and make sure it's writable.
-  - docker exec -it -u root response-test-site mkdir -p /srv/www/html/build/logs
-  - docker exec -it -u root response-test-site chmod -R 777 /srv/www/html/build/logs
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -T drupal mkdir -p /srv/www/html/build/logs
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -T drupal chmod -R 777 /srv/www/html/build/logs
 
   # Run all tests and generate coverage report.
-  - docker exec -it -u root -w /srv/www -e XDEBUG_MODE=coverage -e BROWSERTEST_OUTPUT_DIRECTORY=/srv/www/html/sites/default/files/browser_output -e DTT_BASE_URL=http://127.0.0.1 response-test-site ./vendor/bin/phpunit --coverage-clover /srv/www/html/build/logs/clover.xml --debug
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -e XDEBUG_MODE=coverage -e BROWSERTEST_OUTPUT_DIRECTORY=/srv/www/html/sites/default/files/browser_output -e DTT_BASE_URL=http://127.0.0.1 -T drupal ./vendor/bin/phpunit --coverage-clover /srv/www/html/build/logs/clover.xml --debug
 
 after_success:
   - echo "The tests completed without errors."
@@ -80,4 +80,4 @@ after_success:
 
 after_failure:
   - echo "The tests failed. Please check the output above for problems."
-  - docker exec -it response-test-site drush watchdog:show --count=50 --extended
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -T drupal drush watchdog:show --count=50 --extended
