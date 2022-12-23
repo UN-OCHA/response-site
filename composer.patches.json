@@ -1,27 +1,29 @@
 {
     "patches": {
         "drupal/core" : {
-            "https://www.drupal.org/project/drupal/issues/2544110": "https://www.drupal.org/files/issues/2021-02-11/2544110-100.patch",
             "https://www.drupal.org/project/drupal/issues/3143617": "https://www.drupal.org/files/issues/2020-07-07/3143617-28_0.patch",
             "Include database SSL/TLS info on status report": "./PATCHES/mysql-ssl-status.patch"
         },
         "drupal/csp": {
             "Simplify log format": "PATCHES/csp-log-format.patch"
         },
-        "drupal/environment_indicator": {
-            "getTitle() in Toolbar Handler returns null value, crashes site - https://www.drupal.org/project/environment_indicator/issues/3324429": "https://www.drupal.org/files/issues/2022-12-08/3324429-16.patch"
-        },
         "drupal/group": {
             "https://www.drupal.org/project/subgroup/issues/3163044#comment-14499262": "https://www.drupal.org/files/issues/2022-05-04/i3278723.patch",
             "https://www.drupal.org/project/group/issues/3305840": "https://www.drupal.org/files/issues/2022-08-25/group-3294949-2.patch",
-            "https://www.drupal.org/project/group/issues/3210808": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch"
+            "https://www.drupal.org/project/group/issues/3210808": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch",
+            "https://www.drupal.org/project/group/issues/3212608 - views data export": "https://www.drupal.org/files/issues/2022-10-19/3212608-5_0.patch"
         },
         "drupal/layout_paragraphs" : {
             "Async translation - https://www.drupal.org/project/layout_paragraphs/issues/3178277": "./PATCHES/layout-paragraphs-translations-14.patch"
         },
+        "drupal/linkchecker": {
+          "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743": "https://git.drupalcode.org/project/linkchecker/-/merge_requests/34.diff",
+          "Do not break admin denied": "./PATCHES/linkchecker_use_uid.patch",
+          "Avoid null links": "./PATCHES/linkchecker_null_link.patch"
+        },
         "drupal/user_expire": {
-            "Allow the notification email to be customised": "https://git.drupalcode.org/project/user_expire/-/merge_requests/5.diff",
-             "Reset expiration when user is reactivated": "https://git.drupalcode.org/project/user_expire/-/merge_requests/6.diff"
+          "Allow the notification email to be customised": "https://git.drupalcode.org/project/user_expire/-/merge_requests/5.diff",
+          "Reset expiration when user is reactivated": "https://git.drupalcode.org/project/user_expire/-/merge_requests/6.diff"
         }
     }
 }

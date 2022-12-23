@@ -34,10 +34,10 @@ display:
           label: URL
           exclude: false
           alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
+            alter_text: true
+            text: '{{ url__value }} '
+            make_link: true
+            path: '{{ url__value }} '
             absolute: false
             external: false
             replace_spaces: false
@@ -73,7 +73,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: string
+          type: uri_link
           settings: {  }
           group_column: value
           group_columns: {  }
@@ -402,7 +402,7 @@ display:
           click_sort_column: target_id
           type: dynamic_entity_reference_label
           settings:
-            link: true
+            link: false
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -659,7 +659,17 @@ display:
       use_more_text: more
       link_display: page_1
       link_url: ''
-      header: {  }
+      header:
+        result:
+          id: result
+          table: views
+          field: result
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: result
+          empty: false
+          content: 'Displaying @start - @end of @total'
       footer: {  }
       display_extenders: {  }
     cache_metadata:
@@ -863,6 +873,55 @@ display:
         - 'languages:language_interface'
         - url.query_args
       tags: {  }
+  data_export_1:
+    id: data_export_1
+    display_title: 'Data export'
+    display_plugin: data_export
+    position: 3
+    display_options:
+      access:
+        type: perm
+        options:
+          perm: 'administer nodes'
+      style:
+        type: data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: true
+            trim: true
+            encoding: utf8
+            utf8_bom: '0'
+            use_serializer_encode_only: false
+      defaults:
+        access: false
+      display_extenders: {  }
+      path: admin/content/reports/links.csv
+      displays:
+        page_1: page_1
+        default: '0'
+        block_1: '0'
+      filename: links.csv
+      automatic_download: true
+      export_method: batch
+      export_batch_size: 100
+      store_in_public_file_directory: null
+      custom_redirect_path: false
+      redirect_to_display: page_1
+      include_query_params: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - request_format
+        - url
+        - user.permissions
+      tags: {  }
   page_1:
     id: page_1
     display_title: Page
@@ -890,6 +949,10 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
+      access:
+        type: perm
+        options:
+          perm: 'administer nodes'
       filters:
         status:
           id: status

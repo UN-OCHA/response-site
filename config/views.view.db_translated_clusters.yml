@@ -649,6 +649,55 @@ display:
         - url
         - url.query_args
       tags: {  }
+  data_export_1:
+    id: data_export_1
+    display_title: 'Data export'
+    display_plugin: data_export
+    position: 3
+    display_options:
+      access:
+        type: perm
+        options:
+          perm: 'administer nodes'
+      style:
+        type: data_export
+        options:
+          formats:
+            csv: csv
+          csv_settings:
+            delimiter: ','
+            enclosure: '"'
+            escape_char: \
+            strip_tags: true
+            trim: true
+            encoding: utf8
+            utf8_bom: '0'
+            use_serializer_encode_only: false
+      defaults:
+        access: false
+      display_extenders: {  }
+      path: admin/content/reports/translated-clusters.csv
+      displays:
+        page_1: page_1
+        default: '0'
+        block_1: '0'
+      filename: translated-clusters.csv
+      automatic_download: true
+      export_method: batch
+      export_batch_size: 100
+      store_in_public_file_directory: null
+      custom_redirect_path: false
+      redirect_to_display: page_1
+      include_query_params: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - request_format
+        - url
+        - user.permissions
+      tags: {  }
   page_1:
     id: page_1
     display_title: Page
@@ -676,6 +725,10 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
+      access:
+        type: perm
+        options:
+          perm: 'administer nodes'
       defaults:
         pager: false
         use_more: false
