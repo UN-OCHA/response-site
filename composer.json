@@ -72,6 +72,7 @@
         "drush/drush": "^11.0",
         "fullcalendar/fullcalendar": "^3.10.0",
         "galbar/jsonpath": "^2.0",
+        "guzzlehttp/guzzle": "7.5.0 as 6.5.8",
         "league/commonmark": "1.6",
         "mailchimp/marketing": "^3.0",
         "npm-asset/moment": "^2.29",
