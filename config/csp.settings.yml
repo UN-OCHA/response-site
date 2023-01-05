@@ -7,7 +7,7 @@ report-only:
       base: self
       sources:
         - www.google-analytics.com
-        - '*.analytics.google.com'
+        - analytics.google.com
     font-src:
       base: self
       sources:
