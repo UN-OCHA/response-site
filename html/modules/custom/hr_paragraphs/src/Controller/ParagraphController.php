@@ -407,12 +407,18 @@ class ParagraphController extends ControllerBase {
 
       $count = $results['count'];
       $this->pagerManager->createPager($count, $limit);
+      $data = $this->hdxController->buildHdxObjects($results);
+
+      if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
+        $first = reset($data['#data']);
+        hr_entity_freshness_write_date($group, $first['date_created'], 'hdx');
+      }
 
       return [
         '#theme' => 'river',
         '#service' => 'Humanitarian Data Exchange',
         '#service_url' => 'https://data.humdata.org',
-        '#data' => $this->hdxController->buildHdxObjects($results),
+        '#data' => $data,
         '#set_name' => $this->t('Data'),
         '#view_all' => $url,
         '#total' => $count,
@@ -485,6 +491,11 @@ class ParagraphController extends ControllerBase {
     $data = $this->getReliefwebDocuments($request, $group, $url);
     $data['#set_name'] = $this->t('Reports');
 
+    if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
+      $first = reset($data['#data']);
+      hr_entity_freshness_write_date($group, $first['date_created'], 'reports');
+    }
+
     return $data;
   }
 
@@ -525,6 +536,11 @@ class ParagraphController extends ControllerBase {
 
     $data = $this->getReliefwebDocuments($request, $group, $url);
     $data['#set_name'] = $this->t('Maps / Infographics');
+
+    if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
+      $first = reset($data['#data']);
+      hr_entity_freshness_write_date($group, $first['date_created'], 'maps');
+    }
 
     return $data;
   }
@@ -665,6 +681,11 @@ class ParagraphController extends ControllerBase {
 
     $data = $this->getReliefwebDocuments($request, $group, $url);
     $data['#set_name'] = $this->t('Assessments');
+
+    if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
+      $first = reset($data['#data']);
+      hr_entity_freshness_write_date($group, $first['date_created'], 'assessments');
+    }
 
     return $data;
   }
