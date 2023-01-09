@@ -410,8 +410,8 @@ class ParagraphController extends ControllerBase {
       $data = $this->hdxController->buildHdxObjects($results);
 
       if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
-        if (is_array($data['#data']) && !empty($data['#data'])) {
-          $first = reset($data['#data']);
+        if (is_array($data) && !empty($data)) {
+          $first = reset($data);
           hr_entity_freshness_write_date($group, $first['date_created'], 'hdx');
         }
       }
