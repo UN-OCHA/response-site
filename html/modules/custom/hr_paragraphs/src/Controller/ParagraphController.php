@@ -410,8 +410,10 @@ class ParagraphController extends ControllerBase {
       $data = $this->hdxController->buildHdxObjects($results);
 
       if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
-        $first = reset($data['#data']);
-        hr_entity_freshness_write_date($group, $first['date_created'], 'hdx');
+        if (is_array($data['#data']) && !empty($data['#data'])) {
+          $first = reset($data['#data']);
+          hr_entity_freshness_write_date($group, $first['date_created'], 'hdx');
+        }
       }
 
       return [
@@ -492,8 +494,10 @@ class ParagraphController extends ControllerBase {
     $data['#set_name'] = $this->t('Reports');
 
     if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
-      $first = reset($data['#data']);
-      hr_entity_freshness_write_date($group, $first['date_created'], 'reports');
+      if (is_array($data['#data']) && !empty($data['#data'])) {
+        $first = reset($data['#data']);
+        hr_entity_freshness_write_date($group, $first['date_created'], 'reports');
+      }
     }
 
     return $data;
@@ -538,8 +542,10 @@ class ParagraphController extends ControllerBase {
     $data['#set_name'] = $this->t('Maps / Infographics');
 
     if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
-      $first = reset($data['#data']);
-      hr_entity_freshness_write_date($group, $first['date_created'], 'maps');
+      if (is_array($data['#data']) && !empty($data['#data'])) {
+        $first = reset($data['#data']);
+        hr_entity_freshness_write_date($group, $first['date_created'], 'maps');
+      }
     }
 
     return $data;
@@ -683,8 +689,10 @@ class ParagraphController extends ControllerBase {
     $data['#set_name'] = $this->t('Assessments');
 
     if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
-      $first = reset($data['#data']);
-      hr_entity_freshness_write_date($group, $first['date_created'], 'assessments');
+      if (is_array($data['#data']) && !empty($data['#data'])) {
+        $first = reset($data['#data']);
+        hr_entity_freshness_write_date($group, $first['date_created'], 'assessments');
+      }
     }
 
     return $data;
