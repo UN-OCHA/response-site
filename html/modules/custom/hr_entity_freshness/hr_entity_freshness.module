@@ -190,3 +190,35 @@ function hr_entity_freshness_group_view_alter(array &$build, EntityInterface $en
     ],
   ];
 }
+
+/**
+ * Implements hook_views_data().
+ */
+function hr_entity_freshness_views_data() {
+  $data['hr_entity_freshness']['table']['group'] = t('Group');
+
+  // Explain how this table joins to others.
+  $data['hr_entity_freshness']['table']['join'] = [
+    'groups_field_data' => [
+      'left_field' => 'id',
+      'field' => 'entity_id',
+      'extra' => [
+        ['field' => 'entity_type', 'value' => 'group', 'numeric' => FALSE],
+      ],
+    ],
+  ];
+
+  $data['hr_entity_freshness']['timestamp'] = [
+    'title' => t('Most recent content'),
+    'field' => [
+      'id' => 'hr_entity_freshness_timestamp',
+      'help' => t('Show date of most recent content.'),
+    ],
+    'filter' => [
+      'help' => t('Show only content that is new or updated.'),
+      'id' => 'hr_entity_freshness_timestamp',
+    ],
+  ];
+
+  return $data;
+}

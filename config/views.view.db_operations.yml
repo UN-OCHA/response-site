@@ -5,7 +5,13 @@ dependencies:
   config:
     - group.type.operation
   module:
+    - csv_serialization
     - group
+    - hr_entity_freshness
+    - rest
+    - serialization
+    - user
+    - views_data_export
 id: db_operations
 label: 'DB operations'
 module: views
@@ -221,6 +227,58 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        timestamp:
+          id: timestamp
+          table: hr_entity_freshness
+          field: timestamp
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: hr_entity_freshness_timestamp
+          label: 'Most recent content'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          date_format: html_date
+          custom_date_format: ''
+          timezone: ''
       pager:
         type: mini
         options:
@@ -383,6 +441,7 @@ display:
             label: label
             changed: changed
             created: created
+            timestamp: timestamp
           default: label
           info:
             label:
@@ -400,6 +459,13 @@ display:
               empty_column: false
               responsive: ''
             created:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            timestamp:
               sortable: true
               default_sort_order: asc
               align: ''
