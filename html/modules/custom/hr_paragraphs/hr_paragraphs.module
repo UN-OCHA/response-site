@@ -604,6 +604,11 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   // Slice array.
   $items = array_slice($items, 0, $max_number_of_items);
 
+  if (function_exists('hr_entity_freshness_write_date')) {
+    $first = reset($items);
+    hr_entity_freshness_write($paragraph, $first->date);
+  }
+
   $variables['content']['embed'] = [
     '#theme' => 'hr_paragraphs_rss_feed',
     '#items' => $items,
@@ -910,10 +915,19 @@ function hr_paragraphs_preprocess_paragraph__hdx_river(&$variables) {
     $query_filters = $hdx_controller->parseHdxUrl($url);
     $parameters = $hdx_controller->buildHdxParameters(0, $max_number_of_items, $query_filters);
     $results = $hdx_controller->executeHdxQuery($parameters);
+    $data = $hdx_controller->buildHdxObjects($results);
+
+    if (function_exists('hr_entity_freshness_write_date')) {
+      $max = 0;
+      foreach ($data as $row) {
+        $max = max($max, $row['date_created']);
+      }
+      hr_entity_freshness_write_date($paragraph, $max);
+    }
 
     $variables['content']['rw_list'] = [
       '#theme' => 'hr_paragraphs_rw_list',
-      '#data' => $hdx_controller->buildHdxObjects($results),
+      '#data' => $data,
       '#view_all' => $paragraph->field_hdx_url->first()->uri,
       '#total' => $max_number_of_items,
       '#weight' => 99,
@@ -987,10 +1001,19 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
   try {
     $results = $reliefweb_controller->executeReliefwebQuery($parameters);
     $hide_thumbs = $paragraph->field_hide_thumbnails->value == 1 ? TRUE : FALSE;
+    $data = $reliefweb_controller->buildReliefwebObjects($results, $hide_thumbs);
+
+    if (function_exists('hr_entity_freshness_write_date')) {
+      $max = 0;
+      foreach ($data as $row) {
+        $max = max($max, $row['date_created']);
+      }
+      hr_entity_freshness_write_date($paragraph, $max);
+    }
 
     $variables['content']['rw_list'] = [
       '#theme' => 'hr_paragraphs_rw_list',
-      '#data' => $reliefweb_controller->buildReliefwebObjects($results, $hide_thumbs),
+      '#data' => $data,
       '#view_all' => $paragraph->field_reliefweb_url->first()->uri,
       '#total' => $max_number_of_items,
       '#weight' => 99,
@@ -1113,6 +1136,10 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
 
     $docs = $reliefweb_controller->buildReliefwebObjects($results, $hide_thumbs);
     $doc = reset($docs);
+
+    if (function_exists('hr_entity_freshness_write_date')) {
+      hr_entity_freshness_write_date($paragraph, $doc['date_created']);
+    }
 
     $variables['content']['rw_list'] = [
       '#theme' => 'hr_paragraphs_rw_list',
