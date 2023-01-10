@@ -1851,7 +1851,27 @@ function hr_paragraphs_group_content_info_alter(&$definitions) {
   // Hide sub groups and pages when unpublished.
   $definitions['group_node:landing_page']['handlers']['access'] = 'Drupal\hr_paragraphs\Plugin\GroupNodeAccessControlHandler';
   $definitions['group_node:page']['handlers']['access'] = 'Drupal\hr_paragraphs\Plugin\GroupNodeAccessControlHandler';
-  $definitions['subgroup:cluster']['handlers']['access'] = 'Drupal\subgroup\Plugin\SubgroupAccessControlHandler';
+}
+
+/**
+ * Implements hook_entity_access().
+ */
+function hr_paragraphs_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  $entity_type_id = $entity->getEntityTypeId();
+  if ($operation === 'view' && $entity_type_id === 'group') {
+    if (!$account->hasPermission('access content overview')) {
+      // Check parent.
+      /** @var \Drupal\group\Entity\Group $entity */
+      if ($entity->hasField('subgroup_tree') && !$entity->subgroup_tree->isEmpty()) {
+        $parent = Group::load($entity->subgroup_tree->value);
+        if (!$parent->isPublished()) {
+          return AccessResult::forbidden();
+        }
+      }
+    }
+  }
+
+  return AccessResult::neutral();
 }
 
 /**

@@ -20,7 +20,7 @@ class GroupNodeAccessControlHandler extends GroupContentAccessControlHandler {
   public function entityAccess(EntityInterface $entity, $operation, AccountInterface $account, $return_as_object = FALSE) {
     $result = parent::entityAccess($entity, $operation, $account, TRUE);
 
-    //if ($operation == 'view' && !$account->hasPermission('access content overview')) {
+    if ($operation == 'view' && !$account->hasPermission('access content overview')) {
       if ($entity instanceof Node) {
         /** @var \Drupal\group\Entity\Storage\GroupContentStorage */
         $storage = \Drupal::entityTypeManager()->getStorage('group_content');
@@ -34,23 +34,19 @@ class GroupNodeAccessControlHandler extends GroupContentAccessControlHandler {
         foreach ($activGroupListEntity as $groupContent) {
           $group = $groupContent->getGroup();
           if (!$group->isPublished()) {
-            dpm('denied');
             $result = AccessResult::forbidden();
           }
 
           // Check parent.
           if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
-            dpm($group->id(), 'before');
             $group = Group::load($group->subgroup_tree->value);
-            dpm($group->id(), 'after');
             if (!$group->isPublished()) {
-              dpm('d');
               $result = AccessResult::forbidden();
             }
           }
         }
       }
-    //}
+    }
 
     return $return_as_object ? $result : $result->isAllowed();
   }
