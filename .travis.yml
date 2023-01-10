@@ -63,8 +63,7 @@ script:
   - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -T drupal chmod -R 777 /srv/www/html/build/logs
 
   # Run all tests and generate coverage report.
-  # - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -e XDEBUG_MODE=coverage -e BROWSERTEST_OUTPUT_DIRECTORY=/srv/www/html/sites/default/files/browser_output -e DTT_BASE_URL=http://127.0.0.1 -T drupal ./vendor/bin/phpunit --coverage-clover /srv/www/html/build/logs/clover.xml --debug
-  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -e XDEBUG_MODE=coverage -e BROWSERTEST_OUTPUT_DIRECTORY=/srv/www/html/sites/default/files/browser_output -e DTT_BASE_URL=http://127.0.0.1 -T drupal ./vendor/bin/phpunit --coverage-clover /srv/www/html/build/logs/clover.xml --debug html/modules/custom/hr_paragraphs/tests/src/ExistingSite/HrParagraphsArchiveTest.php
+  - docker-compose -p response-test -f tests/docker-compose.yml exec -w /srv/www -e XDEBUG_MODE=coverage -e BROWSERTEST_OUTPUT_DIRECTORY=/srv/www/html/sites/default/files/browser_output -e DTT_BASE_URL=http://127.0.0.1 -T drupal ./vendor/bin/phpunit --coverage-clover /srv/www/html/build/logs/clover.xml --debug
 
 after_success:
   - echo "The tests completed without errors."
