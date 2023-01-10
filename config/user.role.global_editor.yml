@@ -30,6 +30,7 @@ dependencies:
     - paragraphs
     - paragraphs_type_permissions
     - path
+    - redirect
     - shortcut
     - system
     - taxonomy
@@ -51,6 +52,7 @@ permissions:
   - 'access user profiles'
   - 'administer menu'
   - 'administer nodes'
+  - 'administer redirects'
   - 'administer shortcuts'
   - 'administer taxonomy'
   - 'administer url aliases'
