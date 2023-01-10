@@ -8,6 +8,7 @@ Intergration tests using existing site/config.
 XDEBUG_MODE=coverage ./vendor/bin/phpunit --testsuite Existing --verbose
 ```
 
+
 ## Drupal check
 
 ```sh {name=drupalcheck}
