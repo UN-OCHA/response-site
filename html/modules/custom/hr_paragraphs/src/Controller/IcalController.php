@@ -115,6 +115,7 @@ class IcalController extends ControllerBase {
             'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
             'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
             'timezone' => $event['DTSTART']->getTimezone()->getName(),
+            'timezone_string' => $event['timezone_string'] ?? $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
           ];
 
@@ -141,6 +142,7 @@ class IcalController extends ControllerBase {
             'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
             'timezone' => $event['DTSTART']->getTimezone()->getName(),
+            'timezone_string' => $event['timezone_string'] ?? $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
           ];
         }
@@ -153,6 +155,7 @@ class IcalController extends ControllerBase {
             'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
             'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
             'timezone' => $event['DTSTART']->getTimezone()->getName(),
+            'timezone_string' => $event['timezone_string'] ?? $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
           ];
         }
