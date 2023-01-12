@@ -494,7 +494,7 @@ class ParagraphController extends ControllerBase {
     $data['#set_name'] = $this->t('Reports');
 
     if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
-      if (is_array($data['#data']) && !empty($data['#data'])) {
+      if (isset($data['#data']) && is_array($data['#data']) && !empty($data['#data'])) {
         $first = reset($data['#data']);
         hr_entity_freshness_write_date($group, $first['date_created'], 'reports');
       }
@@ -542,7 +542,7 @@ class ParagraphController extends ControllerBase {
     $data['#set_name'] = $this->t('Maps / Infographics');
 
     if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
-      if (is_array($data['#data']) && !empty($data['#data'])) {
+      if (isset($data['#data']) && is_array($data['#data']) && !empty($data['#data'])) {
         $first = reset($data['#data']);
         hr_entity_freshness_write_date($group, $first['date_created'], 'maps');
       }
@@ -689,7 +689,7 @@ class ParagraphController extends ControllerBase {
     $data['#set_name'] = $this->t('Assessments');
 
     if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
-      if (is_array($data['#data']) && !empty($data['#data'])) {
+      if (isset($data['#data']) && is_array($data['#data']) && !empty($data['#data'])) {
         $first = reset($data['#data']);
         hr_entity_freshness_write_date($group, $first['date_created'], 'assessments');
       }
