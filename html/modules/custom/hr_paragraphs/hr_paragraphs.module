@@ -1462,6 +1462,7 @@ function hr_paragraphs_preprocess_node(&$variables) {
   hr_paragraphs_node_sidebar($variables);
   hr_paragraphs_node_is_archived($variables);
   hr_paragraphs_user_can_edit($variables);
+  hr_paragraphs_node_parent_is_published($variables);
 }
 
 /**
@@ -1563,12 +1564,50 @@ function hr_paragraphs_node_is_archived(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_node().
+ */
+function hr_paragraphs_node_parent_is_published(&$variables) {
+  $node = $variables['node'];
+
+  if (!($node instanceof Node)) {
+    return;
+  }
+
+  $variables['parent_is_published'] = TRUE;
+  /** @var \Drupal\group\Entity\Storage\GroupContentStorage */
+  $storage = \Drupal::entityTypeManager()->getStorage('group_content');
+  $activGroupListEntity = $storage->loadByEntity($node);
+
+  // Not a group node.
+  if (empty($activGroupListEntity)) {
+    return;
+  }
+
+  foreach ($activGroupListEntity as $groupContent) {
+    $group = $groupContent->getGroup();
+    if (!$group->isPublished()) {
+      $variables['parent_is_published'] = FALSE;
+      return;
+    }
+
+    // Check parent.
+    if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+      $group = Group::load($group->subgroup_tree->value);
+      if (!$group->isPublished()) {
+        $variables['parent_is_published'] = FALSE;
+        return;
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_preprocess_group().
  */
 function hr_paragraphs_preprocess_group(&$variables) {
-
   hr_paragraphs_group_sidebar($variables);
   hr_paragraphs_group_is_archived($variables);
+  hr_paragraphs_group_parent_is_published($variables);
 }
 
 /**
@@ -1625,6 +1664,31 @@ function hr_paragraphs_group_is_archived(&$variables) {
   $variables['archive_message'] = t('This group has been archived.');
   if (!$group->field_archive_message->isEmpty()) {
     $variables['archive_message'] = $group->field_archive_message->value;
+  }
+}
+
+/**
+ * Implements hook_preprocess_group().
+ */
+function hr_paragraphs_group_parent_is_published(&$variables) {
+  /** @var \Drupal\group\Entity\GroupInterface $group */
+  $group = $variables['elements']['#group'] ?? $variables['group'];
+  $variables['parent_is_published'] = TRUE;
+
+  if (!$group) {
+    return;
+  }
+
+  if (!$group->hasField('field_archive_group')) {
+    return;
+  }
+
+  // Check parent.
+  if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+    $group = Group::load($group->subgroup_tree->value);
+    if (!$group->isPublished()) {
+      $variables['parent_is_published'] = FALSE;
+    }
   }
 }
 
@@ -1847,6 +1911,31 @@ function hr_paragraphs_group_content_info_alter(&$definitions) {
   // Allow blocked users to be added to a group.
   $definitions['group_membership']['class'] = 'Drupal\hr_paragraphs\Plugin\GroupContentEnabler\AllGroupMembership';
   $definitions['group_membership']['provider'] = 'hr_paragraphs';
+
+  // Hide sub groups and pages when unpublished.
+  $definitions['group_node:landing_page']['handlers']['access'] = 'Drupal\hr_paragraphs\Plugin\GroupNodeAccessControlHandler';
+  $definitions['group_node:page']['handlers']['access'] = 'Drupal\hr_paragraphs\Plugin\GroupNodeAccessControlHandler';
+}
+
+/**
+ * Implements hook_entity_access().
+ */
+function hr_paragraphs_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  $entity_type_id = $entity->getEntityTypeId();
+  if ($operation === 'view' && $entity_type_id === 'group') {
+    if (!$account->hasPermission('access content overview')) {
+      // Check parent.
+      /** @var \Drupal\group\Entity\Group $entity */
+      if ($entity->hasField('subgroup_tree') && !$entity->subgroup_tree->isEmpty()) {
+        $parent = Group::load($entity->subgroup_tree->value);
+        if (!$parent->isPublished()) {
+          return AccessResult::forbidden();
+        }
+      }
+    }
+  }
+
+  return AccessResult::neutral();
 }
 
 /**
