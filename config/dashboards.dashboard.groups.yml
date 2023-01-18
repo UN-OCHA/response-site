@@ -26,7 +26,7 @@ sections:
           context_mapping: {  }
           views_label: ''
           items_per_page: none
-        weight: 4
+        weight: 5
         additional: {  }
       6941417c-df60-429b-ba37-6fc57bf7ef7c:
         uuid: 6941417c-df60-429b-ba37-6fc57bf7ef7c
@@ -78,7 +78,7 @@ sections:
           context_mapping: {  }
           views_label: ''
           items_per_page: none
-        weight: 1
+        weight: 2
         additional: {  }
       897bf649-54d9-405f-b8db-f263afbce28d:
         uuid: 897bf649-54d9-405f-b8db-f263afbce28d
@@ -91,7 +91,7 @@ sections:
           context_mapping: {  }
           views_label: ''
           items_per_page: none
-        weight: 3
+        weight: 4
         additional: {  }
       ae76e826-7db8-4c40-bd40-bb3b8633819c:
         uuid: ae76e826-7db8-4c40-bd40-bb3b8633819c
@@ -104,7 +104,7 @@ sections:
           context_mapping: {  }
           views_label: ''
           items_per_page: none
-        weight: 2
+        weight: 3
         additional: {  }
       9918b291-7deb-4e94-8108-04cc4a2f3193:
         uuid: 9918b291-7deb-4e94-8108-04cc4a2f3193
@@ -117,7 +117,7 @@ sections:
           context_mapping: {  }
           views_label: ''
           items_per_page: none
-        weight: 5
+        weight: 6
         additional: {  }
       e4374b97-3a5e-4aab-9729-1941333b566f:
         uuid: e4374b97-3a5e-4aab-9729-1941333b566f
@@ -130,7 +130,7 @@ sections:
           context_mapping: {  }
           views_label: ''
           items_per_page: none
-        weight: 6
+        weight: 7
         additional: {  }
       ed38ada5-19fb-4208-b094-9b74d3bb710c:
         uuid: ed38ada5-19fb-4208-b094-9b74d3bb710c
@@ -144,5 +144,18 @@ sections:
           views_label: ''
           items_per_page: none
         weight: 8
+        additional: {  }
+      efdb2bdf-2dd1-41da-84c5-1a9b06762b9d:
+        uuid: efdb2bdf-2dd1-41da-84c5-1a9b06762b9d
+        region: first
+        configuration:
+          id: 'views_block:db_hdx_cod-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 1
         additional: {  }
     third_party_settings: {  }
