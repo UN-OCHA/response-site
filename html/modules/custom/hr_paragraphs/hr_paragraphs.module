@@ -651,6 +651,23 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
   $paragraph = $variables['paragraph'];
   $group = $paragraph->getParentEntity();
 
+  // Make sure it exists.
+  if (!$group) {
+    return;
+  }
+
+  // If we are on page, get the group.
+  if (get_class($group) == 'Drupal\node\Entity\Node') {
+    $group_content_array = GroupContent::loadByEntity($group);
+    $group_content = reset($group_content_array);
+    if ($group_content) {
+      $group = $group_content->getGroup();
+    }
+    else {
+      return;
+    }
+  }
+
   if (!$group) {
     return;
   }
