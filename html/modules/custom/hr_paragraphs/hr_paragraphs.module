@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Themes and preprocessors for the paragraphs page title module.
+ * Install hooks.
  */
 
 use Drupal\Component\Utility\UrlHelper;
