@@ -25,6 +25,7 @@ module:
   environment_indicator: 0
   environment_indicator_ui: 0
   external_entities: 0
+  featureflags: 0
   field: 0
   field_group: 0
   field_ui: 0

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dba5a8b7e03e8be1d08d16de453dfcba",
+    "content-hash": "cf20ffb0aa2e077d5c1b2c1c4edcbc5a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2561,6 +2561,58 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/external_entities",
                 "issues": "http://drupal.org/project/issues/external_entities"
+            }
+        },
+        {
+            "name": "drupal/featureflags",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/featureflags.git",
+                "reference": "2.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/featureflags-2.0.2.zip",
+                "reference": "2.0.2",
+                "shasum": "7f032a9d72cbd50aa9e5a862a8ff66562cbd1eec"
+            },
+            "require": {
+                "drupal/core": "^8.8 || ~9.0 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.2",
+                    "datestamp": "1666324781",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "larowlan",
+                    "homepage": "https://www.drupal.org/user/395439"
+                },
+                {
+                    "name": "tobiasdeardorff",
+                    "homepage": "https://www.drupal.org/user/1639406"
+                },
+                {
+                    "name": "Unsupported Projects",
+                    "homepage": "https://www.drupal.org/user/291168"
+                }
+            ],
+            "description": "Provides the ability to manage feature flags and utilities to check if a feature is enabled.",
+            "homepage": "https://www.drupal.org/project/featureflags",
+            "support": {
+                "source": "https://git.drupalcode.org/project/featureflags"
             }
         },
         {
