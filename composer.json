@@ -208,5 +208,5 @@
         "phpunit/phpunit": "^9.5",
         "weitzman/drupal-test-traits": "^1.5"
     },
-    "version": "0.3.7"
+    "version": "0.3.8"
 }
