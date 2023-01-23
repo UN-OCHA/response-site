@@ -3,6 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - dashboards.dashboard.global_editors
+    - dashboards.dashboard.groups
+    - dashboards.dashboard.links
+    - dashboards.dashboard.pages
     - filter.format.hr_plain_text
     - group.type.cluster
     - group.type.operation
@@ -13,6 +17,7 @@ dependencies:
   module:
     - content_translation
     - contextual
+    - dashboards
     - entity_reference_revisions
     - file
     - filter
@@ -25,6 +30,7 @@ dependencies:
     - paragraphs
     - paragraphs_type_permissions
     - path
+    - redirect
     - shortcut
     - system
     - taxonomy
@@ -46,12 +52,17 @@ permissions:
   - 'access user profiles'
   - 'administer menu'
   - 'administer nodes'
+  - 'administer redirects'
   - 'administer shortcuts'
   - 'administer taxonomy'
   - 'administer url aliases'
   - 'administer users'
   - 'bypass group access'
   - 'bypass node access'
+  - 'can view global_editors dashboard'
+  - 'can view groups dashboard'
+  - 'can view links dashboard'
+  - 'can view pages dashboard'
   - 'create content translations'
   - 'create landing_page content'
   - 'create operation group'

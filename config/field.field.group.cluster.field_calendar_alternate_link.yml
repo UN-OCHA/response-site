@@ -8,7 +8,11 @@ dependencies:
   module:
     - link
     - link_allowed_hosts
+    - linkchecker
 third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: link_link_extractor
   link_allowed_hosts:
     secure_hosts: true
 id: group.cluster.field_calendar_alternate_link

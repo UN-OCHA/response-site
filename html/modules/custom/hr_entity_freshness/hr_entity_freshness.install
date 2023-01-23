@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Installation functions.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function hr_entity_freshness_schema() {
+  $schema['hr_entity_freshness'] = [
+    'description' => 'Track freshness of any entity.',
+    'fields' => [
+      'entity_type' => [
+        'description' => 'Entity type.',
+        'type' => 'varchar_ascii',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'entity_id' => [
+        'description' => 'Entity Id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'tab' => [
+        'description' => 'Entity type.',
+        'type' => 'varchar_ascii',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'parent_entity_type' => [
+        'description' => 'Entity type.',
+        'type' => 'varchar_ascii',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'parent_entity_id' => [
+        'description' => 'Entity Id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'timestamp' => [
+        'description' => 'The Unix timestamp of the most recent content.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => [
+      'entity_type',
+      'entity_id',
+      'parent_entity_type',
+      'parent_entity_id',
+      'tab',
+    ],
+    'indexes' => [
+      'entity' => [
+        'entity_type',
+        'entity_id',
+      ],
+      'parent' => [
+        'parent_entity_type',
+        'parent_entity_id',
+      ],
+    ],
+  ];
+
+  return $schema;
+}

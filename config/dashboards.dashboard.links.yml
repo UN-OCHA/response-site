@@ -1,0 +1,56 @@
+uuid: da105b7c-3b68-4ee0-9316-44ae267bc61a
+langcode: en
+status: true
+dependencies: {  }
+id: links
+admin_label: Links
+category: ''
+frontend: false
+weight: 0
+sections:
+  -
+    layout_id: layout_onecol
+    layout_settings:
+      label: ''
+      context_mapping: {  }
+    components:
+      b47f4549-9bad-4f02-837b-27fe54f39502:
+        uuid: b47f4549-9bad-4f02-837b-27fe54f39502
+        region: content
+        configuration:
+          id: 'views_block:db_links-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 0
+        additional: {  }
+      b5654097-8935-4a5c-8b82-211141090dbd:
+        uuid: b5654097-8935-4a5c-8b82-211141090dbd
+        region: content
+        configuration:
+          id: 'views_block:db_links-block_2'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 1
+        additional: {  }
+      6a457063-faf5-436d-b53f-ac05f3f6c820:
+        uuid: 6a457063-faf5-436d-b53f-ac05f3f6c820
+        region: content
+        configuration:
+          id: 'views_block:db_links-block_3'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 2
+        additional: {  }
+    third_party_settings: {  }

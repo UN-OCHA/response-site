@@ -6,7 +6,12 @@ dependencies:
     - field.storage.group.field_archive_message
     - group.type.cluster
   module:
+    - linkchecker
     - text
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: html_link_extractor
 id: group.cluster.field_archive_message
 field_name: field_archive_message
 entity_type: group

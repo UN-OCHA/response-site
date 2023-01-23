@@ -1,0 +1,221 @@
+uuid: 6e65c493-71f2-4ee6-9ed6-635f880e73af
+langcode: en
+status: true
+dependencies: {  }
+id: global_editors
+admin_label: 'Global editors'
+category: ''
+frontend: false
+weight: 0
+sections:
+  -
+    layout_id: layout_twocol_section
+    layout_settings:
+      label: ''
+      context_mapping: {  }
+      column_widths: 50-50
+    components:
+      23e3e2dc-466b-47d2-b233-af348ddc0eef:
+        uuid: 23e3e2dc-466b-47d2-b233-af348ddc0eef
+        region: second
+        configuration:
+          id: 'views_block:db_clusters-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 2
+        additional: {  }
+      01838d7d-2e65-4ca8-b29d-9dd9d4a3436c:
+        uuid: 01838d7d-2e65-4ca8-b29d-9dd9d4a3436c
+        region: first
+        configuration:
+          id: 'views_block:db_groups_never_updated-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 0
+        additional: {  }
+      9d2cc77b-83bc-465e-a826-dd304e7d2376:
+        uuid: 9d2cc77b-83bc-465e-a826-dd304e7d2376
+        region: first
+        configuration:
+          id: 'views_block:db_last_editor-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 1
+        additional: {  }
+      d36bed10-2046-4142-8971-3d201bc34e0c:
+        uuid: d36bed10-2046-4142-8971-3d201bc34e0c
+        region: second
+        configuration:
+          id: 'views_block:db_operations-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 1
+        additional: {  }
+      da730d54-b915-47dd-8a52-ff6778b8b7ca:
+        uuid: da730d54-b915-47dd-8a52-ff6778b8b7ca
+        region: first
+        configuration:
+          id: 'views_block:db_enabled_tabs-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 2
+        additional: {  }
+      de377bf3-5357-4dae-8390-82bc0ae0d9e1:
+        uuid: de377bf3-5357-4dae-8390-82bc0ae0d9e1
+        region: first
+        configuration:
+          id: 'views_block:db_used_paragraphs-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 3
+        additional: {  }
+      e0115c11-b190-4759-b9e2-faaec9fb2d93:
+        uuid: e0115c11-b190-4759-b9e2-faaec9fb2d93
+        region: second
+        configuration:
+          id: 'views_block:db_translated_operations-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 3
+        additional: {  }
+      f17ac3ec-b854-470e-9cc2-125d312a7ad4:
+        uuid: f17ac3ec-b854-470e-9cc2-125d312a7ad4
+        region: second
+        configuration:
+          id: 'views_block:db_translated_clusters-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 4
+        additional: {  }
+      002a9004-5635-469a-9ed9-e404ebf52c83:
+        uuid: 002a9004-5635-469a-9ed9-e404ebf52c83
+        region: first
+        configuration:
+          id: 'views_block:db_new_groups-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 4
+        additional: {  }
+      e0a28c80-aa9b-4a38-bcc6-c339f5b724e6:
+        uuid: e0a28c80-aa9b-4a38-bcc6-c339f5b724e6
+        region: second
+        configuration:
+          id: 'views_block:db_group_managers-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 5
+        additional: {  }
+      2f03e7df-0f45-4932-84c8-a6fed88e8d1a:
+        uuid: 2f03e7df-0f45-4932-84c8-a6fed88e8d1a
+        region: first
+        configuration:
+          id: 'views_block:db_used_paragraphs_on_pages-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 5
+        additional: {  }
+      1234ab4f-eb2d-4b6a-aa42-29923200b6d7:
+        uuid: 1234ab4f-eb2d-4b6a-aa42-29923200b6d7
+        region: second
+        configuration:
+          id: 'views_block:db_translated_pages-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 6
+        additional: {  }
+      3d330f07-9cee-4a8e-af37-f75865c916fb:
+        uuid: 3d330f07-9cee-4a8e-af37-f75865c916fb
+        region: first
+        configuration:
+          id: 'views_block:db_links-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 6
+        additional: {  }
+      d80ef7d8-c942-4a7f-8f10-153fd662c792:
+        uuid: d80ef7d8-c942-4a7f-8f10-153fd662c792
+        region: second
+        configuration:
+          id: 'views_block:db_links-block_2'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 7
+        additional: {  }
+      174969fd-5ba9-4898-8182-248f6300f8f2:
+        uuid: 174969fd-5ba9-4898-8182-248f6300f8f2
+        region: second
+        configuration:
+          id: 'views_block:db_links-block_3'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 8
+        additional: {  }
+    third_party_settings: {  }
+  -
+    layout_id: layout_3
+    layout_settings:
+      label: ''
+      context_mapping: {  }
+      reverse: 0
+    components: {  }
+    third_party_settings: {  }

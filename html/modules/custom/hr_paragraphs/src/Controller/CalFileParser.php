@@ -75,6 +75,13 @@ class CalFileParser {
   /**
    *
    */
+  public function get_timezone() : string {
+    return $this->_user_timezone;
+  }
+
+  /**
+   *
+   */
   public function get_base_path() : string {
     return $this->_base_path;
   }
@@ -358,6 +365,7 @@ class CalFileParser {
           if (strstr($date_format, "TZID")) {
             $strstr = strstr($date_format, "TZID");
             $timezone = substr($strstr, 5);
+            $event['timezone_string'] = $timezone;
           }
 
           // Process all dates if there are more then one and comma seperated.

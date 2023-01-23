@@ -110,3 +110,179 @@ function hr_paragraphs_update_9006() {
     }
   }
 }
+
+/**
+ * Add computed fields to groups.
+ */
+function hr_paragraphs_update_9007() {
+  $storage_definitions = hr_paragraphs_custom_group_fields();
+
+  foreach ($storage_definitions as $field_name => $storage_definition) {
+    \Drupal::entityDefinitionUpdateManager()
+      ->installFieldStorageDefinition($field_name, 'group', 'group', $storage_definition);
+  }
+}
+
+/**
+ * Update groups for enabled tabs and used paragraphs.
+ */
+function hr_paragraphs_update_9008(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $ids = \Drupal::entityQuery('group')->execute();
+    $sandbox['total'] = count($ids);
+    $sandbox['current'] = 0;
+
+    if (empty($sandbox['total'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+  }
+
+  $ids = \Drupal::entityQuery('group')
+    ->range($sandbox['current'], 25)
+    ->sort('id')
+    ->execute();
+
+  if (empty($sandbox['total'])) {
+    $sandbox['#finished'] = 1;
+    return;
+  }
+
+  /** @var \Drupal\group\Entity\Group $groups[] */
+  $groups = \Drupal::entityTypeManager()->getStorage('group')->loadMultiple($ids);
+  foreach ($groups as $group) {
+    $group->isMigrating = TRUE;
+    $group->save();
+    $sandbox['current']++;
+  }
+
+  \Drupal::messenger()->addMessage($sandbox['current'] . ' groups processed.');
+
+  if ($sandbox['current'] >= $sandbox['total']) {
+    $sandbox['#finished'] = 1;
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}
+
+/**
+ * Add computed fields to users.
+ */
+function hr_paragraphs_update_9009() {
+  $storage_definitions = hr_paragraphs_custom_user_fields();
+
+  foreach ($storage_definitions as $field_name => $storage_definition) {
+    \Drupal::entityDefinitionUpdateManager()
+      ->installFieldStorageDefinition($field_name, 'user', 'user', $storage_definition);
+  }
+}
+
+/**
+ * Update users for manager groups.
+ */
+function hr_paragraphs_update_9010(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $ids = \Drupal::entityQuery('user')->execute();
+    $sandbox['total'] = count($ids);
+    $sandbox['current'] = 0;
+
+    if (empty($sandbox['total'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+  }
+
+  $ids = \Drupal::entityQuery('user')
+    ->range($sandbox['current'], 25)
+    ->sort('uid')
+    ->execute();
+
+  if (empty($sandbox['total'])) {
+    $sandbox['#finished'] = 1;
+    return;
+  }
+
+  /** @var \Drupal\user\Entity\User $users */
+  $users = \Drupal::entityTypeManager()->getStorage('user')->loadMultiple($ids);
+  foreach ($users as $user) {
+    if ($user->manager_for->isEmpty()) {
+      $user->isMigrating = TRUE;
+      $user->save();
+    }
+    $sandbox['current']++;
+  }
+
+  \Drupal::messenger()->addMessage($sandbox['current'] . ' users processed.');
+
+  if ($sandbox['current'] >= $sandbox['total']) {
+    $sandbox['#finished'] = 1;
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}
+
+/**
+ * Add computed fields to nodes.
+ */
+function hr_paragraphs_update_9011() {
+  $storage_definitions = hr_paragraphs_custom_node_fields();
+
+  foreach ($storage_definitions as $field_name => $storage_definition) {
+    \Drupal::entityDefinitionUpdateManager()
+      ->installFieldStorageDefinition($field_name, 'node', 'node', $storage_definition);
+  }
+}
+
+/**
+ * Update nodes for used paragraph types.
+ */
+function hr_paragraphs_update_9012(&$sandbox) {
+  if (!isset($sandbox['total'])) {
+    $ids = \Drupal::entityQuery('node')->execute();
+    $sandbox['total'] = count($ids);
+    $sandbox['current'] = 0;
+
+    if (empty($sandbox['total'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+  }
+
+  $ids = \Drupal::entityQuery('node')
+    ->range($sandbox['current'], 25)
+    ->sort('nid')
+    ->execute();
+
+  if (empty($sandbox['total'])) {
+    $sandbox['#finished'] = 1;
+    return;
+  }
+
+  /** @var \Drupal\node\Entity\Node $nodes */
+  $nodes = \Drupal::entityTypeManager()->getStorage('node')->loadMultiple($ids);
+  foreach ($nodes as $node) {
+    $node->isMigrating = TRUE;
+    $node->save();
+
+    $sandbox['current']++;
+  }
+
+  \Drupal::messenger()->addMessage($sandbox['current'] . ' nodes processed.');
+
+  if ($sandbox['current'] >= $sandbox['total']) {
+    $sandbox['#finished'] = 1;
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}
+
+/**
+ * Hide fields on display.
+ */
+function hr_paragraphs_update_9013() {
+  hr_paragraphs_update_9007();
+  hr_paragraphs_update_9011();
+}

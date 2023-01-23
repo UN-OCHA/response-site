@@ -1,5 +1,5 @@
 # Build the code.
-FROM public.ecr.aws/unocha/unified-builder:8.0-stable as builder
+FROM public.ecr.aws/unocha/unified-builder:8.0.27-r0-202301-01 as builder
 
 ARG  BRANCH_ENVIRONMENT
 
@@ -14,8 +14,8 @@ WORKDIR /srv/www
 RUN rm -rf ./vendor && \
     # Update composer to avoid issues with missing drupal files.
     # @see https://github.com/drupal-composer/drupal-project/issues/282
-    composer selfupdate && \
-    composer install --no-interaction
+    composer --version && \
+    composer install --no-interaction --no-dev
 
 # Copy settings to default site location.
 RUN cp -a docker/settings.php docker/services.yml docker/memcache.services.yml html/sites/default
@@ -23,7 +23,7 @@ RUN cp -a docker/settings.php docker/services.yml docker/memcache.services.yml h
 ################################################################################
 
 # Generate the image.
-FROM public.ecr.aws/unocha/php-k8s:8.0-NR-stable
+FROM public.ecr.aws/unocha/php-k8s:8.0.27-r0-202301-01
 
 ARG VCS_REF
 ARG VCS_URL

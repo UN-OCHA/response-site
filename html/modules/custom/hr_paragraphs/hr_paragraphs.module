@@ -9,6 +9,9 @@ use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -327,6 +330,11 @@ function hr_paragraphs_group_add_member(EntityInterface $entity) {
       '@uid' => $member->id(),
     ]);
   }
+  else {
+    // Save member so manager_for gets updated.
+    // @see hr_paragraphs_user_presave()
+    $member->save();
+  }
 }
 
 /**
@@ -596,6 +604,11 @@ function hr_paragraphs_preprocess_paragraph__rss_feed(&$variables) {
   // Slice array.
   $items = array_slice($items, 0, $max_number_of_items);
 
+  if (function_exists('hr_entity_freshness_write_date')) {
+    $first = reset($items);
+    hr_entity_freshness_write($paragraph, $first->date);
+  }
+
   $variables['content']['embed'] = [
     '#theme' => 'hr_paragraphs_rss_feed',
     '#items' => $items,
@@ -637,6 +650,23 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $group = $paragraph->getParentEntity();
+
+  // Make sure it exists.
+  if (!$group) {
+    return;
+  }
+
+  // If we are on page, get the group.
+  if (get_class($group) == 'Drupal\node\Entity\Node') {
+    $group_content_array = GroupContent::loadByEntity($group);
+    $group_content = reset($group_content_array);
+    if ($group_content) {
+      $group = $group_content->getGroup();
+    }
+    else {
+      return;
+    }
+  }
 
   if (!$group) {
     return;
@@ -902,10 +932,19 @@ function hr_paragraphs_preprocess_paragraph__hdx_river(&$variables) {
     $query_filters = $hdx_controller->parseHdxUrl($url);
     $parameters = $hdx_controller->buildHdxParameters(0, $max_number_of_items, $query_filters);
     $results = $hdx_controller->executeHdxQuery($parameters);
+    $data = $hdx_controller->buildHdxObjects($results);
+
+    if (function_exists('hr_entity_freshness_write_date')) {
+      $max = 0;
+      foreach ($data as $row) {
+        $max = max($max, $row['date_created']);
+      }
+      hr_entity_freshness_write_date($paragraph, $max);
+    }
 
     $variables['content']['rw_list'] = [
       '#theme' => 'hr_paragraphs_rw_list',
-      '#data' => $hdx_controller->buildHdxObjects($results),
+      '#data' => $data,
       '#view_all' => $paragraph->field_hdx_url->first()->uri,
       '#total' => $max_number_of_items,
       '#weight' => 99,
@@ -979,10 +1018,19 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_river(&$variables) {
   try {
     $results = $reliefweb_controller->executeReliefwebQuery($parameters);
     $hide_thumbs = $paragraph->field_hide_thumbnails->value == 1 ? TRUE : FALSE;
+    $data = $reliefweb_controller->buildReliefwebObjects($results, $hide_thumbs);
+
+    if (function_exists('hr_entity_freshness_write_date')) {
+      $max = 0;
+      foreach ($data as $row) {
+        $max = max($max, $row['date_created']);
+      }
+      hr_entity_freshness_write_date($paragraph, $max);
+    }
 
     $variables['content']['rw_list'] = [
       '#theme' => 'hr_paragraphs_rw_list',
-      '#data' => $reliefweb_controller->buildReliefwebObjects($results, $hide_thumbs),
+      '#data' => $data,
       '#view_all' => $paragraph->field_reliefweb_url->first()->uri,
       '#total' => $max_number_of_items,
       '#weight' => 99,
@@ -1105,6 +1153,10 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_document(&$variables) {
 
     $docs = $reliefweb_controller->buildReliefwebObjects($results, $hide_thumbs);
     $doc = reset($docs);
+
+    if (function_exists('hr_entity_freshness_write_date')) {
+      hr_entity_freshness_write_date($paragraph, $doc['date_created']);
+    }
 
     $variables['content']['rw_list'] = [
       '#theme' => 'hr_paragraphs_rw_list',
@@ -1427,6 +1479,7 @@ function hr_paragraphs_preprocess_node(&$variables) {
   hr_paragraphs_node_sidebar($variables);
   hr_paragraphs_node_is_archived($variables);
   hr_paragraphs_user_can_edit($variables);
+  hr_paragraphs_node_parent_is_published($variables);
 }
 
 /**
@@ -1528,12 +1581,50 @@ function hr_paragraphs_node_is_archived(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_node().
+ */
+function hr_paragraphs_node_parent_is_published(&$variables) {
+  $node = $variables['node'];
+
+  if (!($node instanceof Node)) {
+    return;
+  }
+
+  $variables['parent_is_published'] = TRUE;
+  /** @var \Drupal\group\Entity\Storage\GroupContentStorage */
+  $storage = \Drupal::entityTypeManager()->getStorage('group_content');
+  $activGroupListEntity = $storage->loadByEntity($node);
+
+  // Not a group node.
+  if (empty($activGroupListEntity)) {
+    return;
+  }
+
+  foreach ($activGroupListEntity as $groupContent) {
+    $group = $groupContent->getGroup();
+    if (!$group->isPublished()) {
+      $variables['parent_is_published'] = FALSE;
+      return;
+    }
+
+    // Check parent.
+    if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+      $group = Group::load($group->subgroup_tree->value);
+      if (!$group->isPublished()) {
+        $variables['parent_is_published'] = FALSE;
+        return;
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_preprocess_group().
  */
 function hr_paragraphs_preprocess_group(&$variables) {
-
   hr_paragraphs_group_sidebar($variables);
   hr_paragraphs_group_is_archived($variables);
+  hr_paragraphs_group_parent_is_published($variables);
 }
 
 /**
@@ -1590,6 +1681,31 @@ function hr_paragraphs_group_is_archived(&$variables) {
   $variables['archive_message'] = t('This group has been archived.');
   if (!$group->field_archive_message->isEmpty()) {
     $variables['archive_message'] = $group->field_archive_message->value;
+  }
+}
+
+/**
+ * Implements hook_preprocess_group().
+ */
+function hr_paragraphs_group_parent_is_published(&$variables) {
+  /** @var \Drupal\group\Entity\GroupInterface $group */
+  $group = $variables['elements']['#group'] ?? $variables['group'];
+  $variables['parent_is_published'] = TRUE;
+
+  if (!$group) {
+    return;
+  }
+
+  if (!$group->hasField('field_archive_group')) {
+    return;
+  }
+
+  // Check parent.
+  if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+    $group = Group::load($group->subgroup_tree->value);
+    if (!$group->isPublished()) {
+      $variables['parent_is_published'] = FALSE;
+    }
   }
 }
 
@@ -1812,6 +1928,31 @@ function hr_paragraphs_group_content_info_alter(&$definitions) {
   // Allow blocked users to be added to a group.
   $definitions['group_membership']['class'] = 'Drupal\hr_paragraphs\Plugin\GroupContentEnabler\AllGroupMembership';
   $definitions['group_membership']['provider'] = 'hr_paragraphs';
+
+  // Hide sub groups and pages when unpublished.
+  $definitions['group_node:landing_page']['handlers']['access'] = 'Drupal\hr_paragraphs\Plugin\GroupNodeAccessControlHandler';
+  $definitions['group_node:page']['handlers']['access'] = 'Drupal\hr_paragraphs\Plugin\GroupNodeAccessControlHandler';
+}
+
+/**
+ * Implements hook_entity_access().
+ */
+function hr_paragraphs_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  $entity_type_id = $entity->getEntityTypeId();
+  if ($operation === 'view' && $entity_type_id === 'group') {
+    if (!$account->hasPermission('access content overview')) {
+      // Check parent.
+      /** @var \Drupal\group\Entity\Group $entity */
+      if ($entity->hasField('subgroup_tree') && !$entity->subgroup_tree->isEmpty()) {
+        $parent = Group::load($entity->subgroup_tree->value);
+        if (!$parent->isPublished()) {
+          return AccessResult::forbidden();
+        }
+      }
+    }
+  }
+
+  return AccessResult::neutral();
 }
 
 /**
@@ -1919,6 +2060,271 @@ function hr_paragraphs_form_views_exposed_form_alter(&$form, $form_state, $form_
       $form['gid']['#options'] = $options;
       $form['gid']['#size'] = 1;
 
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function hr_paragraphs_entity_base_field_info(EntityTypeInterface $entity_type) {
+  switch ($entity_type->id()) {
+    case 'group':
+      return hr_paragraphs_custom_group_fields();
+
+    case 'user':
+      return hr_paragraphs_custom_user_fields();
+
+    case 'node':
+      return hr_paragraphs_custom_node_fields();
+
+  }
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function hr_paragraphs_custom_group_fields() {
+  $fields = [];
+
+  // Enabled tabs.
+  $fields['enabled_tabs'] = BaseFieldDefinition::create('string')
+    ->setLabel(t('Enabled tabs'))
+    ->setDescription(t('Enabled and active tabs'))
+    ->setRevisionable(TRUE)
+    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
+
+  // Used paragraph types.
+  $fields['used_paragraphs'] = BaseFieldDefinition::create('string')
+    ->setLabel(t('Used paragraphs'))
+    ->setDescription(t('List of paragraph types in use'))
+    ->setRevisionable(TRUE)
+    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
+
+  return $fields;
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function hr_paragraphs_custom_user_fields() {
+  $fields = [];
+
+  // Enabled tabs.
+  $fields['manager_for'] = BaseFieldDefinition::create('entity_reference')
+    ->setLabel(t('Manager of'))
+    ->setDescription(t('Manager of the following groups'))
+    ->setRevisionable(TRUE)
+    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+    ->setSettings([
+      'target_type' => 'group',
+      'default_value' => 0,
+    ])
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'weight' => -5,
+    ]
+  );
+
+  return $fields;
+}
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function hr_paragraphs_custom_node_fields() {
+  $fields = [];
+
+  // Used paragraph types.
+  $fields['used_paragraphs'] = BaseFieldDefinition::create('string')
+    ->setLabel(t('Used paragraphs'))
+    ->setDescription(t('List of paragraph types in use'))
+    ->setRevisionable(TRUE)
+    ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
+
+  return $fields;
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function hr_paragraphs_group_presave(EntityInterface $entity) {
+  /** @var \Drupal\hr_paragraphs\Controller\ParagraphController $controller */
+  $controller = \Drupal::service('hr_paragraphs.paragraph_controller');
+
+  // Store enabled tabs.
+  $enabled_tabs = [];
+  if ($controller->hasDocuments($entity)) {
+    $enabled_tabs[] = 'Reports';
+  }
+
+  if ($controller->hasInfographics($entity)) {
+    $enabled_tabs[] = 'Maps';
+  }
+
+  if ($controller->hasAssessments($entity)) {
+    $enabled_tabs[] = 'Assessments';
+  }
+
+  if ($controller->hasDatasets($entity)) {
+    $enabled_tabs[] = 'Datasets';
+  }
+
+  if ($controller->hasEvents($entity)) {
+    $enabled_tabs[] = 'Events';
+  }
+
+  if ($controller->hasContacts($entity)) {
+    $enabled_tabs[] = 'Contacts';
+  }
+
+  if ($controller->hasPages($entity)) {
+    $enabled_tabs[] = 'Pages';
+  }
+
+  $entity->set('enabled_tabs', $enabled_tabs);
+
+  // Store used paragraphs.
+  $used_paragraphs = [];
+  if ($entity->hasField('field_paragraphs') && !$entity->field_paragraphs->isEmpty()) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+    $paragraphs = $entity->field_paragraphs->referencedEntities();
+    foreach ($paragraphs as $paragraph) {
+      if (!isset($used_paragraphs[$paragraph->bundle()])) {
+        $used_paragraphs[$paragraph->bundle()] = [
+          'label' => $paragraph->getParagraphType()->label(),
+          'count' => 1,
+        ];
+      }
+      else {
+        $used_paragraphs[$paragraph->bundle()]['count']++;
+      }
+    }
+  }
+
+  if ($entity->hasField('field_sidebar_menu') && !$entity->field_sidebar_menu->isEmpty()) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+    $paragraphs = $entity->field_sidebar_menu->referencedEntities();
+    foreach ($paragraphs as $paragraph) {
+      if (!isset($used_paragraphs[$paragraph->bundle()])) {
+        $used_paragraphs[$paragraph->bundle()] = [
+          'label' => $paragraph->getParagraphType()->label(),
+          'count' => 1,
+        ];
+      }
+      else {
+        $used_paragraphs[$paragraph->bundle()]['count']++;
+      }
+    }
+  }
+
+  $formatted = [];
+  foreach ($used_paragraphs as $used_paragraph) {
+    $formatted[] = $used_paragraph['label'] . ' (' . $used_paragraph['count'] . ')';
+  }
+  sort($formatted);
+  $entity->set('used_paragraphs', $formatted);
+
+  // Revert changed time during update.
+  if ($entity->isMigrating) {
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $original */
+    $original = $entity->original;
+    $langcode = $entity->language()->getId();
+    if (!$entity->isNew() && $original && $original->hasTranslation($langcode)) {
+      $original_value = $original->getTranslation($langcode)->get('changed')->value;
+      $entity->set('changed', $original_value);
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function hr_paragraphs_user_presave(EntityInterface $entity) {
+  // Skip for new users.
+  if ($entity->isNew()) {
+    return;
+  }
+
+  $manager_for = [];
+
+  /** @var \Drupal\group\GroupMembershipLoader */
+  $group_membership_service = \Drupal::service('group.membership_loader');
+  $group_memberships = $group_membership_service->loadByUser($entity, [
+    'operation-manager',
+    'cluster-manager',
+  ]);
+
+  foreach ($group_memberships as $group_membership) {
+    $manager_for[] = $group_membership->getGroup();
+  }
+
+  $entity->set('manager_for', $manager_for);
+
+  // Revert changed time during update.
+  if ($entity->isMigrating) {
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $original */
+    $original = $entity->original;
+    if (!$entity->isNew() && $original) {
+      $original_value = $original->get('changed')->value;
+      $entity->set('changed', $original_value);
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function hr_paragraphs_node_presave(EntityInterface $entity) {
+  // Store used paragraphs.
+  $used_paragraphs = [];
+  if ($entity->hasField('field_paragraphs') && !$entity->field_paragraphs->isEmpty()) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+    $paragraphs = $entity->field_paragraphs->referencedEntities();
+    foreach ($paragraphs as $paragraph) {
+      if (!isset($used_paragraphs[$paragraph->bundle()])) {
+        $used_paragraphs[$paragraph->bundle()] = [
+          'label' => $paragraph->getParagraphType()->label(),
+          'count' => 1,
+        ];
+      }
+      else {
+        $used_paragraphs[$paragraph->bundle()]['count']++;
+      }
+    }
+  }
+
+  if ($entity->hasField('field_paragraphs_secondary') && !$entity->field_paragraphs_secondary->isEmpty()) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+    $paragraphs = $entity->field_paragraphs_secondary->referencedEntities();
+    foreach ($paragraphs as $paragraph) {
+      if (!isset($used_paragraphs[$paragraph->bundle()])) {
+        $used_paragraphs[$paragraph->bundle()] = [
+          'label' => $paragraph->getParagraphType()->label(),
+          'count' => 1,
+        ];
+      }
+      else {
+        $used_paragraphs[$paragraph->bundle()]['count']++;
+      }
+    }
+  }
+
+  $formatted = [];
+  foreach ($used_paragraphs as $used_paragraph) {
+    $formatted[] = $used_paragraph['label'] . ' (' . $used_paragraph['count'] . ')';
+  }
+  sort($formatted);
+  $entity->set('used_paragraphs', $formatted);
+
+  // Revert changed time during update.
+  if ($entity->isMigrating) {
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $original */
+    $original = $entity->original;
+    $langcode = $entity->language()->getId();
+    if (!$entity->isNew() && $original && $original->hasTranslation($langcode)) {
+      $original_value = $original->getTranslation($langcode)->get('changed')->value;
+      $entity->set('changed', $original_value);
     }
   }
 }

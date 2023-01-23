@@ -7,6 +7,11 @@ dependencies:
     - paragraphs.paragraphs_type.rss_feed
   module:
     - link
+    - linkchecker
+third_party_settings:
+  linkchecker:
+    scan: true
+    extractor: link_link_extractor
 id: paragraph.rss_feed.field_rss_read_more
 field_name: field_rss_read_more
 entity_type: paragraph

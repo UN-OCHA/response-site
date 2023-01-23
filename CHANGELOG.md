@@ -4,6 +4,76 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.8](https://github.com/UN-OCHA/response-site/compare/v0.3.7...v0.3.8) (2023-01-23)
+
+### Features
+
+* Add language to dashboard ([59f815](https://github.com/UN-OCHA/response-site/commit/59f81560181392fff3bb64070173b1d0cad77dbc))
+* Allow upcoming events on pages [#RWR-312](https://https://humanitarian.atlassian.net/browse/RWR-312) ([2d3bf6](https://github.com/UN-OCHA/response-site/commit/2d3bf6624c6d5d073946e50e9c8978da949e053e))
+* Dashboard [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292) ([ce803f](https://github.com/UN-OCHA/response-site/commit/ce803f2a0139d7be32a127af75625d1961bc845b))
+* Dashboard - backlinks [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-304](https://https://humanitarian.atlassian.net/browse/RWR-304), [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-304](https://https://humanitarian.atlassian.net/browse/RWR-304) ([317dc2](https://github.com/UN-OCHA/response-site/commit/317dc28f66c4d6b0d45f73be5adcfdb3399c90e6), [9b4b1c](https://github.com/UN-OCHA/response-site/commit/9b4b1c7f5d86c595f21d5a620b05a3c752b9311e))
+* Dashboard - Latests editor [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-294](https://https://humanitarian.atlassian.net/browse/RWR-294) ([2ebd1d](https://github.com/UN-OCHA/response-site/commit/2ebd1d0723f933a42ae179ff946efae97d8681b3))
+* Dashboard - links [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-304](https://https://humanitarian.atlassian.net/browse/RWR-304), [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-304](https://https://humanitarian.atlassian.net/browse/RWR-304) ([664bea](https://github.com/UN-OCHA/response-site/commit/664beada05623ca2ba38f4cfc7ae6329ac6d8c2c), [89b525](https://github.com/UN-OCHA/response-site/commit/89b52537db685df2f416a697fe2d0fc6c0c60639))
+* Dashboard - managers [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-301](https://https://humanitarian.atlassian.net/browse/RWR-301) ([b7aee2](https://github.com/UN-OCHA/response-site/commit/b7aee2581aeabdbd2a1ab14ff5da8f89645a15ae))
+* Dashboard - new groups, managers [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-300](https://https://humanitarian.atlassian.net/browse/RWR-300), [#RWR-301](https://https://humanitarian.atlassian.net/browse/RWR-301), [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-300](https://https://humanitarian.atlassian.net/browse/RWR-300), [#RWR-301](https://https://humanitarian.atlassian.net/browse/RWR-301), [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-300](https://https://humanitarian.atlassian.net/browse/RWR-300), [#RWR-301](https://https://humanitarian.atlassian.net/browse/RWR-301) ([fa4649](https://github.com/UN-OCHA/response-site/commit/fa4649602e7bee48aa22a0f37ec6ef907b35f6d0), [d86b11](https://github.com/UN-OCHA/response-site/commit/d86b11599bf2d04135950f909b6522dd6c227db1), [1a5a61](https://github.com/UN-OCHA/response-site/commit/1a5a61a8c2a973eed8569345796bac7e17cf113f))
+* Dashboard - pages [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-297](https://https://humanitarian.atlassian.net/browse/RWR-297), [#RWR-299](https://https://humanitarian.atlassian.net/browse/RWR-299) ([25edcb](https://github.com/UN-OCHA/response-site/commit/25edcb0f395443e18d142e727fef9bb27389d650))
+* Dashboard - tabs and paragraphs [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-295](https://https://humanitarian.atlassian.net/browse/RWR-295), [#RWR-296](https://https://humanitarian.atlassian.net/browse/RWR-296) ([67f098](https://github.com/UN-OCHA/response-site/commit/67f098f80b23685296e3600abcc19c289d0184eb))
+* Dashboard - translated groups [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-298](https://https://humanitarian.atlassian.net/browse/RWR-298) ([f512c5](https://github.com/UN-OCHA/response-site/commit/f512c5ab8b518ef8f311eaef590b3944ca5c935b))
+* Dashboard POC [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292), [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292) ([2fdaf2](https://github.com/UN-OCHA/response-site/commit/2fdaf228c0143b0afdf0e69de454de058c54b01b), [4bbd48](https://github.com/UN-OCHA/response-site/commit/4bbd48e96aed053224b9329d9eba592c4695e52e))
+* Data export [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292) ([0ce5e9](https://github.com/UN-OCHA/response-site/commit/0ce5e91af7412ef263a165a930daa1c57523934e))
+* Environment indicator ([2472e3](https://github.com/UN-OCHA/response-site/commit/2472e3f70195136dbedfa136719be1c94ab3cf4d))
+* Hide children of unpublished groups [#RWR-305](https://https://humanitarian.atlassian.net/browse/RWR-305) ([3465e2](https://github.com/UN-OCHA/response-site/commit/3465e29a199dfbae8ef5d4d796a45c95970d5754))
+* Hide subgroups of unpublished groups [#RWR-305](https://https://humanitarian.atlassian.net/browse/RWR-305) ([60518a](https://github.com/UN-OCHA/response-site/commit/60518a178d1e2445116a4d3dae24014bffe05fa3))
+* Indicator for unpublishedchildren [#RWR-305](https://https://humanitarian.atlassian.net/browse/RWR-305) ([99a438](https://github.com/UN-OCHA/response-site/commit/99a4387cdf3d7f98c3e2170ab56a894bff37cd96))
+* List hdx ext_cod links [#RWR-310](https://https://humanitarian.atlassian.net/browse/RWR-310) ([387b60](https://github.com/UN-OCHA/response-site/commit/387b6073147f27057741559067a228ef3e3aba07))
+* OCHA search [#RWR-288](https://https://humanitarian.atlassian.net/browse/RWR-288) ([9a5594](https://github.com/UN-OCHA/response-site/commit/9a559435d18597462d4260d21e2622911437ce4d))
+* Redirect ui [#RWR-306](https://https://humanitarian.atlassian.net/browse/RWR-306) ([60b8c6](https://github.com/UN-OCHA/response-site/commit/60b8c67d82b0f6d2a18a2eaf0cb5a756fb61ee15))
+* Separate dashboards [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292) ([0197b5](https://github.com/UN-OCHA/response-site/commit/0197b5f8a67388e17ee1ba7bbc7dbc0d2145f14d))
+* Track freshness [#RWR-303](https://https://humanitarian.atlassian.net/browse/RWR-303), [#RWR-303](https://https://humanitarian.atlassian.net/browse/RWR-303), [#RWR-303](https://https://humanitarian.atlassian.net/browse/RWR-303) ([0e67a6](https://github.com/UN-OCHA/response-site/commit/0e67a69ed04c8fe4db40df2190b0fbe3e4a8f54b), [7bfd5e](https://github.com/UN-OCHA/response-site/commit/7bfd5e421e96e6f165e32f409ef3fea8cc104e1e), [d64c5f](https://github.com/UN-OCHA/response-site/commit/d64c5fa96aaa338be98e404bf6acf070e01b0233))
+* Track freshness in dashboards [#RWR-303](https://https://humanitarian.atlassian.net/browse/RWR-303) ([51634a](https://github.com/UN-OCHA/response-site/commit/51634a8c60ff271d374c56972da83508483dd12c))
+* Use timezone string if present [#RWR-307](https://https://humanitarian.atlassian.net/browse/RWR-307) ([6893ed](https://github.com/UN-OCHA/response-site/commit/6893ed40a62ca58f54677f36471ab0a66ed81685))
+
+### Bug Fixes
+
+* Bump to the new docker image that no longer requires fastcgi overrides. ([871999](https://github.com/UN-OCHA/response-site/commit/87199922fc8a23a83928ea151a3446d2745fa23a))
+* Call docker-compsoe exec correctly. ([1344f9](https://github.com/UN-OCHA/response-site/commit/1344f9430bc175b6a53b6164e58aae22a7fbf2ab))
+* Fix the fix. Of course. ([e17aac](https://github.com/UN-OCHA/response-site/commit/e17aac3daf0b20711e0fbf4c265b583499ba8200))
+* Force whitespace before language in Locations list ([a7a8e2](https://github.com/UN-OCHA/response-site/commit/a7a8e255bf867df32408a71a93f09c10730c5354))
+* Pages now have compact sidebars ([ae73f5](https://github.com/UN-OCHA/response-site/commit/ae73f52594063dabac885ad328547a63410dac8e))
+* Remove border from titles that live inside a paragraph ([101424](https://github.com/UN-OCHA/response-site/commit/101424e27f31105bc766b5eaa31a2abda13e213c))
+* Remove unnecessary composer install in tests ([7a7e8f](https://github.com/UN-OCHA/response-site/commit/7a7e8fbd5ab44d4a4b00d921f88949a1d03ae325))
+* See if we can work around drupal/core-dev force-installing an ancient composer version to PATH. ([4df97a](https://github.com/UN-OCHA/response-site/commit/4df97a302f35cd0a4449099550b70f5bfa3d580c))
+* Use the standard image tag, no need for `-NR` as that will go away. ([aa08fe](https://github.com/UN-OCHA/response-site/commit/aa08fe958f25274a9acfae7c336d149046199640))
+* Z-index for edit links ([90fddd](https://github.com/UN-OCHA/response-site/commit/90fdddfa65714f5ae50ea2c2ee5c08ee782dc7ac))
+
+### Chores
+
+* Adjust csp config ([0bee84](https://github.com/UN-OCHA/response-site/commit/0bee84ad4fcf06ff42c8b542d7021c4c77fd2dab))
+* Adjust csp domains for analytics ([3e56a4](https://github.com/UN-OCHA/response-site/commit/3e56a48585a6172ed4dda77a1c73e1571a3963eb))
+* Bump to the current MYSQL image. ([56c3b2](https://github.com/UN-OCHA/response-site/commit/56c3b28ef96430d7b499996df8d3235b5a788aae))
+* Bump version for admin_denied and jquery_ui_dialog ([80ce2d](https://github.com/UN-OCHA/response-site/commit/80ce2d88960f5e16b4c8e343af8bdfed527b36df))
+* Correct path ([56b3c5](https://github.com/UN-OCHA/response-site/commit/56b3c5037df7d8d989bec90db808d452db6745ba))
+* Default redirect ([5bbf53](https://github.com/UN-OCHA/response-site/commit/5bbf5368008386d705475133b6c7a74d0ebd3145))
+* Disable canonical ([c59231](https://github.com/UN-OCHA/response-site/commit/c59231b1244ece742759c97369ccdec1f5cd2e31))
+* Disable redirect ([8b6b0c](https://github.com/UN-OCHA/response-site/commit/8b6b0cebea0022198bc532bb749e526697457c5f))
+* Kick travis ([5533ee](https://github.com/UN-OCHA/response-site/commit/5533ee653de7662e4aeef68a318bec14e68d2966))
+* Manual periodic update as patch failed ([1b847d](https://github.com/UN-OCHA/response-site/commit/1b847de6d44dec83e7379cc2021d884d85922dcf))
+* Remove more links on pages [#RWR-292](https://https://humanitarian.atlassian.net/browse/RWR-292) ([9b3fba](https://github.com/UN-OCHA/response-site/commit/9b3fbac9dc521f0e390ebea849b46940546865eb))
+* Try failing test ([f2de19](https://github.com/UN-OCHA/response-site/commit/f2de19ab551e185a5335ee86a782dbbde21d2c99), [355b24](https://github.com/UN-OCHA/response-site/commit/355b24f08b6e192034076c4ec40d272ab093722c))
+* Update all outdated drupal/* packages. ([5f807a](https://github.com/UN-OCHA/response-site/commit/5f807a30a58a00b00a6469b839ddc8ed0e978aee), [822a0e](https://github.com/UN-OCHA/response-site/commit/822a0ef96142f66babad77058bfdaa8c8c6eb154), [373a63](https://github.com/UN-OCHA/response-site/commit/373a63dfc929a435cb405c626e092e289b4d5124), [fd4798](https://github.com/UN-OCHA/response-site/commit/fd4798e4580341fc5139f4e48ace6388e51e4edb), [f15f92](https://github.com/UN-OCHA/response-site/commit/f15f925a07765b732c8f1bf5fad9d5d3118d03cb))
+* Update stylelint ([08a488](https://github.com/UN-OCHA/response-site/commit/08a48827d0f309df687e5eeaa6c5195a70556c21))
+
+##### Deps
+
+* Bump debug, babel-jest, jest and svg-sprite ([4d97b3](https://github.com/UN-OCHA/response-site/commit/4d97b3555bfc3b8f6c1ccf8a66d372c414e42e4f))
+* Bump decode-uri-component ([2456a2](https://github.com/UN-OCHA/response-site/commit/2456a2bc09511b3908a9c1a8d2169776cca7ea41))
+* Bump json5 in /html/themes/custom/common_design_subtheme ([1c3430](https://github.com/UN-OCHA/response-site/commit/1c3430f8c9fedc66fd7faeeb8588b2255c719b96))
+* Bump qs in /html/themes/custom/common_design_subtheme ([a7b2b1](https://github.com/UN-OCHA/response-site/commit/a7b2b12281aafbefc7d6edd01cace24a15f28dfe))
+
+##### Deps-dev
+
+* Bump @xmldom/xmldom ([adf16d](https://github.com/UN-OCHA/response-site/commit/adf16d7389e102408af182f226d090ccde368a7c))
+
 ## [0.3.7](https://github.com/UN-OCHA/response-site/compare/v0.3.6...v0.3.7) (2022-12-12)
 
 ### Features

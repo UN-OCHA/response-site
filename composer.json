@@ -34,13 +34,15 @@
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.7",
         "drupal/address": "^1.9",
-        "drupal/admin_denied": "^1.1",
+        "drupal/admin_denied": "^2.0",
         "drupal/components": "^2.4",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
         "drupal/csp": "^1.16",
+        "drupal/dashboards": "^2.1",
         "drupal/date_recur": "^3.2",
+        "drupal/environment_indicator": "^4.0",
         "drupal/external_entities": "^2.0@alpha",
         "drupal/field_group": "^3.2",
         "drupal/fullcalendar_api": "^2.0@alpha",
@@ -48,9 +50,10 @@
         "drupal/google_tag": "^1.4",
         "drupal/group": "^1.4",
         "drupal/inline_entity_form": "^1.0@RC",
-        "drupal/jquery_ui_dialog": "^1.0",
+        "drupal/jquery_ui_dialog": "^2.0",
         "drupal/layout_paragraphs": "^2.0@beta",
         "drupal/link_allowed_hosts": "^1.0@beta",
+        "drupal/linkchecker": "^1.0@beta",
         "drupal/maintenance200": "^1.1",
         "drupal/masquerade": "^2.0@beta",
         "drupal/memcache": "^2.3",
@@ -58,6 +61,7 @@
         "drupal/paragraphs_admin": "^1.4",
         "drupal/paragraphs_asymmetric_translation_widgets": "^1.0@beta",
         "drupal/pathauto": "^1.8",
+        "drupal/redirect": "^1.8",
         "drupal/select2": "^1.13",
         "drupal/social_auth_hid": "^3.0",
         "drupal/subgroup": "^1.0",
@@ -65,16 +69,19 @@
         "drupal/twig_tweak": "^3.1",
         "drupal/user_expire": "^1.0",
         "drupal/views_data_export": "^1.2",
+        "drupal/views_field_compare": "^1.0",
         "drush/drush": "^11.0",
         "fullcalendar/fullcalendar": "^3.10.0",
         "galbar/jsonpath": "^2.0",
+        "guzzlehttp/guzzle": "7.5.0 as 6.5.8",
         "league/commonmark": "1.6",
         "mailchimp/marketing": "^3.0",
         "npm-asset/moment": "^2.29",
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",
         "rlanvin/php-rrule": "2.3.1",
-        "unocha/common_design": "^7.3.0"
+        "unocha/common_design": "^7.3.0",
+        "unocha/ocha_search": "^1.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -201,5 +208,5 @@
         "phpunit/phpunit": "^9.5",
         "weitzman/drupal-test-traits": "^1.5"
     },
-    "version": "0.3.7"
+    "version": "0.3.8"
 }

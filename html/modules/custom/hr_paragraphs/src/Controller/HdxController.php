@@ -467,6 +467,11 @@ class HdxController extends ControllerBase {
     $body = $response->getBody() . '';
     $results = json_decode($body, TRUE);
 
+    // Make sure we have results.
+    if (!isset($results['result'])) {
+      return [];
+    }
+
     return $results['result'];
   }
 
@@ -481,6 +486,11 @@ class HdxController extends ControllerBase {
    */
   public function buildHdxObjects(array $results) : array {
     $data = [];
+
+    // Make sure we have results.
+    if (!isset($results['results'])) {
+      return [];
+    }
 
     foreach ($results['results'] as $row) {
       $id = $row['id'];

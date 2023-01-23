@@ -13,13 +13,17 @@ module:
   csp: 0
   csv_serialization: 0
   ctools: 0
+  dashboards: 0
   date_recur: 0
   datetime: 0
   datetime_range: 0
+  dynamic_entity_reference: 0
   dynamic_page_cache: 0
   editor: 0
   entity: 0
   entity_reference_revisions: 0
+  environment_indicator: 0
+  environment_indicator_ui: 0
   external_entities: 0
   field: 0
   field_group: 0
@@ -33,6 +37,7 @@ module:
   group: 0
   help: 0
   hr_analytics: 0
+  hr_entity_freshness: 0
   hr_mailchimp: 0
   hr_paragraphs: 0
   image: 0
@@ -44,10 +49,12 @@ module:
   jquery_ui_draggable: 0
   jquery_ui_resizable: 0
   language: 0
+  layout_builder: 0
   layout_discovery: 0
   layout_paragraphs: 0
   link: 0
   link_allowed_hosts: 0
+  linkchecker: 0
   locale: 0
   maintenance200: 0
   masquerade: 0
@@ -56,6 +63,7 @@ module:
   menu_ui: 0
   mysql: 0
   node: 0
+  ocha_search: 0
   options: 0
   override_node_options: 0
   page_cache: 0
@@ -66,6 +74,7 @@ module:
   path: 0
   path_alias: 0
   rdf: 0
+  redirect: 0
   rest: 0
   select2: 0
   serialization: 0
@@ -88,6 +97,7 @@ module:
   user_expire: 0
   variationcache: 0
   views_data_export: 0
+  views_field_compare: 0
   views_ui: 0
   pathauto: 1
   content_translation: 10

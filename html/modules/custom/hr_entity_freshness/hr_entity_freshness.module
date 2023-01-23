@@ -1,0 +1,224 @@
+<?php
+
+/**
+ * @file
+ * Track freshness of any entity..
+ */
+
+use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\group\Entity\Group;
+use Drupal\node\Entity\Node;
+use Drupal\paragraphs\Entity\Paragraph;
+
+/**
+ * Retrieves the timestamp for an entity.
+ */
+function hr_entity_freshness_read($entity) {
+  $hr_entity_freshness = hr_entity_freshness_read_multiple($entity->getEntityTypeId(), [$entity->id()]);
+  if (!empty($hr_entity_freshness)) {
+    $first = reset($hr_entity_freshness);
+    return $first;
+  }
+
+  return 0;
+}
+
+/**
+ * Retrieves the last timestamp for entities.
+ */
+function hr_entity_freshness_read_multiple($entity_type, $ids) {
+  $hr_entity_freshness = &drupal_static(__FUNCTION__, []);
+  if (!isset($hr_entity_freshness[$entity_type])) {
+    $hr_entity_freshness[$entity_type] = [];
+  }
+
+  $return = [];
+
+  $entities_to_read = [];
+  foreach ($ids as $id) {
+    if (isset($hr_entity_freshness[$entity_type][$id])) {
+      $return[$id] = $hr_entity_freshness[$entity_type][$id];
+    }
+    else {
+      // Initialize value if current user has not viewed the node.
+      $entities_to_read[$id] = 0;
+    }
+  }
+
+  if (empty($entities_to_read)) {
+    return $return;
+  }
+
+  $result = \Drupal::database()->query('SELECT [entity_id], [timestamp] FROM {hr_entity_freshness} WHERE [entity_type] = :entity_type AND [entity_id] IN ( :ids[] )', [
+    ':entity_type' => $entity_type,
+    ':ids[]' => array_keys($entities_to_read),
+  ]);
+
+  foreach ($result as $row) {
+    $entities_to_read[$row->entity_id] = (int) $row->timestamp;
+  }
+  $hr_entity_freshness[$entity_type] += $entities_to_read;
+
+  return $return + $entities_to_read;
+}
+
+/**
+ * Updates freshness timestamp of the specified entity.
+ */
+function hr_entity_freshness_write(ContentEntityBase $entity, $timestamp, $tab = 'entity') {
+  if ($entity->isNew()) {
+    return;
+  }
+
+  $parent = FALSE;
+  $parent_entity_type = '';
+  $parent_entity_id = 0;
+
+  if ($tab != 'entity') {
+    $parent = $entity;
+    $parent_entity_type = $parent->getEntityTypeId();
+    $parent_entity_id = $parent->id();
+  }
+  elseif ($entity instanceof Paragraph) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph $entity */
+    $parent = $entity->getParentEntity();
+    $parent_entity_type = $parent->getEntityTypeId();
+    $parent_entity_id = $parent->id();
+  }
+  elseif ($entity instanceof Group) {
+    /** @var \Drupal\group\Entity\Group $entity */
+    if ($entity->hasField('subgroup_tree') && !$entity->subgroup_tree->isEmpty()) {
+      if ($entity->subgroup_tree->value !== $entity->id()) {
+        $parent = Group::load($entity->subgroup_tree->value);
+        $parent_entity_type = $parent->getEntityTypeId();
+        $parent_entity_id = $parent->id();
+      }
+    }
+  }
+  elseif ($entity instanceof Node) {
+    /** @var \Drupal\group\Entity\Storage\GroupContentStorage */
+    $storage = \Drupal::entityTypeManager()->getStorage('group_content');
+    $activGroupListEntity = $storage->loadByEntity($entity);
+
+    if (!empty($activGroupListEntity)) {
+      $groupContent = reset($activGroupListEntity);
+      $parent = $groupContent->getGroup();
+      $parent_entity_type = $parent->getEntityTypeId();
+      $parent_entity_id = $parent->id();
+    }
+  }
+
+  \Drupal::database()->merge('hr_entity_freshness')
+    ->keys([
+      'entity_type' => $entity->getEntityTypeId(),
+      'entity_id' => $entity->id(),
+      'parent_entity_type' => $parent_entity_type,
+      'parent_entity_id' => $parent_entity_id,
+      'tab' => $tab,
+    ])
+    ->fields([
+      'timestamp' => $timestamp,
+    ])
+    ->execute();
+
+  // Update static cache.
+  $hr_entity_freshness = &drupal_static('hr_entity_freshness_read_multiple', []);
+  $hr_entity_freshness[$entity->getEntityTypeId()][$entity->id()] = $timestamp;
+
+  // Update parent.
+  if ($parent) {
+    $result = \Drupal::database()->query('SELECT MAX([timestamp]) FROM {hr_entity_freshness} WHERE [parent_entity_type] = :parent_entity_type AND [parent_entity_id] = :parent_entity_id', [
+      ':parent_entity_type' => $parent_entity_type,
+      ':parent_entity_id' => $parent_entity_id,
+    ]);
+
+    if ($parent_timestamp = $result->fetchField()) {
+      return hr_entity_freshness_write($parent, $parent_timestamp);
+    }
+  }
+}
+
+/**
+ * Updates freshness timestamp of the specified entity.
+ */
+function hr_entity_freshness_write_date($entity, $date, $tab = 'entity') {
+  return hr_entity_freshness_write($entity, strtotime($date), $tab);
+}
+
+/**
+ * Implements hook_entity_delete().
+ */
+function hr_entity_freshness_entity_delete(EntityInterface $entity) {
+  \Drupal::database()->delete('hr_entity_freshness')
+    ->condition('entity_type', $entity->getEntityTypeId())
+    ->condition('entity_id', $entity->id())
+    ->execute();
+
+  \Drupal::database()->delete('hr_entity_freshness')
+    ->condition('parent_entity_type', $entity->getEntityTypeId())
+    ->condition('parent_entity_id', $entity->id())
+    ->execute();
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function hr_entity_freshness_group_view_alter(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display) {
+  /** @var \Drupal\group\Entity\GroupInterface $group */
+  $group = $entity;
+
+  if ($group->isNew()) {
+    return;
+  }
+
+  if (\Drupal::currentUser()->isAnonymous()) {
+    return;
+  }
+
+  if (!\Drupal::currentUser()->hasPermission('access content overview')) {
+    return;
+  }
+
+  $build['hr_entity_freshness_timestamp'] = [
+    '#lazy_builder' => [
+      '\Drupal\hr_entity_freshness\HrEntityFreshnessInfo::addFreshnessInfo',
+      [
+        $group->id(),
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function hr_entity_freshness_views_data() {
+  $data['hr_entity_freshness']['table']['group'] = t('Group');
+
+  // Explain how this table joins to others.
+  $data['hr_entity_freshness']['table']['join'] = [
+    'groups_field_data' => [
+      'left_field' => 'id',
+      'field' => 'entity_id',
+      'extra' => [
+        ['field' => 'entity_type', 'value' => 'group', 'numeric' => FALSE],
+      ],
+    ],
+  ];
+
+  $data['hr_entity_freshness']['timestamp'] = [
+    'title' => t('Most recent content'),
+    'field' => [
+      'id' => 'hr_entity_freshness_timestamp',
+      'help' => t('Show date of most recent content.'),
+    ],
+    'filter' => [
+      'help' => t('Show only content that is new or updated.'),
+      'id' => 'hr_entity_freshness_timestamp',
+    ],
+  ];
+
+  return $data;
+}
