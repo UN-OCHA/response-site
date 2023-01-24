@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install hooks.
+ * Themes and preprocessors for the paragraphs page title module.
  */
 
 use Drupal\Component\Utility\UrlHelper;
@@ -16,7 +16,6 @@ use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
-use Drupal\featureflags\Entity\FeatureFlag;
 use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupContent;
 use Drupal\node\Entity\Node;
@@ -2150,7 +2149,6 @@ function hr_paragraphs_custom_node_fields() {
  * Implements hook_ENTITY_TYPE_presave().
  */
 function hr_paragraphs_group_presave(EntityInterface $entity) {
-  /** @var \Drupal\group\Entity\Group $entity */
   /** @var \Drupal\hr_paragraphs\Controller\ParagraphController $controller */
   $controller = \Drupal::service('hr_paragraphs.paragraph_controller');
 
@@ -2186,49 +2184,46 @@ function hr_paragraphs_group_presave(EntityInterface $entity) {
 
   $entity->set('enabled_tabs', $enabled_tabs);
 
-  // Track used paragraph types.
-  if (FeatureFlag::isActive('track_paragraph_use')) {
-    // Store used paragraphs.
-    $used_paragraphs = [];
-    if ($entity->hasField('field_paragraphs') && !$entity->field_paragraphs->isEmpty()) {
-      /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
-      $paragraphs = $entity->field_paragraphs->referencedEntities();
-      foreach ($paragraphs as $paragraph) {
-        if (!isset($used_paragraphs[$paragraph->bundle()])) {
-          $used_paragraphs[$paragraph->bundle()] = [
-            'label' => $paragraph->getParagraphType()->label(),
-            'count' => 1,
-          ];
-        }
-        else {
-          $used_paragraphs[$paragraph->bundle()]['count']++;
-        }
+  // Store used paragraphs.
+  $used_paragraphs = [];
+  if ($entity->hasField('field_paragraphs') && !$entity->field_paragraphs->isEmpty()) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+    $paragraphs = $entity->field_paragraphs->referencedEntities();
+    foreach ($paragraphs as $paragraph) {
+      if (!isset($used_paragraphs[$paragraph->bundle()])) {
+        $used_paragraphs[$paragraph->bundle()] = [
+          'label' => $paragraph->getParagraphType()->label(),
+          'count' => 1,
+        ];
+      }
+      else {
+        $used_paragraphs[$paragraph->bundle()]['count']++;
       }
     }
-
-    if ($entity->hasField('field_sidebar_menu') && !$entity->field_sidebar_menu->isEmpty()) {
-      /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
-      $paragraphs = $entity->field_sidebar_menu->referencedEntities();
-      foreach ($paragraphs as $paragraph) {
-        if (!isset($used_paragraphs[$paragraph->bundle()])) {
-          $used_paragraphs[$paragraph->bundle()] = [
-            'label' => $paragraph->getParagraphType()->label(),
-            'count' => 1,
-          ];
-        }
-        else {
-          $used_paragraphs[$paragraph->bundle()]['count']++;
-        }
-      }
-    }
-
-    $formatted = [];
-    foreach ($used_paragraphs as $used_paragraph) {
-      $formatted[] = $used_paragraph['label'] . ' (' . $used_paragraph['count'] . ')';
-    }
-    sort($formatted);
-    $entity->set('used_paragraphs', $formatted);
   }
+
+  if ($entity->hasField('field_sidebar_menu') && !$entity->field_sidebar_menu->isEmpty()) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+    $paragraphs = $entity->field_sidebar_menu->referencedEntities();
+    foreach ($paragraphs as $paragraph) {
+      if (!isset($used_paragraphs[$paragraph->bundle()])) {
+        $used_paragraphs[$paragraph->bundle()] = [
+          'label' => $paragraph->getParagraphType()->label(),
+          'count' => 1,
+        ];
+      }
+      else {
+        $used_paragraphs[$paragraph->bundle()]['count']++;
+      }
+    }
+  }
+
+  $formatted = [];
+  foreach ($used_paragraphs as $used_paragraph) {
+    $formatted[] = $used_paragraph['label'] . ' (' . $used_paragraph['count'] . ')';
+  }
+  sort($formatted);
+  $entity->set('used_paragraphs', $formatted);
 
   // Revert changed time during update.
   if ($entity->isMigrating) {
@@ -2246,28 +2241,25 @@ function hr_paragraphs_group_presave(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_presave().
  */
 function hr_paragraphs_user_presave(EntityInterface $entity) {
-  /** @var \Drupal\user\Entity\User $entity */
   // Skip for new users.
   if ($entity->isNew()) {
     return;
   }
 
-  if (FeatureFlag::isActive('track_managers')) {
-    $manager_for = [];
+  $manager_for = [];
 
-    /** @var \Drupal\group\GroupMembershipLoader */
-    $group_membership_service = \Drupal::service('group.membership_loader');
-    $group_memberships = $group_membership_service->loadByUser($entity, [
-      'operation-manager',
-      'cluster-manager',
-    ]);
+  /** @var \Drupal\group\GroupMembershipLoader */
+  $group_membership_service = \Drupal::service('group.membership_loader');
+  $group_memberships = $group_membership_service->loadByUser($entity, [
+    'operation-manager',
+    'cluster-manager',
+  ]);
 
-    foreach ($group_memberships as $group_membership) {
-      $manager_for[] = $group_membership->getGroup();
-    }
-
-    $entity->set('manager_for', $manager_for);
+  foreach ($group_memberships as $group_membership) {
+    $manager_for[] = $group_membership->getGroup();
   }
+
+  $entity->set('manager_for', $manager_for);
 
   // Revert changed time during update.
   if ($entity->isMigrating) {
@@ -2284,50 +2276,46 @@ function hr_paragraphs_user_presave(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_presave().
  */
 function hr_paragraphs_node_presave(EntityInterface $entity) {
-  /** @var \Drupal\node\Entity\Node $entity */
-
   // Store used paragraphs.
-  if (FeatureFlag::isActive('track_paragraph_use')) {
-    $used_paragraphs = [];
-    if ($entity->hasField('field_paragraphs') && !$entity->field_paragraphs->isEmpty()) {
-      /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
-      $paragraphs = $entity->field_paragraphs->referencedEntities();
-      foreach ($paragraphs as $paragraph) {
-        if (!isset($used_paragraphs[$paragraph->bundle()])) {
-          $used_paragraphs[$paragraph->bundle()] = [
-            'label' => $paragraph->getParagraphType()->label(),
-            'count' => 1,
-          ];
-        }
-        else {
-          $used_paragraphs[$paragraph->bundle()]['count']++;
-        }
+  $used_paragraphs = [];
+  if ($entity->hasField('field_paragraphs') && !$entity->field_paragraphs->isEmpty()) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+    $paragraphs = $entity->field_paragraphs->referencedEntities();
+    foreach ($paragraphs as $paragraph) {
+      if (!isset($used_paragraphs[$paragraph->bundle()])) {
+        $used_paragraphs[$paragraph->bundle()] = [
+          'label' => $paragraph->getParagraphType()->label(),
+          'count' => 1,
+        ];
+      }
+      else {
+        $used_paragraphs[$paragraph->bundle()]['count']++;
       }
     }
-
-    if ($entity->hasField('field_paragraphs_secondary') && !$entity->field_paragraphs_secondary->isEmpty()) {
-      /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
-      $paragraphs = $entity->field_paragraphs_secondary->referencedEntities();
-      foreach ($paragraphs as $paragraph) {
-        if (!isset($used_paragraphs[$paragraph->bundle()])) {
-          $used_paragraphs[$paragraph->bundle()] = [
-            'label' => $paragraph->getParagraphType()->label(),
-            'count' => 1,
-          ];
-        }
-        else {
-          $used_paragraphs[$paragraph->bundle()]['count']++;
-        }
-      }
-    }
-
-    $formatted = [];
-    foreach ($used_paragraphs as $used_paragraph) {
-      $formatted[] = $used_paragraph['label'] . ' (' . $used_paragraph['count'] . ')';
-    }
-    sort($formatted);
-    $entity->set('used_paragraphs', $formatted);
   }
+
+  if ($entity->hasField('field_paragraphs_secondary') && !$entity->field_paragraphs_secondary->isEmpty()) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+    $paragraphs = $entity->field_paragraphs_secondary->referencedEntities();
+    foreach ($paragraphs as $paragraph) {
+      if (!isset($used_paragraphs[$paragraph->bundle()])) {
+        $used_paragraphs[$paragraph->bundle()] = [
+          'label' => $paragraph->getParagraphType()->label(),
+          'count' => 1,
+        ];
+      }
+      else {
+        $used_paragraphs[$paragraph->bundle()]['count']++;
+      }
+    }
+  }
+
+  $formatted = [];
+  foreach ($used_paragraphs as $used_paragraph) {
+    $formatted[] = $used_paragraph['label'] . ' (' . $used_paragraph['count'] . ')';
+  }
+  sort($formatted);
+  $entity->set('used_paragraphs', $formatted);
 
   // Revert changed time during update.
   if ($entity->isMigrating) {

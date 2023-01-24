@@ -175,3 +175,27 @@ function hr_paragraphs_update_9013() {
   hr_paragraphs_update_9007();
   hr_paragraphs_update_9011();
 }
+
+/**
+ * Mark post_update as being run.
+ */
+function hr_paragraphs_update_9014() {
+  $existing_updates = Drupal::keyValue('post_update')->get('existing_updates');
+  $start_count = count($existing_updates);
+
+  $already_ran = [
+    'hr_paragraphs_post_update_track_managers',
+    'hr_paragraphs_post_update_track_usage_on_group',
+    'hr_paragraphs_post_update_track_usage_on_node',
+  ];
+
+  foreach ($already_ran as $update_hook) {
+    if (!in_array($update_hook, $existing_updates)) {
+      $existing_updates[] = $update_hook;
+    }
+  }
+
+  if ($start_count != count($existing_updates)) {
+    Drupal::keyValue('post_update')->set('existing_updates', $existing_updates);
+  }
+}
