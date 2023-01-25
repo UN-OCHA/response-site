@@ -286,3 +286,19 @@ function hr_paragraphs_update_9013() {
   hr_paragraphs_update_9007();
   hr_paragraphs_update_9011();
 }
+
+/**
+ * Delete GSCE paragraphs.
+ */
+function hr_paragraphs_update_9015() {
+  /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+  $paragraphs = \Drupal::entityTypeManager()->getStorage('paragraph')->loadByProperties([
+    'type' => 'search_results',
+  ]);
+
+  if (!empty($paragraphs)) {
+    foreach ($paragraphs as $paragraph) {
+      $paragraph->delete();
+    }
+  }
+}
