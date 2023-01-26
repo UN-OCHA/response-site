@@ -199,3 +199,19 @@ function hr_paragraphs_update_9014() {
     Drupal::keyValue('post_update')->set('existing_updates', $existing_updates);
   }
 }
+
+/**
+ * Delete GSCE paragraphs.
+ */
+function hr_paragraphs_update_9015() {
+  /** @var \Drupal\paragraphs\Entity\Paragraph[] $paragraphs */
+  $paragraphs = \Drupal::entityTypeManager()->getStorage('paragraph')->loadByProperties([
+    'type' => 'search_results',
+  ]);
+
+  if (!empty($paragraphs)) {
+    foreach ($paragraphs as $paragraph) {
+      $paragraph->delete();
+    }
+  }
+}
