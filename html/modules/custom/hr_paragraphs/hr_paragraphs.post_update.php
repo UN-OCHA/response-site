@@ -136,3 +136,31 @@ function hr_paragraphs_post_update_track_usage_on_node(&$sandbox) {
     $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
   }
 }
+
+/**
+ * Delete wrong aliases.
+ */
+function hr_paragraphs_post_update_rename_cameroun() {
+  $query = Drupal::entityTypeManager()->getStorage('path_alias')->getQuery();
+  $query->condition('alias', 'cameroun', 'CONTAINS');
+  $ids = $query->execute();
+
+  if (empty($ids)) {
+    return;
+  }
+
+  /** @var \Drupal\path_alias\Entity\PathAlias[] $aliases */
+  $aliases = Drupal::entityTypeManager()->getStorage('path_alias')->loadMultiple($ids);
+  foreach ($aliases as $alias) {
+    if (strpos($alias->getAlias(), '/cameroun/') !== FALSE) {
+      $new = str_replace('/cameroun/', '/cameroon/', $alias->getAlias());
+      $alias->setAlias($new);
+      $alias->save();
+    }
+    elseif (strpos($alias->getAlias(), '/cameroun') === 0) {
+      $new = str_replace('/cameroun', '/cameroon', $alias->getAlias());
+      $alias->setAlias($new);
+      $alias->save();
+    }
+  }
+}
