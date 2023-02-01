@@ -117,6 +117,12 @@ hri-iframe:
   js:
     components/hri-iframe/hri-iframe.js: {}
 
+tableau:
+  js:
+    components/hri-iframe/tableau-2.9.1.min.js: {}
+    components/hri-iframe/tableau-2.min.js: {}
+    components/hri-iframe/tableau.js: {}
+
 hri-layout:
   css:
     component:
