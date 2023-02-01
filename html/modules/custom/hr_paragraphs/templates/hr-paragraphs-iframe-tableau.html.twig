@@ -1,0 +1,14 @@
+{%
+  set classes = [
+    'hri-iframe',
+    'hri-iframe-tableau',
+    'hri-iframe--' ~ ratio,
+  ]
+%}
+<div{{ create_attribute()
+  .addClass(classes)
+  .setAttribute('data-width', width)
+  .setAttribute('data-url', embed_url)
+}}>
+  <div class="vizContainer"></div>
+</div>
