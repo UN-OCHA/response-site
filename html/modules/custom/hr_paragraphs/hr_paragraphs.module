@@ -84,6 +84,16 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'ratio' => NULL,
       ],
     ],
+    'hr_paragraphs_iframe_tableau' => [
+      'template' => 'hr-paragraphs-iframe-tableau',
+      'variables' => [
+        'paragraph_id' => NULL,
+        'embed_id' => NULL,
+        'width' => NULL,
+        'height' => NULL,
+        'ratio' => NULL,
+      ],
+    ],
     'group_children' => [
       'template' => 'group-children',
       'variables' => [
@@ -528,14 +538,33 @@ function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
     $ratio = 'ratio-16-9';
   }
 
-  $variables['content']['embed'] = [
-    '#theme' => 'hr_paragraphs_iframe',
-    '#embed_url' => $embed_url,
-    '#width' => $width,
-    '#height' => $height,
-    '#ratio' => $ratio,
-    '#weight' => 99,
-  ];
+  if (strpos($embed_url, 'https://public.tableau.com/views') === 0) {
+    $height = '900px';
+
+    $embed_id = str_replace('https://public.tableau.com/views/', '', $embed_url);
+    if (strpos($embed_id, '?') !== FALSE) {
+      $embed_id = substr($embed_id, 0, strpos($embed_id, '?'));
+    }
+    $variables['content']['embed'] = [
+      '#theme' => 'hr_paragraphs_iframe_tableau',
+      '#paragraph_id' => $paragraph->id(),
+      '#embed_id' => $embed_id,
+      '#width' => $width,
+      '#height' => $height,
+      '#ratio' => $ratio,
+      '#weight' => 99,
+    ];
+  }
+  else {
+    $variables['content']['embed'] = [
+      '#theme' => 'hr_paragraphs_iframe',
+      '#embed_url' => $embed_url,
+      '#width' => $width,
+      '#height' => $height,
+      '#ratio' => $ratio,
+      '#weight' => 99,
+    ];
+  }
 }
 
 /**
