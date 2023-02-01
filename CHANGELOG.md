@@ -4,6 +4,23 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.9](https://github.com/UN-OCHA/response-site/compare/v0.3.8...v0.3.9) (2023-02-01)
+
+### Features
+
+* Remove timezone ([5bc1d3](https://github.com/UN-OCHA/response-site/commit/5bc1d3310b5d87c4dd046c0899ce20a8d68b6d85))
+* Rename Cameroun [#RWR-313](https://https://humanitarian.atlassian.net/browse/RWR-313) ([2817e9](https://github.com/UN-OCHA/response-site/commit/2817e99550e5f2bcbc0ef54b43ba2c6bfaa58ef1))
+
+### Chores
+
+* Delete paragraph template and component css for search results paragraph type in favour of ocha_search module ([0a5083](https://github.com/UN-OCHA/response-site/commit/0a5083edb69eb5003d7240254396824c7b45e154))
+* Remove feature flags [#OPS-9029](https://https://humanitarian.atlassian.net/browse/OPS-9029) ([8044b4](https://github.com/UN-OCHA/response-site/commit/8044b4851b5c06506ab18c3a99822fafadb1c987))
+* Remove search_results paragraphs before cim [#RWR-288](https://https://humanitarian.atlassian.net/browse/RWR-288) ([62245f](https://github.com/UN-OCHA/response-site/commit/62245faae672361d7c8e11bbcd0fee5e3de8ce5b))
+* Remove search results paragraph type as it is replaced with ocha_search module ([fbed22](https://github.com/UN-OCHA/response-site/commit/fbed227e6cda2ec6164bd4f09c2f9563d076023c))
+* Update all outdated drupal/* packages. ([24b2cf](https://github.com/UN-OCHA/response-site/commit/24b2cf4f4498218d3a3ace25476950176ba2dc32))
+* Use feature flags [#OPS-9029](https://https://humanitarian.atlassian.net/browse/OPS-9029) ([c01afe](https://github.com/UN-OCHA/response-site/commit/c01afefde23a81d476cede5fc82070703c9ec42b))
+* Use post update hooks [#OPS-9029](https://https://humanitarian.atlassian.net/browse/OPS-9029) ([27e652](https://github.com/UN-OCHA/response-site/commit/27e6522856b3c604b3a5005347f249f665fb52e4))
+
 ## [0.3.8](https://github.com/UN-OCHA/response-site/compare/v0.3.7...v0.3.8) (2023-01-23)
 
 ### Features

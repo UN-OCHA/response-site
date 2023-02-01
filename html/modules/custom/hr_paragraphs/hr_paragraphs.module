@@ -2149,6 +2149,8 @@ function hr_paragraphs_custom_node_fields() {
  * Implements hook_ENTITY_TYPE_presave().
  */
 function hr_paragraphs_group_presave(EntityInterface $entity) {
+  /** @var \Drupal\group\Entity\Group $entity */
+
   /** @var \Drupal\hr_paragraphs\Controller\ParagraphController $controller */
   $controller = \Drupal::service('hr_paragraphs.paragraph_controller');
 
@@ -2241,6 +2243,7 @@ function hr_paragraphs_group_presave(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_presave().
  */
 function hr_paragraphs_user_presave(EntityInterface $entity) {
+  /** @var \Drupal\user\Entity\User $entity */
   // Skip for new users.
   if ($entity->isNew()) {
     return;
@@ -2276,6 +2279,7 @@ function hr_paragraphs_user_presave(EntityInterface $entity) {
  * Implements hook_ENTITY_TYPE_presave().
  */
 function hr_paragraphs_node_presave(EntityInterface $entity) {
+  /** @var \Drupal\node\Entity\Node $entity */
   // Store used paragraphs.
   $used_paragraphs = [];
   if ($entity->hasField('field_paragraphs') && !$entity->field_paragraphs->isEmpty()) {

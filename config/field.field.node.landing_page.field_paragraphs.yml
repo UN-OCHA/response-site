@@ -8,7 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.child_groups
     - paragraphs.paragraphs_type.group_pages
     - paragraphs.paragraphs_type.layout
-    - paragraphs.paragraphs_type.search_results
     - paragraphs.paragraphs_type.twitter_feed
     - paragraphs.paragraphs_type.upcoming_events
   module:
@@ -31,7 +30,6 @@ settings:
       layout: layout
       child_groups: child_groups
       group_pages: group_pages
-      search_results: search_results
       twitter_feed: twitter_feed
     negate: 1
     target_bundles_drag_drop:
