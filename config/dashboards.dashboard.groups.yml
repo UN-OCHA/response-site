@@ -158,4 +158,17 @@ sections:
           items_per_page: none
         weight: 1
         additional: {  }
+      f9d48407-3e71-4c03-8849-625c4842fad7:
+        uuid: f9d48407-3e71-4c03-8849-625c4842fad7
+        region: second
+        configuration:
+          id: 'views_block:db_h1_used-block_1'
+          label: ''
+          label_display: visible
+          provider: views
+          context_mapping: {  }
+          views_label: ''
+          items_per_page: none
+        weight: 10
+        additional: {  }
     third_party_settings: {  }
