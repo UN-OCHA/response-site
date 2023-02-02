@@ -2360,21 +2360,13 @@ function hr_paragraphs_node_presave(EntityInterface $entity) {
  * Implements hook_editor_js_settings_alter().
  */
 function hr_paragraphs_editor_js_settings_alter(array &$settings) {
-  if (isset($settings['editor'])
-    && isset($settings['editor']['formats'])
-    && isset($settings['editor']['formats']['full_html'])
-    && isset($settings['editor']['formats']['full_html']['editorSettings'])
-    && isset($settings['editor']['formats']['full_html']['editorSettings']['format_tags'])
+  if (isset($settings['editor']['formats']['full_html']['editorSettings']['format_tags'])
     && strpos($settings['editor']['formats']['full_html']['editorSettings']['format_tags'], 'h1;')) {
     $format_tags = str_replace('h1;', '', $settings['editor']['formats']['full_html']['editorSettings']['format_tags']);
     $settings['editor']['formats']['full_html']['editorSettings']['format_tags'] = $format_tags;
   }
 
-  if (isset($settings['editor'])
-    && isset($settings['editor']['formats'])
-    && isset($settings['editor']['formats']['basic_html'])
-    && isset($settings['editor']['formats']['basic_html']['editorSettings'])
-    && isset($settings['editor']['formats']['basic_html']['editorSettings']['format_tags'])
+  if (isset($settings['editor']['formats']['basic_html']['editorSettings']['format_tags'])
     && strpos($settings['editor']['formats']['basic_html']['editorSettings']['format_tags'], 'h1;')) {
     $format_tags = str_replace('h1;', '', $settings['editor']['formats']['basic_html']['editorSettings']['format_tags']);
     $settings['editor']['formats']['basic_html']['editorSettings']['format_tags'] = $format_tags;
