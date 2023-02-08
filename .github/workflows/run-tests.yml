@@ -123,13 +123,26 @@ jobs:
           threshold_alert: 10
           threshold_warning: 50
           threshold_metric: "lines"
+          comment_footer: false
 
-      - name: Post Comment
-        uses: actions/github-script@v6
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: fc
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const output = `#### Composer Validate \`${{ steps.validate.outcome }}\`
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Build output
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ### Build output
+            #### Composer Validate \`${{ steps.validate.outcome }}\`
             #### PHP Lint \`${{ steps.lint.outcome }}\`
             #### Docker Build \`${{ steps.build.outcome }}\`
             #### Environment Setup \`${{ steps.docker.outcome }}\`
@@ -143,13 +156,7 @@ jobs:
             </details>
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Workflow: \`${{ github.workflow }}\`*`;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
+          edit-mode: replace
 
       - name: Slack Success Notification
         id: slack_success

@@ -43,3 +43,9 @@ filters:
     status: true
     weight: 11
     settings: {  }
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: 10
+    settings: {  }
