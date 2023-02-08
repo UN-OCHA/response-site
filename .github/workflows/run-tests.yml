@@ -142,7 +142,7 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             ### Build output
-            const output = `#### Composer Validate \`${{ steps.validate.outcome }}\`
+            #### Composer Validate \`${{ steps.validate.outcome }}\`
             #### PHP Lint \`${{ steps.lint.outcome }}\`
             #### Docker Build \`${{ steps.build.outcome }}\`
             #### Environment Setup \`${{ steps.docker.outcome }}\`
@@ -156,13 +156,6 @@ jobs:
             </details>
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Workflow: \`${{ github.workflow }}\`*`;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
           edit-mode: replace
 
       - name: Slack Success Notification
