@@ -123,6 +123,7 @@ jobs:
           threshold_alert: 10
           threshold_warning: 50
           threshold_metric: "lines"
+          comment_footer: false
 
       - name: Post Comment
         uses: actions/github-script@v6
