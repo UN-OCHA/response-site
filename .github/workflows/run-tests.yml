@@ -125,11 +125,23 @@ jobs:
           threshold_metric: "lines"
           comment_footer: false
 
-      - name: Post Comment
-        uses: actions/github-script@v6
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: fc
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Build output
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ### Build output
             const output = `#### Composer Validate \`${{ steps.validate.outcome }}\`
             #### PHP Lint \`${{ steps.lint.outcome }}\`
             #### Docker Build \`${{ steps.build.outcome }}\`
@@ -151,6 +163,7 @@ jobs:
               repo: context.repo.repo,
               body: output
             })
+          edit-mode: replace
 
       - name: Slack Success Notification
         id: slack_success
