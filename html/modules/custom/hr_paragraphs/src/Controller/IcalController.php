@@ -94,6 +94,11 @@ class IcalController extends ControllerBase {
         }
       }
 
+      // Max sure DTEND is set.
+      if (!isset($event['DTEND'])) {
+        $event['DTEND'] = $event['DTSTART'];
+      }
+
       if (isset($event['RRULE'])) {
         $iterationCount = 0;
         $maxIterations = 40;
