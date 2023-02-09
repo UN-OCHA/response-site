@@ -10225,16 +10225,16 @@
         },
         {
             "name": "unocha/ocha_search",
-            "version": "v1.0.6",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/ocha_search.git",
-                "reference": "09beb11d8cfd4ec5a92e507fb6fdd83943cb97b8"
+                "reference": "8bb1108a1db2955886ab5a3a20423c0c02276f80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/ocha_search/zipball/09beb11d8cfd4ec5a92e507fb6fdd83943cb97b8",
-                "reference": "09beb11d8cfd4ec5a92e507fb6fdd83943cb97b8",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_search/zipball/8bb1108a1db2955886ab5a3a20423c0c02276f80",
+                "reference": "8bb1108a1db2955886ab5a3a20423c0c02276f80",
                 "shasum": ""
             },
             "require": {
@@ -10251,9 +10251,9 @@
             ],
             "support": {
                 "issues": "https://github.com/UN-OCHA/ocha_search/issues",
-                "source": "https://github.com/UN-OCHA/ocha_search/tree/v1.0.6"
+                "source": "https://github.com/UN-OCHA/ocha_search/tree/v1.0.7"
             },
-            "time": "2022-12-13T11:42:20+00:00"
+            "time": "2023-02-09T14:22:52+00:00"
         },
         {
             "name": "webflo/drupal-finder",
