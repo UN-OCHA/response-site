@@ -4,6 +4,27 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.10](https://github.com/UN-OCHA/response-site/compare/v0.3.9...v0.3.10) (2023-02-09)
+
+### Features
+
+* Handle tableau size [#RWR-314](https://https://humanitarian.atlassian.net/browse/RWR-314) ([c92c14](https://github.com/UN-OCHA/response-site/commit/c92c1467d383cf6cbaa1da98f337e83e65a720aa))
+* Handle tableau url [#RWR-314](https://https://humanitarian.atlassian.net/browse/RWR-314) ([4c1cb7](https://github.com/UN-OCHA/response-site/commit/4c1cb744155ee3d5f30fbd9b8781a69c39901e4f))
+* List use of H1 [#RWR-315](https://https://humanitarian.atlassian.net/browse/RWR-315) ([ebb617](https://github.com/UN-OCHA/response-site/commit/ebb61737f07a578a62c1b111c969d8bcc269514a))
+* Remove H1 in editor [#RWR-315](https://https://humanitarian.atlassian.net/browse/RWR-315), [#RWR-315](https://https://humanitarian.atlassian.net/browse/RWR-315) ([2de6a1](https://github.com/UN-OCHA/response-site/commit/2de6a1687b8c79dcb98f18e909e23e22d91e2084), [f3a453](https://github.com/UN-OCHA/response-site/commit/f3a45351b5bd428557ab677c57578288c38fee24))
+
+### Chores
+
+* Coverage report ([0d4d66](https://github.com/UN-OCHA/response-site/commit/0d4d663b56109f51643e787c3ed1009be98ffec9), [0a4140](https://github.com/UN-OCHA/response-site/commit/0a414050fd5bf11566afe3822a89e99c42cf46da), [fb19b4](https://github.com/UN-OCHA/response-site/commit/fb19b4ad70919a30f5e69c0bb899950abfb992eb))
+* Disable footer ([74a726](https://github.com/UN-OCHA/response-site/commit/74a726f0c7389a03456b6dccea3ae730f2feeb82))
+* Fix yml ([1ce6e0](https://github.com/UN-OCHA/response-site/commit/1ce6e06eb4e1053ed8362752a59518e0430b8829))
+* Remove travis ([ed9545](https://github.com/UN-OCHA/response-site/commit/ed9545b43a93147ba262a439c2d724c0f6037c6b))
+* Replace issue comments ([01150e](https://github.com/UN-OCHA/response-site/commit/01150edc4288f1082df6ac35d7b1f2016e0ef8cb), [0d5756](https://github.com/UN-OCHA/response-site/commit/0d5756c0d462e08adef5a4f4729c9893f656e2fb))
+* Switch to GH actions ([5d4ac8](https://github.com/UN-OCHA/response-site/commit/5d4ac87c630d27c1bbf018461b72ce9427408a4e), [203a72](https://github.com/UN-OCHA/response-site/commit/203a72a64e0d7aec0584c1f417181656e908b988), [4ad6ec](https://github.com/UN-OCHA/response-site/commit/4ad6eca63b17d06ac0145ceba4bbdcb5b7ce9dc3), [667362](https://github.com/UN-OCHA/response-site/commit/667362f628bd07d493c485baf22dd3d94ced26b8), [adf2bb](https://github.com/UN-OCHA/response-site/commit/adf2bb32d91ed6c88198fea80fb1d3d7c2a9ec26), [820f91](https://github.com/UN-OCHA/response-site/commit/820f91325750e44b6026afe5a237a6f01da36d00), [124ad5](https://github.com/UN-OCHA/response-site/commit/124ad5b9994f03776ce9b44f676eda3e83fa31af), [c39c90](https://github.com/UN-OCHA/response-site/commit/c39c9099e3632a8a6ee56d0448b9448b21a99891), [0a0ef5](https://github.com/UN-OCHA/response-site/commit/0a0ef58879f3e0f0e9a2352e9ec8ae7243c3a9c7), [2dc832](https://github.com/UN-OCHA/response-site/commit/2dc83291793b8eba2324a7852ffe570edd80b095))
+* Typo in comment ([3f9e8f](https://github.com/UN-OCHA/response-site/commit/3f9e8f1a96f0f21d72471e815d4060a3b232fcb4))
+* Update all outdated drupal/* packages. ([55b90e](https://github.com/UN-OCHA/response-site/commit/55b90e28a18e1ef3785253be14ad68afeb7267d6))
+* Use local patches ([dba7e7](https://github.com/UN-OCHA/response-site/commit/dba7e7d544943d0cec35407d3ab9cb70f1c844b6))
+
 ## [0.3.9](https://github.com/UN-OCHA/response-site/compare/v0.3.8...v0.3.9) (2023-02-01)
 
 ### Features

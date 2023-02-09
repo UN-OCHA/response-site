@@ -84,6 +84,14 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'ratio' => NULL,
       ],
     ],
+    'hr_paragraphs_iframe_tableau' => [
+      'template' => 'hr-paragraphs-iframe-tableau',
+      'variables' => [
+        'embed_url' => NULL,
+        'width' => NULL,
+        'ratio' => NULL,
+      ],
+    ],
     'group_children' => [
       'template' => 'group-children',
       'variables' => [
@@ -528,14 +536,29 @@ function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
     $ratio = 'ratio-16-9';
   }
 
-  $variables['content']['embed'] = [
-    '#theme' => 'hr_paragraphs_iframe',
-    '#embed_url' => $embed_url,
-    '#width' => $width,
-    '#height' => $height,
-    '#ratio' => $ratio,
-    '#weight' => 99,
-  ];
+  if (strpos($embed_url, 'https://public.tableau.com/views') === 0) {
+    if (strpos($embed_url, '?') !== FALSE) {
+      $embed_url = substr($embed_url, 0, strpos($embed_url, '?'));
+    }
+
+    $variables['content']['embed'] = [
+      '#theme' => 'hr_paragraphs_iframe_tableau',
+      '#embed_url' => $embed_url,
+      '#width' => $width,
+      '#ratio' => $ratio,
+      '#weight' => 99,
+    ];
+  }
+  else {
+    $variables['content']['embed'] = [
+      '#theme' => 'hr_paragraphs_iframe',
+      '#embed_url' => $embed_url,
+      '#width' => $width,
+      '#height' => $height,
+      '#ratio' => $ratio,
+      '#weight' => 99,
+    ];
+  }
 }
 
 /**
@@ -2330,5 +2353,22 @@ function hr_paragraphs_node_presave(EntityInterface $entity) {
       $original_value = $original->getTranslation($langcode)->get('changed')->value;
       $entity->set('changed', $original_value);
     }
+  }
+}
+
+/**
+ * Implements hook_editor_js_settings_alter().
+ */
+function hr_paragraphs_editor_js_settings_alter(array &$settings) {
+  if (isset($settings['editor']['formats']['full_html']['editorSettings']['format_tags'])
+    && strpos($settings['editor']['formats']['full_html']['editorSettings']['format_tags'], 'h1;')) {
+    $format_tags = str_replace('h1;', '', $settings['editor']['formats']['full_html']['editorSettings']['format_tags']);
+    $settings['editor']['formats']['full_html']['editorSettings']['format_tags'] = $format_tags;
+  }
+
+  if (isset($settings['editor']['formats']['basic_html']['editorSettings']['format_tags'])
+    && strpos($settings['editor']['formats']['basic_html']['editorSettings']['format_tags'], 'h1;')) {
+    $format_tags = str_replace('h1;', '', $settings['editor']['formats']['basic_html']['editorSettings']['format_tags']);
+    $settings['editor']['formats']['basic_html']['editorSettings']['format_tags'] = $format_tags;
   }
 }

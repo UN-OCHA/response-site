@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Theme override for an iFrame Paragraph.
+ *
+ * @overrides html/modules/custom/hr_paragraphs/templates/hr-paragraphs-iframe-tableau.html.twig
+ */
+#}
+{{ attach_library('common_design_subtheme/hri-iframe') }}
+{{ attach_library('common_design_subtheme/tableau') }}
+{%
+  set classes = [
+    'hri-iframe',
+    'hri-iframe-tableau',
+    'hri-iframe--' ~ ratio,
+  ]
+%}
+<div{{ create_attribute()
+  .addClass(classes)
+  .setAttribute('data-width', width)
+  .setAttribute('data-url', embed_url)
+}}>
+  <div class="vizContainer"></div>
+</div>

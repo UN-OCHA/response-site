@@ -1,0 +1,207 @@
+diff --git a/linkchecker.links.task.yml b/linkchecker.links.task.yml
+index 288b455c037e7d1b0bd18a84bc521a23f87636a2..a23ddf8cdb7da0236ef915dcf0a1d03f29b8def9 100644
+--- a/linkchecker.links.task.yml
++++ b/linkchecker.links.task.yml
+@@ -2,3 +2,7 @@ linkchecker.admin_settings_form_tab:
+   route_name: linkchecker.admin_settings_form
+   title: Settings
+   base_route: linkchecker.admin_settings_form
++linkchecker.fields_tab:
++  route_name: linkchecker.fields
++  title: Configurable Fields
++  base_route: linkchecker.admin_settings_form
+diff --git a/linkchecker.routing.yml b/linkchecker.routing.yml
+index ae2b4cf65cb08bf076879ad49ade07e15d7859fc..af850ca4b4b799bece9b967d1f0f142500354b33 100644
+--- a/linkchecker.routing.yml
++++ b/linkchecker.routing.yml
+@@ -5,3 +5,10 @@ linkchecker.admin_settings_form:
+     _title: 'Link checker'
+   requirements:
+     _permission: 'administer linkchecker'
++linkchecker.fields:
++  path: '/admin/config/content/linkchecker/fields'
++  defaults:
++    _title: 'Configurable Fields'
++    _controller: '\Drupal\linkchecker\Controller\ConfigurableFieldsListController::build'
++  requirements:
++    _permission: 'administer linkchecker'
+diff --git a/src/Controller/ConfigurableFieldsListController.php b/src/Controller/ConfigurableFieldsListController.php
+new file mode 100644
+index 0000000000000000000000000000000000000000..4dd9b216b963be6391f9690ff2baa8f3b89ea17f
+--- /dev/null
++++ b/src/Controller/ConfigurableFieldsListController.php
+@@ -0,0 +1,174 @@
++<?php
++
++namespace Drupal\linkchecker\Controller;
++
++use Drupal\Core\Controller\ControllerBase;
++use Drupal\Core\Entity\EntityFieldManagerInterface;
++use Drupal\Core\Field\FieldConfigInterface;
++use Drupal\Core\Link;
++use Drupal\Core\Url;
++use Drupal\linkchecker\Plugin\LinkExtractorManager;
++use Symfony\Component\DependencyInjection\ContainerInterface;
++
++/**
++ * Returns responses for Link Checker routes.
++ */
++class ConfigurableFieldsListController extends ControllerBase {
++
++  /**
++   * The entity field manager.
++   *
++   * @var \Drupal\Core\Entity\EntityFieldManagerInterface
++   */
++  protected $entityFieldManager;
++
++  /**
++   * The link extractor manager.
++   *
++   * @var \Drupal\linkchecker\Plugin\LinkExtractorManager
++   */
++  protected $extractorManager;
++
++  /**
++   * ConfigurableFieldsListController constructor.
++   *
++   * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager
++   *   The entity field manager.
++   * @param \Drupal\linkchecker\Plugin\LinkExtractorManager $extractor_manager
++   *   The link extractor manager.
++   */
++  public function __construct(EntityFieldManagerInterface $entity_field_manager, LinkExtractorManager $extractor_manager) {
++    $this->entityFieldManager = $entity_field_manager;
++    $this->extractorManager = $extractor_manager;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function create(ContainerInterface $container) {
++    return new static(
++      $container->get('entity_field.manager'),
++      $container->get('plugin.manager.link_extractor')
++    );
++  }
++
++  /**
++   * Builds the response.
++   */
++  public function build() {
++    $eligible_fields = $this->getConfigurableFields();
++    if (empty($eligible_fields)) {
++      return [
++        '#markup' => $this->t('<p>No configurable fields were found.</p>'),
++      ];
++    }
++
++    $text = [
++      '#markup' => $this->t('<p>This is a list of all fields that are eligible for Link Checker configuration.</p>'),
++    ];
++
++    $table = [
++      '#theme' => 'table',
++      '#header' => [
++        'entity_type' => $this->t('Entity type'),
++        'bundle' => $this->t('Bundle'),
++        'field_name' => $this->t('Field name'),
++        'enabled' => $this->t('Scan broken links'),
++        'configure_link' => '',
++      ],
++      '#rows' => [],
++    ];
++
++    foreach ($eligible_fields as $entity_type => $bundles) {
++      foreach ($bundles as $bundle => $fields) {
++        foreach ($fields as $field_name => $config) {
++          $table['#rows'][] = [
++            'entity_type' => $entity_type,
++            'bundle' => $bundle,
++            'field_name' => $field_name,
++            'enabled' => $config['enabled'] ? $this->t('Yes') : '',
++            'configure_link' => Link::fromTextAndUrl('configure', $config['config_url']),
++          ];
++        }
++      }
++    }
++    $build = [
++      'content' => $text,
++      'table' => $table,
++    ];
++
++    return $build;
++  }
++
++  /**
++   * Get a list of fields that can be configured to use Link Checker.
++   *
++   * @return array
++   *   An associative array of data (enabled, config_url), keyed by entity type,
++   *   then bundle, then field name.
++   */
++  protected function getConfigurableFields() {
++    $field_list = [];
++    $ignore_entity_types = [
++      'shortcut',
++    ];
++
++    $valid_types = [];
++    foreach ($this->extractorManager->getDefinitions() as $definition) {
++      $valid_types = array_unique(array_merge($valid_types, $definition['field_types']), SORT_REGULAR);
++    }
++
++    $field_map = $this->entityFieldManager->getFieldMap();
++    foreach ($field_map as $entity_type => $fields) {
++      if (in_array($entity_type, $ignore_entity_types)) {
++        continue;
++      }
++      $bundle_entity_type = $this->entityTypeManager()->getDefinition($entity_type)->getBundleEntityType();
++      if (empty($bundle_entity_type)) {
++        continue;
++      }
++
++      foreach ($fields as $field_name => $definition) {
++        if (in_array($definition['type'], $valid_types)) {
++          foreach ($definition['bundles'] as $bundle) {
++            $bundle_links = $this->entityTypeManager()->getDefinition($bundle_entity_type)->get('links');
++            switch ($entity_type) {
++              case 'taxonomy_term':
++                $bundle_edit_link = preg_replace('/\{.+\}\/overview$/', $bundle . '/overview', $bundle_links['overview-form']);
++                break;
++
++              default:
++                $bundle_edit_link = preg_replace('/\{.+\}$/', $bundle, $bundle_links['edit-form']);
++            }
++
++            // Get the configure URL.
++            $field_config_uri = sprintf('internal:%s/fields/%s.%s.%s', $bundle_edit_link, $entity_type, $bundle, $field_name);
++            $field_config_url = Url::fromUri($field_config_uri);
++
++            $bundle_fields = $this->entityFieldManager->getFieldDefinitions($entity_type, $bundle);
++
++            if (isset($bundle_fields[$field_name]) and $bundle_fields[$field_name] instanceof FieldConfigInterface) {
++              /** @var Drupal\field\Entity\FieldConfigInterface $field_config */
++              $field_config = $bundle_fields[$field_name];
++              // Whether linkchecker is configured for this field or not.
++              $enabled = (bool) $field_config->getThirdPartySetting('linkchecker', 'scan');
++              if (!array_key_exists($entity_type, $field_list)) {
++                $field_list[$entity_type] = [];
++              }
++              if (!array_key_exists($bundle, $field_list[$entity_type])) {
++                $field_list[$entity_type][$bundle] = [];
++              }
++              $field_list[$entity_type][$bundle][$field_name] = [
++                'enabled' => $enabled,
++                'config_url' => $field_config_url,
++              ];
++            }
++          }
++        }
++      }
++    }
++
++    return $field_list;
++  }
++
++}
