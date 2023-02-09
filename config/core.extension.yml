@@ -24,7 +24,6 @@ module:
   entity_reference_revisions: 0
   environment_indicator: 0
   environment_indicator_ui: 0
-  external_entities: 0
   field: 0
   field_group: 0
   field_ui: 0
@@ -68,7 +67,6 @@ module:
   override_node_options: 0
   page_cache: 0
   paragraphs_admin: 0
-  paragraphs_asymmetric_translation_widgets: 0
   paragraphs_group_permissions: 0
   paragraphs_type_permissions: 0
   path: 0
