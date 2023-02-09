@@ -10,7 +10,7 @@
  */
 function hr_paragraphs_post_update_track_usage_on_group(&$sandbox) {
   if (!isset($sandbox['total'])) {
-    $ids = \Drupal::entityQuery('group')->execute();
+    $ids = \Drupal::entityQuery('group')->accessCheck(FALSE)->execute();
     $sandbox['total'] = count($ids);
     $sandbox['current'] = 0;
 
@@ -23,6 +23,7 @@ function hr_paragraphs_post_update_track_usage_on_group(&$sandbox) {
   $ids = \Drupal::entityQuery('group')
     ->range($sandbox['current'], 25)
     ->sort('id')
+    ->accessCheck(FALSE)
     ->execute();
 
   if (empty($sandbox['total'])) {
@@ -53,7 +54,7 @@ function hr_paragraphs_post_update_track_usage_on_group(&$sandbox) {
  */
 function hr_paragraphs_post_update_track_managers(&$sandbox) {
   if (!isset($sandbox['total'])) {
-    $ids = \Drupal::entityQuery('user')->execute();
+    $ids = \Drupal::entityQuery('user')->accessCheck(FALSE)->execute();
     $sandbox['total'] = count($ids);
     $sandbox['current'] = 0;
 
@@ -66,6 +67,7 @@ function hr_paragraphs_post_update_track_managers(&$sandbox) {
   $ids = \Drupal::entityQuery('user')
     ->range($sandbox['current'], 25)
     ->sort('uid')
+    ->accessCheck(FALSE)
     ->execute();
 
   if (empty($sandbox['total'])) {
@@ -98,7 +100,7 @@ function hr_paragraphs_post_update_track_managers(&$sandbox) {
  */
 function hr_paragraphs_post_update_track_usage_on_node(&$sandbox) {
   if (!isset($sandbox['total'])) {
-    $ids = \Drupal::entityQuery('node')->execute();
+    $ids = \Drupal::entityQuery('node')->accessCheck(FALSE)->execute();
     $sandbox['total'] = count($ids);
     $sandbox['current'] = 0;
 
@@ -109,6 +111,7 @@ function hr_paragraphs_post_update_track_usage_on_node(&$sandbox) {
   }
 
   $ids = \Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
     ->range($sandbox['current'], 25)
     ->sort('nid')
     ->execute();
@@ -141,7 +144,7 @@ function hr_paragraphs_post_update_track_usage_on_node(&$sandbox) {
  * Delete wrong aliases.
  */
 function hr_paragraphs_post_update_rename_cameroun() {
-  $query = Drupal::entityTypeManager()->getStorage('path_alias')->getQuery();
+  $query = Drupal::entityTypeManager()->getStorage('path_alias')->getQuery()->accessCheck(FALSE);
   $query->condition('alias', 'cameroun', 'CONTAINS');
   $ids = $query->execute();
 

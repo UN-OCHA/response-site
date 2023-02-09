@@ -1,4 +1,4 @@
 type: module
 name: RWR Analytics
 description: 'Handles RWR analytics.'
-core_version_requirement: ^9
+core_version_requirement: ^9 || ^10

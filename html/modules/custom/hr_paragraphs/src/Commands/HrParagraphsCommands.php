@@ -1474,7 +1474,7 @@ class HrParagraphsCommands extends DrushCommands {
     $records = [];
 
     // Main content.
-    $query = $this->entityTypeManager->getStorage('group')->getQuery();
+    $query = $this->entityTypeManager->getStorage('group')->getQuery()->accessCheck(FALSE);
     $condition_group = $query->orConditionGroup('OR');
     $condition_group->condition('field_paragraphs.entity:paragraph.field_links.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
       ->condition('field_paragraphs.entity:paragraph.field_iframe_url.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
@@ -1486,7 +1486,7 @@ class HrParagraphsCommands extends DrushCommands {
     $group_ids = array_values($query->execute());
 
     // Sidebar.
-    $query = $this->entityTypeManager->getStorage('group')->getQuery();
+    $query = $this->entityTypeManager->getStorage('group')->getQuery()->accessCheck(FALSE);
     $condition_group = $query->orConditionGroup('OR');
     $condition_group->condition('field_sidebar_menu.entity:paragraph.field_links.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
       ->condition('field_sidebar_menu.entity:paragraph.field_iframe_url.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
@@ -1620,7 +1620,7 @@ class HrParagraphsCommands extends DrushCommands {
     $records = [];
 
     // Main content.
-    $query = $this->entityTypeManager->getStorage('node')->getQuery();
+    $query = $this->entityTypeManager->getStorage('node')->getQuery()->accessCheck(FALSE);
     $condition_group = $query->orConditionGroup('OR');
     $condition_group->condition('field_paragraphs.entity:paragraph.field_links.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
       ->condition('field_paragraphs.entity:paragraph.field_iframe_url.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
@@ -1632,7 +1632,7 @@ class HrParagraphsCommands extends DrushCommands {
     $node_ids = array_values($query->execute());
 
     // Sidebar.
-    $query = $this->entityTypeManager->getStorage('node')->getQuery();
+    $query = $this->entityTypeManager->getStorage('node')->getQuery()->accessCheck(FALSE);
     $condition_group = $query->orConditionGroup('OR');
     $condition_group->condition('field_paragraphs_secondary.entity:paragraph.field_links.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
       ->condition('field_paragraphs_secondary.entity:paragraph.field_iframe_url.uri', 'https://www.humanitarianresponse.info/%', 'LIKE')
