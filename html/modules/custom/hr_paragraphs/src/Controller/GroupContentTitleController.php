@@ -3,7 +3,6 @@
 namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\group\Entity\Controller\GroupRelationshipController;
-use Drupal\group\Entity\GroupRelationshipType;
 use Drupal\group\Entity\GroupInterface;
 
 /**

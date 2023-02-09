@@ -269,8 +269,8 @@ class ParagraphController extends ControllerBase {
       // content plugins.
       foreach ($group->getGroupType()->getInstalledPlugins() as $plugin) {
         /** @var \Drupal\group\Plugin\Group\Relation\GroupRelationInterface $plugin */
-        //$links += $plugin->getGroupOperations($group);
-        //$cacheable_metadata = $cacheable_metadata->merge($plugin->getGroupOperationsCacheableMetadata());
+        $links += $plugin->getGroupOperations($group);
+        $cacheable_metadata = $cacheable_metadata->merge($plugin->getGroupOperationsCacheableMetadata());
       }
 
       if ($links) {
