@@ -1948,10 +1948,6 @@ function hr_paragraphs_preprocess_views_view(&$variables) {
  * Implements hook_group_content_info_alter().
  */
 function hr_paragraphs_group_content_info_alter(&$definitions) {
-  // Allow blocked users to be added to a group.
-  $definitions['group_membership']['class'] = 'Drupal\hr_paragraphs\Plugin\GroupContentEnabler\AllGroupMembership';
-  $definitions['group_membership']['provider'] = 'hr_paragraphs';
-
   // Hide sub groups and pages when unpublished.
   $definitions['group_node:landing_page']['handlers']['access'] = 'Drupal\hr_paragraphs\Plugin\GroupNodeAccessControlHandler';
   $definitions['group_node:page']['handlers']['access'] = 'Drupal\hr_paragraphs\Plugin\GroupNodeAccessControlHandler';

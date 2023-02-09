@@ -312,7 +312,7 @@ class HrParagraphsCommands extends DrushCommands {
       $this->addPanesToEntity($group);
 
       // Add cluster to operation.
-      $operation->addContent($group, 'subgroup:' . $group->bundle());
+      $operation->addRelationship($group, 'subgroup:' . $group->bundle());
     }
 
     fclose($handle);
@@ -432,8 +432,8 @@ class HrParagraphsCommands extends DrushCommands {
       }
 
       // Add page to operation/cluster.
-      if (!$operation->getContentByEntityId('group_node:' . $node->bundle(), $node->id())) {
-        $operation->addContent($node, 'group_node:' . $node->bundle());
+      if (!$operation->getRelationshipsByEntity($node)) {
+        $operation->addRelationship($node, 'group_node:' . $node->bundle());
       }
     }
 

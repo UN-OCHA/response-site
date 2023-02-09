@@ -2,24 +2,23 @@
 
 namespace Drupal\hr_paragraphs\Controller;
 
-use Drupal\group\Entity\Controller\GroupContentController;
-use Drupal\group\Entity\GroupContentType;
+use Drupal\group\Entity\Controller\GroupRelationshipController;
+use Drupal\group\Entity\GroupRelationshipType;
 use Drupal\group\Entity\GroupInterface;
 
 /**
  * Returns responses for GroupContent routes.
  */
-class GroupContentTitleController extends GroupContentController {
+class GroupContentTitleController extends GroupRelationshipController {
 
   /**
    * {@inheritdoc}
    */
   public function createFormTitle(GroupInterface $group, $plugin_id) {
-    /** @var \Drupal\group\Plugin\GroupContentEnablerInterface $plugin */
-    $plugin = $group->getGroupType()->getContentPlugin($plugin_id);
-    $group_content_type = GroupContentType::load($plugin->getContentTypeConfigId());
+    /** @var \Drupal\group\Plugin\Group\Relation\GroupRelationInterface $plugin */
+    $plugin = $group->getGroupType()->getPlugin($plugin_id);
 
-    switch ($group_content_type->getContentPluginId()) {
+    switch ($plugin->getRelationTypeId()) {
       case 'subgroup:cluster':
         return $this->t('Add Cluster or Working Group');
 
@@ -28,7 +27,7 @@ class GroupContentTitleController extends GroupContentController {
 
     }
 
-    return $this->t('Add @name', ['@name' => $group_content_type->label()]);
+    return $this->t('Add @name', ['@name' => $plugin->getRelationType()->getLabel()]);
   }
 
 }
