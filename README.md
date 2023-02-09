@@ -2,6 +2,8 @@
 
 ## Drupal 10
 
+Download and enable https://www.drupal.org/project/flexible_permissions before updating!
+
 ### Issues
 
 - [ ] https://www.drupal.org/project/components/issues/3278984 and https://www.drupal.org/project/components/issues/3299770

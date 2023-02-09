@@ -7,8 +7,6 @@ dependencies:
   module:
     - user
 id: cluster-group_membership
-label: 'Cluster: Group membership'
-description: 'Adds users to groups as members.'
 group_type: cluster
 content_plugin: group_membership
 plugin_config:

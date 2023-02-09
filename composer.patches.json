@@ -9,8 +9,6 @@
         },
         "drupal/group": {
             "https://www.drupal.org/project/subgroup/issues/3163044#comment-14499262": "https://www.drupal.org/files/issues/2022-05-04/i3278723.patch",
-            "https://www.drupal.org/project/group/issues/3305840": "https://www.drupal.org/files/issues/2022-08-25/group-3294949-2.patch",
-            "https://www.drupal.org/project/group/issues/3210808": "https://www.drupal.org/files/issues/2021-04-26/uasort-comparison-3210808-2.patch",
             "https://www.drupal.org/project/group/issues/3212608 - views data export": "https://www.drupal.org/files/issues/2022-10-19/3212608-5_0.patch"
         },
         "drupal/layout_paragraphs" : {

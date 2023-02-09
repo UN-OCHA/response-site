@@ -1,0 +1,15 @@
+uuid: 35a8c4fa-63ad-47f3-afac-9a0a4b5db73c
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.cluster
+    - user.role.administrator
+id: cluster-global_administrator
+label: 'Global administrator'
+weight: 106
+admin: true
+scope: outsider
+global_role: administrator
+group_type: cluster
+permissions: {  }

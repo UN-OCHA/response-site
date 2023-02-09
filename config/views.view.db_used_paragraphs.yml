@@ -3,7 +3,12 @@ langcode: en
 status: true
 dependencies:
   module:
+    - csv_serialization
     - group
+    - rest
+    - serialization
+    - user
+    - views_data_export
 id: db_used_paragraphs
 label: 'DB used paragraphs'
 module: views
@@ -87,7 +92,7 @@ display:
           field_api_classes: false
         gid:
           id: gid
-          table: group_content_field_data
+          table: group_relationship_field_data
           field: gid
           relationship: group_content
           group_type: group
