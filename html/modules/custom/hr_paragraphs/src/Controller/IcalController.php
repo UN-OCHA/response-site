@@ -94,7 +94,7 @@ class IcalController extends ControllerBase {
         }
       }
 
-      // Max sure DTEND is set.
+      // Make sure DTEND is set.
       if (!isset($event['DTEND'])) {
         $event['DTEND'] = $event['DTSTART'];
       }
