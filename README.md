@@ -1,5 +1,23 @@
 # Reliefweb Response
 
+## Drupal 10
+
+### Issues
+
+- [ ] https://www.drupal.org/project/components/issues/3278984 and https://www.drupal.org/project/components/issues/3299770
+- [ ] https://www.drupal.org/project/csv_serialization/issues/3294354
+- [ ] https://www.drupal.org/project/fullcalendar_api/issues/3340591
+- [ ] https://www.drupal.org/project/linkchecker/issues/3271896 and https://www.drupal.org/project/linkchecker/issues/3335586
+- [ ] https://www.drupal.org/project/maintenance200/issues/3288424
+- [ ] https://www.drupal.org/project/override_node_options/issues/3269901
+- [ ] https://www.drupal.org/project/subgroup/issues/3305343
+- [ ] https://www.drupal.org/project/theme_switcher/issues/3290031
+
+### Manual updates
+
+- [ ] `composer require 'drupal/dynamic_entity_reference:^3.0'` is D10 only
+- [ ] `group` and `subgroup` needs to be updated to at least `2.x`
+
 ## Testing
 
 Intergration tests using existing site/config.
