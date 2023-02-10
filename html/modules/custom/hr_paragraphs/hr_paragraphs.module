@@ -893,7 +893,7 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
       }
     }
 
-    $nodes = array_merge($nodes, $group->getContentEntities('group_node:page'));
+    $nodes = array_merge($nodes, $group->getRelatedEntities('group_node:page'));
   }
 
   if (empty($nodes)) {
@@ -1999,6 +1999,7 @@ function hr_paragraphs_remove_layout_paragraph_from_entity($entity_type, $id) {
     return;
   }
 
+  /** @var \Drupal\Core\Entity\ContentEntityBase $entity */
   if (!$entity->hasField('field_paragraphs')) {
     return;
   }
