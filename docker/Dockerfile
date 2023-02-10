@@ -1,5 +1,5 @@
 # Build the code.
-FROM public.ecr.aws/unocha/unified-builder:8.0.27-r0-202301-01 as builder
+FROM public.ecr.aws/unocha/unified-builder:8.1-stable as builder
 
 ARG  BRANCH_ENVIRONMENT
 
@@ -23,7 +23,7 @@ RUN cp -a docker/settings.php docker/services.yml docker/memcache.services.yml h
 ################################################################################
 
 # Generate the image.
-FROM public.ecr.aws/unocha/php-k8s:8.0.27-r0-202301-01
+FROM public.ecr.aws/unocha/php-k8s:8.1-stable
 
 ARG VCS_REF
 ARG VCS_URL
