@@ -57,11 +57,11 @@ class HrParagraphsPathAliasesTest extends ExistingSiteBase {
     $group->setPublished()->save();
 
     // Add cluster to operation.
-    $operation->addContent($group, 'subgroup:' . $group->bundle());
+    $operation->addRelationship($group, 'subgroup:' . $group->bundle());
 
     // Add pages to cluster.
-    $group->addContent($contacts, 'group_node:' . $contacts->bundle());
-    $group->addContent($pages, 'group_node:' . $pages->bundle());
+    $group->addRelationship($contacts, 'group_node:' . $contacts->bundle());
+    $group->addRelationship($pages, 'group_node:' . $pages->bundle());
 
     // Check URL aliases.
     $operation_url = '/' . strtolower(str_replace(' ', '-', $operation_title));

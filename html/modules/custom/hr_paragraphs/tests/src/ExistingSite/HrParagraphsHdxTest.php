@@ -14,8 +14,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use weitzman\DrupalTestTraits\ExistingSiteBase;
 
 /**
@@ -176,7 +177,7 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
     );
 
     // Render it.
-    $request = new Request([
+    $request = new HttpRequest([
       'filters' => [
         'res_format' => 'XLSX',
       ],

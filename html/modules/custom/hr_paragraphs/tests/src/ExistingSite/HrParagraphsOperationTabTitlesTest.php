@@ -48,8 +48,8 @@ class HrParagraphsOperationTabTitlesTest extends ExistingSiteBase {
     $group->setPublished()->save();
 
     // Add pages to group.
-    $group->addContent($contacts, 'group_node:' . $contacts->bundle());
-    $group->addContent($pages, 'group_node:' . $pages->bundle());
+    $group->addRelationship($contacts, 'group_node:' . $contacts->bundle());
+    $group->addRelationship($pages, 'group_node:' . $pages->bundle());
 
     $this->drupalGet($group->toUrl());
     $this->assertSession()->titleEquals($group_title . ' | ' . $site_name);
