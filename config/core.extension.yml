@@ -30,6 +30,7 @@ module:
   field_ui: 0
   file: 0
   filter: 0
+  flexible_permissions: 0
   fullcalendar_api: 0
   geofield: 0
   gnode: 0
