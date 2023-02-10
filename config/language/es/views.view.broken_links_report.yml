@@ -1,0 +1,61 @@
+display:
+  default:
+    display_title: Máster
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Aplicar
+          reset_button_label: Restablecer
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« Primero'
+            last: 'Último »'
+          expose:
+            items_per_page_label: 'Elementos por página'
+            items_per_page_options_all_label: '- Todo -'
+            offset_label: Desplazamiento
+      fields:
+        entity_field:
+          separator: ', '
+        entity_langcode:
+          label: 'Idioma de la entidad'
+          separator: ', '
+        url:
+          label: URL
+          separator: ', '
+        last_check:
+          separator: ', '
+        method:
+          separator: ', '
+        code:
+          separator: ', '
+        error:
+          label: Error
+          separator: ', '
+        fail_count:
+          separator: ', '
+        status:
+          separator: ', '
+        operations:
+          label: Operaciones
+      filters:
+        url:
+          expose:
+            label: URL
+        code_1:
+          group_info:
+            label: Resultado
+        entity_langcode:
+          expose:
+            label: 'Idioma de la entidad'
+      footer:
+        result:
+          content: 'Mostrando @start - @end de @total'
+  page_1:
+    display_title: Página

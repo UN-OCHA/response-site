@@ -12,7 +12,7 @@ use Drupal\node\Entity\Node;
  * Change content type to page.
  */
 function hr_paragraphs_update_9001() {
-  $query = \Drupal::entityQuery('node')->condition('type', 'article');
+  $query = \Drupal::entityQuery('node')->condition('type', 'article')->accessCheck(FALSE);
   $results = $query->execute();
 
   foreach ($results as $nid) {
@@ -32,7 +32,7 @@ function hr_paragraphs_update_9001() {
  * Change content type to page.
  */
 function hr_paragraphs_update_9002() {
-  $query = \Drupal::entityQuery('node')->condition('nid', 1);
+  $query = \Drupal::entityQuery('node')->condition('nid', 1)->accessCheck(FALSE);
   $results = $query->execute();
 
   foreach ($results as $nid) {
