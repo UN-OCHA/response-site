@@ -33,6 +33,28 @@ class RssController extends ControllerBase {
   }
 
   /**
+   * RSS or Atom.
+   */
+  protected function isAtomFeed($url) : bool {
+    $xml = $this->getXml($url);
+    if (!$xml) {
+      return FALSE;
+    }
+
+    // RSS feed.
+    if (!empty($xml->channel)) {
+      return FALSE;
+    }
+
+    // Atom feed.
+    if (!empty($xml->entry)) {
+      return TRUE;
+    }
+
+    return FALSE;
+  }
+
+  /**
    * Fetch XML.
    *
    * @param string $url
@@ -81,6 +103,10 @@ class RssController extends ControllerBase {
       return '';
     }
 
+    if ($this->isAtomFeed($url)) {
+      return (string) $xml->link[0]['href'] ?? '';
+    }
+
     if (!empty($xml->channel->link[0])) {
       return (string) $xml->channel->link[0];
     }
@@ -100,6 +126,10 @@ class RssController extends ControllerBase {
   public function getRssItems($url) : array {
     $items = [];
 
+    if ($this->isAtomFeed(($url))) {
+      return $this->getAtomItems($url);
+    }
+
     $xml = $this->getXml($url);
     if (!$xml) {
       return $items;
@@ -112,6 +142,40 @@ class RssController extends ControllerBase {
           (string) $entry->link,
           (string) $entry->description,
           strtotime($entry->pubDate),
+        );
+      }
+    }
+    catch (\Exception $e) {
+      return $items;
+    }
+
+    return $items;
+  }
+
+  /**
+   * Get rss items.
+   *
+   * @param string $url
+   *   RSS feed url.
+   *
+   * @return array<int, \Drupal\hr_paragraphs\RssItem>
+   *   List of items.
+   */
+  public function getAtomItems($url) : array {
+    $items = [];
+
+    $xml = $this->getXml($url);
+    if (!$xml) {
+      return $items;
+    }
+
+    try {
+      foreach ($xml->entry as $entry) {
+        $items[] = new RssItem(
+          (string) $entry->title,
+          (string) $entry->link,
+          (string) $entry->summary,
+          strtotime($entry->updated),
         );
       }
     }
