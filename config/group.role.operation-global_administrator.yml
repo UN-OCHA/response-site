@@ -1,0 +1,15 @@
+uuid: 52efbf98-ee67-47c4-aabf-1cd122384ad8
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.operation
+    - user.role.administrator
+id: operation-global_administrator
+label: 'Global administrator'
+weight: 105
+admin: true
+scope: outsider
+global_role: administrator
+group_type: operation
+permissions: {  }

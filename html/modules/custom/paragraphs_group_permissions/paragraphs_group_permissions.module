@@ -8,7 +8,7 @@
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\group\Entity\Group;
-use Drupal\group\Entity\GroupContent;
+use Drupal\group\Entity\GroupRelationship;
 use Drupal\paragraphs\ParagraphInterface;
 
 /**
@@ -68,7 +68,7 @@ function paragraphs_group_permissions_paragraph_access(ParagraphInterface $entit
 
   // If we are on page, get the group.
   if (get_class($parent) == 'Drupal\node\Entity\Node') {
-    $group_content_array = GroupContent::loadByEntity($parent);
+    $group_content_array = GroupRelationship::loadByEntity($parent);
     $group_content = reset($group_content_array);
     if ($group_content) {
       $group = $group_content->getGroup();
