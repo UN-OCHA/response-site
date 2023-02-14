@@ -4,6 +4,25 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.11](https://github.com/UN-OCHA/response-site/compare/v0.3.10...v0.3.11) (2023-02-14)
+
+### Features
+
+* Add flexible permissions [#RWR-201](https://https://humanitarian.atlassian.net/browse/RWR-201) ([63809c](https://github.com/UN-OCHA/response-site/commit/63809c4bcbe7d0d584db026c862c0cddbd66d386))
+* Site-wide search [#RWR-322](https://https://humanitarian.atlassian.net/browse/RWR-322) ([0f1f55](https://github.com/UN-OCHA/response-site/commit/0f1f554bcc8811857fd5a517ccb99537c9830057))
+* Support atom feeds [#RWR-323](https://https://humanitarian.atlassian.net/browse/RWR-323) ([def994](https://github.com/UN-OCHA/response-site/commit/def9947782f76b8a3a7f335e4ec21ab6bce57fe6))
+
+### Chores
+
+* Add dockerignore and update dockerfile ([9fcf04](https://github.com/UN-OCHA/response-site/commit/9fcf048931f663f35a40b56d4c7a502db8748ac8))
+* Add docksal php ini ([46dd7b](https://github.com/UN-OCHA/response-site/commit/46dd7b517d5fa17afb26eda1480ebe6fb676e9e9))
+* PHP 8.1 ([5ccc43](https://github.com/UN-OCHA/response-site/commit/5ccc43c0daa49b314eaa6e65bae70c4a273ff610), [10fc71](https://github.com/UN-OCHA/response-site/commit/10fc71122eb9b1216674c93c08d27fc0549baf7d))
+* Revert change ([4350c1](https://github.com/UN-OCHA/response-site/commit/4350c1898c3ae9da73019e778c7d6677b9c3ec4a))
+* Update all outdated drupal/* packages. ([751fdc](https://github.com/UN-OCHA/response-site/commit/751fdce00c56c13d20da76966a3ff177e00d765b))
+* Update custom code ([c0293a](https://github.com/UN-OCHA/response-site/commit/c0293ad25c0e6c47c19961fd5b7c2c1eaad7eb83))
+* Updated config ([723376](https://github.com/UN-OCHA/response-site/commit/723376b94acaf8214bc03ed57e32120900496eaf))
+* Update ocha_search module ([83b105](https://github.com/UN-OCHA/response-site/commit/83b105ff2fc698938f81dac8ccebca61ceb8e3f3))
+
 ## [0.3.10](https://github.com/UN-OCHA/response-site/compare/v0.3.9...v0.3.10) (2023-02-09)
 
 ### Features
