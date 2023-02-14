@@ -20,7 +20,7 @@
           "Avoid null links": "./PATCHES/linkchecker_null_link.patch"
         },
         "drupal/maintenance200": {
-          "Drupal 10 compatibility": "patches/maintenance200-drupal-10-compatibility.patch"
+          "Drupal 10 compatibility": "PATCHES/maintenance200-drupal-10-compatibility.patch"
         },
         "drupal/theme_switcher": {
           "https://www.drupal.org/project/theme_switcher": "https://www.drupal.org/files/issues/2022-06-16/theme_switcher.1.2.rector.patch"
