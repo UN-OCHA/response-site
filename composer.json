@@ -35,7 +35,7 @@
         "cweagans/composer-patches": "^1.7",
         "drupal/address": "^1.9",
         "drupal/admin_denied": "^2.0",
-        "drupal/components": "^2.4",
+        "drupal/components": "^3.0@beta",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-project-message": "^9",
         "drupal/core-recommended": "^9",
