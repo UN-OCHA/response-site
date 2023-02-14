@@ -1309,7 +1309,7 @@ function hr_paragraphs_library_info_alter(&$libraries, $extension) {
     return;
   }
 
-  $new_file = '/' . drupal_get_path('module', 'hr_paragraphs') . '/component/events/js/fullcalendar.js';
+  $new_file = '/' . \Drupal::service('extension.list.module')->getPath('hr_paragraphs') . '/component/events/js/fullcalendar.js';
   $replacements = [
     'js/fullcalendar.load.js' => $new_file,
   ];

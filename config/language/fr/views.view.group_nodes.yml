@@ -68,6 +68,7 @@ display:
         gid:
           exception:
             title: Tout
+          title: '{{ arguments.gid|placeholder }} pages'
       title: Nœuds
   page_1:
     display_title: Page
