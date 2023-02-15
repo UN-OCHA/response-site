@@ -7,6 +7,9 @@ dependencies:
 id: cluster-manager
 label: Manager
 weight: 104
+admin: false
+scope: individual
+global_role: null
 group_type: cluster
 permissions:
   - 'access group_node overview'
@@ -99,5 +102,3 @@ permissions:
   - 'view paragraph content twitter_feed'
   - 'view paragraph content upcoming_events'
   - 'view unpublished group_node:page entity'
-admin: false
-scope: individual

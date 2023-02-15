@@ -7,10 +7,10 @@ dependencies:
 id: operation-outsider
 label: Outsider
 weight: -101
+admin: false
+scope: outsider
+global_role: authenticated
 group_type: operation
 permissions:
   - 'view group'
   - 'view group_node:page entity'
-admin: false
-scope: outsider
-global_role: authenticated
