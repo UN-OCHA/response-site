@@ -83,9 +83,9 @@ class HrParagraphsSidebarTest extends ExistingSiteBase {
     $operation->setPublished()->save();
 
     // Add pages to group.
-    $operation->addContent($op_contacts, 'group_node:' . $op_contacts->bundle());
-    $operation->addContent($op_pages, 'group_node:' . $op_pages->bundle());
-    $operation->addContent($op_about, 'group_node:' . $op_about->bundle());
+    $operation->addRelationship($op_contacts, 'group_node:' . $op_contacts->bundle());
+    $operation->addRelationship($op_pages, 'group_node:' . $op_pages->bundle());
+    $operation->addRelationship($op_about, 'group_node:' . $op_about->bundle());
 
     $cluster_title = 'My cluster';
 
@@ -124,12 +124,12 @@ class HrParagraphsSidebarTest extends ExistingSiteBase {
     $cluster->setPublished()->save();
 
     // Add pages to group.
-    $cluster->addContent($cl_contacts, 'group_node:' . $cl_contacts->bundle());
-    $cluster->addContent($cl_pages, 'group_node:' . $cl_pages->bundle());
-    $cluster->addContent($cl_about, 'group_node:' . $cl_about->bundle());
+    $cluster->addRelationship($cl_contacts, 'group_node:' . $cl_contacts->bundle());
+    $cluster->addRelationship($cl_pages, 'group_node:' . $cl_pages->bundle());
+    $cluster->addRelationship($cl_about, 'group_node:' . $cl_about->bundle());
 
     // Add cluster to operation.
-    $operation->addContent($cluster, 'subgroup:' . $cluster->bundle());
+    $operation->addRelationship($cluster, 'subgroup:' . $cluster->bundle());
 
     // Check operation on landing page.
     $this->drupalGet($operation->toUrl());

@@ -7,10 +7,10 @@ dependencies:
 id: cluster-manager
 label: Manager
 weight: 104
-internal: false
-audience: member
+admin: false
+scope: individual
+global_role: null
 group_type: cluster
-permissions_ui: true
 permissions:
   - 'access group_node overview'
   - 'administer members'

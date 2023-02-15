@@ -267,8 +267,8 @@ class ParagraphController extends ControllerBase {
 
       // Retrieve the operations and cacheable metadata from the installed
       // content plugins.
-      foreach ($group->getGroupType()->getInstalledContentPlugins() as $plugin) {
-        /** @var \Drupal\group\Plugin\GroupContentEnablerInterface $plugin */
+      foreach ($group->getGroupType()->getInstalledPlugins() as $plugin) {
+        /** @var \Drupal\group\Plugin\Group\Relation\GroupRelationInterface $plugin */
         $links += $plugin->getGroupOperations($group);
         $cacheable_metadata = $cacheable_metadata->merge($plugin->getGroupOperationsCacheableMetadata());
       }

@@ -7,10 +7,10 @@ dependencies:
 id: operation-manager
 label: Manager
 weight: 103
-internal: false
-audience: member
+admin: false
+scope: individual
+global_role: null
 group_type: operation
-permissions_ui: true
 permissions:
   - 'access group_node overview'
   - 'administer members'

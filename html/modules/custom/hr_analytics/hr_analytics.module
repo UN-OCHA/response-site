@@ -13,7 +13,7 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\group\Entity\Group;
-use Drupal\group\Entity\GroupContent;
+use Drupal\group\Entity\GroupRelationship;
 
 /**
  * Add datalayer dimensions for google tag manager.
@@ -105,7 +105,7 @@ function hr_analytics_get_entity_dimensions() {
   else {
     $dimensions['dimension1'] = 'Page';
 
-    $group_content_array = GroupContent::loadByEntity($entity);
+    $group_content_array = GroupRelationship::loadByEntity($entity);
     $group_content = reset($group_content_array);
     if ($group_content) {
       $group = $group_content->getGroup();

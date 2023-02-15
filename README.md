@@ -2,6 +2,8 @@
 
 ## Drupal 10
 
+Download and enable https://www.drupal.org/project/flexible_permissions before updating!
+
 ### Issues
 
 - [ ] https://www.drupal.org/project/components/issues/3278984 and https://www.drupal.org/project/components/issues/3299770
@@ -26,6 +28,13 @@ Intergration tests using existing site/config.
 XDEBUG_MODE=coverage ./vendor/bin/phpunit --testsuite Existing --verbose
 ```
 
+## Local development
+
+For local development, see the stack repository.
+
+Add this line to settings.local.php: `$config['config_split.config_split.config_dev']['status'] = TRUE;` to enable `config_split` and install the development modules.
+
+After importing a fresh database, run `drush cim` to enable devel, database log and stage_file_proxy.
 
 ## Drupal check
 

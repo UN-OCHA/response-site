@@ -7,8 +7,6 @@ dependencies:
   module:
     - user
 id: operation-group_membership
-label: 'Operation: Group membership'
-description: 'Adds users to groups as members.'
 group_type: operation
 content_plugin: group_membership
 plugin_config:

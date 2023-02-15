@@ -4,6 +4,26 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.12](https://github.com/UN-OCHA/response-site/compare/v0.3.11...v0.3.12) (2023-02-15)
+
+### Bug Fixes
+
+
+##### Homepage
+
+* Adjust spacing of card-list to accomodate margin-less headings ([8ac5d0](https://github.com/UN-OCHA/response-site/commit/8ac5d02a7ecfe0e59a95e1cecea7a86870ecddf8))
+
+### Chores
+
+* Add and configure config_split ([fb150e](https://github.com/UN-OCHA/response-site/commit/fb150e9530c828f0504a5c85753d3f2b94298e11))
+* Correct stage_file_proxy origin for this site ([7ef3d2](https://github.com/UN-OCHA/response-site/commit/7ef3d22401fc5cc52b9e549b5e9e485951f4b100))
+* Re-export group roles ([159717](https://github.com/UN-OCHA/response-site/commit/159717f617121d6efacf0d22f6a3e3a93b0fbd43))
+* Remove flowdock ([18eecd](https://github.com/UN-OCHA/response-site/commit/18eecda2d4ed8bc648230009e114e6080cf3f4da))
+* Update contrib modules ([342984](https://github.com/UN-OCHA/response-site/commit/342984e4334a50a614b054041730d824aa1ee43c))
+* Update tests ([1acf07](https://github.com/UN-OCHA/response-site/commit/1acf077c1f34658ef0666fbf9f8b757c4f24c8ca), [3a1f62](https://github.com/UN-OCHA/response-site/commit/3a1f622760d12969cb083561420956c1f234f23e))
+* Update to group 2.0 ([7bf6e0](https://github.com/UN-OCHA/response-site/commit/7bf6e0d4d8c5fa6102a307618264161fd0e7ecfb))
+* Update to group 2.0 - part 1 ([3c1c5b](https://github.com/UN-OCHA/response-site/commit/3c1c5bd26a4e007f8f309ff8bb0b50fcffb57d1b), [4fbc0d](https://github.com/UN-OCHA/response-site/commit/4fbc0d329560e3af6034ec86b17fa1490a807d33))
+
 ## [0.3.11](https://github.com/UN-OCHA/response-site/compare/v0.3.10...v0.3.11) (2023-02-14)
 
 ### Features

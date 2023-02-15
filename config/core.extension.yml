@@ -9,6 +9,7 @@ module:
   ckeditor: 0
   components: 0
   config: 0
+  config_split: 0
   contextual: 0
   csp: 0
   csv_serialization: 0
@@ -97,7 +98,6 @@ module:
   variationcache: 0
   views_data_export: 0
   views_field_compare: 0
-  views_ui: 0
   pathauto: 1
   content_translation: 10
   views: 10

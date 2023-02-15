@@ -10,10 +10,10 @@ dependencies:
 id: cluster-e34066a71
 label: 'Global editor'
 weight: 5
-internal: true
-audience: outsider
+admin: false
+scope: outsider
+global_role: global_editor
 group_type: cluster
-permissions_ui: false
 permissions:
   - 'access group_node overview'
   - 'create group_node:page content'

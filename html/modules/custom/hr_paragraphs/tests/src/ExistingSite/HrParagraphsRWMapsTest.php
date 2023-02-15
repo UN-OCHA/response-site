@@ -25,6 +25,11 @@ class HrParagraphsRWMapsTest extends ExistingSiteBase {
 
   use RWTestDataTrait;
 
+  /**
+   * An http client.
+   */
+  protected $httpClient;
+
   protected function renderIt($entity_type, $entity) {
     $theme_rule = ThemeSwitcherRule::load('operation_management');
 
