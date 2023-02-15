@@ -10,6 +10,9 @@ dependencies:
 id: operation-e34066a71
 label: 'Global editor'
 weight: 5
+admin: false
+scope: outsider
+global_role: global_editor
 group_type: operation
 permissions:
   - 'access group_node overview'
@@ -37,6 +40,3 @@ permissions:
   - 'view latest group version'
   - 'view own unpublished group'
   - 'view unpublished group_node:page entity'
-admin: false
-scope: outsider
-global_role: global_editor

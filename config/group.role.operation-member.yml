@@ -7,12 +7,12 @@ dependencies:
 id: operation-member
 label: Member
 weight: -100
+admin: false
+scope: insider
+global_role: authenticated
 group_type: operation
 permissions:
   - 'leave group'
   - 'view group'
   - 'view group_membership content'
   - 'view group_node:page entity'
-admin: false
-scope: insider
-global_role: authenticated

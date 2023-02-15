@@ -7,10 +7,10 @@ dependencies:
 id: cluster-anonymous
 label: Anonymous
 weight: -102
+admin: false
+scope: outsider
+global_role: anonymous
 group_type: cluster
 permissions:
   - 'view group'
   - 'view group_node:page entity'
-admin: false
-scope: outsider
-global_role: anonymous

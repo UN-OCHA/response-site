@@ -7,6 +7,9 @@ dependencies:
 id: operation-manager
 label: Manager
 weight: 103
+admin: false
+scope: individual
+global_role: null
 group_type: operation
 permissions:
   - 'access group_node overview'
@@ -102,5 +105,3 @@ permissions:
   - 'view paragraph content upcoming_events'
   - 'view subgroup:cluster content'
   - 'view unpublished group_node:page entity'
-admin: false
-scope: individual

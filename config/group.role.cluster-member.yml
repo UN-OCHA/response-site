@@ -7,11 +7,11 @@ dependencies:
 id: cluster-member
 label: Member
 weight: -100
+admin: false
+scope: insider
+global_role: authenticated
 group_type: cluster
 permissions:
   - 'leave group'
   - 'view group'
   - 'view group_node:page entity'
-admin: false
-scope: insider
-global_role: authenticated
