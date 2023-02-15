@@ -8,6 +8,10 @@
   border-top: 0 none;
 }
 
+.paragraph--type--card-list .field--name-field-paragraphs {
+  margin-block-end: 1em;
+}
+
 /* Override layout rules for a wider sidebar like RW */
 @media (min-width: 1024px) {
   .path-frontpage .hri-layout--two-col > .hri-layout__sidebar {
