@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - group.type.cluster
+    - user.role.global_editor
   enforced:
     config:
       - user.role.global_editor
@@ -16,6 +17,7 @@ global_role: global_editor
 group_type: cluster
 permissions:
   - 'access group_node overview'
+  - 'administer members'
   - 'create group_node:page content'
   - 'create group_node:page entity'
   - 'delete any group_node:page content'
@@ -31,10 +33,12 @@ permissions:
   - 'update any group_node:page entity'
   - 'update own group_node:page content'
   - 'update own group_node:page entity'
+  - 'view all group revisions'
   - 'view any unpublished group'
   - 'view group'
   - 'view group revisions'
   - 'view group_membership content'
+  - 'view group_membership relationship'
   - 'view group_node:page content'
   - 'view group_node:page entity'
   - 'view latest group version'
