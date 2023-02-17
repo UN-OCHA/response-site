@@ -92,8 +92,8 @@
           .addClass([
             'rw-river-letter-navigation__link'
           ])
-          .setAttribute('href', '#group-' ~ row['#title']|render|striptags|trim)
-        }}>{{ row['#title']|render|striptags|trim }}</a></li>
+          .setAttribute('href', '#group-' ~ row['#title']|render|striptags|trim|upper)
+        }}>{{ row['#title']|render|striptags|trim|upper }}</a></li>
       {% endfor %}
         <li class="rw-river-letter-navigation__list__item"><a{{ create_attribute()
           .addClass([
