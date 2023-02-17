@@ -48,3 +48,8 @@ services:
       - '@language.default'
     tags:
       - { name: config.factory.override, priority: 2 }
+
+  group.relation_handler.entity_reference.group_membership:
+    class: 'Drupal\hr_paragraphs\Plugin\Group\RelationHandler\GroupMembershipAllEntityReference'
+    arguments: ['@group.relation_handler.entity_reference']
+    shared: false
