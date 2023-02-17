@@ -52,9 +52,10 @@
     ]
   %}
 {% endif %}
-<li id="group-{{ title|render|striptags|trim }}" class="rw-river-country-list__group">
+{% set group_letter = title|render|striptags|trim|upper %}
+<li id="group-{{ group_letter }}" class="rw-river-country-list__group">
   {% if title %}
-    <h2 class="rw-river-country-list__group__title">{{ title }}</h2>
+    <h2 class="rw-river-country-list__group__title">{{ group_letter }}</h2>
   {% endif %}
   <div{{ attributes.addClass(classes) }}>
     {% if options.alignment == 'horizontal' %}
