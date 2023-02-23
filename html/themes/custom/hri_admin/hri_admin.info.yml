@@ -1,7 +1,7 @@
-name: HR.info admin
+name: RWR admin
 type: theme
-description: 'HR.info admin theme, a subtheme of Seven'
-package: HR.info
+description: RWR admin theme, a subtheme of Seven
+package: Response
 core_version_requirement: ^8.8 || ^9 || ^10
 base theme: seven
 
