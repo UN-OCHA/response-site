@@ -4,6 +4,20 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.13](https://github.com/UN-OCHA/response-site/compare/v0.3.12...v0.3.13) (2023-02-17)
+
+### Bug Fixes
+
+
+##### Locations
+
+* Always capitalize letter-based navigation ([d1a16e](https://github.com/UN-OCHA/response-site/commit/d1a16e8d52b965f0d78b49b7dbaa576e10feeff3))
+
+### Chores
+
+* Bump php version for update action too ([5427f8](https://github.com/UN-OCHA/response-site/commit/5427f84a3927e6504566d76ab5bbe18d3a4baebc))
+* PHP8.1 ([4941ed](https://github.com/UN-OCHA/response-site/commit/4941ed1fe231acf0b525538cb46b5cd15733160e))
+
 ## [0.3.12](https://github.com/UN-OCHA/response-site/compare/v0.3.11...v0.3.12) (2023-02-15)
 
 ### Bug Fixes
