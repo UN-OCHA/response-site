@@ -15,7 +15,6 @@
   --brand-light: #d4e5f7;
   --brand-grey: var(--cd-blue-grey);
   --brand-logo-width: 150px;
-
   --cd-ie-primary-color: #0988bb;
   --cd-ie-primary-color--light: #63cef8;
   --cd-ie-primary-color--dark: #032b3a;
@@ -25,8 +24,8 @@
   --cd-primary-color-h: 197;
   --cd-primary-color-s: 91%;
   --cd-primary-color-l: 38%;
-  --cd-primary-color: hsl(var(--cd-primary-color-h),var(--cd-primary-color-s),var(--cd-primary-color-l));
-  --cd-primary-color--light: hsl(var(--cd-primary-color-h),var(--cd-primary-color-s),calc(var(--cd-primary-color-l) + 30%));
-  --cd-primary-color--dark: hsl(var(--cd-primary-color-h),var(--cd-primary-color-s),calc(var(--cd-primary-color-l) - 26%));
-  --cd-primary-color--lighter: hsl(var(--cd-primary-color-h),var(--cd-primary-color-s),calc(var(--cd-primary-color-l) + 39%));
+  --cd-primary-color: hsl(var(--cd-primary-color-h), var(--cd-primary-color-s), var(--cd-primary-color-l));
+  --cd-primary-color--light: hsl(var(--cd-primary-color-h), var(--cd-primary-color-s), calc(var(--cd-primary-color-l) + 30%));
+  --cd-primary-color--dark: hsl(var(--cd-primary-color-h), var(--cd-primary-color-s), calc(var(--cd-primary-color-l) - 26%));
+  --cd-primary-color--lighter: hsl(var(--cd-primary-color-h), var(--cd-primary-color-s), calc(var(--cd-primary-color-l) + 39%));
 }
