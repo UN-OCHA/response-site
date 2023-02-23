@@ -8,8 +8,26 @@ definitions:
     expanded: false
     enabled: true
   masquerade__unmasquerade:
-    menu_name: account
+    weight: -49
     parent: ''
-    weight: -50
+    menu_name: account
     expanded: false
     enabled: false
+  hr_paragraphs__unmasquerade:
+    parent: user.page
+    menu_name: account
+    enabled: true
+    expanded: false
+    weight: -50
+  user__logout:
+    weight: -47
+    parent: ''
+    menu_name: account
+    expanded: false
+    enabled: true
+  user__page:
+    weight: -48
+    menu_name: account
+    parent: ''
+    expanded: false
+    enabled: true

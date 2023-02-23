@@ -13,7 +13,7 @@ _core:
 id: common_design_subtheme_account_menu
 theme: common_design_subtheme
 region: header_top
-weight: -6
+weight: -5
 provider: null
 plugin: 'system_menu_block:account'
 settings:
