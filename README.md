@@ -59,6 +59,7 @@ git fetch --all
 today=$(date +%d-%m-%Y)
 git checkout -b $today-prep-release
 composer run release:patch
+composer update
 git add composer.json
 git add CHANGELOG.md
 git commit -m "chore: $today prep release"
