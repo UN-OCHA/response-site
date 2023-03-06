@@ -79,7 +79,7 @@ class RssController extends ControllerBase {
       return $this->staticCache[$url];
     }
     catch (\Exception $exception) {
-      $this->getLogger('hr_paragraphs_rss')->error('Fetching data from $url failed with @message', [
+      $this->getLogger('hr_paragraphs_rss')->error('Fetching data from @url failed with @message', [
         '@url' => $url,
         '@message' => $exception->getMessage(),
       ]);
