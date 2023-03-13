@@ -1,0 +1,12 @@
+name: 'FullCalendar API Examples'
+description: 'Examples for using FullCalendar API module.'
+core_version_requirement: ^8.8 || ^9 || ^10
+package: Calendar
+requirements:
+  - fullcalendar_api
+type: module
+
+# Information added by Drupal.org packaging script on 2021-10-18
+version: '2.0.0-alpha1'
+project: 'fullcalendar_api'
+datestamp: 1634589655

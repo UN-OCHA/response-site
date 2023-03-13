@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "103f7475a0fdec5ad2d42b3ac0aab1ef",
+    "content-hash": "d3542b51d61fd8b3233b247349b57d11",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1538,6 +1538,98 @@
             }
         },
         {
+            "name": "drupal/ckeditor",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/ckeditor.git",
+                "reference": "1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/ckeditor-1.0.1.zip",
+                "reference": "1.0.1",
+                "shasum": "d3dd8bfb2301b749599ba48cf76208becdf0eeb3"
+            },
+            "require": {
+                "drupal/core": "^9.4 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.1",
+                    "datestamp": "1662977541",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "dczepierga",
+                    "homepage": "https://www.drupal.org/user/911466"
+                },
+                {
+                    "name": "hass",
+                    "homepage": "https://www.drupal.org/user/85918"
+                },
+                {
+                    "name": "jcisio",
+                    "homepage": "https://www.drupal.org/user/210762"
+                },
+                {
+                    "name": "Jorrit",
+                    "homepage": "https://www.drupal.org/user/161217"
+                },
+                {
+                    "name": "lauriii",
+                    "homepage": "https://www.drupal.org/user/1078742"
+                },
+                {
+                    "name": "Magnus",
+                    "homepage": "https://www.drupal.org/user/73919"
+                },
+                {
+                    "name": "mkesicki",
+                    "homepage": "https://www.drupal.org/user/922884"
+                },
+                {
+                    "name": "nod_",
+                    "homepage": "https://www.drupal.org/user/598310"
+                },
+                {
+                    "name": "p.wiaderny",
+                    "homepage": "https://www.drupal.org/user/2956619"
+                },
+                {
+                    "name": "vokiel",
+                    "homepage": "https://www.drupal.org/user/2793801"
+                },
+                {
+                    "name": "Wim Leers",
+                    "homepage": "https://www.drupal.org/user/99777"
+                },
+                {
+                    "name": "wwalc",
+                    "homepage": "https://www.drupal.org/user/184556"
+                },
+                {
+                    "name": "xjm",
+                    "homepage": "https://www.drupal.org/user/65776"
+                }
+            ],
+            "description": "WYSIWYG editing for rich text fields using CKEditor.",
+            "homepage": "https://www.drupal.org/project/ckeditor",
+            "support": {
+                "source": "https://git.drupalcode.org/project/ckeditor"
+            }
+        },
+        {
             "name": "drupal/components",
             "version": "3.0.0-beta3",
             "source": {
@@ -2060,20 +2152,20 @@
         },
         {
             "name": "drupal/csv_serialization",
-            "version": "2.1.0",
+            "version": "3.0.0-beta1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/csv_serialization.git",
-                "reference": "8.x-2.1"
+                "reference": "3.0.0-beta1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/csv_serialization-8.x-2.1.zip",
-                "reference": "8.x-2.1",
-                "shasum": "10b8629a5808ed1ecf358d5ca7054d6c14a476d4"
+                "url": "https://ftp.drupal.org/files/projects/csv_serialization-3.0.0-beta1.zip",
+                "reference": "3.0.0-beta1",
+                "shasum": "bf030e5099b4013b6a8a7fc91fac7fc1324b700c"
             },
             "require": {
-                "drupal/core": "^8 || ^9",
+                "drupal/core": "^9.3 || ^10",
                 "league/csv": "^9.1"
             },
             "require-dev": {
@@ -2083,11 +2175,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.1",
-                    "datestamp": "1655054417",
+                    "version": "3.0.0-beta1",
+                    "datestamp": "1677196357",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -2325,24 +2417,23 @@
         },
         {
             "name": "drupal/dynamic_entity_reference",
-            "version": "1.16.0",
+            "version": "4.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/dynamic_entity_reference.git",
-                "reference": "8.x-1.16"
+                "reference": "4.0.0-alpha1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/dynamic_entity_reference-8.x-1.16.zip",
-                "reference": "8.x-1.16",
-                "shasum": "4155c11eac17ccd485888e6e5c52858358726415"
+                "url": "https://ftp.drupal.org/files/projects/dynamic_entity_reference-4.0.0-alpha1.zip",
+                "reference": "4.0.0-alpha1",
+                "shasum": "4248dc45ec1597504903e67d7d7e441e909bf7b8"
             },
             "require": {
-                "drupal/core": "^9.3",
-                "php": ">=7.4"
+                "drupal/core": "^9.3 || ^10",
+                "php": ">=8.0"
             },
             "require-dev": {
-                "drupal/diff": "1.x-dev",
                 "mglaman/phpstan-drupal": "^1.1",
                 "phpstan/phpstan": "^1.1",
                 "phpstan/phpstan-deprecation-rules": "^1.0"
@@ -2350,11 +2441,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.16",
-                    "datestamp": "1644273068",
+                    "version": "4.0.0-alpha1",
+                    "datestamp": "1663511667",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -2568,84 +2659,6 @@
             }
         },
         {
-            "name": "drupal/external_entities",
-            "version": "2.0.0-alpha5",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/external_entities.git",
-                "reference": "8.x-2.0-alpha5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/external_entities-8.x-2.0-alpha5.zip",
-                "reference": "8.x-2.0-alpha5",
-                "shasum": "ce2402ec96805598f3664e8a61ad68b30190b92b"
-            },
-            "require": {
-                "drupal/core": "^8.8 || ^9",
-                "galbar/jsonpath": "^2.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-2.0-alpha5",
-                    "datestamp": "1648796532",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Alpha releases are not covered by Drupal security advisories."
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "attiks",
-                    "homepage": "https://www.drupal.org/user/105002"
-                },
-                {
-                    "name": "clemens.tolboom",
-                    "homepage": "https://www.drupal.org/user/125814"
-                },
-                {
-                    "name": "Hanno",
-                    "homepage": "https://www.drupal.org/user/18826"
-                },
-                {
-                    "name": "Jelle_S",
-                    "homepage": "https://www.drupal.org/user/829198"
-                },
-                {
-                    "name": "pefferen",
-                    "homepage": "https://www.drupal.org/user/993376"
-                },
-                {
-                    "name": "pgrond",
-                    "homepage": "https://www.drupal.org/user/698374"
-                },
-                {
-                    "name": "rodrigoaguilera",
-                    "homepage": "https://www.drupal.org/user/408170"
-                },
-                {
-                    "name": "rp7",
-                    "homepage": "https://www.drupal.org/user/219330"
-                },
-                {
-                    "name": "Wim Leers",
-                    "homepage": "https://www.drupal.org/user/99777"
-                }
-            ],
-            "description": "Allows using remote entities, for example through a REST interface.",
-            "homepage": "https://www.drupal.org/project/external_entities",
-            "support": {
-                "source": "http://cgit.drupalcode.org/external_entities",
-                "issues": "http://drupal.org/project/issues/external_entities"
-            }
-        },
-        {
             "name": "drupal/field_group",
             "version": "3.4.0",
             "source": {
@@ -2756,54 +2769,6 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/flexible_permissions",
                 "issues": "https://drupal.org/project/issues/flexible_permissions"
-            }
-        },
-        {
-            "name": "drupal/fullcalendar_api",
-            "version": "2.0.0-alpha1",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/fullcalendar_api.git",
-                "reference": "2.0.0-alpha1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/fullcalendar_api-2.0.0-alpha1.zip",
-                "reference": "2.0.0-alpha1",
-                "shasum": "8cc3170c6cc15f855e00fbdbabc188b7a8d7e0e9"
-            },
-            "require": {
-                "drupal/core": "^8.8 || ^9"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.0.0-alpha1",
-                    "datestamp": "1634589654",
-                    "security-coverage": {
-                        "status": "not-covered",
-                        "message": "Project has not opted into security advisory coverage!"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "UsingSession",
-                    "homepage": "https://www.drupal.org/user/3582050"
-                },
-                {
-                    "name": "earthday47",
-                    "homepage": "https://www.drupal.org/user/605842"
-                }
-            ],
-            "description": "API interface for jQuery FullCalendar plugin, http://fullcalendar.io/.",
-            "homepage": "https://www.drupal.org/project/fullcalendar_api",
-            "support": {
-                "source": "https://git.drupalcode.org/project/fullcalendar_api"
             }
         },
         {
@@ -3615,38 +3580,38 @@
         },
         {
             "name": "drupal/linkchecker",
-            "version": "1.1.0",
+            "version": "2.0.0-alpha1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/linkchecker.git",
-                "reference": "8.x-1.1"
+                "reference": "2.0.0-alpha1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/linkchecker-8.x-1.1.zip",
-                "reference": "8.x-1.1",
-                "shasum": "c23eeb94023da2da28678cc8d1de4f9a0d1a2797"
+                "url": "https://ftp.drupal.org/files/projects/linkchecker-2.0.0-alpha1.zip",
+                "reference": "2.0.0-alpha1",
+                "shasum": "ee0a058ca14a776284fdc3f784f5edac01a5ded3"
             },
             "require": {
-                "drupal/core": "^8.9 || ^9.2",
-                "drupal/dynamic_entity_reference": "^1.0 || ^2.0@alpha || ^3.0@beta || ^4.0@alpha"
+                "drupal/core": "^9.4 || ^10.0",
+                "drupal/dynamic_entity_reference": "^3.0 || ^4.0"
             },
             "require-dev": {
-                "drupal/redirect": "^1.6"
+                "drupal/redirect": "^1.8"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.1",
-                    "datestamp": "1674834761",
+                    "version": "2.0.0-alpha1",
+                    "datestamp": "1674444668",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
                     }
                 },
                 "drush": {
                     "services": {
-                        "drush.services.yml": "^9"
+                        "drush.services.yml": "^10 || ^11"
                     }
                 }
             },
@@ -4053,67 +4018,6 @@
             }
         },
         {
-            "name": "drupal/paragraphs_asymmetric_translation_widgets",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/paragraphs_asymmetric_translation_widgets.git",
-                "reference": "8.x-1.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/paragraphs_asymmetric_translation_widgets-8.x-1.1.zip",
-                "reference": "8.x-1.1",
-                "shasum": "aa6721d65116a0c4b69fbc28287c20fe189668aa"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9",
-                "drupal/paragraphs": "~1.3"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.1",
-                    "datestamp": "1669304631",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "efpapado",
-                    "homepage": "https://www.drupal.org/user/1009348"
-                },
-                {
-                    "name": "esolitos",
-                    "homepage": "https://www.drupal.org/user/1567500"
-                },
-                {
-                    "name": "Grayle",
-                    "homepage": "https://www.drupal.org/user/3145497"
-                },
-                {
-                    "name": "penyaskito",
-                    "homepage": "https://www.drupal.org/user/959536"
-                },
-                {
-                    "name": "weseze",
-                    "homepage": "https://www.drupal.org/user/417521"
-                }
-            ],
-            "description": "Extends the paragraphs field widgets to support asymmetric translations.",
-            "homepage": "https://www.drupal.org/project/paragraphs_asymmetric_translation_widgets",
-            "support": {
-                "source": "https://git.drupalcode.org/project/paragraphs_asymmetric_translation_widgets"
-            }
-        },
-        {
             "name": "drupal/pathauto",
             "version": "1.11.0",
             "source": {
@@ -4179,6 +4083,83 @@
                 "source": "https://cgit.drupalcode.org/pathauto",
                 "issues": "https://www.drupal.org/project/issues/pathauto",
                 "documentation": "https://www.drupal.org/docs/8/modules/pathauto"
+            }
+        },
+        {
+            "name": "drupal/rdf",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/rdf.git",
+                "reference": "2.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/rdf-2.1.1.zip",
+                "reference": "2.1.1",
+                "shasum": "9c897d1313abdabbe80806d79643faffaa0b2466"
+            },
+            "require": {
+                "drupal/core": "^9.4 || ^10.0",
+                "easyrdf/easyrdf": "^0.9 || ^1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.1.1",
+                    "datestamp": "1666340902",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Arto",
+                    "homepage": "https://www.drupal.org/user/26089"
+                },
+                {
+                    "name": "bbrala",
+                    "homepage": "https://www.drupal.org/user/3366066"
+                },
+                {
+                    "name": "bhuga",
+                    "homepage": "https://www.drupal.org/user/186547"
+                },
+                {
+                    "name": "febbraro",
+                    "homepage": "https://www.drupal.org/user/43670"
+                },
+                {
+                    "name": "jmiccolis",
+                    "homepage": "https://www.drupal.org/user/31731"
+                },
+                {
+                    "name": "linclark",
+                    "homepage": "https://www.drupal.org/user/396253"
+                },
+                {
+                    "name": "miglius",
+                    "homepage": "https://www.drupal.org/user/18741"
+                },
+                {
+                    "name": "scor",
+                    "homepage": "https://www.drupal.org/user/52142"
+                },
+                {
+                    "name": "smustgrave",
+                    "homepage": "https://www.drupal.org/user/3252890"
+                }
+            ],
+            "description": "Enriches your content with metadata to let other applications (e.g. search engines, aggregators) better understand its relationships and attributes",
+            "homepage": "https://www.drupal.org/project/rdf",
+            "support": {
+                "source": "https://git.drupalcode.org/project/rdf"
             }
         },
         {
@@ -4281,6 +4262,66 @@
             "homepage": "https://www.drupal.org/project/select2",
             "support": {
                 "source": "https://git.drupalcode.org/project/select2"
+            }
+        },
+        {
+            "name": "drupal/seven",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/seven.git",
+                "reference": "1.0.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/seven-1.0.0-alpha1.zip",
+                "reference": "1.0.0-alpha1",
+                "shasum": "8e3472d4d0c52abba3d6159ed80177933fc7e00e"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10"
+            },
+            "type": "drupal-theme",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0-alpha1",
+                    "datestamp": "1660152561",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "bnjmnm",
+                    "homepage": "https://www.drupal.org/user/2369194"
+                },
+                {
+                    "name": "lauriii",
+                    "homepage": "https://www.drupal.org/user/1078742"
+                },
+                {
+                    "name": "mcrittenden",
+                    "homepage": "https://www.drupal.org/user/420631"
+                },
+                {
+                    "name": "mrfelton",
+                    "homepage": "https://www.drupal.org/user/305669"
+                },
+                {
+                    "name": "TravisCarden",
+                    "homepage": "https://www.drupal.org/user/236758"
+                }
+            ],
+            "description": "The Seven theme from Drupal 8/9 moved to contrib",
+            "homepage": "https://www.drupal.org/project/seven",
+            "support": {
+                "source": "https://git.drupalcode.org/project/seven"
             }
         },
         {
@@ -5129,6 +5170,81 @@
                 }
             ],
             "time": "2023-02-15T17:17:24+00:00"
+        },
+        {
+            "name": "easyrdf/easyrdf",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/easyrdf/easyrdf.git",
+                "reference": "c7b0a9dbcb211eb7de03ee99ff5b52d17f2a8e64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/easyrdf/easyrdf/zipball/c7b0a9dbcb211eb7de03ee99ff5b52d17f2a8e64",
+                "reference": "c7b0a9dbcb211eb7de03ee99ff5b52d17f2a8e64",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-mbstring": "*",
+                "ext-pcre": "*",
+                "ext-xmlreader": "*",
+                "lib-libxml": "*",
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "code-lts/doctum": "^5",
+                "ml/json-ld": "~1.0",
+                "phpunit/phpunit": "^7",
+                "semsol/arc2": "^2.4",
+                "squizlabs/php_codesniffer": "3.*",
+                "zendframework/zend-http": "~2.3"
+            },
+            "suggest": {
+                "ml/json-ld": "~1.0",
+                "semsol/arc2": "~2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EasyRdf\\": "lib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nicholas Humfrey",
+                    "email": "njh@aelius.com",
+                    "homepage": "http://www.aelius.com/njh/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Alexey Zakhlestin",
+                    "email": "indeyets@gmail.com",
+                    "homepage": "http://indeyets.ru/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "EasyRdf is a PHP library designed to make it easy to consume and produce RDF.",
+            "homepage": "http://www.easyrdf.org/",
+            "keywords": [
+                "Linked Data",
+                "RDF",
+                "Semantic Web",
+                "Turtle",
+                "rdfa",
+                "sparql"
+            ],
+            "support": {
+                "forum": "http://groups.google.com/group/easyrdf/",
+                "issues": "http://github.com/easyrdf/easyrdf/issues",
+                "source": "https://github.com/easyrdf/easyrdf/tree/1.1.1"
+            },
+            "time": "2020-12-02T08:47:31+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -12559,138 +12675,6 @@
             }
         },
         {
-            "name": "drupal/entity_type_clone",
-            "version": "1.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/entity_type_clone.git",
-                "reference": "8.x-1.7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_type_clone-8.x-1.7.zip",
-                "reference": "8.x-1.7",
-                "shasum": "cad1536cbae4dd069bc78230fcd418ea07a6513c"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.7",
-                    "datestamp": "1621579347",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "ajay_reddy",
-                    "homepage": "https://www.drupal.org/user/3261994"
-                },
-                {
-                    "name": "vuil",
-                    "homepage": "https://www.drupal.org/user/3568458"
-                }
-            ],
-            "description": "This module provide option to clone entity types.",
-            "homepage": "https://www.drupal.org/project/entity_type_clone",
-            "support": {
-                "source": "https://git.drupalcode.org/project/entity_type_clone"
-            }
-        },
-        {
-            "name": "drupal/stage_file_proxy",
-            "version": "2.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/stage_file_proxy.git",
-                "reference": "2.0.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-2.0.2.zip",
-                "reference": "2.0.2",
-                "shasum": "187019fdbb7b805a66068c6ca93d211f439d288b"
-            },
-            "require": {
-                "drupal/core": "^9 || ^10"
-            },
-            "require-dev": {
-                "drush/drush": "^11"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.0.2",
-                    "datestamp": "1670369228",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                },
-                "drush": {
-                    "services": {
-                        "stage_file_proxy.drush.services.yml": "^11"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "BarisW",
-                    "homepage": "https://www.drupal.org/user/107229"
-                },
-                {
-                    "name": "geek-merlin",
-                    "homepage": "https://www.drupal.org/user/229048"
-                },
-                {
-                    "name": "greggles",
-                    "homepage": "https://www.drupal.org/user/36762"
-                },
-                {
-                    "name": "markdorison",
-                    "homepage": "https://www.drupal.org/user/346106"
-                },
-                {
-                    "name": "moshe weitzman",
-                    "homepage": "https://www.drupal.org/user/23"
-                },
-                {
-                    "name": "msonnabaum",
-                    "homepage": "https://www.drupal.org/user/75278"
-                },
-                {
-                    "name": "netaustin",
-                    "homepage": "https://www.drupal.org/user/199298"
-                },
-                {
-                    "name": "robwilmshurst",
-                    "homepage": "https://www.drupal.org/user/144488"
-                },
-                {
-                    "name": "smustgrave",
-                    "homepage": "https://www.drupal.org/user/3252890"
-                }
-            ],
-            "description": "Provides stage_file_proxy module.",
-            "homepage": "https://www.drupal.org/project/stage_file_proxy",
-            "support": {
-                "source": "https://git.drupalcode.org/project/stage_file_proxy"
-            }
-        },
-        {
             "name": "drupal/upgrade_status",
             "version": "3.18.0",
             "source": {
@@ -12764,81 +12748,6 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/upgrade_status"
             }
-        },
-        {
-            "name": "easyrdf/easyrdf",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/easyrdf/easyrdf.git",
-                "reference": "c7b0a9dbcb211eb7de03ee99ff5b52d17f2a8e64"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/easyrdf/easyrdf/zipball/c7b0a9dbcb211eb7de03ee99ff5b52d17f2a8e64",
-                "reference": "c7b0a9dbcb211eb7de03ee99ff5b52d17f2a8e64",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dom": "*",
-                "ext-mbstring": "*",
-                "ext-pcre": "*",
-                "ext-xmlreader": "*",
-                "lib-libxml": "*",
-                "php": ">=7.1.0"
-            },
-            "require-dev": {
-                "code-lts/doctum": "^5",
-                "ml/json-ld": "~1.0",
-                "phpunit/phpunit": "^7",
-                "semsol/arc2": "^2.4",
-                "squizlabs/php_codesniffer": "3.*",
-                "zendframework/zend-http": "~2.3"
-            },
-            "suggest": {
-                "ml/json-ld": "~1.0",
-                "semsol/arc2": "~2.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "EasyRdf\\": "lib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nicholas Humfrey",
-                    "email": "njh@aelius.com",
-                    "homepage": "http://www.aelius.com/njh/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Alexey Zakhlestin",
-                    "email": "indeyets@gmail.com",
-                    "homepage": "http://indeyets.ru/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "EasyRdf is a PHP library designed to make it easy to consume and produce RDF.",
-            "homepage": "http://www.easyrdf.org/",
-            "keywords": [
-                "Linked Data",
-                "RDF",
-                "Semantic Web",
-                "Turtle",
-                "rdfa",
-                "sparql"
-            ],
-            "support": {
-                "forum": "http://groups.google.com/group/easyrdf/",
-                "issues": "http://github.com/easyrdf/easyrdf/issues",
-                "source": "https://github.com/easyrdf/easyrdf/tree/1.1.1"
-            },
-            "time": "2020-12-02T08:47:31+00:00"
         },
         {
             "name": "fabpot/goutte",
@@ -17174,16 +17083,16 @@
     "stability-flags": {
         "drupal/components": 10,
         "drupal/config_split": 5,
-        "drupal/external_entities": 15,
+        "drupal/csv_serialization": 10,
+        "drupal/dynamic_entity_reference": 15,
         "drupal/flexible_permissions": 10,
-        "drupal/fullcalendar_api": 15,
         "drupal/group": 5,
         "drupal/inline_entity_form": 5,
         "drupal/layout_paragraphs": 10,
         "drupal/link_allowed_hosts": 10,
-        "drupal/linkchecker": 10,
+        "drupal/linkchecker": 15,
         "drupal/masquerade": 10,
-        "drupal/paragraphs_asymmetric_translation_widgets": 10,
+        "drupal/seven": 15,
         "drupal/subgroup": 10
     },
     "prefer-stable": true,

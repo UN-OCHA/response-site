@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ * Functions and hook implementations for FullCalendar API Examples module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function fullcalendar_api_example_menu() {
+  $items['fullcalendar/calendar'] = [
+    'title' => 'FullCalendar',
+    'description' => 'FullCalendar basic implementation.',
+    'page callback' => 'fullcalendar_api_example_calendar_page',
+    // Testing.
+    'access callback' => TRUE,
+    'file' => 'fullcalendar_api_example.pages.inc',
+    'type' => MENU_CALLBACK,
+  ];
+  $items['fullcalendar/datasource'] = [
+    'title' => 'FullCalendar Datasource',
+    'description' => 'FullCalendar datasource implementation.',
+    'page callback' => 'fullcalendar_api_example_datasource_page',
+    // Testing.
+    'access callback' => TRUE,
+    'file' => 'fullcalendar_api_example.pages.inc',
+    'type' => MENU_CALLBACK,
+  ];
+  $items['fullcalendar/json-data'] = [
+    'title' => 'JSON Data',
+    'description' => 'Example JSON datasource feed',
+    'page callback' => 'full_calendar_api_example_data_provider',
+    // Testing.
+    'access callback' => TRUE,
+    'delivery callback' => 'ajax_deliver',
+    'file' => 'fullcalendar_api_example.ajax.inc',
+  ];
+  $items['fullcalendar/entity'] = [
+    'title' => 'FullCalendar Entities',
+    'description' => 'FullCalendar entity implementation.',
+    'page callback' => 'fullcalendar_api_example_entity_page',
+    // Testing.
+    'access callback' => TRUE,
+    'file' => 'fullcalendar_api_example.pages.inc',
+    'type' => MENU_CALLBACK,
+  ];
+  $items['fullcalendar/callbacks'] = [
+    'title' => 'FullCalendar Callbacks',
+    'description' => 'Example of using callbacks when a FullCalendar event fires.',
+    'page callback' => 'fullcalendar_api_example_callbacks_page',
+    // Testing.
+    'access callback' => TRUE,
+    'file' => 'fullcalendar_api_example.pages.inc',
+    'type' => MENU_CALLBACK,
+  ];
+  return $items;
+}

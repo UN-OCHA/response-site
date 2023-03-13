@@ -1,0 +1,79 @@
+<?php
+
+/**
+ * @file
+ * Functions and hooks for FullCalendar API module.
+ */
+
+use Drupal\Component\Utility\Html;
+
+/**
+ * Implements hook_theme().
+ */
+function fullcalendar_api_theme($existing, $type, $theme, $path) {
+  return [
+
+    'fullcalendar_calendar' => [
+      'template' => 'fullcalendar',
+      'variables' => [
+        'calendar_id' => NULL,
+        'calendar_settings' => [],
+      ],
+    ],
+    'fullcalendar_calendar_datasource' => [
+      'file' => 'theme.inc',
+      'path' => "$path/theme",
+      'variables' => [
+        'datasource_uri' => NULL,
+        'calendar_id' => NULL,
+        'calendar_settings' => [],
+      ],
+    ],
+    'fullcalendar_calendar_entity' => [
+      'file' => 'theme.inc',
+      'path' => "$path/theme",
+      'variables' => [
+        'entities' => [],
+        'date_field_map' => [],
+        'calendar_id' => NULL,
+        'calendar_settings' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for fullcalendar_calendar.
+ *
+ * Default template: fullcalendar.html.twig.
+ *
+ * @params array $vars
+ *   an associative array containing:
+ *   - calendar_id: string the CSS id of the calendar DOM object
+ *   - calendar_settings: array of settings to override FullCalendar.js defaults
+ */
+function template_preprocess_fullcalendar_calendar(&$vars) {
+  $calendar_id = $vars['calendar_id'];
+  $user_settings = $vars['calendar_settings'];
+
+  // Default settings.
+  $settings = [
+    'header' => [
+      'left' => 'month,agendaWeek',
+      'right' => 'prev title next',
+    ],
+    'defaultDate' => (new \DateTime)->format('Y-m-d'),
+    'businessHours' => TRUE,
+    'editable' => TRUE,
+    'events' => [],
+  ];
+
+  // Override defaults with user submitted data.
+  $settings = array_replace_recursive($settings, $user_settings);
+
+  // Have to make sure that html id and id in settings are identical.
+  $calendar_id = Html::getId($calendar_id);
+
+  $vars['#attached']['library'][] = 'fullcalendar_api/fullcalendar_load';
+  $vars['#attached']['drupalSettings']['fullcalendar_api']['instances'][$calendar_id] = $settings;
+}

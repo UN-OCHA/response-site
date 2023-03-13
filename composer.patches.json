@@ -7,6 +7,9 @@
         "drupal/csp": {
             "Simplify log format": "PATCHES/csp-log-format.patch"
         },
+        "drupal/csv_serialization": {
+            "Make D9 compatible": "PATCHES/csv_d9.patch"
+        },
         "drupal/group": {
             "https://www.drupal.org/project/subgroup/issues/3163044#comment-14499262": "https://www.drupal.org/files/issues/2022-05-04/i3278723.patch",
             "https://www.drupal.org/project/group/issues/3212608 - views data export": "https://www.drupal.org/files/issues/2022-10-19/3212608-5_0.patch"
