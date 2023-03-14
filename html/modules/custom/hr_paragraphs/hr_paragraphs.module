@@ -1305,25 +1305,28 @@ function hr_paragraphs_validate_date_filter_values($code, array $values) {
  * Implements hook_library_info_alter().
  */
 function hr_paragraphs_library_info_alter(&$libraries, $extension) {
-  if ($extension !== 'fullcalendar_api') {
-    return;
+  if ($extension == 'claro') {
+    $module_path = \Drupal::service('module_handler')->getModule(basename(__FILE__, '.module'))->getPath();
+    $libraries['global-styling']['css']['theme']['/' . $module_path . '/css/admin.css'] = [];
   }
 
-  $new_file = '/' . \Drupal::service('extension.list.module')->getPath('hr_paragraphs') . '/component/events/js/fullcalendar.js';
-  $replacements = [
-    'js/fullcalendar.load.js' => $new_file,
-  ];
+  if ($extension == 'fullcalendar_api') {
+    $new_file = '/' . \Drupal::service('extension.list.module')->getPath('hr_paragraphs') . '/component/events/js/fullcalendar.js';
+    $replacements = [
+      'js/fullcalendar.load.js' => $new_file,
+    ];
 
-  $new_js = [];
-  foreach ($libraries['fullcalendar_load']['js'] as $source => $options) {
-    if (isset($replacements[$source])) {
-      $new_js[$replacements[$source]] = $options;
+    $new_js = [];
+    foreach ($libraries['fullcalendar_load']['js'] as $source => $options) {
+      if (isset($replacements[$source])) {
+        $new_js[$replacements[$source]] = $options;
+      }
+      else {
+        $new_js[$source] = $options;
+      }
     }
-    else {
-      $new_js[$source] = $options;
-    }
+    $libraries['fullcalendar_load']['js'] = $new_js;
   }
-  $libraries['fullcalendar_load']['js'] = $new_js;
 }
 
 /**
