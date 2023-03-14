@@ -50,6 +50,26 @@ Download and enable https://www.drupal.org/project/flexible_permissions before u
         }
     ```
 
+```bash
+fin composer remove drupal/maintenance200 drupal/theme_switcher
+
+fin composer remove --dev drupal/coder drupal/config_filter drupal/config_inspector drupal/console drupal/core-dev drupal/dev_mode drupal/devel_php marcocesarato/php-conventional-changelog mglaman/drupal-check phpcompatibility/php-compatibility phpspec/prophecy-phpunit phpunit/php-code-coverage phpunit/phpunit weitzman/drupal-test-traits
+
+fin composer update
+
+fin composer require 'drupal/core-recommended:^10' 'drupal/core-composer-scaffold:^10' 'drupal/core-project-message:^10' --update-with-dependencies --no-update
+
+fin composer update
+
+fin composer require drupal/maintenance200 drupal/theme_switcher
+
+fin composer require --dev drupal/coder drupal/config_filter drupal/config_inspector drupal/core-dev marcocesarato/php-conventional-changelog mglaman/drupal-check phpcompatibility/php-compatibility phpspec/prophecy-phpunit phpunit/php-code-coverage phpunit/phpunit weitzman/drupal-test-traits
+
+drush cr
+
+drush updb -y
+```
+
 ## Testing
 
 Intergration tests using existing site/config.
