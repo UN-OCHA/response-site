@@ -83,9 +83,15 @@
         "npm-asset/moment": "^2.29",
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",
+        "orakili/composer-drupal-info-file-patch-helper": "^1.0",
         "rlanvin/php-rrule": "2.3.1",
         "unocha/common_design": "^8",
         "unocha/ocha_search": "^1.0"
+    },
+    "autoload": {
+        "classmap": [
+            "scripts/composer/DrupalLenientRequirement.php"
+        ]
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -110,6 +116,9 @@
         ],
         "post-update-cmd": [
             "@git-hooks"
+        ],
+        "pre-pool-create": [
+            "scripts\\composer\\DrupalLenientRequirement::changeVersionConstraint"
         ]
     },
     "minimum-stability": "stable",
@@ -126,10 +135,18 @@
             "drupal/core-project-message": true,
             "drupal/console-extend-plugin": true,
             "symfony/flex": true,
-            "oomphinc/composer-installers-extender": true
+            "oomphinc/composer-installers-extender": true,
+            "orakili/composer-drupal-info-file-patch-helper": true
         }
     },
     "extra": {
+        "drupal-lenient": {
+            "constraint": "^10",
+            "allowed-list": [
+                "drupal/maintenance200",
+                "drupal/theme_switcher"
+            ]
+        },
         "enable-patching": true,
         "composer-exit-on-patch-failure": true,
         "patches-file": "composer.patches.json",
@@ -203,7 +220,6 @@
         "drupal/core-dev": "^9",
         "drupal/dev_mode": "^2.3",
         "drupal/devel_php": "^1.3",
-        "drupal/upgrade_status": "^3.18",
         "marcocesarato/php-conventional-changelog": "^1.13",
         "mglaman/drupal-check": "^1.4",
         "phpcompatibility/php-compatibility": "^9.3",

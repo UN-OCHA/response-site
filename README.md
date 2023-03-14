@@ -18,7 +18,37 @@ Download and enable https://www.drupal.org/project/flexible_permissions before u
 ### Manual updates
 
 - [ ] `composer require 'drupal/dynamic_entity_reference:^3.0'` is D10 only
-- [ ] `group` and `subgroup` needs to be updated to at least `2.x`
+- [x] `group` and `subgroup` needs to be updated to at least `2.x`
+
+### Use patches with versions
+
+1. Add [scripts/composer/DrupalLenientRequirement.php](https://raw.githubusercontent.com/UN-OCHA/rwint9-site/ca0d55ab6df1da02655a32a8fe0aa0d6714c2663/scripts/composer/DrupalLenientRequirement.php)
+2. `composer require orakili/composer-drupal-info-file-patch-helper`
+3. Add autload
+    ```
+      "autoload": {
+          "classmap": [
+              "scripts/composer/DrupalLenientRequirement.php"
+          ]
+      }
+    ```
+4. Add script
+    ```
+      "scripts": {
+          "pre-pool-create": [
+              "scripts\\composer\\DrupalLenientRequirement::changeVersionConstraint"
+          ],
+    ```
+5. Add
+    ```
+        "drupal-lenient": {
+            "constraint": "^10",
+            "allowed-list": [
+                "drupal/maintenance200",
+                "drupal/theme_switcher"
+            ]
+        }
+    ```
 
 ## Testing
 
