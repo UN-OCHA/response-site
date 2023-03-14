@@ -12,7 +12,7 @@ field_name: field_iframe_aspect_ratio
 entity_type: paragraph
 bundle: iframe
 label: 'Aspect Ratio'
-description: 'Force a particular aspect ratio. If you supply an embed code (not a URL) and the embed code contains explicit values, you can choose ''Automatically detect'''
+description: "Force a particular aspect ratio. If you supply an embed code (not a URL) and the embed code contains explicit values, you can choose 'Automatically detect'"
 required: false
 translatable: true
 default_value:
