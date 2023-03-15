@@ -12,6 +12,13 @@ use Drupal\group\Entity\Group;
 class CustomAccessGroupType implements AccessInterface {
 
   /**
+   * Group.
+   *
+   * @var mixed
+   */
+  protected $group;
+
+  /**
    * Constructor.
    */
   public function __construct($group) {
