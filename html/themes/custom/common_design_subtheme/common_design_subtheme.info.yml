@@ -1,8 +1,8 @@
-name: HR.info public
+name: RWR
 type: theme
-description: HR.info public theme, an OCHA Common Design subtheme
-core_version_requirement: ^8.8 || ^9 || ^10
-package: HR.info
+description: RWR public theme, an OCHA Common Design subtheme
+core_version_requirement: ^9.5 || ^10
+package: Response
 base theme: common_design
 logo: 'img/logos/response-logo.svg'
 
