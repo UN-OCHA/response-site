@@ -1909,6 +1909,14 @@ function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
     if (isset($form['field_enabled_tabs'])) {
       unset($form['field_enabled_tabs']['widget']['#options']['pages']);
     }
+
+    // Hide language option for managers.
+    if (isset($form['langcode'])) {
+      $user = \Drupal::currentUser();
+      if (!$user->hasPermission('create operation group')) {
+        $form['langcode']['#access'] = FALSE;
+      }
+    }
   }
 }
 
