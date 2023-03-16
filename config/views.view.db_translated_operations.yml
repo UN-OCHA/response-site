@@ -321,8 +321,9 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'administer nodes'
       cache:
         type: tag
         options: {  }
