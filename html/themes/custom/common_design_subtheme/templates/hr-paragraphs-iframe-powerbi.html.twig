@@ -1,0 +1,33 @@
+{#
+/**
+ * @file
+ * Theme override for an iFrame Paragraph.
+ *
+ * @overrides html/modules/custom/hr_paragraphs/templates/hr-paragraphs-iframe.html.twig
+ */
+#}
+{{ attach_library('common_design_subtheme/hri-iframe') }}
+{%
+  set classes = [
+    'hri-iframe',
+    'hri-iframe--' ~ ratio,
+  ]
+%}
+<div{{ create_attribute()
+  .addClass(classes)
+  .setAttribute('data-width', width)
+  .setAttribute('data-height', height)
+}}>
+  <iframe
+    class="hri-iframe__iframe"
+    sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+    allow="autoplay; encrypted-media;"
+    width="{{ width }}"
+    height="{{ height }}"
+    referrerpolicy="no-referrer"
+    frameborder="0"
+    target="_blank"
+    src="{{ embed_url }}"
+    title="{{ 'Embedded media'|t }}">
+  </iframe>
+</div>
