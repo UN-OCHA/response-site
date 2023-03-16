@@ -92,6 +92,14 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
         'ratio' => NULL,
       ],
     ],
+    'hr_paragraphs_iframe_powerbi' => [
+      'template' => 'hr-paragraphs-iframe-powerbi',
+      'variables' => [
+        'embed_url' => NULL,
+        'width' => NULL,
+        'ratio' => NULL,
+      ],
+    ],
     'group_children' => [
       'template' => 'group-children',
       'variables' => [
@@ -545,6 +553,16 @@ function hr_paragraphs_preprocess_paragraph__iframe(&$variables) {
       '#theme' => 'hr_paragraphs_iframe_tableau',
       '#embed_url' => $embed_url,
       '#width' => $width,
+      '#ratio' => $ratio,
+      '#weight' => 99,
+    ];
+  }
+  elseif (strpos($embed_url, 'https://app.powerbi.com/view') === 0) {
+    $variables['content']['embed'] = [
+      '#theme' => 'hr_paragraphs_iframe_powerbi',
+      '#embed_url' => $embed_url,
+      '#width' => $width,
+      '#height' => $height,
       '#ratio' => $ratio,
       '#weight' => 99,
     ];
@@ -1890,6 +1908,14 @@ function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
   if (in_array($form_id, $form_ids)) {
     if (isset($form['field_enabled_tabs'])) {
       unset($form['field_enabled_tabs']['widget']['#options']['pages']);
+    }
+
+    // Hide language option for managers.
+    if (isset($form['langcode'])) {
+      $user = \Drupal::currentUser();
+      if (!$user->hasPermission('create operation group')) {
+        $form['langcode']['#access'] = FALSE;
+      }
     }
   }
 }
