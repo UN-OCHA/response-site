@@ -2207,17 +2207,17 @@
         },
         {
             "name": "drupal/dashboards",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/dashboards.git",
-                "reference": "2.1.2"
+                "reference": "2.1.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/dashboards-2.1.2.zip",
-                "reference": "2.1.2",
-                "shasum": "1f741b80850ea39bf530217a5863bd678db629ca"
+                "url": "https://ftp.drupal.org/files/projects/dashboards-2.1.3.zip",
+                "reference": "2.1.3",
+                "shasum": "974539bdb155d794a26d0bfd0d9192c6c635f657"
             },
             "require": {
                 "drupal/core": "^9.4 || ^10"
@@ -2230,8 +2230,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.1.2",
-                    "datestamp": "1674644047",
+                    "version": "2.1.3",
+                    "datestamp": "1679332395",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2905,6 +2905,22 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
+                {
+                    "name": "acquia",
+                    "homepage": "https://www.drupal.org/user/1231722"
+                },
+                {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
+                },
+                {
+                    "name": "kaynen",
+                    "homepage": "https://www.drupal.org/user/733308"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                },
                 {
                     "name": "solotandem",
                     "homepage": "https://www.drupal.org/user/240748"
@@ -4587,17 +4603,17 @@
         },
         {
             "name": "drupal/theme_switcher",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/theme_switcher.git",
-                "reference": "8.x-1.2"
+                "reference": "8.x-1.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/theme_switcher-8.x-1.2.zip",
-                "reference": "8.x-1.2",
-                "shasum": "d9ac27a941e50d45067e1e3b087e7eb8709f904a"
+                "url": "https://ftp.drupal.org/files/projects/theme_switcher-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "c3ce3499cbbf31e4a47808478af890b47c4f41dd"
             },
             "require": {
                 "drupal/core": "^8.5 || ^9",
@@ -4606,8 +4622,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1624695689",
+                    "version": "8.x-1.3",
+                    "datestamp": "1679338191",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4623,6 +4639,10 @@
                     "name": "Adrián Marín",
                     "homepage": "https://www.drupal.org/user/3529039",
                     "email": "amarincolas@gmail.com"
+                },
+                {
+                    "name": "Anybody",
+                    "homepage": "https://www.drupal.org/user/291091"
                 },
                 {
                     "name": "mkalkbrenner",
@@ -4874,17 +4894,17 @@
         },
         {
             "name": "drupal/views_data_export",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/views_data_export.git",
-                "reference": "8.x-1.2"
+                "reference": "8.x-1.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/views_data_export-8.x-1.2.zip",
-                "reference": "8.x-1.2",
-                "shasum": "168c0d3de19f2182f2c1bc16066498342015970e"
+                "url": "https://ftp.drupal.org/files/projects/views_data_export-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "a8a5483e13787f2bb3eb66d9b0f19d96c0d8d7c1"
             },
             "require": {
                 "drupal/core": "^9 || ^10",
@@ -4897,8 +4917,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.2",
-                    "datestamp": "1665515238",
+                    "version": "8.x-1.3",
+                    "datestamp": "1679072666",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -7237,16 +7257,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.12",
+            "version": "v0.11.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "52cb7c47d403c31c0adc9bf7710fc355f93c20f7"
+                "reference": "722317c9f5627e588788e340f29b923e58f92f54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/52cb7c47d403c31c0adc9bf7710fc355f93c20f7",
-                "reference": "52cb7c47d403c31c0adc9bf7710fc355f93c20f7",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/722317c9f5627e588788e340f29b923e58f92f54",
+                "reference": "722317c9f5627e588788e340f29b923e58f92f54",
                 "shasum": ""
             },
             "require": {
@@ -7307,9 +7327,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.12"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.13"
             },
-            "time": "2023-01-29T21:24:40+00:00"
+            "time": "2023-03-21T14:22:44+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -14076,24 +14096,27 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.6.2",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "48f445a408c131e38cab1c235aa6d2bb7a0bb20d"
+                "reference": "1534aea9bde19a5c85c5d1e1f834ab63f4c5dcf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/48f445a408c131e38cab1c235aa6d2bb7a0bb20d",
-                "reference": "48f445a408c131e38cab1c235aa6d2bb7a0bb20d",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/1534aea9bde19a5c85c5d1e1f834ab63f4c5dcf5",
+                "reference": "1534aea9bde19a5c85c5d1e1f834ab63f4c5dcf5",
                 "shasum": ""
             },
             "require": {
+                "doctrine/deprecations": "^1.0",
                 "php": "^7.4 || ^8.0",
-                "phpdocumentor/reflection-common": "^2.0"
+                "phpdocumentor/reflection-common": "^2.0",
+                "phpstan/phpdoc-parser": "^1.13"
             },
             "require-dev": {
                 "ext-tokenizer": "*",
+                "phpbench/phpbench": "^1.2",
                 "phpstan/extension-installer": "^1.1",
                 "phpstan/phpstan": "^1.8",
                 "phpstan/phpstan-phpunit": "^1.1",
@@ -14125,9 +14148,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.2"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.0"
             },
-            "time": "2022-10-14T12:47:21+00:00"
+            "time": "2023-03-12T10:13:29+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -14296,16 +14319,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.6",
+            "version": "1.10.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "50d089a3e0904b0fe7e2cf2d4fd37d427d64235a"
+                "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/50d089a3e0904b0fe7e2cf2d4fd37d427d64235a",
-                "reference": "50d089a3e0904b0fe7e2cf2d4fd37d427d64235a",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/b10ceb526d9607903c5b2673f1fc8775dbe48975",
+                "reference": "b10ceb526d9607903c5b2673f1fc8775dbe48975",
                 "shasum": ""
             },
             "require": {
@@ -14334,8 +14357,11 @@
                 "static analysis"
             ],
             "support": {
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.10.6"
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
             },
             "funding": [
                 {
@@ -14351,20 +14377,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-09T16:55:12+00:00"
+            "time": "2023-03-16T15:24:20+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-deprecation-rules.git",
-                "reference": "bcc1e8cdf81c3da1a2ba9188ee94cd7e2a62e865"
+                "reference": "a22b36b955a2e9a3d39fe533b6c1bb5359f9c319"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/bcc1e8cdf81c3da1a2ba9188ee94cd7e2a62e865",
-                "reference": "bcc1e8cdf81c3da1a2ba9188ee94cd7e2a62e865",
+                "url": "https://api.github.com/repos/phpstan/phpstan-deprecation-rules/zipball/a22b36b955a2e9a3d39fe533b6c1bb5359f9c319",
+                "reference": "a22b36b955a2e9a3d39fe533b6c1bb5359f9c319",
                 "shasum": ""
             },
             "require": {
@@ -14397,9 +14423,9 @@
             "description": "PHPStan rules for detecting usage of deprecated classes, methods, properties, constants and traits.",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-deprecation-rules/issues",
-                "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/1.1.2"
+                "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/1.1.3"
             },
-            "time": "2023-01-17T16:14:21+00:00"
+            "time": "2023-03-17T07:50:08+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
