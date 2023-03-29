@@ -5,6 +5,10 @@
  * Post update hooks.
  */
 
+use Drupal\Core\Language\Language;
+use Drupal\path_alias\Entity\PathAlias;
+use Drupal\redirect\Entity\Redirect;
+
 /**
  * Update groups for enabled tabs and used paragraphs.
  */
@@ -164,6 +168,36 @@ function hr_paragraphs_post_update_rename_cameroun() {
       $new = str_replace('/cameroun', '/cameroon', $alias->getAlias());
       $alias->setAlias($new);
       $alias->save();
+    }
+  }
+}
+
+/**
+ * Fix Afghanistan aliases.
+ */
+function hr_paragraphs_post_update_afghanistan_aliases(&$sandbox) {
+  /** @var \Drupal\redirect\RedirectRepository $repository */
+  $repository = \Drupal::service('redirect.repository');
+
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $query = $entity_type_manager->getStorage('path_alias')->getQuery();
+  $query->condition('alias', '/afganistan/%', 'LIKE');
+  $path_ids = $query->execute();
+
+  $aliases = PathAlias::loadMultiple($path_ids);
+  foreach ($aliases as $alias) {
+    $old_alias = $alias->getAlias();
+    $new_alias = str_replace('/afganistan/', '/afghanistan/', $old_alias);
+    $alias->setAlias($new_alias);
+    $alias->save();
+
+    if (!$repository->findMatchingRedirect($old_alias)) {
+      Redirect::create([
+        'redirect_source' => $old_alias,
+        'redirect_redirect' => $new_alias,
+        'language' => Language::LANGCODE_NOT_SPECIFIED,
+        'status_code' => '301',
+      ])->save();
     }
   }
 }
