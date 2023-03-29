@@ -1,0 +1,11 @@
+uuid: 42ac34ba-ae60-4b91-953c-5bdd9c09d46a
+langcode: en
+status: true
+dependencies: {  }
+machine: local
+description: null
+name: Local
+weight: ''
+url: 'https://response.test/'
+fg_color: '#ffffff'
+bg_color: '#0d0d0d'
