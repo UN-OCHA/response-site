@@ -35,7 +35,10 @@ class AllUsersSelection extends UserSelection {
 
     // Filter on email address.
     if (isset($match)) {
-      $query->condition('mail', $match, $match_operator);
+      $condition_group = $query->orConditionGroup();
+      $condition_group->condition('mail', $match, $match_operator);
+      $condition_group->condition('name', $match, $match_operator);
+      $query->condition($condition_group);
     }
 
     // Filter by role.
@@ -89,7 +92,7 @@ class AllUsersSelection extends UserSelection {
     /** @var \Drupal\user\Entity\User */
     foreach ($entities as $entity_id => $entity) {
       $bundle = $entity->bundle();
-      $options[$bundle][$entity_id] = $entity->getEmail();
+      $options[$bundle][$entity_id] = $entity->label() . ' (' . $entity->getEmail() . ')';
     }
 
     return $options;
