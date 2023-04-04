@@ -4,6 +4,24 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [0.3.15](https://github.com/UN-OCHA/response-site/compare/v0.3.14...v0.3.15) (2023-04-04)
+
+### Features
+
+* Keep lang code in redirect [#RWR-330](https://https://humanitarian.atlassian.net/browse/RWR-330) ([3d8ce8](https://github.com/UN-OCHA/response-site/commit/3d8ce8b1e48514ef5234d81978ccd486e2de8fad))
+* Select user by email [#RWR-338](https://https://humanitarian.atlassian.net/browse/RWR-338), [#RWR-338](https://https://humanitarian.atlassian.net/browse/RWR-338) ([d7519b](https://github.com/UN-OCHA/response-site/commit/d7519b5a0b6594b51f6ea578f41d620fa94dcbae), [0a9864](https://github.com/UN-OCHA/response-site/commit/0a98648a35483acb12ee4d17880c86e1b3fa4b8f))
+
+### Bug Fixes
+
+* And frankly, just shove the english override into config as well. ([d23d87](https://github.com/UN-OCHA/response-site/commit/d23d879e57922d8d893179010158673409c8026e))
+* Inject language override config for email templates as per the specification. ([5b16ff](https://github.com/UN-OCHA/response-site/commit/5b16ff8897e9e930ae58af8f9d5a12b6a55fcbaf))
+* Upgrade to CD v8.0.1 and crush the img bug ([ecec24](https://github.com/UN-OCHA/response-site/commit/ecec2428452a0787b59e38a4009921a4836ba73b))
+
+### Chores
+
+* Fix Afghanistan aliases [#RWR-337](https://https://humanitarian.atlassian.net/browse/RWR-337) ([16f4ce](https://github.com/UN-OCHA/response-site/commit/16f4ce896445b30ae55d1eb2fed2bb0a1f41029a))
+* Update all outdated drupal/* packages. ([3309bb](https://github.com/UN-OCHA/response-site/commit/3309bb0ad5375431bad92b5001a17b61540c77fa), [1f7f86](https://github.com/UN-OCHA/response-site/commit/1f7f863c4bc4e9e53906164af9a3975415c06418))
+
 ## [0.3.13](https://github.com/UN-OCHA/response-site/compare/v0.3.12...v0.3.13) (2023-02-17)
 
 ### Bug Fixes
