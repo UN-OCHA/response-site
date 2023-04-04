@@ -66,13 +66,13 @@ register_no_approval_required:
 
     --  [site:name] team
 register_pending_approval:
-  subject: 'Account details for [user:display-name] at [site:name] (pending admin approval)'
+  subject: 'Account registered on [site:name]'
   body: |-
     [user:display-name],
 
-    Thank you for registering at [site:name]. Your application for an account is currently pending approval. Once it has been approved, you will receive another email containing information about how to log in, set your password, and other details.
+    Thank you for registering with [site:name]. See the help section at [site:url]/help for details about the site.
 
-    --  [site:name] team
+    -- [site:name] team
 register_pending_approval_admin:
   subject: 'Account details for [user:display-name] at [site:name] (pending admin approval)'
   body: |-
