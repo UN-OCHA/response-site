@@ -1,0 +1,11 @@
+_core:
+  default_config_hash: 6CZIzFifRq3qbdq3n3nDpEOO4hWIQtKOAQNPvGNGKeM
+langcode: es
+register_pending_approval:
+  subject: 'Cuenta registrada en [site:name]'
+  body: |-
+    [user:display-name],
+
+    Gracias por registrarse en [site:name]. Para obtener detalles sobre el sitio, consulte la sección de ayuda [siute:url]/help.
+
+    -- El equipo de [site:name]
