@@ -33,9 +33,12 @@ class AllUsersSelection extends UserSelection {
     // Only real users.
     $query->condition('uid', 1, '>');
 
-    // The user entity doesn't have a label column.
+    // Filter on email address.
     if (isset($match)) {
-      $query->condition('name', $match, $match_operator);
+      $condition_group = $query->orConditionGroup();
+      $condition_group->condition('mail', $match, $match_operator);
+      $condition_group->condition('name', $match, $match_operator);
+      $query->condition($condition_group);
     }
 
     // Filter by role.
@@ -65,6 +68,34 @@ class AllUsersSelection extends UserSelection {
    * {@inheritdoc}
    */
   public function entityQueryAlter(SelectInterface $query) {
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getReferenceableEntities($match = NULL, $match_operator = 'CONTAINS', $limit = 0) {
+    $target_type = $this->getConfiguration()['target_type'];
+
+    $query = $this->buildEntityQuery($match, $match_operator);
+    if ($limit > 0) {
+      $query->range(0, $limit);
+    }
+
+    $result = $query->execute();
+
+    if (empty($result)) {
+      return [];
+    }
+
+    $options = [];
+    $entities = $this->entityTypeManager->getStorage($target_type)->loadMultiple($result);
+    /** @var \Drupal\user\Entity\User */
+    foreach ($entities as $entity_id => $entity) {
+      $bundle = $entity->bundle();
+      $options[$bundle][$entity_id] = $entity->label() . ' (' . $entity->getEmail() . ')';
+    }
+
+    return $options;
   }
 
 }

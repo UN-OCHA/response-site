@@ -82,7 +82,7 @@
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",
         "rlanvin/php-rrule": "2.3.1",
-        "unocha/common_design": "^8",
+        "unocha/common_design": "^8.0.1",
         "unocha/ocha_search": "^1.0"
     },
     "conflict": {
@@ -212,5 +212,5 @@
         "phpunit/phpunit": "^9.5",
         "weitzman/drupal-test-traits": "^1.5"
     },
-    "version": "0.3.13"
+    "version": "0.3.15"
 }

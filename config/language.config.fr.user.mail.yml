@@ -1,0 +1,11 @@
+_core:
+  default_config_hash: 6CZIzFifRq3qbdq3n3nDpEOO4hWIQtKOAQNPvGNGKeM
+langcode: fr
+register_pending_approval:
+  subject: 'Compte enregistré sur [site:name]'
+  body: |-
+    [user:display-name],
+
+    Nous vous remercions pour votre demande d'inscription sur [site:name]. Pour plus de dètails, voir la section d'aide sur [site:url]/help.
+
+    -- L'equipe de [site:name]
