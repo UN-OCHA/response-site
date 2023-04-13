@@ -175,7 +175,7 @@ jobs:
 
       - name: Slack Success Notification
         id: slack_success
-        if: ${{ !env.ACT }} && success()
+        if: ${{ !env.ACT && success() }}
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: '${{ secrets.SLACK_CHANNEL }}'
@@ -202,7 +202,7 @@ jobs:
 
       - name: Slack Failure Notification
         id: slack_failure
-        if: ${{ !env.ACT }} && failure()
+        if: ${{ !env.ACT && failure() }}
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: '${{ secrets.SLACK_CHANNEL }}'
