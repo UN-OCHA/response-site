@@ -9,11 +9,22 @@ jobs:
     steps:
       - name: Setup PHP with PECL extension
         uses: shivammathur/setup-php@v2
+        if: ${{ !env.ACT }}
         with:
           php-version: 8.1
           tools: composer
         env:
           fail-fast: true
+
+      - name: Setup PHP with PECL extension
+        uses: shivammathur/setup-php@v2
+        if: ${{ env.ACT }}
+        with:
+          php-version: 8.1
+          tools: composer
+        env:
+          fail-fast: true
+          runner: self-hosted
 
       - name: Software versions
         id: versions
@@ -46,6 +57,7 @@ jobs:
 
       - name: Configure AWS Credentials
         id: aws
+        if: ${{ !env.ACT }}
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
@@ -54,6 +66,7 @@ jobs:
 
       - name: Login to Public ECR
         id: aws-login
+        if: ${{ !env.ACT }}
         uses: docker/login-action@v2.1.0
         with:
           registry: public.ecr.aws
@@ -76,10 +89,10 @@ jobs:
         uses: cafuego/command-output@main
         with:
           run: |
-            docker-compose -f tests/docker-compose.yml up -d
+            docker compose -f tests/docker-compose.yml up -d
             sleep 10
             docker ps -a
-            docker-compose -f tests/docker-compose.yml exec -w /srv/www -T drupal composer install
+            docker compose -f tests/docker-compose.yml exec -w /srv/www -T drupal composer install
         env:
           fail-fast: true
 
@@ -88,7 +101,7 @@ jobs:
         uses: cafuego/command-output@main
         with:
           run: |
-            docker-compose -f tests/docker-compose.yml exec -u appuser -w /srv/www -T drupal phpcs -p --report=full --standard=phpcs.xml ./html/modules/custom
+            docker compose -f tests/docker-compose.yml exec -u appuser -w /srv/www -T drupal phpcs -p --report=full --standard=phpcs.xml ./html/modules/custom
         env:
           fail-fast: true
 
@@ -97,7 +110,7 @@ jobs:
         uses: cafuego/command-output@main
         with:
           run: |
-            docker-compose -f tests/docker-compose.yml exec -T drupal drush -y si --existing-config
+            docker compose -f tests/docker-compose.yml exec -T drupal drush -y si --existing-config
         env:
           fail-fast: true
 
@@ -106,12 +119,12 @@ jobs:
         uses: cafuego/command-output@main
         with:
           run: |
-            docker-compose -f tests/docker-compose.yml exec -T drupal drush -y en dblog
-            docker-compose -f tests/docker-compose.yml exec -T drupal chmod -R 777 /srv/www/html/sites/default/files /srv/www/html/sites/default/private
-            docker-compose -f tests/docker-compose.yml exec -T drupal mkdir -p /srv/www/html/build/logs
-            docker-compose -f tests/docker-compose.yml exec -T drupal chmod -R 777 /srv/www/html/build/logs
-            docker-compose -f tests/docker-compose.yml exec -T -w /srv/www -e XDEBUG_MODE=coverage -e BROWSERTEST_OUTPUT_DIRECTORY=/srv/www/html/sites/default/files/browser_output -e DTT_BASE_URL=http://127.0.0.1 drupal ./vendor/bin/phpunit --coverage-clover /srv/www/html/build/logs/clover.xml --debug
-            docker cp "$(docker-compose -f tests/docker-compose.yml ps -q drupal)":/srv/www/html/build/logs/clover.xml .
+            docker compose -f tests/docker-compose.yml exec -T drupal drush -y en dblog
+            docker compose -f tests/docker-compose.yml exec -T drupal chmod -R 777 /srv/www/html/sites/default/files /srv/www/html/sites/default/private
+            docker compose -f tests/docker-compose.yml exec -T drupal mkdir -p /srv/www/html/build/logs
+            docker compose -f tests/docker-compose.yml exec -T drupal chmod -R 777 /srv/www/html/build/logs
+            docker compose -f tests/docker-compose.yml exec -T -w /srv/www -e XDEBUG_MODE=coverage -e BROWSERTEST_OUTPUT_DIRECTORY=/srv/www/html/sites/default/files/browser_output -e DTT_BASE_URL=http://127.0.0.1 drupal ./vendor/bin/phpunit --coverage-clover /srv/www/html/build/logs/clover.xml --debug
+            docker cp "$(docker compose -f tests/docker-compose.yml ps -q drupal)":/srv/www/html/build/logs/clover.xml .
         env:
           fail-fast: true
 
@@ -127,6 +140,7 @@ jobs:
 
       - name: Find Comment
         uses: peter-evans/find-comment@v2
+        if: ${{ !env.ACT }}
         id: fc
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -136,6 +150,7 @@ jobs:
 
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v2
+        if: ${{ !env.ACT }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           comment-id: ${{ steps.fc.outputs.comment-id }}
@@ -160,7 +175,7 @@ jobs:
 
       - name: Slack Success Notification
         id: slack_success
-        if: success()
+        if: ${{ !env.ACT }} && success()
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: '${{ secrets.SLACK_CHANNEL }}'
@@ -187,7 +202,7 @@ jobs:
 
       - name: Slack Failure Notification
         id: slack_failure
-        if: failure()
+        if: ${{ !env.ACT }} && failure()
         uses: slackapi/slack-github-action@v1.23.0
         with:
           channel-id: '${{ secrets.SLACK_CHANNEL }}'
@@ -211,3 +226,13 @@ jobs:
             }
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+      - name: Clean up
+        id: docker-clean-up
+        if: ${{ env.ACT }}
+        uses: cafuego/command-output@main
+        with:
+          run: |
+            docker compose -f tests/docker-compose.yml down
+        env:
+          fail-fast: true
