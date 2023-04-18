@@ -64,7 +64,7 @@ class HrParagraphsHdxTest extends ExistingSiteBase {
   }
 
   /**
-   * Set 404 HTTP excpetion.
+   * Set 404 HTTP exception.
    */
   protected function setHttpException404(): void {
     $mock = new MockHandler([

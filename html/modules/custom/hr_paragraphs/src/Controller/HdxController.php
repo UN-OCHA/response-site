@@ -463,6 +463,9 @@ class HdxController extends ControllerBase {
       if ($exception->getCode() === 404) {
         throw new NotFoundHttpException();
       }
+
+      // #RWR-342. Don't continue if fetching data failed.
+      return [];
     }
     $body = $response->getBody() . '';
     $results = json_decode($body, TRUE);
