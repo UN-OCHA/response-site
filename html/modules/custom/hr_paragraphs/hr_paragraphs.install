@@ -215,3 +215,15 @@ function hr_paragraphs_update_9015() {
     }
   }
 }
+
+/**
+ * Add field to linkchecker.
+ */
+function hr_paragraphs_update_9016() {
+  $storage_definitions = hr_paragraphs_custom_linkcheckerlink_fields();
+
+  foreach ($storage_definitions as $field_name => $storage_definition) {
+    \Drupal::entityDefinitionUpdateManager()
+      ->installFieldStorageDefinition($field_name, 'linkcheckerlink', 'linkcheckerlink', $storage_definition);
+  }
+}
