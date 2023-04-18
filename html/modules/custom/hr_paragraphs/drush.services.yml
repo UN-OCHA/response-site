@@ -4,3 +4,8 @@ services:
     arguments: ['@config.factory', '@entity_type.manager', '@http_client', '@file.repository', '@file_system', '@hr_paragraphs.reliefweb_controller']
     tags:
       - { name: drush.command }
+  hr_paragraphs.backlinks.commands:
+    class: \Drupal\hr_paragraphs\Commands\HrParagraphsBacklinksCommands
+    arguments: ['@config.factory', '@entity_type.manager', '@http_client', '@file.repository', '@file_system', '@hr_paragraphs.reliefweb_controller']
+    tags:
+      - { name: drush.command }
