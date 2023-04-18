@@ -201,3 +201,179 @@ function hr_paragraphs_post_update_afghanistan_aliases(&$sandbox) {
     }
   }
 }
+
+/**
+ * Set status for back links.
+ */
+function hr_paragraphs_post_update_set_backlinks_status(&$sandbox) {
+  $logger = \Drupal::logger('hr_paragraphs');
+
+  if (!isset($sandbox['total'])) {
+    $ids = \Drupal::entityQuery('linkcheckerlink')
+      ->accessCheck(FALSE)
+      ->condition('url', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->notExists('link_type')
+      ->execute();
+    $sandbox['total'] = count($ids);
+    $sandbox['last_id'] = 0;
+    $sandbox['current'] = 0;
+
+    $logger->notice('Found ' . $sandbox['total'] . ' links to check');
+
+    if (empty($sandbox['total'])) {
+      $sandbox['#finished'] = 1;
+      return;
+    }
+  }
+
+  $ids = \Drupal::entityQuery('linkcheckerlink')
+    ->accessCheck(FALSE)
+    ->condition('url', 'https://www.humanitarianresponse.info/%', 'LIKE')
+    ->condition('lid', $sandbox['last_id'], '>')
+    ->notExists('link_type')
+    ->sort('lid')
+    ->execute();
+
+  if (empty($ids)) {
+    $sandbox['#finished'] = 1;
+    return;
+  }
+
+  /** @var \Drupal\linkchecker\Entity\LinkCheckerLink[] $links */
+  $links = \Drupal::entityTypeManager()->getStorage('linkcheckerlink')->loadMultiple($ids);
+  foreach ($links as $link) {
+    $link_type = '';
+    $original_url = $link->getUrl();
+    $url = parse_url($original_url, PHP_URL_PATH);
+
+    $logger->notice($sandbox['current'] . '. Analyzing: ' . $url);
+
+    // Operation, cluster or document.
+    $parts = explode('/', $url);
+
+    // Remove language.
+    if ($parts[1] === 'en' || $parts[1] === 'es' || $parts[1] === 'fr' || $parts[1] === 'ru') {
+      unset($parts[1]);
+      $parts = array_values($parts);
+    }
+
+    // Operation in other language.
+    if ($parts[1] === 'op%C3%A9rations') {
+      $parts[1] = 'operations';
+    }
+
+    // Home.
+    if (count($parts) === 1) {
+      $link_type = 'home';
+    }
+
+    // Files.
+    if ($parts[1] === 'sites' && $parts[3] === 'files') {
+      $link_type = 'file';
+    }
+
+    // Private files.
+    elseif ($parts[1] === 'file' && is_numeric($parts[2])) {
+      $link_type = 'private file';
+    }
+    elseif ($parts[1] === 'system' && $parts[2] === 'files') {
+      $link_type = 'private file';
+    }
+
+    // Nodes.
+    elseif (count($parts) === 3 && $parts[1] === 'node') {
+      $link_type = 'node';
+    }
+
+    // Applications.
+    elseif (count($parts) === 3 && $parts[1] === 'applications') {
+      $link_type = 'application';
+    }
+
+    // Document or infographic.
+    elseif (count($parts) === 3 && $parts[1] === 'document') {
+      $link_type = 'document';
+    }
+    elseif (count($parts) === 3 && $parts[1] === 'infographic') {
+      $link_type = 'infographic';
+    }
+
+    // Documents or infographics.
+    elseif (count($parts) === 3 && $parts[1] === 'documents') {
+      $link_type = 'documents';
+    }
+    elseif (count($parts) === 3 && $parts[1] === 'infographics') {
+      $link_type = 'infographics';
+    }
+
+    // Operations, clusters, ...
+    elseif ($parts[1] === 'operations' || $parts[1] === 'topics') {
+      if (count($parts) == 3) {
+        $link_type = 'operation';
+      }
+      elseif (count($parts) == 4) {
+        $link_type = 'cluster';
+      }
+      elseif (count($parts) == 5) {
+        if ($parts[3] === 'document') {
+          $link_type = 'document';
+        }
+        elseif ($parts[3] === 'infographic') {
+          $link_type = 'infographic';
+        }
+        elseif ($parts[3] === 'assessment') {
+          $link_type = 'assessment';
+        }
+        elseif ($parts[3] === 'documents') {
+          $link_type = 'documents';
+        }
+        elseif ($parts[3] === 'infographics') {
+          $link_type = 'infographics';
+        }
+        elseif ($parts[4] === 'documents') {
+          $link_type = 'documents';
+        }
+        elseif ($parts[4] === 'infographics') {
+          $link_type = 'infographics';
+        }
+      }
+      elseif (count($parts) > 5) {
+        if ($parts[3] === 'documents') {
+          $link_type = 'documents';
+        }
+        elseif ($parts[3] === 'infographics') {
+          $link_type = 'infographics';
+        }
+        elseif ($parts[4] === 'documents') {
+          $link_type = 'documents';
+        }
+        elseif ($parts[4] === 'infographics') {
+          $link_type = 'infographics';
+        }
+      }
+    }
+
+    if (!empty($link_type)) {
+      $logger->notice($sandbox['current'] . '. Found type: ' . $link_type . ' for ' . implode(' -- ', $parts));
+      $link->set('link_type', $link_type);
+      $link->save();
+    }
+    else {
+      $logger->error($sandbox['current'] . '. Unknown url: ' . implode(' -- ', $parts));
+      $link->set('link_type', 'unknown');
+      $link->save();
+    }
+
+    $sandbox['last_id'] = $link->id();
+    $sandbox['current']++;
+  }
+
+  \Drupal::messenger()->addMessage($sandbox['current'] . ' nodes processed.');
+
+  if ($sandbox['current'] >= $sandbox['total']) {
+    $sandbox['#finished'] = 1;
+  }
+  else {
+    $sandbox['#finished'] = ($sandbox['current'] / $sandbox['total']);
+  }
+}
