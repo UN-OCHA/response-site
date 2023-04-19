@@ -618,21 +618,158 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
   }
 
   /**
-   * Fetch panes from source site.
+   * Fix file links.
+   *
+   * @command hr_paragraphs:backlinks-file
+   * @validate-module-enabled hr_paragraphs
+   * @option reset
+   *   Start from the beginning.
+   * @usage hr_paragraphs:backlinks-file
+   *   Fix file links.
+   */
+  public function fixFileLinks($options = [
+    'reset' => FALSE,
+  ]) {
+    $last_id = $this->state->get('hr_paragraphs_backlinks_' . __FUNCTION__, 0);
+    if (!empty($options['reset'])) {
+      $last_id = 0;
+    }
+
+    $ids = $this->entityTypeManager->getStorage('linkcheckerlink')->getQuery()
+      ->accessCheck(FALSE)
+      ->condition('url', 'https://www.humanitarianresponse.info/%', 'LIKE')
+      ->condition('status', TRUE)
+      ->condition('link_type', 'file')
+      ->condition('lid', $last_id, '>')
+      ->range(0, 250)
+      ->sort('lid')
+      ->execute();
+
+    if (empty($ids)) {
+      $this->logger('backlinks')->notice('Nothing to do');
+      return;
+    }
+
+    $this->logger('backlinks')->notice('Found ' . count($ids) . ' to check');
+
+    /** @var \Drupal\linkchecker\Entity\LinkCheckerLink[] $links */
+    $links = $this->entityTypeManager->getStorage('linkcheckerlink')->loadMultiple($ids);
+    foreach ($links as $link) {
+      $this->state->set('hr_paragraphs_backlinks_' . __FUNCTION__, $link->id());
+
+      // Load parent entity.
+      $parent = $link->getParentEntity();
+
+      // Get data.
+      /** @var \Drupal\Core\Field\FieldItemListInterface $data */
+      $data = $parent->get($link->getParentEntityFieldName())->getValue();
+      $field_definition = $parent->getFieldDefinition($link->getParentEntityFieldName());
+
+      // Get new destination.
+      $new_url = '';
+      $url = parse_url($link->getUrl(), PHP_URL_PATH);
+      $parts = explode('/', $url);
+
+      // Remove language.
+      if ($parts[1] === 'en' || $parts[1] === 'es' || $parts[1] === 'fr' || $parts[1] === 'ru') {
+        unset($parts[1]);
+        $parts = array_values($parts);
+      }
+
+      $this->logger('backlinks')->notice('Processing ' . $url . ' (' . $link->id() . ') on ' . $parent->label());
+
+      // Lookup node on HRInfo.
+      $filename = array_pop($parts);
+      $node_url = $this->fetchAliasFromFilename($filename);
+      if (!isset($node_url['alias'])) {
+        $this->logger('backlinks')->notice('No new url found on HRInfo for ' . $url);
+        continue;
+      }
+
+      // Try to find the document on RW using URL.
+      $new_url = $this->fetchReliefWebDocumentUrl('https://www.humanitarianresponse.info/' . $node_url['alias']);
+
+      if (!$new_url) {
+        $this->logger('backlinks')->notice('No new url found for ' . $url);
+        continue;
+      }
+
+      // Track changes.
+      $updated = FALSE;
+      switch ($field_definition->getItemDefinition()->getDataType()) {
+        case 'field_item:text_long':
+          foreach ($data as &$row) {
+            $row['value'] = str_replace($link->getUrl(), $new_url, $row['value']);
+            $updated = TRUE;
+          }
+          break;
+
+        case 'field_item:link':
+          foreach ($data as &$row) {
+            if ($row['uri'] == $link->getUrl()) {
+              $row['uri'] = $new_url;
+              $updated = TRUE;
+            }
+          }
+          break;
+
+        default:
+          $this->logger('backlinks')->error('Skipping ' . $link->getUrl() . ' (' . $field_definition->getItemDefinition()->getDataType() . ')');
+          break;
+
+      }
+
+      if ($updated) {
+        $this->logger('backlinks')->info('Changing ' . $url . ' (' . $link->id() . ') to ' . $new_url);
+
+        // Disable link checking.
+        $link->setDisableLinkCheck();
+        $link->save();
+
+        // Save entity.
+        $parent->set($link->getParentEntityFieldName(), $data);
+        $parent->save();
+      }
+    }
+  }
+
+  /**
+   * Fetch node id from alias.
    */
   protected function fetchNidFromAlias($alias) {
+    $query = [
+      'alias' => $alias,
+      'ts' => time(),
+    ];
+
+    return $this->doReverseLookup($query);
+  }
+
+  /**
+   * Fetch alias from filename.
+   */
+  protected function fetchAliasFromFilename($filename) {
+    $query = [
+      'filename' => $filename,
+      'ts' => time(),
+    ];
+
+    return $this->doReverseLookup($query);
+  }
+
+  /**
+   * Reverse lookup on HRInfo.
+   */
+  protected function doReverseLookup($query = []) {
     $sync_domain = $this->configFactory->get('hr_paragraphs.settings')->get('sync_domain', 'http://hrinfo.docksal.site');
     $sync_credentials = $this->configFactory->get('hr_paragraphs.settings')->get('sync_credentials', '');
     if (!empty($sync_credentials)) {
       $sync_domain = str_replace('https://', 'https://' . $sync_credentials . '@', $sync_domain);
     }
-    $url = $sync_domain . '/reverse-alias';
+    $url = $sync_domain . '/reverse-lookup';
 
     $options = [
-      'query' => [
-        'alias' => $alias,
-        'ts' => time(),
-      ],
+      'query' => $query,
       'headers' => [
         'Content-Type' => 'application/json',
         'Accept' => 'application/json',
