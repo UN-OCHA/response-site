@@ -849,7 +849,6 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
     }
   }
 
-
   /**
    * Fix private file links.
    *
