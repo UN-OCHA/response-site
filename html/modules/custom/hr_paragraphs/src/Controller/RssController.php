@@ -33,24 +33,35 @@ class RssController extends ControllerBase {
   }
 
   /**
-   * RSS or Atom.
+   * Determines the type of feed (RSS or Atom) for a given URL.
+   *
+   * @param string $url
+   *   The URL of the feed to check.
+   *
+   * @return string
+   *   The type of feed (rss or atom), or an empty string
+   *   if the feed could not be retrieved or is in an unknown format.
    */
-  protected function getFeedType($url) : string {
+  protected function getFeedType(string $url) : string {
+    // Get the XML data for the given URL.
     $xml = $this->getXml($url);
+
+    // If XML data could not be retrieved, return an empty string.
     if (!$xml) {
       return '';
     }
 
-    // RSS feed.
+    // If the XML data contains a "channel" element, it is an RSS feed.
     if (!empty($xml->channel)) {
       return 'rss';
     }
 
-    // Atom feed.
+    // If the XML data contains an "entry" element, it is an Atom feed.
     if (!empty($xml->entry)) {
       return 'atom';
     }
 
+    // If the XML data is an unknown format, return an empty string.
     return '';
   }
 
@@ -116,13 +127,13 @@ class RssController extends ControllerBase {
   }
 
   /**
-   * Get rss items.
+   * Get RSS items.
    *
    * @param string $url
-   *   RSS feed url.
+   *   The RSS feed url.
    *
    * @return array<int, \Drupal\hr_paragraphs\RssItem>
-   *   List of items.
+   *   List of RSS items.
    */
   public function getRssItems($url) : array {
     switch ($this->getFeedType($url)) {
