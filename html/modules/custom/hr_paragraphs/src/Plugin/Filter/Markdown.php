@@ -7,7 +7,7 @@ use Drupal\Core\Url;
 use Drupal\Core\Render\Markup;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
-use League\CommonMark\Environment;
+use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
 use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
