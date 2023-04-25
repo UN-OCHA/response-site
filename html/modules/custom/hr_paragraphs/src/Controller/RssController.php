@@ -33,25 +33,36 @@ class RssController extends ControllerBase {
   }
 
   /**
-   * RSS or Atom.
+   * Determines the type of feed (RSS or Atom) for a given URL.
+   *
+   * @param string $url
+   *   The URL of the feed to check.
+   *
+   * @return string
+   *   The type of feed (rss or atom), or an empty string
+   *   if the feed could not be retrieved or is in an unknown format.
    */
-  protected function isAtomFeed($url) : bool {
+  protected function getFeedType(string $url) : string {
+    // Get the XML data for the given URL.
     $xml = $this->getXml($url);
+
+    // If XML data could not be retrieved, return an empty string.
     if (!$xml) {
-      return FALSE;
+      return '';
     }
 
-    // RSS feed.
+    // If the XML data contains a "channel" element, it is an RSS feed.
     if (!empty($xml->channel)) {
-      return FALSE;
+      return 'rss';
     }
 
-    // Atom feed.
+    // If the XML data contains an "entry" element, it is an Atom feed.
     if (!empty($xml->entry)) {
-      return TRUE;
+      return 'atom';
     }
 
-    return FALSE;
+    // If the XML data is an unknown format, return an empty string.
+    return '';
   }
 
   /**
@@ -103,32 +114,51 @@ class RssController extends ControllerBase {
       return '';
     }
 
-    if ($this->isAtomFeed($url)) {
-      return (string) $xml->link[0]['href'] ?? '';
-    }
+    switch ($this->getFeedType($url)) {
+      case 'rss':
+        return (string) $xml->channel->link[0];
 
-    if (!empty($xml->channel->link[0])) {
-      return (string) $xml->channel->link[0];
+      case 'atom':
+        return (string) $xml->link[0]['href'] ?? '';
+
     }
 
     return '';
   }
 
   /**
-   * Get rss items.
+   * Get RSS items.
    *
    * @param string $url
-   *   RSS feed url.
+   *   The RSS feed url.
    *
    * @return array<int, \Drupal\hr_paragraphs\RssItem>
-   *   List of items.
+   *   List of RSS items.
    */
   public function getRssItems($url) : array {
-    $items = [];
+    switch ($this->getFeedType($url)) {
+      case 'rss':
+        return $this->getRssItemsFromFeed($url);
 
-    if ($this->isAtomFeed(($url))) {
-      return $this->getAtomItems($url);
+      case 'atom':
+        return $this->getAtomItemsFromFeed($url);
+
     }
+
+    return [];
+  }
+
+  /**
+   * Returns an array of RssItem objects parsed from an RSS feed URL.
+   *
+   * @param string $url
+   *   The URL of the RSS feed to parse.
+   *
+   * @return array<int, \Drupal\hr_paragraphs\RssItem>
+   *   An array of RssItem objects.
+   */
+  public function getRssItemsFromFeed($url) : array {
+    $items = [];
 
     $xml = $this->getXml($url);
     if (!$xml) {
@@ -150,6 +180,7 @@ class RssController extends ControllerBase {
     }
 
     return $items;
+
   }
 
   /**
@@ -161,7 +192,7 @@ class RssController extends ControllerBase {
    * @return array<int, \Drupal\hr_paragraphs\RssItem>
    *   List of items.
    */
-  public function getAtomItems($url) : array {
+  public function getAtomItemsFromFeed($url) : array {
     $items = [];
 
     $xml = $this->getXml($url);
