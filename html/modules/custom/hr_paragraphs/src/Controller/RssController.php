@@ -35,23 +35,23 @@ class RssController extends ControllerBase {
   /**
    * RSS or Atom.
    */
-  protected function isAtomFeed($url) : bool {
+  protected function getFeedType($url) : string {
     $xml = $this->getXml($url);
     if (!$xml) {
-      return FALSE;
+      return '';
     }
 
     // RSS feed.
     if (!empty($xml->channel)) {
-      return FALSE;
+      return 'rss';
     }
 
     // Atom feed.
     if (!empty($xml->entry)) {
-      return TRUE;
+      return 'atom';
     }
 
-    return FALSE;
+    return '';
   }
 
   /**
@@ -103,12 +103,13 @@ class RssController extends ControllerBase {
       return '';
     }
 
-    if ($this->isAtomFeed($url)) {
-      return (string) $xml->link[0]['href'] ?? '';
-    }
+    switch ($this->getFeedType($url)) {
+      case 'rss':
+        return (string) $xml->channel->link[0];
 
-    if (!empty($xml->channel->link[0])) {
-      return (string) $xml->channel->link[0];
+      case 'atom':
+        return (string) $xml->link[0]['href'] ?? '';
+
     }
 
     return '';
@@ -124,11 +125,29 @@ class RssController extends ControllerBase {
    *   List of items.
    */
   public function getRssItems($url) : array {
-    $items = [];
+    switch ($this->getFeedType($url)) {
+      case 'rss':
+        return $this->getRssItemsFromFeed($url);
 
-    if ($this->isAtomFeed(($url))) {
-      return $this->getAtomItems($url);
+      case 'atom':
+        return $this->getAtomItemsFromFeed($url);
+
     }
+
+    return [];
+  }
+
+  /**
+   * Returns an array of RssItem objects parsed from an RSS feed URL.
+   *
+   * @param string $url
+   *   The URL of the RSS feed to parse.
+   *
+   * @return array<int, \Drupal\hr_paragraphs\RssItem>
+   *   An array of RssItem objects.
+   */
+  public function getRssItemsFromFeed($url) : array {
+    $items = [];
 
     $xml = $this->getXml($url);
     if (!$xml) {
@@ -150,6 +169,7 @@ class RssController extends ControllerBase {
     }
 
     return $items;
+
   }
 
   /**
@@ -161,7 +181,7 @@ class RssController extends ControllerBase {
    * @return array<int, \Drupal\hr_paragraphs\RssItem>
    *   List of items.
    */
-  public function getAtomItems($url) : array {
+  public function getAtomItemsFromFeed($url) : array {
     $items = [];
 
     $xml = $this->getXml($url);
