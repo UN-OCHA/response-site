@@ -131,6 +131,7 @@ jobs:
 
       - name: Monitor coverage
         uses: slavcodev/coverage-monitor-action@v1
+        if: ${{ !env.ACT }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           coverage_path: "clover.xml"
