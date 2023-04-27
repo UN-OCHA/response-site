@@ -235,7 +235,6 @@ jobs:
         uses: cafuego/command-output@main
         with:
           run: |
-            docker compose -f tests/docker-compose.yml stop
-            docker compose -f tests/docker-compose.yml rm -f
+            docker compose -f tests/docker-compose.yml down --rmi=local -v
         env:
           fail-fast: true
