@@ -199,7 +199,7 @@ function paragraphs_group_permissions_node_create_access(AccountInterface $accou
   // Get group from referer.
   $request = \Drupal::request();
   $referer = $request->headers->get('referer');
-  if (strpos($referer, '/group/') !== FALSE) {
+  if ($referer && strpos($referer, '/group/') !== FALSE) {
     $parts = explode('/', parse_url($referer, PHP_URL_PATH));
     // Group Id is after group string.
     $group_id = FALSE;
