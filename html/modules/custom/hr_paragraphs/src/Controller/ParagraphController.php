@@ -384,8 +384,11 @@ class ParagraphController extends ControllerBase {
     $link = $group->field_hdx_dataset_link->first();
     $url = $link->getUrl()->getUri();
 
+    // Make sure page is positive.
+    $page = max(0, $request->query->getInt('page', 0));
+
     $limit = 10;
-    $offset = $request->query->getInt('page', 0) * $limit;
+    $offset = $page * $limit;
 
     // Base filter from entered URL.
     $query_filters = $this->hdxController->parseHdxUrl($url);
@@ -409,7 +412,7 @@ class ParagraphController extends ControllerBase {
       $this->pagerManager->createPager($count, $limit);
       $data = $this->hdxController->buildHdxObjects($results);
 
-      if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
+      if ($page == 0 && function_exists('hr_entity_freshness_write_date')) {
         if (is_array($data) && !empty($data)) {
           $first = reset($data);
           hr_entity_freshness_write_date($group, $first['date_created'], 'hdx');
@@ -493,7 +496,10 @@ class ParagraphController extends ControllerBase {
     $data = $this->getReliefwebDocuments($request, $group, $url);
     $data['#set_name'] = $this->t('Reports');
 
-    if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
+    // Make sure page is positive.
+    $page = max(0, $request->query->getInt('page', 0));
+
+    if ($page == 0 && function_exists('hr_entity_freshness_write_date')) {
       if (isset($data['#data']) && is_array($data['#data']) && !empty($data['#data'])) {
         $first = reset($data['#data']);
         hr_entity_freshness_write_date($group, $first['date_created'], 'reports');
@@ -541,7 +547,10 @@ class ParagraphController extends ControllerBase {
     $data = $this->getReliefwebDocuments($request, $group, $url);
     $data['#set_name'] = $this->t('Maps / Infographics');
 
-    if ($request->query->getInt('page', 0) == 0 && function_exists('hr_entity_freshness_write_date')) {
+    // Make sure page is positive.
+    $page = max(0, $request->query->getInt('page', 0));
+
+    if ($page == 0 && function_exists('hr_entity_freshness_write_date')) {
       if (isset($data['#data']) && is_array($data['#data']) && !empty($data['#data'])) {
         $first = reset($data['#data']);
         hr_entity_freshness_write_date($group, $first['date_created'], 'maps');
@@ -565,8 +574,11 @@ class ParagraphController extends ControllerBase {
    *   Render array.
    */
   public function getReliefwebDocuments(Request $request, Group $group, string $url) : array {
+    // Make sure page is positive.
+    $page = max(0, $request->query->getInt('page', 0));
+
     $limit = 10;
-    $offset = $request->query->getInt('page', 0) * $limit;
+    $offset = $page * $limit;
     $filters = [];
 
     $parameters = $this->reliefwebController->buildReliefwebParameters($offset, $limit, $filters);
