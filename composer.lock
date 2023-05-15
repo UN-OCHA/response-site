@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5ac714080887de093c298b3acdb30e3b",
+    "content-hash": "41bc65de7acd5398ce2dfb80ceba1936",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -10793,16 +10793,16 @@
         },
         {
             "name": "unocha/common_design",
-            "version": "v8.0.1",
+            "version": "v8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/common_design.git",
-                "reference": "bb44eb7bf4f10b608c4a9ce2af269f03dd245e2d"
+                "reference": "2ea1deae46e659a313d9eebb2a838368f332b18f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/bb44eb7bf4f10b608c4a9ce2af269f03dd245e2d",
-                "reference": "bb44eb7bf4f10b608c4a9ce2af269f03dd245e2d",
+                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/2ea1deae46e659a313d9eebb2a838368f332b18f",
+                "reference": "2ea1deae46e659a313d9eebb2a838368f332b18f",
                 "shasum": ""
             },
             "require": {
@@ -10817,9 +10817,9 @@
             "description": "OCHA Common Design base theme for Drupal 9+",
             "support": {
                 "issues": "https://github.com/UN-OCHA/common_design/issues",
-                "source": "https://github.com/UN-OCHA/common_design/tree/v8.0.1"
+                "source": "https://github.com/UN-OCHA/common_design/tree/v8.1.0"
             },
-            "time": "2023-03-22T20:34:28+00:00"
+            "time": "2023-05-04T09:44:30+00:00"
         },
         {
             "name": "unocha/ocha_search",

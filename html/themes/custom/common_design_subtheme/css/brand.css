@@ -15,6 +15,13 @@
   --brand-light: #d4e5f7;
   --brand-grey: var(--cd-blue-grey);
   --brand-logo-width: 150px;
+
+  /**
+   * ReliefWeb colors
+   *
+   * These are included in order to make use of some frontend libraries that we
+   * copy in from the RW-proper codebase.
+   */
   --cd-ie-primary-color: #0988bb;
   --cd-ie-primary-color--light: #63cef8;
   --cd-ie-primary-color--dark: #032b3a;

@@ -42,7 +42,6 @@
  */
 #}
 {{ attach_library('common_design/cd-alert') }}
-{{ attach_library('common_design_subtheme/hri-layout') }}
 
 {%
   set classes = [
@@ -81,13 +80,13 @@
 
   <div{{ content_attributes }}>
     {% block section %}
-      <div class="hri-layout hri-layout--two-col">
-        <div class="hri-layout__main-content">
+      <div class="cd-layout">
+        <div class="cd-layout__content">
           {{ content|without('field_sidebar_menu')}}
         </div>
 
         {% if content.field_sidebar_menu[0] is not empty %}
-          <div class="cd-layout-sidebar-first hri-layout__sidebar hri-layout__first cd-content--compact" role="complementary">
+          <div class="cd-layout__sidebar cd-layout__sidebar--first cd-content--compact" role="complementary">
             {{ content.field_sidebar_menu }}
           </div>
         {% endif %}

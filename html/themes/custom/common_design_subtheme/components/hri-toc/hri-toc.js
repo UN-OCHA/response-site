@@ -40,7 +40,7 @@
         });
 
         // Remove sidebar if empty.
-        const sidebar = document.querySelector('.hri-layout__sidebar');
+        const sidebar = document.querySelector('.cd-layout__sidebar');
         if (sidebar && sidebar.childElementCount == 0) {
           sidebar.remove();
         }
