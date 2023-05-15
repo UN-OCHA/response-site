@@ -385,7 +385,7 @@ class ReliefwebController extends ControllerBase {
         'date_changed' => $row['fields']['date']['changed'],
         'date_created' => $row['fields']['date']['created'],
         'date_original' => $row['fields']['date']['original'],
-        'format' => $row['fields']['format'][0]['name'],
+        'format' => $row['fields']['format'][0]['name'] ?? '',
         'primary_country' => $row['fields']['primary_country']['name'],
         'hide_thumbnails' => $hide_thumbs,
       ];
