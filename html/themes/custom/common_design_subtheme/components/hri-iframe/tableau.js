@@ -7,7 +7,7 @@
 
   // Did we find iframes with the 'auto' aspect-ratio setting?
   if (autoIframes) {
-    var width = document.querySelector('.hri-layout__main-content').scrollWidth;
+    var width = document.querySelector('.cd-layout__content').scrollWidth;
 
     // For every iframe found, set its CSS aspect-ratio using the attributes
     // on the container element: data-width, data-height.

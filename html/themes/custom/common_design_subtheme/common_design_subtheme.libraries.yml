@@ -123,11 +123,6 @@ tableau:
     components/hri-iframe/tableau-2.min.js: {}
     components/hri-iframe/tableau.js: {}
 
-hri-layout:
-  css:
-    component:
-      components/hri-layout/hri-layout.css: {}
-
 hri-pagination:
   css:
     theme:

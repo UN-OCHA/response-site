@@ -1,9 +1,9 @@
 /**
  * HR.info River
  *
- * The layout is controlled by hri-layout component.
+ * The column layout is controlled by base-theme's cd-layout component.
  *
- * @see html/themes/custom/common_design_subtheme/components/hri-layout/hri-layout.css
+ * @see html/themes/custom/common_design/components/cd/cd-other/cd-layout--content.css
  */
 
 .hri-river {

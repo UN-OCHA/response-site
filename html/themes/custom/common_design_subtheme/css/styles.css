@@ -1,6 +1,15 @@
 /**
- * HR.info site-wide custom styling.
+ * RWR site-wide custom styling.
  */
+
+/**
+ * Sidebar customizations
+ */
+.cd-layout__sidebar {
+  padding: 1rem;
+  background-color: var(--cd-grey--light);
+  font-size: 1rem;
+}
 
 /**
  * Provide separators between each Paragraph on ANY Paragraphs field.
