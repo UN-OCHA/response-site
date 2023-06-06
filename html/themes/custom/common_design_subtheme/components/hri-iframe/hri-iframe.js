@@ -2,7 +2,7 @@
  * HR.info iFrame embeds.
  */
 (function iife() {
-  var autoIframes = document.querySelectorAll('.hri-iframe--ratio-auto');
+  var autoIframes = document.querySelectorAll('.hri-iframe--ratio-auto[data-width][data-height]');
 
   // Did we find iframes with the 'auto' aspect-ratio setting?
   if (autoIframes) {

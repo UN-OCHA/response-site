@@ -89,6 +89,7 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
       'variables' => [
         'embed_url' => NULL,
         'width' => NULL,
+        'height' => NULL,
         'ratio' => NULL,
       ],
     ],
@@ -97,6 +98,7 @@ function hr_paragraphs_theme($existing, $type, $theme, $path) {
       'variables' => [
         'embed_url' => NULL,
         'width' => NULL,
+        'height' => NULL,
         'ratio' => NULL,
       ],
     ],
