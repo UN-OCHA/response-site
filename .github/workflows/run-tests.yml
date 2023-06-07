@@ -7,11 +7,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Code
+        id: checkout
+        uses: actions/checkout@v3
+
+      - name: Extract PHP Version
+        id: php
+        uses: docker://ghcr.io/un-ocha/actions:extract-php-version-main
+        with:
+          docker_file: 'docker/Dockerfile'
+          docker_image: 'public.ecr.aws/unocha/php-k8s'
+
       - name: Setup PHP with PECL extension
         uses: shivammathur/setup-php@v2
         if: ${{ !env.ACT }}
         with:
-          php-version: 8.1
+          php-version: ${{ steps.php.outputs.php_version }}
           tools: composer
         env:
           fail-fast: true
@@ -20,7 +31,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         if: ${{ env.ACT }}
         with:
-          php-version: 8.1
+          php-version: ${{ steps.php.outputs.php_version }}
           tools: composer
         env:
           fail-fast: true
@@ -32,10 +43,6 @@ jobs:
         with:
           run: |
             php --version && composer --version
-
-      - name: Checkout Code
-        id: checkout
-        uses: actions/checkout@v3
 
       - name: Composer Validate
         id: validate
@@ -235,6 +242,6 @@ jobs:
         uses: cafuego/command-output@main
         with:
           run: |
-            docker compose -f tests/docker-compose.yml down --rmi=local -v
+            docker compose -f tests/docker-compose.yml down --rmi local -v
         env:
           fail-fast: true
