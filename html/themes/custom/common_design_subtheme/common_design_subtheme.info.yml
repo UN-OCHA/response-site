@@ -49,13 +49,14 @@ libraries-extend:
     - common_design_subtheme/cd-page-title
   hr_paragraphs/fullcalendar:
     - common_design_subtheme/hri-fullcalendar
+  common_design/cd-tabs:
+    - common_design_subtheme/hri-tabs
 
 ###
 # Override libraries to replace specific base-theme components. Now, when the
 # base-theme component would have been used, instead ONLY yours will apply.
 #
-libraries-override:
-  common_design/cd-tabs: common_design_subtheme/cd-tabs
+# libraries-override:
 
 ###
 # Custom namespace - requires Components module

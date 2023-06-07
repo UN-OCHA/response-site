@@ -24,12 +24,6 @@ cd-read-more:
   dependencies:
     - common_design/cd-read-more
 
-cd-tabs:
-  css:
-    theme:
-      components/cd-tabs/cd-tabs.css: {}
-      components/cd-tabs/hri-tabs.css: {}
-
 google-cse:
   css:
     theme:
@@ -153,6 +147,11 @@ hri-table:
       components/hri-table/hri-table.css: {}
   dependencies:
     - common_design/cd-table
+
+hri-tabs:
+  css:
+    theme:
+      components/hri-tabs/hri-tabs.css: {}
 
 hri-text-block:
   css:
