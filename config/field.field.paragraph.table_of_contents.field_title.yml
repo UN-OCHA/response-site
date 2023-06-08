@@ -12,7 +12,7 @@ bundle: table_of_contents
 label: Title
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: 'Table of Contents'
