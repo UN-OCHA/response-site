@@ -2,8 +2,8 @@
 
 namespace Drupal\hr_paragraphs\Plugin\Group\RelationHandler;
 
-use Drupal\group\Plugin\Group\RelationHandler\GroupMembershipEntityReference;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\group\Plugin\Group\RelationHandler\GroupMembershipEntityReference;
 
 /**
  * Configures the entity reference for the group_membership relation plugin.

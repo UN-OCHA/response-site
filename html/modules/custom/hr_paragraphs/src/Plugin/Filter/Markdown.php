@@ -3,8 +3,8 @@
 namespace Drupal\hr_paragraphs\Plugin\Filter;
 
 use Drupal\Core\Link;
-use Drupal\Core\Url;
 use Drupal\Core\Render\Markup;
+use Drupal\Core\Url;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
 use League\CommonMark\Environment\Environment;
