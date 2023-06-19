@@ -1,0 +1,25 @@
+diff --git a/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php b/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php
+index d2fa1ed5dfa11d9588c360b98c0d9649344dad6f..aad98947ddb6cc8804c8c5f3645be47608251803 100644
+--- a/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php
++++ b/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php
+@@ -71,8 +71,20 @@ class LinkcheckerLinkPageEntityLabel extends FieldPluginBase {
+       return '';
+     }
+ 
++    $revision_id = $linked_entity->getRevisionId();
+     if ($linked_entity->getEntityTypeId() === 'paragraph' && $linked_entity->getParentEntity() !== NULL) {
+       $linked_entity = $linked_entity->getParentEntity();
++      $previous_revision = TRUE;
++      foreach ($linked_entity->field_paragraphs->getValue() as $target_ids) {
++        if ($revision_id == $target_ids['target_revision_id']) {
++          $previous_revision = FALSE;
++          continue;
++        };
++      }
++      if ($previous_revision) {
++        $this->options['alter']['make_link'] = FALSE;
++        return $this->t('The link is from a previous revision of a paragraph.');
++      }
+     }
+ 
+     if (!empty($this->options['link_to_entity'])) {
