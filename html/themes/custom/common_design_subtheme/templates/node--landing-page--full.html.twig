@@ -154,9 +154,9 @@
         </div>
 
         {% if content.field_paragraphs_secondary is not empty %}
-          <div class="cd-layout__sidebar cd-layout__sidebar--second cd-layout__sidebar--wide" role="complementary">
+          <aside class="cd-layout__sidebar cd-layout__sidebar--second cd-layout__sidebar--wide" aria-label="{{ 'Sidebar'|t }}">
             {{ content.field_paragraphs_secondary }}
-          </div>
+          </aside>
         {% endif %}
       </div>
     {% endblock %}

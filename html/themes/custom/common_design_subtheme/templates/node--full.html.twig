@@ -148,9 +148,9 @@
         </div>
 
         {% if field_sidebar_menu is not empty %}
-          <div class="cd-layout__sidebar cd-layout__sidebar--first cd-content--compact" role="complementary">
+          <aside class="cd-layout__sidebar cd-layout__sidebar--first cd-content--compact" aria-label="{{ 'Sidebar'|t }}">
             {{ field_sidebar_menu }}
-          </div>
+          </aside>
         {% endif %}
       </div>
     {% endblock %}
