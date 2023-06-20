@@ -1,5 +1,5 @@
 /**
- * Extends CD Tabs for HR.info customization.
+ * RWR-specific customizations to tabs
  */
 ul.tabs > li > a {
   padding-inline-start: 0.75rem;

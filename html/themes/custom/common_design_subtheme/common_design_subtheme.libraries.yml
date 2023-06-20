@@ -24,12 +24,6 @@ cd-read-more:
   dependencies:
     - common_design/cd-read-more
 
-cd-tabs:
-  css:
-    theme:
-      components/cd-tabs/cd-tabs.css: {}
-      components/cd-tabs/hri-tabs.css: {}
-
 google-cse:
   css:
     theme:
@@ -172,6 +166,11 @@ hri-twitter-feed:
   css:
     theme:
       components/hri-twitter-feed/hri-twitter-feed.css: {}
+
+rwr-tabs:
+  css:
+    theme:
+      components/rwr-tabs/rwr-tabs.css: {}
 
 rw-brand:
   css:
