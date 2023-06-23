@@ -21,6 +21,9 @@ use Drupal\group\Entity\GroupRelationship;
 use Drupal\node\Entity\Node;
 use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Views;
 
 /**
  * Implements hook_theme().
@@ -2427,4 +2430,52 @@ function hr_paragraphs_editor_js_settings_alter(array &$settings) {
     $format_tags = str_replace('h1;', '', $settings['editor']['formats']['basic_html']['editorSettings']['format_tags']);
     $settings['editor']['formats']['basic_html']['editorSettings']['format_tags'] = $format_tags;
   }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function hr_paragraphs_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+  if ($view->id() !== 'db_links') {
+    return;
+  }
+
+  /** @var \Drupal\views\Plugin\views\query\Sql $query */
+
+  // Link to parents using paragraph fields.
+  $configuration = [
+    'type' => 'LEFT',
+    'table' => 'group__field_paragraphs',
+    'field' => 'field_paragraphs_target_id',
+    'left_table' => 'linkchecker_link',
+    'left_field' => 'entity_id__target_id',
+    'operator' => '=',
+  ];
+  $join = Views::pluginManager('join')->createInstance('standard', $configuration);
+  $query->addRelationship('gfp', $join, 'linkchecker_link');
+
+  $configuration = [
+    'type' => 'LEFT',
+    'table' => 'group__field_sidebar_menu',
+    'field' => 'field_sidebar_menu_target_id',
+    'left_table' => 'linkchecker_link',
+    'left_field' => 'entity_id__target_id',
+    'operator' => '=',
+  ];
+  $join = Views::pluginManager('join')->createInstance('standard', $configuration);
+  $query->addRelationship('gfsm', $join, 'linkchecker_link');
+
+  $configuration = [
+    'type' => 'LEFT',
+    'table' => 'node__field_paragraphs',
+    'field' => 'field_paragraphs_target_id',
+    'left_table' => 'linkchecker_link',
+    'left_field' => 'entity_id__target_id',
+    'operator' => '=',
+  ];
+  $join = Views::pluginManager('join')->createInstance('standard', $configuration);
+  $query->addRelationship('nfp', $join, 'linkchecker_link');
+
+  // Check that at least one isn't NULL.
+  $query->addWhereExpression('activeonly', 'gfp.field_paragraphs_target_id is not null or nfp.field_paragraphs_target_id is not null or gfsm.field_sidebar_menu_target_id is not null');
 }
