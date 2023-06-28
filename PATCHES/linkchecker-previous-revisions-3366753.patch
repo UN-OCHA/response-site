@@ -1,8 +1,16 @@
 diff --git a/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php b/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php
-index d2fa1ed5dfa11d9588c360b98c0d9649344dad6f..aad98947ddb6cc8804c8c5f3645be47608251803 100644
+index d2fa1ed5dfa11d9588c360b98c0d9649344dad6f..e844753b020743cc0cf85675a4c82a2c6f545507 100644
 --- a/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php
 +++ b/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php
-@@ -71,8 +71,20 @@ class LinkcheckerLinkPageEntityLabel extends FieldPluginBase {
+@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityInterface;
+ use Drupal\Core\Entity\EntityMalformedException;
+ use Drupal\Core\Entity\Exception\UndefinedLinkTemplateException;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\entity_reference_revisions\EntityReferenceRevisionsFieldItemList;
+ use Drupal\linkchecker\LinkCheckerLinkInterface;
+ use Drupal\views\Plugin\views\field\FieldPluginBase;
+ use Drupal\views\ResultRow;
+@@ -71,8 +72,30 @@ class LinkcheckerLinkPageEntityLabel extends FieldPluginBase {
        return '';
      }
  
@@ -10,15 +18,25 @@ index d2fa1ed5dfa11d9588c360b98c0d9649344dad6f..aad98947ddb6cc8804c8c5f3645be476
      if ($linked_entity->getEntityTypeId() === 'paragraph' && $linked_entity->getParentEntity() !== NULL) {
        $linked_entity = $linked_entity->getParentEntity();
 +      $previous_revision = TRUE;
-+      foreach ($linked_entity->field_paragraphs->getValue() as $target_ids) {
-+        if ($revision_id == $target_ids['target_revision_id']) {
-+          $previous_revision = FALSE;
-+          continue;
-+        };
++      $field_names = [];
++      foreach ($linked_entity->getFields() as $field) {
++        if ($field instanceof EntityReferenceRevisionsFieldItemList) {
++          $field_names[] = $field->getName();
++        }
 +      }
++
++      foreach ($field_names as $field_name) {
++        foreach ($linked_entity->$field_name->getValue() as $target_ids) {
++          if ($revision_id == $target_ids['target_revision_id']) {
++            $previous_revision = FALSE;
++            continue;
++          };
++        }
++      }
++
 +      if ($previous_revision) {
 +        $this->options['alter']['make_link'] = FALSE;
-+        return $this->t('The link is from a previous revision of a paragraph.');
++        return $this->t('The linked content originates from a prior revision of a paragraph.');
 +      }
      }
  
