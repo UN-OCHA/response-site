@@ -17,8 +17,7 @@
         "drupal/linkchecker": {
           "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743": "PATCHES/linkchecker-unconfirmed-but-eligible-field-list-3244743.patch",
           "Do not break admin denied": "./PATCHES/linkchecker_use_uid.patch",
-          "Avoid null links": "./PATCHES/linkchecker_null_link.patch",
-          "Recognize previous revisions https://www.drupal.org/project/linkchecker/issues/3366753#comment-15106979": "./PATCHES/linkchecker-previous-revisions-3366753.patch"
+          "Avoid null links": "./PATCHES/linkchecker_null_link.patch"
         },
         "drupal/maintenance200": {
           "Drupal 10 compatibility": "PATCHES/maintenance200-drupal-10-compatibility.patch"
