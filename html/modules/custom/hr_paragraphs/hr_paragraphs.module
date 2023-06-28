@@ -2428,3 +2428,17 @@ function hr_paragraphs_editor_js_settings_alter(array &$settings) {
     $settings['editor']['formats']['basic_html']['editorSettings']['format_tags'] = $format_tags;
   }
 }
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function hr_paragraphs_views_data_alter(array &$data) {
+  $data['linkchecker_link']['active_revisions'] = [
+    'title' => t('Filter out old revisions'),
+    'help' => t('Filter out old revisions.'),
+    'filter' => [
+      'title' => t('Filter out old revisions'),
+      'id' => 'linkchecker_link_active_revisions',
+    ],
+  ];
+}
