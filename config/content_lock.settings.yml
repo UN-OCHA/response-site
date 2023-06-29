@@ -1,0 +1,69 @@
+_core:
+  default_config_hash: 6Ka3T1c-CIjEUO1Q64NXKksLthkMhj53a6zy4RJBtkc
+verbose: 1
+types:
+  file: {  }
+  group_content: {  }
+  group_config_wrapper: {  }
+  group:
+    '*': '*'
+  linkcheckerlink: {  }
+  menu_link_content: {  }
+  node:
+    '*': '*'
+  path_alias: {  }
+  redirect: {  }
+  shortcut: {  }
+  social_auth: {  }
+  taxonomy_term: {  }
+  user: {  }
+  paragraph: {  }
+types_translation_lock: {  }
+types_js_lock: {  }
+form_op_lock:
+  file:
+    mode: 0
+    values: {  }
+  group_content:
+    mode: 0
+    values: {  }
+  group_config_wrapper:
+    mode: 0
+    values: {  }
+  group:
+    mode: 1
+    values:
+      add: add
+      edit: edit
+  linkcheckerlink:
+    mode: 0
+    values: {  }
+  menu_link_content:
+    mode: 0
+    values: {  }
+  node:
+    mode: 1
+    values:
+      default: default
+      edit: edit
+  path_alias:
+    mode: 0
+    values: {  }
+  redirect:
+    mode: 0
+    values: {  }
+  shortcut:
+    mode: 0
+    values: {  }
+  social_auth:
+    mode: 0
+    values: {  }
+  taxonomy_term:
+    mode: 0
+    values: {  }
+  user:
+    mode: 0
+    values: {  }
+  paragraph:
+    mode: 0
+    values: {  }

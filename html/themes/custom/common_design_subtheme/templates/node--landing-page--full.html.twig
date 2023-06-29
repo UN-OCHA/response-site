@@ -91,7 +91,6 @@
 {{ attach_library('common_design/cd-article') }}
 {{ attach_library('common_design/cd-author') }}
 {{ attach_library('common_design/cd-typography') }}
-{{ attach_library('common_design_subtheme/hri-layout') }}
 {{ attach_library('common_design_subtheme/hri-headline') }}
 
 {% set unochaDate = node.getCreatedTime|date('j F Y') %}
@@ -148,16 +147,16 @@
 
   <div{{ content_attributes }}>
     {% block section %}
-      <div class="hri-layout hri-layout--two-col">
+      <div class="cd-layout">
 
-        <div{{ attributes.addClass('hri-layout__main-content', 'hri-layout__first', homepage) }}>
+        <div{{ attributes.addClass('cd-layout__content', homepage) }}>
           {{ content|without('field_paragraphs_secondary') }}
         </div>
 
         {% if content.field_paragraphs_secondary is not empty %}
-          <div class="cd-layout-sidebar-first hri-layout__sidebar" role="complementary">
+          <aside class="cd-layout__sidebar cd-layout__sidebar--second cd-layout__sidebar--wide" aria-label="{{ 'Sidebar'|t }}">
             {{ content.field_paragraphs_secondary }}
-          </div>
+          </aside>
         {% endif %}
       </div>
     {% endblock %}

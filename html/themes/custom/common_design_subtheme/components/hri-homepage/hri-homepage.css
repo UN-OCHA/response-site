@@ -2,7 +2,7 @@
  * HR.info Homepage.
  */
 
-.path-frontpage .hri-layout__main-content .field--name-field-paragraphs > .field__item + .field__item {
+.path-frontpage .cd-layout__content .field--name-field-paragraphs > .field__item + .field__item {
   margin-top: 0;
   padding-top: 0;
   border-top: 0 none;
@@ -10,11 +10,4 @@
 
 .paragraph--type--card-list .field--name-field-paragraphs {
   margin-block-end: 1em;
-}
-
-/* Override layout rules for a wider sidebar like RW */
-@media (min-width: 1024px) {
-  .path-frontpage .hri-layout--two-col > .hri-layout__sidebar {
-    flex: 0 0 399px;
-  }
 }

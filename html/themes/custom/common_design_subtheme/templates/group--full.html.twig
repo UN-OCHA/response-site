@@ -42,7 +42,6 @@
  */
 #}
 {{ attach_library('common_design/cd-alert') }}
-{{ attach_library('common_design_subtheme/hri-layout') }}
 
 {%
   set classes = [
@@ -57,7 +56,7 @@
   {% if is_archived %}
     <div class="group--archived">
       <div class="cd-alert">
-        <div aria-live="polite">
+        <div role="status" aria-label="{{ 'Info message'|t }}">
           <svg class="cd-icon cd-icon--about" aria-hidden="true" focusable="false" width="16" height="16">
             <use xlink:href="#cd-icon--about"></use>
           </svg>
@@ -81,15 +80,15 @@
 
   <div{{ content_attributes }}>
     {% block section %}
-      <div class="hri-layout hri-layout--two-col">
-        <div class="hri-layout__main-content">
+      <div class="cd-layout">
+        <div class="cd-layout__content">
           {{ content|without('field_sidebar_menu')}}
         </div>
 
         {% if content.field_sidebar_menu[0] is not empty %}
-          <div class="cd-layout-sidebar-first hri-layout__sidebar hri-layout__first cd-content--compact" role="complementary">
+          <aside class="cd-layout__sidebar cd-layout__sidebar--first cd-content--compact" aria-label="{{ 'Sidebar'|t }}">
             {{ content.field_sidebar_menu }}
-          </div>
+          </aside>
         {% endif %}
       </div>
     {% endblock %}

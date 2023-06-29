@@ -1,0 +1,11 @@
+uuid: 30039ae3-a1cb-4e00-a0be-92a3b6c75a89
+langcode: en
+status: true
+dependencies:
+  module:
+    - content_lock
+id: group_break_lock_action
+label: 'Break lock group'
+type: group
+plugin: 'entity:break_lock:group'
+configuration: {  }

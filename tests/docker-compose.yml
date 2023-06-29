@@ -4,6 +4,7 @@ networks:
   default:
 
 volumes:
+  response-test-site-database:
   response-test-site-public:
   response-test-site-private:
 
@@ -16,6 +17,8 @@ services:
       - MYSQL_DB=response
       - MYSQL_USER=response
       - MYSQL_PASS=response
+    volumes:
+      - "response-test-site-database:/var/lib/mysql:rw"
     networks:
       - default
 

@@ -6,8 +6,8 @@
  */
 
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\group\Entity\Group;
 use Drupal\node\Entity\Node;
 use Drupal\paragraphs\Entity\Paragraph;
