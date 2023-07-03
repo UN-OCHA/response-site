@@ -27,9 +27,6 @@ display:
         title:
           label: Título
           separator: ', '
-        type:
-          label: 'Tipo de contenido'
-          separator: ', '
         name:
           separator: ', '
         operations:

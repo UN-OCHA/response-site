@@ -23,12 +23,15 @@ display:
           separator: ', '
         view_group_content:
           admin_label: 'View relation link'
+          label: 'Link to Group content'
           text: 'View relation'
         edit_group_content:
           admin_label: 'Edit relation link'
+          label: 'Link to edit Group content'
           text: 'Edit relation'
         delete_group_content:
           admin_label: 'Delete relation link'
+          label: 'Link to delete Group content'
           text: 'Delete relation'
         edit_node:
           admin_label: 'Edit node link'
