@@ -15,23 +15,26 @@
             "Async translation - https://www.drupal.org/project/layout_paragraphs/issues/3178277": "./PATCHES/layout-paragraphs-translations-14.patch"
         },
         "drupal/linkchecker": {
-          "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743": "PATCHES/linkchecker-unconfirmed-but-eligible-field-list-3244743.patch",
-          "Do not break admin denied": "./PATCHES/linkchecker_use_uid.patch",
-          "Avoid null links": "./PATCHES/linkchecker_null_link.patch",
-          "Recognize previous revisions https://www.drupal.org/project/linkchecker/issues/3366753": "./PATCHES/linkchecker-previous-revisions-3366753.patch"
+            "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743": "PATCHES/linkchecker-unconfirmed-but-eligible-field-list-3244743.patch",
+            "Do not break admin denied": "./PATCHES/linkchecker_use_uid.patch",
+            "Avoid null links": "./PATCHES/linkchecker_null_link.patch",
+            "Recognize previous revisions https://www.drupal.org/project/linkchecker/issues/3366753": "./PATCHES/linkchecker-previous-revisions-3366753.patch"
         },
         "drupal/maintenance200": {
-          "Drupal 10 compatibility": "PATCHES/maintenance200-drupal-10-compatibility.patch"
+            "Drupal 10 compatibility": "PATCHES/maintenance200-drupal-10-compatibility.patch"
         },
         "drupal/social_auth_hid": {
-          "Keep lang prefix in URL": "./PATCHES/hid_lang.patch"
+            "Keep lang prefix in URL": "./PATCHES/hid_lang.patch"
         },
         "drupal/theme_switcher": {
-          "https://www.drupal.org/project/theme_switcher": "https://www.drupal.org/files/issues/2022-06-16/theme_switcher.1.2.rector.patch"
+            "https://www.drupal.org/project/theme_switcher": "https://www.drupal.org/files/issues/2022-06-16/theme_switcher.1.2.rector.patch"
         },
         "drupal/user_expire": {
-          "Allow the notification email to be customised": "PATCHES/user_expire-customize-notification-email.patch",
-          "Reset expiration when user is reactivated": "PATCHES/user_expire-reset-expiration-on-reactivation.patch"
+            "Allow the notification email to be customised": "PATCHES/user_expire-customize-notification-email.patch",
+            "Reset expiration when user is reactivated": "PATCHES/user_expire-reset-expiration-on-reactivation.patch"
+        },
+        "drupal/username_enumeration_prevention": {
+            "Avoid leaking the path via Drupal.settings json": "PATCHES/username_enumeration_prevention-user-login-block-form-3312288.patch"
         }
     }
 }
