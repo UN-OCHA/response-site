@@ -87,3 +87,5 @@ fix|feat|BREAKING CHANGE|docs|chore<optional>(scope)</optional>: <short title>
 Refs: #issue_number
 <optional>BREAKING CHANGE: what will be broken by new feature</optional>
 ```
+
+.
