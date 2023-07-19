@@ -36,7 +36,6 @@ dependencies:
     - system
     - taxonomy
     - toolbar
-    - user_expire
 id: global_editor
 label: 'Global editor'
 weight: 5
