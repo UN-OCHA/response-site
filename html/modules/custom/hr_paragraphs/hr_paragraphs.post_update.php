@@ -150,7 +150,7 @@ function hr_paragraphs_post_update_track_usage_on_node(&$sandbox) {
 function hr_paragraphs_post_update_rename_cameroun() {
   $query = Drupal::entityTypeManager()->getStorage('path_alias')->getQuery()->accessCheck(FALSE);
   $query->condition('alias', 'cameroun', 'CONTAINS');
-  $ids = $query->execute();
+  $ids = $query->accessCheck(FALSE)->execute();
 
   if (empty($ids)) {
     return;
