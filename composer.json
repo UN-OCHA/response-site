@@ -80,9 +80,11 @@
         "guzzlehttp/guzzle": "7.5.0 as 6.5.8",
         "league/commonmark": "^2.4",
         "mailchimp/marketing": "^3.0",
+        "mglaman/composer-drupal-lenient": "^1.0",
         "npm-asset/moment": "^2.29",
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",
+        "orakili/composer-drupal-info-file-patch-helper": "^1.0",
         "rlanvin/php-rrule": "2.3.1",
         "unocha/common_design": "^8",
         "unocha/ocha_search": "^1.0"
@@ -110,6 +112,9 @@
         ],
         "post-update-cmd": [
             "@git-hooks"
+        ],
+        "pre-pool-create": [
+            "scripts\\composer\\DrupalLenientRequirement::changeVersionConstraint"
         ]
     },
     "minimum-stability": "stable",
@@ -126,7 +131,9 @@
             "drupal/core-project-message": true,
             "drupal/console-extend-plugin": true,
             "symfony/flex": true,
-            "oomphinc/composer-installers-extender": true
+            "oomphinc/composer-installers-extender": true,
+            "mglaman/composer-drupal-lenient": true,
+            "orakili/composer-drupal-info-file-patch-helper": true
         }
     },
     "extra": {
@@ -192,6 +199,12 @@
                 "      https://www.drupal.org/getting-involved",
                 "  * Remove the plugin that prints this message:",
                 "      composer remove drupal/core-project-message"
+            ]
+        },
+        "drupal-lenient": {
+            "constraint": "^10",
+            "allowed-list": [
+                "drupal/maintenance200"
             ]
         }
     },
