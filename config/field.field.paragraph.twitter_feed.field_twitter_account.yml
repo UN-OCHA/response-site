@@ -10,7 +10,7 @@ field_name: field_twitter_account
 entity_type: paragraph
 bundle: twitter_feed
 label: 'Twitter account'
-description: 'Enter the Twitter account you''d like to embed. Omit the @ symbol.'
+description: "Enter the Twitter account you'd like to embed. Omit the @ symbol."
 required: false
 translatable: false
 default_value: {  }

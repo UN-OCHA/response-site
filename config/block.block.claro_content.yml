@@ -1,15 +1,15 @@
-uuid: fa649ad3-28e8-4490-894d-d17520a2145c
+uuid: 57134811-5575-4cad-9eb9-4be9a9fa1a02
 langcode: en
 status: true
 dependencies:
   module:
     - system
   theme:
-    - hri_admin
+    - claro
 _core:
-  default_config_hash: kigu8pTxXt1qGR2NJ5HHdC4G2G1wsDrIjLPKBT5wUBc
-id: hri_admin_content
-theme: hri_admin
+  default_config_hash: a0Yyx1GeyKarZ4T_yXQBR_ZFKnXiFLtxAb6gWLd8nr0
+id: claro_content
+theme: claro
 region: content
 weight: 0
 provider: null

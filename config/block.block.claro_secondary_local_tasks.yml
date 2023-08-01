@@ -1,18 +1,20 @@
-uuid: 43a4c776-d8ac-4e5b-9121-82945c1dd612
+uuid: 1dd5ff60-2fd0-4b09-b8b5-f070f3c25942
 langcode: en
 status: true
 dependencies:
   theme:
-    - hri_admin
-id: tabs
-theme: hri_admin
+    - claro
+_core:
+  default_config_hash: 2L0geP-ixCbCkEpW6BVF6H7vDUZN4ea07_Y9CociQm4
+id: claro_secondary_local_tasks
+theme: claro
 region: pre_content
-weight: -2
+weight: 0
 provider: null
 plugin: local_tasks_block
 settings:
   id: local_tasks_block
-  label: 'Secondary Tabs'
+  label: 'Secondary tabs'
   label_display: '0'
   provider: core
   primary: false
