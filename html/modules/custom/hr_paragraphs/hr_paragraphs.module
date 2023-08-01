@@ -1760,6 +1760,11 @@ function hr_paragraphs_group_parent_is_published(&$variables) {
  */
 function hr_paragraphs_parse_str($string) {
   $results = [];
+
+  if (empty($string)) {
+    return $results;
+  }
+
   $parts = explode('&', $string);
 
   foreach ($parts as $part) {
