@@ -182,7 +182,7 @@ function hr_paragraphs_post_update_afghanistan_aliases(&$sandbox) {
   $entity_type_manager = \Drupal::entityTypeManager();
   $query = $entity_type_manager->getStorage('path_alias')->getQuery();
   $query->condition('alias', '/afganistan/%', 'LIKE');
-  $path_ids = $query->execute();
+  $path_ids = $query->accessCheck(FALSE)->execute();
 
   $aliases = PathAlias::loadMultiple($path_ids);
   foreach ($aliases as $alias) {

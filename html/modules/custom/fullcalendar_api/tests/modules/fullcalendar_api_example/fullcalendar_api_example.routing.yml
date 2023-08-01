@@ -1,0 +1,7 @@
+fullcalendar_api_example_calendar:
+  path: 'fullcalendar/calendar'
+  defaults:
+    _controller: '\Drupal\fullcalendar_api_example\Controller\FullcalendarApiExampleController::calendar'
+    _title: 'FullCalendar'
+  requirements:
+    _permission: 'access content'
