@@ -204,7 +204,8 @@
         "drupal-lenient": {
             "constraint": "^10",
             "allowed-list": [
-                "drupal/maintenance200"
+                "drupal/maintenance200",
+                "drupal/theme_switcher"
             ]
         }
     },
