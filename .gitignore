@@ -23,6 +23,7 @@
 
 # Ignore .env files as they are personal
 /.env
+/local/.env
 
 # Ignore the build log.
 /buildlog.txt
