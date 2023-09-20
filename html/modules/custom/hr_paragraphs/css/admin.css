@@ -184,6 +184,7 @@
   order: -1;
   white-space: nowrap;
 }
+
 .upcoming-event__time::after {
   position: absolute;
   top: 50%;
@@ -197,7 +198,12 @@
   background: #666;
 }
 
-/* Make sure editor sees paragraph, even if empty */
+/* RSS Feeds */
+.external-feed--item-title h3 {
+  font-size: 1em;
+}
+
+/* Empty paragraphs: make sure editor sees empty paragraphs */
 .paragraph-preview-indicator {
   position: absolute;
   top: 5px;
