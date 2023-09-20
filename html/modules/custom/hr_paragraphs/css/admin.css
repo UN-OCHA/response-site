@@ -69,9 +69,10 @@
 }
 
 /* Title */
-.field--name-field-paragraphs .field--name-field-title {
-  margin: 1rem 0;
-  font-size: 1.75em;
+.field--name-field-title {
+  margin-block-end: 1rem;
+  margin-inline: .5rem;
+  font-size: 1.5em;
 }
 
 /* Rivers */
@@ -80,8 +81,11 @@
 }
 .river__result + .river__result {
   margin-block-start: 1rem;
-  border-block-start: 1px solid #ddd;
   padding-block-start: 1rem;
+  border-block-start: 1px solid #ddd;
+}
+.river__result .title {
+  font-size: 1em;
 }
 .river__result .country {
   display: none;
@@ -91,7 +95,6 @@
   flex-flow: row nowrap;
   gap: 1rem;
 }
-
 .river__result .meta > * {
   display: inline;
 }
@@ -124,7 +127,6 @@
 .paragraph--type--card-list--col-3 .field--name-field-paragraphs {
   --hri-card-list-num-cols: 3;
 }
-
 .paragraph--type--card-list .paragraph--type--featured-highlight {
   display: flex;
   flex-flow: column nowrap;
@@ -184,6 +186,7 @@
   order: -1;
   white-space: nowrap;
 }
+
 .upcoming-event__time::after {
   position: absolute;
   top: 50%;
@@ -197,7 +200,12 @@
   background: #666;
 }
 
-/* Make sure editor sees paragraph, even if empty */
+/* RSS Feeds */
+.external-feed--item-title h3 {
+  font-size: 1em;
+}
+
+/* Empty paragraphs: make sure editor sees empty paragraphs */
 .paragraph-preview-indicator {
   position: absolute;
   top: 5px;
@@ -205,12 +213,14 @@
 }
 
 .js-lpb-component {
-  border: dotted green;
   min-height: 30px;
   margin-bottom: 20px;
+  border: dotted green;
 }
 
-/* ReliefWeb Key Figures */
+/**
+ * ReliefWeb Key Figures
+ */
 .rw-key-figures__list {
   --rwkf-num-cols: 1;
   --rwkf-gap-size: 1rem;
@@ -221,21 +231,24 @@
   margin: 0;
   padding: 0;
 }
+
 @media screen and (min-width: 768px) {
   .rw-key-figures__list {
     --rwkf-num-cols: 2;
   }
 }
+
 .rw-key-figures__list > li {
   display: block;
+  flex: 0 1 calc((100% / var(--rwkf-num-cols)) - (var(--rwkf-gap-size) * (var(--rwkf-num-cols) - 1)));
   margin: 0;
   padding: 0;
-  flex: 0 1 calc((100% / var(--rwkf-num-cols)) - (var(--rwkf-gap-size) * (var(--rwkf-num-cols) - 1)));
   border: 2px solid #0003;
 }
+
 .rw-key-figures__figure__label {
-  font-weight: 700;
   font-size: 1.25em;
+  font-weight: 700;
 }
 
 /**
@@ -248,6 +261,8 @@
  * CKEditor5 instance.
  *
  * @see https://www.drupal.org/project/drupal/issues/3351603
+ * @see RWR-372
+ * @see RWR-377
  */
 .ck.ck-balloon-panel {
   --ck-z-modal: 10000 !important;
