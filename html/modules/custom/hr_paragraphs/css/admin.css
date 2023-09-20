@@ -253,6 +253,8 @@
  * CKEditor5 instance.
  *
  * @see https://www.drupal.org/project/drupal/issues/3351603
+ * @see RWR-372
+ * @see RWR-377
  */
 .ck.ck-balloon-panel {
   --ck-z-modal: 10000 !important;
