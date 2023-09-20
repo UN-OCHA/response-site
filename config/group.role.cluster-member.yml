@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - group.type.cluster
+    - user.role.authenticated
 id: cluster-member
 label: Member
 weight: -100

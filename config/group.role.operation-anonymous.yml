@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - group.type.operation
+    - user.role.anonymous
 id: operation-anonymous
 label: Anonymous
 weight: -102
