@@ -69,3 +69,44 @@
   vertical-align: middle;
   background: transparent url("../components/rw-brand/rw-icons-sprite.svg") -84px -108px no-repeat;
 }
+
+/**
+ * Local actions for admins/editors
+ */
+.block-local-actions-block nav {
+  padding: 0;
+  list-style: none;
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.block-local-actions-block nav li {
+  margin: 0;
+}
+
+.block-local-actions-block nav a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: var(--cd-white);
+  border: solid 2px var(--brand-primary);
+  border-radius: 3px;
+  background-color: var(--brand-primary);
+  font-size: 1.1rem;
+  line-height: 1rem;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/**
+ * Views exposed filters
+ *
+ * For example, on the "Pages" local task logged in as admin/editor.
+ */
+.views-exposed-form .cd-form--inline {
+  gap: 1rem;
+}
