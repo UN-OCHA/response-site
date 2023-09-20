@@ -237,3 +237,18 @@
   font-weight: 700;
   font-size: 1.25em;
 }
+
+/**
+ * CKEditor 5 link hotfix
+ *
+ * There's probably a better way to do this, but we were hotfixing prod after
+ * the D10 deploy and this was the first thing that worked.
+ *
+ * It bumps the z-index up higher than the Paragraphs modal which contains the
+ * CKEditor5 instance.
+ *
+ * @see https://www.drupal.org/project/drupal/issues/3351603
+ */
+.ck.ck-balloon-panel {
+  --ck-z-modal: 10000 !important;
+}
