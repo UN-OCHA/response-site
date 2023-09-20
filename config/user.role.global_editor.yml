@@ -7,6 +7,7 @@ dependencies:
     - dashboards.dashboard.groups
     - dashboards.dashboard.links
     - dashboards.dashboard.pages
+    - filter.format.basic_html
     - filter.format.hr_plain_text
     - group.type.cluster
     - group.type.operation
@@ -148,6 +149,7 @@ permissions:
   - 'update paragraph content text_block'
   - 'update paragraph content twitter_feed'
   - 'update paragraph content upcoming_events'
+  - 'use text format basic_html'
   - 'use text format hr_plain_text'
   - 'view all revisions'
   - 'view landing_page revisions'
