@@ -84,6 +84,9 @@
   padding-block-start: 1rem;
   border-block-start: 1px solid #ddd;
 }
+.river__result .title {
+  font-size: 1em;
+}
 .river__result .country {
   display: none;
 }
@@ -92,7 +95,6 @@
   flex-flow: row nowrap;
   gap: 1rem;
 }
-
 .river__result .meta > * {
   display: inline;
 }
@@ -125,7 +127,6 @@
 .paragraph--type--card-list--col-3 .field--name-field-paragraphs {
   --hri-card-list-num-cols: 3;
 }
-
 .paragraph--type--card-list .paragraph--type--featured-highlight {
   display: flex;
   flex-flow: column nowrap;
