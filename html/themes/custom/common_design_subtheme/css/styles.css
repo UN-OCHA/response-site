@@ -101,3 +101,12 @@
   appearance: none;
   -webkit-font-smoothing: antialiased;
 }
+
+/**
+ * Views exposed filters
+ *
+ * For example, on the "Pages" local task logged in as admin/editor.
+ */
+.views-exposed-form .cd-form--inline {
+  gap: 1rem;
+}
