@@ -1,0 +1,36 @@
+moment:
+  remote: https://github.com/moment/moment/releases
+  version: VERSION
+  license:
+    name: MIT
+    remote: https://github.com/moment/moment/blob/develop/LICENSE
+    gpl-compatible: true
+  js:
+    /libraries/moment/min/moment.min.js: {}
+  dependencies:
+    - core/jquery
+
+fullcalendar:
+  remote: http://fullcalendar.io/download/
+  version: VERSION
+  license:
+    name: MIT
+    remote: https://github.com/fullcalendar/fullcalendar/blob/master/LICENSE.txt
+    gpl-compatible: true
+  js:
+    /libraries/fullcalendar/fullcalendar.min.js: {}
+    /libraries/fullcalendar/locale-all.js: {}
+  css:
+    component:
+      /libraries/fullcalendar/fullcalendar.min.css: {}
+  dependencies:
+    - core/jquery
+    - fullcalendar_api/moment
+
+fullcalendar_load:
+  version: VERSION
+  js:
+    js/fullcalendar.load.js: {}
+  dependencies:
+    - fullcalendar_api/fullcalendar
+    - core/drupalSettings

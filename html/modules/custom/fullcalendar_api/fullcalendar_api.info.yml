@@ -1,0 +1,13 @@
+name: 'FullCalendar API'
+description: 'API interface for jQuery FullCalendar plugin, http://fullcalendar.io/.'
+type: module
+core_version_requirement: ^8.8 || ^9 || ^10
+
+package: Calendar
+dependencies:
+  - drupal:datetime
+
+# Information added by Drupal.org packaging script on 2021-10-18
+version: '2.0.0-alpha1'
+project: 'fullcalendar_api'
+datestamp: 1634589655

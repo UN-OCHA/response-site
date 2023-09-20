@@ -63,8 +63,13 @@ function common_design_subtheme_theme_suggestions_fullcalendar_alter(array &$sug
  */
 function common_design_subtheme_theme_suggestions_paragraph_alter(&$suggestions, $variables) {
   $paragraph = $variables['elements']['#paragraph'];
-  $parent = $paragraph->getParentEntity();
-  if ($parent) {
-    $suggestions[] = 'paragraph__' . $parent->bundle() . '__' . $paragraph->bundle();
+  $parent_entity = $paragraph->getParentEntity();
+  $parent_field_name = $paragraph->parent_field_name->value;
+
+  if ($parent_entity) {
+    $suggestions[] = 'paragraph__' . $parent_entity->bundle() . '__' . $paragraph->bundle();
+  }
+  if ($parent_entity && $parent_field_name) {
+    $suggestions[] = 'paragraph__' . $parent_entity->bundle() . '__' . $parent_field_name . '__' . $paragraph->bundle();
   }
 }

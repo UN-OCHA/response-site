@@ -150,7 +150,7 @@ function hr_paragraphs_post_update_track_usage_on_node(&$sandbox) {
 function hr_paragraphs_post_update_rename_cameroun() {
   $query = Drupal::entityTypeManager()->getStorage('path_alias')->getQuery()->accessCheck(FALSE);
   $query->condition('alias', 'cameroun', 'CONTAINS');
-  $ids = $query->execute();
+  $ids = $query->accessCheck(FALSE)->execute();
 
   if (empty($ids)) {
     return;
@@ -182,7 +182,7 @@ function hr_paragraphs_post_update_afghanistan_aliases(&$sandbox) {
   $entity_type_manager = \Drupal::entityTypeManager();
   $query = $entity_type_manager->getStorage('path_alias')->getQuery();
   $query->condition('alias', '/afganistan/%', 'LIKE');
-  $path_ids = $query->execute();
+  $path_ids = $query->accessCheck(FALSE)->execute();
 
   $aliases = PathAlias::loadMultiple($path_ids);
   foreach ($aliases as $alias) {
