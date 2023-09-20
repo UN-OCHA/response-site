@@ -6,6 +6,8 @@ dependencies:
     - field.storage.group.field_sidebar_menu
     - group.type.operation
     - paragraphs.paragraphs_type.call_to_action
+    - paragraphs.paragraphs_type.child_groups
+    - paragraphs.paragraphs_type.group_pages
     - paragraphs.paragraphs_type.menu_block
     - paragraphs.paragraphs_type.table_of_contents
   module:
@@ -25,6 +27,8 @@ settings:
   handler_settings:
     target_bundles:
       menu_block: menu_block
+      child_groups: child_groups
+      group_pages: group_pages
       table_of_contents: table_of_contents
       call_to_action: call_to_action
     negate: 0
@@ -37,13 +41,13 @@ settings:
         enabled: false
       child_groups:
         weight: -38
-        enabled: false
+        enabled: true
       featured_highlight:
         weight: -35
         enabled: false
       group_pages:
         weight: -37
-        enabled: false
+        enabled: true
       hdx_river:
         weight: -22
         enabled: false
@@ -70,9 +74,6 @@ settings:
         enabled: false
       rss_feed:
         weight: -25
-        enabled: false
-      search_results:
-        weight: -24
         enabled: false
       table_of_contents:
         weight: -36
