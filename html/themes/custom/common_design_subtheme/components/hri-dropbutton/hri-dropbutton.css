@@ -36,3 +36,9 @@
   display: inline-block;
   white-space: nowrap;
 }
+
+.js td .dropbutton-wrapper {
+  position: relative;
+  top: .25rem;
+  right: auto;
+}
