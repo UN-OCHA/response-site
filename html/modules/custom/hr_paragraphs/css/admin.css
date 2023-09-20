@@ -69,9 +69,10 @@
 }
 
 /* Title */
-.field--name-field-paragraphs .field--name-field-title {
-  margin: 1rem 0;
-  font-size: 1.75em;
+.field--name-field-title {
+  margin-block-end: 1rem;
+  margin-inline: .5rem;
+  font-size: 1.5em;
 }
 
 /* Rivers */
