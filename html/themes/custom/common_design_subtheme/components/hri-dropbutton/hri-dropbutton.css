@@ -39,6 +39,8 @@
 
 .js td .dropbutton-wrapper {
   position: relative;
+  margin-right: 1em;
+  padding-right: 11em;
   top: .25rem;
   right: auto;
 }
