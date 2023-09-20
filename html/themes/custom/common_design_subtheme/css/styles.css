@@ -69,3 +69,37 @@
   vertical-align: middle;
   background: transparent url("../components/rw-brand/rw-icons-sprite.svg") -84px -108px no-repeat;
 }
+
+.block-local-actions-block nav {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.block-local-actions-block li {
+  margin-right: 1rem;
+}
+
+.block-local-actions-block li:last-child {
+  margin-right: 0;
+}
+
+.block-local-actions-block a {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  color: var(--brand-primary);
+  border: solid 2px var(--brand-primary);
+  border-radius: 3px;
+  background-color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1rem;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-font-smoothing: antialiased;
+}
