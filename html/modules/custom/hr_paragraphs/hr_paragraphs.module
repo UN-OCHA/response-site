@@ -1393,6 +1393,11 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
     $data['tabs'][0]['group.content']['#access'] = FALSE;
   }
 
+  // New revisions tab.
+  if (isset($data['tabs'][0]['entity.version_history:group.version_history']['#access'])) {
+    $data['tabs'][0]['entity.version_history:group.version_history']['#access'] = FALSE;
+  }
+
   // Mark local task active for queries.
   $supported_routes = [
     'hr_paragraphs.operation.pages',
