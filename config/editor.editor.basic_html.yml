@@ -23,7 +23,6 @@ settings:
       - drupalInsertImage
       - '|'
       - heading
-      - codeBlock
       - '|'
       - sourceEditing
   plugins:

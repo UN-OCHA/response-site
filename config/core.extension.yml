@@ -11,8 +11,6 @@ module:
   components: 0
   config: 0
   config_split: 0
-  content_lock: 0
-  content_lock_timeout: 0
   contextual: 0
   csp: 0
   csv_serialization: 0

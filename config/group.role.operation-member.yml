@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - group.type.operation
+    - user.role.authenticated
 id: operation-member
 label: Member
 weight: -100

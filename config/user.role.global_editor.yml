@@ -7,6 +7,7 @@ dependencies:
     - dashboards.dashboard.groups
     - dashboards.dashboard.links
     - dashboards.dashboard.pages
+    - filter.format.basic_html
     - filter.format.hr_plain_text
     - group.type.cluster
     - group.type.operation
@@ -15,7 +16,6 @@ dependencies:
     - taxonomy.vocabulary.tags
     - user.role.authenticated
   module:
-    - content_lock
     - content_translation
     - contextual
     - dashboards
@@ -57,7 +57,6 @@ permissions:
   - 'administer taxonomy'
   - 'administer url aliases'
   - 'administer users'
-  - 'break content lock'
   - 'bypass node access'
   - 'can view global_editors dashboard'
   - 'can view groups dashboard'
@@ -96,7 +95,9 @@ permissions:
   - 'delete page revisions'
   - 'delete paragraph content call_to_action'
   - 'delete paragraph content card_list'
+  - 'delete paragraph content child_groups'
   - 'delete paragraph content featured_highlight'
+  - 'delete paragraph content group_pages'
   - 'delete paragraph content hdx_river'
   - 'delete paragraph content heading'
   - 'delete paragraph content iframe'
@@ -148,6 +149,7 @@ permissions:
   - 'update paragraph content text_block'
   - 'update paragraph content twitter_feed'
   - 'update paragraph content upcoming_events'
+  - 'use text format basic_html'
   - 'use text format hr_plain_text'
   - 'view all revisions'
   - 'view landing_page revisions'

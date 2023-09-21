@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - group.type.cluster
+    - user.role.anonymous
 id: cluster-anonymous
 label: Anonymous
 weight: -102

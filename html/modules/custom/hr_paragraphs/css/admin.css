@@ -1,0 +1,269 @@
+/**
+ * HR.info admin theme styles
+ */
+
+/**
+ * We use CD components occasionally, so declare any CSS Custom Props we might
+ * need to use.
+ */
+:root {
+  --cd-grey--light: #f2f2f2;
+  --cd-grey--bright: #ccc;
+  --cd-grey--mid: #595959;
+  --cd-grey--dark: #4a4a4a;
+  --cd-blue--bright: #82b5e9;
+  --hri-card-list-num-cols: 2;
+  --hri-card-list-gap-size: 1rem;
+}
+
+
+/**
+ * Make descriptions more noticeable when editing certain entities.
+ */
+.path-node .description,
+.path-group .description {
+  padding: .25rem .5rem;
+  border: 1px solid var(--cd-grey--bright);
+  border-inline-start-width: 0.5rem;
+  border-radius: 3px;
+}
+
+
+/**
+ * Move description of the "Custom Content" fields on Operations so it sits
+ * above the content.
+ */
+#edit-field-paragraphs .fieldset-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+#edit-field-paragraphs .fieldset-wrapper > .description {
+  order: -1;
+}
+
+
+/**
+ * Large images in WYSIWYG
+ *
+ * When large images get initially uploaded to the WYSIWYG editor, it's possible
+ * for the image to enlarge the editor so much that the Save/Cancel buttons are
+ * obscured, making it difficult to proceed without potential loss of content.
+ *
+ * We restrict the editor's height to avoid obscuring the buttons.
+ */
+.js .ui-dialog .ui-widget-content.ui-dialog-content {
+  max-height: calc(100vh - 160px) !important;
+}
+
+
+/**
+ * Paragraphs Editor UI customizations
+ *
+ * Just some basic tweaks to make the Paragraphs in the Editor UI look a bit
+ * more like the final product.
+ */
+.paragraph--view-mode--preview {
+  padding: 1rem;
+}
+
+/* Title */
+.field--name-field-title {
+  margin-block-end: 1rem;
+  margin-inline: .5rem;
+  font-size: 1.5em;
+}
+
+/* Rivers */
+.river__result {
+  max-width: 720px;
+}
+.river__result + .river__result {
+  margin-block-start: 1rem;
+  padding-block-start: 1rem;
+  border-block-start: 1px solid #ddd;
+}
+.river__result .title {
+  font-size: 1em;
+}
+.river__result .country {
+  display: none;
+}
+.river__result .content {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+}
+.river__result .meta > * {
+  display: inline;
+}
+.river__result .meta dt {
+  font-weight: 700;
+}
+.river__result .meta dd {
+  margin: 0;
+  padding: 0;
+  padding-inline-end: 1rem;
+}
+
+/* Text */
+.paragraph--type--text-block .align-left {
+  margin-right: 1rem;
+}
+.paragraph--type--text-block .align-right {
+  margin-left: 1rem;
+}
+
+/* Card List */
+.paragraph--type--card-list .field--name-field-paragraphs {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+}
+.paragraph--type--card-list .field--name-field-paragraphs > .field__item {
+  flex: 0 1 calc((100% / var(--hri-card-list-num-cols)) - var(--hri-card-list-gap-size) + var(--hri-card-list-gap-size) / var(--hri-card-list-num-cols));
+}
+.paragraph--type--card-list--col-3 .field--name-field-paragraphs {
+  --hri-card-list-num-cols: 3;
+}
+.paragraph--type--card-list .paragraph--type--featured-highlight {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.paragraph--type--card-list .paragraph--type--featured-highlight .field--name-field-image {
+  order: -1;
+}
+.paragraph--type--card-list .paragraph--type--featured-highlight .field--name-field-destination::before {
+  content: "Destination: ";
+}
+
+/* Upcoming Events */
+.upcoming-events__list {
+  /* layout */
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 720px;
+
+  /* cosmetics */
+  margin: 0 0 1rem 0;
+  padding: 0;
+  border: 1px solid #ddd;
+}
+
+.upcoming-events .event-heading {
+  /* layout */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 1rem;
+
+  /* cosmetics */
+  padding: 0.5rem;
+  background: #eee;
+  font-weight: 700;
+}
+
+.upcoming-event {
+  /* layout */
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2rem;
+  align-items: center;
+
+  /* cosmetics */
+  padding: 0.5rem;
+}
+
+.upcoming-event:hover {
+  color: #222;
+  background-color: #f7f7f7;
+}
+
+.upcoming-event__time {
+  position: relative;
+  flex: 0 0 0;
+  order: -1;
+  white-space: nowrap;
+}
+
+.upcoming-event__time::after {
+  position: absolute;
+  top: 50%;
+  right: -1.25rem;
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  content: "";
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  background: #666;
+}
+
+/* RSS Feeds */
+.external-feed--item-title h3 {
+  font-size: 1em;
+}
+
+/* Empty paragraphs: make sure editor sees empty paragraphs */
+.paragraph-preview-indicator {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.js-lpb-component {
+  min-height: 30px;
+  margin-bottom: 20px;
+  border: dotted green;
+}
+
+/**
+ * ReliefWeb Key Figures
+ */
+.rw-key-figures__list {
+  --rwkf-num-cols: 1;
+  --rwkf-gap-size: 1rem;
+
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--rwkf-gap-size);
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .rw-key-figures__list {
+    --rwkf-num-cols: 2;
+  }
+}
+
+.rw-key-figures__list > li {
+  display: block;
+  flex: 0 1 calc((100% / var(--rwkf-num-cols)) - (var(--rwkf-gap-size) * (var(--rwkf-num-cols) - 1)));
+  margin: 0;
+  padding: 0;
+  border: 2px solid #0003;
+}
+
+.rw-key-figures__figure__label {
+  font-size: 1.25em;
+  font-weight: 700;
+}
+
+/**
+ * CKEditor 5 link hotfix
+ *
+ * There's probably a better way to do this, but we were hotfixing prod after
+ * the D10 deploy and this was the first thing that worked.
+ *
+ * It bumps the z-index up higher than the Paragraphs modal which contains the
+ * CKEditor5 instance.
+ *
+ * @see https://www.drupal.org/project/drupal/issues/3351603
+ * @see RWR-372
+ * @see RWR-377
+ */
+.ck.ck-balloon-panel {
+  --ck-z-modal: 10000 !important;
+}

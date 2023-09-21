@@ -1393,6 +1393,11 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
     $data['tabs'][0]['group.content']['#access'] = FALSE;
   }
 
+  // New revisions tab.
+  if (isset($data['tabs'][0]['entity.version_history:group.version_history']['#access'])) {
+    $data['tabs'][0]['entity.version_history:group.version_history']['#access'] = FALSE;
+  }
+
   // Mark local task active for queries.
   $supported_routes = [
     'hr_paragraphs.operation.pages',
@@ -1515,6 +1520,10 @@ function hr_paragraphs_menu_local_actions_alter(&$local_actions) {
 
   if (isset($local_actions['group_content.group_node_add_page'])) {
     $local_actions['group_content.group_node_add_page']['title'] = t('Add new page');
+  }
+
+  if (isset($local_actions['group_content.group_node_create_page'])) {
+    $local_actions['group_content.group_node_create_page']['title'] = t('Add new page');
   }
 }
 
