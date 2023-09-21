@@ -4,6 +4,33 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.0.2](https://github.com/UN-OCHA/response-site/compare/v1.0.1...v1.0.2) (2023-09-21)
+
+### Features
+
+* Disabel content lock ([14277e](https://github.com/UN-OCHA/response-site/commit/14277eaadb6cbc06fb84e0d52fb380c64467aa27))
+
+### Bug Fixes
+
+
+##### Admin
+
+* Allow GE to delete defunct paragraph types ([18a703](https://github.com/UN-OCHA/response-site/commit/18a7039727a8f5291acf40c1705911f93b5f70f5))
+* Make Featured Highlight text optional ([683113](https://github.com/UN-OCHA/response-site/commit/6831130b084ba8345aee06a804cc270e23a61344))
+* Make titles more prominent when editing ([0433de](https://github.com/UN-OCHA/response-site/commit/0433deffbac69164f471a2f4132c360ac6d4685e))
+* More font-sizes for Editors ([7e6569](https://github.com/UN-OCHA/response-site/commit/7e6569783ec5cf2a859da81bd0b0800930d8fe60))
+* Re-surface the Link 'balloon' in CKEditor 5 ([98c68c](https://github.com/UN-OCHA/response-site/commit/98c68c3f1fc27f1e181e0e219d5f8bd9861f63bb))
+* Restore spacing on Views exposed filters ([ead43f](https://github.com/UN-OCHA/response-site/commit/ead43f130cfdbdb9d21085ec8468a4d28c17857e))
+* RSS feed font-size ([b7cf8b](https://github.com/UN-OCHA/response-site/commit/b7cf8ba1c6925ff4ee09a8585c2b65b8f108656b))
+* Style table sticky-header like non-sticky ([732e22](https://github.com/UN-OCHA/response-site/commit/732e223c763e72c8de91aee0376d6f45a0196058))
+* Tidy up local actions ([cbd51d](https://github.com/UN-OCHA/response-site/commit/cbd51d0cbf99632c3e36710b9c60d194b2224f7d))
+
+### Chores
+
+* Config export also made this change during previous commit ([fc6b2f](https://github.com/UN-OCHA/response-site/commit/fc6b2fc3728ddde7c8a47b0b61b10cbbc2c07f74))
+* Update all outdated drupal/* packages. ([a5f679](https://github.com/UN-OCHA/response-site/commit/a5f6792222beaf0d39870b7b04274f67fbbec833))
+* Update core and contrib ([ca14ce](https://github.com/UN-OCHA/response-site/commit/ca14ce9e1c50bf939c9d4a68172d470d4a50174a))
+
 ## [0.3.15](https://github.com/UN-OCHA/response-site/compare/v0.3.14...v0.3.15) (2023-04-04)
 
 ### Features
