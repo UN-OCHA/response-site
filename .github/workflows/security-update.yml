@@ -1,0 +1,20 @@
+name: Run Composer Update
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Update The Thing
+      id: update-action
+      uses: UN-OCHA/actions/composer-update@main
+      with:
+        github_access_token: ${{ secrets.PAT }}
+        patch_branch: 'main'
+        patch_packages: 'drupal/*'
+        patch_maintainers: ${{ secrets.DRUPAL_MAINTAINERS }}
+        php_version: '8.1'
+        slack_bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
+        slack_channel_name: ${{ secrets.SLACK_CHANNEL }}
