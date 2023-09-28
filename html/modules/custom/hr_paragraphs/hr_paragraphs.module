@@ -1318,6 +1318,16 @@ function hr_paragraphs_validate_date_filter_values($code, array $values) {
     }
   }
 
+  // Format the dates to ISO 8601.
+  if (!empty($dates['from'])) {
+    $dates['from'] = $dates['from']->format('c');
+  }
+  // The `to` date is inclusive, so we add 1 day minus 1 second to the
+  // `to` date so that we cover the entire day.
+  if (!empty($dates['to'])) {
+    $dates['to'] = $dates['to']->modify('+1 day -1 second')->format('c');
+  }
+
   return $dates;
 }
 

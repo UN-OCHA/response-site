@@ -608,6 +608,7 @@ class ReliefwebController extends ControllerBase {
           }
           else {
             $conditions[$key] = $condition;
+            $conditions[$key]['value'] = $condition['processed'] ?? $condition['value'];
           }
         }
       }
