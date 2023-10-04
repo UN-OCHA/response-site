@@ -33,7 +33,7 @@ path_list: |-
   /user/*/edit*
   /user/*/cancel*
   /group/add*
-  /group/*/edit
+  /group/*/edit*
 role_toggle: 'exclude listed'
 role_list: {  }
 status_toggle: 'exclude listed'
