@@ -120,9 +120,11 @@
   display: flex;
   flex-flow: row wrap;
   gap: 1rem;
+  overflow: auto;
 }
 .paragraph--type--card-list .field--name-field-paragraphs > .field__item {
   flex: 0 1 calc((100% / var(--hri-card-list-num-cols)) - var(--hri-card-list-gap-size) + var(--hri-card-list-gap-size) / var(--hri-card-list-num-cols));
+  max-width: 100%;
 }
 .paragraph--type--card-list--col-3 .field--name-field-paragraphs {
   --hri-card-list-num-cols: 3;
@@ -136,6 +138,13 @@
 }
 .paragraph--type--card-list .paragraph--type--featured-highlight .field--name-field-destination::before {
   content: "Destination: ";
+}
+
+.paragraph--type--card-list .field--name-field-destination {
+  max-width: 40ch;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Upcoming Events */
