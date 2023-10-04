@@ -1,7 +1,7 @@
 uuid: 5baec9c6-24e6-454d-a6fe-53699fb0f183
 langcode: en
 status: true
-dependencies: null
+dependencies: {  }
 id: default
 label: default
 weight: 0
