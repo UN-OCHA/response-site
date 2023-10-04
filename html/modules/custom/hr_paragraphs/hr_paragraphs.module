@@ -2468,4 +2468,12 @@ function hr_paragraphs_views_data_alter(array &$data) {
       'id' => 'linkchecker_link_active_revisions',
     ],
   ];
+
+  $data['linkchecker_link']['linkcheckerlink_group_entity_label'] = [
+    'field' => [
+      'title' => t('Group entity label'),
+      'help' => t('The label of the entity that is related to the file.'),
+      'id' => 'linkcheckerlink_group_entity_label',
+    ],
+  ];
 }
