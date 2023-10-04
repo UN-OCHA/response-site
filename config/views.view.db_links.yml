@@ -1908,7 +1908,7 @@ display:
           admin_label: ''
           entity_type: linkcheckerlink
           plugin_id: linkcheckerlink_group_entity_label
-          label: 'Group entity label'
+          label: 'Operation / Cluster'
           exclude: false
           alter:
             alter_text: false
