@@ -142,7 +142,7 @@
 
 .paragraph--type--card-list .field--name-field-destination {
   max-width: 40ch;
-  text-wrap: nowrap;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
