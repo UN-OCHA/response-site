@@ -41,24 +41,6 @@ status_list: |-
   403
   404
 conditions:
-  'entity_bundle:group':
-    id: 'entity_bundle:group'
-    negate: false
-    context_mapping:
-      group: '@group.group_route_context:group'
-    bundles: {  }
-  'entity_bundle:node':
-    id: 'entity_bundle:node'
-    negate: false
-    context_mapping:
-      node: '@node.node_route_context:node'
-    bundles: {  }
-  'entity_bundle:taxonomy_term':
-    id: 'entity_bundle:taxonomy_term'
-    negate: false
-    context_mapping:
-      taxonomy_term: '@taxonomy_term.taxonomy_term_route_context:taxonomy_term'
-    bundles: {  }
   group_type:
     id: group_type
     group_types: {  }
