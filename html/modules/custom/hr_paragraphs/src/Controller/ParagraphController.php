@@ -404,6 +404,16 @@ class ParagraphController extends ControllerBase {
       $parameters = $this->hdxController->buildHdxParameters($offset, $limit, $query_filters);
       $results = $this->hdxController->executeHdxQuery($parameters);
 
+      // Make sure we have data.
+      if (!isset($results) || !isset($results['count'])) {
+        return [
+          '#type' => 'markup',
+          '#markup' => $this->t('HDX data is currently not available.'),
+          '#prefix' => '<div class="response-error response-error-api response-error-hdx">',
+          '#suffix' => '</div>',
+        ];
+      }
+
       // Active facets.
       $active_facets = [];
       $facets = [];
