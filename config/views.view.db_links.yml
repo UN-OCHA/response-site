@@ -674,29 +674,16 @@ display:
           default_row_class: true
           columns:
             url: url
+            fail_count: fail_count
+            linkcheckerlink_group_entity_label: linkcheckerlink_group_entity_label
+            linkcheckerlink_page_entity_label: linkcheckerlink_page_entity_label
+            entity_id__target_id: entity_id__target_id
+            entity_field: entity_field
             code: code
             last_check: last_check
-            fail_count: fail_count
-            entity_field: entity_field
-            entity_id__target_id: entity_id__target_id
-            linkcheckerlink_page_entity_label: linkcheckerlink_page_entity_label
           default: '-1'
           info:
             url:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            code:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            last_check:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -710,14 +697,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            entity_field:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            entity_id__target_id:
+            linkcheckerlink_group_entity_label:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -725,6 +705,34 @@ display:
               empty_column: false
               responsive: ''
             linkcheckerlink_page_entity_label:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            entity_id__target_id:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            entity_field:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            code:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            last_check:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -1381,6 +1389,57 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        linkcheckerlink_group_entity_label:
+          id: linkcheckerlink_group_entity_label
+          table: linkchecker_link
+          field: linkcheckerlink_group_entity_label
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: linkcheckerlink
+          plugin_id: linkcheckerlink_group_entity_label
+          label: 'Operation / Cluster'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          link_to_entity: 1
         entity_id__target_id:
           id: entity_id__target_id
           table: linkchecker_link
@@ -1497,6 +1556,108 @@ display:
           empty_zero: false
           hide_alter_empty: true
           link_to_entity: 1
+        linkcheckerlink_group_entity_link:
+          id: linkcheckerlink_group_entity_link
+          table: linkchecker_link
+          field: linkcheckerlink_group_entity_link
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: linkcheckerlink
+          plugin_id: linkcheckerlink_group_entity_link
+          label: 'Operation / Cluster link'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          absolute_link: 1
+        linkcheckerlink_page_entity_link:
+          id: linkcheckerlink_page_entity_link
+          table: linkchecker_link
+          field: linkcheckerlink_page_entity_link
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: linkcheckerlink
+          plugin_id: linkcheckerlink_page_entity_link
+          label: 'Page entity link'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          absolute_link: 1
       access:
         type: perm
         options:
