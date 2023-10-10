@@ -2545,3 +2545,44 @@ function hr_paragraphs_move_meta_description_field(&$form, &$form_state, $form_i
     return;
   }
 }
+
+/**
+ * Implements hook_metatags_alter().
+ */
+function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
+  $site_name = \Drupal::config('system.site')->get('name');
+  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  // Skip if the page is not found or accessible.
+  if ($route_name === 'system.403' || $route_name === 'system.404') {
+    return;
+  }
+
+  $entity = $context['entity'];
+
+  // Force title.
+  $title = '';
+  switch ($route_name) {
+    case 'entity.node.canonical':
+      /** @var \Drupal\node\Entity\Node $entity */
+      $title = $entity->label() . ' | ' . $site_name;
+      break;
+
+    case 'entity.group.canonical':
+      /** @var \Drupal\group\Entity\Group $entity */
+      if ($entity->bundle() == 'operation') {
+        $title = $entity->label() . ' | ' . $site_name;
+      }
+      elseif ($entity->bundle() == 'cluster' && $entity->hasField('subgroup_tree') && !$entity->subgroup_tree->isEmpty()) {
+        $operation = Group::load($entity->subgroup_tree->value);
+        $title = $operation->label() . ': ' . $entity->label() . ' | ' . $site_name;
+      }
+
+      break;
+  }
+
+  if (!empty($title)) {
+    $metatags['title'] = $title;
+  }
+
+}
