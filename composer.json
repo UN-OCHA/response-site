@@ -62,6 +62,7 @@
         "drupal/maintenance200": "^1.1",
         "drupal/masquerade": "^2.0@beta",
         "drupal/memcache": "^2.3",
+        "drupal/metatag": "^2.0",
         "drupal/override_node_options": "^2.6",
         "drupal/paragraphs_admin": "^1.4",
         "drupal/pathauto": "^1.8",

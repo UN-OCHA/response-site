@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.landing_page.field_meta_description
     - field.field.node.landing_page.field_paragraphs
     - field.field.node.landing_page.field_paragraphs_secondary
     - node.type.landing_page
@@ -21,7 +22,7 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 101
+    weight: 1
     region: content
   field_paragraphs_secondary:
     type: layout_paragraphs
@@ -30,12 +31,13 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 102
+    weight: 2
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
+  field_meta_description: true
   langcode: true

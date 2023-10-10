@@ -1947,6 +1947,9 @@ function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
       }
     }
   }
+
+  // Move meta description field to sidebar.
+  hr_paragraphs_move_meta_description_field($form, $form_state, $form_id);
 }
 
 /**
@@ -2492,4 +2495,53 @@ function hr_paragraphs_views_data_alter(array &$data) {
       'id' => 'linkcheckerlink_page_entity_link',
     ],
   ];
+}
+
+/**
+ * Move meta description and check permissions.
+ */
+function hr_paragraphs_move_meta_description_field(&$form, &$form_state, $form_id) {
+  // Nodes.
+  $form_ids = [
+    'node_landing_page_edit_form',
+    'node_landing_page_form',
+    'node_page_edit_form',
+    'node_page_form',
+  ];
+
+  if (in_array($form_id, $form_ids)) {
+    if (!empty($form['field_meta_description']) && $form['field_meta_description']['#type'] == 'container') {
+      $form['field_meta_description']['#type'] = 'details';
+      $form['field_meta_description']['#group'] = 'advanced';
+      $form['field_meta_description']['#title'] = t('Meta description');
+
+      // Only for global editors.
+      $userCurrent = \Drupal::currentUser();
+      if (!$userCurrent->hasPermission('rwr edit meta tags')) {
+        $form['field_meta_description']['#access'] = FALSE;
+      }
+    }
+
+    return;
+  }
+
+  // Groups.
+  $form_ids = [
+    'group_cluster_add_form',
+    'group_cluster_edit_form',
+    'group_operation_add_form',
+    'group_operation_edit_form',
+  ];
+
+  if (in_array($form_id, $form_ids)) {
+    if (!empty($form['field_meta_description']) && $form['field_meta_description']['#type'] == 'container') {
+      // Only for global editors.
+      $userCurrent = \Drupal::currentUser();
+      if (!$userCurrent->hasPermission('rwr edit meta tags')) {
+        $form['field_meta_description']['#access'] = FALSE;
+      }
+    }
+
+    return;
+  }
 }
