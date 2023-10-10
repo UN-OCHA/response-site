@@ -2551,7 +2551,14 @@ function hr_paragraphs_move_meta_description_field(&$form, &$form_state, $form_i
  */
 function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
   $site_name = \Drupal::config('system.site')->get('name');
-  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  /** @var \Drupal\Core\Routing\RouteMatch $route_match */
+  $route_match = \Drupal::routeMatch();
+  if (!$route_match) {
+    return;
+  }
+
+  $route_name = $route_match->getRouteName();
 
   // Skip if the page is not found or accessible.
   if ($route_name === 'system.403' || $route_name === 'system.404') {
@@ -2577,7 +2584,31 @@ function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
         $operation = Group::load($entity->subgroup_tree->value);
         $title = $operation->label() . ': ' . $entity->label() . ' | ' . $site_name;
       }
+      break;
 
+    case 'hr_paragraphs.operation.pages':
+    case 'hr_paragraphs.operation.reports':
+    case 'hr_paragraphs.operation.maps':
+    case 'hr_paragraphs.operation.assessments':
+    case 'hr_paragraphs.operation.data':
+    case 'hr_paragraphs.operation.events':
+    case 'hr_paragraphs.operation.contacts':
+    case 'hr_paragraphs.operation.operations':
+    case 'hr_paragraphs.operation.ical':
+      /** @var Drupal\group\Entity\Group $group */
+      $group = \Drupal::request()->attributes->get('group');
+      if (!$group) {
+        return;
+      }
+
+      /** @var \Drupal\group\Entity\Group $entity */
+      if ($group->bundle() == 'operation') {
+        $title = $group->label() . ' - ' . $route_match->getRouteObject()->getDefault('_title') . ' | ' . $site_name;
+      }
+      elseif ($group->bundle() == 'cluster' && $group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+        $operation = Group::load($group->subgroup_tree->value);
+        $title = $operation->label() . ': ' . $group->label() . ' - ' . $route_match->getRouteObject()->getDefault('_title') . ' | ' . $site_name;
+      }
       break;
   }
 
