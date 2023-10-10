@@ -2472,8 +2472,24 @@ function hr_paragraphs_views_data_alter(array &$data) {
   $data['linkchecker_link']['linkcheckerlink_group_entity_label'] = [
     'field' => [
       'title' => t('Group entity label'),
-      'help' => t('The label of the entity that is related to the file.'),
+      'help' => t('The label of the group that is related.'),
       'id' => 'linkcheckerlink_group_entity_label',
+    ],
+  ];
+
+  $data['linkchecker_link']['linkcheckerlink_group_entity_link'] = [
+    'field' => [
+      'title' => t('Group entity link'),
+      'help' => t('The link of the group that is related.'),
+      'id' => 'linkcheckerlink_group_entity_link',
+    ],
+  ];
+
+  $data['linkchecker_link']['linkcheckerlink_page_entity_link'] = [
+    'field' => [
+      'title' => t('Page entity link'),
+      'help' => t('The link of the page that is related.'),
+      'id' => 'linkcheckerlink_page_entity_link',
     ],
   ];
 }
