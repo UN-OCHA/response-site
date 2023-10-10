@@ -15,3 +15,7 @@ ul.tabs > li > a {
   background-color: var(--cd-grey--light);
   font-size: var(--cd-font-size--medium);
 }
+
+#block-operation-tabs ul.tabs.secondary > li {
+  flex-shrink: 1;
+}

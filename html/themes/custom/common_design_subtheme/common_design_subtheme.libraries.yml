@@ -168,6 +168,8 @@ hri-twitter-feed:
       components/hri-twitter-feed/hri-twitter-feed.css: {}
 
 rwr-tabs:
+  js:
+    components/rwr-tabs/rwr-tabs.js: {}
   css:
     theme:
       components/rwr-tabs/rwr-tabs.css: {}
