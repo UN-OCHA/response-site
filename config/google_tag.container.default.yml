@@ -1,7 +1,11 @@
 uuid: 5baec9c6-24e6-454d-a6fe-53699fb0f183
 langcode: en
 status: true
-dependencies: null
+dependencies:
+  module:
+    - group
+    - node
+    - taxonomy
 id: default
 label: default
 weight: 0
@@ -28,10 +32,18 @@ path_list: |-
   /node/*/delete
   /user/*/edit*
   /user/*/cancel*
+  /group/add*
+  /group/*/edit*
 role_toggle: 'exclude listed'
 role_list: {  }
 status_toggle: 'exclude listed'
 status_list: |-
   403
   404
-conditions: {  }
+conditions:
+  group_type:
+    id: group_type
+    group_types: {  }
+    negate: 0
+    context_mapping:
+      group: '@group.group_route_context:group'

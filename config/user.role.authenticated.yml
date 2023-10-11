@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - environment_indicator.switcher.demo
+    - environment_indicator.switcher.dev
     - filter.format.basic_html
     - filter.format.hr_plain_text
   module:
@@ -22,7 +24,8 @@ weight: 1
 is_admin: false
 permissions:
   - 'access content'
-  - 'access environment indicator'
+  - 'access environment indicator demo'
+  - 'access environment indicator dev'
   - 'access shortcuts'
   - 'enter landing_page revision log entry'
   - 'enter page revision log entry'
