@@ -4,6 +4,33 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.0.3](https://github.com/UN-OCHA/response-site/compare/v1.0.2...v1.0.3) (2023-10-11)
+
+### Features
+
+* Add absolute URL to export [#RWR-304](https://https://humanitarian.atlassian.net/browse/RWR-304) ([5a96a5](https://github.com/UN-OCHA/response-site/commit/5a96a5533f244f3f13f43ab238e85befe2a2c8de))
+* Add env indicator for production [#RWR-384](https://https://humanitarian.atlassian.net/browse/RWR-384) ([fb4719](https://github.com/UN-OCHA/response-site/commit/fb4719c4f1be93fd6e9cb67cd5c8106bc133c433))
+* Permissions for env indicator [#RWR-384](https://https://humanitarian.atlassian.net/browse/RWR-384) ([f2450a](https://github.com/UN-OCHA/response-site/commit/f2450a9afa28f2eef209b4e7aebe15fe27ac35a3))
+
+### Bug Fixes
+
+* Proper processing of date filters for the RW rivers ([37fd17](https://github.com/UN-OCHA/response-site/commit/37fd174324499721e059552aea75fb07c117eb2c))
+* The dependencies for the default container must always be an array, never `null`. ([13dfeb](https://github.com/UN-OCHA/response-site/commit/13dfeb987b0ad5fc3698b3957787cfde2a7991df))
+* Use older CSS for wrapping ([bd986a](https://github.com/UN-OCHA/response-site/commit/bd986a3c1ec9c76ab8d26e01f0f3aad97054f1b6))
+
+### Chores
+
+* Allow manual run against a chosen branch. ([2b0340](https://github.com/UN-OCHA/response-site/commit/2b03405c84e8f03d79a1b4e4df92a2f47e9e387a))
+* Docksal to 8.2, no dynamic properties ([7129c9](https://github.com/UN-OCHA/response-site/commit/7129c970161336d9af64ef2bed17f851175310ae))
+* Drupal 10 sites run on PHP 8.2. ([dbf3f6](https://github.com/UN-OCHA/response-site/commit/dbf3f6214f87f2d4afef55d43f152bfd58c3afff))
+* Export config that repeatedly says needs importing ([425d94](https://github.com/UN-OCHA/response-site/commit/425d9400105f83f98418862584c56920c839a9e8))
+* Move config filter ([be5f25](https://github.com/UN-OCHA/response-site/commit/be5f250af98e7228e1bdfdde2562d40b8d2294b8))
+* Update all outdated drupal/* packages. ([239953](https://github.com/UN-OCHA/response-site/commit/23995307a79025f3e05a44d7a75d20181e0f6d8b), [888671](https://github.com/UN-OCHA/response-site/commit/8886715a6b7420ceb818b2c5f4f413ee266eb3cc), [703f3b](https://github.com/UN-OCHA/response-site/commit/703f3b5b91794d5b784038288a7037878761acff))
+
+##### Deps-dev
+
+* Bump postcss ([2e2c88](https://github.com/UN-OCHA/response-site/commit/2e2c8843d6cd83c7e3754cdfec594a0b96de90e7))
+
 ## [1.0.2](https://github.com/UN-OCHA/response-site/compare/v1.0.1...v1.0.2) (2023-09-21)
 
 ### Features
