@@ -75,8 +75,9 @@ class LinkcheckerLinkPageEntityLink extends FieldPluginBase {
     }
 
     $revision_id = $linked_entity->getRevisionId();
-    if ($linked_entity->getEntityTypeId() === 'paragraph' && $linked_entity->getParentEntity() !== NULL) {
+    while ($linked_entity->getEntityTypeId() === 'paragraph' && $linked_entity->getParentEntity() !== NULL) {
       $linked_entity = $linked_entity->getParentEntity();
+
       $previous_revision = TRUE;
       $field_names = [];
       foreach ($linked_entity->getFields() as $field) {
