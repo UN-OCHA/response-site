@@ -8,4 +8,5 @@ id: front
 label: 'Front page'
 tags:
   canonical_url: '[site:url]'
+  description: 'The leading platform for humanitarian coordination. Find reports, assessments, meetings, contacts, and more to support effective emergency response.'
   shortlink: '[site:url]'

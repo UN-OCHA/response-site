@@ -2514,6 +2514,7 @@ function hr_paragraphs_move_meta_description_field(&$form, &$form_state, $form_i
       $form['field_meta_description']['#type'] = 'details';
       $form['field_meta_description']['#group'] = 'advanced';
       $form['field_meta_description']['#title'] = t('Meta description');
+      $form['field_meta_description']['#open'] = TRUE;
 
       // Only for global editors.
       $userCurrent = \Drupal::currentUser();
@@ -2614,6 +2615,85 @@ function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
 
   if (!empty($title)) {
     $metatags['title'] = $title;
+  }
+
+  // Force description for tabs.
+  /** @var Drupal\group\Entity\Group $group */
+  $group = \Drupal::request()->attributes->get('group');
+  if ($group) {
+    $description = '';
+    switch ($route_name) {
+      case 'hr_paragraphs.operation.reports':
+        if ($group->bundle() == 'operation') {
+          $description = t('Find the latest situation reports, analysis and more in @label. Explore our resources to make informed, impactful decisions.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Access the latest situation reports, analysis and more in. Explore our resources to make informed, impactful decisions.');
+        }
+        break;
+
+      case 'hr_paragraphs.operation.maps':
+        if ($group->bundle() == 'operation') {
+          $description = t('Discover latest maps and infographics for @label. Visualize complex data, gain crucial insights, and enhance your understanding of crisis areas.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Discover latest maps and infographics . Visualize complex data and, gain crucial insights, and enhance your understanding of crisis areas.');
+        }
+        break;
+
+      case 'hr_paragraphs.operation.assessments':
+        if ($group->bundle() == 'operation') {
+          $description = t('Find the latest humanitarian needs assessments. Gain a deeper understanding of vulnerable populations and people in need in @label.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Find the latest humanitarian needs assessments. Gain a deeper understanding of vulnerable populations and people in need.');
+        }
+        break;
+
+      case 'hr_paragraphs.operation.data':
+        if ($group->bundle() == 'operation') {
+          $description = t('Explore critical data for research, analysis, and insights on humanitarian operations in @label.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Access critical data for research, analysis, and insights on humanitarian operations.');
+        }
+        break;
+
+      case 'hr_paragraphs.operation.events':
+        if ($group->bundle() == 'operation') {
+          $description = t('Stay connected and informed with our humanitarian event calendar. Never miss a critical meeting in @label.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Stay connected and informed with our humanitarian event calendar. Never miss a critical meeting.');
+        }
+        break;
+
+      case 'hr_paragraphs.operation.contacts':
+        if ($group->bundle() == 'operation') {
+          $description = t('Find and connect with humanitarian organizations and key contacts in @label.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Find and connect with humanitarian organizations and key contacts.');
+        }
+        break;
+
+    }
+
+    if (!empty($description)) {
+      $metatags['description'] = $description;
+    }
   }
 
 }
