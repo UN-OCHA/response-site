@@ -1,0 +1,8 @@
+uuid: 1a8aedfc-3c3c-4995-ad7f-53c729ef9b4f
+langcode: en
+status: true
+dependencies: {  }
+id: group__operation
+label: 'Group: Operation'
+tags:
+  description: 'Stay updated on humanitarian operations in [group:title]. Find locally curated resources, assessments, meetings and contacts to coordinate relief efforts.'

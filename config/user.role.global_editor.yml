@@ -24,6 +24,7 @@ dependencies:
     - file
     - filter
     - group
+    - hr_paragraphs
     - locale
     - masquerade
     - menu_link_content
@@ -126,6 +127,7 @@ permissions:
   - 'revert all revisions'
   - 'revert landing_page revisions'
   - 'revert page revisions'
+  - 'rwr edit meta tags'
   - 'switch shortcut sets'
   - 'translate cluster group'
   - 'translate interface'
