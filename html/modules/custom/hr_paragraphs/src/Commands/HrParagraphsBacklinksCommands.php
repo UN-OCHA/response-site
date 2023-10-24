@@ -206,8 +206,10 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
       switch ($field_definition->getItemDefinition()->getDataType()) {
         case 'field_item:text_long':
           foreach ($data as &$row) {
-            $row->value = str_replace($link->getUrl(), $new_url, $row->value);
-            $updated = TRUE;
+            if (!is_array($row)) {
+              $row->value = str_replace($link->getUrl(), $new_url, $row->value);
+              $updated = TRUE;
+            }
           }
           break;
 
@@ -421,21 +423,12 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
         $result = $this->fetchNidFromAlias(implode('/', $parts));
         if ($result) {
           $id = $result['nid'] ?? '';
-          $exclude_reliefweb = $result['exclude_reliefweb'] ?? FALSE;
           if ($id) {
             $node = $this->entityTypeManager->getStorage('node')->load($id);
             if ($node) {
               $new_url = $node->toUrl()->toString();
             }
           }
-        }
-
-        // Document probably doesn't exist on RW.
-        if ($exclude_reliefweb) {
-          // Try to find it anyways.
-        }
-        else {
-          // Link to report page on RW.
         }
       }
 
