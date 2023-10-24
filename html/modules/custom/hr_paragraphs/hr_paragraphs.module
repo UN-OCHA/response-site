@@ -2551,8 +2551,6 @@ function hr_paragraphs_move_meta_description_field(&$form, &$form_state, $form_i
  * Implements hook_metatags_alter().
  */
 function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
-  $site_name = \Drupal::config('system.site')->get('name');
-
   /** @var \Drupal\Core\Routing\RouteMatch $route_match */
   $route_match = \Drupal::routeMatch();
   if (!$route_match) {
@@ -2566,6 +2564,22 @@ function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
     return;
   }
 
+  hr_paragraphs_metatags_for_rivers($metatags, $context);
+}
+
+/**
+ * Implements hook_metatags_alter().
+ */
+function hr_paragraphs_metatags_for_rivers(array &$metatags, array &$context) {
+  $site_name = \Drupal::config('system.site')->get('name');
+
+  /** @var \Drupal\Core\Routing\RouteMatch $route_match */
+  $route_match = \Drupal::routeMatch();
+  if (!$route_match) {
+    return;
+  }
+
+  $route_name = $route_match->getRouteName();
   $entity = $context['entity'];
 
   // Force title.
@@ -2623,6 +2637,23 @@ function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
   if ($group) {
     $description = '';
     switch ($route_name) {
+      case 'entity.group.canonical':
+        if ($group->hasField('field_meta_description') && !$group->field_meta_description->isEmpty()) {
+          $description = $group->field_meta_description->value;
+        }
+        else {
+          /** @var \Drupal\group\Entity\Group $entity */
+          if ($group->bundle() == 'operation') {
+            $description = t('Stay updated on humanitarian operations in @label. Find locally curated resources, assessments, meetings and contacts to coordinate relief efforts.', [
+              '@label' => $group->label(),
+            ]);
+          }
+          else {
+            $description = t('Get the latest information on the humanitarian work of the cluster/working group. Access crucial resources, meetings, contacts, and more.');
+          }
+        }
+        break;
+
       case 'hr_paragraphs.operation.reports':
         if ($group->bundle() == 'operation') {
           $description = t('Find the latest situation reports, analysis and more in @label. Explore our resources to make informed, impactful decisions.', [
@@ -2630,7 +2661,7 @@ function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
           ]);
         }
         else {
-          $description = t('Access the latest situation reports, analysis and more in. Explore our resources to make informed, impactful decisions.');
+          $description = t('Access the latest situation reports, analysis and more. Explore our resources to make informed, impactful decisions.');
         }
         break;
 
@@ -2641,7 +2672,7 @@ function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
           ]);
         }
         else {
-          $description = t('Discover latest maps and infographics . Visualize complex data and, gain crucial insights, and enhance your understanding of crisis areas.');
+          $description = t('Discover latest maps and infographics. Visualize complex data and, gain crucial insights, and enhance your understanding of crisis areas.');
         }
         break;
 

@@ -1,8 +1,0 @@
-uuid: 634a4310-91ea-4969-96b6-e917f00c16c2
-langcode: en
-status: true
-dependencies: {  }
-id: group__cluster
-label: 'Group: Cluster or Working Group'
-tags:
-  description: 'Get the latest information on the humanitarian work of the cluster/working group. Access crucial resources, meetings, contacts, and more.'
