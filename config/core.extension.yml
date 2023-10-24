@@ -36,6 +36,7 @@ module:
   geofield: 0
   gnode: 0
   google_tag: 0
+  grequest: 0
   group: 0
   help: 0
   hr_analytics: 0
@@ -85,6 +86,7 @@ module:
   social_api: 0
   social_auth: 0
   social_auth_hid: 0
+  state_machine: 0
   subgroup: 0
   syslog: 0
   system: 0

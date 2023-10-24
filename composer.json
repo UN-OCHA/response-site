@@ -53,6 +53,7 @@
         "drupal/flexible_permissions": "^1.0@beta",
         "drupal/geofield": "^1.36",
         "drupal/google_tag": "^1.4",
+        "drupal/grequest": "^2.2",
         "drupal/group": "^2.0.0-rc1",
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/jquery_ui_dialog": "^2.0",

@@ -13,5 +13,7 @@ scope: outsider
 global_role: authenticated
 group_type: cluster
 permissions:
+  - 'request group membership'
   - 'view group'
   - 'view group_node:page entity'
+  - 'view own group_membership_request relationship'

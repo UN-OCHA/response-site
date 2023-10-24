@@ -1,0 +1,34 @@
+uuid: e5df3cb7-b2e8-4b52-a77a-37c5f41459d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.group_content.cluster-group_membership_request.grequest_status
+    - field.field.group_content.cluster-group_membership_request.grequest_updated_by
+    - group.content_type.cluster-group_membership_request
+  module:
+    - options
+id: group_content.cluster-group_membership_request.default
+targetEntityType: group_content
+bundle: cluster-group_membership_request
+mode: default
+content:
+  grequest_status:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: -4
+    region: content
+  grequest_updated_by:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: -3
+    region: content
+hidden:
+  entity_id: true
+  langcode: true
+  uid: true
