@@ -353,6 +353,15 @@ function hr_paragraphs_group_add_member(EntityInterface $entity) {
     // @see hr_paragraphs_user_presave()
     $member->save();
   }
+
+  // Add user to the operation.
+  if ($group->bundle() == 'cluster' && $group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+    $operation = Group::load($group->subgroup_tree->value);
+    if (!$operation->getMember($member)) {
+      $operation->addMember($member);
+    }
+  }
+
 }
 
 /**
