@@ -226,6 +226,7 @@
         "drupal/coder": "^8.3",
         "drupal/config_inspector": "^2.1",
         "drupal/core-dev": "^10.0",
+        "drupal/dev_mode": "^2.6",
         "drupal/devel_php": "^1.5",
         "marcocesarato/php-conventional-changelog": "^1.16",
         "mglaman/drupal-check": "^1.4",
