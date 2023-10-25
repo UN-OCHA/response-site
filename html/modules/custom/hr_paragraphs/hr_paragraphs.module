@@ -1784,6 +1784,44 @@ function hr_paragraphs_group_parent_is_published(&$variables) {
 }
 
 /**
+ * Implements template_preprocess_field().
+ */
+function hr_paragraphs_preprocess_field(&$variables, $hook) {
+  if (!isset($variables['entity_type']) || !isset($variables['field_name'])) {
+    return;
+  }
+
+  if ($variables['entity_type'] != 'group') {
+    return;
+  }
+
+  if ($variables['field_name'] != 'label') {
+    return;
+  }
+
+  $variables['request_membership'] = FALSE;
+  $variables['request_membership_id'] = 0;
+
+  /** @var \Drupal\group\Entity\GroupInterface $group */
+  $group = $variables['element']['#object'];
+  if (!$group) {
+    return;
+  }
+
+  if ($group->bundle() != 'cluster') {
+    return;
+  }
+
+  $user = \Drupal::currentUser();
+  if ($group->getMember($user)) {
+    return;
+  }
+
+  $variables['request_membership'] = TRUE;
+  $variables['request_membership_id'] = $group->id();
+}
+
+/**
  * Parse query string, allowing duplicate keys.
  */
 function hr_paragraphs_parse_str($string) {

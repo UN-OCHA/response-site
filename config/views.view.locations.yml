@@ -430,11 +430,7 @@ display:
     position: 1
     display_options:
       display_description: ''
-      display_extenders:
-        metatag_display_extender:
-          metatags:
-            description: "Improve humanitarian response coordination with local information to enhance preparedness and response. Join us in making an impact where it's needed most."
-          tokenize: false
+      display_extenders: {  }
       path: locations
       menu:
         type: normal

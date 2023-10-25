@@ -1,0 +1,21 @@
+uuid: 2d881343-fd5e-4494-8e0e-8a9b7d96efc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group_content.grequest_updated_by
+    - group.content_type.cluster-group_membership_request
+id: group_content.cluster-group_membership_request.grequest_updated_by
+field_name: grequest_updated_by
+entity_type: group_content
+bundle: cluster-group_membership_request
+label: 'Approved/Rejected by'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:user'
+  handler_settings: {  }
+field_type: entity_reference

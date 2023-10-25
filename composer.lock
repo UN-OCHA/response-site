@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2718abaf532d625cde96c4ca7614e896",
+    "content-hash": "4a83b73901b1e015b1ad366118f4ae03",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2961,6 +2961,54 @@
             }
         },
         {
+            "name": "drupal/grequest",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/grequest.git",
+                "reference": "2.2.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/grequest-2.2.1.zip",
+                "reference": "2.2.1",
+                "shasum": "0387a89b7178af1c567bd845a3b13eb919c6566a"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10",
+                "drupal/group": "^2.0",
+                "drupal/state_machine": "^1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.2.1",
+                    "datestamp": "1697405252",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Nikolay Lobachev",
+                    "homepage": "https://www.drupal.org/u/lobsterr",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Group membership request module allows to request membership in a group.",
+            "homepage": "https://www.drupal.org/project/grequest",
+            "support": {
+                "source": "https://git.drupalcode.org/project/grequest",
+                "issues": "https://www.drupal.org/project/issues/grequest"
+            }
+        },
+        {
             "name": "drupal/group",
             "version": "2.2.1",
             "source": {
@@ -4832,6 +4880,103 @@
             "homepage": "https://www.drupal.org/project/stage_file_proxy",
             "support": {
                 "source": "https://git.drupalcode.org/project/stage_file_proxy"
+            }
+        },
+        {
+            "name": "drupal/state_machine",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/state_machine.git",
+                "reference": "8.x-1.8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/state_machine-8.x-1.8.zip",
+                "reference": "8.x-1.8",
+                "shasum": "dd59939a0f91f413c4f98e3f2966f8ea7a4a74ee"
+            },
+            "require": {
+                "drupal/core": "^9.2 || ^10",
+                "php": ">=7.0.8"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.8",
+                    "datestamp": "1684226801",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "arithmetric",
+                    "homepage": "https://www.drupal.org/user/162305"
+                },
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "Brandonian",
+                    "homepage": "https://www.drupal.org/user/77766"
+                },
+                {
+                    "name": "das-peter",
+                    "homepage": "https://www.drupal.org/user/762870"
+                },
+                {
+                    "name": "e2thex",
+                    "homepage": "https://www.drupal.org/user/189123"
+                },
+                {
+                    "name": "Elijah Lynn",
+                    "homepage": "https://www.drupal.org/user/353190"
+                },
+                {
+                    "name": "ericduran",
+                    "homepage": "https://www.drupal.org/user/244460"
+                },
+                {
+                    "name": "fmitchell",
+                    "homepage": "https://www.drupal.org/user/213574"
+                },
+                {
+                    "name": "indytechcook",
+                    "homepage": "https://www.drupal.org/user/245817"
+                },
+                {
+                    "name": "jsacksick",
+                    "homepage": "https://www.drupal.org/user/972218"
+                },
+                {
+                    "name": "robeano",
+                    "homepage": "https://www.drupal.org/user/67660"
+                },
+                {
+                    "name": "stevector",
+                    "homepage": "https://www.drupal.org/user/179805"
+                },
+                {
+                    "name": "timcosgrove",
+                    "homepage": "https://www.drupal.org/user/118452"
+                },
+                {
+                    "name": "zroger",
+                    "homepage": "https://www.drupal.org/user/67977"
+                }
+            ],
+            "description": "Provides code-driven workflow functionality.",
+            "homepage": "http://drupal.org/project/state_machine",
+            "support": {
+                "source": "https://git.drupalcode.org/project/state_machine"
             }
         },
         {
@@ -12402,6 +12547,56 @@
                 "source": "https://github.com/drupal/core-dev/tree/10.1.5"
             },
             "time": "2023-05-25T11:39:24+00:00"
+        },
+        {
+            "name": "drupal/dev_mode",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/dev_mode.git",
+                "reference": "8.x-2.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/dev_mode-8.x-2.6.zip",
+                "reference": "8.x-2.6",
+                "shasum": "7dfa949130c4add242a91604c4f0fd8e75317c54"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.6",
+                    "datestamp": "1673374613",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "George Anderson (geoanders)",
+                    "homepage": "https://www.drupal.org/u/geoanders",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "rduplock",
+                    "homepage": "https://www.drupal.org/user/3506644"
+                }
+            ],
+            "description": "Enable this module to activate development mode on your Drupal site.",
+            "homepage": "https://drupal.org/project/dev_mode",
+            "support": {
+                "source": "https://git.drupalcode.org/project/dev_mode",
+                "issues": "https://drupal.org/project/issues/dev_mode"
+            }
         },
         {
             "name": "drupal/devel",

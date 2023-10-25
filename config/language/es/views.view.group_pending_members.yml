@@ -1,0 +1,39 @@
+display:
+  default:
+    display_title: Máster
+    display_options:
+      fields:
+        name:
+          label: Nombre
+          separator: ', '
+        created:
+          separator: ', '
+        gid:
+          separator: ', '
+        id:
+          label: ID
+          separator: ', '
+        dropbutton:
+          label: Operaciones
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+          expose:
+            items_per_page_label: 'Elementos por página'
+            items_per_page_options_all_label: '- Todo -'
+            offset_label: Desplazamiento
+      exposed_form:
+        options:
+          submit_button: Aplicar
+          reset_button_label: Restablecer
+          exposed_sorts_label: 'Ordenar por'
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      arguments:
+        gid:
+          exception:
+            title: Todo(s)
+  page_1:
+    display_title: Página
