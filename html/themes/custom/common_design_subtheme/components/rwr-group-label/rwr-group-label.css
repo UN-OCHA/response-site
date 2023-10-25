@@ -1,0 +1,18 @@
+/**
+ * RWR Group Labels
+ *
+ * We have a "request membership" button that can appear in the title.
+ */
+.group-label {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 2rem;
+}
+
+.group-label__text {
+  flex: 1 1 100%;
+}
+
+.group-label__request {
+  flex: 0 0 auto;
+}

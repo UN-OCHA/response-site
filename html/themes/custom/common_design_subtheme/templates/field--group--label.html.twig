@@ -37,22 +37,25 @@
  * @see template_preprocess_field()
  */
 #}
-
+{{ attach_library('common_design_subtheme/rwr-group-label') }}
 {%
   set classes = [
     'field',
     'field--name-' ~ field_name|clean_class,
     'field--type-' ~ field_type|clean_class,
     'field--label-' ~ label_display,
+    'field__item',
+    'group-label',
     label_display == 'inline' ? 'clearfix',
   ]
 %}
-
 {% for item in items %}
-  <div{{ attributes.addClass(classes, 'field__item') }} style="position: relative;">
-    {{ item.content }}
+  <div{{ attributes.addClass(classes) }}>
+    <span class="group-label__text">
+      {{ item.content }}
+    </span>
     {% if request_membership %}
-      <span style="position: absolute; right: 0">
+      <span class="group-label__request">
         <a class="cd-button cd-button--icon cd-button--small" href="{{ url('entity.group.group_request_membership', {'group': request_membership_id}) }}">
           <span class="cd-button__text">{{ 'Request membership'|t }}</span>
           <svg class="cd-icon cd-icon--arrow-right" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--arrow-right"></use></svg>

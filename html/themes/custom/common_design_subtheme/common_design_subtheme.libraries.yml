@@ -167,6 +167,11 @@ hri-twitter-feed:
     theme:
       components/hri-twitter-feed/hri-twitter-feed.css: {}
 
+rwr-group-label:
+  css:
+    theme:
+      components/rwr-group-label/rwr-group-label.css: {}
+
 rwr-tabs:
   css:
     theme:
