@@ -5,34 +5,34 @@ index a969fb5..86404fa 100644
 @@ -63,6 +63,34 @@ class Configuration
      protected $tempFolderPath;
      protected $timeout = 120;
- 
-+    protected $accountExport = NULL;
-+    protected $accountExports = NULL;
-+    protected $activityFeed = NULL;
-+    protected $authorizedApps = NULL;
-+    protected $automations = NULL;
-+    protected $batchWebhooks = NULL;
-+    protected $batches = NULL;
-+    protected $campaignFolders = NULL;
-+    protected $campaigns = NULL;
-+    protected $connectedSites = NULL;
-+    protected $conversations = NULL;
-+    protected $customerJourneys = NULL;
-+    protected $ecommerce = NULL;
-+    protected $facebookAds = NULL;
-+    protected $fileManager = NULL;
-+    protected $landingPages = NULL;
-+    protected $lists = NULL;
-+    protected $ping = NULL;
-+    protected $reporting = NULL;
-+    protected $reports = NULL;
-+    protected $root = NULL;
-+    protected $searchCampaigns = NULL;
-+    protected $searchMembers = NULL;
-+    protected $Surveys = NULL;
-+    protected $templateFolders = NULL;
-+    protected $templates = NULL;
-+    protected $verifiedDomains = NULL;
+
++    public $accountExport = NULL;
++    public $accountExports = NULL;
++    public $activityFeed = NULL;
++    public $authorizedApps = NULL;
++    public $automations = NULL;
++    public $batchWebhooks = NULL;
++    public $batches = NULL;
++    public $campaignFolders = NULL;
++    public $campaigns = NULL;
++    public $connectedSites = NULL;
++    public $conversations = NULL;
++    public $customerJourneys = NULL;
++    public $ecommerce = NULL;
++    public $facebookAds = NULL;
++    public $fileManager = NULL;
++    public $landingPages = NULL;
++    public $lists = NULL;
++    public $ping = NULL;
++    public $reporting = NULL;
++    public $reports = NULL;
++    public $root = NULL;
++    public $searchCampaigns = NULL;
++    public $searchMembers = NULL;
++    public $Surveys = NULL;
++    public $templateFolders = NULL;
++    public $templates = NULL;
++    public $verifiedDomains = NULL;
 +
      public function __construct()
      {
