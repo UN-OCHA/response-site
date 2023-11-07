@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.landing_page.field_meta_description
     - field.field.node.landing_page.field_paragraphs
     - field.field.node.landing_page.field_paragraphs_secondary
     - node.type.landing_page
@@ -20,6 +21,7 @@ content:
     weight: 100
     region: content
 hidden:
+  field_meta_description: true
   field_paragraphs: true
   field_paragraphs_secondary: true
   langcode: true

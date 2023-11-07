@@ -353,6 +353,15 @@ function hr_paragraphs_group_add_member(EntityInterface $entity) {
     // @see hr_paragraphs_user_presave()
     $member->save();
   }
+
+  // Add user to the operation.
+  if ($group->bundle() == 'cluster' && $group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+    $operation = Group::load($group->subgroup_tree->value);
+    if (!$operation->getMember($member)) {
+      $operation->addMember($member);
+    }
+  }
+
 }
 
 /**
@@ -1947,6 +1956,9 @@ function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
       }
     }
   }
+
+  // Move meta description field to sidebar.
+  hr_paragraphs_move_meta_description_field($form, $form_state, $form_id);
 }
 
 /**
@@ -2492,4 +2504,236 @@ function hr_paragraphs_views_data_alter(array &$data) {
       'id' => 'linkcheckerlink_page_entity_link',
     ],
   ];
+}
+
+/**
+ * Move meta description and check permissions.
+ */
+function hr_paragraphs_move_meta_description_field(&$form, &$form_state, $form_id) {
+  // Nodes.
+  $form_ids = [
+    'node_landing_page_edit_form',
+    'node_landing_page_form',
+    'node_page_edit_form',
+    'node_page_form',
+  ];
+
+  if (in_array($form_id, $form_ids)) {
+    if (!empty($form['field_meta_description']) && $form['field_meta_description']['#type'] == 'container') {
+      $form['field_meta_description']['#type'] = 'details';
+      $form['field_meta_description']['#group'] = 'advanced';
+      $form['field_meta_description']['#title'] = t('Meta description');
+      $form['field_meta_description']['#open'] = TRUE;
+
+      // Only for global editors.
+      $userCurrent = \Drupal::currentUser();
+      if (!$userCurrent->hasPermission('rwr edit meta tags')) {
+        $form['field_meta_description']['#access'] = FALSE;
+      }
+    }
+
+    return;
+  }
+
+  // Groups.
+  $form_ids = [
+    'group_cluster_add_form',
+    'group_cluster_edit_form',
+    'group_operation_add_form',
+    'group_operation_edit_form',
+  ];
+
+  if (in_array($form_id, $form_ids)) {
+    if (!empty($form['field_meta_description']) && $form['field_meta_description']['#type'] == 'container') {
+      // Only for global editors.
+      $userCurrent = \Drupal::currentUser();
+      if (!$userCurrent->hasPermission('rwr edit meta tags')) {
+        $form['field_meta_description']['#access'] = FALSE;
+      }
+    }
+
+    return;
+  }
+}
+
+/**
+ * Implements hook_metatags_alter().
+ */
+function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
+  /** @var \Drupal\Core\Routing\RouteMatch $route_match */
+  $route_match = \Drupal::routeMatch();
+  if (!$route_match) {
+    return;
+  }
+
+  $route_name = $route_match->getRouteName();
+
+  // Skip if the page is not found or accessible.
+  if ($route_name === 'system.403' || $route_name === 'system.404') {
+    return;
+  }
+
+  hr_paragraphs_metatags_for_rivers($metatags, $context);
+}
+
+/**
+ * Implements hook_metatags_alter().
+ */
+function hr_paragraphs_metatags_for_rivers(array &$metatags, array &$context) {
+  $site_name = \Drupal::config('system.site')->get('name');
+
+  /** @var \Drupal\Core\Routing\RouteMatch $route_match */
+  $route_match = \Drupal::routeMatch();
+  if (!$route_match) {
+    return;
+  }
+
+  $route_name = $route_match->getRouteName();
+  $entity = $context['entity'];
+
+  // Force title.
+  $title = '';
+  switch ($route_name) {
+    case 'entity.node.canonical':
+      /** @var \Drupal\node\Entity\Node $entity */
+      $title = $entity->label() . ' | ' . $site_name;
+      break;
+
+    case 'entity.group.canonical':
+      /** @var \Drupal\group\Entity\Group $entity */
+      if ($entity->bundle() == 'operation') {
+        $title = $entity->label() . ' | ' . $site_name;
+      }
+      elseif ($entity->bundle() == 'cluster' && $entity->hasField('subgroup_tree') && !$entity->subgroup_tree->isEmpty()) {
+        $operation = Group::load($entity->subgroup_tree->value);
+        $title = $operation->label() . ': ' . $entity->label() . ' | ' . $site_name;
+      }
+      break;
+
+    case 'hr_paragraphs.operation.pages':
+    case 'hr_paragraphs.operation.reports':
+    case 'hr_paragraphs.operation.maps':
+    case 'hr_paragraphs.operation.assessments':
+    case 'hr_paragraphs.operation.data':
+    case 'hr_paragraphs.operation.events':
+    case 'hr_paragraphs.operation.contacts':
+    case 'hr_paragraphs.operation.operations':
+    case 'hr_paragraphs.operation.ical':
+      /** @var Drupal\group\Entity\Group $group */
+      $group = \Drupal::request()->attributes->get('group');
+      if (!$group) {
+        return;
+      }
+
+      /** @var \Drupal\group\Entity\Group $entity */
+      if ($group->bundle() == 'operation') {
+        $title = $group->label() . ' - ' . $route_match->getRouteObject()->getDefault('_title') . ' | ' . $site_name;
+      }
+      elseif ($group->bundle() == 'cluster' && $group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+        $operation = Group::load($group->subgroup_tree->value);
+        $title = $operation->label() . ': ' . $group->label() . ' - ' . $route_match->getRouteObject()->getDefault('_title') . ' | ' . $site_name;
+      }
+      break;
+  }
+
+  if (!empty($title)) {
+    $metatags['title'] = $title;
+  }
+
+  // Force description for tabs.
+  /** @var Drupal\group\Entity\Group $group */
+  $group = \Drupal::request()->attributes->get('group');
+  if ($group) {
+    $description = '';
+    switch ($route_name) {
+      case 'entity.group.canonical':
+        if ($group->hasField('field_meta_description') && !$group->field_meta_description->isEmpty()) {
+          $description = $group->field_meta_description->value;
+        }
+        else {
+          /** @var \Drupal\group\Entity\Group $entity */
+          if ($group->bundle() == 'operation') {
+            $description = t('Stay updated on humanitarian operations in @label. Find locally curated resources, assessments, meetings and contacts to coordinate relief efforts.', [
+              '@label' => $group->label(),
+            ]);
+          }
+          else {
+            $description = t('Get the latest information on the humanitarian work of the cluster/working group. Access crucial resources, meetings, contacts, and more.');
+          }
+        }
+        break;
+
+      case 'hr_paragraphs.operation.reports':
+        if ($group->bundle() == 'operation') {
+          $description = t('Find the latest situation reports, analysis and more in @label. Explore our resources to make informed, impactful decisions.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Access the latest situation reports, analysis and more. Explore our resources to make informed, impactful decisions.');
+        }
+        break;
+
+      case 'hr_paragraphs.operation.maps':
+        if ($group->bundle() == 'operation') {
+          $description = t('Discover latest maps and infographics for @label. Visualize complex data, gain crucial insights, and enhance your understanding of crisis areas.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Discover latest maps and infographics. Visualize complex data and, gain crucial insights, and enhance your understanding of crisis areas.');
+        }
+        break;
+
+      case 'hr_paragraphs.operation.assessments':
+        if ($group->bundle() == 'operation') {
+          $description = t('Find the latest humanitarian needs assessments. Gain a deeper understanding of vulnerable populations and people in need in @label.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Find the latest humanitarian needs assessments. Gain a deeper understanding of vulnerable populations and people in need.');
+        }
+        break;
+
+      case 'hr_paragraphs.operation.data':
+        if ($group->bundle() == 'operation') {
+          $description = t('Explore critical data for research, analysis, and insights on humanitarian operations in @label.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Access critical data for research, analysis, and insights on humanitarian operations.');
+        }
+        break;
+
+      case 'hr_paragraphs.operation.events':
+        if ($group->bundle() == 'operation') {
+          $description = t('Stay connected and informed with our humanitarian event calendar. Never miss a critical meeting in @label.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Stay connected and informed with our humanitarian event calendar. Never miss a critical meeting.');
+        }
+        break;
+
+      case 'hr_paragraphs.operation.contacts':
+        if ($group->bundle() == 'operation') {
+          $description = t('Find and connect with humanitarian organizations and key contacts in @label.', [
+            '@label' => $group->label(),
+          ]);
+        }
+        else {
+          $description = t('Find and connect with humanitarian organizations and key contacts.');
+        }
+        break;
+
+    }
+
+    if (!empty($description)) {
+      $metatags['description'] = $description;
+    }
+  }
+
 }

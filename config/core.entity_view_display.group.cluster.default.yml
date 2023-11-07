@@ -15,6 +15,7 @@ dependencies:
     - field.field.group.cluster.field_ical_url
     - field.field.group.cluster.field_infographics
     - field.field.group.cluster.field_maps_infographics_link
+    - field.field.group.cluster.field_meta_description
     - field.field.group.cluster.field_offices_page
     - field.field.group.cluster.field_pages_page
     - field.field.group.cluster.field_paragraphs
@@ -75,6 +76,7 @@ hidden:
   field_ical_url: true
   field_infographics: true
   field_maps_infographics_link: true
+  field_meta_description: true
   field_offices_page: true
   field_pages_page: true
   field_reliefweb_assessments: true

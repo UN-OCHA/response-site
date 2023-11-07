@@ -6,7 +6,6 @@ module:
   big_pipe: 0
   block: 0
   breakpoint: 0
-  ckeditor: 0
   ckeditor5: 0
   components: 0
   config: 0
@@ -63,6 +62,8 @@ module:
   memcache: 0
   menu_link_content: 0
   menu_ui: 0
+  metatag: 0
+  metatag_views: 0
   mysql: 0
   node: 0
   ocha_search: 0
@@ -91,6 +92,7 @@ module:
   text: 0
   theme_switcher: 0
   token: 0
+  token_or: 0
   toolbar: 0
   twig_tweak: 0
   update: 0
@@ -99,6 +101,7 @@ module:
   variationcache: 0
   views_data_export: 0
   views_field_compare: 0
+  views_ui: 0
   pathauto: 1
   content_translation: 10
   views: 10
