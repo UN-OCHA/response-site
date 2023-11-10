@@ -1,0 +1,6 @@
+name: OCHA DRD Agent
+type: module
+description: OCHA DRD Agent.
+package: Administration
+core_version_requirement: ^10 || ^11
+project: drd_agent
