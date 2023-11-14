@@ -1,0 +1,39 @@
+uuid: f8abee87-bf63-420c-8ede-1a3f11b870d7
+langcode: en
+status: true
+dependencies:
+  module:
+    - image
+_core:
+  default_config_hash: Uu1kUcL4Mv1YbMv-JLLPhOXVbfedWiQnZgEB9se6YFA
+id: dblog_image_missing_style
+label: 'Image derivative creation fail'
+description: 'Image derivative creation fails'
+category: Watchdog
+plugin_id: image_style_missing
+result_class: null
+value_label: 'Watchdog entries'
+value_type: number
+caching_time: 3600
+settings:
+  time_interval_field: timestamp
+  time_interval_value: 86400
+  conditions:
+    -
+      field: type
+      value: image
+    -
+      field: message
+      value: 'Source image at %source_image_path not found while trying to generate derivative image at %derivative_path.'
+  verbose_fields:
+    - wid
+    - message
+    - variables
+    - referer
+    - timestamp
+  table: watchdog
+  history_status: true
+thresholds:
+  type: exceeds
+  warning: 5
+  critical: 20

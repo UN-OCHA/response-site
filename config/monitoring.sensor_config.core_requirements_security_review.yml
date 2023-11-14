@@ -1,0 +1,20 @@
+uuid: 3ca671b2-4d0c-4d05-afd1-0fbf52f7033b
+langcode: en
+status: true
+dependencies:
+  module:
+    - security_review
+id: core_requirements_security_review
+label: 'Module security_review'
+description: 'Requirements of the security_review module'
+category: Requirements
+plugin_id: core_requirements
+result_class: null
+value_label: null
+value_type: no_value
+caching_time: 3600
+settings:
+  module: security_review
+  exclude_keys: {  }
+thresholds:
+  type: none

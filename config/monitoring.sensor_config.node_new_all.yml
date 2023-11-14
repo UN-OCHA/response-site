@@ -1,0 +1,28 @@
+uuid: bf06aa79-3769-49d3-a2fe-e7b30214b47d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+_core:
+  default_config_hash: zTQAePg4PXGH5498PtpSWPZsG3bwEPHMydfDIc3Ozds
+id: node_new_all
+label: 'All new nodes'
+description: 'All new nodes'
+category: Content
+plugin_id: entity_aggregator
+result_class: null
+value_label: Nodes
+value_type: number
+caching_time: 3600
+settings:
+  time_interval_field: created
+  time_interval_value: 86400
+  verbose_fields:
+    - id
+    - label
+    - type
+    - created
+  entity_type: node
+thresholds:
+  type: none

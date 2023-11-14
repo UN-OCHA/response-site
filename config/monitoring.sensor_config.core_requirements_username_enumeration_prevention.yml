@@ -1,0 +1,20 @@
+uuid: 972bf84b-251b-4ac0-b772-9a5a86e99760
+langcode: en
+status: true
+dependencies:
+  module:
+    - username_enumeration_prevention
+id: core_requirements_username_enumeration_prevention
+label: 'Module username_enumeration_prevention'
+description: 'Requirements of the username_enumeration_prevention module'
+category: Requirements
+plugin_id: core_requirements
+result_class: null
+value_label: null
+value_type: no_value
+caching_time: 3600
+settings:
+  module: username_enumeration_prevention
+  exclude_keys: {  }
+thresholds:
+  type: none

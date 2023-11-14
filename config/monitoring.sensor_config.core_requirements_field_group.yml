@@ -1,0 +1,20 @@
+uuid: 636618d0-7fab-414a-ac8b-ba9729f72ba6
+langcode: en
+status: true
+dependencies:
+  module:
+    - field_group
+id: core_requirements_field_group
+label: 'Module field_group'
+description: 'Requirements of the field_group module'
+category: Requirements
+plugin_id: core_requirements
+result_class: null
+value_label: null
+value_type: no_value
+caching_time: 3600
+settings:
+  module: field_group
+  exclude_keys: {  }
+thresholds:
+  type: none

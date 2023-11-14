@@ -1,0 +1,20 @@
+uuid: d430c1ca-8099-489e-af99-f3e3266e6020
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 9xaHOMw0Ra9sOuNKGoBqCLFoX2pj_66FbTQPK1CFK1U
+id: core_cron_last_run_age
+label: 'Last cron run age'
+description: 'Time since last cron run'
+category: Cron
+plugin_id: cron_last_run_time
+result_class: null
+value_label: null
+value_type: time_interval
+caching_time: null
+settings: {  }
+thresholds:
+  type: exceeds
+  warning: 86400
+  critical: 259200
