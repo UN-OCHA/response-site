@@ -6,25 +6,25 @@ use Drupal\monitoring\Result\SensorResultInterface;
 use Drupal\monitoring\SensorPlugin\SensorPluginBase;
 
 /**
- * Monitors current PHP version.
+ * Monitors current Drupal version.
  *
  * @SensorPlugin(
- *   id = "ocha_current_php_version",
- *   label = @Translation("Current PHP version"),
- *   description = @Translation("Current PHP version."),
+ *   id = "ocha_current_drupal_version",
+ *   label = @Translation("Current drupal version"),
+ *   description = @Translation("Current drupal version."),
  *   addable = FALSE
  * )
  *
  * Based on the drupal core system state cron_last.
  */
-class OchaCurrentPhpVersionSensorPlugin extends SensorPluginBase {
+class OchaCurrentDrupalVersionSensorPlugin extends SensorPluginBase {
 
   /**
    * {@inheritdoc}
    */
   public function runSensor(SensorResultInterface $result) {
-    $result->setValue(PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION);
-    $result->setMessage('PHP ' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION);
+    $result->setValue(\DRUPAL::VERSION);
+    $result->setMessage(\DRUPAL::VERSION);
     $result->setStatus(SensorResultInterface::STATUS_INFO);
   }
 

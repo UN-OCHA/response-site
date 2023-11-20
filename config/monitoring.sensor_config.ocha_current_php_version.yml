@@ -1,9 +1,7 @@
 uuid: 15ef1188-805b-409d-98e7-dd59bb0f561f
 langcode: en
 status: true
-dependencies:
-  module:
-    - ocha_monitoring
+dependencies: {  }
 id: ocha_current_php_version
 label: 'Current PHP version'
 description: 'Current PHP version'

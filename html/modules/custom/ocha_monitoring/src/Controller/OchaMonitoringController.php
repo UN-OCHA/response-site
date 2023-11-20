@@ -5,10 +5,8 @@ namespace Drupal\ocha_monitoring\Controller;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\CacheableJsonResponse;
 use Drupal\Core\Cache\CacheableMetadata;
-use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Render\RenderContext;
-use Drupal\Core\Render\Renderer;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\ocha_monitoring\OchaHealthcheckGenerator;
@@ -50,21 +48,13 @@ class OchaMonitoringController extends ControllerBase {
   protected $renderer;
 
   /**
-   * Config.
-   *
-   * @var \Drupal\Core\Config\ImmutableConfig
-   */
-  protected $config;
-
-  /**
    * Constructs controller.
    */
-  public function __construct(OchaHealthcheckGenerator $generator, LoggerInterface $logger, RequestStack $request_stack, RendererInterface $renderer, ConfigFactoryInterface $config) {
+  public function __construct(OchaHealthcheckGenerator $generator, LoggerInterface $logger, RequestStack $request_stack, RendererInterface $renderer) {
     $this->generator = $generator;
     $this->logger = $logger;
     $this->requestStack = $request_stack;
     $this->renderer = $renderer;
-    $this->config = $config->get('ocha_monitoring');
   }
 
   /**
@@ -76,7 +66,6 @@ class OchaMonitoringController extends ControllerBase {
       $container->get('logger.channel.ocha_monitoring'),
       $container->get('request_stack'),
       $container->get('renderer'),
-      $container->get('config.factory'),
     );
   }
 
@@ -134,9 +123,9 @@ class OchaMonitoringController extends ControllerBase {
    *   Determines the access to controller.
    */
   public function access(AccountInterface $account) {
-    $ohdear_header_secret = $this->requestStack->getCurrentRequest()->headers->get('ocha-monitoring-key') ?? NULL;
-    $ohdear_healthcheck_secret = 'xyzzy';
-    if (($ohdear_header_secret && $ohdear_header_secret === $ohdear_healthcheck_secret)
+    $header_secret = $this->requestStack->getCurrentRequest()->headers->get('ocha-monitoring-key') ?? NULL;
+    $config_secret = $this->config('ocha_monitoring')->get('key');
+    if (($header_secret && $header_secret === $config_secret)
       || $account->hasPermission('monitoring reports')) {
       $access_result = AccessResult::allowed();
     }
@@ -155,7 +144,7 @@ class OchaMonitoringController extends ControllerBase {
   }
 
   /**
-   * Make sure ohdear healthcheck response is not cached.
+   * Make sure healthcheck response is not cached.
    *
    * @param \Drupal\Core\Cache\CacheableMetadata $cacheable_metadata
    *   Cacheable metadata.

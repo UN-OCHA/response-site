@@ -5,8 +5,6 @@ namespace Drupal\ocha_monitoring;
 use Drupal\Component\Utility\Html;
 use Drupal\monitoring\Result\SensorResultInterface;
 use Drupal\monitoring\SensorRunner;
-use OhDear\HealthCheckResults\CheckResult;
-use OhDear\HealthCheckResults\CheckResults;
 use Psr\Log\LoggerInterface;
 
 /**
