@@ -1,0 +1,131 @@
+uuid: b59ac734-369c-43b2-a748-3efbc5cf1d9b
+langcode: en
+status: true
+dependencies: {  }
+id: monitoring_installed_modules
+label: 'Installed modules'
+description: 'Installed only expected modules'
+category: System
+plugin_id: monitoring_installed_modules
+result_class: null
+value_label: 'Modules delta'
+value_type: number
+caching_time: 3600
+settings:
+  allow_additional: false
+  modules:
+    address: address
+    admin_denied: admin_denied
+    big_pipe: big_pipe
+    block: block
+    breakpoint: breakpoint
+    ckeditor5: ckeditor5
+    components: components
+    config: config
+    config_split: config_split
+    contextual: contextual
+    csp: csp
+    csv_serialization: csv_serialization
+    ctools: ctools
+    dashboards: dashboards
+    date_recur: date_recur
+    datetime: datetime
+    datetime_range: datetime_range
+    dblog: dblog
+    devel: devel
+    devel_php: devel_php
+    dynamic_entity_reference: dynamic_entity_reference
+    dynamic_page_cache: dynamic_page_cache
+    editor: editor
+    entity: entity
+    entity_reference_revisions: entity_reference_revisions
+    environment_indicator: environment_indicator
+    environment_indicator_ui: environment_indicator_ui
+    field: field
+    field_group: field_group
+    field_ui: field_ui
+    file: file
+    filter: filter
+    flexible_permissions: flexible_permissions
+    fullcalendar_api: fullcalendar_api
+    geofield: geofield
+    gnode: gnode
+    google_tag: google_tag
+    group: group
+    help: help
+    hr_analytics: hr_analytics
+    hr_entity_freshness: hr_entity_freshness
+    hr_mailchimp: hr_mailchimp
+    hr_paragraphs: hr_paragraphs
+    image: image
+    jquery_ui: jquery_ui
+    jquery_ui_button: jquery_ui_button
+    jquery_ui_checkboxradio: jquery_ui_checkboxradio
+    jquery_ui_controlgroup: jquery_ui_controlgroup
+    jquery_ui_dialog: jquery_ui_dialog
+    jquery_ui_draggable: jquery_ui_draggable
+    jquery_ui_resizable: jquery_ui_resizable
+    language: language
+    layout_builder: layout_builder
+    layout_discovery: layout_discovery
+    layout_paragraphs: layout_paragraphs
+    link: link
+    link_allowed_hosts: link_allowed_hosts
+    linkchecker: linkchecker
+    locale: locale
+    maintenance200: maintenance200
+    masquerade: masquerade
+    memcache: memcache
+    menu_link_content: menu_link_content
+    menu_ui: menu_ui
+    metatag: metatag
+    metatag_views: metatag_views
+    monitoring: monitoring
+    mysql: mysql
+    node: node
+    ocha_monitoring: ocha_monitoring
+    ocha_search: ocha_search
+    ohdear_integration: ohdear_integration
+    options: options
+    override_node_options: override_node_options
+    page_cache: page_cache
+    paragraphs_admin: paragraphs_admin
+    paragraphs_group_permissions: paragraphs_group_permissions
+    paragraphs_type_permissions: paragraphs_type_permissions
+    path: path
+    path_alias: path_alias
+    rdf: rdf
+    redirect: redirect
+    rest: rest
+    security_review: security_review
+    select2: select2
+    serialization: serialization
+    shortcut: shortcut
+    social_api: social_api
+    social_auth: social_auth
+    social_auth_hid: social_auth_hid
+    subgroup: subgroup
+    syslog: syslog
+    system: system
+    taxonomy: taxonomy
+    telephone: telephone
+    text: text
+    theme_switcher: theme_switcher
+    token: token
+    token_or: token_or
+    toolbar: toolbar
+    twig_tweak: twig_tweak
+    update: update
+    user: user
+    username_enumeration_prevention: username_enumeration_prevention
+    variationcache: variationcache
+    views_data_export: views_data_export
+    views_field_compare: views_field_compare
+    views_ui: views_ui
+    pathauto: pathauto
+    content_translation: content_translation
+    views: views
+    paragraphs: paragraphs
+    minimal: minimal
+thresholds:
+  type: none

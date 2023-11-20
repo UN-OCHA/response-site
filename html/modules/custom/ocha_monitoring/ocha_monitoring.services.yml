@@ -1,0 +1,11 @@
+services:
+  logger.channel.ocha_monitoring:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: logger.factory:get
+    arguments: [ 'ocha_monitoring' ]
+  ocha_monitoring.generator:
+    class: Drupal\ocha_monitoring\OchaHealthcheckGenerator
+    arguments:
+      - '@logger.channel.ocha_monitoring'
+      - '@monitoring.sensor_runner'
+

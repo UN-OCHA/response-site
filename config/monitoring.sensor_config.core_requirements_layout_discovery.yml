@@ -1,6 +1,6 @@
 uuid: 5fcc8a7e-83d5-4d8b-89e0-43532a6c4c95
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - layout_discovery

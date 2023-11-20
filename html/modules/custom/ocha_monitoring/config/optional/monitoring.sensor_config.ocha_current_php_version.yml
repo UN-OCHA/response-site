@@ -1,0 +1,9 @@
+id: ocha_current_php_version
+label: 'Current PHP version'
+description: 'Current PHP version'
+plugin_id: ocha_current_php_version
+value_type: string
+value_label: null
+category: OCHA
+status: TRUE
+settings: { }

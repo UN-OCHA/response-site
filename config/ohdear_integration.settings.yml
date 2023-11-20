@@ -1,5 +1,0 @@
-ohdear_healthcheck_secret: xyzzy
-ohdear_cron_uri: 'http://sesame-site.docksal.site/monitoring/ping/01264e9f-3883-48d1-ae38-ada980d9083e'
-ohdear_api_key: xyzzy
-ohdear_site_id: 3
-ohdear_base_url: 'http://sesame-site.docksal.site/monitoring/api/'

@@ -1,14 +1,14 @@
-uuid: 3b1f1460-9af3-4cda-af18-3156329ca662
+uuid: 15ef1188-805b-409d-98e7-dd59bb0f561f
 langcode: en
 status: true
 dependencies:
   module:
     - ocha_monitoring
-id: ocha_deployment_identifier
-label: 'Deployment identifier'
-description: 'Deployment identifier'
+id: ocha_current_php_version
+label: 'Current PHP version'
+description: 'Current PHP version'
 category: OCHA
-plugin_id: ocha_deployment_identifier
+plugin_id: ocha_current_php_version
 result_class: null
 value_label: null
 value_type: string

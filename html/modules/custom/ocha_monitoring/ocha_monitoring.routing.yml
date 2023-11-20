@@ -1,0 +1,9 @@
+ocha_monitoring.healthcheck:
+  path: '/json/health-check-results'
+  defaults:
+    _title: 'OCHA Monitoring'
+    _controller: '\Drupal\ocha_monitoring\Controller\OchaMonitoringController::buildJson'
+  options:
+    no_cache: TRUE
+  requirements:
+    _access: 'TRUE'

@@ -1,6 +1,6 @@
 uuid: 7eae7315-3f2c-4f65-88e3-4449d6d647fd
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - csp

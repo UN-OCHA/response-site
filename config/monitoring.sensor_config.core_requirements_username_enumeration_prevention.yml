@@ -1,6 +1,6 @@
 uuid: 972bf84b-251b-4ac0-b772-9a5a86e99760
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - username_enumeration_prevention
