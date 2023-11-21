@@ -64,10 +64,8 @@ module:
   menu_ui: 0
   metatag: 0
   metatag_views: 0
-  monitoring: 0
   mysql: 0
   node: 0
-  ocha_monitoring: 0
   ocha_search: 0
   options: 0
   override_node_options: 0

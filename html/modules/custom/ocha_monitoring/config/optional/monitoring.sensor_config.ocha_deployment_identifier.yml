@@ -1,9 +1,0 @@
-id: ocha_deployment_identifier
-label: 'Deployment identifier'
-description: 'Deployment identifier'
-plugin_id: ocha_deployment_identifier
-value_type: string
-value_label: null
-category: OCHA
-status: TRUE
-settings: { }
