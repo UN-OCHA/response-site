@@ -1,0 +1,19 @@
+uuid: dbfe8c47-0f5c-405d-8f6b-44d6280fe47e
+langcode: en
+status: false
+dependencies: {  }
+_core:
+  default_config_hash: Y0paL4ZTKoSeEXWZta8LiGw8ZWzTmq2LhQ625a4AAes
+id: system_load_average
+label: 'System load average'
+description: 'System load average monitoring plugin'
+category: Other
+plugin_id: system_load
+result_class: null
+value_label: '% Average'
+value_type: number
+caching_time: 0
+settings:
+  average_monitored: '1'
+thresholds:
+  type: none
