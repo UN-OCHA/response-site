@@ -1,0 +1,103 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 57b3309a-0463-49a2-9dc4-51178f15b4fa
+  bundle: page
+  default_langcode: en
+  depends:
+    d933b5ca-ce2b-4d07-be98-0182f2a6b3a3: user
+default:
+  revision_uid:
+    -
+      entity: d933b5ca-ce2b-4d07-be98-0182f2a6b3a3
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: d933b5ca-ce2b-4d07-be98-0182f2a6b3a3
+  title:
+    -
+      value: 'Simulation Health Dashboard'
+  created:
+    -
+      value: 1677856931
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  used_paragraphs:
+    -
+      value: 'Iframe - Dashboard (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Simulation Health Dashboard | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'This page brings together locally, curated information for humanitarians to improve communication and collaboration during an emergency response.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/simulation-operation/simulation-health-cluster/simulation-health-dashboard'
+  path:
+    -
+      alias: /simulation-operation/simulation-health-cluster/simulation-health-dashboard
+      langcode: und
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_hide_sidebar:
+    -
+      value: true
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e2f27e94-6738-4862-b8da-125da43c53c3
+          bundle: iframe
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1677856962
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_embed_code:
+            -
+              value: '<iframe title="ReliefWeb Response Health Cluster" width="720" height="800" src=https://app.powerbi.com/view?r=eyJrIjoiMjNhOWQwYjktMjUzYS00MmJlLTlhMGEtZjliZmEwMGI0ZmI2IiwidCI6ImY2MTBjMGI3LWJkMjQtNGIzOS04MTBiLTNkYzI4MGFmYjU5MCIsImMiOjh9 frameborder="0" allowFullScreen="true"></iframe>'
+          field_iframe_aspect_ratio:
+            -
+              value: ratio-16-9
