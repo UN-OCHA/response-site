@@ -1,0 +1,446 @@
+_meta:
+  version: '1.0'
+  entity_type: group
+  uuid: e6dcb1cf-d6b4-4891-a8af-2c047c538305
+  bundle: cluster
+  default_langcode: en
+  depends:
+    1f3121b6-478f-4e0b-ab2e-58a0e515ce26: user
+    89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
+    c339a4bb-d368-487a-aebb-1828b6dd694a: file
+    72ffecda-5cce-4418-a889-00dba078f545: file
+default:
+  revision_user:
+    -
+      entity: 1f3121b6-478f-4e0b-ab2e-58a0e515ce26
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  label:
+    -
+      value: 'Simulation WASH cluster'
+  created:
+    -
+      value: 1697621519
+  path:
+    -
+      alias: /simulation-operation/simulation-wash-cluster
+      langcode: und
+      pathauto: 0
+  revision_translation_affected:
+    -
+      value: true
+  enabled_tabs:
+    -
+      value: Reports
+    -
+      value: Maps
+    -
+      value: Assessments
+    -
+      value: Datasets
+    -
+      value: Events
+    -
+      value: Contacts
+    -
+      value: Pages
+  used_paragraphs:
+    -
+      value: 'Card List (1)'
+    -
+      value: 'Custom block (1)'
+    -
+      value: 'Featured highlight (1)'
+    -
+      value: 'Iframe - Dashboard (1)'
+    -
+      value: 'Menu - Links (1)'
+    -
+      value: 'ReliefWeb - Document (1)'
+    -
+      value: 'ReliefWeb - Feed (1)'
+    -
+      value: 'Table of Contents (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/node/1'
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_archive_group:
+    -
+      value: false
+  field_archive_message:
+    -
+      value: "<p>This Cluster / Working group has been archived</p>\r\n"
+      format: basic_html
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e42da13b-4787-489d-9336-3478340516bc
+          bundle: table_of_contents
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697636523
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_title:
+            -
+              value: 'Table of Contents'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 1ec1b1e9-ad89-4a88-8080-d17d8f46d11c
+          bundle: text_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697635898
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<p><img alt=\"logo\" data-entity-type=\"file\" data-entity-uuid=\"1c6f4418-5b83-4a2d-aadf-8bf8df936492\" height=\"105\" src=\"/sites/default/files/inline-images/Mali%20Cash%20Logo_2.png\" width=\"239\" />text here</p>\r\n\r\n<ul>\r\n\t<li><a href=\"https://response.reliefweb.int/somalia\">item 1</a></li>\r\n\t<li>item 2</li>\r\n</ul>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: Description
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b16b7b94-5984-4d26-83c3-8a33b6216229
+          bundle: card_list
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697636323
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_paragraphs:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: bc16c457-a7de-49e9-8c1c-ffca334b8e02
+                  bundle: featured_highlight
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1697636323
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_destination:
+                    -
+                      uri: 'https://app.powerbi.com/view?r=eyJrIjoiYzVlNTllN2UtYzc1OC00ZjYzLTliZjgtODhhOGYyZGFmOTdmIiwidCI6ImU1YzM3OTgxLTY2NjQtNDEzNC04YTBjLTY1NDNkMmFmODBiZSIsImMiOjh9'
+                      title: ''
+                      options: {  }
+                  field_image:
+                    -
+                      entity: c339a4bb-d368-487a-aebb-1828b6dd694a
+                      alt: image
+                      title: ''
+                      width: 1051
+                      height: 785
+                  field_text:
+                    -
+                      value: "<p>text</p>\r\n"
+                      format: basic_html
+                  field_title:
+                    -
+                      value: 'This is a card'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 95050230-76b8-4184-a514-0674f77ed708
+          bundle: featured_highlight
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697636394
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_destination:
+            -
+              uri: 'https://app.powerbi.com/view?r=eyJrIjoiYzVlNTllN2UtYzc1OC00ZjYzLTliZjgtODhhOGYyZGFmOTdmIiwidCI6ImU1YzM3OTgxLTY2NjQtNDEzNC04YTBjLTY1NDNkMmFmODBiZSIsImMiOjh9'
+              title: ''
+              options: {  }
+          field_image:
+            -
+              entity: 72ffecda-5cce-4418-a889-00dba078f545
+              alt: image
+              title: ''
+              width: 1196
+              height: 866
+          field_text:
+            -
+              value: "<p>text here</p>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'Featured highlight'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 4a0cc5a6-86e0-44ec-b13b-7b2e83946113
+          bundle: reliefweb_document
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697635993
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_hide_thumbnails:
+            -
+              value: false
+          field_reliefweb_url:
+            -
+              uri: 'https://reliefweb.int/report/somalia/somalia-cash-barometer-overcoming-power-imbalances-community-recommendations-breaking-cycle-july-2023'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Key document'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 41d7fff0-f289-4bfe-9061-7804e25ff7a4
+          bundle: reliefweb_river
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697636139
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_hide_thumbnails:
+            -
+              value: false
+          field_max_number_of_items:
+            -
+              value: 3
+          field_reliefweb_url:
+            -
+              uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28PC216%29&search=title%3A%22Cash%22+OR+title%3A%22Voucher%22+OR+title%3A%22MPCT%22++OR+title%3A%22Transfert%22+OR+title%3A%22Monetaire%22+OR+title%3A%22asistencia+monetaria%22+OR+title%3A%22Transferencias+Monetarias%22+OR+title%3A%22CVA%22&'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Latest updates'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: a1a766b9-65f9-4d64-8099-96468646ef56
+          bundle: iframe
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697636234
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_iframe_aspect_ratio:
+            -
+              value: ratio-16-9
+          field_iframe_url:
+            -
+              uri: 'https://app.powerbi.com/view?r=eyJrIjoiYzVlNTllN2UtYzc1OC00ZjYzLTliZjgtODhhOGYyZGFmOTdmIiwidCI6ImU1YzM3OTgxLTY2NjQtNDEzNC04YTBjLTY1NDNkMmFmODBiZSIsImMiOjh9'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: Interactive
+  field_sidebar_from_operation:
+    -
+      value: false
+  field_sidebar_menu:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 690f67f6-5a94-425c-9374-788f0c20b40f
+          bundle: menu_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697636667
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<ul>\r\n\t<li>Link 1</li>\r\n\t<li>Link 2</li>\r\n</ul>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'Custom menu'
+  subgroup_depth:
+    -
+      value: 1
+  subgroup_left:
+    -
+      value: 6
+  subgroup_right:
+    -
+      value: 7
+  subgroup_tree:
+    -
+      value: 280897

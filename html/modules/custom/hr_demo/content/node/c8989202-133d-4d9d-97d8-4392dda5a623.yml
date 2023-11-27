@@ -1,0 +1,101 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: c8989202-133d-4d9d-97d8-4392dda5a623
+  bundle: page
+  default_langcode: en
+  depends:
+    f720802e-647f-4b2a-9c69-0b805cb2b070: user
+default:
+  revision_uid:
+    -
+      entity: f720802e-647f-4b2a-9c69-0b805cb2b070
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: f720802e-647f-4b2a-9c69-0b805cb2b070
+  title:
+    -
+      value: 'Google Drive Test'
+  created:
+    -
+      value: 1679661396
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  used_paragraphs:
+    -
+      value: 'Custom block (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Google Drive Test | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'This page brings together locally, curated information for humanitarians to improve communication and collaboration during an emergency response.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/simulation-operation/google-drive-test'
+  path:
+    -
+      alias: /simulation-operation/google-drive-test
+      langcode: und
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_hide_sidebar:
+    -
+      value: false
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 4757998e-099b-446a-8dfe-e35b252b15ce
+          bundle: text_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1679661672
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<p><iframe frameborder=\"0\" height=\"500\" src=\"https://drive.google.com/embeddedfolderview?id=1I9N8Fog58gIwMfCvoWfKbUktqC4L7pq2#list\" width=\"100%\"></iframe></p>\r\n"
+              format: basic_html

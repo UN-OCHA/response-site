@@ -1,0 +1,100 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 7e80f097-e9c9-4c00-9eb5-dd2b9c91d0af
+  bundle: page
+  default_langcode: en
+  depends:
+    d933b5ca-ce2b-4d07-be98-0182f2a6b3a3: user
+default:
+  revision_uid:
+    -
+      entity: d933b5ca-ce2b-4d07-be98-0182f2a6b3a3
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: d933b5ca-ce2b-4d07-be98-0182f2a6b3a3
+  title:
+    -
+      value: 'Calendar Test'
+  created:
+    -
+      value: 1677536336
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  used_paragraphs:
+    -
+      value: 'Iframe - Dashboard (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Calendar Test | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'This page brings together locally, curated information for humanitarians to improve communication and collaboration during an emergency response.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/simulation-operation/calendar-test'
+  path:
+    -
+      alias: /simulation-operation/calendar-test
+      langcode: und
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_hide_sidebar:
+    -
+      value: true
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e08ac469-c3a7-4ea0-b02d-c8dcf6c5c078
+          bundle: iframe
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1677537974
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_embed_code:
+            -
+              value: '<iframe frameborder="0" loading="lazy" src="https://teamup.com/ksjekd62mrggnyifty?view=M&amp;keywords=blue%20nile" style="width: 100%; height: 800px; border: 1px solid #cccccc"></iframe>'
+          field_iframe_aspect_ratio:
+            -
+              value: ratio-16-9

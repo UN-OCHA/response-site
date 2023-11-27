@@ -1,0 +1,29 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 4d67e48b-ec26-435d-83d3-d71476bd09c8
+  default_langcode: en
+  depends:
+    d933b5ca-ce2b-4d07-be98-0182f2a6b3a3: user
+default:
+  uid:
+    -
+      entity: d933b5ca-ce2b-4d07-be98-0182f2a6b3a3
+  filename:
+    -
+      value: banner-blue.png
+  uri:
+    -
+      value: 'public://2023-09/banner-blue.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 27824
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1695739489

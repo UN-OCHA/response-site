@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: group_content
+  uuid: bd551926-c0fe-406d-8e58-b3fa9519b9a8
+  bundle: operation-group_node-page
+  default_langcode: en
+  depends:
+    f720802e-647f-4b2a-9c69-0b805cb2b070: user
+    0d775665-d71b-43b7-85c4-4e0e83ed504d: group
+    c8989202-133d-4d9d-97d8-4392dda5a623: node
+default:
+  uid:
+    -
+      entity: f720802e-647f-4b2a-9c69-0b805cb2b070
+  gid:
+    -
+      entity: 0d775665-d71b-43b7-85c4-4e0e83ed504d
+  entity_id:
+    -
+      entity: c8989202-133d-4d9d-97d8-4392dda5a623
+  label:
+    -
+      value: 'Google Drive Test'
+  created:
+    -
+      value: 1679661674
+  plugin_id:
+    -
+      value: 'group_node:page'
+  group_type:
+    -
+      target_id: operation
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/node/1'

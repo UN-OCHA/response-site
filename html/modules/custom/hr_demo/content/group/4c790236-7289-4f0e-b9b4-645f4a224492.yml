@@ -1,0 +1,546 @@
+_meta:
+  version: '1.0'
+  entity_type: group
+  uuid: 4c790236-7289-4f0e-b9b4-645f4a224492
+  bundle: cluster
+  default_langcode: en
+  depends:
+    1f3121b6-478f-4e0b-ab2e-58a0e515ce26: user
+    d933b5ca-ce2b-4d07-be98-0182f2a6b3a3: user
+    ec4da0e2-005d-48ad-9442-584aac124a21: file
+    c1e28e0d-110e-4278-a004-4084d48d4307: file
+    d5ae0957-ccb1-4637-b9e7-d84c15cefe9f: file
+default:
+  revision_user:
+    -
+      entity: 1f3121b6-478f-4e0b-ab2e-58a0e515ce26
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: d933b5ca-ce2b-4d07-be98-0182f2a6b3a3
+  label:
+    -
+      value: 'Simulation Protection Cluster'
+  created:
+    -
+      value: 1678976171
+  path:
+    -
+      alias: /simulation-operation/simulation-protection-cluster
+      langcode: und
+      pathauto: 0
+  revision_translation_affected:
+    -
+      value: true
+  enabled_tabs:
+    -
+      value: Reports
+    -
+      value: Maps
+    -
+      value: Assessments
+    -
+      value: Datasets
+    -
+      value: Events
+    -
+      value: Contacts
+    -
+      value: Pages
+  used_paragraphs:
+    -
+      value: 'Card List (1)'
+    -
+      value: 'Custom block (2)'
+    -
+      value: 'Featured highlight (1)'
+    -
+      value: 'Iframe - Dashboard (1)'
+    -
+      value: 'ReliefWeb - Document (1)'
+    -
+      value: 'ReliefWeb - Feed (2)'
+    -
+      value: 'Table of Contents (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/node/1'
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_archive_group:
+    -
+      value: false
+  field_archive_message:
+    -
+      value: "<p>This Cluster / Working group has been archived</p>\r\n"
+      format: basic_html
+  field_enabled_tabs:
+    -
+      value: documents
+    -
+      value: offices
+  field_offices_page:
+    -
+      uri: 'internal:/node/282305/'
+      title: ''
+      options: {  }
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 61d409dd-6ff8-40e4-acdd-9f91f4daaed7
+          bundle: table_of_contents
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697620434
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_title:
+            -
+              value: 'Table of Contents'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 08e138e1-edb2-4122-8141-e0d348ef5404
+          bundle: text_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1696423965
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<p><em>[Cluster mandate and goals, Cluster composition, How to join the cluster, Links to docs like TOR, organigram etc. Keywords are highlighted here in bold for reference]</em></p>\r\n\r\n<p>The <strong>Protection Cluster</strong>&nbsp;aims to ensure a coordinated, predictable, accountable and effective response by humanitarian organizations to the protection concerns stemming from the current <strong>conflict in Ukraine</strong>. In 2024, the cluster will continue to engage in dialogue with protection partners, <strong>conflict-affected communities</strong>, to ensure their participation in the protection response and their feedback in reaching the most vulnerable and in need.</p>\r\n\r\n<ul>\r\n\t<li><strong>Ukraine Protection Cluster</strong>, lead UNHCR</li>\r\n\t<li><strong>Ukraine Gender-Based Violence&nbsp;sub cluster&nbsp;</strong>(<strong>GBV</strong>), lead UNFPA <em>[+link to the page]</em></li>\r\n\t<li><strong>Ukraine Child Protection&nbsp;sub cluster</strong> (CP), lead UNICEF&nbsp;<em>[+link to the page]</em></li>\r\n</ul>\r\n\r\n<p>Participation is open to all actors with a demonstrated interest in and operational capacity to respond to protection concerns. They are expected to demonstrate adherence to humanitarian principles.&nbsp;Read more on the <strong>Protection Cluster in Ukraine.</strong><em> [+link to About us page]</em></p>\r\n\r\n<ul>\r\n\t<li><a href=\"https://reliefweb.int/report/ukraine/terms-reference-ukraine-protection-cluster\">Terms of Reference</a></li>\r\n\t<li><a href=\"https://reliefweb.int/report/ukraine/global-protection-cluster-four-areas-responsibility-enuk?_gl=1*1hdh54y*_ga*NTM2NTg1OTAwLjE2ODc3NjA0MjQ.*_ga_E60ZNX2F68*MTY5OTg3NzYxNC4xMjQuMS4xNjk5ODgyNTMzLjU3LjAuMA..\">Organogram</a></li>\r\n</ul>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'Cluster Description [Custom block]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 1f4b1fc0-ef0d-449a-b8d2-3f8c4495e8a3
+          bundle: reliefweb_document
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697620773
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_hide_thumbnails:
+            -
+              value: false
+          field_reliefweb_url:
+            -
+              uri: 'https://reliefweb.int/report/ukraine/2024-protection-cluster-response-strategy-monitoring'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Key Documents [ReliefWeb Document]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ca57b221-3a7b-4109-99b0-c549e85bbe39
+          bundle: card_list
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697621021
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_paragraphs:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 987b8ffb-c040-4242-b9cc-05a598558a45
+                  bundle: featured_highlight
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1697620914
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_destination:
+                    -
+                      uri: 'https://reliefweb.int/updates?advanced-search=%28S8619%29_%28L267%29&search=title%3A%22Protection+Flash+Info%22'
+                      title: ''
+                      options: {  }
+                  field_image:
+                    -
+                      entity: ec4da0e2-005d-48ad-9442-584aac124a21
+                      alt: image
+                      title: ''
+                      width: 1051
+                      height: 785
+                  field_text:
+                    -
+                      value: "<p>text</p>\r\n"
+                      format: basic_html
+                  field_title:
+                    -
+                      value: 'Protection Flash info [Card list]'
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 09144d31-6b74-4f89-a54c-62936faab690
+                  bundle: featured_highlight
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1697621004
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_destination:
+                    -
+                      uri: 'https://reliefweb.int/updates?view=maps&advanced-search=%28S8619%29_%28L267%29&search=Protection+Monitoring+Static+Dashboard'
+                      title: ''
+                      options: {  }
+                  field_image:
+                    -
+                      entity: c1e28e0d-110e-4278-a004-4084d48d4307
+                      alt: image
+                      title: ''
+                      width: 1196
+                      height: 866
+                  field_text:
+                    -
+                      value: "<p>text</p>\r\n"
+                      format: basic_html
+                  field_title:
+                    -
+                      value: 'Monitoring Dashboard [Card list]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 3f92c4fd-e455-4c8b-8323-7e5df49c8229
+          bundle: iframe
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697621137
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_iframe_aspect_ratio:
+            -
+              value: ratio-16-9
+          field_iframe_url:
+            -
+              uri: 'https://app.powerbi.com/view?r=eyJrIjoiYzVlNTllN2UtYzc1OC00ZjYzLTliZjgtODhhOGYyZGFmOTdmIiwidCI6ImU1YzM3OTgxLTY2NjQtNDEzNC04YTBjLTY1NDNkMmFmODBiZSIsImMiOjh9'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Interactive Dashboard [Iframe - Dashboard]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 1cb88b16-1739-410b-ad46-262082b3178c
+          bundle: featured_highlight
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697621218
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_destination:
+            -
+              uri: 'https://app.powerbi.com/view?r=eyJrIjoiYzVlNTllN2UtYzc1OC00ZjYzLTliZjgtODhhOGYyZGFmOTdmIiwidCI6ImU1YzM3OTgxLTY2NjQtNDEzNC04YTBjLTY1NDNkMmFmODBiZSIsImMiOjh9'
+              title: ''
+              options: {  }
+          field_image:
+            -
+              entity: d5ae0957-ccb1-4637-b9e7-d84c15cefe9f
+              alt: image
+              title: ''
+              width: 1290
+              height: 739
+          field_text:
+            -
+              value: "<p>text</p>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'Dashboard [Featured highlihgt]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 7b9306b7-de44-4ba3-beb3-e9853bed1fb8
+          bundle: reliefweb_river
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697621299
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_hide_thumbnails:
+            -
+              value: false
+          field_max_number_of_items:
+            -
+              value: 1
+          field_reliefweb_url:
+            -
+              uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28S8619_S2868%29_%28L267%29&search=title%3A%22minutes%22'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Meeting minutes[ReliefWeb Feed]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 37014090-6bb7-4e47-9dd3-66ab60c6518e
+          bundle: reliefweb_river
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697621341
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_hide_thumbnails:
+            -
+              value: false
+          field_max_number_of_items:
+            -
+              value: 3
+          field_reliefweb_url:
+            -
+              uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28S8619_S2868%29_%28L267%29&search=NOT+title%3A%22minutes%22'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Latest cluster updates [ReliefWeb Feed]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c458c721-7ae1-415c-8644-4eeed1601d32
+          bundle: text_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697621384
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<ul>\r\n\t<li><a href=\"https://response.reliefweb.int/\">Link 1</a></li>\r\n\t<li>Link 2</li>\r\n\t<li>Link 3</li>\r\n</ul>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'Useful links [Custom block]'
+  field_reliefweb_documents:
+    -
+      uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28S8619_S2868%29_%28L267%29'
+      title: ''
+      options: {  }
+  field_sidebar_from_operation:
+    -
+      value: true
+  subgroup_depth:
+    -
+      value: 1
+  subgroup_left:
+    -
+      value: 4
+  subgroup_right:
+    -
+      value: 5
+  subgroup_tree:
+    -
+      value: 280897
