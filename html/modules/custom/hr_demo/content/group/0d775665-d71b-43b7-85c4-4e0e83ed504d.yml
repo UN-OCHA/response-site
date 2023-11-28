@@ -668,15 +668,3 @@ default:
           field_title:
             -
               value: Dashboard
-  subgroup_depth:
-    -
-      value: 0
-  subgroup_left:
-    -
-      value: 1
-  subgroup_right:
-    -
-      value: 8
-  subgroup_tree:
-    -
-      value: 280897

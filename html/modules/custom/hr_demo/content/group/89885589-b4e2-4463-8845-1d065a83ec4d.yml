@@ -363,15 +363,3 @@ default:
           field_title:
             -
               value: Pages
-  subgroup_depth:
-    -
-      value: 1
-  subgroup_left:
-    -
-      value: 2
-  subgroup_right:
-    -
-      value: 3
-  subgroup_tree:
-    -
-      value: 280897

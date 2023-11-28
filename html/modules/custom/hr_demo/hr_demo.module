@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Installs demo content.
+ */
+
+/**
+ * Implements hook_modules_installed().
+ */
+function hr_demo_modules_installed($modules) {
+  if (!in_array('hr_demo', $modules)) {
+    return;
+  }
+
+  $operations = \Drupal::entityTypeManager()->getStorage('group')->loadByProperties([
+    'uuid' => '0d775665-d71b-43b7-85c4-4e0e83ed504d',
+  ]);
+
+  /** @var \Drupal\group\Entity\Group $operation */
+  $operation = reset($operations);
+
+  $cluster_uuids = [
+    '4c790236-7289-4f0e-b9b4-645f4a224492',
+    '89885589-b4e2-4463-8845-1d065a83ec4d',
+    'e6dcb1cf-d6b4-4891-a8af-2c047c538305',
+  ];
+
+  foreach ($cluster_uuids as $cluster_uuid) {
+    $clusters = \Drupal::entityTypeManager()->getStorage('group')->loadByProperties([
+      'uuid' => $cluster_uuid,
+    ]);
+
+    /** \Drupal\group\Entity\Group $cluster */
+    $cluster = reset($clusters);
+    $operation->addRelationship($cluster, 'subgroup:' . $cluster->bundle());
+  }
+}
