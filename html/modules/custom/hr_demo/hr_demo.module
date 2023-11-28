@@ -31,7 +31,7 @@ function hr_demo_modules_installed($modules) {
       'uuid' => $cluster_uuid,
     ]);
 
-    /** \Drupal\group\Entity\Group $cluster */
+    /** @var \Drupal\group\Entity\Group $cluster */
     $cluster = reset($clusters);
     $operation->addRelationship($cluster, 'subgroup:' . $cluster->bundle());
   }
