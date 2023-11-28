@@ -1,0 +1,47 @@
+name: Demo content
+type: module
+description: 'Demo content.'
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - default_content:default_content
+  - group:group
+default_content:
+  group:
+    - e6dcb1cf-d6b4-4891-a8af-2c047c538305
+    - 0d775665-d71b-43b7-85c4-4e0e83ed504d
+    - 4c790236-7289-4f0e-b9b4-645f4a224492
+    - 89885589-b4e2-4463-8845-1d065a83ec4d
+  group_content:
+    - ed69346f-741e-4dc9-a83f-f391363d8ead
+    - e86205c9-0144-4017-944a-03a4c4d05dca
+    - bd551926-c0fe-406d-8e58-b3fa9519b9a8
+    - e4eb2032-5a86-425b-879a-4ea4992a8755
+    - 7eb20017-e5ed-4fdd-8274-072fae1c77e7
+    - e3dcb40c-60e2-4328-9469-c886f09c6a9c
+    - 6e1c2617-744f-45d8-998c-82284b7d32ed
+    - c99287a3-6e12-4f0f-b069-ac257b78277e
+    - 04574d63-9b05-4be0-af2b-322d0433e8cd
+    - 11599901-0710-4347-93cc-cb9cd164c73c
+    - c7187aee-9f83-4bdf-ab09-c3942f7bc161
+  node:
+    - c8989202-133d-4d9d-97d8-4392dda5a623
+    - 672bd8f6-3a2d-4295-a6e6-124de96f635b
+    - 7e80f097-e9c9-4c00-9eb5-dd2b9c91d0af
+    - c39dccbf-2ce2-426a-b50d-34409b70c777
+    - 508b48b7-c974-4f93-9652-8acac41d7719
+    - e54294d5-bf21-4ad2-89c0-f73d80bd8b64
+    - c6d730d1-0887-4d57-a199-4da838a03b89
+    - c6ef8519-213c-49d8-ac97-c3a6e186b19d
+    - 6fa928cd-3cdd-46c9-8f50-fef1e716bf7f
+    - 57b3309a-0463-49a2-9dc4-51178f15b4fa
+    - e96fd16e-6c22-43dd-bcd4-117009878374
+  file:
+    - 08bea3f6-7a43-409e-8ad4-d51e43fd688f
+    - 369c92a7-d1e9-47be-abca-5064c0fe0258
+    - 4201b04f-1046-47c1-b50a-d5049e3f2777
+    - 4d67e48b-ec26-435d-83d3-d71476bd09c8
+    - 72ffecda-5cce-4418-a889-00dba078f545
+    - c1e28e0d-110e-4278-a004-4084d48d4307
+    - c339a4bb-d368-487a-aebb-1828b6dd694a
+    - d5ae0957-ccb1-4637-b9e7-d84c15cefe9f
+    - ec4da0e2-005d-48ad-9442-584aac124a21

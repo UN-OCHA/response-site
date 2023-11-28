@@ -1,0 +1,154 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 672bd8f6-3a2d-4295-a6e6-124de96f635b
+  bundle: page
+  default_langcode: en
+  depends:
+    f720802e-647f-4b2a-9c69-0b805cb2b070: user
+default:
+  revision_uid:
+    -
+      entity: f720802e-647f-4b2a-9c69-0b805cb2b070
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: f720802e-647f-4b2a-9c69-0b805cb2b070
+  title:
+    -
+      value: 'Translation Test'
+  created:
+    -
+      value: 1697191247
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  used_paragraphs:
+    -
+      value: 'Custom block (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Translation Test | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'This page brings together locally, curated information for humanitarians to improve communication and collaboration during an emergency response.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/simulation-operation/translation-test'
+  path:
+    -
+      alias: /simulation-operation/translation-test
+      langcode: und
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_hide_sidebar:
+    -
+      value: false
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 179775be-efd8-47ac-a1c4-ba13fe021e76
+          bundle: text_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697191273
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<p>Test of translation</p>\r\n"
+              format: basic_html
+        translations:
+          fr:
+            status:
+              -
+                value: true
+            created:
+              -
+                value: 1697191273
+            revision_translation_affected:
+              -
+                value: true
+            content_translation_source:
+              -
+                value: en
+            content_translation_outdated:
+              -
+                value: false
+            field_text:
+              -
+                value: "<pre data-placeholder=\"Translation\" data-ved=\"2ahUKEwiO0POp4vKBAxUggf0HHV9YAQUQ3ewLegQIBhAQ\" dir=\"ltr\" id=\"tw-target-text\">\r\nTest de traduction\r\n</pre>\r\n"
+                format: basic_html
+translations:
+  fr:
+    title:
+      -
+        value: 'Translation Test'
+    revision_translation_affected:
+      -
+        value: true
+    metatag:
+      -
+        tag: meta
+        attributes:
+          name: title
+          content: 'Translation Test | test'
+      -
+        tag: meta
+        attributes:
+          name: description
+          content: 'This page brings together locally, curated information for humanitarians to improve communication and collaboration during an emergency response.'
+      -
+        tag: link
+        attributes:
+          rel: canonical
+          href: 'http://response-site.docksal.site/fr/simulation-operation/translation-test'
+    path:
+      -
+        alias: /simulation-operation/translation-test
+        langcode: fr
+        pathauto: 0
+    content_translation_source:
+      -
+        value: en
+    content_translation_outdated:
+      -
+        value: false

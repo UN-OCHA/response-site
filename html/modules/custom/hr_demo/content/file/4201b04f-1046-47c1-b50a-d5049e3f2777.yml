@@ -1,0 +1,29 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 4201b04f-1046-47c1-b50a-d5049e3f2777
+  default_langcode: en
+  depends:
+    d933b5ca-ce2b-4d07-be98-0182f2a6b3a3: user
+default:
+  uid:
+    -
+      entity: d933b5ca-ce2b-4d07-be98-0182f2a6b3a3
+  filename:
+    -
+      value: Ukraine-Dnipro-City-Reference-Map-As-of-20-March-2023-Ukraine-ReliefWeb-demo.png
+  uri:
+    -
+      value: 'public://2023-04/Ukraine-Dnipro-City-Reference-Map-As-of-20-March-2023-Ukraine-ReliefWeb-demo.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1123181
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1681153488
