@@ -51,8 +51,8 @@ $config['system.logging']['error_level'] = 'verbose';
 /**
  * Disable CSS and JS aggregation.
  */
-$config['system.performance']['css']['preprocess'] = FALSE;
-$config['system.performance']['js']['preprocess'] = FALSE;
+$config['system.performance']['css']['preprocess'] = TRUE;
+$config['system.performance']['js']['preprocess'] = TRUE;
 
 /**
  * Disable the render cache.
@@ -145,7 +145,7 @@ $config['config_split.config_split.config_dev']['status'] = TRUE;
 $settings['config_sync_directory'] = '/srv/www/config';
 
 // Hash salt.
-$settings['hash_salt'] = 'response-local-site-salt';
+$settings['hash_salt'] = 'local-site-salt';
 
 // Ensure the dev_mod module configuration is not saved.
 if (isset($settings['config_exclude_modules']) && is_array($settings['config_exclude_modules'])) {
@@ -153,8 +153,33 @@ if (isset($settings['config_exclude_modules']) && is_array($settings['config_exc
 } else {
   $settings['config_exclude_modules'] = ['dev_mode'];
 }
-// Change kint depth_limit setting.
-if (class_exists('Kint')) {
-  // Set the depth_limit to prevent out-of-memory.
-  \Kint::$depth_limit = 4;
+
+// Ensure the devel module configuration is not saved.
+if (isset($settings['config_exclude_modules']) && is_array($settings['config_exclude_modules'])) {
+  $settings['config_exclude_modules'][] = 'devel';
+} else {
+  $settings['config_exclude_modules'] = ['devel'];
 }
+
+// Ensure the stage_file_proxy module configuration is not saved.
+if (isset($settings['config_exclude_modules']) && is_array($settings['config_exclude_modules'])) {
+  $settings['config_exclude_modules'][] = 'stage_file_proxy';
+} else {
+  $settings['config_exclude_modules'] = ['stage_file_proxy'];
+}
+
+// Enable/disable page/render caching and css/js aggregation.
+$no_cache = TRUE;
+if (!empty($no_cache)) {
+  $config['system.performance']['css']['preprocess'] = FALSE;
+  $config['system.performance']['js']['preprocess'] = FALSE;
+  $settings['cache']['bins']['render'] = 'cache.backend.null';
+  $settings['cache']['bins']['page'] = 'cache.backend.null';
+  $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
+}
+
+// // Change kint depth_limit setting.
+// if (class_exists('Kint')) {
+//   // Set the depth_limit to prevent out-of-memory.
+//   \Kint::$depth_limit = 4;
+// }
