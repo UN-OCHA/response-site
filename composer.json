@@ -56,7 +56,7 @@
         "drupal/group": "^2.0.0-rc1",
         "drupal/inline_entity_form": "^1.0@RC",
         "drupal/jquery_ui_dialog": "^2.0",
-        "drupal/layout_paragraphs": "^2.0@beta",
+        "drupal/layout_paragraphs": "2.0.3",
         "drupal/link_allowed_hosts": "^1.0@beta",
         "drupal/linkchecker": "^2.0@alpha",
         "drupal/maintenance200": "^2",
