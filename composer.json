@@ -59,7 +59,7 @@
         "drupal/layout_paragraphs": "^2.0@beta",
         "drupal/link_allowed_hosts": "^1.0@beta",
         "drupal/linkchecker": "^2.0@alpha",
-        "drupal/maintenance200": "^1.1",
+        "drupal/maintenance200": "^2",
         "drupal/masquerade": "^2.0@beta",
         "drupal/memcache": "^2.3",
         "drupal/metatag": "^2.0",

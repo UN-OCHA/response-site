@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98018f2dc1b44acaedf149c09a02525d",
+    "content-hash": "1093889c5cc02677f127091a51df6649",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3707,26 +3707,26 @@
         },
         {
             "name": "drupal/maintenance200",
-            "version": "1.1.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/maintenance200.git",
-                "reference": "8.x-1.1"
+                "reference": "8.x-2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/maintenance200-8.x-1.1.zip",
-                "reference": "8.x-1.1",
-                "shasum": "b01ed2dd4371c9ff24dbbbe235bedfe44f0e008e"
+                "url": "https://ftp.drupal.org/files/projects/maintenance200-8.x-2.1.zip",
+                "reference": "8.x-2.1",
+                "shasum": "fc8ea60619b6b4682bade340e13fb4565d3a7e0c"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10"
+                "drupal/core": "^10"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.1",
-                    "datestamp": "1597142482",
+                    "version": "8.x-2.1",
+                    "datestamp": "1697195734",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4948,7 +4948,7 @@
                 "shasum": "c3ce3499cbbf31e4a47808478af890b47c4f41dd"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10",
+                "drupal/core": "^10",
                 "php": ">=7.1"
             },
             "type": "drupal-module",
