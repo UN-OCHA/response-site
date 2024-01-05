@@ -1,18 +1,17 @@
 _meta:
   version: '1.0'
   entity_type: group
-  uuid: 0d775665-d71b-43b7-85c4-4e0e83ed504d
+  uuid: fa14bcf3-2293-4023-80e5-32ecbbc6f494
   bundle: operation
-  default_langcode: en
+  default_langcode: fr
   depends:
-    f720802e-647f-4b2a-9c69-0b805cb2b070: user
     89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
-    08bea3f6-7a43-409e-8ad4-d51e43fd688f: file
-    4201b04f-1046-47c1-b50a-d5049e3f2777: file
+    130e623d-81df-494d-b083-faef1512ab83: file
+    bc6f15e0-051c-48e0-90a9-e404922f78d8: file
 default:
   revision_user:
     -
-      entity: f720802e-647f-4b2a-9c69-0b805cb2b070
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
   status:
     -
       value: true
@@ -21,13 +20,13 @@ default:
       entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
   label:
     -
-      value: 'Sample Operation'
+      value: "Opération d'example"
   created:
     -
-      value: 1666685167
+      value: 1684225921
   path:
     -
-      alias: /simulation-operation
+      alias: /operation-dexample
       langcode: und
       pathauto: 0
   revision_translation_affected:
@@ -60,11 +59,13 @@ default:
     -
       value: 'Heading (1)'
     -
-      value: 'Menu - Links (3)'
+      value: 'Iframe - Dashboard (1)'
     -
-      value: 'ReliefWeb - Document (2)'
+      value: 'Menu - Links (2)'
     -
       value: 'ReliefWeb - Feed (1)'
+    -
+      value: 'Table of Contents (1)'
   metatag:
     -
       tag: meta
@@ -75,7 +76,7 @@ default:
       tag: link
       attributes:
         rel: canonical
-        href: 'http://response-site.docksal.site/node/1'
+        href: 'http://response-site.docksal.site/fr/node/1'
   content_translation_source:
     -
       value: und
@@ -89,9 +90,9 @@ default:
     -
       value: "<p>This operation has been archived</p>\r\n"
       format: basic_html
-  field_calendar_alternate_link:
+  field_calendar_link:
     -
-      uri: 'https://demo.response-reliefweb-int.ahconu.org/simulation-operation/calendar-test'
+      uri: 'https://teamup.com/kskn9apsetg1d4oj6o'
       title: ''
       options: {  }
   field_enabled_tabs:
@@ -109,20 +110,20 @@ default:
       value: offices
   field_hdx_dataset_link:
     -
-      uri: 'https://data.humdata.org/dataset?groups=afg&q=&sort=if(gt(last_modified%2Creview_date)%2Clast_modified%2Creview_date)%20desc&ext_page_size=25'
+      uri: 'https://data.humdata.org/group/mli'
       title: ''
       options: {  }
   field_ical_url:
     -
-      value: 'https://ics.teamup.com/feed/ks52dg81acr9u8v2cs/0.ics'
+      value: 'https://ics.teamup.com/feed/ks52dg81acr9u8v2cs/11795103.ics'
   field_maps_infographics_link:
     -
-      uri: 'https://reliefweb.int/updates?view=maps&advanced-search=%28PC109%29_%28T4600.T4594%29_%28DA20230801-%29'
+      uri: 'https://reliefweb.int/updates?view=maps&advanced-search=%28PC149%29'
       title: ''
       options: {  }
   field_offices_page:
     -
-      uri: 'internal:/node/282199'
+      uri: 'internal:/node/282279/'
       title: ''
       options: {  }
   field_paragraphs:
@@ -131,16 +132,46 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 353663db-14a8-49b2-8a04-7059d692f250
-          bundle: text_block
-          default_langcode: en
+          uuid: 54f52fb1-dc23-4b3d-9b95-a0e6ff18988c
+          bundle: table_of_contents
+          default_langcode: fr
         default:
           status:
             -
               value: true
           created:
             -
-              value: 1666685440
+              value: 1696426370
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_title:
+            -
+              value: 'Table des matières'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: c461402c-d531-4598-a9dd-ee18a79575d1
+          bundle: text_block
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684226104
           behavior_settings:
             -
               value:
@@ -155,7 +186,7 @@ default:
               value: false
           field_text:
             -
-              value: "<ul>\r\n\t<li>This site is for demonstrating best practices for a RW Response site.</li>\r\n\t<li>It includes cluster and working group sites.</li>\r\n\t<li>In some instances, we have used content for Afghanistan to demonstrate particular features.&nbsp;</li>\r\n</ul>\r\n"
+              value: "<ul>\r\n\t<li>Ce site est utilisé pour démontrer les meilleures pratiques pour un site RW Response.</li>\r\n\t<li>Il comprend les sites des clusters et des groupes de travail.</li>\r\n\t<li>Entre parenthèses, vous pouvez voir le nom de chaque bloc de contenu</li>\r\n\t<li>Dans certains cas, nous avons utilisé du contenu pour le Mali&nbsp;pour démontrer des caractéristiques particulières.</li>\r\n</ul>\r\n"
               format: basic_html
           field_title:
             -
@@ -165,16 +196,16 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: e42aca36-24cf-49ce-97fd-21a650370d97
+          uuid: 45d0a2ac-4476-4f47-a2ed-8e629000f295
           bundle: heading
-          default_langcode: en
+          default_langcode: fr
         default:
           status:
             -
               value: true
           created:
             -
-              value: 1693589909
+              value: 1684226280
           behavior_settings:
             -
               value:
@@ -189,22 +220,22 @@ default:
               value: false
           field_title:
             -
-              value: 'Two Column Layout [Heading]'
+              value: 'Disposition en deux colonnes [Heading]'
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: af34bd47-e580-4a87-a11e-132a42bae023
+          uuid: 655c0fc3-0879-4caa-b2c4-e245f1912101
           bundle: card_list
-          default_langcode: en
+          default_langcode: fr
         default:
           status:
             -
               value: true
           created:
             -
-              value: 1681153532
+              value: 1684226582
           behavior_settings:
             -
               value:
@@ -223,16 +254,16 @@ default:
                 _meta:
                   version: '1.0'
                   entity_type: paragraph
-                  uuid: 5c16ea19-6df4-4b95-8fae-497710e4046b
+                  uuid: 377af3c4-b709-4fb7-b77a-5e49282c5bae
                   bundle: featured_highlight
-                  default_langcode: en
+                  default_langcode: fr
                 default:
                   status:
                     -
                       value: true
                   created:
                     -
-                      value: 1681153439
+                      value: 1684226449
                   behavior_settings:
                     -
                       value: {  }
@@ -247,38 +278,38 @@ default:
                       value: false
                   field_destination:
                     -
-                      uri: 'https://demo.response-reliefweb-int.ahconu.org/simulation-operation/dashboard-partner-presence'
+                      uri: 'https://reliefweb.int/updates?advanced-search=%28PC149%29_%28S1503%29_%28F3%29&search=Aper%C3%A7u%20des%20besoins%20humanitaires'
                       title: ''
                       options: {  }
                   field_image:
                     -
-                      entity: 08bea3f6-7a43-409e-8ad4-d51e43fd688f
-                      alt: 'enter descriptive text here: Afghanistan dashboard'
+                      entity: 130e623d-81df-494d-b083-faef1512ab83
+                      alt: 'Image du document'
                       title: ''
-                      width: 1302
-                      height: 711
+                      width: 480
+                      height: 240
                   field_text:
                     -
-                      value: "<p>This is a link to a page on the ReliefWeb Response website</p>\r\n"
+                      value: "<p>Les analyses conduites par des experts ont mis en évidence la persistance des conflits, de l’insécurité multiforme, des aléas climatiques (les inondations et sècheresses), les urgences épidémiologiques et environnementales.</p>\r\n"
                       format: basic_html
                   field_title:
                     -
-                      value: 'Dashboard [Card]'
+                      value: 'Aperçu des Besoins Humanitaires [Card]'
             -
               entity:
                 _meta:
                   version: '1.0'
                   entity_type: paragraph
-                  uuid: f687089d-4b36-4dd3-91cc-0c844a1a170d
+                  uuid: 91041219-563a-4c58-a2e0-20c5cf086aba
                   bundle: featured_highlight
-                  default_langcode: en
+                  default_langcode: fr
                 default:
                   status:
                     -
                       value: true
                   created:
                     -
-                      value: 1681153465
+                      value: 1684226485
                   behavior_settings:
                     -
                       value: {  }
@@ -293,38 +324,38 @@ default:
                       value: false
                   field_destination:
                     -
-                      uri: 'https://reliefweb.int/map/ukraine/ukraine-dnipro-city-reference-map-20-march-2023'
+                      uri: 'https://reliefweb.int/updates?advanced-search=%28PC149%29_%28S1503%29_%28F4%29'
                       title: ''
                       options: {  }
                   field_image:
                     -
-                      entity: 4201b04f-1046-47c1-b50a-d5049e3f2777
-                      alt: 'Ukraine Reference Map'
+                      entity: bc6f15e0-051c-48e0-90a9-e404922f78d8
+                      alt: 'image du document'
                       title: ''
-                      width: 1152
-                      height: 835
+                      width: 480
+                      height: 240
                   field_text:
                     -
-                      value: "<p>This is a link to a map on ReliefWeb</p>\r\n"
+                      value: "<p>En 2023, la situation humanitaire au Mali demeure très préoccupante en raison de la persistance de la crise multidimensionnelle affectant particulièrement le nord, le centre et l’ouest du pays.</p>\r\n"
                       format: basic_html
                   field_title:
                     -
-                      value: 'Ukraine: Map[Card]'
+                      value: 'Plan de réponse humanitaire [Card]'
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: b9a5ce48-877e-49cb-a086-f1b2b023d8be
+          uuid: 05824ec2-ec94-412c-aecd-2314f2c64af5
           bundle: text_block
-          default_langcode: en
+          default_langcode: fr
         default:
           status:
             -
               value: true
           created:
             -
-              value: 1678207925
+              value: 1684226759
           behavior_settings:
             -
               value:
@@ -339,26 +370,26 @@ default:
               value: false
           field_text:
             -
-              value: "<p>Join our list at this link:&nbsp;<a href=\"https://forms.office.com/e/XDPR0rpP1S\">https://forms.office.com/e/XDPR0rpP1S</a>&nbsp;or scan the QR code</p>\r\n\r\n<p><img alt=\"QR code\" data-entity-type=\"file\" data-entity-uuid=\"88bcb1e1-2795-4e07-808a-d615a22f8d2b\" height=\"205\" src=\"/sites/default/files/inline-images/QRCode%20for%20IMPACT%20Contact%20Form%20-%20Example.png\" width=\"205\" /></p>\r\n"
+              value: "<p>&nbsp;Rejoignez notre liste sur ce lien : https://forms.office.com/e/XDPR0rpP1S ou scannez le code QR&nbsp;</p>\r\n\r\n<p><img alt=\"Code QR\" data-entity-type=\"file\" data-entity-uuid=\"dd90315a-1e30-46ba-a9d9-9a1ed0ec4122\" height=\"329\" src=\"/sites/default/files/inline-images/QRCode%20for%20IMPACT%20Contact%20Form%20-%20Example_1.png\" width=\"329\" /></p>\r\n"
               format: basic_html
           field_title:
             -
-              value: 'Join the Contact List [Custom block]'
+              value: 'Rejoignez la liste de contacts [Custom block]'
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 0abb0931-5344-469f-9c1e-89a0ed01712f
+          uuid: f0110149-fa4e-466a-bf5a-04e2f0938ae5
           bundle: reliefweb_river
-          default_langcode: en
+          default_langcode: fr
         default:
           status:
             -
               value: true
           created:
             -
-              value: 1678139129
+              value: 1684226864
           behavior_settings:
             -
               value:
@@ -379,107 +410,27 @@ default:
               value: 3
           field_reliefweb_url:
             -
-              uri: 'https://reliefweb.int/updates?advanced-search=%28PC13%29_%28S1503%29'
+              uri: 'https://reliefweb.int/updates?advanced-search=%28PC149%29_%28S1503%29'
               title: ''
               options: {  }
-          field_text:
-            -
-              value: "<p>This is a ReliefWeb Feed block.&nbsp;</p>\r\n"
-              format: basic_html
           field_title:
             -
-              value: 'Latest OCHA Updates from ReliefWeb [ReliefWeb Feed]'
+              value: 'Dernières mises à jour OCHA de ReliefWeb [ReliefWeb Feed]'
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 2001ce2d-1e71-4ee0-bc7f-3c866f1bf742
-          bundle: reliefweb_document
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1693590140
-          behavior_settings:
-            -
-              value:
-                layout_paragraphs:
-                  parent_uuid: null
-                  region: null
-          content_translation_source:
-            -
-              value: und
-          content_translation_outdated:
-            -
-              value: false
-          field_hide_thumbnails:
-            -
-              value: false
-          field_reliefweb_url:
-            -
-              uri: 'https://reliefweb.int/report/world/guidance-note-data-responsibility-and-accountability-affected-people-humanitarian-action'
-              title: ''
-              options: {  }
-          field_title:
-            -
-              value: 'Guidance Note [ReliefWeb - Document]'
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 8ed8855c-f922-4829-ada4-6f43a7fcf2c1
-          bundle: reliefweb_document
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1693590189
-          behavior_settings:
-            -
-              value:
-                layout_paragraphs:
-                  parent_uuid: null
-                  region: null
-          content_translation_source:
-            -
-              value: und
-          content_translation_outdated:
-            -
-              value: false
-          field_hide_thumbnails:
-            -
-              value: true
-          field_reliefweb_url:
-            -
-              uri: 'https://reliefweb.int/report/ethiopia/inter-cluster-coordination-group-idp-returns-and-relocation-operational-guidance-and-assistance-package'
-              title: ''
-              options: {  }
-          field_title:
-            -
-              value: 'Operational Guidance and Assistance Package [ReliefWeb - Document]'
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 7780f4aa-7d9d-4b72-83fe-0b65d4460676
+          uuid: d3de61be-4aa3-4394-b988-3e57a4306b2d
           bundle: text_block
-          default_langcode: en
+          default_langcode: fr
         default:
           status:
             -
               value: true
           created:
             -
-              value: 1678139451
+              value: 1684227202
           behavior_settings:
             -
               value:
@@ -494,26 +445,26 @@ default:
               value: false
           field_text:
             -
-              value: "<p>View the CODs on the HDX website here:&nbsp;<a href=\"https://data.humdata.org/dataset/cod-ab-afg\">https://data.humdata.org/dataset/cod-ab-afg</a></p>\r\n"
+              value: "<p>Consultez les COD sur le site Web HDX ici : <a href=\"https://data.humdata.org/group/mli?cod_level=cod-standard&amp;cod_level=cod-enhanced\">https://data.humdata.org/group/mli?cod_level=cod-standard&amp;cod_level=cod-enhanced</a></p>\r\n"
               format: basic_html
           field_title:
             -
-              value: 'Custom Block - Link to Latest CODs [Custom block]'
+              value: 'Lien vers le CODs du pays [Custom block]'
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 2978edd2-a7cc-4cd7-8484-4d80622a6e46
+          uuid: fc661996-9327-4753-86c6-bd032617d3dd
           bundle: hdx_river
-          default_langcode: en
+          default_langcode: fr
         default:
           status:
             -
               value: true
           created:
             -
-              value: 1679062785
+              value: 1684227284
           behavior_settings:
             -
               value:
@@ -528,34 +479,34 @@ default:
               value: false
           field_hdx_url:
             -
-              uri: 'https://data.humdata.org/dataset?cod_level=cod-standard&cod_level=cod-enhanced&q=&sort=if(gt(last_modified%2Creview_date)%2Clast_modified%2Creview_date)%20desc&ext_page_size=25'
+              uri: 'https://data.humdata.org/group/mli?cod_level=cod-standard&cod_level=cod-enhanced'
               title: ''
               options: {  }
           field_max_number_of_items:
             -
-              value: 3
+              value: 2
           field_text:
             -
-              value: "<p>You can use the HDX Feed component to display of feed of datasets - such as CODs.&nbsp; All you need is the URL.&nbsp;</p>\r\n"
+              value: "<p>Vous pouvez utiliser le composant HDX Feed pour afficher le flux de données, tels que les CODs. Tout ce dont vous avez besoin est l'URL.</p>\r\n"
               format: basic_html
           field_title:
             -
-              value: 'Common Operational Datasets [HDX feed]'
+              value: 'CODs - [HDX feed]'
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 786c9666-dc5c-4dbb-aa66-e2b422084a30
+          uuid: d7067e25-67ba-4e74-8160-167440d75f37
           bundle: upcoming_events
-          default_langcode: en
+          default_langcode: fr
         default:
           status:
             -
               value: true
           created:
             -
-              value: 1678138949
+              value: 1684316608
           behavior_settings:
             -
               value:
@@ -570,22 +521,52 @@ default:
               value: false
           field_max_number_of_items:
             -
-              value: 3
-          field_text:
-            -
-              value: "<p>This is the upcoming events block.&nbsp;</p>\r\n"
-              format: basic_html
+              value: 5
           field_title:
             -
-              value: 'Upcoming events [Events - Upcoming]'
+              value: 'Evénements à venir'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e7b743c6-a3d8-4a72-a8f4-c198b25161a0
+          bundle: iframe
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1685983645
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_iframe_aspect_ratio:
+            -
+              value: ratio-auto
+          field_text:
+            -
+              value: "<p><iframe src=\"https://data.humdata.org/tools/quickcharts/show;url=https%3A%2F%2Fproxy.hxlstandard.org%2Fdata.csv%3Fdest%3Ddata_edit%26filter01%3Dcount%26count-type01-01%3Dsum%26count-pattern01-01%3D%2523value%252Bfunding%252Brequired%252Busd%26count-header01-01%3DSum%2BFunding%2BRequired%26count-column01-01%3D%2523value%252Bfunding%252Busd%252Blabel%26count-type01-02%3Dsum%26count-pattern01-02%3D%2523value%252Bfunding%252Btotal%252Busd%26count-header01-02%3DSum%2BFunding%2BTotal%26count-column01-02%3D%2523value%252Bfunding%252Busd%252Blabel%26filter02%3Dexplode%26explode-header-att02%3Dheader%26explode-value-att02%3Dvalue%26url%3Dhttps%253A%252F%252Fdata.humdata.org%252Fdataset%252F3ade4119-fa7c-476b-94a9-f001c6c8e7ba%252Fresource%252Fad246b9d-dcc2-44bf-9863-a57a745e6fcb%252Fdownload%252Ffts_requirements_funding_globalcluster_ukr.csv;embeddedSource=International%2520Organization%2520for%2520Migration%2520%2528IOM%2529;embeddedUrl=https%3A%2F%2Fdata.humdata.org%2Fdataset%2F4adf7874-ae01-46fd-a442-5fc6b3c9dff1;embeddedDate=undefined;embeddedConfig=%7B%22configVersion%22%3A5%2C%22bites%22%3A%5B%7B%22tempShowSaveCancelButtons%22%3Afalse%2C%22ingredient%22%3A%7B%22aggregateColumn%22%3A%22%23value%2Bfunding%2Busd%2Bheader%22%2C%22valueColumn%22%3A%22%23value%2Bfunding%2Busd%2Bvalue%22%2C%22aggregateFunction%22%3A%22sum%22%2C%22dateColumn%22%3Anull%2C%22comparisonValueColumn%22%3Anull%2C%22comparisonOperator%22%3Anull%2C%22filters%22%3A%7B%7D%2C%22title%22%3A%22%5BPie%5D%20Requirements%20and%20Funding%20for%20Latest%20Year%22%2C%22description%22%3A%22Comparative%20bar%20chart%20comparing%20requirements%20and%20funding%20for%20latest%20year%22%7D%2C%22type%22%3A%22chart%22%2C%22errorMsg%22%3Anull%2C%22computedProperties%22%3A%7B%22explainedFiltersMap%22%3A%7B%7D%2C%22pieChart%22%3Atrue%2C%22dataTitle%22%3A%22Sum%20Funding%20Required%22%7D%2C%22uiProperties%22%3A%7B%22swapAxis%22%3Atrue%2C%22showGrid%22%3Afalse%2C%22color%22%3A%22%231ebfb3%22%2C%22sortingByValue1%22%3Anull%2C%22sortingByCategory1%22%3Anull%2C%22internalColorPattern%22%3A%5B%22%231ebfb3%22%2C%22%230077ce%22%2C%22%23f2645a%22%2C%22%239C27B0%22%5D%7D%2C%22dataProperties%22%3A%7B%7D%2C%22displayCategory%22%3A%22Charts%22%2C%22hashCode%22%3A-817821579%2C%22_configOrder%22%3A0%7D%5D%7D;singleWidgetMode=true;embeddedTitle=Quick%20Charts;recipeUrl=https%3A%2F%2Fraw.githubusercontent.com%2FOCHA-DAP%2Fhxl-recipes%2F1.0.11%2Fcookbook-library.json;chartSettings=true;chartShare=true\" style=\"border:none; width:100%; min-height:500px\"></iframe></p>\r\n"
+              format: basic_html
   field_reliefweb_assessments:
     -
-      uri: 'https://reliefweb.int/updates?advanced-search=%28PC226.PC236.S8619.T4600%29_%28F5%29&search=%22cross-border%22+OR+%22northwest+syria%22+OR+%22north-west+syria%22+OR+%22northwest+of+syria%22'
+      uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28PC149%29'
       title: ''
       options: {  }
   field_reliefweb_documents:
     -
-      uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28PC180%29_%28S15477.S4145.S1275%29_%28T4595.T4593%29&'
+      uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28PC149%29'
       title: ''
       options: {  }
   field_sidebar_menu:
@@ -594,41 +575,35 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 1fa29bf8-6a0e-4081-b3ad-180048131a6e
+          uuid: d708c612-1417-4453-a3b5-fa889ba88278
           bundle: menu_block
-          default_langcode: en
+          default_langcode: fr
         default:
           status:
             -
               value: true
           created:
             -
-              value: 1666685265
+              value: 1684225953
           behavior_settings:
             -
               value:
                 layout_paragraphs:
                   parent_uuid: null
                   region: null
+          revision_translation_affected:
+            -
+              value: true
           content_translation_source:
             -
               value: und
           content_translation_outdated:
             -
               value: false
-          field_links:
+          field_text:
             -
-              uri: 'internal:/simulation-operation/simulation-health-cluster'
-              title: 'Simulation Health Cluster'
-              options: {  }
-            -
-              uri: 'https://demo.response-reliefweb-int.ahconu.org/simulation-operation/simulation-protection-cluster'
-              title: 'Simulation Protection Cluster'
-              options: {  }
-            -
-              uri: 'https://demo.response-reliefweb-int.ahconu.org/simulation-operation/simulation-wash-cluster'
-              title: 'Simulation WASH Cluster'
-              options: {  }
+              value: "<ul>\r\n\t<li><a href=\"https://demo.response-reliefweb-int.ahconu.org/operation-dexample/simulation-cluster-eau-assainissement-et-hygiene\">Eau, Assainissement et Hygiène</a></li>\r\n\t<li><a href=\"https://demo.response-reliefweb-int.ahconu.org/fr/operation-dexample/simulation-cluster-protection\">Protection</a></li>\r\n\t<li><a href=\"https://demo.response-reliefweb-int.ahconu.org/fr/operation-dexample/simulation-cluster-sante\">Santé</a></li>\r\n\t<li><a href=\"https://demo.response-reliefweb-int.ahconu.org/operation-dexample/simulation-cluster\">Cluster</a></li>\r\n</ul>\r\n"
+              format: basic_html
           field_title:
             -
               value: Clusters
@@ -637,16 +612,16 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: a98cc0fa-b1dd-4ae5-88ad-fca5e230a434
+          uuid: ba6d788a-8fca-4ca2-ac45-d4ca48830898
           bundle: menu_block
-          default_langcode: en
+          default_langcode: fr
         default:
           status:
             -
               value: true
           created:
             -
-              value: 1702021276
+              value: 1684225975
           behavior_settings:
             -
               value:
@@ -661,45 +636,11 @@ default:
               value: false
           field_text:
             -
-              value: '<ul><li><a href="https://demo.response-reliefweb-int.ahconu.org/simulation-operation/giha">GiHA</a></li></ul>'
+              value: "<ul>\r\n\t<li><a href=\"https://demo.response-reliefweb-int.ahconu.org/operation-dexample/tableau-de-bord\">Présence opérationelle</a></li>\r\n</ul>\r\n"
               format: basic_html
           field_title:
             -
-              value: 'Working Groups'
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 4ff6dc4e-b1c3-42ba-ad9f-474a026853f5
-          bundle: menu_block
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1673523259
-          behavior_settings:
-            -
-              value:
-                layout_paragraphs:
-                  parent_uuid: null
-                  region: null
-          content_translation_source:
-            -
-              value: und
-          content_translation_outdated:
-            -
-              value: false
-          field_text:
-            -
-              value: "<ul>\r\n\t<li><a href=\"https://demo.response-reliefweb-int.ahconu.org/simulation-operation/dashboard-partner-presence\">Humanitarian Partner Presence</a></li>\r\n</ul>\r\n"
-              format: basic_html
-          field_title:
-            -
-              value: Dashboard
+              value: 'Tableau de bord'
   subgroup_depth:
     -
       value: 0
@@ -708,7 +649,7 @@ default:
       value: 1
   subgroup_right:
     -
-      value: 12
+      value: 10
   subgroup_tree:
     -
-      value: 280897
+      value: 280972

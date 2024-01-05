@@ -33,7 +33,9 @@ default:
       value: true
   used_paragraphs:
     -
-      value: 'Iframe - Dashboard (1)'
+      value: 'Iframe - Dashboard (2)'
+    -
+      value: 'Table of Contents (1)'
   metatag:
     -
       tag: meta
@@ -63,8 +65,76 @@ default:
       value: false
   field_hide_sidebar:
     -
-      value: true
+      value: false
   field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 37ba3736-e9dc-438a-9289-186e09e5e54f
+          bundle: table_of_contents
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1701450177
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_title:
+            -
+              value: 'Table of Contents'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 4e803b9d-3f5e-47b1-a661-9ce299834c36
+          bundle: iframe
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1701450157
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_iframe_aspect_ratio:
+            -
+              value: ratio-16-9
+          field_iframe_url:
+            -
+              uri: 'https://teamup.com/kskn9apsetg1d4oj6o'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Calendar 1'
     -
       entity:
         _meta:
@@ -98,3 +168,6 @@ default:
           field_iframe_aspect_ratio:
             -
               value: ratio-16-9
+          field_title:
+            -
+              value: 'Calendar 2'

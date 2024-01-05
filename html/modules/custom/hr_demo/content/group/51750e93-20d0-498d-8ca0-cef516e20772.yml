@@ -1,16 +1,18 @@
 _meta:
   version: '1.0'
   entity_type: group
-  uuid: 89885589-b4e2-4463-8845-1d065a83ec4d
+  uuid: 51750e93-20d0-498d-8ca0-cef516e20772
   bundle: cluster
   default_langcode: en
   depends:
-    25145244-19e6-4574-b21f-c6dcd9b2912b: user
+    1f3121b6-478f-4e0b-ab2e-58a0e515ce26: user
     89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
+    726beae5-2ae7-4a38-9004-63bf96d2e24e: file
+    b07a6a90-b753-4f6b-8acb-a6e561fda045: file
 default:
   revision_user:
     -
-      entity: 25145244-19e6-4574-b21f-c6dcd9b2912b
+      entity: 1f3121b6-478f-4e0b-ab2e-58a0e515ce26
   status:
     -
       value: true
@@ -19,13 +21,13 @@ default:
       entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
   label:
     -
-      value: 'Simulation Health Cluster'
+      value: 'Simulation - Cluster'
   created:
     -
-      value: 1666685192
+      value: 1696428368
   path:
     -
-      alias: /simulation-operation/simulation-health-cluster
+      alias: /operation-dexample/simulation-cluster
       langcode: und
       pathauto: 0
   revision_translation_affected:
@@ -48,11 +50,15 @@ default:
       value: Pages
   used_paragraphs:
     -
-      value: 'Custom block (3)'
+      value: 'Card List (1)'
+    -
+      value: 'Custom block (1)'
+    -
+      value: 'Featured highlight (1)'
     -
       value: 'Iframe - Dashboard (1)'
     -
-      value: 'Menu - Links (1)'
+      value: 'ReliefWeb - Document (1)'
     -
       value: 'ReliefWeb - Feed (1)'
     -
@@ -87,17 +93,15 @@ default:
     -
       value: maps
     -
-      value: assessments
-    -
       value: offices
   field_maps_infographics_link:
     -
-      uri: 'https://reliefweb.int/updates?view=maps&advanced-search=%28S1275_S15477%29'
+      uri: 'https://reliefweb.int/updates?view=maps&advanced-search=%28PC75%29_%28S12989%29'
       title: ''
       options: {  }
   field_offices_page:
     -
-      uri: 'internal:/node/282200/'
+      uri: 'internal:/node/282301/'
       title: ''
       options: {  }
   field_paragraphs:
@@ -106,8 +110,8 @@ default:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 2550a725-a091-4920-9e1e-a5093086ebfc
-          bundle: text_block
+          uuid: 4461550c-342b-4ef8-948c-b38492fde335
+          bundle: table_of_contents
           default_langcode: en
         default:
           status:
@@ -115,41 +119,7 @@ default:
               value: true
           created:
             -
-              value: 1667214164
-          behavior_settings:
-            -
-              value:
-                layout_paragraphs:
-                  parent_uuid: null
-                  region: null
-          content_translation_source:
-            -
-              value: und
-          content_translation_outdated:
-            -
-              value: false
-          field_text:
-            -
-              value: "<div class=\"field field--name-field-text field--type-text-long field--label-hidden field__item\">\r\n<ul>\r\n\t<li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>\r\n\t<li>Aliquam tincidunt mauris eu risus.</li>\r\n\t<li>Vestibulum auctor dapibus neque.</li>\r\n\t<li>Nunc dignissim risus id metus.</li>\r\n</ul>\r\n</div>\r\n"
-              format: basic_html
-          field_title:
-            -
-              value: Introduction
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: f352e3d4-7480-48c9-b4a6-bf47065a4652
-          bundle: text_block
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1678199759
+              value: 1697107304
           behavior_settings:
             -
               value:
@@ -165,20 +135,16 @@ default:
           content_translation_outdated:
             -
               value: false
-          field_text:
-            -
-              value: "<p><iframe allowfullscreen=\"true\" frameborder=\"0\" height=\"800\" name=\"604d68f3-d9ca-4e6d-a0e2-45d2e85ef98e\" src=\"https://app.powerbi.com/view?r=eyJrIjoiMjNhOWQwYjktMjUzYS00MmJlLTlhMGEtZjliZmEwMGI0ZmI2IiwidCI6ImY2MTBjMGI3LWJkMjQtNGIzOS04MTBiLTNkYzI4MGFmYjU5MCIsImMiOjh9\" title=\"ReliefWeb Response Health Cluster\" width=100%></iframe></p>\r\n"
-              format: basic_html
           field_title:
             -
-              value: Documents
+              value: 'Table des matières'
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: d9525986-db9e-4d69-92f8-68b90e781e9c
-          bundle: iframe
+          uuid: ddddcc41-b0d3-4b81-a5df-e28d5598a293
+          bundle: card_list
           default_langcode: en
         default:
           status:
@@ -186,7 +152,7 @@ default:
               value: true
           created:
             -
-              value: 1667214207
+              value: 1697107184
           behavior_settings:
             -
               value:
@@ -199,23 +165,177 @@ default:
           content_translation_outdated:
             -
               value: false
-          field_iframe_aspect_ratio:
+          field_paragraphs:
             -
-              value: ratio-4-3
-          field_iframe_url:
-            -
-              uri: 'https://extranet.who.int/publicemergency'
-              title: ''
-              options: {  }
-          field_title:
-            -
-              value: Overview
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: da1735ae-0eaa-4b91-8ea6-66e366e3ba2a
+                  bundle: featured_highlight
+                  default_langcode: en
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1697107184
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_destination:
+                    -
+                      uri: 'https://demo.response-reliefweb-int.ahconu.org/operation-dexample/simulation-cluster/tableau-de-bord'
+                      title: ''
+                      options: {  }
+                  field_image:
+                    -
+                      entity: 726beae5-2ae7-4a38-9004-63bf96d2e24e
+                      alt: image
+                      title: ''
+                      width: 1389
+                      height: 861
+                  field_text:
+                    -
+                      value: "<p>text</p>\r\n"
+                      format: basic_html
+                  field_title:
+                    -
+                      value: 'Card list'
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: 1be4e013-58d9-4eeb-aba8-ec0ec5b933bb
+          uuid: d82a7a0b-6ed7-4b26-90fd-b1671816e6ef
+          bundle: featured_highlight
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697107247
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_destination:
+            -
+              uri: 'https://demo.response-reliefweb-int.ahconu.org/operation-dexample/simulation-cluster/tableau-de-bord'
+              title: ''
+              options: {  }
+          field_image:
+            -
+              entity: b07a6a90-b753-4f6b-8acb-a6e561fda045
+              alt: image
+              title: ''
+              width: 1389
+              height: 861
+          field_text:
+            -
+              value: "<p>text</p>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'featured highlight'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ebec849e-92c8-4224-81a3-120c416ba53d
+          bundle: text_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697106699
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<p><img alt=\"logo\" data-entity-type=\"file\" data-entity-uuid=\"78998166-c893-4056-b90a-01a2de1e2f52\" height=\"72\" src=\"/sites/default/files/inline-images/Mali%20Cash%20Logo_1.png\" width=\"163\" /></p>\r\n\r\n<p>text</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<ul>\r\n\t<li><a href=\"https://response.reliefweb.int/\">item1</a></li>\r\n\t<li>item2</li>\r\n</ul>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: Description
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 82013897-bb64-47cb-a33c-7e6300be4266
+          bundle: reliefweb_document
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697106841
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_hide_thumbnails:
+            -
+              value: false
+          field_reliefweb_url:
+            -
+              uri: 'https://reliefweb.int/report/democratic-republic-congo/session-dinformation-nomination-ong-reseau-femmes-au-sein-du-ehp'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Document cles'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 4570b1cd-da24-4592-9c84-0c38592a8f37
           bundle: reliefweb_river
           default_langcode: en
         default:
@@ -224,7 +344,7 @@ default:
               value: true
           created:
             -
-              value: 1667214258
+              value: 1697106945
           behavior_settings:
             -
               value:
@@ -245,19 +365,19 @@ default:
               value: 3
           field_reliefweb_url:
             -
-              uri: 'https://reliefweb.int/updates?advanced-search=%28S1275%29_%28F4%29'
+              uri: 'https://reliefweb.int/updates?advanced-search=%28PC75%29_%28S12989%29'
               title: ''
               options: {  }
           field_title:
             -
-              value: 'Appeals and Response Plans'
+              value: 'Dernières mises à jour'
     -
       entity:
         _meta:
           version: '1.0'
           entity_type: paragraph
-          uuid: b07fea5f-24cd-4350-823f-f1f020b0d8f3
-          bundle: text_block
+          uuid: 2cf953f4-4aed-4bac-9755-8e9f0b9b4759
+          bundle: iframe
           default_langcode: en
         default:
           status:
@@ -265,7 +385,7 @@ default:
               value: true
           created:
             -
-              value: 1667214282
+              value: 1697107041
           behavior_settings:
             -
               value:
@@ -278,100 +398,38 @@ default:
           content_translation_outdated:
             -
               value: false
+          field_iframe_aspect_ratio:
+            -
+              value: ratio-16-9
+          field_iframe_url:
+            -
+              uri: 'https://app.powerbi.com/view?r=eyJrIjoiZDdkNjg4YmMtZjBkYy00NzBhLTlhYmQtZmRkYmMxNTNjZmYwIiwidCI6IjBmOWUzNWRiLTU0NGYtNGY2MC1iZGNjLTVlYTQxNmU2ZGM3MCIsImMiOjh9'
+              title: ''
+              options: {  }
           field_text:
             -
-              value: "<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.<br />\r\nAliquam tincidunt mauris eu risus.<br />\r\nVestibulum auctor dapibus neque.<br />\r\nNunc dignissim risus id metus.</p>\r\n"
+              value: "<p>description</p>\r\n"
               format: basic_html
           field_title:
             -
-              value: 'Useful Links'
-  field_reliefweb_assessments:
-    -
-      uri: 'https://reliefweb.int/updates?advanced-search=%28S1275_S15477%29_%28F5%29'
-      title: ''
-      options: {  }
+              value: 'tableau de bord'
   field_reliefweb_documents:
     -
-      uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28S1275_S15477%29'
+      uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28PC75%29_%28S12989%29'
       title: ''
       options: {  }
   field_sidebar_from_operation:
     -
-      value: false
-  field_sidebar_menu:
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 995f6668-d184-429d-8c41-656813dfc0e0
-          bundle: table_of_contents
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1667228678
-          behavior_settings:
-            -
-              value:
-                layout_paragraphs:
-                  parent_uuid: null
-                  region: null
-          content_translation_source:
-            -
-              value: und
-          content_translation_outdated:
-            -
-              value: false
-          field_title:
-            -
-              value: 'Table of Contents'
-    -
-      entity:
-        _meta:
-          version: '1.0'
-          entity_type: paragraph
-          uuid: 4b680bb0-448a-4820-aa34-3887328b81b6
-          bundle: menu_block
-          default_langcode: en
-        default:
-          status:
-            -
-              value: true
-          created:
-            -
-              value: 1677857048
-          behavior_settings:
-            -
-              value:
-                layout_paragraphs:
-                  parent_uuid: null
-                  region: null
-          content_translation_source:
-            -
-              value: und
-          content_translation_outdated:
-            -
-              value: false
-          field_text:
-            -
-              value: "<ul>\r\n\t<li><a href=\"https://demo.response-reliefweb-int.ahconu.org/simulation-operation/simulation-health-cluster/simulation-health-dashboard\">Health Dashboard</a></li>\r\n</ul>\r\n"
-              format: basic_html
-          field_title:
-            -
-              value: Pages
+      value: true
   subgroup_depth:
     -
       value: 1
   subgroup_left:
     -
-      value: 2
+      value: 8
   subgroup_right:
     -
-      value: 3
+      value: 9
   subgroup_tree:
     -
-      value: 280897
+      value: 280972

@@ -1,0 +1,29 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ad224c5b-0439-421c-b226-ec9423147e95
+  default_langcode: en
+  depends:
+    1f3121b6-478f-4e0b-ab2e-58a0e515ce26: user
+default:
+  uid:
+    -
+      entity: 1f3121b6-478f-4e0b-ab2e-58a0e515ce26
+  filename:
+    -
+      value: 'Carte cle.png'
+  uri:
+    -
+      value: 'public://2023-10/Carte cle.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 917071
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1696494882

@@ -35,4 +35,29 @@ function hr_demo_modules_installed($modules) {
     $cluster = reset($clusters);
     $operation->addRelationship($cluster, 'subgroup:' . $cluster->bundle());
   }
+
+  // French demo content.
+  $operations = \Drupal::entityTypeManager()->getStorage('group')->loadByProperties([
+    'uuid' => 'fa14bcf3-2293-4023-80e5-32ecbbc6f494',
+  ]);
+
+  /** @var \Drupal\group\Entity\Group $operation */
+  $operation = reset($operations);
+
+  $cluster_uuids = [
+    '9ef9a699-e5a7-44a8-a982-6a460bf50156',
+    'fb2bd002-859d-457d-8e3b-46efcf473c43',
+    'aa23460d-f95e-48e8-adfe-8f216b545ed2',
+    '51750e93-20d0-498d-8ca0-cef516e20772',
+  ];
+
+  foreach ($cluster_uuids as $cluster_uuid) {
+    $clusters = \Drupal::entityTypeManager()->getStorage('group')->loadByProperties([
+      'uuid' => $cluster_uuid,
+    ]);
+
+    /** @var \Drupal\group\Entity\Group $cluster */
+    $cluster = reset($clusters);
+    $operation->addRelationship($cluster, 'subgroup:' . $cluster->bundle());
+  }
 }
