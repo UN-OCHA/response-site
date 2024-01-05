@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: group_content
+  uuid: ba0c2862-4d2e-4d22-b6df-dac994943b08
+  bundle: operation-group_node-page
+  default_langcode: en
+  depends:
+    89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
+    fa14bcf3-2293-4023-80e5-32ecbbc6f494: group
+    68a5f289-a143-41eb-8c82-ba14c11b1475: node
+default:
+  uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  gid:
+    -
+      entity: fa14bcf3-2293-4023-80e5-32ecbbc6f494
+  entity_id:
+    -
+      entity: 68a5f289-a143-41eb-8c82-ba14c11b1475
+  label:
+    -
+      value: "Opération d'example Contacts Clés"
+  created:
+    -
+      value: 1684227361
+  plugin_id:
+    -
+      value: 'group_node:page'
+  group_type:
+    -
+      target_id: operation
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/node/1'

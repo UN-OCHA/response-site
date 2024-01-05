@@ -1,0 +1,101 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 8509330d-c6c1-410f-beda-80f928d16948
+  bundle: page
+  default_langcode: en
+  depends:
+    89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
+default:
+  revision_uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  title:
+    -
+      value: "Opération d'example Cluster Santé COntact Cles"
+  created:
+    -
+      value: 1684231159
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  used_paragraphs:
+    -
+      value: 'Custom block (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: "Opération d'example Cluster Santé COntact Cles | test"
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'This page brings together locally, curated information for humanitarians to improve communication and collaboration during an emergency response.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/operation-dexample/simulation-cluster-sante/operation-dexample-cluster-sante-contact-cles'
+  path:
+    -
+      alias: /operation-dexample/simulation-cluster-sante/operation-dexample-cluster-sante-contact-cles
+      langcode: und
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_hide_sidebar:
+    -
+      value: false
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 6f0d2c38-5d38-4bee-b44b-ce7503564e0e
+          bundle: text_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684231319
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<p><strong>Coordinateur du cluster</strong><br />\r\nNom : example<br />\r\nEmail : example<br />\r\nTéléohone : example</p>\r\n\r\n<p><strong>IMO du cluster</strong><br />\r\nNom : example<br />\r\nEmail : example<br />\r\nTéléohone : example</p>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'Poits Focaux [Custom block]'

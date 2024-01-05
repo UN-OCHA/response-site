@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: group_content
+  uuid: 0c661fa7-7a2c-4763-821c-312567a9b6c4
+  bundle: cluster-group_node-page
+  default_langcode: en
+  depends:
+    1f3121b6-478f-4e0b-ab2e-58a0e515ce26: user
+    51750e93-20d0-498d-8ca0-cef516e20772: group
+    a8828a93-f11b-4146-a158-a14e31d3b9ce: node
+default:
+  uid:
+    -
+      entity: 1f3121b6-478f-4e0b-ab2e-58a0e515ce26
+  gid:
+    -
+      entity: 51750e93-20d0-498d-8ca0-cef516e20772
+  entity_id:
+    -
+      entity: a8828a93-f11b-4146-a158-a14e31d3b9ce
+  label:
+    -
+      value: 'Tableau de bord'
+  created:
+    -
+      value: 1697106441
+  plugin_id:
+    -
+      value: 'group_node:page'
+  group_type:
+    -
+      target_id: cluster
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/node/1'

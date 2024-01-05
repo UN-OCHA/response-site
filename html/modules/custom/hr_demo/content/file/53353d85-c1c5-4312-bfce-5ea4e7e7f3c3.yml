@@ -1,0 +1,29 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 53353d85-c1c5-4312-bfce-5ea4e7e7f3c3
+  default_langcode: en
+  depends:
+    1f3121b6-478f-4e0b-ab2e-58a0e515ce26: user
+default:
+  uid:
+    -
+      entity: 1f3121b6-478f-4e0b-ab2e-58a0e515ce26
+  filename:
+    -
+      value: 'Doc cle.png'
+  uri:
+    -
+      value: 'public://2023-10/Doc cle.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 434188
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1696495037

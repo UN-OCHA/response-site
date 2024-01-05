@@ -1,0 +1,105 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 9408b592-dc64-42b1-a37f-14ffc95798a9
+  bundle: page
+  default_langcode: en
+  depends:
+    89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
+default:
+  revision_uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  title:
+    -
+      value: 'Tableau de bord'
+  created:
+    -
+      value: 1684228274
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  used_paragraphs:
+    -
+      value: 'Iframe - Dashboard (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: 'Tableau de bord | test'
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'This page brings together locally, curated information for humanitarians to improve communication and collaboration during an emergency response.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/operation-dexample/tableau-de-bord'
+  path:
+    -
+      alias: /operation-dexample/tableau-de-bord
+      langcode: und
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_hide_sidebar:
+    -
+      value: true
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f39efb3e-2e92-43c7-ad4f-3680312d5bda
+          bundle: iframe
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684228326
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_iframe_aspect_ratio:
+            -
+              value: ratio-16-9
+          field_iframe_url:
+            -
+              uri: 'https://app.powerbi.com/view?r=eyJrIjoiZjMwYTgzZDktZjA5Mi00NTVhLTliMzQtNzQ2Mzk5YjM2NWMzIiwidCI6IjBmOWUzNWRiLTU0NGYtNGY2MC1iZGNjLTVlYTQxNmU2ZGM3MCIsImMiOjh9'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Présence opérationelle [Iframe- dashboard]'

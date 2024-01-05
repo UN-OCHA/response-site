@@ -432,3 +432,15 @@ default:
           field_title:
             -
               value: 'Custom menu'
+  subgroup_depth:
+    -
+      value: 1
+  subgroup_left:
+    -
+      value: 6
+  subgroup_right:
+    -
+      value: 7
+  subgroup_tree:
+    -
+      value: 280897
