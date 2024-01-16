@@ -1,0 +1,29 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 130e623d-81df-494d-b083-faef1512ab83
+  default_langcode: en
+  depends:
+    89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
+default:
+  uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  filename:
+    -
+      value: 'Mali_HNO 2023 01.png'
+  uri:
+    -
+      value: 'public://2023-05/Mali_HNO 2023 01.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 164488
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1684226449

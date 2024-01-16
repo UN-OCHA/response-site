@@ -1,0 +1,101 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 534c9f46-a6c7-478e-ad49-53003a8bdf36
+  bundle: page
+  default_langcode: en
+  depends:
+    1f3121b6-478f-4e0b-ab2e-58a0e515ce26: user
+default:
+  revision_uid:
+    -
+      entity: 1f3121b6-478f-4e0b-ab2e-58a0e515ce26
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 1f3121b6-478f-4e0b-ab2e-58a0e515ce26
+  title:
+    -
+      value: "Opération d'example  Simulation - Cluster Contacts Cles"
+  created:
+    -
+      value: 1696491486
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  used_paragraphs:
+    -
+      value: 'Custom block (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: "Opération d'example Simulation - Cluster Contacts Cles | test"
+    -
+      tag: meta
+      attributes:
+        name: description
+        content: 'This page brings together locally, curated information for humanitarians to improve communication and collaboration during an emergency response.'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/operation-dexample/simulation-cluster/operation-dexample-simulation-cluster-contacts-cles'
+  path:
+    -
+      alias: /operation-dexample/simulation-cluster/operation-dexample-simulation-cluster-contacts-cles
+      langcode: und
+      pathauto: 0
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_hide_sidebar:
+    -
+      value: false
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 26f5a08a-e363-4945-9129-55aafb7eb18e
+          bundle: text_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1697107361
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<p>Point focal</p>\r\n\r\n<p>telephone</p>\r\n\r\n<p>email</p>\r\n"
+              format: basic_html

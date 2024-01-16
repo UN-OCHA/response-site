@@ -7,6 +7,7 @@
 
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\node\Entity\Node;
+use Drupal\user\Entity\User;
 
 /**
  * Change content type to page.
@@ -225,5 +226,41 @@ function hr_paragraphs_update_9016() {
   foreach ($storage_definitions as $field_name => $storage_definition) {
     \Drupal::entityDefinitionUpdateManager()
       ->installFieldStorageDefinition($field_name, 'linkcheckerlink', 'linkcheckerlink', $storage_definition);
+  }
+}
+
+/**
+ * Remove admins and global editors from groups.
+ */
+function hr_paragraphs_update_9017() {
+  $roles = [
+    'administrator',
+    'global_editor',
+  ];
+
+  $query = \Drupal::entityQuery('user')
+    ->accessCheck(FALSE)
+    ->condition('roles', $roles, 'IN');
+
+  $uids = $query->execute();
+
+  // Add admin role.
+  $uids[1] = "1";
+
+  if (!empty($uids)) {
+    /** @var \Drupal\group\GroupMembershipLoaderInterface */
+    $group_membership_service = \Drupal::service('group.membership_loader');
+
+    foreach ($uids as $uid) {
+      /** @var \Drupal\user\Entity\User */
+      $user = User::load($uid);
+
+      $memberships = $group_membership_service->loadByUser($user);
+      if (!empty($memberships)) {
+        foreach ($memberships as $membership) {
+          $membership->getGroup()->removeMember($user);
+        }
+      }
+    }
   }
 }

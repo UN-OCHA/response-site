@@ -1,0 +1,29 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: c1e28e0d-110e-4278-a004-4084d48d4307
+  default_langcode: en
+  depends:
+    89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
+default:
+  uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  filename:
+    -
+      value: 'protection card 2.png'
+  uri:
+    -
+      value: 'public://2023-10/protection card 2.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 656019
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1697621021

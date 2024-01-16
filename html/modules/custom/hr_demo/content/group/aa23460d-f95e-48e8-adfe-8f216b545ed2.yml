@@ -1,0 +1,263 @@
+_meta:
+  version: '1.0'
+  entity_type: group
+  uuid: aa23460d-f95e-48e8-adfe-8f216b545ed2
+  bundle: cluster
+  default_langcode: en
+  depends:
+    89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
+default:
+  revision_user:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  label:
+    -
+      value: 'Simulation - Cluster Eau, Assainissement et Hygiène'
+  created:
+    -
+      value: 1684228563
+  path:
+    -
+      alias: /operation-dexample/simulation-cluster-eau-assainissement-et-hygiene
+      langcode: und
+      pathauto: 0
+  revision_translation_affected:
+    -
+      value: true
+  enabled_tabs:
+    -
+      value: Reports
+    -
+      value: Maps
+    -
+      value: Assessments
+    -
+      value: Datasets
+    -
+      value: Events
+    -
+      value: Contacts
+    -
+      value: Pages
+  used_paragraphs:
+    -
+      value: 'Custom block (2)'
+    -
+      value: 'Iframe - Dashboard (1)'
+    -
+      value: 'ReliefWeb - Document (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/node/1'
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_archive_group:
+    -
+      value: false
+  field_archive_message:
+    -
+      value: "<p>This Cluster / Working group has been archived</p>\r\n"
+      format: basic_html
+  field_enabled_tabs:
+    -
+      value: documents
+    -
+      value: maps
+    -
+      value: offices
+  field_maps_infographics_link:
+    -
+      uri: 'https://reliefweb.int/updates?view=maps&advanced-search=%28PC149%29_%28T4604%29'
+      title: ''
+      options: {  }
+  field_offices_page:
+    -
+      uri: 'internal:/node/282283/'
+      title: ''
+      options: {  }
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: f3b9cccf-0d17-4213-acaa-aad73f7e5f28
+          bundle: text_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684232753
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<p><img alt=\"logo\" data-align=\"left\" data-entity-type=\"file\" data-entity-uuid=\"8e1528f0-e3a0-422b-bd3c-a2458c796113\" height=\"81\" src=\"/sites/default/files/inline-images/gwc_logo_mali.png\" width=\"226\" />Depuis 2012, le&nbsp;<strong>Cluster Eau, Hygiène et Assainissement</strong>&nbsp;est géré en partenariat avec la Direction Nationale de l’Hydraulique (DNH), Solidarités Internationale et l'Unicef.</p>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: '[Custom block]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 8463806b-11f8-490d-bd6c-44969c508bf6
+          bundle: reliefweb_document
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684232834
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_hide_thumbnails:
+            -
+              value: false
+          field_reliefweb_url:
+            -
+              uri: 'https://reliefweb.int/report/mali/termes-de-r-f-rence-du-cluster-wash-au-mali'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Documents de base du cluster [ReliefWeb document]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 436f8aa6-2e79-4391-ab8b-e5b3a63db0e7
+          bundle: iframe
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684316848
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_iframe_aspect_ratio:
+            -
+              value: ratio-16-9
+          field_iframe_url:
+            -
+              uri: 'https://teamup.com/c/fhyip2/sample-operation?tz=Africa%2FLagos&view=M&keywords=WASH'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Evénements à venir'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 872f53b4-f8e3-419a-a7f1-d4d75a4edb6d
+          bundle: text_block
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684232868
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<p>Toutes les ressources (documents, infographies, publications, etc.) du Cluster en cliquant sur&nbsp;<strong><a href=\"https://drive.google.com/drive/folders/1ympjz-GzW3nup8EYaS0YftKmlgY2L_Hw?usp=sharing\">Ressources du Cluster WASH au Mali</a></strong></p>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'Ressources du Cluster'
+  field_reliefweb_documents:
+    -
+      uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28PC149%29_%28T4604%29'
+      title: ''
+      options: {  }
+  field_sidebar_from_operation:
+    -
+      value: true
+  subgroup_depth:
+    -
+      value: 1
+  subgroup_left:
+    -
+      value: 6
+  subgroup_right:
+    -
+      value: 7
+  subgroup_tree:
+    -
+      value: 280972

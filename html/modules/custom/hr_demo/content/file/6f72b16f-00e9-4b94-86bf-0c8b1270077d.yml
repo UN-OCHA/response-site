@@ -1,0 +1,29 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 6f72b16f-00e9-4b94-86bf-0c8b1270077d
+  default_langcode: en
+  depends:
+    1f3121b6-478f-4e0b-ab2e-58a0e515ce26: user
+default:
+  uid:
+    -
+      entity: 1f3121b6-478f-4e0b-ab2e-58a0e515ce26
+  filename:
+    -
+      value: 'Tableau de bord interactif_0.png'
+  uri:
+    -
+      value: 'public://2023-10/Tableau de bord interactif_0.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 394430
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1696495414

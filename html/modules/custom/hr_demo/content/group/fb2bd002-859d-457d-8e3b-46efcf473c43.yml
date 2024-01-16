@@ -1,0 +1,553 @@
+_meta:
+  version: '1.0'
+  entity_type: group
+  uuid: fb2bd002-859d-457d-8e3b-46efcf473c43
+  bundle: cluster
+  default_langcode: fr
+  depends:
+    1f3121b6-478f-4e0b-ab2e-58a0e515ce26: user
+    89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
+    53353d85-c1c5-4312-bfce-5ea4e7e7f3c3: file
+    ad224c5b-0439-421c-b226-ec9423147e95: file
+    6f72b16f-00e9-4b94-86bf-0c8b1270077d: file
+default:
+  revision_user:
+    -
+      entity: 1f3121b6-478f-4e0b-ab2e-58a0e515ce26
+  status:
+    -
+      value: true
+  uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  label:
+    -
+      value: 'Simulation - Cluster Protection'
+  created:
+    -
+      value: 1684228524
+  path:
+    -
+      alias: /operation-dexample/simulation-cluster-protection
+      langcode: und
+      pathauto: 0
+  revision_translation_affected:
+    -
+      value: true
+  enabled_tabs:
+    -
+      value: Reports
+    -
+      value: Maps
+    -
+      value: Assessments
+    -
+      value: Datasets
+    -
+      value: Events
+    -
+      value: Contacts
+    -
+      value: Pages
+  used_paragraphs:
+    -
+      value: 'Card List (1)'
+    -
+      value: 'Custom block (2)'
+    -
+      value: 'Featured highlight (1)'
+    -
+      value: 'Iframe - Dashboard (1)'
+    -
+      value: 'ReliefWeb - Document (1)'
+    -
+      value: 'ReliefWeb - Feed (2)'
+    -
+      value: 'Table of Contents (1)'
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/fr/node/1'
+  content_translation_source:
+    -
+      value: und
+  content_translation_outdated:
+    -
+      value: false
+  field_archive_group:
+    -
+      value: false
+  field_archive_message:
+    -
+      value: "<p>This Cluster / Working group has been archived</p>\r\n"
+      format: basic_html
+  field_enabled_tabs:
+    -
+      value: documents
+    -
+      value: maps
+    -
+      value: offices
+  field_maps_infographics_link:
+    -
+      uri: 'https://reliefweb.int/updates?view=maps&advanced-search=%28PC149%29_%28T4600%29'
+      title: ''
+      options: {  }
+  field_offices_page:
+    -
+      uri: 'internal:/node/282282/'
+      title: ''
+      options: {  }
+  field_paragraphs:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 060be5e9-e0ac-4e1d-98b2-942a1c209465
+          bundle: table_of_contents
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684232348
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_title:
+            -
+              value: 'Table de matieres'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 7389cc09-684d-441d-baff-3dab2ce9bac9
+          bundle: text_block
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684231710
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<p>Le Cluster Protection (CP) a été activé en avril 2012 pour répondre aux besoins humanitaires de protection des personnes affectées (personnes déplacées internes et retournées, personnes rapatriées, et communautés hôtes) dans le cadre des crises résultant des conflits armés et/ou catastrophes naturelles. Depuis 2012, le Cluster Protection coordonne les activités de prévention et de réponse aux risques de protection et aux violations des droits humains et du droit international humanitaire en soutien aux autorités maliennes.</p>\r\n\r\n<p><strong>Composition</strong></p>\r\n\r\n<ul>\r\n\t<li>Cluster Protection, lead UNHCR</li>\r\n\t<li>Sous Cluster Violence Basée sur le Genre (SCVBG), lead UNFPA</li>\r\n\t<li>Sous Cluster Protection de l’Enfance (SCPE), lead UNICEF</li>\r\n\t<li>Commission Mouvement des Populations (CMP), lead DNDS/OIM</li>\r\n\t<li>Groupe Thématique Lutte Anti-Mine Humanitaire (GT-LAMH), lead UNMAS</li>\r\n</ul>\r\n\r\n<p><a href=\"https://reliefweb.int/report/democratic-republic-congo/terme-de-reference-retraite-du-cluster-protection-en-republique-democratique-du-congo-11-et-12-juin-2019-goma-rdc\">Terme de référence</a></p>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'Mandat du Cluster Protection [Custom block]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 9d8e467a-e6e6-438c-95e6-e20fec72a604
+          bundle: reliefweb_document
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684231923
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_hide_thumbnails:
+            -
+              value: false
+          field_reliefweb_url:
+            -
+              uri: 'https://reliefweb.int/report/mali/covid-19-strat-gie-d-intervention-pour-le-cluster-protection-et-ses-sous-clusters'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Documents Clés [ReliefWeb document]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 07a3e2ee-7994-4df0-ae90-c17384150f5d
+          bundle: card_list
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1696495048
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_paragraphs:
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 1adab86b-209e-423e-b2fc-17b0360494ff
+                  bundle: featured_highlight
+                  default_langcode: fr
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1696494971
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_destination:
+                    -
+                      uri: 'https://reliefweb.int/report/democratic-republic-congo/republique-democratique-du-congo-points-saillants-de-protection-avril-mai-2023'
+                      title: ''
+                      options: {  }
+                  field_image:
+                    -
+                      entity: 53353d85-c1c5-4312-bfce-5ea4e7e7f3c3
+                      alt: ''
+                      title: ''
+                      width: 1339
+                      height: 829
+                  field_text:
+                    -
+                      value: "<p>&nbsp;&nbsp;</p>\r\n"
+                      format: basic_html
+                  field_title:
+                    -
+                      value: 'Points Saillants de Protection'
+            -
+              entity:
+                _meta:
+                  version: '1.0'
+                  entity_type: paragraph
+                  uuid: 30ea3cc6-a4f7-431e-96c1-222d5b364076
+                  bundle: featured_highlight
+                  default_langcode: fr
+                default:
+                  status:
+                    -
+                      value: true
+                  created:
+                    -
+                      value: 1696494882
+                  behavior_settings:
+                    -
+                      value: {  }
+                  revision_translation_affected:
+                    -
+                      value: true
+                  content_translation_source:
+                    -
+                      value: und
+                  content_translation_outdated:
+                    -
+                      value: false
+                  field_destination:
+                    -
+                      uri: 'https://reliefweb.int/map/democratic-republic-congo/rd-congo-global-pour-3-provinces-et-sud-kivu-acces-humanitaire-et-protection-personnes-dans-le-besoin-et-ciblees-21-avril-2023'
+                      title: ''
+                      options: {  }
+                  field_image:
+                    -
+                      entity: ad224c5b-0439-421c-b226-ec9423147e95
+                      alt: carte
+                      title: ''
+                      width: 1167
+                      height: 951
+                  field_text:
+                    -
+                      value: "<p>&nbsp; &nbsp;</p>\r\n"
+                      format: basic_html
+                  field_title:
+                    -
+                      value: 'Cartes cles'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 3a484523-2bd7-4b83-8c28-e55b2eeaaede
+          bundle: iframe
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684232120
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_iframe_aspect_ratio:
+            -
+              value: ratio-16-9
+          field_iframe_url:
+            -
+              uri: 'https://app.powerbi.com/view?r=eyJrIjoiZDE2NDBkMjQtZTUyZC00OGNmLTkzMDAtOWJlZmQxM2FlZTdlIiwidCI6ImU1YzM3OTgxLTY2NjQtNDEzNC04YTBjLTY1NDNkMmFmODBiZSIsImMiOjh9'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Monitoring de protection [Iframe - dashboard]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: ee149346-4217-4d67-848e-7e55356d046d
+          bundle: featured_highlight
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1696495576
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          revision_translation_affected:
+            -
+              value: true
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_destination:
+            -
+              uri: 'https://app.powerbi.com/view?r=eyJrIjoiZDE2NDBkMjQtZTUyZC00OGNmLTkzMDAtOWJlZmQxM2FlZTdlIiwidCI6ImU1YzM3OTgxLTY2NjQtNDEzNC04YTBjLTY1NDNkMmFmODBiZSIsImMiOjh9'
+              title: ''
+              options: {  }
+          field_image:
+            -
+              entity: 6f72b16f-00e9-4b94-86bf-0c8b1270077d
+              alt: tableu
+              title: ''
+              width: 1715
+              height: 927
+          field_text:
+            -
+              value: "<p>Mise en avant du tableau de bord a travers de image + lien</p>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'Tableau de bord [Featured Highlight]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: b06eb53e-2914-4e00-ae55-3a073d4f950d
+          bundle: reliefweb_river
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684231852
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_hide_thumbnails:
+            -
+              value: false
+          field_max_number_of_items:
+            -
+              value: 1
+          field_reliefweb_url:
+            -
+              uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28PC149%29_%28S8619_S2868%29_%28T4600%29&search=title%3A%22Meeting+Minutes%22'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Comptes rendus [ReliefWeb feed]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: e1afd76b-faa0-4bf7-8c59-c9bae0b0bc16
+          bundle: reliefweb_river
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684232006
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_hide_thumbnails:
+            -
+              value: false
+          field_max_number_of_items:
+            -
+              value: 4
+          field_reliefweb_url:
+            -
+              uri: 'https://reliefweb.int/updates?advanced-search=%28PC149%29_%28S8619_S2868%29_%28T4600%29&search=NOT+title%3A%22Meeting+minutes%22'
+              title: ''
+              options: {  }
+          field_title:
+            -
+              value: 'Dernières mises à jour du cluster [ReliefWeb feed]'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 9c48cae4-b315-436d-9961-f0e249eb754c
+          bundle: text_block
+          default_langcode: fr
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1696490758
+          behavior_settings:
+            -
+              value:
+                layout_paragraphs:
+                  parent_uuid: null
+                  region: null
+          content_translation_source:
+            -
+              value: und
+          content_translation_outdated:
+            -
+              value: false
+          field_text:
+            -
+              value: "<ul>\r\n\t<li><a href=\"https://www.unhcr.org/\">UNHCR</a></li>\r\n\t<li>Lien 2</li>\r\n\t<li>Lien 3</li>\r\n</ul>\r\n"
+              format: basic_html
+          field_title:
+            -
+              value: 'Liens utiles'
+  field_reliefweb_documents:
+    -
+      uri: 'https://reliefweb.int/updates?view=reports&advanced-search=%28PC149%29_%28T4600%29'
+      title: ''
+      options: {  }
+  field_sidebar_from_operation:
+    -
+      value: true
+  subgroup_depth:
+    -
+      value: 1
+  subgroup_left:
+    -
+      value: 4
+  subgroup_right:
+    -
+      value: 5
+  subgroup_tree:
+    -
+      value: 280972

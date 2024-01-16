@@ -1,0 +1,48 @@
+_meta:
+  version: '1.0'
+  entity_type: group_content
+  uuid: 462f5449-67ef-463e-976b-365ebbaa9ed4
+  bundle: cluster-group_node-page
+  default_langcode: en
+  depends:
+    89b1366d-d954-4e8b-aa54-7b95ceb22d80: user
+    fb2bd002-859d-457d-8e3b-46efcf473c43: group
+    32d009a1-4014-44de-9dac-d5be24dba4a4: node
+default:
+  uid:
+    -
+      entity: 89b1366d-d954-4e8b-aa54-7b95ceb22d80
+  gid:
+    -
+      entity: fb2bd002-859d-457d-8e3b-46efcf473c43
+  entity_id:
+    -
+      entity: 32d009a1-4014-44de-9dac-d5be24dba4a4
+  label:
+    -
+      value: "Opération d'example Cluster Protection Contacts Cles"
+  created:
+    -
+      value: 1684232273
+  plugin_id:
+    -
+      value: 'group_node:page'
+  group_type:
+    -
+      target_id: cluster
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  metatag:
+    -
+      tag: meta
+      attributes:
+        name: title
+        content: '| test'
+    -
+      tag: link
+      attributes:
+        rel: canonical
+        href: 'http://response-site.docksal.site/node/1'
