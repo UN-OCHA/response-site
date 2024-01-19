@@ -8,7 +8,7 @@ dependencies:
     - field.field.paragraph.menu_block.field_title
     - paragraphs.paragraphs_type.menu_block
   module:
-    - link
+    - hr_paragraphs
     - text
 id: paragraph.menu_block.default
 targetEntityType: paragraph
@@ -16,14 +16,16 @@ bundle: menu_block
 mode: default
 content:
   field_links:
-    type: link
+    type: hr_paragraphs_link
     label: hidden
     settings:
-      trim_length: 80
+      trim_length: '80'
+      local_domains: response.reliefweb.int
+      force_relative: '1'
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
+      rel: 0
+      target: 0
     third_party_settings: {  }
     weight: 2
     region: content

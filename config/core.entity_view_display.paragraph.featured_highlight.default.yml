@@ -10,8 +10,8 @@ dependencies:
     - image.style.highlight_thumb
     - paragraphs.paragraphs_type.featured_highlight
   module:
+    - hr_paragraphs
     - image
-    - link
     - text
 id: paragraph.featured_highlight.default
 targetEntityType: paragraph
@@ -19,14 +19,16 @@ bundle: featured_highlight
 mode: default
 content:
   field_destination:
-    type: link
+    type: hr_paragraphs_link
     label: hidden
     settings:
-      trim_length: null
+      trim_length: ''
+      local_domains: response.reliefweb.int
+      force_relative: '1'
       url_only: true
       url_plain: true
-      rel: '0'
-      target: '0'
+      rel: 0
+      target: 0
     third_party_settings: {  }
     weight: 3
     region: content
