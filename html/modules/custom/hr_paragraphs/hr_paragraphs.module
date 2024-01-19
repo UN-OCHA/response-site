@@ -5,6 +5,7 @@
  * Themes and preprocessors for the paragraphs page title module.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Breadcrumb\Breadcrumb;
@@ -491,7 +492,6 @@ function hr_paragraphs_preprocess_paragraph(&$variables) {
 
   $view_mode = $variables['view_mode'];
   if ($view_mode === 'preview') {
-
     // Check emptiness.
     $is_empty = TRUE;
     $outputted_fields = array_keys($variables['content']);
@@ -521,6 +521,33 @@ function hr_paragraphs_preprocess_paragraph(&$variables) {
       '#prefix' => '<div class="paragraph-preview-indicator">',
       '#suffix' => '</div>',
     ];
+  }
+  else {
+    if ($paragraph->hasField('field_text') && isset($variables['content']['field_text'][0]['#text'])) {
+      $local_domains = [
+        'response.reliefweb.int',
+      ];
+
+      if (!empty($local_domains)) {
+        $dom = Html::load($variables['content']['field_text'][0]['#text']);
+        foreach ($dom->getElementsByTagName('a') as $link) {
+          /** @var \DOMElement $link */
+          if (!$link->hasAttribute('href')) {
+            continue;
+          }
+
+          $path = mb_strtolower($link->getAttribute('href'));
+          $domain = parse_url($path, PHP_URL_HOST);
+
+          if (in_array($domain, $local_domains)) {
+            $uri = substr($path, strpos($path, $domain) + strlen($domain));
+            $link->setAttribute('href', $uri);
+          }
+        }
+
+        $variables['content']['field_text'][0]['#text'] = Html::serialize($dom);
+      }
+    }
   }
 }
 
