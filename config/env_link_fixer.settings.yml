@@ -1,0 +1,3 @@
+_core:
+  default_config_hash: 3C-xnHHAJx_NvvWRZeV-pv_V6GRRg3cmr5H8k1SV82A
+mapping: "dev.response-reliefweb-int.ahconu.org|response.reliefweb.int\r\ndemo.response-reliefweb-int.ahconu.org|response.reliefweb.int\r\nstage.response-reliefweb-int.ahconu.org|response.reliefweb.int\r\nfeature.response-reliefweb-int.ahconu.org|response.reliefweb.int\r\n"

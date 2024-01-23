@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "898f0a42c2e19693a91e79e5da7de15b",
+    "content-hash": "81a285470101f3327e5d112263160c5b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2652,6 +2652,50 @@
             }
         },
         {
+            "name": "drupal/env_link_fixer",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/env_link_fixer.git",
+                "reference": "1.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/env_link_fixer-1.0.0.zip",
+                "reference": "1.0.0",
+                "shasum": "bc3350ada27b1e56dc0c81a7b59d7d71f1a8f698"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0",
+                    "datestamp": "1706002747",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "attiks",
+                    "homepage": "https://www.drupal.org/user/105002"
+                }
+            ],
+            "description": "Environment Link fixer",
+            "homepage": "https://www.drupal.org/project/env_link_fixer",
+            "support": {
+                "source": "https://git.drupalcode.org/project/env_link_fixer"
+            }
+        },
+        {
             "name": "drupal/environment_indicator",
             "version": "4.0.17",
             "source": {
@@ -3718,7 +3762,7 @@
                 "shasum": "fc8ea60619b6b4682bade340e13fb4565d3a7e0c"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10"
+                "drupal/core": "^10"
             },
             "type": "drupal-module",
             "extra": {
@@ -4946,7 +4990,7 @@
                 "shasum": "c3ce3499cbbf31e4a47808478af890b47c4f41dd"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10",
+                "drupal/core": "^10",
                 "php": ">=7.1"
             },
             "type": "drupal-module",
@@ -12579,6 +12623,56 @@
                 "source": "https://github.com/drupal/core-dev/tree/10.2.2"
             },
             "time": "2023-12-12T22:01:45+00:00"
+        },
+        {
+            "name": "drupal/dev_mode",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/dev_mode.git",
+                "reference": "8.x-2.6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/dev_mode-8.x-2.6.zip",
+                "reference": "8.x-2.6",
+                "shasum": "7dfa949130c4add242a91604c4f0fd8e75317c54"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.6",
+                    "datestamp": "1673374613",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "George Anderson (geoanders)",
+                    "homepage": "https://www.drupal.org/u/geoanders",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "rduplock",
+                    "homepage": "https://www.drupal.org/user/3506644"
+                }
+            ],
+            "description": "Enable this module to activate development mode on your Drupal site.",
+            "homepage": "https://drupal.org/project/dev_mode",
+            "support": {
+                "source": "https://git.drupalcode.org/project/dev_mode",
+                "issues": "https://drupal.org/project/issues/dev_mode"
+            }
         },
         {
             "name": "drupal/devel",

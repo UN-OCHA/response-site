@@ -4,21 +4,33 @@ status: true
 dependencies:
   module:
     - editor
+    - env_link_fixer
+    - hr_paragraphs
 _core:
   default_config_hash: P8ddpAIKtawJDi5SzOwCzVnnNYqONewSTJ6Xn0dW_aQ
 name: 'Basic HTML'
 format: basic_html
 weight: 0
 filters:
-  filter_html:
-    id: filter_html
-    provider: filter
+  RewriteOwnDomainLinks:
+    id: RewriteOwnDomainLinks
+    provider: hr_paragraphs
     status: false
-    weight: -10
+    weight: -20
+    settings: {  }
+  editor_file_reference:
+    id: editor_file_reference
+    provider: editor
+    status: true
+    weight: 11
+    settings: {  }
+  env_link_fixer_strip_domain:
+    id: env_link_fixer_strip_domain
+    provider: env_link_fixer
+    status: true
+    weight: 99
     settings:
-      allowed_html: ''
-      filter_html_help: false
-      filter_html_nofollow: false
+      domain_names: ''
   filter_align:
     id: filter_align
     provider: filter
@@ -31,17 +43,20 @@ filters:
     status: true
     weight: 8
     settings: {  }
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: false
+    weight: -10
+    settings:
+      allowed_html: ''
+      filter_html_help: false
+      filter_html_nofollow: false
   filter_html_image_secure:
     id: filter_html_image_secure
     provider: filter
     status: true
     weight: 9
-    settings: {  }
-  editor_file_reference:
-    id: editor_file_reference
-    provider: editor
-    status: true
-    weight: 11
     settings: {  }
   filter_htmlcorrector:
     id: filter_htmlcorrector
