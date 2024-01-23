@@ -26,6 +26,7 @@ display:
           label: 'Fecha de modificación'
         count:
           label: 'Usado en'
+          format_plural_string: !!binary MSBwbGFjZQNAY291bnQgcGxhY2Vz
       pager:
         options:
           tags:

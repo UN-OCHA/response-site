@@ -12,12 +12,6 @@ name: 'Basic HTML'
 format: basic_html
 weight: 0
 filters:
-  RewriteOwnDomainLinks:
-    id: RewriteOwnDomainLinks
-    provider: hr_paragraphs
-    status: false
-    weight: -20
-    settings: {  }
   editor_file_reference:
     id: editor_file_reference
     provider: editor
