@@ -10,8 +10,8 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.featured_highlight
   module:
+    - env_link_fixer
     - image
-    - link
     - text
 id: paragraph.featured_highlight.default
 targetEntityType: paragraph
@@ -19,7 +19,7 @@ bundle: featured_highlight
 mode: default
 content:
   field_destination:
-    type: link_default
+    type: env_link_fixer_link_widget
     weight: 3
     region: content
     settings:

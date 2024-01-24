@@ -10,7 +10,7 @@ dependencies:
     - image.style.highlight_thumb
     - paragraphs.paragraphs_type.featured_highlight
   module:
-    - hr_paragraphs
+    - env_link_fixer
     - image
     - text
 id: paragraph.featured_highlight.default
@@ -19,7 +19,7 @@ bundle: featured_highlight
 mode: default
 content:
   field_destination:
-    type: hr_paragraphs_link
+    type: env_link_fixer_link_formatter
     label: hidden
     settings:
       trim_length: ''
