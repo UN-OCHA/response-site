@@ -28,12 +28,11 @@
     .setAttribute('id', paragraph.bundle ~ '-' ~ paragraph.id())
   }}>
     {% block content %}
-      {% set destination = paragraph.field_destination.0.url %}
       <div{{ content_attributes.addClass('node__content').addClass('hri-card__content') }}>
         {{ content.field_image }}
         <h3 class="hri-card__title">{{ content.field_title.0 }}</h3>
         <p class="hri-card__summary">{{ content.field_text|render|striptags|trim|replace({'&nbsp;': ''}) }}</p>
-        <a href="{{ destination }}" class="hri-card__link" title="{{ 'View more'|t }}">{{ 'View more'|t }}</a>
+        <a href="{{ content.field_destination|render|striptags|trim }}" class="hri-card__link" title="{{ 'View more'|t }}">{{ 'View more'|t }}</a>
       </div>
     {% endblock %}
   </article>

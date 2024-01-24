@@ -491,7 +491,6 @@ function hr_paragraphs_preprocess_paragraph(&$variables) {
 
   $view_mode = $variables['view_mode'];
   if ($view_mode === 'preview') {
-
     // Check emptiness.
     $is_empty = TRUE;
     $outputted_fields = array_keys($variables['content']);

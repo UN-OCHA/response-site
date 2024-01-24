@@ -8,7 +8,7 @@ dependencies:
     - field.field.paragraph.menu_block.field_title
     - paragraphs.paragraphs_type.menu_block
   module:
-    - link
+    - env_link_fixer
     - text
 id: paragraph.menu_block.default
 targetEntityType: paragraph
@@ -16,8 +16,8 @@ bundle: menu_block
 mode: default
 content:
   field_links:
-    type: link_default
-    weight: 2
+    type: env_link_fixer_link_widget
+    weight: 11
     region: content
     settings:
       placeholder_url: ''
@@ -38,6 +38,11 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true

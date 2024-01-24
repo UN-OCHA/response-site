@@ -23,6 +23,7 @@ module:
   editor: 0
   entity: 0
   entity_reference_revisions: 0
+  env_link_fixer: 0
   environment_indicator: 0
   environment_indicator_ui: 0
   field: 0
@@ -103,7 +104,6 @@ module:
   variationcache: 0
   views_data_export: 0
   views_field_compare: 0
-  views_ui: 0
   pathauto: 1
   content_translation: 10
   views: 10
