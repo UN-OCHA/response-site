@@ -36,6 +36,14 @@ Add this line to settings.local.php: `$config['config_split.config_split.config_
 
 After importing a fresh database, run `drush cim` to enable devel, database log and stage_file_proxy.
 
+Add the following to your `settings.php` to eliminate absolute links to production:
+
+```php
+$settings['env_link_fixer_custom_mappings'] = [
+  'response-site.docksal.site' => 'response.reliefweb.int',
+];
+```
+
 ## Drupal check
 
 ```sh {name=drupalcheck}
