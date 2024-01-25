@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "168b210510f65665adbcbb8214c82e25",
+    "content-hash": "78df9cfe40e00b3ae491c24078277195",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4093,7 +4093,7 @@
                 "shasum": "fc8ea60619b6b4682bade340e13fb4565d3a7e0c"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11"
+                "drupal/core": "^10"
             },
             "type": "drupal-module",
             "extra": {
@@ -5308,27 +5308,26 @@
         },
         {
             "name": "drupal/theme_switcher",
-            "version": "1.3.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/theme_switcher.git",
-                "reference": "8.x-1.3"
+                "reference": "2.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/theme_switcher-8.x-1.3.zip",
-                "reference": "8.x-1.3",
-                "shasum": "c3ce3499cbbf31e4a47808478af890b47c4f41dd"
+                "url": "https://ftp.drupal.org/files/projects/theme_switcher-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "9ea9eee91cf75f21fcc939704baa6a7ec10d7748"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11",
-                "php": ">=7.1"
+                "drupal/core": "^10"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.3",
-                    "datestamp": "1679338191",
+                    "version": "2.0.1",
+                    "datestamp": "1687963275",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5337,13 +5336,12 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
-                    "name": "Adrián Marín",
-                    "homepage": "https://www.drupal.org/user/3529039",
-                    "email": "amarincolas@gmail.com"
+                    "name": "amarincolas",
+                    "homepage": "https://www.drupal.org/user/3529039"
                 },
                 {
                     "name": "Anybody",
@@ -5354,11 +5352,10 @@
                     "homepage": "https://www.drupal.org/user/124705"
                 }
             ],
-            "description": "Creates Theme Switcher Rules within a Drupal installation.",
+            "description": "Switches active themes on specific conditions.",
             "homepage": "https://www.drupal.org/project/theme_switcher",
             "support": {
-                "source": "http://cgit.drupalcode.org/theme_switcher",
-                "issues": "http://drupal.org/project/issues/theme_switcher"
+                "source": "https://git.drupalcode.org/project/theme_switcher"
             }
         },
         {

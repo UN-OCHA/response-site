@@ -21,9 +21,6 @@
         "drupal/social_auth_hid": {
             "Keep lang prefix in URL": "./PATCHES/hid_lang.patch"
         },
-        "drupal/theme_switcher": {
-            "https://www.drupal.org/project/theme_switcher": "https://www.drupal.org/files/issues/2022-06-16/theme_switcher.1.2.rector.patch"
-        },
         "drupal/user_expire": {
             "Allow the notification email to be customised": "PATCHES/user_expire-customize-notification-email.patch",
             "Reset expiration when user is reactivated": "PATCHES/user_expire-reset-expiration-on-reactivation.patch"
