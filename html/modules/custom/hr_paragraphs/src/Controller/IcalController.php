@@ -99,7 +99,16 @@ class IcalController extends ControllerBase {
         $event['DTEND'] = $event['DTSTART'];
       }
 
+      // Handle recurring events.
       if (isset($event['RRULE'])) {
+        // Track excluded dates.
+        $excluded_dates = [];
+        if (isset($event['EXDATE']) && is_array($event['EXDATE'])) {
+          foreach ($event['EXDATE'] as $ex_date) {
+            $excluded_dates[] = $ex_date->format(\DateTimeInterface::W3C);
+          }
+        }
+
         $iterationCount = 0;
         $maxIterations = 40;
 
@@ -112,6 +121,11 @@ class IcalController extends ControllerBase {
         }
 
         foreach ($generator as $occurrence) {
+          // Check excluded dates.
+          if (in_array($occurrence->getStart()->format(\DateTimeInterface::W3C), $excluded_dates)) {
+            continue;
+          }
+
           $output[] = [
             'title' => $event['SUMMARY'] ?? '',
             'description' => $event['DESCRIPTION'] ?? '',
