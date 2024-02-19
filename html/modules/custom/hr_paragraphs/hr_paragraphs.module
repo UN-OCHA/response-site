@@ -1954,6 +1954,12 @@ function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
         $form['langcode']['#access'] = FALSE;
       }
     }
+
+    // Restrict access to status.
+    $user = \Drupal::currentUser();
+    if (!$user->hasPermission('rwr unpublish group')) {
+      $form['langcode']['#access'] = FALSE;
+    }
   }
 
   // Move meta description field to sidebar.

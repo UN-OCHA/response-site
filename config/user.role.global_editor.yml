@@ -128,6 +128,7 @@ permissions:
   - 'revert landing_page revisions'
   - 'revert page revisions'
   - 'rwr edit meta tags'
+  - 'rwr unpublish group'
   - 'switch shortcut sets'
   - 'translate cluster group'
   - 'translate interface'
