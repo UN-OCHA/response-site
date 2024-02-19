@@ -1,3 +1,6 @@
 rwr edit meta tags:
   title: 'Edit meta description'
   restrict access: true
+rwr unpublish group:
+  title: 'Unpublish operations and clusters'
+  restrict access: true
