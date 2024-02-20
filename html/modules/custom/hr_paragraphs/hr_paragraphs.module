@@ -1958,7 +1958,7 @@ function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
     // Restrict access to status.
     $user = \Drupal::currentUser();
     if (!$user->hasPermission('rwr unpublish group')) {
-      $form['langcode']['#access'] = FALSE;
+      $form['status']['#access'] = FALSE;
     }
   }
 
