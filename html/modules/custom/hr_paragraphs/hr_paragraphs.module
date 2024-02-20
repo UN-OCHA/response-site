@@ -8,6 +8,7 @@
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -1370,7 +1371,7 @@ function hr_paragraphs_library_info_alter(&$libraries, $extension) {
 /**
  * Implements hook_menu_local_tasks_alter().
  */
-function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
+function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
   if (empty($data['tabs'])) {
     return;
   }
@@ -1435,12 +1436,19 @@ function hr_paragraphs_menu_local_tasks_alter(&$data, $route_name) {
       }
 
       $data['tabs'][1][$route_name]['#link']['localized_options']['attributes']['class'][] = 'is-active';
+
+      // Add caching on url.
+      $cacheability->addCacheContexts(['url']);
     }
   }
 
   // Mark link as being external if needed.
+  /** @var \Drupal\group\Entity\GroupInterface */
   $group = \Drupal::routeMatch()->getParameter('group');
   if ($group) {
+    // Add group specific cache tags.
+    $cacheability->addCacheTags($group->getCacheTags());
+
     foreach ($supported_routes as $tab_name) {
       if (!isset($data['tabs'][1][$tab_name])) {
         continue;
