@@ -491,7 +491,6 @@ function hr_paragraphs_preprocess_paragraph(&$variables) {
 
   $view_mode = $variables['view_mode'];
   if ($view_mode === 'preview') {
-
     // Check emptiness.
     $is_empty = TRUE;
     $outputted_fields = array_keys($variables['content']);
@@ -1954,6 +1953,12 @@ function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
       if (!$user->hasPermission('create operation group')) {
         $form['langcode']['#access'] = FALSE;
       }
+    }
+
+    // Restrict access to status.
+    $user = \Drupal::currentUser();
+    if (!$user->hasPermission('rwr unpublish group')) {
+      $form['status']['#access'] = FALSE;
     }
   }
 
