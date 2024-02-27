@@ -26,7 +26,7 @@ services:
       - default
 
   mysql:
-    image: public.ecr.aws/unocha/mysql:10.6
+    image: public.ecr.aws/unocha/mysql:10.11
     hostname: $PROJECT_NAME-mysql
     container_name: $PROJECT_NAME-mysql
     environment:
