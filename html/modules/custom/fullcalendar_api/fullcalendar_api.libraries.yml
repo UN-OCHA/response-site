@@ -3,7 +3,6 @@ moment:
   version: VERSION
   license:
     name: MIT
-    remote: https://github.com/moment/moment/blob/develop/LICENSE
     gpl-compatible: true
   js:
     /libraries/moment/min/moment.min.js: {}
@@ -15,7 +14,6 @@ fullcalendar:
   version: VERSION
   license:
     name: MIT
-    remote: https://github.com/fullcalendar/fullcalendar/blob/master/LICENSE.txt
     gpl-compatible: true
   js:
     /libraries/fullcalendar/fullcalendar.min.js: {}

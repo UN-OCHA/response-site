@@ -12,29 +12,9 @@ use Drupal\Component\Utility\Html;
  */
 function fullcalendar_api_theme($existing, $type, $theme, $path) {
   return [
-
     'fullcalendar_calendar' => [
       'template' => 'fullcalendar',
       'variables' => [
-        'calendar_id' => NULL,
-        'calendar_settings' => [],
-      ],
-    ],
-    'fullcalendar_calendar_datasource' => [
-      'file' => 'theme.inc',
-      'path' => "$path/theme",
-      'variables' => [
-        'datasource_uri' => NULL,
-        'calendar_id' => NULL,
-        'calendar_settings' => [],
-      ],
-    ],
-    'fullcalendar_calendar_entity' => [
-      'file' => 'theme.inc',
-      'path' => "$path/theme",
-      'variables' => [
-        'entities' => [],
-        'date_field_map' => [],
         'calendar_id' => NULL,
         'calendar_settings' => [],
       ],
