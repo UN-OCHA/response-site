@@ -1243,39 +1243,12 @@ function hr_paragraphs_preprocess_paragraph__reliefweb_key_figures(&$variables) 
     return;
   }
 
-  // Fetch country from user input.
-  $key_figures_country = $paragraph->field_country->value;
-
-  // Fetch label of the user input.
-  $key_figures_country_labels = $paragraph->getFieldDefinition('field_country')->getFieldStorageDefinition()->getSetting('allowed_values');
-
-  // Set max number of items to 4 by default.
-  $max_number_of_items = $paragraph->field_max_number_of_items->value ?? 4;
-
-  try {
-    /** @var \Drupal\hr_paragraphs\Controller\KeyFiguresController */
-    $key_figures_controller = \Drupal::service('hr_paragraphs.key_figures_controller');
-    $results = $key_figures_controller->getKeyFigures($key_figures_country);
-
-    $variables['content']['key_figures'] = [
-      '#theme' => 'hr_paragraphs_rw_key_figures',
-      '#country_iso' => $key_figures_country,
-      '#country_name' => $key_figures_country_labels[$key_figures_country],
-      '#data' => $key_figures_controller->buildKeyFigures($results, $max_number_of_items),
-      '#weight' => 99,
-      '#cache' => [
-        'max-age' => 12 * 60 * 60,
-      ],
-    ];
-  }
-  catch (\Exception $exception) {
-    $variables['content']['key_figures'] = [
-      '#type' => 'markup',
-      '#markup' => t('Key figure data is currently not available.'),
-      '#prefix' => '<div class="response-error response-error-api response-error-fts">',
-      '#suffix' => '</div>',
-    ];
-  }
+  $variables['content']['key_figures'] = [
+    '#type' => 'markup',
+    '#markup' => t('Key figure data is no longer available.'),
+    '#prefix' => '<div class="response-error response-error-api response-error-fts">',
+    '#suffix' => '</div>',
+  ];
 }
 
 /**
