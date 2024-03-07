@@ -1,0 +1,15 @@
+uuid: 701ef623-8a9b-4b9d-a104-8a03cf806441
+langcode: en
+status: true
+dependencies:
+  module:
+    - imageapi_optimize_webp
+name: convert_to_webp
+label: 'Convert to webp'
+processors:
+  86cd6db9-5de6-4ea6-8350-ed02b556d262:
+    id: imageapi_optimize_webp
+    data:
+      quality: '75'
+    weight: 1
+    uuid: 86cd6db9-5de6-4ea6-8350-ed02b556d262

@@ -2560,6 +2560,24 @@ function hr_paragraphs_metatags_alter(array &$metatags, array &$context) {
   }
 
   hr_paragraphs_metatags_for_rivers($metatags, $context);
+
+  // Copy general tags to og tags.
+  $site_name = \Drupal::config('system.site')->get('name');
+
+  $metatags['og_site_name'] = $site_name;
+  $metatags['og_image'] = "/themes/custom/common_design_subtheme/img/logos/response-logo.svg";
+
+  if (isset($metatags['canonical'])) {
+    $metatags['og_url'] = $metatags['canonical'];
+  }
+
+  if (isset($metatags['title'])) {
+    $metatags['og_title'] = $metatags['title'];
+  }
+
+  if (isset($metatags['description'])) {
+    $metatags['og_description'] = $metatags['description'];
+  }
 }
 
 /**
@@ -2624,6 +2642,7 @@ function hr_paragraphs_metatags_for_rivers(array &$metatags, array &$context) {
 
   if (!empty($title)) {
     $metatags['title'] = $title;
+    $metatags['og:title'] = $title;
   }
 
   // Force description for tabs.
@@ -2721,5 +2740,4 @@ function hr_paragraphs_metatags_for_rivers(array &$metatags, array &$context) {
       $metatags['description'] = $description;
     }
   }
-
 }

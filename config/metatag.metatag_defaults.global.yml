@@ -8,4 +8,9 @@ id: global
 label: Global
 tags:
   canonical_url: '[current-page:url]'
+  og_description: 'Get the latest information on the humanitarian work of the cluster/working group. Access crucial resources, meetings, contacts, and more.'
+  og_image: /themes/custom/common_design_subtheme/img/logos/response-logo.svg
+  og_site_name: '[site:name]'
+  og_title: '[current-page:title]'
+  og_url: '[current-page:url]'
   title: '[current-page:title] | [site:name]'

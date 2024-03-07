@@ -1,0 +1,16 @@
+uuid: f096add7-45d0-40a3-a545-5944c7b7b559
+langcode: en
+status: true
+dependencies: {  }
+name: highlight_thumb_560
+label: 'Highlight Thumb - 560'
+effects:
+  1bf3f545-e9c4-4c19-a6b2-f5997d0978ea:
+    uuid: 1bf3f545-e9c4-4c19-a6b2-f5997d0978ea
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 560
+      height: 280
+      anchor: center-top
+pipeline: __default__
