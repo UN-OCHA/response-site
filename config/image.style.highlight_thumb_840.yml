@@ -1,0 +1,16 @@
+uuid: c7ffb0ad-6303-49c7-8e74-f83452a77382
+langcode: en
+status: true
+dependencies: {  }
+name: highlight_thumb_840
+label: 'Highlight Thumb - 840'
+effects:
+  05a74f0f-b46d-438f-97f4-4e0da76e1914:
+    uuid: 05a74f0f-b46d-438f-97f4-4e0da76e1914
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 840
+      height: 420
+      anchor: center-top
+pipeline: __default__
