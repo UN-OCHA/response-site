@@ -7,11 +7,11 @@ dependencies:
     - field.field.paragraph.featured_highlight.field_image
     - field.field.paragraph.featured_highlight.field_text
     - field.field.paragraph.featured_highlight.field_title
-    - image.style.highlight_thumb
     - paragraphs.paragraphs_type.featured_highlight
+    - responsive_image.styles.featured
   module:
     - env_link_fixer
-    - image
+    - responsive_image
     - text
 id: paragraph.featured_highlight.default
 targetEntityType: paragraph
@@ -33,11 +33,11 @@ content:
     weight: 3
     region: content
   field_image:
-    type: image
+    type: responsive_image
     label: hidden
     settings:
+      responsive_image_style: featured
       image_link: ''
-      image_style: highlight_thumb
       image_loading:
         attribute: lazy
     third_party_settings: {  }

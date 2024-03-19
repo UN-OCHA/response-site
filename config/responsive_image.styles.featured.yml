@@ -1,0 +1,27 @@
+uuid: 409882d4-d4a2-460b-91b8-588eb380c6e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.highlight_thumb_260
+    - image.style.highlight_thumb_400
+    - image.style.highlight_thumb_560
+    - image.style.highlight_thumb_840
+  theme:
+    - common_design
+id: featured
+label: Featured
+image_style_mappings:
+  -
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: '(max-width: 260px) 260px, (max-width: 480px) 480px, (max-width: 960px) 560px, 560px'
+      sizes_image_styles:
+        - highlight_thumb_260
+        - highlight_thumb_400
+        - highlight_thumb_560
+        - highlight_thumb_840
+    breakpoint_id: common_design.xxl
+    multiplier: 1x
+breakpoint_group: common_design
+fallback_image_style: highlight_thumb_560
