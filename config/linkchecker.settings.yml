@@ -37,7 +37,7 @@ check:
 error:
   action_status_code_301: 1
   action_status_code_404: 0
-  ignore_response_codes: "200\r\n206\r\n302\r\n304\r\n401\r\n403"
+  ignore_response_codes: "200\r\n206\r\n302\r\n304\r\n307\r\n401\r\n403"
   impersonate_account: '1'
 logging:
   level: 6
