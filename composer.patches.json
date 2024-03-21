@@ -30,9 +30,6 @@
         },
         "mailchimp/marketing": {
             "PHP 8.2": "PATCHES/mailchimp_php82.patch"
-        },
-        "unocha/common_design": {
-          "Google fonts": "https://patch-diff.githubusercontent.com/raw/UN-OCHA/common_design/pull/471.diff"
         }
     }
 }

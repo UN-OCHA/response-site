@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68186693e47de9717f9dcc56ad603e23",
+    "content-hash": "f827e916bd19dc50124eb627bd8a2eee",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -337,39 +337,37 @@
         },
         {
             "name": "composer/installers",
-            "version": "v1.12.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19"
+                "reference": "c29dc4b93137acb82734f672c37e029dfbd95b35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/d20a64ed3c94748397ff5973488761b22f6d3f19",
-                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19",
+                "url": "https://api.github.com/repos/composer/installers/zipball/c29dc4b93137acb82734f672c37e029dfbd95b35",
+                "reference": "c29dc4b93137acb82734f672c37e029dfbd95b35",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0 || ^2.0"
-            },
-            "replace": {
-                "roundcube/plugin-installer": "*",
-                "shama/baton": "*"
+                "composer-plugin-api": "^1.0 || ^2.0",
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
                 "composer/composer": "1.6.* || ^2.0",
                 "composer/semver": "^1 || ^3",
                 "phpstan/phpstan": "^0.12.55",
                 "phpstan/phpstan-phpunit": "^0.12.16",
-                "symfony/phpunit-bridge": "^4.2 || ^5",
-                "symfony/process": "^2.3"
+                "symfony/phpunit-bridge": "^5.3",
+                "symfony/process": "^5"
             },
             "type": "composer-plugin",
             "extra": {
                 "class": "Composer\\Installers\\Plugin",
                 "branch-alias": {
-                    "dev-main": "1.x-dev"
-                }
+                    "dev-main": "2.x-dev"
+                },
+                "plugin-modifies-install-path": true
             },
             "autoload": {
                 "psr-4": {
@@ -390,7 +388,6 @@
             "description": "A multi-framework Composer library installer",
             "homepage": "https://composer.github.io/installers/",
             "keywords": [
-                "Craft",
                 "Dolibarr",
                 "Eliasis",
                 "Hurad",
@@ -411,7 +408,6 @@
                 "Whmcs",
                 "WolfCMS",
                 "agl",
-                "aimeos",
                 "annotatecms",
                 "attogram",
                 "bitrix",
@@ -430,7 +426,6 @@
                 "grav",
                 "installer",
                 "itop",
-                "joomla",
                 "known",
                 "kohana",
                 "laravel",
@@ -439,6 +434,7 @@
                 "magento",
                 "majima",
                 "mako",
+                "matomo",
                 "mediawiki",
                 "miaoxing",
                 "modulework",
@@ -458,9 +454,7 @@
                 "silverstripe",
                 "sydes",
                 "sylius",
-                "symfony",
                 "tastyigniter",
-                "typo3",
                 "wordpress",
                 "yawik",
                 "zend",
@@ -468,7 +462,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/installers/issues",
-                "source": "https://github.com/composer/installers/tree/v1.12.0"
+                "source": "https://github.com/composer/installers/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -484,7 +478,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-13T08:19:44+00:00"
+            "time": "2022-08-20T06:45:11+00:00"
         },
         {
             "name": "composer/semver",
@@ -4381,7 +4375,7 @@
                 "shasum": "fc8ea60619b6b4682bade340e13fb4565d3a7e0c"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11"
+                "drupal/core": "^10"
             },
             "type": "drupal-module",
             "extra": {
@@ -5660,7 +5654,7 @@
                 "shasum": "9ea9eee91cf75f21fcc939704baa6a7ec10d7748"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11"
+                "drupal/core": "^10"
             },
             "type": "drupal-module",
             "extra": {
@@ -6192,23 +6186,23 @@
         },
         {
             "name": "drush/drush",
-            "version": "12.4.3",
+            "version": "12.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drush-ops/drush.git",
-                "reference": "8245acede57ecc62a90aa0f19ff3b29e5f11f971"
+                "reference": "71fcea30a22e7336e17be18bb5945400b2c63fad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drush-ops/drush/zipball/8245acede57ecc62a90aa0f19ff3b29e5f11f971",
-                "reference": "8245acede57ecc62a90aa0f19ff3b29e5f11f971",
+                "url": "https://api.github.com/repos/drush-ops/drush/zipball/71fcea30a22e7336e17be18bb5945400b2c63fad",
+                "reference": "71fcea30a22e7336e17be18bb5945400b2c63fad",
                 "shasum": ""
             },
             "require": {
                 "chi-teck/drupal-code-generator": "^3.0",
                 "composer-runtime-api": "^2.2",
                 "composer/semver": "^1.4 || ^3",
-                "consolidation/annotated-command": "^4.9.1",
+                "consolidation/annotated-command": "^4.9.2",
                 "consolidation/config": "^2.1.2",
                 "consolidation/filter-via-dot-access-data": "^2.0.2",
                 "consolidation/output-formatters": "^4.3.2",
@@ -6324,7 +6318,7 @@
                 "issues": "https://github.com/drush-ops/drush/issues",
                 "security": "https://github.com/drush-ops/drush/security/advisories",
                 "slack": "https://drupal.slack.com/messages/C62H9CWQM",
-                "source": "https://github.com/drush-ops/drush/tree/12.4.3"
+                "source": "https://github.com/drush-ops/drush/tree/12.5.1"
             },
             "funding": [
                 {
@@ -6332,7 +6326,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-16T22:57:24+00:00"
+            "time": "2024-03-20T15:03:27+00:00"
         },
         {
             "name": "easyrdf/easyrdf",
@@ -12041,16 +12035,16 @@
         },
         {
             "name": "unocha/common_design",
-            "version": "v9.3.2",
+            "version": "v9.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/common_design.git",
-                "reference": "8a59010887b7d07960eb8dc61bcaabfcbfd02597"
+                "reference": "25cd18749497b8e02816f128e5994ce9e6d8a44f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/8a59010887b7d07960eb8dc61bcaabfcbfd02597",
-                "reference": "8a59010887b7d07960eb8dc61bcaabfcbfd02597",
+                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/25cd18749497b8e02816f128e5994ce9e6d8a44f",
+                "reference": "25cd18749497b8e02816f128e5994ce9e6d8a44f",
                 "shasum": ""
             },
             "require": {
@@ -12065,22 +12059,22 @@
             "description": "OCHA Common Design base theme for Drupal 9+",
             "support": {
                 "issues": "https://github.com/UN-OCHA/common_design/issues",
-                "source": "https://github.com/UN-OCHA/common_design/tree/v9.3.2"
+                "source": "https://github.com/UN-OCHA/common_design/tree/v9.4.0"
             },
-            "time": "2024-02-12T09:04:26+00:00"
+            "time": "2024-03-19T09:01:42+00:00"
         },
         {
             "name": "unocha/ocha_monitoring",
-            "version": "1.0.3",
+            "version": "1.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/ocha_monitoring.git",
-                "reference": "f2542aeb5f702ab1e39d73caf730ba5620598728"
+                "reference": "c105d4199bc86049f2b0589e8cf0b08aff95dd63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/ocha_monitoring/zipball/f2542aeb5f702ab1e39d73caf730ba5620598728",
-                "reference": "f2542aeb5f702ab1e39d73caf730ba5620598728",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_monitoring/zipball/c105d4199bc86049f2b0589e8cf0b08aff95dd63",
+                "reference": "c105d4199bc86049f2b0589e8cf0b08aff95dd63",
                 "shasum": ""
             },
             "require": {
@@ -12095,26 +12089,26 @@
             "description": "UNOCHA Monitoring",
             "support": {
                 "issues": "https://github.com/UN-OCHA/ocha_monitoring/issues",
-                "source": "https://github.com/UN-OCHA/ocha_monitoring/tree/1.0.3"
+                "source": "https://github.com/UN-OCHA/ocha_monitoring/tree/1.0.14"
             },
-            "time": "2023-12-21T13:23:29+00:00"
+            "time": "2024-02-09T10:23:16+00:00"
         },
         {
             "name": "unocha/ocha_search",
-            "version": "v1.0.7",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/ocha_search.git",
-                "reference": "8bb1108a1db2955886ab5a3a20423c0c02276f80"
+                "reference": "485fe73c7772f9496558e3ecd850f1f004ca485e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/ocha_search/zipball/8bb1108a1db2955886ab5a3a20423c0c02276f80",
-                "reference": "8bb1108a1db2955886ab5a3a20423c0c02276f80",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_search/zipball/485fe73c7772f9496558e3ecd850f1f004ca485e",
+                "reference": "485fe73c7772f9496558e3ecd850f1f004ca485e",
                 "shasum": ""
             },
             "require": {
-                "composer/installers": "^1.7"
+                "composer/installers": "^1 || ^2"
             },
             "require-dev": {
                 "drupal/coder": "^8.3",
@@ -12127,9 +12121,9 @@
             ],
             "support": {
                 "issues": "https://github.com/UN-OCHA/ocha_search/issues",
-                "source": "https://github.com/UN-OCHA/ocha_search/tree/v1.0.7"
+                "source": "https://github.com/UN-OCHA/ocha_search/tree/v1.0.8"
             },
-            "time": "2023-02-09T14:22:52+00:00"
+            "time": "2024-02-12T12:45:40+00:00"
         },
         {
             "name": "webflo/drupal-finder",
