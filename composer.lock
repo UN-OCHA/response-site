@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f827e916bd19dc50124eb627bd8a2eee",
+    "content-hash": "fa63cb47527b408ccd6539473edfe241",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1654,17 +1654,11 @@
         },
         {
             "name": "drupal/aws",
-            "version": "2.0.3",
+            "version": "dev-2.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/aws.git",
-                "reference": "2.0.3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/aws-2.0.3.zip",
-                "reference": "2.0.3",
-                "shasum": "683b5ed0698bb6c64db8a34b42fff2571807becc"
+                "reference": "5c8371feefd3ea641cca486925e3db9e628b07ba"
             },
             "require": {
                 "aws/aws-sdk-php": "^3.54",
@@ -1672,12 +1666,15 @@
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-2.0.x": "2.0.x-dev"
+                },
                 "drupal": {
-                    "version": "2.0.3",
-                    "datestamp": "1671308573",
+                    "version": "2.0.3+4-dev",
+                    "datestamp": "1690752016",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -18301,6 +18298,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "drupal/aws": 20,
         "drupal/components": 10,
         "drupal/config_split": 5,
         "drupal/default_content": 15,

@@ -3,6 +3,8 @@ _core:
 module:
   address: 0
   admin_denied: 0
+  amazon_ses: 0
+  aws: 0
   big_pipe: 0
   block: 0
   breakpoint: 0
@@ -63,6 +65,7 @@ module:
   link_allowed_hosts: 0
   linkchecker: 0
   locale: 0
+  mailsystem: 0
   maintenance200: 0
   masquerade: 0
   memcache: 0
