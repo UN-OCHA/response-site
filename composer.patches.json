@@ -1,5 +1,8 @@
 {
     "patches": {
+      "drupal/amazon_ses": {
+            "Cron fails on amazon_ses when not configured": "PATCHES/amazon_ses-3417090-cron-queue-14.patch"
+        },
         "drupal/core" : {
             "https://www.drupal.org/project/drupal/issues/3143617": "https://www.drupal.org/files/issues/2020-07-07/3143617-28_0.patch",
             "Include database SSL/TLS info on status report": "./PATCHES/mysql-ssl-status.patch"
@@ -30,9 +33,6 @@
         },
         "mailchimp/marketing": {
             "PHP 8.2": "PATCHES/mailchimp_php82.patch"
-        },
-        "unocha/common_design": {
-          "Google fonts": "https://patch-diff.githubusercontent.com/raw/UN-OCHA/common_design/pull/471.diff"
         }
     }
 }
