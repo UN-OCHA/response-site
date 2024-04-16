@@ -1928,18 +1928,23 @@ function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
       unset($form['field_enabled_tabs']['widget']['#options']['pages']);
     }
 
+    $user = \Drupal::currentUser();
+
     // Hide language option for managers.
     if (isset($form['langcode'])) {
-      $user = \Drupal::currentUser();
       if (!$user->hasPermission('create operation group')) {
         $form['langcode']['#access'] = FALSE;
       }
     }
 
     // Restrict access to status.
-    $user = \Drupal::currentUser();
     if (!$user->hasPermission('rwr unpublish group')) {
       $form['status']['#access'] = FALSE;
+    }
+
+    // Restrict access to edit title.
+    if (strpos($form_id, '_edit_form') !== FALSE && !$user->hasPermission('rwr edit group title')) {
+      $form['label']['#disabled'] = TRUE;
     }
   }
 
