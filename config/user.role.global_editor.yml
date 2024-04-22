@@ -125,6 +125,8 @@ permissions:
   - 'revert all revisions'
   - 'revert landing_page revisions'
   - 'revert page revisions'
+  - 'rwr edit operation title'
+  - 'rwr edit cluster title'
   - 'rwr edit meta tags'
   - 'rwr unpublish group'
   - 'switch shortcut sets'
