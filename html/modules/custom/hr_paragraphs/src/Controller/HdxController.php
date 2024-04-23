@@ -510,7 +510,7 @@ class HdxController extends ControllerBase {
         'primary_country' => $row['groups'][0]['title'],
         'countries' => $row['groups'],
         'format' => 'Dataset',
-        'sources' => 'HDX',
+        'sources' => $row['dataset_source'] ?? 'HDX',
       ];
 
       if (isset($row['groups'])) {
