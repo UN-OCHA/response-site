@@ -38,8 +38,8 @@ module:
   fullcalendar_api: 0
   geofield: 0
   gnode: 0
-  google_tag: 0
   group: 0
+  gtm_barebones: 0
   help: 0
   hr_analytics: 0
   hr_entity_freshness: 0
