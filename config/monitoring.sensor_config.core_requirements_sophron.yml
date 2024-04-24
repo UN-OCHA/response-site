@@ -1,0 +1,20 @@
+uuid: 3fecb4ce-60a5-4b0b-a019-e4d2a59267ae
+langcode: en
+status: false
+dependencies:
+  module:
+    - sophron
+id: core_requirements_sophron
+label: 'Module sophron'
+description: 'Requirements of the sophron module'
+category: Requirements
+plugin_id: core_requirements
+result_class: null
+value_label: null
+value_type: no_value
+caching_time: 3600
+settings:
+  module: sophron
+  exclude_keys: {  }
+thresholds:
+  type: none
