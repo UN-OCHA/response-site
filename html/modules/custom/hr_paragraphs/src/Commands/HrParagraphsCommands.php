@@ -87,10 +87,12 @@ class HrParagraphsCommands extends DrushCommands {
    * @usage hr_paragraphs:import-operations --skip-existing --ids=1,2,3
    *   Import operations.
    */
-  public function importOperations($options = [
-    'skip-existing' => FALSE,
-    'ids' => '',
-  ]) {
+  public function importOperations(
+    $options = [
+      'skip-existing' => FALSE,
+      'ids' => '',
+    ],
+  ) {
     $filename = 'operations.tsv';
     $handle = $this->loadTsvFile($filename);
 
@@ -195,11 +197,13 @@ class HrParagraphsCommands extends DrushCommands {
    * @usage hr_paragraphs:import-clusters --skip-existing --ids=1,2,3 --ops-ids=7,8,9
    *   Import clusters.
    */
-  public function importClusters($options = [
-    'skip-existing' => FALSE,
-    'ids' => '',
-    'ops-ids' => '',
-  ]) {
+  public function importClusters(
+    $options = [
+      'skip-existing' => FALSE,
+      'ids' => '',
+      'ops-ids' => '',
+    ],
+  ) {
     $filename = 'clusters.tsv';
     $handle = $this->loadTsvFile($filename);
 
@@ -332,11 +336,13 @@ class HrParagraphsCommands extends DrushCommands {
    * @usage hr_paragraphs:import-pages --skip-existing --ids=1,2,3 --group-ids=7,8,9
    *   Import pages.
    */
-  public function importPages($options = [
-    'skip-existing' => FALSE,
-    'ids' => '',
-    'group-ids' => '',
-  ]) {
+  public function importPages(
+    $options = [
+      'skip-existing' => FALSE,
+      'ids' => '',
+      'group-ids' => '',
+    ],
+  ) {
     $filename = 'pages.tsv';
     $handle = $this->loadTsvFile($filename);
 
@@ -454,11 +460,13 @@ class HrParagraphsCommands extends DrushCommands {
    * @usage hr_paragraphs:import-members --skip-existing --ids=1,2,3 --group-ids=7,8,9
    *   Import members.
    */
-  public function importMembers($options = [
-    'skip-existing' => FALSE,
-    'ids' => '',
-    'group-ids' => '',
-  ]) {
+  public function importMembers(
+    $options = [
+      'skip-existing' => FALSE,
+      'ids' => '',
+      'group-ids' => '',
+    ],
+  ) {
     $filename = 'membership.tsv';
     $handle = $this->loadTsvFile($filename);
 
@@ -605,15 +613,17 @@ class HrParagraphsCommands extends DrushCommands {
    * @usage hr_paragraphs:import-users --account-active|--account-blocked --ids=1,2,3 --emails=user@example.com --group-ids=7,8,9
    *   Import users.
    */
-  public function importUsers($options = [
-    'skip-existing' => TRUE,
-    'migrate-all' => FALSE,
-    'account-active' => FALSE,
-    'account-blocked' => FALSE,
-    'ids' => '',
-    'group-ids' => '',
-    'emails' => '',
-  ]) {
+  public function importUsers(
+    $options = [
+      'skip-existing' => TRUE,
+      'migrate-all' => FALSE,
+      'account-active' => FALSE,
+      'account-blocked' => FALSE,
+      'ids' => '',
+      'group-ids' => '',
+      'emails' => '',
+    ],
+  ) {
 
     // Always skip existing users.
     $options['skip-existing'] = TRUE;
