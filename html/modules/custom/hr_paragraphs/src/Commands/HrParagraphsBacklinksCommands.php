@@ -75,9 +75,11 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
    * @usage hr_paragraphs:backlinks-home
    *   Fix home links.
    */
-  public function fixHomeLinks($options = [
-    'reset' => FALSE,
-  ]) {
+  public function fixHomeLinks(
+    $options = [
+      'reset' => FALSE,
+    ],
+  ) {
 
     $last_id = $this->state->get('hr_paragraphs_backlinks_' . __FUNCTION__, 0);
     if (!empty($options['reset'])) {
@@ -135,9 +137,11 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
    * @usage hr_paragraphs:backlinks-operation
    *   Fix operation links.
    */
-  public function fixOperationLinks($options = [
-    'reset' => FALSE,
-  ]) {
+  public function fixOperationLinks(
+    $options = [
+      'reset' => FALSE,
+    ],
+  ) {
     $last_id = $this->state->get('hr_paragraphs_backlinks_' . __FUNCTION__, 0);
     if (!empty($options['reset'])) {
       $last_id = 0;
@@ -248,9 +252,11 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
    * @usage hr_paragraphs:backlinks-cluster
    *   Fix cluster links.
    */
-  public function fixClusterLinks($options = [
-    'reset' => FALSE,
-  ]) {
+  public function fixClusterLinks(
+    $options = [
+      'reset' => FALSE,
+    ],
+  ) {
     $last_id = $this->state->get('hr_paragraphs_backlinks_' . __FUNCTION__, 0);
     if (!empty($options['reset'])) {
       $last_id = 0;
@@ -364,9 +370,11 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
    * @usage hr_paragraphs:backlinks-document
    *   Fix document links.
    */
-  public function fixDocumentLinks($options = [
-    'reset' => FALSE,
-  ]) {
+  public function fixDocumentLinks(
+    $options = [
+      'reset' => FALSE,
+    ],
+  ) {
     $last_id = $this->state->get('hr_paragraphs_backlinks_' . __FUNCTION__, 0);
     if (!empty($options['reset'])) {
       $last_id = 0;
@@ -486,9 +494,11 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
    * @usage hr_paragraphs:backlinks-documents
    *   Fix documents links.
    */
-  public function fixDocumentsLinks($options = [
-    'reset' => FALSE,
-  ]) {
+  public function fixDocumentsLinks(
+    $options = [
+      'reset' => FALSE,
+    ],
+  ) {
     $last_id = $this->state->get('hr_paragraphs_backlinks_' . __FUNCTION__, 0);
     if (!empty($options['reset'])) {
       $last_id = 0;
@@ -620,9 +630,11 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
    * @usage hr_paragraphs:backlinks-file
    *   Fix file links.
    */
-  public function fixFileLinks($options = [
-    'reset' => FALSE,
-  ]) {
+  public function fixFileLinks(
+    $options = [
+      'reset' => FALSE,
+    ],
+  ) {
     $last_id = $this->state->get('hr_paragraphs_backlinks_' . __FUNCTION__, 0);
     if (!empty($options['reset'])) {
       $last_id = 0;
@@ -736,9 +748,11 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
    * @usage hr_paragraphs:backlinks-node
    *   Fix node links.
    */
-  public function fixNodeLinks($options = [
-    'reset' => FALSE,
-  ]) {
+  public function fixNodeLinks(
+    $options = [
+      'reset' => FALSE,
+    ],
+  ) {
     $last_id = $this->state->get('hr_paragraphs_backlinks_' . __FUNCTION__, 0);
     if (!empty($options['reset'])) {
       $last_id = 0;
@@ -852,9 +866,11 @@ class HrParagraphsBacklinksCommands extends DrushCommands {
    * @usage hr_paragraphs:backlinks-privatefile
    *   Fix private file links.
    */
-  public function fixPrivateFileLinks($options = [
-    'reset' => FALSE,
-  ]) {
+  public function fixPrivateFileLinks(
+    $options = [
+      'reset' => FALSE,
+    ],
+  ) {
     $last_id = $this->state->get('hr_paragraphs_backlinks_' . __FUNCTION__, 0);
     if (!empty($options['reset'])) {
       $last_id = 0;
