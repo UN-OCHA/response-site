@@ -1,6 +1,8 @@
 # Variables. Yes.
 DOCKER=docker
 DOCKER_BUILDKIT=0
+IMAGE_NAME=response-site
+IMAGE_TAG=local
 
 # The main build recipe.
 build:  clean

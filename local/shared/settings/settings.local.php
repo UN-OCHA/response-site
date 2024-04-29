@@ -178,6 +178,11 @@ if (!empty($no_cache)) {
   $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
 }
 
+$settings['env_link_fixer_disabled'] = TRUE;
+
+# $settings['env_link_fixer_custom_mappings'] = [
+#   'response-local.test' => 'response.reliefweb.int',
+# ]
 // // Change kint depth_limit setting.
 // if (class_exists('Kint')) {
 //   // Set the depth_limit to prevent out-of-memory.
