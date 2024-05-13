@@ -17,22 +17,8 @@ use Drupal\group\Entity\GroupRelationship;
 
 /**
  * Add datalayer dimensions for google tag manager.
- *
- * Note: the google_tag module store snippets on files for caching even when
- * instructed to add the snippets inline. As a result we cannot easily add
- * custom dimensions per entity so we inject them ourselves here.
  */
 function hr_analytics_page_attachments(array &$attachments) {
-  /** @var \Drupal\google_tag\Entity\Container $container */
-  $container = \Drupal::entityTypeManager()
-    ?->getStorage('google_tag_container')
-    ?->load('default');
-
-  // Check if we should add the custom dimensions.
-  if (!isset($container) || !$container->insertSnippet()) {
-    return;
-  }
-
   $dimensions = [];
   $dimensions += hr_analytics_get_entity_dimensions();
   $dimensions += hr_analytics_get_user_dimensions();
@@ -45,7 +31,7 @@ function hr_analytics_page_attachments(array &$attachments) {
     // Add the datalayer javascript.
     $datalayer_json = Json::encode($datalayer);
     if (!empty($datalayer_json)) {
-      $variable = $container->variableClean('data_layer');
+      $variable = 'dataLayer';
       $content = $variable . ' = [' . $datalayer_json . '];';
 
       $attachments['#attached']['html_head'][] = [

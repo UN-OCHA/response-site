@@ -103,9 +103,14 @@ class IcalController extends ControllerBase {
       if (isset($event['RRULE'])) {
         // Track excluded dates.
         $excluded_dates = [];
-        if (isset($event['EXDATE']) && is_array($event['EXDATE'])) {
-          foreach ($event['EXDATE'] as $ex_date) {
-            $excluded_dates[] = $ex_date->format(\DateTimeInterface::W3C);
+        if (isset($event['EXDATE'])) {
+          if (is_array($event['EXDATE'])) {
+            foreach ($event['EXDATE'] as $ex_date) {
+              $excluded_dates[] = $ex_date->format('Y-m-d');
+            }
+          }
+          else {
+            $excluded_dates[] = $event['EXDATE']->format('Y-m-d');
           }
         }
 
@@ -122,7 +127,7 @@ class IcalController extends ControllerBase {
 
         foreach ($generator as $occurrence) {
           // Check excluded dates.
-          if (in_array($occurrence->getStart()->format(\DateTimeInterface::W3C), $excluded_dates)) {
+          if (in_array($occurrence->getStart()->format('Y-m-d'), $excluded_dates)) {
             continue;
           }
 

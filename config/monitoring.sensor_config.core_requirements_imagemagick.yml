@@ -1,0 +1,20 @@
+uuid: b2ce1577-728e-4f14-a6cb-4546f3312fd0
+langcode: en
+status: false
+dependencies:
+  module:
+    - imagemagick
+id: core_requirements_imagemagick
+label: 'Module imagemagick'
+description: 'Requirements of the imagemagick module'
+category: Requirements
+plugin_id: core_requirements
+result_class: null
+value_label: null
+value_type: no_value
+caching_time: 3600
+settings:
+  module: imagemagick
+  exclude_keys: {  }
+thresholds:
+  type: none

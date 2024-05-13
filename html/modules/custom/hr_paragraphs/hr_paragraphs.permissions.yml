@@ -4,3 +4,9 @@ rwr edit meta tags:
 rwr unpublish group:
   title: 'Unpublish operations and clusters'
   restrict access: true
+rwr edit operation title:
+  title: 'Edit title of an operation'
+  restrict access: true
+rwr edit cluster title:
+  title: 'Edit title of a clusters'
+  restrict access: true

@@ -13,6 +13,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
@@ -1900,7 +1901,7 @@ function hr_paragraphs_module_implements_alter(array &$implementations, string $
 /**
  * Implements hook_form_alter().
  */
-function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
+function hr_paragraphs_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Hide path for memberships.
   $form_ids = [
     'group_content_operation-group_membership_add_form',
@@ -1928,18 +1929,67 @@ function hr_paragraphs_form_alter(&$form, $form_state, $form_id) {
       unset($form['field_enabled_tabs']['widget']['#options']['pages']);
     }
 
+    $user = \Drupal::currentUser();
+
     // Hide language option for managers.
     if (isset($form['langcode'])) {
-      $user = \Drupal::currentUser();
       if (!$user->hasPermission('create operation group')) {
         $form['langcode']['#access'] = FALSE;
       }
     }
 
     // Restrict access to status.
-    $user = \Drupal::currentUser();
     if (!$user->hasPermission('rwr unpublish group')) {
       $form['status']['#access'] = FALSE;
+    }
+
+    // Restrict access to edit title.
+    if (strpos($form_id, '_edit_form') !== FALSE) {
+      /** @var \Drupal\group\Entity\Group $group */
+      $group = $form_state->getFormObject()->getEntity();
+      $bundle = $group->bundle();
+
+      switch ($bundle) {
+        case 'operation':
+          if (!$user->hasPermission('rwr edit ' . $bundle . ' title')) {
+            $form['label']['#disabled'] = TRUE;
+          }
+          break;
+
+        case 'cluster':
+          // Manager of parent (operation) may edit field.
+          if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
+            $operation = Group::load($group->subgroup_tree->value);
+            if ($member = $operation->getMember($user)) {
+              $roles = $member->getRoles();
+              if (!isset($roles['operation-manager'])) {
+                if (!$user->hasPermission('rwr edit ' . $bundle . ' title')) {
+                  $form['label']['#disabled'] = TRUE;
+                }
+              }
+            }
+            else {
+              // Not a member of the operation.
+              if (!$user->hasPermission('rwr edit ' . $bundle . ' title')) {
+                $form['label']['#disabled'] = TRUE;
+              }
+            }
+          }
+          else {
+            // No operation found.
+            if (!$user->hasPermission('rwr edit ' . $bundle . ' title')) {
+              $form['label']['#disabled'] = TRUE;
+            }
+          }
+          break;
+
+        default:
+          if (!$user->hasPermission('rwr edit ' . $bundle . ' title')) {
+            $form['label']['#disabled'] = TRUE;
+          }
+          break;
+
+      }
     }
   }
 

@@ -200,7 +200,7 @@ class ParagraphController extends ControllerBase {
    * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
    *   Render array or redirect to external site.
    */
-  public function getContacts(Group $group) : array|TrustedRedirectResponse {
+  public function getContacts(Group $group) : array | TrustedRedirectResponse {
     if ($group->field_offices_page->isEmpty()) {
       return [
         '#type' => 'markup',
@@ -360,7 +360,7 @@ class ParagraphController extends ControllerBase {
    * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
    *   Render array or redirect to external site.
    */
-  public function getDatasets(Group $group, Request $request) : array|TrustedRedirectResponse {
+  public function getDatasets(Group $group, Request $request) : array | TrustedRedirectResponse {
     if ($group->hasField('field_hdx_alternate_source') && !$group->field_hdx_alternate_source->isEmpty()) {
       /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
       $link = $group->field_hdx_alternate_source->first();
@@ -479,7 +479,7 @@ class ParagraphController extends ControllerBase {
    * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
    *   Render array or redirect to external site.
    */
-  public function getReports(Group $group, Request $request) : array|TrustedRedirectResponse {
+  public function getReports(Group $group, Request $request) : array | TrustedRedirectResponse {
     if ($group->hasField('field_documents_page') && !$group->field_documents_page->isEmpty()) {
       /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
       $link = $group->field_documents_page->first();
@@ -530,7 +530,7 @@ class ParagraphController extends ControllerBase {
    * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
    *   Render array or redirect to external site.
    */
-  public function getInfographics(Group $group, Request $request) : array|TrustedRedirectResponse {
+  public function getInfographics(Group $group, Request $request) : array | TrustedRedirectResponse {
     if ($group->hasField('field_infographics') && !$group->field_infographics->isEmpty()) {
       /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
       $link = $group->field_infographics->first();
@@ -683,7 +683,7 @@ class ParagraphController extends ControllerBase {
    * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
    *   Render array or redirect to external site.
    */
-  public function getAssessments(Group $group, Request $request) : array|TrustedRedirectResponse {
+  public function getAssessments(Group $group, Request $request) : array | TrustedRedirectResponse {
     if ($group->hasField('field_assessments_page') && !$group->field_assessments_page->isEmpty()) {
       /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
       $link = $group->field_assessments_page->first();
@@ -729,7 +729,7 @@ class ParagraphController extends ControllerBase {
    * @return array<string, mixed>|\Drupal\Core\Routing\TrustedRedirectResponse
    *   Render array or redirect to external site.
    */
-  public function getEvents(Group $group) : array|TrustedRedirectResponse {
+  public function getEvents(Group $group) : array | TrustedRedirectResponse {
     if ($group->hasField('field_calendar_alternate_link') && !$group->field_calendar_alternate_link->isEmpty()) {
       /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
       $link = $group->field_calendar_alternate_link->first();

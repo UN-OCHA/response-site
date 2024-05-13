@@ -1,12 +1,12 @@
-version: "2.2"
+name: response-test
 
 networks:
   default:
 
 volumes:
-  response-test-site-database:
-  response-test-site-public:
-  response-test-site-private:
+  site-database:
+  site-public:
+  site-private:
 
 services:
   mysql:
@@ -18,7 +18,7 @@ services:
       - MYSQL_USER=response
       - MYSQL_PASS=response
     volumes:
-      - "response-test-site-database:/var/lib/mysql:rw"
+      - "site-database:/var/lib/mysql:rw"
     networks:
       - default
 
@@ -31,8 +31,8 @@ services:
     volumes:
       - "./settings:/srv/www/shared/settings:ro"
       # Mount volumes for the private and public files.
-      - "response-test-site-public:/srv/www/html/sites/default/files:rw"
-      - "response-test-site-private:/srv/www/html/sites/default/private:rw"
+      - "site-public:/srv/www/html/sites/default/files:rw"
+      - "site-private:/srv/www/html/sites/default/private:rw"
       # Mount the folders needed for the tests.
       - "../phpcs.xml:/srv/www/phpcs.xml:ro"
       - "../phpunit.xml:/srv/www/phpunit.xml:ro"

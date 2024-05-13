@@ -1,12 +1,12 @@
-uuid: 3f7602d6-6253-4c3b-b903-1be4eac5e84b
+uuid: 11c052b4-7d0a-4759-9ec7-62ed0e95c944
 langcode: en
 status: false
 dependencies:
   module:
-    - google_tag
-id: core_requirements_google_tag
-label: 'Module google_tag'
-description: 'Requirements of the google_tag module'
+    - xmlsitemap
+id: core_requirements_xmlsitemap
+label: 'Module xmlsitemap'
+description: 'Requirements of the xmlsitemap module'
 category: Requirements
 plugin_id: core_requirements
 result_class: null
@@ -14,7 +14,7 @@ value_label: null
 value_type: no_value
 caching_time: 3600
 settings:
-  module: google_tag
+  module: xmlsitemap
   exclude_keys: {  }
 thresholds:
   type: none
