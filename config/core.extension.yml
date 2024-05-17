@@ -91,6 +91,7 @@ module:
   redirect: 0
   responsive_image: 0
   rest: 0
+  seckit: 0
   select2: 0
   serialization: 0
   shortcut: 0
