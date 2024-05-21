@@ -13,7 +13,6 @@ module:
   config: 0
   config_split: 0
   contextual: 0
-  csp: 0
   csv_serialization: 0
   ctools: 0
   dashboards: 0
