@@ -12,7 +12,7 @@ seckit_xss:
     object-src: "'none'"
     style-src: "'self' 'unsafe-inline' fonts.googleapis.com https://cdnjs.cloudflare.com"
     img-src: "'self' data: https://*.google-analytics.com https://*.googletagmanager.com gstatic.com ytimg.com reliefweb.int"
-    media-src: 'data:'
+    media-src: "'none'"
     frame-src: "'self'  https://flo.uri.sh  https://api.mapbox.com https://app.powerbi.com"
     frame-ancestors: "'self'"
     child-src: "'self'"
