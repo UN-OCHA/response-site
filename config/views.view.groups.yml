@@ -5,9 +5,12 @@ dependencies:
   config:
     - field.storage.group.field_archive_group
     - field.storage.group.field_enabled_tabs
+    - user.role.administrator
+    - user.role.global_editor
   module:
     - group
     - options
+    - user
 id: groups
 label: Groups
 module: views
@@ -645,8 +648,11 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: role
+        options:
+          role:
+            administrator: administrator
+            global_editor: global_editor
       cache:
         type: tag
         options: {  }
@@ -936,6 +942,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.roles
       tags:
         - 'config:field.storage.group.field_archive_group'
         - 'config:field.storage.group.field_enabled_tabs'
@@ -945,7 +952,10 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
       path: admin/group
     cache_metadata:
       max-age: -1
@@ -954,6 +964,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.roles
       tags:
         - 'config:field.storage.group.field_archive_group'
         - 'config:field.storage.group.field_enabled_tabs'
