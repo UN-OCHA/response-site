@@ -13,7 +13,6 @@ module:
   config: 0
   config_split: 0
   contextual: 0
-  csp: 0
   csv_serialization: 0
   ctools: 0
   dashboards: 0
@@ -91,6 +90,7 @@ module:
   redirect: 0
   responsive_image: 0
   rest: 0
+  seckit: 0
   select2: 0
   serialization: 0
   shortcut: 0
