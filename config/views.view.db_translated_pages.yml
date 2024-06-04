@@ -311,7 +311,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'access content'
+          perm: 'administer nodes'
       cache:
         type: tag
         options: {  }
@@ -536,7 +536,10 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        metatag_display_extender:
+          metatags: {  }
+          tokenize: false
       block_category: 'Dashboards: Response'
     cache_metadata:
       max-age: -1
@@ -595,6 +598,7 @@ display:
         - 'languages:language_interface'
         - request_format
         - url
+        - 'user.node_grants:view'
         - user.permissions
       tags: {  }
   page_1:
