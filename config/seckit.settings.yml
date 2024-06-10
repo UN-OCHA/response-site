@@ -13,7 +13,7 @@ seckit_xss:
     style-src: "'self' 'unsafe-inline' https://googletagmanager.com https://tagmanager.google.com fonts.googleapis.com cdnjs.cloudflare.com"
     img-src: "'self' data: https://*.google-analytics.com https://*.googletagmanager.com gstatic.com https://googleads.g.doubleclick.net https://www.google.com https://google.com ytimg.com reliefweb.int"
     media-src: "'none'"
-    frame-src: "'self' https://www.googletagmanager.com https://bid.g.doubleclick.net https://td.doubleclick.net https://flo.uri.sh  https://api.mapbox.com https://app.powerbi.com https://data.humdata.org https://drive.google.com https://www.youtube.com https://datawrapper.dwcdn.net https://teamup.com https://lookerstudio.google.com https://experience.arcgis.com https://public.tableau.com https://rrmniger.azurewebsites.net/"
+    frame-src: "'self' https://www.googletagmanager.com https://bid.g.doubleclick.net https://td.doubleclick.net https://flo.uri.sh https://api.mapbox.com https://app.powerbi.com https://data.humdata.org https://drive.google.com https://www.youtube.com https://datawrapper.dwcdn.net https://teamup.com https://lookerstudio.google.com https://experience.arcgis.com https://public.tableau.com https://rrmniger.azurewebsites.net https://cdn.addevent.com https://cdn.knightlab.com https://dashboards.impact-initiatives.org https://docs.google.com https://e.infogram.com https://jmmi-northernsyria.shinyapps.io https://logie.logcluster.org https://m.facebook.com https://miro.com https://spxih.mjt.lu https://turkiyeeq.thedeep.io https://ukraine.servicesadvisor.net https://unhcr.carto.com https://www.arcgis.com"
     frame-ancestors: "'self'"
     child-src: "'self'"
     font-src: "'self' data: fonts.gstatic.com"
