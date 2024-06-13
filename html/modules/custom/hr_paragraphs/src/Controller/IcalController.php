@@ -117,36 +117,45 @@ class IcalController extends ControllerBase {
         $iterationCount = 0;
         $maxIterations = 40;
 
-        $rule = DateRecurHelper::create($event['RRULE'], $event['DTSTART'], $event['DTEND']);
-        if ($range_start && $range_end) {
-          $generator = $rule->generateOccurrences(new \DateTime($range_start), new \DateTime($range_end));
-        }
-        else {
-          $generator = $rule->generateOccurrences(new \DateTime());
-        }
-
-        foreach ($generator as $occurrence) {
-          // Check excluded dates.
-          if (in_array($occurrence->getStart()->format('Y-m-d'), $excluded_dates)) {
-            continue;
+        try {
+          $rule = DateRecurHelper::create($event['RRULE'], $event['DTSTART'], $event['DTEND']);
+          if ($range_start && $range_end) {
+            $generator = $rule->generateOccurrences(new \DateTime($range_start), new \DateTime($range_end));
+          }
+          else {
+            $generator = $rule->generateOccurrences(new \DateTime());
           }
 
-          $output[] = [
-            'title' => $event['SUMMARY'] ?? '',
-            'description' => $event['DESCRIPTION'] ?? '',
-            'location' => $event['LOCATION'] ?? '',
-            'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
-            'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
-            'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
-            'timezone' => $event['DTSTART']->getTimezone()->getName(),
-            'timezone_string' => $event['timezone_string'] ?? $event['DTSTART']->getTimezone()->getName(),
-            'attachments' => $attachments,
-          ];
+          foreach ($generator as $occurrence) {
+            // Check excluded dates.
+            if (in_array($occurrence->getStart()->format('Y-m-d'), $excluded_dates)) {
+              continue;
+            }
 
-          $iterationCount++;
-          if ($iterationCount >= $maxIterations) {
-            break;
+            $output[] = [
+              'title' => $event['SUMMARY'] ?? '',
+              'description' => $event['DESCRIPTION'] ?? '',
+              'location' => $event['LOCATION'] ?? '',
+              'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
+              'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
+              'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
+              'timezone' => $event['DTSTART']->getTimezone()->getName(),
+              'timezone_string' => $event['timezone_string'] ?? $event['DTSTART']->getTimezone()->getName(),
+              'attachments' => $attachments,
+            ];
+
+            $iterationCount++;
+            if ($iterationCount >= $maxIterations) {
+              break;
+            }
           }
+        }
+        catch (\Exception $e) {
+          $this->getLogger('hr_paragraphs_ical')->notice('Exception when building event list: @msg', [
+            '@msg' => $e->getMessage(),
+          ]);
+
+          return [];
         }
       }
       else {
