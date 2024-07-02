@@ -11,7 +11,7 @@ third_party_settings:
 name: 'Landing Page'
 type: landing_page
 description: 'Use this for the Homepage or another dashboard-like page. Unlike a plain Page, the Landing Page can contain a multi-column layout'
-help: ''
+help: null
 new_revision: true
 preview_mode: 1
 display_submitted: false
