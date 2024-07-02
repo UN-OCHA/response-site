@@ -10,6 +10,7 @@ label: 'Operation management'
 weight: 0
 theme: hri_admin
 admin_theme: hri_admin
+conjunction: and
 visibility:
   request_path:
     id: request_path
