@@ -4,8 +4,10 @@ override_registration_settings: true
 end_session_enabled: true
 user_login_display: replace
 redirect_login: ''
-redirect_logout: ''
-userinfo_mappings: {  }
+redirect_logout: '/'
+userinfo_mappings:
+  timezone: zoneinfo
+  user_picture: picture
 role_mappings:
   administrator: {  }
   global_editor: {  }
