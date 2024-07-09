@@ -5,7 +5,7 @@ dependencies:
   module:
     - openid_connect_windows_aad
 id: azure_b2c_signup_signin
-label: 'Azure B2C Signup/Signin'
+label: 'Azure B2C (New HID)'
 plugin: windows_aad
 settings:
   client_id: 64661a42-4710-4bfd-97ab-916bcfeddb59
