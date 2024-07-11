@@ -16,8 +16,7 @@ class AuthController extends ControllerBase {
    */
   public function redirectRegister() {
     $url = $this->config('azure_tweaks.settings')->get('register_url');
-    $openid_client = $this->config('azure_tweaks.settings')->get('openid_connect_client');
-    $client_id = $this->config('openid_connect.client.' . $openid_client)->get('settings.client_id');
+    $client_id = $this->config('azure_tweaks.settings')->get('openid_connect_client_id');
     $redirect = Url::fromRoute('<front>')->setAbsolute()->toString();
     $redirect .= 'openid-connect/azure_b2c_signin';
 
@@ -35,8 +34,7 @@ class AuthController extends ControllerBase {
    */
   public function redirectResetPassword() {
     $url = $this->config('azure_tweaks.settings')->get('password_url');
-    $openid_client = $this->config('azure_tweaks.settings')->get('openid_connect_client');
-    $client_id = $this->config('openid_connect.client.' . $openid_client)->get('settings.client_id');
+    $client_id = $this->config('azure_tweaks.settings')->get('openid_connect_client_id');
     $redirect = Url::fromRoute('<front>')->setAbsolute()->toString();
     $redirect .= 'openid-connect/azure_b2c_signin';
 

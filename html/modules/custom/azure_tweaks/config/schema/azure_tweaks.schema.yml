@@ -8,6 +8,6 @@ azure_tweaks.settings:
     register_url:
       type: string
       label: 'Register URL'
-    openid_connect_client:
+    openid_connect_client_id:
       type: string
-      label: 'OpenID Client'
+      label: 'OpenID Client ID'
