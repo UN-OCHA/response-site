@@ -1,0 +1,16 @@
+azure_tweaks.register:
+  path: '/user/register'
+  defaults:
+    _controller: '\Drupal\azure_tweaks\Controller\AuthController::redirectRegister'
+    _title: 'Create new account'
+  requirements:
+    _user_is_logged_in: 'FALSE'
+azure_tweaks.pass:
+  path: '/user/password'
+  defaults:
+    _controller: '\Drupal\azure_tweaks\Controller\AuthController::redirectResetPassword'
+    _title: 'Reset your password'
+  requirements:
+    _access: 'TRUE'
+  options:
+    _user_is_logged_in: 'FALSE'

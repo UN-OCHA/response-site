@@ -1,0 +1,7 @@
+name: 'Azure tweaks'
+description: Tweaks for Azure B2C.
+type: module
+core_version_requirement: ^9 || ^10
+package: 'UNOCHA'
+dependencies:
+  - openid_connect_windows_aad:openid_connect_windows_aad

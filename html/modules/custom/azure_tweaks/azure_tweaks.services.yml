@@ -1,0 +1,7 @@
+services:
+  azure_tweaks.route_subscriber:
+    class: Drupal\azure_tweaks\Routing\RouteSubscriber
+    arguments:
+      - '@config.factory'
+    tags:
+      - { name: event_subscriber }

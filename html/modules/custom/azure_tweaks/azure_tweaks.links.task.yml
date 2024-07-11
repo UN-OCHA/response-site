@@ -1,0 +1,9 @@
+azure_tweaks.register:
+  route_name: azure_tweaks.register
+  base_route: user.page
+  title: 'Create new account'
+
+azure_tweaks.pass:
+  route_name: azure_tweaks.pass
+  base_route: user.page
+  title: 'Reset your password'
