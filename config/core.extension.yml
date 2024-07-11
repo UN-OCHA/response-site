@@ -5,6 +5,7 @@ module:
   admin_denied: 0
   amazon_ses: 0
   aws: 0
+  azure_tweaks: 0
   big_pipe: 0
   block: 0
   breakpoint: 0
