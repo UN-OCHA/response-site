@@ -5,7 +5,6 @@ module:
   admin_denied: 0
   amazon_ses: 0
   aws: 0
-  azure_tweaks: 0
   big_pipe: 0
   block: 0
   breakpoint: 0
@@ -79,6 +78,7 @@ module:
   monitoring: 0
   mysql: 0
   node: 0
+  ocha_azure_tweaks: 0
   ocha_monitoring: 0
   ocha_search: 0
   openid_connect: 0
