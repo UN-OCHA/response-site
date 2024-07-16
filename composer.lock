@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "489d07555f5f360fd52d99a3ac88a9f2",
+    "content-hash": "7b98d0c0ce896d065065aee67cdb5d2b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -12549,6 +12549,46 @@
                 "source": "https://github.com/UN-OCHA/gtm_barebones/tree/1.1.3"
             },
             "time": "2024-07-17T12:52:34+00:00"
+        },
+        {
+            "name": "unocha/ocha_azure_tweaks",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UN-OCHA/ocha_azure_tweaks.git",
+                "reference": "41adb36060d81b91880e48d5169ef7a55f6eb40e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_azure_tweaks/zipball/41adb36060d81b91880e48d5169ef7a55f6eb40e",
+                "reference": "41adb36060d81b91880e48d5169ef7a55f6eb40e",
+                "shasum": ""
+            },
+            "require": {
+                "drupal/openid_connect_windows_aad": "^2.0@beta",
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "drupal/coder": "^8.3",
+                "phpcompatibility/php-compatibility": "^9.3"
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "UNOCHA"
+                }
+            ],
+            "description": "OCHA Azure tweaks module",
+            "support": {
+                "issues": "https://github.com/UN-OCHA/ocha_azure_tweaks/issues",
+                "source": "https://github.com/UN-OCHA/ocha_azure_tweaks/tree/0.0.1"
+            },
+            "time": "2024-07-16T02:41:48+00:00"
         },
         {
             "name": "unocha/ocha_monitoring",
