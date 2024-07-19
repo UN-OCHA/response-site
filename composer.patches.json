@@ -24,6 +24,9 @@
       "Avoid null links": "./PATCHES/linkchecker_null_link.patch",
       "Recognize previous revisions https://www.drupal.org/project/linkchecker/issues/3366753": "./PATCHES/linkchecker-previous-revisions-3366753.patch"
     },
+    "drupal/openid_connect": {
+      "Handle case if user is in blocked state after SSO Authorization": "PATCHES/openid_connect-3390668-6.patch"
+    },
     "drupal/openid_connect_windows_aad": {
       "Failed to get authentication tokens for Windows Azure AD": "PATCHES/openid_connect_windows_aad-3346603-5.patch"
     },
