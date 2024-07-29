@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a7fa0591e32391909cd08666484b0c7",
+    "content-hash": "3e5f31a99c4fca0b632da771dc6f1498",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -12552,16 +12552,16 @@
         },
         {
             "name": "unocha/ocha_azure_tweaks",
-            "version": "0.0.2",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/ocha_azure_tweaks.git",
-                "reference": "134e947e7351e5dcc50de690e9034f6b01642750"
+                "reference": "1505e707623a917da492cd6acdb46666c6917698"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/ocha_azure_tweaks/zipball/134e947e7351e5dcc50de690e9034f6b01642750",
-                "reference": "134e947e7351e5dcc50de690e9034f6b01642750",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_azure_tweaks/zipball/1505e707623a917da492cd6acdb46666c6917698",
+                "reference": "1505e707623a917da492cd6acdb46666c6917698",
                 "shasum": ""
             },
             "require": {
@@ -12586,9 +12586,9 @@
             "description": "OCHA Azure tweaks module",
             "support": {
                 "issues": "https://github.com/UN-OCHA/ocha_azure_tweaks/issues",
-                "source": "https://github.com/UN-OCHA/ocha_azure_tweaks/tree/0.0.2"
+                "source": "https://github.com/UN-OCHA/ocha_azure_tweaks/tree/v0.1.0"
             },
-            "time": "2024-07-16T03:24:24+00:00"
+            "time": "2024-07-29T00:31:58+00:00"
         },
         {
             "name": "unocha/ocha_monitoring",
@@ -18836,5 +18836,5 @@
         "php": "8.*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
