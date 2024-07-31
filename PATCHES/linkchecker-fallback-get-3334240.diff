@@ -1,0 +1,108 @@
+diff --git a/config/install/linkchecker.settings.yml b/config/install/linkchecker.settings.yml
+index f3311437c5beb3072a353b5047d769850442f95b..c8f135bae3aba4c7a69394dc998334780138ee20 100644
+--- a/config/install/linkchecker.settings.yml
++++ b/config/install/linkchecker.settings.yml
+@@ -29,6 +29,7 @@ check:
+ error:
+   action_status_code_301: 0
+   action_status_code_404: 0
++  fallback_get_if_head_fails: true
+   ignore_response_codes: "200\n206\n302\n304\n401\n403"
+   impersonate_account: ''
+ logging:
+diff --git a/config/schema/linkchecker.schema.yml b/config/schema/linkchecker.schema.yml
+index 7b3ad78f875cbcb883190b180bcbeaf5b28051bf..3c4cd755482815392a87fdc641bbc5936984c0e5 100644
+--- a/config/schema/linkchecker.schema.yml
++++ b/config/schema/linkchecker.schema.yml
+@@ -79,6 +79,9 @@ linkchecker.settings:
+         action_status_code_404:
+           type: integer
+           label: 'Unpublish content on file not found error'
++        fallback_get_if_head_fails:
++          type: boolean
++          label: 'If HEAD request fails, attempt GET'
+         ignore_response_codes:
+           type: string
+           label: 'Do not treat these response codes as errors'
+diff --git a/src/Form/LinkCheckerAdminSettingsForm.php b/src/Form/LinkCheckerAdminSettingsForm.php
+index 73cafcff0e0d1048fc3b4376550502a30d92f207..d6571f338766bd929fd446d3dccceb2501b8eb81 100644
+--- a/src/Form/LinkCheckerAdminSettingsForm.php
++++ b/src/Form/LinkCheckerAdminSettingsForm.php
+@@ -388,6 +388,12 @@ class LinkCheckerAdminSettingsForm extends ConfigFormBase {
+         10 => $this->t('After ten file not found errors'),
+       ],
+     ];
++    $form['error']['linkchecker_fallback_get_if_head_fails'] = [
++      '#title' => $this->t('Use GET method if error returned with HEAD'),
++      '#description' => $this->t('Certain sites may return an error when using HEAD, but return OK when making a GET request. In case HEAD request returns error, a GET request would be attempted.'),
++      '#type' => 'checkbox',
++      '#default_value' => $config->get('error.fallback_get_if_head_fails'),
++    ];
+     $form['error']['linkchecker_ignore_response_codes'] = [
+       '#default_value' => $config->get('error.ignore_response_codes'),
+       '#type' => 'textarea',
+@@ -480,6 +486,7 @@ class LinkCheckerAdminSettingsForm extends ConfigFormBase {
+       ->set('check.useragent', $form_state->getValue('linkchecker_check_useragent'))
+       ->set('error.action_status_code_301', $form_state->getValue('linkchecker_action_status_code_301'))
+       ->set('error.action_status_code_404', $form_state->getValue('linkchecker_action_status_code_404'))
++      ->set('error.fallback_get_if_head_fails', $form_state->getValue('linkchecker_fallback_get_if_head_fails'))
+       ->set('error.ignore_response_codes', $form_state->getValue('linkchecker_ignore_response_codes'))
+       ->set('error.impersonate_account', $form_state->getValue('linkchecker_impersonate_account'))
+       ->set('logging.level', $form_state->getValue('linkchecker_logging_level'))
+diff --git a/src/LinkCheckerService.php b/src/LinkCheckerService.php
+index e672546064af73737756e62370b2e660bcfe1064..0257f8042d4591f50dbba7c4b19e5c70feb9d8c3 100644
+--- a/src/LinkCheckerService.php
++++ b/src/LinkCheckerService.php
+@@ -193,6 +193,26 @@ class LinkCheckerService {
+     return $this->httpClient
+       ->requestAsync($link->getRequestMethod(), $link->getUrl(), $options)
+       ->then(function (ResponseInterface $response) use ($link, $uri) {
++        // Certain HEAD requests return error even though they are valid.
++        // If turned on, in case of error response to HEAD request, attempt
++        // a GET request as well.
++        $fallbackGetIfHeadFails = $this->linkcheckerSetting->get('error.fallback_get_if_head_fails');
++        $isHead = $link->getRequestMethod() === 'HEAD';
++        $isErrorResponse = !in_array($response->getStatusCode(), $this->getIgnoreResponseCodes());
++
++        if ($fallbackGetIfHeadFails && $isHead && $isErrorResponse) {
++          // It checks the link using GET method. After the check is finished,
++          // it resets the method to HEAD.
++          $link->setRequestMethod('GET')->save();
++          $this->check($link)
++            ->then(
++              function () use ($link) {
++                $link->setRequestMethod('HEAD')->save();
++              }
++            );
++          return NULL;
++        }
++
+         if (!empty($uri['fragment'])) {
+           $response = $response->withHeader('Fragment', $uri['fragment']);
+         }
+@@ -204,6 +224,16 @@ class LinkCheckerService {
+     );
+   }
+ 
++  /**
++   * Extracts response codes which are not treated as broken links.
++   *
++   * @return string[]
++   *   Array of response codes.
++   */
++  protected function getIgnoreResponseCodes() {
++    return preg_split('/(\r\n?|\n)/', $this->linkcheckerSetting->get('error.ignore_response_codes'));
++  }
++
+   /**
+    * Status code handling.
+    *
+@@ -214,7 +244,7 @@ class LinkCheckerService {
+    *   The link.
+    */
+   protected function statusHandling(ResponseInterface $response, LinkCheckerLinkInterface $link) {
+-    $ignoreResponseCodes = preg_split('/(\r\n?|\n)/', $this->linkcheckerSetting->get('error.ignore_response_codes'));
++    $ignoreResponseCodes = $this->getIgnoreResponseCodes();
+ 
+     $error = $response->getReasonPhrase();
+     if (!isset($error)) {
