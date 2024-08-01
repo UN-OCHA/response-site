@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da9eac0c036591f8d458391e184e31ab",
+    "content-hash": "aeed14aa91569f55f5db386497b66ff7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2369,55 +2369,6 @@
             "time": "2024-07-04T11:33:45+00:00"
         },
         {
-            "name": "drupal/csp",
-            "version": "1.33.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/csp.git",
-                "reference": "8.x-1.33"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/csp-8.x-1.33.zip",
-                "reference": "8.x-1.33",
-                "shasum": "c923468c3cf077bbc89967ee7fa6c6e48c7254df"
-            },
-            "require": {
-                "drupal/core": "~10.0.0 || ^10.1.3 || ^11",
-                "ext-json": "*"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.33",
-                    "datestamp": "1721292907",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "gapple",
-                    "homepage": "https://www.drupal.org/user/490940"
-                }
-            ],
-            "description": "Provide Content-Security-Policy headers",
-            "homepage": "https://www.drupal.org/project/csp",
-            "keywords": [
-                "Drupal"
-            ],
-            "support": {
-                "source": "https://git.drupalcode.org/project/csp",
-                "issues": "https://www.drupal.org/project/issues/csp"
-            }
-        },
-        {
             "name": "drupal/csv_serialization",
             "version": "4.0.0",
             "source": {
@@ -3496,28 +3447,28 @@
         },
         {
             "name": "drupal/imagemagick",
-            "version": "3.7.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/imagemagick.git",
-                "reference": "8.x-3.7"
+                "reference": "4.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/imagemagick-8.x-3.7.zip",
-                "reference": "8.x-3.7",
-                "shasum": "2698db0ccc4a76d44ebbbfcabe9e70d25ae3db9b"
+                "url": "https://ftp.drupal.org/files/projects/imagemagick-4.0.1.zip",
+                "reference": "4.0.1",
+                "shasum": "f8489049fe3206a0d83efac9717fede838c20e87"
             },
             "require": {
-                "drupal/core": "^10.1",
-                "drupal/file_mdm": "^3",
-                "drupal/sophron": "^2.0.2"
+                "drupal/core": "^10.3 | ^11",
+                "drupal/file_mdm": "^3.1",
+                "drupal/sophron": "^2.1"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.7",
-                    "datestamp": "1706096705",
+                    "version": "4.0.1",
+                    "datestamp": "1719035672",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4391,7 +4342,7 @@
                 "shasum": "fc8ea60619b6b4682bade340e13fb4565d3a7e0c"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11"
+                "drupal/core": "^10"
             },
             "type": "drupal-module",
             "extra": {
@@ -5609,39 +5560,37 @@
         },
         {
             "name": "drupal/stage_file_proxy",
-            "version": "2.1.5",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/stage_file_proxy.git",
-                "reference": "2.1.5"
+                "reference": "3.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-2.1.5.zip",
-                "reference": "2.1.5",
-                "shasum": "6f5974c106d45211e54945e4d9f5bbf8ec6699de"
+                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-3.1.0.zip",
+                "reference": "3.1.0",
+                "shasum": "e2684977e612555fcd10ebeabfba0f63e4a2424d"
             },
             "require": {
-                "drupal/core": "^9 || ^10",
-                "php": ">=8"
+                "drupal/core": "^10.3 || ^11",
+                "php": ">=8.1"
+            },
+            "conflict": {
+                "drush/drush": "<12"
             },
             "require-dev": {
                 "drupal/coder": "^8.3",
-                "drush/drush": "^11 || ^12"
+                "drush/drush": ">=12"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.1.5",
-                    "datestamp": "1719499510",
+                    "version": "3.1.0",
+                    "datestamp": "1721592834",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
-                    }
-                },
-                "drush": {
-                    "services": {
-                        "stage_file_proxy.drush.services.yml": "^11"
                     }
                 }
             },
@@ -5769,7 +5718,7 @@
                 "shasum": "9ea9eee91cf75f21fcc939704baa6a7ec10d7748"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11"
+                "drupal/core": "^10"
             },
             "type": "drupal-module",
             "extra": {
