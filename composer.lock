@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aeed14aa91569f55f5db386497b66ff7",
+    "content-hash": "e6d9c90c76def1c5a6f57ce705f97e9d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -210,6 +210,21 @@
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.316.10"
             },
             "time": "2024-07-30T18:10:20+00:00"
+        },
+        {
+            "name": "bower-asset/dragula",
+            "version": "v3.7.3",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:bevacqua/dragula.git",
+                "reference": "495664213ed81d17598bd7e5afa09116ae2bb26e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bevacqua/dragula/zipball/495664213ed81d17598bd7e5afa09116ae2bb26e",
+                "reference": "495664213ed81d17598bd7e5afa09116ae2bb26e"
+            },
+            "type": "bower-asset"
         },
         {
             "name": "chi-teck/drupal-code-generator",
