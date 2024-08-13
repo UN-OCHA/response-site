@@ -25,5 +25,6 @@ default_value:
     value: "<p>This operation has been archived</p>\r\n"
     format: basic_html
 default_value_callback: ''
-settings: {  }
+settings:
+  allowed_formats: {  }
 field_type: text_long

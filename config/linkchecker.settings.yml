@@ -4,6 +4,7 @@ scan_blocks: null
 check_links_types: 0
 default_url_scheme: 'http://'
 base_path: ''
+search_published_contents_only: true
 extract:
   from_a: true
   from_audio: false
@@ -17,11 +18,13 @@ extract:
     filter_caption: filter_caption
     filter_autop: filter_autop
     editor_file_reference: '0'
+    env_link_fixer_strip_domain: '0'
     filter_url: '0'
     filter_html_escape: '0'
     filter_htmlcorrector: '0'
     filter_html_image_secure: '0'
     filter_html: '0'
+    filter_image_lazy_load: '0'
     filter_markdown: '0'
 check:
   connections_max: 8
@@ -33,10 +36,11 @@ check:
     dev.response-reliefweb-int.ahconu.org
   library: core
   interval: 2419200
-  useragent: 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0'
+  useragent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586'
 error:
   action_status_code_301: 1
   action_status_code_404: 0
+  fallback_get_if_head_fails: true
   ignore_response_codes: "200\r\n206\r\n302\r\n304\r\n307\r\n401\r\n403"
   impersonate_account: '1'
 logging:
