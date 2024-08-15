@@ -118,16 +118,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.319.2",
+            "version": "3.320.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "99b75502221af095f0a5a72b0df7ec44e865e699"
+                "reference": "8dd47fd0af8450124057b83cbcf727b4735a14d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/99b75502221af095f0a5a72b0df7ec44e865e699",
-                "reference": "99b75502221af095f0a5a72b0df7ec44e865e699",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8dd47fd0af8450124057b83cbcf727b4735a14d9",
+                "reference": "8dd47fd0af8450124057b83cbcf727b4735a14d9",
                 "shasum": ""
             },
             "require": {
@@ -210,9 +210,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.319.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.320.0"
             },
-            "time": "2024-08-09T18:32:29+00:00"
+            "time": "2024-08-14T18:04:04+00:00"
         },
         {
             "name": "bower-asset/dragula",
@@ -2388,21 +2388,21 @@
         },
         {
             "name": "drupal/csv_serialization",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/csv_serialization.git",
-                "reference": "4.0.0"
+                "reference": "4.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/csv_serialization-4.0.0.zip",
-                "reference": "4.0.0",
-                "shasum": "90d429b044f7d6608d9075852285f37a97d5de6c"
+                "url": "https://ftp.drupal.org/files/projects/csv_serialization-4.0.1.zip",
+                "reference": "4.0.1",
+                "shasum": "cd172acbf6b5996daa88b0d8d897074c5fe742dd"
             },
             "require": {
-                "drupal/core": "^10",
-                "league/csv": "^9.1"
+                "drupal/core": "^10 || ^11",
+                "league/csv": "^9.16"
             },
             "require-dev": {
                 "drupal/coder": "^8.3"
@@ -2410,8 +2410,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "4.0.0",
-                    "datestamp": "1698702085",
+                    "version": "4.0.1",
+                    "datestamp": "1723473162",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4481,17 +4481,17 @@
         },
         {
             "name": "drupal/memcache",
-            "version": "2.6.0",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/memcache.git",
-                "reference": "8.x-2.6"
+                "reference": "8.x-2.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/memcache-8.x-2.6.zip",
-                "reference": "8.x-2.6",
-                "shasum": "c58d66e426134c082490dca25b057c6ae0ea3d2a"
+                "url": "https://ftp.drupal.org/files/projects/memcache-8.x-2.7.zip",
+                "reference": "8.x-2.7",
+                "shasum": "d16c7641eb1367606c55e1657b5fa8ae07c59ecf"
             },
             "require": {
                 "drupal/core": "^9.5 || ^10 || ^11"
@@ -4499,8 +4499,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-2.6",
-                    "datestamp": "1720732159",
+                    "version": "8.x-2.7",
+                    "datestamp": "1723657818",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -6012,6 +6012,10 @@
                 "GPL-2.0-or-later"
             ],
             "authors": [
+                {
+                    "name": "japerry",
+                    "homepage": "https://www.drupal.org/user/45640"
+                },
                 {
                     "name": "nicksanta",
                     "homepage": "https://www.drupal.org/user/87915"
