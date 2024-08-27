@@ -1,0 +1,8 @@
+uuid: 9e7973a2-4280-4811-87c9-00a00aee8ee1
+langcode: en
+status: true
+dependencies: {  }
+id: 2e9ZfIfLFCC0V-PbcDKUTb1Wk22XgjzJ6f-b16CFlPE
+label: 'Sitemap FR'
+context:
+  language: fr
