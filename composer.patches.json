@@ -18,6 +18,9 @@
     "drupal/imageapi_optimize_webp": {
       "https://www.drupal.org/project/imageapi_optimize_webp/issues/3453941": "https://www.drupal.org/files/issues/2024-06-14/3453941-bc-break_0.patch"
     },
+    "drupal/imagemagick": {
+      "Cast dimensions to int after translations": "PATCHES/imagemagick-ints.patch"
+    },
     "drupal/linkchecker": {
       "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743": "PATCHES/linkchecker-unconfirmed-but-eligible-field-list-3244743.patch",
       "Do not break admin denied": "./PATCHES/linkchecker_use_uid.patch",
