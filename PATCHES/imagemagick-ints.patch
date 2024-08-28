@@ -1,0 +1,37 @@
+diff --git a/src/Plugin/ImageToolkit/Operation/imagemagick/Resize.php b/src/Plugin/ImageToolkit/Operation/imagemagick/Resize.php
+index 01e9101..df8c833 100644
+--- a/src/Plugin/ImageToolkit/Operation/imagemagick/Resize.php
++++ b/src/Plugin/ImageToolkit/Operation/imagemagick/Resize.php
+@@ -68,7 +68,7 @@ protected function execute(array $arguments = []): bool {
+       '-resize',
+       $arguments['width'] . 'x' . $arguments['height'] . '!',
+     ]);
+-    $this->getToolkit()->setWidth($arguments['width'])->setHeight($arguments['height']);
++    $this->getToolkit()->setWidth((int) $arguments['width'])->setHeight((int) $arguments['height']);
+     return TRUE;
+   }
+ 
+diff --git a/src/Plugin/ImageToolkit/Operation/imagemagick/Scale.php b/src/Plugin/ImageToolkit/Operation/imagemagick/Scale.php
+index 7efd34e..6dfbc5d 100644
+--- a/src/Plugin/ImageToolkit/Operation/imagemagick/Scale.php
++++ b/src/Plugin/ImageToolkit/Operation/imagemagick/Scale.php
+@@ -68,15 +68,15 @@ protected function validateArguments(array $arguments): array {
+     // calculated to be bigger than its target.
+     $aspect = $this->getToolkit()->getHeight() / $this->getToolkit()->getWidth();
+     if (($arguments['width'] && !$arguments['height']) || ($arguments['width'] && $arguments['height'] && $aspect < $arguments['height'] / $arguments['width'])) {
+-      $arguments['height'] = (int) round($arguments['width'] * $aspect);
++      $arguments['height'] = round((int) $arguments['width'] * $aspect);
+     }
+     else {
+-      $arguments['width'] = (int) round($arguments['height'] / $aspect);
++      $arguments['width'] = round((int) $arguments['height'] / $aspect);
+     }
+ 
+     // Assure integers for all arguments.
+-    $arguments['width'] = (int) round($arguments['width']);
+-    $arguments['height'] = (int) round($arguments['height']);
++    $arguments['width'] = round((int) $arguments['width']);
++    $arguments['height'] = round((int) $arguments['height']);
+ 
+     // Fail when width or height are 0 or negative.
+     if ($arguments['width'] <= 0) {
