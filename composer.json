@@ -232,6 +232,7 @@
     },
     "version": "1.0.3",
     "require-dev": {
+        "davidrjonas/composer-lock-diff": "^1.7",
         "drupal/coder": "^8.3",
         "drupal/config_inspector": "^2.1",
         "drupal/core-dev": "^10.0",
