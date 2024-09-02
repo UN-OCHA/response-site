@@ -64,9 +64,14 @@ function user_merger_merge_ids(int $new_id, array|string $retired_ids = []) {
     }
   }
 
-  // @todo Delete the account(s).
-  // @todo Clear all cache.
-  \Drupal::cache()->deleteAll();
+  // Delete the account(s).
+  foreach ($retired_ids as $retired_id) {
+    $user = User::load($retired_id);
+    $user->delete();
+  }
+
+  // Clear all cache.
+  drupal_flush_all_caches();
 }
 
 /**
