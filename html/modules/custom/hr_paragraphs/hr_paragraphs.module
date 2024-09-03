@@ -187,10 +187,23 @@ function hr_paragraphs_add_aliases_for_tabs(Group $group) {
     $tab_alias = $group_alias . '/' . $tab;
 
     $existing_alias = $path_alias_manager->getAliasByPath($source);
-
     // Skip if an alias is already set.
     if ($existing_alias !== $source) {
-      continue;
+      // Check if path do match.
+      $group_parts = explode('/', $group_alias);
+      $tab_parts = explode('/', $existing_alias);
+      $match = TRUE;
+
+      foreach ($group_parts as $index => $group_part) {
+        if ($group_part != $tab_parts[$index]) {
+          $match = FALSE;
+        }
+      }
+
+      // Skip if parts do match.
+      if ($match) {
+        continue;
+      }
     }
 
     if ($source !== $tab_alias) {

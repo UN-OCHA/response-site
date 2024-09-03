@@ -8,12 +8,12 @@ seckit_xss:
       webkit: false
     report-only: false
     default-src: "'self'"
-    script-src: "'self' 'unsafe-inline' 'unsafe-eval' fonts.googleapis.com www.gstatic.com https://*.google.com https://*.googletagmanager.com *.google-analytics.com https://tagmanager.google.com  https://www.googleadservices.com  https://googleads.g.doubleclick.net cdnjs.cloudflare.com ajax.googleapis.com https://cdn.addevent.com https://platform.twitter.com"
+    script-src: "'self' 'unsafe-inline' 'unsafe-eval' fonts.googleapis.com www.gstatic.com https://*.google.com https://*.googletagmanager.com *.google-analytics.com https://tagmanager.google.com  https://www.googleadservices.com  https://googleads.g.doubleclick.net cdnjs.cloudflare.com ajax.googleapis.com https://cdn.addevent.com https://platform.twitter.com embed.aidaform.com https://cdn.jsdelivr.net https://s3.amazonaws.com https://partner.googleadservices.com"
     object-src: "'none'"
-    style-src: "'self' 'unsafe-inline' https://googletagmanager.com https://tagmanager.google.com https://www.google.com fonts.googleapis.com cdnjs.cloudflare.com cdn.jsdelivr.net"
+    style-src: "'self' 'unsafe-inline' https://googletagmanager.com https://tagmanager.google.com https://www.google.com fonts.googleapis.com cdnjs.cloudflare.com cdn.jsdelivr.net https://cdn-images.mailchimp.com"
     img-src: "'self' data: https://*"
-    media-src: "'none'"
-    frame-src: "'self' https://www.googletagmanager.com https://bid.g.doubleclick.net https://td.doubleclick.net https://flo.uri.sh  https://api.mapbox.com https://app.powerbi.com https://data.humdata.org https://drive.google.com calendar.google.com https://www.youtube.com https://datawrapper.dwcdn.net https://teamup.com https://lookerstudio.google.com https://experience.arcgis.com https://public.tableau.com https://rrmniger.azurewebsites.net/ *.unocha.org https://*.addevent.com https://cdn.knightlab.com https://dashboards.impact-initiatives.org https://docs.google.com https://e.infogram.com https://jmmi-northernsyria.shinyapps.io https://logie.logcluster.org https://m.facebook.com https://miro.com https://spxih.mjt.lu https://turkiyeeq.thedeep.io https://ukraine.servicesadvisor.net https://unhcr.carto.com https://www.arcgis.com https://www.facebook.com"
+    media-src: "'self' data:"
+    frame-src: "'self' https://www.googletagmanager.com https://bid.g.doubleclick.net https://td.doubleclick.net https://flo.uri.sh  https://api.mapbox.com https://app.powerbi.com https://data.humdata.org https://drive.google.com calendar.google.com https://www.youtube.com https://datawrapper.dwcdn.net https://teamup.com https://lookerstudio.google.com https://experience.arcgis.com https://public.tableau.com https://rrmniger.azurewebsites.net/ *.unocha.org https://*.addevent.com https://cdn.knightlab.com https://dashboards.impact-initiatives.org https://docs.google.com https://e.infogram.com https://jmmi-northernsyria.shinyapps.io https://logie.logcluster.org https://m.facebook.com https://miro.com https://spxih.mjt.lu https://turkiyeeq.thedeep.io https://ukraine.servicesadvisor.net https://unhcr.carto.com https://www.arcgis.com https://www.facebook.com https://rwsupport.aidaform.com"
     frame-ancestors: "'self'"
     child-src: "'self'"
     font-src: "'self' data: fonts.gstatic.com"
