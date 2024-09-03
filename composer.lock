@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b35cbd3270c9abf26b9108489685cc96",
+    "content-hash": "b40ca52efcfed35976bc10039398fd89",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -18860,7 +18860,7 @@
             "version": "2.3.0",
             "source": {
                 "type": "git",
-                "url": "https://git.drupalcode.org/project/dtt/",
+                "url": "https://git.drupalcode.org/project/dtt.git",
                 "reference": "9385da6be0db48ecdb27e6646ae2bb0864c1dcee"
             },
             "require": {
