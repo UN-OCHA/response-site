@@ -1,6 +1,3 @@
 services:
-  rwr_sitrep.paragraph_controller:
-    class: \Drupal\rwr_sitrep\Controller\ParagraphController
-    arguments: ['@entity_type.manager', '@http_client']
   rwr_sitrep.pdf_controller:
     class: \Drupal\rwr_sitrep\Controller\PdfController
