@@ -1,0 +1,18 @@
+uuid: 175140d6-079d-4674-beba-92c92ccf147b
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.update
+id: node.update.title
+field_name: title
+entity_type: node
+bundle: update
+label: Headline
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

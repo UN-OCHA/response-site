@@ -13,6 +13,7 @@ dependencies:
     - group.type.operation
     - node.type.landing_page
     - node.type.page
+    - node.type.update
     - taxonomy.vocabulary.tags
     - user.role.authenticated
   module:
@@ -85,15 +86,18 @@ permissions:
   - 'create paragraph content twitter_feed'
   - 'create paragraph content upcoming_events'
   - 'create terms in tags'
+  - 'create update content'
   - 'create url aliases'
   - 'customize shortcut links'
   - 'delete any landing_page content'
   - 'delete any page content'
+  - 'delete any update content'
   - 'delete content translations'
   - 'delete landing_page revisions'
   - 'delete orphan revisions'
   - 'delete own landing_page content'
   - 'delete own page content'
+  - 'delete own update content'
   - 'delete page revisions'
   - 'delete paragraph content call_to_action'
   - 'delete paragraph content card_list'
@@ -113,10 +117,13 @@ permissions:
   - 'delete paragraph content twitter_feed'
   - 'delete paragraph content upcoming_events'
   - 'delete terms in tags'
+  - 'delete update revisions'
   - 'edit any landing_page content'
   - 'edit any page content'
+  - 'edit any update content'
   - 'edit own landing_page content'
   - 'edit own page content'
+  - 'edit own update content'
   - 'edit terms in tags'
   - 'masquerade as any user'
   - 'masquerade as authenticated'
@@ -125,6 +132,7 @@ permissions:
   - 'revert all revisions'
   - 'revert landing_page revisions'
   - 'revert page revisions'
+  - 'revert update revisions'
   - 'rwr edit cluster title'
   - 'rwr edit meta tags'
   - 'rwr edit operation title'
@@ -137,6 +145,7 @@ permissions:
   - 'translate operation group'
   - 'translate page node'
   - 'translate paragraph'
+  - 'translate update node'
   - 'update content translations'
   - 'update paragraph content call_to_action'
   - 'update paragraph content card_list'
@@ -163,4 +172,5 @@ permissions:
   - 'view paragraph content featured_highlight'
   - 'view the administration theme'
   - 'view unpublished paragraphs'
+  - 'view update revisions'
   - 'view user email addresses'

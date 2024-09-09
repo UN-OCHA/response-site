@@ -1,0 +1,23 @@
+uuid: ab8eaf2e-e16a-46be-8f4e-1c0ba30ba81b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.update.field_paragraphs
+    - node.type.update
+  module:
+    - user
+id: node.update.teaser
+targetEntityType: node
+bundle: update
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_paragraphs: true
+  langcode: true

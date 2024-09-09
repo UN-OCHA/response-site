@@ -1,0 +1,20 @@
+uuid: 7789f538-2322-42a8-99b7-b347429ca6eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.update
+  module:
+    - path
+id: node.update.path
+field_name: path
+entity_type: node
+bundle: update
+label: 'URL alias'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path
