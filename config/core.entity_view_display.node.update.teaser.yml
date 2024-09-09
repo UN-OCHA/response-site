@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.update.field_paragraphs
-    - field.field.node.update.field_update_type
     - node.type.update
   module:
     - user
@@ -21,5 +20,4 @@ content:
     region: content
 hidden:
   field_paragraphs: true
-  field_update_type: true
   langcode: true

@@ -16,6 +16,7 @@ dependencies:
     - node.type.update
     - taxonomy.vocabulary.tags
     - user.role.authenticated
+    - user.role.global_editor
   module:
     - content_translation
     - contextual
@@ -127,6 +128,7 @@ permissions:
   - 'edit terms in tags'
   - 'masquerade as any user'
   - 'masquerade as authenticated'
+  - 'masquerade as global_editor'
   - 'override landing_page authored by option'
   - 'override page authored by option'
   - 'revert all revisions'

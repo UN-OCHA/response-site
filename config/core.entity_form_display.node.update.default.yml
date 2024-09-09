@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.update.field_paragraphs
-    - field.field.node.update.field_update_type
     - node.type.update
   module:
     - layout_paragraphs
@@ -31,14 +30,6 @@ content:
       nesting_depth: 0
       require_layouts: 0
       empty_message: ''
-    third_party_settings: {  }
-  field_update_type:
-    type: string_textfield
-    weight: 122
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -102,4 +93,5 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  entitygroupfield: true

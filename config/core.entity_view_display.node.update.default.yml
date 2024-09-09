@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.update.field_paragraphs
-    - field.field.node.update.field_update_type
     - node.type.update
   module:
     - layout_paragraphs
@@ -21,20 +20,12 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 1
-    region: content
-  field_update_type:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 102
+    weight: 0
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 1
     region: content
 hidden:
   langcode: true
