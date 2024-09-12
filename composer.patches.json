@@ -5,7 +5,6 @@
     },
     "drupal/core" : {
       "https://www.drupal.org/project/drupal/issues/3143617": "https://www.drupal.org/files/issues/2020-07-07/3143617-28_0.patch",
-      "https://www.drupal.org/project/drupal/issues/3467860": "PATCHES/core--drupal--3467860-aggregation.patch",
       "Include database SSL/TLS info on status report": "./PATCHES/mysql-ssl-status.patch"
     },
     "drupal/group": {
