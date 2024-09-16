@@ -215,7 +215,7 @@
             ],
             "post-create-project-cmd-message": [
                 "<bg=blue;fg=white>                                                         </>",
-                "<bg=blue;fg=white>  Congratulations, you\u2019ve installed the Drupal codebase  </>",
+                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
                 "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
                 "<bg=blue;fg=white>                                                         </>",
                 "",
@@ -230,7 +230,7 @@
             ]
         }
     },
-    "version": "1.0.3",
+    "version": "1.2.8",
     "require-dev": {
         "davidrjonas/composer-lock-diff": "^1.7",
         "drupal/coder": "^8.3",
@@ -238,7 +238,7 @@
         "drupal/core-dev": "^10.0",
         "drupal/dev_mode": "^2.6",
         "drupal/devel_php": "^1.5",
-        "marcocesarato/php-conventional-changelog": "^1.16",
+        "marcocesarato/php-conventional-changelog": "^1.17",
         "mglaman/drupal-check": "^1.4",
         "phpcompatibility/php-compatibility": "^9.3",
         "phpspec/prophecy-phpunit": "^2.0",
