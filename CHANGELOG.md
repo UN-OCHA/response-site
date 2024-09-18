@@ -4,6 +4,32 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.3.0](https://github.com/UN-OCHA/response-site/compare/v1.2.7...v1.3.0) (2024-09-17)
+
+### Features
+
+* Sitemaps per ;anguage [#RWR-450](https://https://humanitarian.atlassian.net/browse/RWR-450) ([9dbee6](https://github.com/UN-OCHA/response-site/commit/9dbee6dd924f9b724d2b219b163cf548a8af720d))
+
+### Bug Fixes
+
+* Include core patch for aggregation error ([11a65f](https://github.com/UN-OCHA/response-site/commit/11a65f3dcdd5eaaf8e2d473d65029a316ebed496))
+* Patch for imagemagick translated dimensions ([719ab7](https://github.com/UN-OCHA/response-site/commit/719ab795209219da697144a07f741617311db1f3))
+
+### Chores
+
+* Add davidrjonas/composer-lock-diff ([2c94fa](https://github.com/UN-OCHA/response-site/commit/2c94fa3639c062c3c6d1c35fb2598bd934245fd4))
+* Add tools [#OPS-10867](https://https://humanitarian.atlassian.net/browse/OPS-10867), [#OPS-10867](https://https://humanitarian.atlassian.net/browse/OPS-10867) ([068fae](https://github.com/UN-OCHA/response-site/commit/068fae7160fedfcc01cd510114c27b4a57ec73c7), [edbb12](https://github.com/UN-OCHA/response-site/commit/edbb121a31eca26646cd57634b4564a3c8745329))
+* Include php logs if tests fail ([267b87](https://github.com/UN-OCHA/response-site/commit/267b878b8a6999449dd58bd4628d18c1ff229568))
+* More csp domains ([9df157](https://github.com/UN-OCHA/response-site/commit/9df157ad325a05d409710035bf519a3bbd76c7a1))
+* Pass on credentials to action ([72ba6c](https://github.com/UN-OCHA/response-site/commit/72ba6c1c36f2b770edfb0479c19684c0efd17ecc))
+* Prep deploy 20240117 ([cfafcd](https://github.com/UN-OCHA/response-site/commit/cfafcde29128795306020cb838d29de9df13cdfd))
+* Remove patch which is blocking core update ([dce177](https://github.com/UN-OCHA/response-site/commit/dce177029515948e0946641f8394a88ff7a1a098))
+* Update all outdated drupal/* unocha/* drush/* packages. ([7393ef](https://github.com/UN-OCHA/response-site/commit/7393ef2041c9346d6460158b1074e1a9056e7259), [4c9995](https://github.com/UN-OCHA/response-site/commit/4c9995b3db7f4cd9589863c965cc241b53b1a51d), [31f6ed](https://github.com/UN-OCHA/response-site/commit/31f6ed737ecd723a863f82741269cdd769b5d53b), [186a8d](https://github.com/UN-OCHA/response-site/commit/186a8d509484ac988ae713b2b281696374ac15b4), [050834](https://github.com/UN-OCHA/response-site/commit/05083437608e473b07df6a6a8d564c1c0ebe30be))
+
+##### Deps-dev
+
+* Bump axios ([d07506](https://github.com/UN-OCHA/response-site/commit/d07506770d596d2ddff7d1be2471f53ca77d102e))
+
 ## [1.2.7](https://github.com/UN-OCHA/response-site/compare/v1.2.6...v1.2.7) (2024-08-13)
 
 ### Features
