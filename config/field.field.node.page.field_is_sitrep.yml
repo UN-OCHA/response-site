@@ -1,0 +1,23 @@
+uuid: 8cdd5ef8-6ea7-4f16-b645-38d19ee9724a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_is_sitrep
+    - node.type.page
+id: node.page.field_is_sitrep
+field_name: field_is_sitrep
+entity_type: node
+bundle: page
+label: 'Is sitrep'
+description: 'Indicate if the page is a situation report.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'This is a situation report'
+  off_label: 'Regular page content'
+field_type: boolean
