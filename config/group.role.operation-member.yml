@@ -17,4 +17,3 @@ permissions:
   - 'view group'
   - 'view group_membership content'
   - 'view group_node:page entity'
-  - 'view group_node:update entity'

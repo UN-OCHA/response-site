@@ -15,4 +15,3 @@ group_type: operation
 permissions:
   - 'view group'
   - 'view group_node:page entity'
-  - 'view group_node:update entity'
