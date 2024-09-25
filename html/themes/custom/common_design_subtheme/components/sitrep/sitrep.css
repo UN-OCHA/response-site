@@ -9,6 +9,9 @@ article.node--type-page:has(.snap) {
   .cd-page-title {
     padding-inline-end: 2rem;
   }
+  div.snap + h1 + div.contextual {
+    padding-inline-end: 1.5rem;
+  }
 }
 
 /* add lines between paragraphs */
