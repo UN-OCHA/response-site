@@ -18,8 +18,8 @@ class PdfController extends ControllerBase {
   /**
    * Access check for updates.
    */
-  public function isUpdate(Node $node) : AccessResult {
-    return AccessResult::allowedIf($node->bundle() == 'update');
+  public function isSitrep(Node $node) : AccessResult {
+    return AccessResult::allowedIf($node->get('field_is_sitrep')->value == 1);
   }
 
   /**
