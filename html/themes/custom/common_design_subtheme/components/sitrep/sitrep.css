@@ -1,0 +1,39 @@
+/**
+ * Individual Update page.
+ */
+
+/* make room for Snap button if it exists */
+article.node--type-page:has(.snap) {
+  position: relative;
+
+  .cd-page-title {
+    padding-inline-end: 2rem;
+  }
+}
+
+/* add lines between paragraphs */
+.node--type-page .field--name-field-content > .field__item + .field__item {
+  margin-block-start: 2rem;
+  padding-block-start: 2rem;
+  border-block-start: 1px solid var(--brand-grey);
+}
+
+/* Snap print styles */
+@media print {
+  /* Hide some UI elements that only make sense in the browser. */
+  .block-system-breadcrumb-block,
+  .cd-page-title,
+  .snap,
+  nav[aria-label="Primary actions"],
+  ul.tabs {
+    display: none;
+  }
+
+  /* Try to keep content headings attached to the next bit of content. CSS spec
+  leaves some wiggle room for the browser so it's never guaranteed. */
+  .node--type-page .field--name-field-body {
+    h2, h3, h4 {
+      break-after: avoid;
+    }
+  }
+}
