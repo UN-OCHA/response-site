@@ -19,7 +19,9 @@ class PdfController extends ControllerBase {
    * Access check for updates.
    */
   public function isSitrep(Node $node) : AccessResult {
-    return AccessResult::allowedIf($node->get('field_is_sitrep')->value == 1);
+    // @todo Include an access check when we have a taxonomy term for sitreps.
+    // return AccessResult::allowedIf();
+    return AccessResult::allowed();
   }
 
   /**
