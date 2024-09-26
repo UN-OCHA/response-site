@@ -96,7 +96,7 @@ class LanguageConfigOverrides implements ConfigFactoryOverrideInterface {
   /**
    * {@inheritdoc}
    */
-  public function setLanguage(LanguageInterface $language = NULL) {
+  public function setLanguage(?LanguageInterface $language = NULL) {
     $this->language = $language;
     return $this;
   }
