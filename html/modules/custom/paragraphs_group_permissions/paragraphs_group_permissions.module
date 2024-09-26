@@ -106,7 +106,7 @@ function paragraphs_group_permissions_paragraph_access(ParagraphInterface $entit
  *
  * @see paragraphs_group_permissions_node_create_access
  */
-function paragraphs_group_permissions_paragraph_create_access(AccountInterface $account = NULL, array $context = [], $entity_bundle = NULL) {
+function paragraphs_group_permissions_paragraph_create_access(?AccountInterface $account = NULL, array $context = [], $entity_bundle = NULL) {
   $permissions = &drupal_static(__FUNCTION__, []);
 
   // Set static cache id to use the type machine name.
@@ -174,7 +174,7 @@ function paragraphs_group_permissions_paragraph_create_access(AccountInterface $
 /**
  * Implements hook_ENTITY_TYPE_create_access() for entity type "node".
  */
-function paragraphs_group_permissions_node_create_access(AccountInterface $account = NULL, array $context = [], $entity_bundle = NULL) {
+function paragraphs_group_permissions_node_create_access(?AccountInterface $account = NULL, array $context = [], $entity_bundle = NULL) {
   $permissions = &drupal_static(__FUNCTION__, []);
 
   // Set static cache id to use the type machine name.

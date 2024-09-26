@@ -285,7 +285,7 @@ class ReliefwebController extends ControllerBase {
    * @return string|array<string, string>|bool
    *   Filter label or all filters.
    */
-  public function getReliefwebFilters(string $key = NULL) {
+  public function getReliefwebFilters(?string $key = NULL) {
     $filters = [
       'source.name' => $this->t('Organization'),
       'disaster.name' => $this->t('Disaster'),
