@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.operation_tab
     - field.field.node.page.field_hide_sidebar
-    - field.field.node.page.field_is_sitrep
     - field.field.node.page.field_meta_description
     - field.field.node.page.field_paragraphs
     - node.type.page
@@ -33,6 +32,5 @@ content:
     region: content
 hidden:
   field_hide_sidebar: true
-  field_is_sitrep: true
   field_meta_description: true
   langcode: true

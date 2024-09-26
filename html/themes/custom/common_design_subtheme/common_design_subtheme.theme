@@ -5,6 +5,8 @@
  * Template overrides, preprocess, and hooks for the OCHA Common Design theme.
  */
 
+use Drupal\group\Entity\GroupRelationship;
+
 /**
  * Implements hook_preprocess_html().
  */
@@ -65,9 +67,18 @@ function common_design_subtheme_theme_suggestions_node_alter(array &$suggestions
   if (!in_array('node__page__full', $suggestions)) {
     return;
   }
-  if ($variables['elements']['#node']->field_is_sitrep->value) {
+
+  $grouptypes = GroupRelationship::loadByEntity($variables['elements']['#node']);
+  $key = array_key_first($grouptypes);
+  $grouptype = $grouptypes[$key]->getGroupType();
+  if ($grouptype->id() != 'cluster') {
+    return;
+  }
+  $group = $grouptypes[$key]->getGroup();
+  if ($group->label() == 'Situation Reports') {
     $suggestions[] = 'node__page__full__sitrep';
   }
+
 }
 
 /**

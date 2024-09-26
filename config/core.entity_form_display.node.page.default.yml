@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.page.field_hide_sidebar
-    - field.field.node.page.field_is_sitrep
     - field.field.node.page.field_meta_description
     - field.field.node.page.field_paragraphs
     - node.type.page
@@ -25,13 +24,6 @@ content:
   field_hide_sidebar:
     type: boolean_checkbox
     weight: 122
-    region: content
-    settings:
-      display_label: true
-    third_party_settings: {  }
-  field_is_sitrep:
-    type: boolean_checkbox
-    weight: 123
     region: content
     settings:
       display_label: true
