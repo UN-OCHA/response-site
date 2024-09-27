@@ -69,6 +69,9 @@ function common_design_subtheme_theme_suggestions_node_alter(array &$suggestions
   }
 
   $grouptypes = GroupRelationship::loadByEntity($variables['elements']['#node']);
+  if (empty($grouptypes)) {
+    return;
+  }
   $key = array_key_first($grouptypes);
   $grouptype = $grouptypes[$key]->getGroupType();
   if ($grouptype->id() != 'cluster') {
