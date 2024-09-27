@@ -6,6 +6,7 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\group\Entity\GroupRelationship;
 use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +17,18 @@ use Symfony\Component\HttpFoundation\Response;
 class PdfController extends ControllerBase {
 
   /**
-   * Access check for updates.
+   * Access check for sitreps.
    */
   public function isSitrep(Node $node) : AccessResult {
-    // @todo Include an access check when we have a taxonomy term for sitreps.
-    // return AccessResult::allowedIf();
-    return AccessResult::allowed();
+    $grouptypes = GroupRelationship::loadByEntity($node);
+    $key = array_key_first($grouptypes);
+    $grouptype = $grouptypes[$key]->getGroupType();
+    if ($grouptype->id() != 'cluster') {
+      return AccessResult::forbidden();
+    }
+    $group = $grouptypes[$key]->getGroup();
+    // @todo 1 is the sitrep taxonomy term target_id. Make more robust.
+    return AccessResult::allowedIf($group->get('field_group_type')->first()->getValue()['target_id'] == 1);
   }
 
   /**

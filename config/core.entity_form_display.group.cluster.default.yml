@@ -10,6 +10,7 @@ dependencies:
     - field.field.group.cluster.field_calendar_link
     - field.field.group.cluster.field_documents_page
     - field.field.group.cluster.field_enabled_tabs
+    - field.field.group.cluster.field_group_type
     - field.field.group.cluster.field_hdx_alternate_source
     - field.field.group.cluster.field_hdx_dataset_link
     - field.field.group.cluster.field_ical_url
@@ -258,6 +259,16 @@ content:
     weight: 2
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_group_type:
+    type: entity_reference_autocomplete
+    weight: 41
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_hdx_alternate_source:
     type: link_default

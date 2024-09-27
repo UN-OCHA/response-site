@@ -75,7 +75,8 @@ function common_design_subtheme_theme_suggestions_node_alter(array &$suggestions
     return;
   }
   $group = $grouptypes[$key]->getGroup();
-  if ($group->label() == 'Situation Reports') {
+  // @todo 1 is the sitrep taxonomy term target_id. Make more robust.
+  if ($group->get('field_group_type')->first()->getValue()['target_id'] == 1) {
     $suggestions[] = 'node__page__full__sitrep';
   }
 

@@ -1,0 +1,29 @@
+uuid: 1046af72-c2c3-490e-9417-18a7487e889d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_group_type
+    - group.type.cluster
+    - taxonomy.vocabulary.cluster_or_working_group_type
+id: group.cluster.field_group_type
+field_name: field_group_type
+entity_type: group
+bundle: cluster
+label: 'Group type'
+description: 'For tagging clusters or situation reports across Operations.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      cluster_or_working_group_type: cluster_or_working_group_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

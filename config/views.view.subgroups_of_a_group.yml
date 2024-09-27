@@ -5,9 +5,13 @@ dependencies:
   config:
     - field.storage.group.field_archive_group
     - field.storage.group.field_enabled_tabs
+    - taxonomy.vocabulary.cluster_or_working_group_type
+  content:
+    - 'taxonomy_term:cluster_or_working_group_type:64bca799-64c7-40d8-8ea8-37b90b7b2e20'
   module:
     - group
     - options
+    - taxonomy
 id: subgroups_of_a_group
 label: 'Subgroups of a group'
 module: views
@@ -785,6 +789,52 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        field_group_type_target_id_1:
+          id: field_group_type_target_id_1
+          table: group__field_group_type
+          field: field_group_type_target_id
+          relationship: none
+          group_type: group
+          admin_label: 'Filter sitreps'
+          plugin_id: taxonomy_index_tid
+          operator: not
+          value:
+            1: 1
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: cluster_or_working_group_type
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
       filter_groups:
         operator: AND
         groups:
