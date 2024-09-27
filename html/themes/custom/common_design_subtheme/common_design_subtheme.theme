@@ -79,7 +79,7 @@ function common_design_subtheme_theme_suggestions_node_alter(array &$suggestions
   }
   $group = $grouptypes[$key]->getGroup();
   // @todo 1 is the sitrep taxonomy term target_id. Make more robust.
-  if ($group->get('field_group_type')->first()->getValue()['target_id'] == 1) {
+  if ($group->get('field_group_type')->first() && $group->get('field_group_type')->first()->getValue()['target_id'] == 1) {
     $suggestions[] = 'node__page__full__sitrep';
   }
 
