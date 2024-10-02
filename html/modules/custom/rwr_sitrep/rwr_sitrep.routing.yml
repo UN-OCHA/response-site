@@ -1,10 +1,10 @@
 rwr_sitrep.node.pdf:
   path: '/node/{node}/pdf'
   defaults:
-    _controller: 'rwr_sitrep.pdf_controller:getPdf'
+    _controller: '\Drupal\rwr_sitrep\Controller\PdfController::getPdf'
     _title: 'PDF'
   requirements:
-    _custom_access: 'rwr_sitrep.pdf_controller:isSitrep'
+    _custom_access: '\Drupal\rwr_sitrep\Controller\PdfController::isSitrep'
   options:
     parameters:
       group:

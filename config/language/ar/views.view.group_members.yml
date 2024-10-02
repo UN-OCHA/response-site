@@ -5,15 +5,10 @@ display:
       fields:
         name:
           label: المستخدم
-          separator: ', '
         group_roles:
           label: الأدوار
-          separator: ', '
         changed:
           label: التحديث
-          separator: ', '
-        created:
-          separator: ', '
         dropbutton:
           label: عمليات
       pager:

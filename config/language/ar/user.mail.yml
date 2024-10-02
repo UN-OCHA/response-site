@@ -2,3 +2,13 @@ cancel_confirm:
   subject: 'طلب إلغاء الحساب لـ [user:display-name] على [site:name]'
 register_admin_created:
   subject: 'أنشأ مدير حساب لك في [site:name]'
+register_pending_approval:
+  subject: 'Account details for [user:display-name] at [site:name] (pending admin approval)'
+  body: |-
+    [user:display-name],
+
+    Thank you for registering with [site:name]. See the help section at [site:url]/help for details about the site.
+
+    -- [site:name] team
+register_pending_approval_admin:
+  subject: 'Account details for [user:display-name] at [site:name] (pending admin approval)'

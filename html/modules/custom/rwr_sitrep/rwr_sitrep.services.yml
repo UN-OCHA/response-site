@@ -1,3 +1,0 @@
-services:
-  rwr_sitrep.pdf_controller:
-    class: \Drupal\rwr_sitrep\Controller\PdfController

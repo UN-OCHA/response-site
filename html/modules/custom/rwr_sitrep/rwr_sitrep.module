@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Helpers for the sitrep module.
+ */
+
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ *
+ * Looking at menu local tasks.
+ */
+function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
+
+  if ($group = \Drupal::routeMatch()->getParameter('group')) {
+    $sitrep_tid = \Drupal::state()->get('rwr_sitrep:sitrep_tid');
+    $has_sitrep = FALSE;
+    if ($group->type->getValue()[0]['target_id'] == 'cluster') {
+      // If this is a sitrep group, rename Pages to Reports.
+      if ($group->field_group_type->getValue() && $group->field_group_type->getValue()[0]['target_id'] == $sitrep_tid) {
+        $data['tabs'][0]['views_view:view.group_nodes.page_1']['#link']['title'] = t("Reports");
+      }
+    }
+    elseif ($group->type->getValue()[0]['target_id'] == 'operation') {
+      // If an operation's related group is a sitrep, use id for reports link.
+      foreach ($group->getRelatedEntities() as $related) {
+        if ($related->getEntityTypeId() == 'group' && isset($related->field_group_type)) {
+          /** @var \Drupal\group\Entity\Group $related */
+          if ($related->field_group_type->getValue() && $related->field_group_type->getValue()[0]['target_id'] == $sitrep_tid) {
+            $data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']['#link']['url'] = Url::fromRoute('view.group_nodes.page_1', ['group' => $related->id()]);
+            $has_sitrep = TRUE;
+            break;
+          }
+        }
+      }
+    }
+    if (empty($has_sitrep)) {
+      unset($data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']);
+    }
+  }
+}

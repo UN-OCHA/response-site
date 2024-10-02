@@ -5,18 +5,12 @@ display:
       fields:
         id:
           label: 'المعرف ID'
-          separator: ', '
         parent_id:
           label: الأب
-          separator: ', '
-        parent_type:
-          separator: ', '
         status:
           label: منشور
-          separator: ', '
         type:
           label: النوع
-          separator: ', '
         nothing:
           label: إجراء
           alter:

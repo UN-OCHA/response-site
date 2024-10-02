@@ -6,8 +6,10 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\State\StateInterface;
 use Drupal\group\Entity\GroupRelationship;
 use Drupal\node\Entity\Node;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,6 +17,32 @@ use Symfony\Component\HttpFoundation\Response;
  * Page controller for tabs.
  */
 class PdfController extends ControllerBase {
+
+  /**
+   * The state store.
+   *
+   * @var \Drupal\Core\State\StateInterface
+   */
+  protected $state;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('state')
+    );
+  }
+
+  /**
+   * PdfController constructor.
+   *
+   * @param \Drupal\Core\State\StateInterface $state
+   *   The state controller.
+   */
+  final public function __construct(StateInterface $state) {
+    $this->state = $state;
+  }
 
   /**
    * Access check for sitreps.
@@ -27,8 +55,8 @@ class PdfController extends ControllerBase {
       return AccessResult::forbidden();
     }
     $group = $grouptypes[$key]->getGroup();
-    // @todo 1 is the sitrep taxonomy term target_id. Make more robust.
-    return AccessResult::allowedIf($group->get('field_group_type')->first()->getValue()['target_id'] == 1);
+    $sitrep_tid = $this->state->get('rwr_sitrep:sitrep_tid');
+    return AccessResult::allowedIf($group->get('field_group_type')->first()->getValue()['target_id'] == $sitrep_tid);
   }
 
   /**
@@ -37,6 +65,7 @@ class PdfController extends ControllerBase {
   public function getPdf(Node $node) {
     // @todo count chars in the Title and start inserting line breaks when the
     // length exceeds a certain threshold.
+    // @todo send language direction too so we can sort the header and footer.
     return $this->buildPdf($node->toUrl('canonical', [
       'absolute' => TRUE,
     ])->toString(), $node->label(), $node->getChangedTime());
