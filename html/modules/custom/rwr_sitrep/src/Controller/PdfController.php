@@ -6,6 +6,7 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\State\StateInterface;
 use Drupal\group\Entity\GroupRelationship;
 use Drupal\node\Entity\Node;
@@ -26,11 +27,19 @@ class PdfController extends ControllerBase {
   protected $state;
 
   /**
+   * Language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('state')
+      $container->get('state'),
+      $container->get('languageManager')
     );
   }
 
@@ -39,9 +48,12 @@ class PdfController extends ControllerBase {
    *
    * @param \Drupal\Core\State\StateInterface $state
    *   The state controller.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *   The language manager.
    */
-  final public function __construct(StateInterface $state) {
+  final public function __construct(StateInterface $state, LanguageManagerInterface $languageManager) {
     $this->state = $state;
+    $this->languageManager = $languageManager;
   }
 
   /**
@@ -56,6 +68,7 @@ class PdfController extends ControllerBase {
     }
     $group = $grouptypes[$key]->getGroup();
     $sitrep_tid = $this->state->get('rwr_sitrep:sitrep_tid');
+
     return AccessResult::allowedIf($group->get('field_group_type')->first()->getValue()['target_id'] == $sitrep_tid);
   }
 
@@ -65,16 +78,16 @@ class PdfController extends ControllerBase {
   public function getPdf(Node $node) {
     // @todo count chars in the Title and start inserting line breaks when the
     // length exceeds a certain threshold.
-    // @todo send language direction too so we can sort the header and footer.
+    $direction = $this->languageManager->getCurrentLanguage()->getDirection();
     return $this->buildPdf($node->toUrl('canonical', [
       'absolute' => TRUE,
-    ])->toString(), $node->label(), $node->getChangedTime());
+    ])->toString(), $node->label(), $node->getChangedTime(), $direction);
   }
 
   /**
    * Generate a PDF.
    */
-  private function buildPdf($url, $title, $updated) {
+  private function buildPdf($url, $title, $updated, $direction) {
     // Build filename based on the label.
     $filename = $title;
     $filename = Html::cleanCssIdentifier($filename) . '.pdf';
@@ -93,7 +106,7 @@ class PdfController extends ControllerBase {
       'media' => 'print',
       'logo' => 'ocha',
       'pdfHeader' => implode('', [
-        '<header class="pdf-header">',
+        '<header class="pdf-header" dir="' . $direction . '">',
         '<div class="pdf-header__meta">',
         '<div class="pdf-header__title">' . $title . '</div>',
         '<div class="pdf-header__description">' . $this->t('Last updated: @date', [
@@ -107,7 +120,7 @@ class PdfController extends ControllerBase {
         '</header>',
       ]) . $css,
       'pdfFooter' => implode('', [
-        '</div><footer class="pdf-footer">',
+        '</div><footer class="pdf-footer" dir="rtl">',
         '<div class="pdf-footer__left">',
         $this->t('Page @num of @total', [
           '@num' => new FormattableMarkup('<span class="pageNumber"></span>', []),
@@ -115,7 +128,7 @@ class PdfController extends ControllerBase {
         ]),
         '</div>',
         '<div class="pdf-footer__right">',
-        '<span class="url" dir="ltr"></span><br>',
+        '<span class="url" dir="' . $direction . '"></span><br>',
         '<span>' . $this->t('Downloaded: @date', [
           '@date' => date('j F Y'),
         ]) . '</span><br>',
