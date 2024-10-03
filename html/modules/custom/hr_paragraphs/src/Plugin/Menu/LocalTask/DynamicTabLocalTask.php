@@ -16,7 +16,7 @@ class DynamicTabLocalTask extends LocalTaskDefault {
   /**
    * {@inheritdoc}
    */
-  public function getTitle(Request $request = NULL) {
+  public function getTitle(?Request $request = NULL) {
     $group = $request->attributes->get('group');
 
     if ($group) {

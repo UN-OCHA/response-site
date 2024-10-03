@@ -41,7 +41,7 @@ class IcalController extends ControllerBase {
    * @return array<int, mixed>
    *   List of events found.
    */
-  public function getIcalEvents(Group $group, string $range_start = NULL, string $range_end = NULL) : array {
+  public function getIcalEvents(Group $group, ?string $range_start = NULL, ?string $range_end = NULL) : array {
     $range_start = $range_start ?? date('Y-m-d');
     $range_end = $range_end ?? date('Y-m-d', time() + 365 * 24 * 60 * 60);
 
