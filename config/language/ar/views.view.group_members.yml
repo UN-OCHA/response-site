@@ -2,6 +2,7 @@ display:
   default:
     display_title: الرئيسي
     display_options:
+      title: الاعضاء
       fields:
         name:
           label: المستخدم
@@ -29,3 +30,6 @@ display:
             title: الكل
   page_1:
     display_title: الصفحة
+    display_options:
+      menu:
+        title: الاعضاء
