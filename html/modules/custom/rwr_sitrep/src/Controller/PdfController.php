@@ -16,6 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Page controller for tabs.
+ *
+ * Most of this taken from https://github.com/UN-OCHA/dsr-site/blob/develop/
+ * html/modules/custom/dsr_custom/src/Controller/PdfController.php.
  */
 class PdfController extends ControllerBase {
 

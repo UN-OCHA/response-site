@@ -21,7 +21,7 @@ msgstr "شاهد الكل"
 msgid "Help"
 msgstr "مساعدة"
 
-msgid "SEARCH"
+msgid "Search"
 msgstr "البحث"
 
 msgid "Add new Content"

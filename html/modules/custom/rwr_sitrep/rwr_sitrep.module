@@ -11,7 +11,13 @@ use Drupal\Core\Url;
 /**
  * Implements hook_menu_local_tasks_alter().
  *
- * Looking at menu local tasks.
+ * Remove or adjust 'Reports' local task for operations or clusters.
+ * If this is an operation, have the link lead to that operation's situation
+ * reports only.
+ * If this is a cluster, remove the link unless the cluster has the Situation
+ * Report tag, in which case change the label accordingly.
+ *
+ * @see rwr_sitrep.links.task.yml
  */
 function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
 
