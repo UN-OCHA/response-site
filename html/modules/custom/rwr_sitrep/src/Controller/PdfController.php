@@ -74,10 +74,10 @@ class PdfController extends ControllerBase {
 
     $group_content_array = GroupRelationship::loadByEntity($node);
     $group_content = reset($group_content_array);
-    if ($group_content->getGroupType()->id() != 'cluster') {
-      return FALSE;
-    }
     if ($group_content) {
+      if ($group_content->getGroupType()->id() != 'cluster') {
+        return FALSE;
+      }
       $group = $group_content->getGroup();
 
       if ($group->get('field_cluster_subtype')->first()) {
