@@ -9,8 +9,10 @@ url:
     fr: fr
     es: es
     '': null
+    ar: ar
   domains:
     en: ''
     fr: ''
     es: ''
+    ar: ''
 selected_langcode: site_default

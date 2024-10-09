@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6c06b9d0ff8c46d9ffa3229db5a2227",
+    "content-hash": "89b11e0efd9e09fd14b989e59e87b7ef",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4399,7 +4399,7 @@
                 "shasum": "fc8ea60619b6b4682bade340e13fb4565d3a7e0c"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11"
+                "drupal/core": "^10"
             },
             "type": "drupal-module",
             "extra": {
@@ -5791,7 +5791,7 @@
                 "shasum": "9ea9eee91cf75f21fcc939704baa6a7ec10d7748"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11"
+                "drupal/core": "^10"
             },
             "type": "drupal-module",
             "extra": {
@@ -12199,16 +12199,16 @@
         },
         {
             "name": "unocha/ocha_search",
-            "version": "v1.0.8",
+            "version": "v1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/ocha_search.git",
-                "reference": "485fe73c7772f9496558e3ecd850f1f004ca485e"
+                "reference": "9b7d8eccc8fb82b9eece3249007a4134d9221e4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/ocha_search/zipball/485fe73c7772f9496558e3ecd850f1f004ca485e",
-                "reference": "485fe73c7772f9496558e3ecd850f1f004ca485e",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_search/zipball/9b7d8eccc8fb82b9eece3249007a4134d9221e4b",
+                "reference": "9b7d8eccc8fb82b9eece3249007a4134d9221e4b",
                 "shasum": ""
             },
             "require": {
@@ -12225,9 +12225,45 @@
             ],
             "support": {
                 "issues": "https://github.com/UN-OCHA/ocha_search/issues",
-                "source": "https://github.com/UN-OCHA/ocha_search/tree/v1.0.8"
+                "source": "https://github.com/UN-OCHA/ocha_search/tree/v1.0.9"
             },
-            "time": "2024-02-12T12:45:40+00:00"
+            "time": "2024-10-09T08:49:09+00:00"
+        },
+        {
+            "name": "unocha/ocha_snap",
+            "version": "v8.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UN-OCHA/ocha_snap.git",
+                "reference": "d2e949adbd7ff466afb717f712b232c5eccabceb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_snap/zipball/d2e949adbd7ff466afb717f712b232c5eccabceb",
+                "reference": "d2e949adbd7ff466afb717f712b232c5eccabceb",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "^1 || ^2",
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "conflict": {
+                "drupal/drupal": "*"
+            },
+            "require-dev": {
+                "drupal/coder": "^8.3",
+                "sebastian/phpcpd": "^4.1"
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "support": {
+                "issues": "https://github.com/UN-OCHA/ocha_snap/issues",
+                "source": "https://github.com/UN-OCHA/ocha_snap/tree/v8.9.0"
+            },
+            "time": "2024-01-03T08:55:02+00:00"
         },
         {
             "name": "webflo/drupal-finder",

@@ -1,0 +1,3 @@
+rwr_sitrep.local_tasks:
+  deriver: 'Drupal\rwr_sitrep\Plugin\Derivative\DynamicLocalTasks'
+  weight: 42
