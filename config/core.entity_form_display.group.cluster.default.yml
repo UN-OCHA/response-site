@@ -8,9 +8,9 @@ dependencies:
     - field.field.group.cluster.field_assessments_page
     - field.field.group.cluster.field_calendar_alternate_link
     - field.field.group.cluster.field_calendar_link
+    - field.field.group.cluster.field_cluster_subtype
     - field.field.group.cluster.field_documents_page
     - field.field.group.cluster.field_enabled_tabs
-    - field.field.group.cluster.field_group_type
     - field.field.group.cluster.field_hdx_alternate_source
     - field.field.group.cluster.field_hdx_dataset_link
     - field.field.group.cluster.field_ical_url
@@ -177,7 +177,7 @@ third_party_settings:
       label: Pages
       region: hidden
       parent_name: ''
-      weight: 9
+      weight: 15
       format_type: tab
       format_settings:
         classes: ''
@@ -246,6 +246,16 @@ content:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+  field_cluster_subtype:
+    type: entity_reference_autocomplete
+    weight: 6
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_documents_page:
     type: hr_paragraphs_link_default
     weight: 32
@@ -259,16 +269,6 @@ content:
     weight: 2
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_group_type:
-    type: entity_reference_autocomplete
-    weight: 41
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_hdx_alternate_source:
     type: link_default
@@ -331,7 +331,9 @@ content:
     weight: 3
     region: content
     settings:
+      view_mode: default
       preview_view_mode: preview
+      form_display_mode: default
       nesting_depth: 0
       require_layouts: 0
       empty_message: ''
@@ -364,7 +366,9 @@ content:
     weight: 5
     region: content
     settings:
+      view_mode: default
       preview_view_mode: preview
+      form_display_mode: default
       nesting_depth: 0
       require_layouts: 0
       empty_message: ''
@@ -386,19 +390,19 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 7
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 8
+    weight: 9
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   translation:
-    weight: 6
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }

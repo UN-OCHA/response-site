@@ -8,9 +8,9 @@ dependencies:
     - field.field.group.cluster.field_assessments_page
     - field.field.group.cluster.field_calendar_alternate_link
     - field.field.group.cluster.field_calendar_link
+    - field.field.group.cluster.field_cluster_subtype
     - field.field.group.cluster.field_documents_page
     - field.field.group.cluster.field_enabled_tabs
-    - field.field.group.cluster.field_group_type
     - field.field.group.cluster.field_hdx_alternate_source
     - field.field.group.cluster.field_hdx_dataset_link
     - field.field.group.cluster.field_ical_url
@@ -36,14 +36,6 @@ targetEntityType: group
 bundle: cluster
 mode: default
 content:
-  field_group_type:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 3
-    region: content
   field_paragraphs:
     type: layout_paragraphs
     label: hidden
@@ -78,6 +70,7 @@ hidden:
   field_assessments_page: true
   field_calendar_alternate_link: true
   field_calendar_link: true
+  field_cluster_subtype: true
   field_documents_page: true
   field_enabled_tabs: true
   field_hdx_alternate_source: true
