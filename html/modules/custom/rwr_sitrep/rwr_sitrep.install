@@ -5,19 +5,12 @@
  * Update hooks.
  */
 
-use Drupal\taxonomy\Entity\Term;
 use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
  * Add taxonomy term for sitreps and capture the tid.
  */
 function rwr_sitrep_update_10300() {
-
-  // See if we're already set.
-  if (\Drupal::state()->get('rwr_sitrep:sitrep_tid')) {
-    \Drupal::logger('rwr_sitrep')->notice('Sitrep tid already set');
-    return;
-  }
 
   // Ensure vocabulary exists.
   $vocabularies = Vocabulary::loadMultiple();
@@ -33,23 +26,5 @@ function rwr_sitrep_update_10300() {
   else {
     \Drupal::logger('rwr_sitrep')->notice('Cluster or working group type vocabulary already exists');
   }
-
-  // Ensure term exists.
-  $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree('cluster_or_working_group_type');
-  foreach ($terms as $term) {
-    if ($term->name == 'Situation Report') {
-      \Drupal::state()->set('rwr_sitrep:sitrep_tid', $term->tid);
-      \Drupal::logger('rwr_sitrep')->notice('Sitrep term already exists, saving tid');
-      return;
-    }
-  }
-  $term = Term::create([
-    'name' => 'Situation Report',
-    'vid' => 'cluster_or_working_group_type',
-  ]);
-  $term->save();
-
-  \Drupal::logger('rwr_sitrep')->notice("Sitrep term didn not exist, creating it and saving tid: $term->tid");
-  \Drupal::state()->set('rwr_sitrep:sitrep_tid', $term->tid);
 
 }

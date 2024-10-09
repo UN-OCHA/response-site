@@ -4,7 +4,7 @@ rwr_sitrep.node.pdf:
     _controller: 'rwr_sitrep.pdf_controller:getPdf'
     _title: 'PDF'
   requirements:
-    _custom_access: 'rwr_sitrep.pdf_controller:isSitrep'
+    _custom_access: 'rwr_sitrep.pdf_controller:pdfAccess'
   options:
     parameters:
       group:

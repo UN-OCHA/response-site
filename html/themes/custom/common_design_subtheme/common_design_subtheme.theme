@@ -5,7 +5,7 @@
  * Template overrides, preprocess, and hooks for the OCHA Common Design theme.
  */
 
-use Drupal\group\Entity\GroupRelationship;
+use Drupal\rwr_sitrep\Controller\PdfController;
 
 /**
  * Implements hook_preprocess_html().
@@ -67,20 +67,12 @@ function common_design_subtheme_theme_suggestions_node_alter(array &$suggestions
   if (!in_array('node__page__full', $suggestions)) {
     return;
   }
-
-  $grouptypes = GroupRelationship::loadByEntity($variables['elements']['#node']);
-  if (empty($grouptypes)) {
-    return;
-  }
-  $key = array_key_first($grouptypes);
-  $grouptype = $grouptypes[$key]->getGroupType();
-  if ($grouptype->id() != 'cluster') {
-    return;
-  }
-  $group = $grouptypes[$key]->getGroup();
-  $sitrep_tid = \Drupal::state()->get('rwr_sitrep:sitrep_tid');
-  if ($group->get('field_group_type')->first() && $group->get('field_group_type')->first()->getValue()['target_id'] == $sitrep_tid) {
-    $suggestions[] = 'node__page__full__sitrep';
+  // If this can be printed as a Pdf, suggest an appropriate template.
+  $entityTypeManager = \Drupal::entityTypeManager();
+  $languageManager = \Drupal::languageManager();
+  $pdfController = new PdfController($entityTypeManager, $languageManager);
+  if ($pdfController->isPdfable($variables['elements']['#node'])) {
+    $suggestions[] = 'node__page__full__pdf';
   }
 
 }

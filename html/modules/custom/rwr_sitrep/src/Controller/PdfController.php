@@ -6,8 +6,8 @@ use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Language\LanguageManagerInterface;
-use Drupal\Core\State\StateInterface;
 use Drupal\group\Entity\GroupRelationship;
 use Drupal\node\Entity\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -23,11 +23,11 @@ use Symfony\Component\HttpFoundation\Response;
 class PdfController extends ControllerBase {
 
   /**
-   * The state store.
+   * EntityTypeManager.
    *
-   * @var \Drupal\Core\State\StateInterface
+   * @var \Drupal\Core\Entity\EntityTypeManager
    */
-  protected $state;
+  protected $entityTypeManager;
 
   /**
    * Language manager.
@@ -41,7 +41,7 @@ class PdfController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('state'),
+      $container->get('entityTypeManager'),
       $container->get('languageManager')
     );
   }
@@ -49,30 +49,55 @@ class PdfController extends ControllerBase {
   /**
    * PdfController constructor.
    *
-   * @param \Drupal\Core\State\StateInterface $state
-   *   The state controller.
+   * @param \Drupal\Core\Entity\EntityTypeManager $entityTypeManager
+   *   Entity type manager.
    * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
    *   The language manager.
    */
-  final public function __construct(StateInterface $state, LanguageManagerInterface $languageManager) {
-    $this->state = $state;
+  final public function __construct(EntityTypeManager $entityTypeManager, LanguageManagerInterface $languageManager) {
+    $this->entityTypeManager = $entityTypeManager;
     $this->languageManager = $languageManager;
+  }
+
+  /**
+   * Should this node have PDFs?
+   *
+   * Check whether it has a cluster group with a 'pdf_enabled' tag.
+   *
+   * @param \Drupal\node\Entity\Node $node
+   *   Node that's being visited.
+   *
+   * @return boolean
+   *   Whether this is a pdf or not.
+   */
+  public function isPdfable(Node $node) {
+
+    $group_content_array = GroupRelationship::loadByEntity($node);
+    $group_content = reset($group_content_array);
+    if ($group_content->getGroupType()->id() != 'cluster') {
+      return FALSE;
+    }
+    if ($group_content) {
+      $group = $group_content->getGroup();
+
+      if ($group->get('field_cluster_subtype')->first()) {
+        $term_id = $group->get('field_cluster_subtype')->first()->getValue()['target_id'];
+        $term = $this->entityTypeManager->getStorage('taxonomy_term')->load($term_id);
+        if ($term->hasField('field_pdf_enabled')) {
+          return $term->field_pdf_enabled->value;
+        }
+      }
+    }
+
+    return FALSE;
   }
 
   /**
    * Access check for sitreps.
    */
-  public function isSitrep(Node $node) : AccessResult {
-    $grouptypes = GroupRelationship::loadByEntity($node);
-    $key = array_key_first($grouptypes);
-    $grouptype = $grouptypes[$key]->getGroupType();
-    if ($grouptype->id() != 'cluster') {
-      return AccessResult::forbidden();
-    }
-    $group = $grouptypes[$key]->getGroup();
-    $sitrep_tid = $this->state->get('rwr_sitrep:sitrep_tid');
+  public function pdfAccess(Node $node) : AccessResult {
 
-    return AccessResult::allowedIf($group->get('field_group_type')->first()->getValue()['target_id'] == $sitrep_tid);
+    return AccessResult::allowedIf($this->isPdfable($node));
   }
 
   /**

@@ -11,32 +11,41 @@ use Drupal\Core\Url;
 /**
  * Implements hook_menu_local_tasks_alter().
  *
- * Remove or adjust 'Reports' local task for operations or clusters.
+ * Remove or adjust a local task for operations or clusters.
  * If this is an operation, have the link lead to that operation's situation
  * reports only.
- * If this is a cluster, remove the link unless the cluster has the Situation
- * Report tag, in which case change the label accordingly.
+ * If this is a cluster, remove the link unless the cluster has a tag withpdfs
+ * enabled, in which case change the label accordingly.
  *
  * @see rwr_sitrep.links.task.yml
  */
 function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
 
+  $has_sitrep = FALSE;
   if ($group = \Drupal::routeMatch()->getParameter('group')) {
-    $sitrep_tid = \Drupal::state()->get('rwr_sitrep:sitrep_tid');
-    $has_sitrep = FALSE;
     if ($group->type->getValue()[0]['target_id'] == 'cluster') {
-      // If this is a sitrep group, rename Pages to Reports.
-      if ($group->field_group_type->getValue() && $group->field_group_type->getValue()[0]['target_id'] == $sitrep_tid) {
-        $data['tabs'][0]['views_view:view.group_nodes.page_1']['#link']['title'] = t("Reports");
+      // If this group has Pdfs, rename Pages tab to that group's label.
+      if ($group->get('field_cluster_subtype')->first()) {
+        $term_id = $group->get('field_cluster_subtype')->first()->getValue()['target_id'];
+        $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+        if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
+          $label = $term->field_collection_label->value ?? $term->label();
+          $data['tabs'][0]['views_view:view.group_nodes.page_1']['#link']['title'] = $label;
+        }
       }
     }
     elseif ($group->type->getValue()[0]['target_id'] == 'operation') {
-      // If an operation's related group is a sitrep, use id for reports link.
+      // If an operation has a related group with pdfs enabled, use its id for
+      // the local task link.
       foreach ($group->getRelatedEntities() as $related) {
-        if ($related->getEntityTypeId() == 'group' && isset($related->field_group_type)) {
+        if ($related->getEntityTypeId() == 'group' && isset($related->field_cluster_subtype)) {
           /** @var \Drupal\group\Entity\Group $related */
-          if ($related->field_group_type->getValue() && $related->field_group_type->getValue()[0]['target_id'] == $sitrep_tid) {
-            $data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']['#link']['url'] = Url::fromRoute('view.group_nodes.page_1', ['group' => $related->id()]);
+          if ($related->field_cluster_subtype->getValue()) {
+            $term_id = $related->get('field_cluster_subtype')->first()->getValue()['target_id'];
+            $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
+            if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
+              $data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']['#link']['url'] = Url::fromRoute('view.group_nodes.page_1', ['group' => $related->id()]);
+            }
             $has_sitrep = TRUE;
             break;
           }
