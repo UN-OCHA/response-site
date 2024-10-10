@@ -93,7 +93,7 @@
 <article{{ attributes.addClass(classes)|without('role') }}>
 
   {{ include('common_design_subtheme:snap', {
-    snap_url: '/node/' ~ node.id() ~ '/pdf',
+    snap_url: '/' ~ node.langcode.langcode ~ '/node/' ~ node.id() ~ '/pdf',
     label: 'Create PDF'|t,
   }) }}
 
