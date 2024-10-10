@@ -7,10 +7,17 @@ article.node--type-page:has(.snap) {
   position: relative;
 
   .cd-page-title {
-    padding-inline-end: 2rem;
-  }
-  div.snap + h1 + div.contextual {
     padding-inline-end: 1.5rem;
+  }
+  div.snap + h1 + div.contextual  {
+    [dir=ltr] & {
+      left: unset;
+      right: 1.5rem;
+    }
+    [dir=rtl] & {
+      left: 1.5rem;
+      right: unset;
+    }
   }
 }
 

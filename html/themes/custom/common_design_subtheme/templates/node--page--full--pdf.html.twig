@@ -89,11 +89,16 @@
 {{ attach_library('common_design/cd-typography') }}
 {{ attach_library('common_design_subtheme/sitrep') }}
 
+{% if node.langcode.langcode == 'en' %}
+  {% set snap_url = '/node/' ~ node.id() ~ '/pdf' %}
+{% else %}
+  {% set snap_url = '/' ~ node.langcode.langcode ~ '/node/' ~ node.id() ~ '/pdf' %}
+{% endif %}
 {% set unochaDate = node.getCreatedTime|date('j F Y') %}
 <article{{ attributes.addClass(classes)|without('role') }}>
 
   {{ include('common_design_subtheme:snap', {
-    snap_url: '/' ~ node.langcode.langcode ~ '/node/' ~ node.id() ~ '/pdf',
+    snap_url: snap_url,
     label: 'Create PDF'|t,
   }) }}
 
