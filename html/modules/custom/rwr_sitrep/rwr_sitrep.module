@@ -25,7 +25,7 @@ function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheab
   if ($group = \Drupal::routeMatch()->getParameter('group')) {
     if ($group->type->getValue()[0]['target_id'] == 'cluster') {
       // If this group has Pdfs, rename Pages tab to that group's label.
-      if ($group->get('field_cluster_subtype')->first()) {
+      if (!empty($group->get('field_cluster_subtype')->first()->getValue())) {
         $term_id = $group->get('field_cluster_subtype')->first()->getValue()['target_id'];
         $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
         if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
