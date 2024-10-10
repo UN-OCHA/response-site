@@ -3,11 +3,13 @@
   top: 6px;
 
   [dir=ltr] & {
+    left: unset;
     right: 0;
   }
 
   [dir=rtl] & {
     left: 0;
+    right: unset;
   }
 }
 
