@@ -4,8 +4,6 @@ status: true
 dependencies:
   config:
     - taxonomy.vocabulary.cluster_or_working_group_type
-_core:
-  default_config_hash: RlCg5cpauyH5nPj_3rrgol-XCB9Ui49qcHTwA-y7PPg
 id: taxonomy_term.cluster_or_working_group_type
 target_entity_type_id: taxonomy_term
 target_bundle: cluster_or_working_group_type

@@ -4,8 +4,6 @@ status: true
 dependencies:
   module:
     - taxonomy
-_core:
-  default_config_hash: rK99fhaZl92sgHWnrqcDtVXLQhY_0_pkwU1NFV6K3gU
 id: taxonomy_term.field_pdf_enabled
 field_name: field_pdf_enabled
 entity_type: taxonomy_term

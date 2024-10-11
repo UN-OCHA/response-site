@@ -9,8 +9,6 @@ dependencies:
   module:
     - path
     - text
-_core:
-  default_config_hash: SRublaL48mld--DMva7xXbPWEEXt9hbmg85O3rbMgDQ
 id: taxonomy_term.cluster_or_working_group_type.default
 targetEntityType: taxonomy_term
 bundle: cluster_or_working_group_type

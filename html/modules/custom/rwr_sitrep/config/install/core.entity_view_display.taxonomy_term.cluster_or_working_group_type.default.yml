@@ -8,8 +8,6 @@ dependencies:
     - taxonomy.vocabulary.cluster_or_working_group_type
   module:
     - text
-_core:
-  default_config_hash: smdN5r2_DPPtv0O_d9VRKRBS-pUFAs4jvzW3VWn_3oM
 id: taxonomy_term.cluster_or_working_group_type.default
 targetEntityType: taxonomy_term
 bundle: cluster_or_working_group_type

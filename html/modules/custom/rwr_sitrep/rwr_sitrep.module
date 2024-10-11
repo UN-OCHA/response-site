@@ -7,6 +7,7 @@
 
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Url;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_menu_local_tasks_alter().
@@ -20,40 +21,73 @@ use Drupal\Core\Url;
  * @see rwr_sitrep.links.task.yml
  */
 function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
-
   $has_sitrep = FALSE;
-  if ($group = \Drupal::routeMatch()->getParameter('group')) {
-    if ($group->type->getValue()[0]['target_id'] == 'cluster') {
-      // If this group has Pdfs, rename Pages tab to that group's label.
-      if (!empty($group->get('field_cluster_subtype')->first()->getValue())) {
-        $term_id = $group->get('field_cluster_subtype')->first()->getValue()['target_id'];
-        $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
-        if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
-          $label = $term->field_collection_label->value ?? $term->label();
-          $data['tabs'][0]['views_view:view.group_nodes.page_1']['#link']['title'] = $label;
-        }
+
+  /** @var \Drupal\group\Entity\Group */
+  $group = \Drupal::routeMatch()->getParameter('group');
+  if (!$group) {
+    return;
+  }
+
+  // Check clusters.
+  if ($group->getGroupType()->id() == 'cluster') {
+    // Make sure field exists and has a value.
+    if ($group->hasField('field_cluster_subtype') && !$group->get('field_cluster_subtype')->isEmpty()) {
+      $term = $group->get('field_cluster_subtype')->entity;
+      if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
+        $label = $term->field_collection_label->value ?? $term->label();
+        $data['tabs'][0]['views_view:view.group_nodes.page_1']['#link']['title'] = $label;
+        $has_sitrep = TRUE;
       }
-    }
-    elseif ($group->type->getValue()[0]['target_id'] == 'operation') {
-      // If an operation has a related group with pdfs enabled, use its id for
-      // the local task link.
-      foreach ($group->getRelatedEntities() as $related) {
-        if ($related->getEntityTypeId() == 'group' && isset($related->field_cluster_subtype)) {
-          /** @var \Drupal\group\Entity\Group $related */
-          if ($related->field_cluster_subtype->getValue()) {
-            $term_id = $related->get('field_cluster_subtype')->first()->getValue()['target_id'];
-            $term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term_id);
-            if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
-              $data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']['#link']['url'] = Url::fromRoute('view.group_nodes.page_1', ['group' => $related->id()]);
-            }
-            $has_sitrep = TRUE;
-            break;
-          }
-        }
-      }
-    }
-    if (empty($has_sitrep)) {
-      unset($data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']);
     }
   }
+  // Check operations.
+  elseif ($group->getGroupType()->id() == 'operation') {
+    $subgroups = $group->getRelatedEntities('subgroup:cluster');
+    if (!empty($subgroups)) {
+      /** @var \Drupal\group\Entity\Group $subgroup */
+      foreach ($subgroups as $subgroup) {
+        if ($subgroup->hasField('field_cluster_subtype') && !$subgroup->get('field_cluster_subtype')->isEmpty()) {
+          $term = $subgroup->get('field_cluster_subtype')->entity;
+          if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
+            $data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']['#link']['url'] = Url::fromRoute('view.group_nodes.page_1', ['group' => $subgroup->id()]);
+          }
+          $has_sitrep = TRUE;
+          break;
+        }
+      }
+
+    }
+  }
+
+  if (!$has_sitrep) {
+    unset($data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']);
+  }
+}
+
+/**
+ * Create term if it doesn't exist.
+ */
+function rwr_sitrep_create_term_if_needed(string $vid, string $label) : Term {
+  $terms = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadByProperties([
+      'vid' => $vid,
+      'name' => $label,
+    ]);
+
+  if (!empty($terms)) {
+    $term = reset($terms);
+    return $term;
+  }
+
+  $term = Term::create([
+    'vid' => $vid,
+    'name' => $label,
+  ]);
+
+  $term->setPublished()
+    ->save();
+
+  return $term;
 }

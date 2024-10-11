@@ -5,8 +5,6 @@ dependencies:
   config:
     - field.storage.taxonomy_term.field_collection_label
     - taxonomy.vocabulary.cluster_or_working_group_type
-_core:
-  default_config_hash: jmidmfkdQkYOdU9HKhSMkrt9lVE_gnDASc0eQfOZN8I
 id: taxonomy_term.cluster_or_working_group_type.field_collection_label
 field_name: field_collection_label
 entity_type: taxonomy_term

@@ -2,29 +2,19 @@
 
 /**
  * @file
- * Update hooks.
+ * Install hooks.
  */
-
-use Drupal\taxonomy\Entity\Vocabulary;
 
 /**
- * Add taxonomy term for sitreps and capture the tid.
+ * Add default taxonomy term for cluster_or_working_group_type.
  */
-function rwr_sitrep_update_10300() {
+function rwr_sitrep_install() {
+  // Add default terms.
+  $term = rwr_sitrep_create_term_if_needed('cluster_or_working_group_type', 'Situation Report');
+  $term->set('field_pdf_enabled', TRUE);
+  $term->save();
 
-  // Ensure vocabulary exists.
-  $vocabularies = Vocabulary::loadMultiple();
-  if (!isset($vocabularies['cluster_or_working_group_type'])) {
-    $vocabulary = Vocabulary::create([
-      'vid' => 'cluster_or_working_group_type',
-      'name' => t('Cluster or Working Group Type'),
-      'description' => t('For connecting subgroups across Operations'),
-    ]);
-    \Drupal::logger('rwr_sitrep')->notice('Creating cluster or working group type vocabulary');
-    $vocabulary->save();
-  }
-  else {
-    \Drupal::logger('rwr_sitrep')->notice('Cluster or working group type vocabulary already exists');
-  }
-
+  $term = rwr_sitrep_create_term_if_needed('cluster_or_working_group_type', 'Cluster');
+  $term = rwr_sitrep_create_term_if_needed('cluster_or_working_group_type', 'Working group');
+  $term = rwr_sitrep_create_term_if_needed('cluster_or_working_group_type', 'Sector');
 }

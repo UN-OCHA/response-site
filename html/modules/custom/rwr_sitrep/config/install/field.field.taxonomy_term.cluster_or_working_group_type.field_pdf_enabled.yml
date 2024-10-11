@@ -5,8 +5,6 @@ dependencies:
   config:
     - field.storage.taxonomy_term.field_pdf_enabled
     - taxonomy.vocabulary.cluster_or_working_group_type
-_core:
-  default_config_hash: klXTwpejp-szF9ijXf7e7bZvXnvBuANQBWvJZlVdyfY
 id: taxonomy_term.cluster_or_working_group_type.field_pdf_enabled
 field_name: field_pdf_enabled
 entity_type: taxonomy_term
