@@ -155,7 +155,8 @@
             "orakili/composer-drupal-info-file-patch-helper": true,
             "phpstan/extension-installer": true,
             "mglaman/composer-drupal-lenient": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "tbachert/spi": true
         },
         "audit": {
             "abandoned": "report",
