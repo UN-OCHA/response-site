@@ -4,6 +4,19 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.2.9](https://github.com/UN-OCHA/response-site/compare/v1.2.8...v1.2.9) (2024-10-15)
+
+### Chores
+
+* Add another domain for csp ([a4349b](https://github.com/UN-OCHA/response-site/commit/a4349b5ebba9917e1a6abeeef277c45c45aa2136))
+* Fix CS ([b9a2e9](https://github.com/UN-OCHA/response-site/commit/b9a2e94763db8fcf65951ae4223b896854de1404))
+* Ignore audit warning that doesn't affect us ([5389c9](https://github.com/UN-OCHA/response-site/commit/5389c94917604584e55ee61f83f694f247db646c))
+* Update all outdated drupal/* unocha/* drush/* packages. ([f8800d](https://github.com/UN-OCHA/response-site/commit/f8800d04c874ce15aa0700be81ed65de95f4f433), [dc48a5](https://github.com/UN-OCHA/response-site/commit/dc48a532e58723045ee104304eb8ef2aa6879306), [5e6968](https://github.com/UN-OCHA/response-site/commit/5e69680f45fb926d315f082d2b962fb5c43f4103), [6850b4](https://github.com/UN-OCHA/response-site/commit/6850b496f689c3925270bd32866fee2534620fce))
+
+##### Deps
+
+* Bump drupal/core-recommended from 10.3.5 to 10.3.6 ([803d23](https://github.com/UN-OCHA/response-site/commit/803d23792bc9c8a63d912de4683c8d6ba11b48b1))
+
 ## [1.3.0](https://github.com/UN-OCHA/response-site/compare/v1.2.7...v1.3.0) (2024-09-17)
 
 ### Features
