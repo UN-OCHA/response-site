@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6c06b9d0ff8c46d9ffa3229db5a2227",
+    "content-hash": "2e11597af43561e7e455414c889d30c2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -219,7 +219,7 @@
             "version": "v3.7.3",
             "source": {
                 "type": "git",
-                "url": "git@github.com:bevacqua/dragula.git",
+                "url": "https://github.com/bevacqua/dragula.git",
                 "reference": "495664213ed81d17598bd7e5afa09116ae2bb26e"
             },
             "dist": {
