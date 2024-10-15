@@ -1,0 +1,29 @@
+uuid: 55e4fde1-c065-4d94-9da6-6a49587239d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_cluster_subtype
+    - group.type.cluster
+    - taxonomy.vocabulary.cluster_or_working_group_type
+id: group.cluster.field_cluster_subtype
+field_name: field_cluster_subtype
+entity_type: group
+bundle: cluster
+label: 'Cluster subtype'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      cluster_or_working_group_type: cluster_or_working_group_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,9 @@
+uuid: 2cbe7312-0be4-42dc-b9a7-d934019dc5c8
+langcode: en
+status: true
+dependencies: {  }
+name: 'Cluster or Working Group Type'
+vid: cluster_or_working_group_type
+description: 'For connecting subgroups across Operations'
+weight: 0
+new_revision: false

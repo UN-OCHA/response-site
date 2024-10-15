@@ -206,6 +206,11 @@ rw-river-letter-navigation:
   dependencies:
     - common_design_subtheme/rw-brand
 
+sitrep:
+  css:
+    theme:
+      components/sitrep/sitrep.css: {}
+
 node-edit-link:
   css:
     theme:
