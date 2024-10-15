@@ -21,7 +21,7 @@ use Drupal\taxonomy\Entity\Term;
  * @see rwr_sitrep.links.task.yml
  */
 function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
-  $has_sitrep = FALSE;
+  $show_operation_sitreps = FALSE;
 
   /** @var \Drupal\group\Entity\Group */
   $group = \Drupal::routeMatch()->getParameter('group');
@@ -37,7 +37,6 @@ function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheab
       if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
         $label = $term->field_collection_label->value ?? $term->label();
         $data['tabs'][0]['views_view:view.group_nodes.page_1']['#link']['title'] = $label;
-        $has_sitrep = TRUE;
       }
     }
   }
@@ -52,7 +51,7 @@ function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheab
           if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
             $data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']['#link']['url'] = Url::fromRoute('view.group_nodes.page_1', ['group' => $subgroup->id()]);
           }
-          $has_sitrep = TRUE;
+          $show_operation_sitreps = TRUE;
           break;
         }
       }
@@ -60,7 +59,7 @@ function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheab
     }
   }
 
-  if (!$has_sitrep) {
+  if (!$show_operation_sitreps) {
     unset($data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']);
   }
 }
