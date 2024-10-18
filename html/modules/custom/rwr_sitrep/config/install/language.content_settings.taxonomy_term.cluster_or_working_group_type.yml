@@ -1,0 +1,11 @@
+uuid: 9fc07a8f-e169-42fd-b6bd-1d1a6f9f84ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.cluster_or_working_group_type
+id: taxonomy_term.cluster_or_working_group_type
+target_entity_type_id: taxonomy_term
+target_bundle: cluster_or_working_group_type
+default_langcode: site_default
+language_alterable: false

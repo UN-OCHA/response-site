@@ -8,6 +8,7 @@ dependencies:
     - field.field.group.cluster.field_assessments_page
     - field.field.group.cluster.field_calendar_alternate_link
     - field.field.group.cluster.field_calendar_link
+    - field.field.group.cluster.field_cluster_subtype
     - field.field.group.cluster.field_documents_page
     - field.field.group.cluster.field_enabled_tabs
     - field.field.group.cluster.field_hdx_alternate_source
@@ -69,6 +70,7 @@ hidden:
   field_assessments_page: true
   field_calendar_alternate_link: true
   field_calendar_link: true
+  field_cluster_subtype: true
   field_documents_page: true
   field_enabled_tabs: true
   field_hdx_alternate_source: true
