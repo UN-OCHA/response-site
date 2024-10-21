@@ -1,0 +1,130 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Custom\\n"
+"MIME-Version: 1.0\\n"
+"Content-Type: text/plain; charset=UTF-8\\n"
+"Content-Transfer-Encoding: 8bit\\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\\n"
+
+msgid "OCHA Services"
+msgstr "خدمات مكتب تنسيق الشؤون الإنسانية"
+
+msgid "Other OCHA Services"
+msgstr "الخدمات الأخرى لمكتب تنسيق الشؤون الإنسانية"
+
+msgid "Related Platforms"
+msgstr "المنصات ذات الصلة"
+
+msgid "See all"
+msgstr "شاهد الكل"
+
+msgid "Help"
+msgstr "مساعدة"
+
+msgid "Search"
+msgstr "البحث"
+
+msgid "Add new Content"
+msgstr "اضافة محتوى جديد"
+
+msgid "Locations"
+msgstr "المواقع"
+
+msgid "Topics"
+msgstr "المواضيع"
+
+msgid "Welcome to ReliefWeb Response"
+msgstr "مرحبا بكم في ReliefWeb Response"
+
+msgid "View all operations"
+msgstr "عرض جميع العمليات"
+
+msgid "Featured operations"
+msgstr "العمليات الرئيسية"
+
+msgid "About Us"
+msgstr "معلومات عنا"
+
+msgid "Terms of Use"
+msgstr "شروط الاستخدام"
+
+msgid "Contacts"
+msgstr "جهات الاتصال"
+
+msgid "Service provided by"
+msgstr "الخدمة مقدمة من"
+
+msgid "OCHA coordinates the global emergency response to save lives and protect people in humanitarian crises. We advocate for effective and principled humanitarian action by all, for all."
+msgstr "تتولى مكتب تنسيق الشؤون الإنسانية تنسيق الاستجابة العالمية للطوارئ بهدف إنقاذ الأرواح وحماية الناس في الأزمات الإنسانية. ونحن ندعو إلى اتخاذ إجراءات إنسانية فعالة ومبدئية من قبل الجميع، من أجل الجميع."
+
+msgid "Except where otherwise noted, content on this site is licensed under a Creative Commons BY 4.0 International license. Creative Commons BY 4.0"
+msgstr "باستثناء ما هو مذكور خلافًا لذلك، فإن المحتوى الموجود على هذا الموقع مرخص بموجب ترخيص Creative Commons BY 4.0 International. Creative Commons BY 4.0"
+
+msgid "All Operations"
+msgstr "جميع العمليات"
+
+msgid "All"
+msgstr "الجميع"
+
+msgid "Members"
+msgstr "الاعضاء"
+
+msgid "Clusters or Working Groups"
+msgstr "القطاعات او مجموعات العمل"
+
+msgid "Pages"
+msgstr "الصفحات"
+
+msgid "Reports"
+msgstr "التقارير"
+
+msgid "Maps"
+msgstr "الخرائط"
+
+msgid "Assessments"
+msgstr "التقييمات"
+
+msgid "Events"
+msgstr "الأحداث"
+
+msgid "Data"
+msgstr "بيانات"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Revisions"
+msgstr "المراجعات"
+
+msgid "Clusters or Working groups"
+msgstr "القطاعات او مجموعات العمل"
+
+msgid "Translate"
+msgstr "ترجمة"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "View"
+msgstr "عرض"
+
+msgid "Report"
+msgstr "تقرير"
+
+msgid "Reports"
+msgstr "التقارير"
+
+msgid "Situation Report"
+msgstr "تقرير عن الحالة"
+
+msgid "Situation Reports"
+msgstr "تقرير عن الحالة"
+
+msgid "Archive"
+msgstr "أرشيف"
+
+msgid "Custom content"
+msgstr "محتوى مخصص"
+
+msgid "Sidebar Menu"
+msgstr "قائمة الشريط الجانبي"
