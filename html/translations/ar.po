@@ -24,7 +24,10 @@ msgstr "مساعدة"
 msgid "Search"
 msgstr "البحث"
 
-msgid "Add new Content"
+msgid "Add new content"
+msgstr "اضافة محتوى جديد"
+
+msgid "Add New Content"
 msgstr "اضافة محتوى جديد"
 
 msgid "Locations"
