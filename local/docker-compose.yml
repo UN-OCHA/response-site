@@ -52,6 +52,8 @@ services:
       - "site-private:/srv/www/html/sites/default/private:rw"
       # A place for database backups to be installed.
       - "../database:/srv/www/database:ro"
+      # A place for translations.
+      - "../html/translations:/srv/www/html/translations:rw"
       # Mount the folders needed for the tests.
       - "../phpcs.xml:/srv/www/phpcs.xml:ro"
       - "../phpunit.xml:/srv/www/phpunit.xml:ro"

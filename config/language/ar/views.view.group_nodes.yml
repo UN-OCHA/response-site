@@ -1,0 +1,58 @@
+display:
+  default:
+    display_title: الرئيسي
+    display_options:
+      title: العقد
+      fields:
+        title:
+          label: العنوان
+          separator: ', '
+        type:
+          label: 'نوع المحتوى'
+          separator: ', '
+        status:
+          label: الحالة
+          settings:
+            format_custom_false: 'غير منشور'
+            format_custom_true: منشور
+          separator: ', '
+        changed:
+          label: التحديث
+          separator: ', '
+        dropbutton:
+          label: عمليات
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- الكل -'
+            offset_label: الإزاحة
+      exposed_form:
+        options:
+          submit_button: تطبيق
+          reset_button_label: 'إعادة الضبط'
+          exposed_sorts_label: 'الترتيب حسب'
+          sort_asc_label: تصاعدي
+          sort_desc_label: تنازلي
+      empty:
+        area_text_custom:
+          content: 'لا يوجد محتوى.'
+      arguments:
+        gid:
+          exception:
+            title: الكل
+      filters:
+        status:
+          group_info:
+            group_items:
+              1:
+                title: منشور
+              2:
+                title: 'غير منشور'
+        type:
+          expose:
+            label: النوع
+  page_1:
+    display_title: الصفحة
+    display_options:
+      menu:
+        title: العقد

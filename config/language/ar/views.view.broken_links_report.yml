@@ -1,0 +1,50 @@
+display:
+  default:
+    display_title: الرئيسي
+    display_options:
+      exposed_form:
+        options:
+          submit_button: تطبيق
+          reset_button_label: 'إعادة الضبط'
+          exposed_sorts_label: 'الترتيب حسب'
+          sort_asc_label: تصاعدي
+          sort_desc_label: تنازلي
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- الكل -'
+            offset_label: الإزاحة
+      fields:
+        entity_field:
+          separator: ', '
+        entity_langcode:
+          separator: ', '
+        url:
+          label: 'العنوان URL'
+          separator: ', '
+        last_check:
+          label: 'أخر تحقق'
+          separator: ', '
+        method:
+          label: الطريقة
+          separator: ', '
+        code:
+          separator: ', '
+        error:
+          label: خطأ
+          separator: ', '
+        fail_count:
+          separator: ', '
+        status:
+          separator: ', '
+        operations:
+          label: عمليات
+      filters:
+        url:
+          expose:
+            label: 'العنوان URL'
+        code_1:
+          group_info:
+            label: نتيجة
+  page_1:
+    display_title: الصفحة
