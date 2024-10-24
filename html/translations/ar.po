@@ -131,3 +131,30 @@ msgstr "محتوى مخصص"
 
 msgid "Sidebar Menu"
 msgstr "قائمة الشريط الجانبي"
+
+msgid "Title"
+msgstr "العنوان"
+
+msgid "General"
+msgstr "عام"
+
+msgid "Arabic"
+msgstr "العربية"
+
+msgid "Last updated: @date"
+msgstr "اخر تحديث: @date"
+
+msgid "Downloaded:"
+msgstr "تم التنزيل:"
+
+msgid "Maps / Infographics"
+msgstr "الخرائط \ الرسوم البيانية"
+
+msgid "View all updates"
+msgstr "اظهار جميع التحديثات"
+
+msgid "View more"
+msgstr "إظهار المزيد"
+
+msgid "Posted"
+msgstr "تم النشر"
