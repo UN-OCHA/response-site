@@ -1,0 +1,25 @@
+uuid: 91b06c9c-4c33-435b-852d-ad3341c3efae
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_pdf_enabled
+    - taxonomy.vocabulary.cluster_or_working_group_type
+_core:
+  default_config_hash: klXTwpejp-szF9ijXf7e7bZvXnvBuANQBWvJZlVdyfY
+id: taxonomy_term.cluster_or_working_group_type.field_pdf_enabled
+field_name: field_pdf_enabled
+entity_type: taxonomy_term
+bundle: cluster_or_working_group_type
+label: 'Pdf Enabled'
+description: 'Content for groups tagged with this will show an option to print a pdf.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Printing pdfs enabled'
+  off_label: 'No option to print pdfs'
+field_type: boolean
