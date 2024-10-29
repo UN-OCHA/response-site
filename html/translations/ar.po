@@ -60,8 +60,8 @@ msgstr "الخدمة مقدمة من"
 msgid "OCHA coordinates the global emergency response to save lives and protect people in humanitarian crises. We advocate for effective and principled humanitarian action by all, for all."
 msgstr "تتولى مكتب تنسيق الشؤون الإنسانية تنسيق الاستجابة العالمية للطوارئ بهدف إنقاذ الأرواح وحماية الناس في الأزمات الإنسانية. ونحن ندعو إلى اتخاذ إجراءات إنسانية فعالة ومبدئية من قبل الجميع، من أجل الجميع."
 
-msgid "Except where otherwise noted, content on this site is licensed under a Creative Commons BY 4.0 International license. Creative Commons BY 4.0"
-msgstr "باستثناء ما هو مذكور خلافًا لذلك، فإن المحتوى الموجود على هذا الموقع مرخص بموجب ترخيص Creative Commons BY 4.0 International. Creative Commons BY 4.0"
+msgid "Except where otherwise noted, content on this site is licensed under a @cc International license."
+msgstr "باستثناء ما هو مذكور خلافًا لذلك، فإن المحتوى الموجود على هذا الموقع مرخص بموجب ترخيص @cc."
 
 msgid "All Operations"
 msgstr "جميع العمليات"

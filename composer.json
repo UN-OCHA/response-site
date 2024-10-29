@@ -245,6 +245,7 @@
         "drupal/core-dev": "^10.0",
         "drupal/dev_mode": "^2.6",
         "drupal/devel_php": "^1.5",
+        "kint-php/kint": "^5.1",
         "marcocesarato/php-conventional-changelog": "^1.17",
         "mglaman/drupal-check": "^1.4",
         "phpcompatibility/php-compatibility": "^9.3",
