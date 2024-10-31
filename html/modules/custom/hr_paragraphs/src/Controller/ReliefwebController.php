@@ -4,6 +4,7 @@ namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Url;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Page controller for tabs.
  */
-class ReliefwebController extends ControllerBase {
+class ReliefwebController extends ControllerBase implements ContainerInjectionInterface {
 
   /**
    * The HTTP client to fetch the files with.
@@ -320,7 +321,7 @@ class ReliefwebController extends ControllerBase {
    *   Raw results.
    */
   public function executeReliefwebQuery(array $parameters) : array {
-    $endpoint = 'https://api.reliefweb.int/v1/reports';
+    $endpoint = $this->config('hr_paragraphs.settings')->get('reliefweb_api_endpoint') ?? 'https://api.reliefweb.int/v1/reports';
 
     // Remove empty filters.
     if (!isset($parameters['filter']['conditions']) || empty(($parameters['filter']['conditions']))) {
