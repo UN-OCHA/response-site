@@ -166,8 +166,8 @@ msgid "Except where otherwise noted, content on this site is licensed under a @c
 msgstr "إلا إذا ذُكر خلاف ذلك، فإن المحتوى على هذا الموقع مرخص بموجب رخصة @cc الدولية."
 
 msgid "Creative Commons BY 4.0"
-msgstr "المشاع الإبداعي  4.0"
+msgstr "المشاع الإبداعي 4.0"
 
-msgid "This selection of @set_name for @label is powered by @service."
-msgstr "يتم تشغيل هذا الاختيار من @set_name لـ @label بواسطة @service."
+msgid "This selection of :set_name for :label is powered by :service."
+msgstr "يتم تشغيل هذا الاختيار من :set_name لـ :label بواسطة :service."
 
