@@ -198,6 +198,7 @@ class ReliefwebController extends ControllerBase implements ContainerInjectionIn
    */
   public function buildReliefwebParameters(int $offset, int $limit, array $query_filters) : array {
     $facet_filters = [];
+    $appname = $this->config('hr_paragraphs.settings')->get('reliefweb_api_appname') ?? 'hrinfo';
 
     foreach ($query_filters as $key => $keywords) {
       // Date is a special case.
@@ -222,7 +223,7 @@ class ReliefwebController extends ControllerBase implements ContainerInjectionIn
     }
 
     $parameters = [
-      'appname' => 'hrinfo',
+      'appname' => $appname,
       'offset' => $offset,
       'limit' => $limit,
       'preset' => 'latest',
