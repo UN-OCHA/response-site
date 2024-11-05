@@ -40,7 +40,7 @@
     </div>
 
     {# Variables are already translated. #}
-    <p>This selection of {{ set_name|lower }} for {{ group.label() }} is powered by {{ service }}.</p>
+    <p>{{ 'This selection of :set_name for :label is powered by :service.'|t({ ':set_name': set_name|lower, ':label': group.label(), ':service': service }) }}</p>
 
     <a class="cd-button cd-button--icon cd-button--small" href="{{ view_all }}" target="_blank">
       <span class="cd-button__text">{{ 'Refine the list with filters'|t }}</span>

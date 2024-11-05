@@ -6,21 +6,19 @@ display:
       fields:
         title:
           label: العنوان
+          separator: ', '
         type:
           label: 'نوع المحتوى'
+          separator: ', '
         status:
           label: الحالة
           settings:
             format_custom_false: 'غير منشور'
             format_custom_true: منشور
+          separator: ', '
         changed:
           label: التحديث
-        view_group_content:
-          label: 'Link to Group content'
-        edit_group_content:
-          label: 'Link to edit Group content'
-        delete_group_content:
-          label: 'Link to delete Group content'
+          separator: ', '
         dropbutton:
           label: عمليات
       pager:
@@ -42,7 +40,6 @@ display:
         gid:
           exception:
             title: الكل
-          title: '{{ arguments.gid|placeholder }} pages'
       filters:
         status:
           group_info:

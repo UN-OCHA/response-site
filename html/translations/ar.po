@@ -27,6 +27,9 @@ msgstr "البحث"
 msgid "Add new Content"
 msgstr "اضافة محتوى جديد"
 
+msgid "Add New Content"
+msgstr "اضافة محتوى جديد"
+
 msgid "Locations"
 msgstr "المواقع"
 
@@ -57,8 +60,8 @@ msgstr "الخدمة مقدمة من"
 msgid "OCHA coordinates the global emergency response to save lives and protect people in humanitarian crises. We advocate for effective and principled humanitarian action by all, for all."
 msgstr "تتولى مكتب تنسيق الشؤون الإنسانية تنسيق الاستجابة العالمية للطوارئ بهدف إنقاذ الأرواح وحماية الناس في الأزمات الإنسانية. ونحن ندعو إلى اتخاذ إجراءات إنسانية فعالة ومبدئية من قبل الجميع، من أجل الجميع."
 
-msgid "Except where otherwise noted, content on this site is licensed under a Creative Commons BY 4.0 International license. Creative Commons BY 4.0"
-msgstr "باستثناء ما هو مذكور خلافًا لذلك، فإن المحتوى الموجود على هذا الموقع مرخص بموجب ترخيص Creative Commons BY 4.0 International. Creative Commons BY 4.0"
+msgid "Except where otherwise noted, content on this site is licensed under a @cc International license."
+msgstr "باستثناء ما هو مذكور خلافًا لذلك، فإن المحتوى الموجود على هذا الموقع مرخص بموجب ترخيص @cc."
 
 msgid "All Operations"
 msgstr "جميع العمليات"
@@ -107,3 +110,63 @@ msgstr "حذف"
 
 msgid "View"
 msgstr "عرض"
+
+msgid "Report"
+msgstr "تقرير"
+
+msgid "Reports"
+msgstr "التقارير"
+
+msgid "Situation Report"
+msgstr "تقرير عن الحالة"
+
+msgid "Situation Reports"
+msgstr "تقرير عن الحالة"
+
+msgid "Archive"
+msgstr "أرشيف"
+
+msgid "Custom content"
+msgstr "محتوى مخصص"
+
+msgid "Sidebar Menu"
+msgstr "قائمة الشريط الجانبي"
+
+msgid "Title"
+msgstr "العنوان"
+
+msgid "General"
+msgstr "عام"
+
+msgid "Arabic"
+msgstr "العربية"
+
+msgid "Last updated: @date"
+msgstr "اخر تحديث: @date"
+
+msgid "Downloaded:"
+msgstr "تم التنزيل:"
+
+msgid "Maps / Infographics"
+msgstr "الخرائط \ الرسوم البيانية"
+
+msgid "View all updates"
+msgstr "اظهار جميع التحديثات"
+
+msgid "View more"
+msgstr "إظهار المزيد"
+
+msgid "Posted"
+msgstr "تم النشر"
+
+msgid "What are you looking for?"
+msgstr "ما الذي تبحث عنه؟"
+
+msgid "Except where otherwise noted, content on this site is licensed under a @cc International license."
+msgstr "إلا إذا ذُكر خلاف ذلك، فإن المحتوى على هذا الموقع مرخص بموجب رخصة @cc الدولية."
+
+msgid "Creative Commons BY 4.0"
+msgstr "المشاع الإبداعي 4.0"
+
+msgid "This selection of :set_name for :label is powered by :service."
+msgstr "يتم تشغيل هذا الاختيار من :set_name لـ :label بواسطة :service."
