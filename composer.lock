@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87e81dfb9f1e4d2fa064e9b525b927c8",
+    "content-hash": "4b9aac76bd5c3ed22b33ae86e73beaed",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -12198,16 +12198,16 @@
         },
         {
             "name": "unocha/ocha_search",
-            "version": "v1.0.9",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/ocha_search.git",
-                "reference": "9b7d8eccc8fb82b9eece3249007a4134d9221e4b"
+                "reference": "fce0807dffb21e926f0b6e224ae3c5002f1b5581"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/ocha_search/zipball/9b7d8eccc8fb82b9eece3249007a4134d9221e4b",
-                "reference": "9b7d8eccc8fb82b9eece3249007a4134d9221e4b",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_search/zipball/fce0807dffb21e926f0b6e224ae3c5002f1b5581",
+                "reference": "fce0807dffb21e926f0b6e224ae3c5002f1b5581",
                 "shasum": ""
             },
             "require": {
@@ -12224,9 +12224,9 @@
             ],
             "support": {
                 "issues": "https://github.com/UN-OCHA/ocha_search/issues",
-                "source": "https://github.com/UN-OCHA/ocha_search/tree/v1.0.9"
+                "source": "https://github.com/UN-OCHA/ocha_search/tree/v1.1.0"
             },
-            "time": "2024-10-09T08:49:09+00:00"
+            "time": "2024-11-05T10:49:37+00:00"
         },
         {
             "name": "webflo/drupal-finder",
@@ -18966,6 +18966,6 @@
     "platform": {
         "php": "8.*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
