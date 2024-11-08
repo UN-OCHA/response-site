@@ -4,7 +4,6 @@ namespace Drupal\hr_paragraphs\Controller;
 
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Drupal\Core\Url;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\RequestException;
@@ -13,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Page controller for tabs.
  */
-class ReliefwebController extends ControllerBase implements ContainerInjectionInterface {
+class ReliefwebController extends ControllerBase {
 
   /**
    * The HTTP client to fetch the files with.
