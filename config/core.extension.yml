@@ -38,6 +38,7 @@ module:
   geofield: 0
   gnode: 0
   group: 0
+  group_support_revisions: 0
   gtm_barebones: 0
   help: 0
   hr_analytics: 0
