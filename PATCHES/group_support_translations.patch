@@ -1,0 +1,180 @@
+diff --git a/modules/group_support_translations/group_support_translations.info.yml b/modules/group_support_translations/group_support_translations.info.yml
+new file mode 100644
+index 0000000..1bc7e8c
+--- /dev/null
++++ b/modules/group_support_translations/group_support_translations.info.yml
+@@ -0,0 +1,7 @@
++name: 'Group Support: Translations'
++description: 'Enables translation access over grouped entities to be determined by the group'
++package: 'Group'
++type: 'module'
++core_version_requirement: ^10.3 || ^11
++dependencies:
++  - 'group:group'
+diff --git a/modules/group_support_translations/group_support_translations.services.yml b/modules/group_support_translations/group_support_translations.services.yml
+new file mode 100644
+index 0000000..36401e2
+--- /dev/null
++++ b/modules/group_support_translations/group_support_translations.services.yml
+@@ -0,0 +1,7 @@
++services:
++  # Decorating group relation handlers.
++  group.relation_handler_decorator.permission_provider.support_translations:
++    class: 'Drupal\group_support_translations\Plugin\Group\RelationHandler\SupportTranslationsPermissionProvider'
++    decorates: 'group.relation_handler.permission_provider'
++    decoration_priority: 50
++    arguments: ['@group.relation_handler_decorator.permission_provider.support_translations.inner']
+diff --git a/modules/group_support_translations/src/Plugin/Group/RelationHandler/SupportTranslationsPermissionProvider.php b/modules/group_support_translations/src/Plugin/Group/RelationHandler/SupportTranslationsPermissionProvider.php
+new file mode 100644
+index 0000000..4bb51d5
+--- /dev/null
++++ b/modules/group_support_translations/src/Plugin/Group/RelationHandler/SupportTranslationsPermissionProvider.php
+@@ -0,0 +1,148 @@
++<?php
++
++namespace Drupal\group_support_translations\Plugin\Group\RelationHandler;
++
++use Drupal\Core\Entity\TranslationableInterface;
++use Drupal\group\Plugin\Group\Relation\GroupRelationTypeInterface;
++use Drupal\group\Plugin\Group\RelationHandler\PermissionProviderInterface;
++use Drupal\group\Plugin\Group\RelationHandler\PermissionProviderTrait;
++
++/**
++ * Alters all permission providers to add translation support.
++ */
++class SupportTranslationsPermissionProvider implements PermissionProviderInterface {
++
++  use PermissionProviderTrait {
++    init as defaultInit;
++  }
++
++  /**
++   * Whether the target entity type implements the TranslationableInterface.
++   *
++   * @var bool
++   */
++  protected bool $implementsTranslationableInterface;
++
++  /**
++   * Constructs a new SupportTranslationsPermissionProvider.
++   *
++   * @param \Drupal\group\Plugin\Group\RelationHandler\PermissionProviderInterface $parent
++   *   The parent permission provider.
++   */
++  public function __construct(PermissionProviderInterface $parent) {
++    $this->parent = $parent;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function init($plugin_id, GroupRelationTypeInterface $group_relation_type) {
++    $this->defaultInit($plugin_id, $group_relation_type);
++    $this->implementsTranslationableInterface = $this->entityType->entityClassImplements(TranslationableInterface::class);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getPermission($operation, $target, $scope = 'any') {
++    if ($target === 'entity') {
++      switch ($operation) {
++        case 'view all translations':
++          return $this->getEntityViewAllTranslationsPermission();
++
++        case 'view translation':
++          return $this->getEntityViewTranslationPermission();
++
++        case 'revert translation':
++          return $this->getEntityRevertTranslationPermission();
++
++        case 'delete translation':
++          return $this->getEntityDeleteTranslationPermission();
++      }
++    }
++
++    return $this->parent->getPermission($operation, $target, $scope);
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function buildPermissions() {
++    $permissions = $this->parent->buildPermissions();
++
++    // Instead of checking whether this specific permission provider allows for
++    // a permission to exist, we check the entire decorator chain. This avoids a
++    // lot of copy-pasted code to turn off or rename a permission in a decorator
++    // further down the chain.
++    $provider_chain = $this->groupRelationTypeManager()->getPermissionProvider($this->pluginId);
++
++    $prefix = 'Translations:';
++    if ($name = $provider_chain->getPermission('view all translations', 'entity')) {
++      $permissions[$name] = $this->buildPermission("$prefix View all translations");
++    }
++    if ($name = $provider_chain->getPermission('view translation', 'entity')) {
++      $permissions[$name] = $this->buildPermission("$prefix View specific entity translations");
++    }
++    if ($name = $provider_chain->getPermission('revert translation', 'entity')) {
++      $permissions[$name] = $this->buildPermission("$prefix Revert specific entity translations");
++    }
++    if ($name = $provider_chain->getPermission('delete translation', 'entity')) {
++      $permissions[$name] = $this->buildPermission("$prefix Delete specific entity translations");
++    }
++
++    return $permissions;
++  }
++
++  /**
++   * Gets the name of the view all translations permission for the entity.
++   *
++   * @return string|false
++   *   The permission name or FALSE if it does not apply.
++   */
++  protected function getEntityViewAllTranslationsPermission() {
++    if ($this->definesEntityPermissions && $this->implementsTranslationableInterface) {
++      return "view all $this->pluginId entity translations";
++    }
++    return FALSE;
++  }
++
++  /**
++   * Gets the name of the view all translations permission for the entity.
++   *
++   * @return string|false
++   *   The permission name or FALSE if it does not apply.
++   */
++  protected function getEntityViewTranslationPermission() {
++    if ($this->definesEntityPermissions && $this->implementsTranslationableInterface) {
++      return "view $this->pluginId entity translations";
++    }
++    return FALSE;
++  }
++
++  /**
++   * Gets the name of the view all translations permission for the entity.
++   *
++   * @return string|false
++   *   The permission name or FALSE if it does not apply.
++   */
++  protected function getEntityRevertTranslationPermission() {
++    if ($this->definesEntityPermissions && $this->implementsTranslationableInterface) {
++      return "revert $this->pluginId entity translations";
++    }
++    return FALSE;
++  }
++
++  /**
++   * Gets the name of the view all translations permission for the entity.
++   *
++   * @return string|false
++   *   The permission name or FALSE if it does not apply.
++   */
++  protected function getEntityDeleteTranslationPermission() {
++    if ($this->definesEntityPermissions && $this->implementsTranslationableInterface) {
++      return "delete $this->pluginId entity translations";
++    }
++    return FALSE;
++  }
++
++}
