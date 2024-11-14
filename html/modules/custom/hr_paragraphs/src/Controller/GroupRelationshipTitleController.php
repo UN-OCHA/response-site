@@ -6,9 +6,9 @@ use Drupal\group\Entity\Controller\GroupRelationshipController;
 use Drupal\group\Entity\GroupInterface;
 
 /**
- * Returns responses for GroupContent routes.
+ * Returns responses for GroupRelationship routes.
  */
-class GroupContentTitleController extends GroupRelationshipController {
+class GroupRelationshipTitleController extends GroupRelationshipController {
 
   /**
    * {@inheritdoc}
