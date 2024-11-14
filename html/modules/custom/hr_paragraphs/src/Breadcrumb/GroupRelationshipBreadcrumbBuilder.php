@@ -11,9 +11,9 @@ use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupRelationship;
 
 /**
- * Provides a custom breadcrumb builder for group content type paths.
+ * Provides a custom breadcrumb builder for group relationship type paths.
  */
-class GroupContentBreadcrumbBuilder implements BreadcrumbBuilderInterface {
+class GroupRelationshipBreadcrumbBuilder implements BreadcrumbBuilderInterface {
   use StringTranslationTrait;
 
   /**
@@ -25,10 +25,10 @@ class GroupContentBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       return FALSE;
     }
 
-    $group_content_array = GroupRelationship::loadByEntity($node);
-    $group_content = reset($group_content_array);
+    $group_relationship_array = GroupRelationship::loadByEntity($node);
+    $group_relationship = reset($group_relationship_array);
 
-    if (!$group_content) {
+    if (!$group_relationship) {
       return FALSE;
     }
 
@@ -44,9 +44,9 @@ class GroupContentBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     $node = $route_match->getParameter('node');
 
-    $group_content_array = GroupRelationship::loadByEntity($node);
-    $group_content = reset($group_content_array);
-    $group = $group_content->getGroup();
+    $group_relationship_array = GroupRelationship::loadByEntity($node);
+    $group_relationship = reset($group_relationship_array);
+    $group = $group_relationship->getGroup();
 
     if ($group->subgroup_tree->value && $group->subgroup_tree->value !== $group->id()) {
       $parent_group = Group::load($group->subgroup_tree->value);

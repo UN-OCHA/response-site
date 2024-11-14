@@ -284,10 +284,10 @@ function hr_paragraphs_node_update(EntityInterface $entity) {
 
   $page_title = \Drupal::service('pathauto.alias_cleaner')->cleanString($entity->label());
 
-  $group_content_array = GroupRelationship::loadByEntity($entity);
-  $group_content = reset($group_content_array);
-  if ($group_content) {
-    $group = $group_content->getGroup();
+  $group_relationship_array = GroupRelationship::loadByEntity($entity);
+  $group_relationship = reset($group_relationship_array);
+  if ($group_relationship) {
+    $group = $group_relationship->getGroup();
     $group_alias = $path_alias_manager->getAliasByPath('/group/' . $group->id());
 
     // Make sure group has a proper alias.
@@ -315,12 +315,12 @@ function hr_paragraphs_node_update(EntityInterface $entity) {
 /**
  * Implements hook_ENTITY_TYPE_insert().
  */
-function hr_paragraphs_group_content_insert(EntityInterface $entity) {
+function hr_paragraphs_group_relationship_insert(EntityInterface $entity) {
   /** @var \Drupal\group\Entity\GroupRelationship $entity */
   $plugin_id = $entity->getRelationshipType()->getPluginId();
 
   if ($plugin_id === 'group_node:page') {
-    return hr_paragraphs_group_content_alias($entity);
+    return hr_paragraphs_group_relationship_alias($entity);
   }
 
   if ($plugin_id === 'subgroup:cluster') {
@@ -450,7 +450,7 @@ function hr_paragraphs_group_subgroup_alias(EntityInterface $entity) {
 /**
  * Implements hook_ENTITY_TYPE_insert().
  */
-function hr_paragraphs_group_content_alias(EntityInterface $entity) {
+function hr_paragraphs_group_relationship_alias(EntityInterface $entity) {
   /** @var \Drupal\group\Entity\GroupRelationship $entity */
   $plugin_id = $entity->getRelationshipType()->getPluginId();
   if ($plugin_id != 'group_node:page') {
@@ -493,8 +493,8 @@ function hr_paragraphs_group_content_alias(EntityInterface $entity) {
 /**
  * Implements hook_ENTITY_TYPE_update().
  */
-function hr_paragraphs_group_content_update(EntityInterface $entity) {
-  return hr_paragraphs_group_content_insert($entity);
+function hr_paragraphs_group_relationship_update(EntityInterface $entity) {
+  return hr_paragraphs_group_relationship_insert($entity);
 }
 
 /**
@@ -724,10 +724,10 @@ function hr_paragraphs_preprocess_paragraph__upcoming_events(&$variables) {
 
   // If we are on page, get the group.
   if (get_class($group) == 'Drupal\node\Entity\Node') {
-    $group_content_array = GroupRelationship::loadByEntity($group);
-    $group_content = reset($group_content_array);
-    if ($group_content) {
-      $group = $group_content->getGroup();
+    $group_relationship_array = GroupRelationship::loadByEntity($group);
+    $group_relationship = reset($group_relationship_array);
+    if ($group_relationship) {
+      $group = $group_relationship->getGroup();
     }
     else {
       return;
@@ -799,10 +799,10 @@ function hr_paragraphs_preprocess_paragraph__child_groups(&$variables) {
 
   // If we are on page, get the group.
   if (get_class($group) == 'Drupal\node\Entity\Node') {
-    $group_content_array = GroupRelationship::loadByEntity($group);
-    $group_content = reset($group_content_array);
-    if ($group_content) {
-      $group = $group_content->getGroup();
+    $group_relationship_array = GroupRelationship::loadByEntity($group);
+    $group_relationship = reset($group_relationship_array);
+    if ($group_relationship) {
+      $group = $group_relationship->getGroup();
     }
     else {
       return;
@@ -879,10 +879,10 @@ function hr_paragraphs_preprocess_paragraph__group_pages(&$variables) {
   // If we are on page, get the group.
   if (get_class($group) == 'Drupal\node\Entity\Node') {
     $exclude_pages[] = $group->id();
-    $group_content_array = GroupRelationship::loadByEntity($group);
-    $group_content = reset($group_content_array);
-    if ($group_content) {
-      $group = $group_content->getGroup();
+    $group_relationship_array = GroupRelationship::loadByEntity($group);
+    $group_relationship = reset($group_relationship_array);
+    if ($group_relationship) {
+      $group = $group_relationship->getGroup();
     }
     else {
       return;
@@ -1527,16 +1527,16 @@ function hr_paragraphs_menu_local_actions_alter(&$local_actions) {
     unset($local_actions['group.add_group']);
   }
 
-  if (isset($local_actions['group_content.group_node_relate_page'])) {
-    unset($local_actions['group_content.group_node_relate_page']);
+  if (isset($local_actions['group_relationship.group_node_relate_page'])) {
+    unset($local_actions['group_relationship.group_node_relate_page']);
   }
 
-  if (isset($local_actions['group_content.group_node_add_page'])) {
-    $local_actions['group_content.group_node_add_page']['title'] = t('Add new page');
+  if (isset($local_actions['group_relationship.group_node_add_page'])) {
+    $local_actions['group_relationship.group_node_add_page']['title'] = t('Add new page');
   }
 
-  if (isset($local_actions['group_content.group_node_create_page'])) {
-    $local_actions['group_content.group_node_create_page']['title'] = t('Add new page');
+  if (isset($local_actions['group_relationship.group_node_create_page'])) {
+    $local_actions['group_relationship.group_node_create_page']['title'] = t('Add new page');
   }
 }
 
@@ -1583,10 +1583,10 @@ function hr_paragraphs_node_sidebar(&$variables) {
     return;
   }
 
-  $group_content_array = GroupRelationship::loadByEntity($node);
-  $group_content = reset($group_content_array);
-  if ($group_content) {
-    $group = $group_content->getGroup();
+  $group_relationship_array = GroupRelationship::loadByEntity($node);
+  $group_relationship = reset($group_relationship_array);
+  if ($group_relationship) {
+    $group = $group_relationship->getGroup();
 
     if ($group->hasField('field_sidebar_from_operation') && !$group->field_sidebar_from_operation->isEmpty() && $group->field_sidebar_from_operation->value) {
       if ($group->hasField('subgroup_tree') && !$group->subgroup_tree->isEmpty()) {
@@ -1611,8 +1611,8 @@ function hr_paragraphs_node_is_archived(&$variables) {
   }
 
   $variables['is_archived'] = FALSE;
-  /** @var \Drupal\group\Entity\Storage\GroupContentStorage */
-  $storage = \Drupal::entityTypeManager()->getStorage('group_content');
+  /** @var \Drupal\group\Entity\Storage\GroupRelationshipStorage */
+  $storage = \Drupal::entityTypeManager()->getStorage('group_relationship');
   $activGroupListEntity = $storage->loadByEntity($node);
 
   // Not a group node.
@@ -1620,8 +1620,8 @@ function hr_paragraphs_node_is_archived(&$variables) {
     return;
   }
 
-  foreach ($activGroupListEntity as $groupContent) {
-    $group = $groupContent->getGroup();
+  foreach ($activGroupListEntity as $groupRelationship) {
+    $group = $groupRelationship->getGroup();
     if (!$group->hasField('field_archive_group')) {
       continue;
     }
@@ -1659,8 +1659,8 @@ function hr_paragraphs_node_parent_is_published(&$variables) {
   }
 
   $variables['parent_is_published'] = TRUE;
-  /** @var \Drupal\group\Entity\Storage\GroupContentStorage */
-  $storage = \Drupal::entityTypeManager()->getStorage('group_content');
+  /** @var \Drupal\group\Entity\Storage\GroupRelationshipStorage */
+  $storage = \Drupal::entityTypeManager()->getStorage('group_relationship');
   $activGroupListEntity = $storage->loadByEntity($node);
 
   // Not a group node.
@@ -1668,8 +1668,8 @@ function hr_paragraphs_node_parent_is_published(&$variables) {
     return;
   }
 
-  foreach ($activGroupListEntity as $groupContent) {
-    $group = $groupContent->getGroup();
+  foreach ($activGroupListEntity as $groupRelationship) {
+    $group = $groupRelationship->getGroup();
     if (!$group->isPublished()) {
       $variables['parent_is_published'] = FALSE;
       return;
@@ -1917,10 +1917,10 @@ function hr_paragraphs_module_implements_alter(array &$implementations, string $
 function hr_paragraphs_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Hide path for memberships.
   $form_ids = [
-    'group_content_operation-group_membership_add_form',
-    'group_content_operation-group_membership_edit_form',
-    'group_content_cluster-group_membership_add_form',
-    'group_content_cluster-group_membership_edit_form',
+    'group_relationship_operation-group_membership_add_form',
+    'group_relationship_operation-group_membership_edit_form',
+    'group_relationship_cluster-group_membership_add_form',
+    'group_relationship_cluster-group_membership_edit_form',
   ];
 
   if (in_array($form_id, $form_ids)) {
@@ -2061,9 +2061,9 @@ function hr_paragraphs_preprocess_views_view(&$variables) {
 }
 
 /**
- * Implements hook_group_content_info_alter().
+ * Implements hook_group_relationship_info_alter().
  */
-function hr_paragraphs_group_content_info_alter(&$definitions) {
+function hr_paragraphs_group_relationship_info_alter(&$definitions) {
   // Hide sub groups and pages when unpublished.
   $definitions['group_node:landing_page']['handlers']['access'] = 'Drupal\hr_paragraphs\Plugin\GroupNodeAccessControlHandler';
   $definitions['group_node:page']['handlers']['access'] = 'Drupal\hr_paragraphs\Plugin\GroupNodeAccessControlHandler';
