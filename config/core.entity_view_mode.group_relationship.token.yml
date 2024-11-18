@@ -4,8 +4,8 @@ status: true
 dependencies:
   module:
     - group
-id: group_content.token
+id: group_relationship.token
 label: Token
 description: ''
-targetEntityType: group_content
+targetEntityType: group_relationship
 cache: true

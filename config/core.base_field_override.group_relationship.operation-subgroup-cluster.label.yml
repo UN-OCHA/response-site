@@ -3,10 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-subgroup-cluster
-id: group_content.operation-subgroup-cluster.label
+    - group.relationship_type.operation-subgroup-cluster
+id: group_relationship.operation-subgroup-cluster.label
 field_name: label
-entity_type: group_content
+entity_type: group_relationship
 bundle: operation-subgroup-cluster
 label: Title
 description: ''

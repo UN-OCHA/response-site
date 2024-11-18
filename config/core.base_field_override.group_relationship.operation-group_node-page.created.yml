@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-group_node-page
-id: group_content.operation-group_node-page.created
+    - group.relationship_type.operation-group_node-page
+id: group_relationship.operation-group_node-page.created
 field_name: created
-entity_type: group_content
+entity_type: group_relationship
 bundle: operation-group_node-page
 label: 'Created on'
-description: 'The time that the group content was created.'
+description: 'The time that the group relationship was created.'
 required: false
 translatable: false
 default_value: {  }

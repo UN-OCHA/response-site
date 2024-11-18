@@ -1,9 +1,9 @@
-uuid: 514e2a11-0b39-45d3-955a-ccf8e02e48f6
+uuid: 2229632c-4511-4613-935c-8377558323d5
 langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-group_node-page
+    - group.relationship_type.operation-subgroup-cluster
   module:
     - content_translation
 third_party_settings:
@@ -11,8 +11,8 @@ third_party_settings:
     enabled: false
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: group_content.operation-group_node-page
-target_entity_type_id: group_content
-target_bundle: operation-group_node-page
+id: group_relationship.operation-subgroup-cluster
+target_entity_type_id: group_relationship
+target_bundle: operation-subgroup-cluster
 default_langcode: site_default
 language_alterable: false

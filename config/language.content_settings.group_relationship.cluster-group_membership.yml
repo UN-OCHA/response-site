@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.cluster-group_membership
+    - group.relationship_type.cluster-group_membership
   module:
     - content_translation
 third_party_settings:
@@ -11,8 +11,8 @@ third_party_settings:
     enabled: false
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: group_content.cluster-group_membership
-target_entity_type_id: group_content
+id: group_relationship.cluster-group_membership
+target_entity_type_id: group_relationship
 target_bundle: cluster-group_membership
 default_langcode: site_default
 language_alterable: false

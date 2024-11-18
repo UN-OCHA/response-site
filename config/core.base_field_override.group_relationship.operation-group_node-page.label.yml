@@ -3,10 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-group_node-page
-id: group_content.operation-group_node-page.label
+    - group.relationship_type.operation-group_node-page
+id: group_relationship.operation-group_node-page.label
 field_name: label
-entity_type: group_content
+entity_type: group_relationship
 bundle: operation-group_node-page
 label: Title
 description: ''

@@ -1,13 +1,13 @@
-uuid: 5665f9c2-e311-4e57-87e0-aa0f9ca4d089
+uuid: f626f641-8295-449b-9b56-4d2a301d2bbb
 langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-group_membership
-id: group_content.operation-group_membership.uid
+    - group.relationship_type.cluster-group_node-page
+id: group_relationship.cluster-group_node-page.uid
 field_name: uid
-entity_type: group_content
-bundle: operation-group_membership
+entity_type: group_relationship
+bundle: cluster-group_node-page
 label: 'Group content creator'
 description: 'The username of the group content creator.'
 required: false

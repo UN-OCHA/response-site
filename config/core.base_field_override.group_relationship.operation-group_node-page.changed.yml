@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-group_node-page
-id: group_content.operation-group_node-page.changed
+    - group.relationship_type.operation-group_node-page
+id: group_relationship.operation-group_node-page.changed
 field_name: changed
-entity_type: group_content
+entity_type: group_relationship
 bundle: operation-group_node-page
 label: 'Changed on'
-description: 'The time that the group content was last edited.'
+description: 'The time that the group relationship was last edited.'
 required: false
 translatable: false
 default_value: {  }

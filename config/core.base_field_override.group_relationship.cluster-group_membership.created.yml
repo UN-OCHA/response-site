@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.cluster-group_membership
-id: group_content.cluster-group_membership.created
+    - group.relationship_type.cluster-group_membership
+id: group_relationship.cluster-group_membership.created
 field_name: created
-entity_type: group_content
+entity_type: group_relationship
 bundle: cluster-group_membership
 label: 'Created on'
-description: 'The time that the group content was created.'
+description: 'The time that the group relationship was created.'
 required: false
 translatable: false
 default_value: {  }

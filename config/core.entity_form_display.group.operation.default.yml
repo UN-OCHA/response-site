@@ -36,7 +36,7 @@ dependencies:
     - text
 third_party_settings:
   field_group:
-    group_content:
+    group_relationship:
       children:
         - group_general
         - group_documents
@@ -64,7 +64,7 @@ third_party_settings:
         - field_calendar_alternate_link
       label: Events
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 26
       format_type: tab
       format_settings:
@@ -80,7 +80,7 @@ third_party_settings:
         - field_meta_description
       label: General
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 20
       format_type: tab
       format_settings:
@@ -95,7 +95,7 @@ third_party_settings:
         - field_offices_page
       label: Contacts
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 27
       format_type: tab
       format_settings:
@@ -126,7 +126,7 @@ third_party_settings:
         - field_documents_page
       label: Reports
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 22
       format_type: tab
       format_settings:
@@ -142,7 +142,7 @@ third_party_settings:
         - field_infographics
       label: 'Maps / Infographics'
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 23
       format_type: tab
       format_settings:
@@ -158,7 +158,7 @@ third_party_settings:
         - field_hdx_alternate_source
       label: Data
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 25
       format_type: tab
       format_settings:
@@ -174,7 +174,7 @@ third_party_settings:
         - field_assessments_page
       label: Assessments
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 24
       format_type: tab
       format_settings:
@@ -190,7 +190,7 @@ third_party_settings:
         - field_archive_message
       label: Archive
       region: content
-      parent_name: group_content
+      parent_name: group_relationship
       weight: 28
       format_type: tab
       format_settings:
