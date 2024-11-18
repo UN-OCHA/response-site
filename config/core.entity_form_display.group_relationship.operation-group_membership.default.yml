@@ -1,15 +1,15 @@
-uuid: 6b3f6332-aa08-4bbe-83c6-f0e6335e766f
+uuid: 458987b1-b9e5-4385-870c-d7bad66e99a6
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.group_content.cluster-group_membership.group_roles
-    - group.content_type.cluster-group_membership
+    - field.field.group_relationship.operation-group_membership.group_roles
+    - group.relationship_type.operation-group_membership
   module:
     - path
-id: group_content.cluster-group_membership.default
-targetEntityType: group_content
-bundle: cluster-group_membership
+id: group_relationship.operation-group_membership.default
+targetEntityType: group_relationship
+bundle: operation-group_membership
 mode: default
 content:
   entity_id:

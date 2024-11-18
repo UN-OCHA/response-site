@@ -3,10 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.group_content.operation-group_membership.group_roles
-    - group.content_type.operation-group_membership
-id: group_content.operation-group_membership.default
-targetEntityType: group_content
+    - field.field.group_relationship.operation-group_membership.group_roles
+    - group.relationship_type.operation-group_membership
+id: group_relationship.operation-group_membership.default
+targetEntityType: group_relationship
 bundle: operation-group_membership
 mode: default
 content:
