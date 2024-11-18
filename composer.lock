@@ -12112,16 +12112,16 @@
         },
         {
             "name": "unocha/common_design",
-            "version": "v9.4.3",
+            "version": "v9.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UN-OCHA/common_design.git",
-                "reference": "15592bea6f10db7c6bb4b58abd2b4a1962979c7d"
+                "reference": "f11b39f2faf9eabcd88ec10a120e465897116e7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/15592bea6f10db7c6bb4b58abd2b4a1962979c7d",
-                "reference": "15592bea6f10db7c6bb4b58abd2b4a1962979c7d",
+                "url": "https://api.github.com/repos/UN-OCHA/common_design/zipball/f11b39f2faf9eabcd88ec10a120e465897116e7d",
+                "reference": "f11b39f2faf9eabcd88ec10a120e465897116e7d",
                 "shasum": ""
             },
             "require": {
@@ -12136,9 +12136,9 @@
             "description": "OCHA Common Design base theme for Drupal 9+",
             "support": {
                 "issues": "https://github.com/UN-OCHA/common_design/issues",
-                "source": "https://github.com/UN-OCHA/common_design/tree/v9.4.3"
+                "source": "https://github.com/UN-OCHA/common_design/tree/v9.4.4"
             },
-            "time": "2024-08-08T09:37:46+00:00"
+            "time": "2024-11-18T09:15:05+00:00"
         },
         {
             "name": "unocha/gtm_barebones",
