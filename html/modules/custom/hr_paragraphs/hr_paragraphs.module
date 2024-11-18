@@ -1532,11 +1532,11 @@ function hr_paragraphs_menu_local_actions_alter(&$local_actions) {
   }
 
   if (isset($local_actions['group_relationship.group_node_add_page'])) {
-    $local_actions['group_relationship.group_node_add_page']['title'] = t('Add new page');
+    $local_actions['group_relationship.group_node_add_page']['title'] = t('Add existing page');
   }
 
   if (isset($local_actions['group_relationship.group_node_create_page'])) {
-    $local_actions['group_relationship.group_node_create_page']['title'] = t('Add new page');
+    $local_actions['group_relationship.group_node_create_page']['title'] = t('Create new page');
   }
 }
 

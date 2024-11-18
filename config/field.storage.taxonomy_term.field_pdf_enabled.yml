@@ -1,0 +1,20 @@
+uuid: 8317e855-4ae1-4de7-9d22-20cfcb9defbd
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+_core:
+  default_config_hash: rK99fhaZl92sgHWnrqcDtVXLQhY_0_pkwU1NFV6K3gU
+id: taxonomy_term.field_pdf_enabled
+field_name: field_pdf_enabled
+entity_type: taxonomy_term
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
