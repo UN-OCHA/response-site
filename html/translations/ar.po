@@ -24,7 +24,7 @@ msgstr "مساعدة"
 msgid "Search"
 msgstr "البحث"
 
-msgid "Add new content"
+msgid "Add new Content"
 msgstr "اضافة محتوى جديد"
 
 msgid "Add New Content"
@@ -170,4 +170,3 @@ msgstr "المشاع الإبداعي 4.0"
 
 msgid "This selection of :set_name for :label is powered by :service."
 msgstr "يتم تشغيل هذا الاختيار من :set_name لـ :label بواسطة :service."
-

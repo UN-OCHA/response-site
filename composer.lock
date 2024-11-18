@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b9aac76bd5c3ed22b33ae86e73beaed",
+    "content-hash": "f10e70300f55f6055c6d8656f236905b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -219,7 +219,7 @@
             "version": "v3.7.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bevacqua/dragula.git",
+                "url": "git@github.com:bevacqua/dragula.git",
                 "reference": "495664213ed81d17598bd7e5afa09116ae2bb26e"
             },
             "dist": {
@@ -12228,6 +12228,42 @@
                 "source": "https://github.com/UN-OCHA/ocha_search/tree/v1.1.0"
             },
             "time": "2024-11-05T10:49:37+00:00"
+        },
+        {
+            "name": "unocha/ocha_snap",
+            "version": "v8.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UN-OCHA/ocha_snap.git",
+                "reference": "d2e949adbd7ff466afb717f712b232c5eccabceb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UN-OCHA/ocha_snap/zipball/d2e949adbd7ff466afb717f712b232c5eccabceb",
+                "reference": "d2e949adbd7ff466afb717f712b232c5eccabceb",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "^1 || ^2",
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "conflict": {
+                "drupal/drupal": "*"
+            },
+            "require-dev": {
+                "drupal/coder": "^8.3",
+                "sebastian/phpcpd": "^4.1"
+            },
+            "type": "drupal-module",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "support": {
+                "issues": "https://github.com/UN-OCHA/ocha_snap/issues",
+                "source": "https://github.com/UN-OCHA/ocha_snap/tree/v8.9.0"
+            },
+            "time": "2024-01-03T08:55:02+00:00"
         },
         {
             "name": "webflo/drupal-finder",

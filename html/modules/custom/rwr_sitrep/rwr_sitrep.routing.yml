@@ -1,0 +1,11 @@
+rwr_sitrep.node.pdf:
+  path: '/node/{node}/pdf'
+  defaults:
+    _controller: 'rwr_sitrep.pdf_controller:getPdf'
+    _title: 'PDF'
+  requirements:
+    _custom_access: 'rwr_sitrep.pdf_controller:pdfAccess'
+  options:
+    parameters:
+      group:
+        type: entity:group
