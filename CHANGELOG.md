@@ -4,6 +4,8 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.2.11](https://github.com/UN-OCHA/response-site/compare/v1.2.10...v1.2.11) (2024-11-19)
+
 ## [1.3.0](https://github.com/UN-OCHA/response-site/compare/v1.2.9...v1.3.0) (2024-11-18)
 
 ### Features
