@@ -17,10 +17,6 @@ display:
         created:
           label: Joined
           separator: ', '
-        edit_group_content:
-          text: 'Edit member'
-        delete_group_content:
-          admin_label: 'Remove member link'
         dropbutton:
           label: Actions
       pager:
