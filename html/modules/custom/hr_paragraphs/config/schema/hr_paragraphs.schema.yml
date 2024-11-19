@@ -17,6 +17,12 @@ hr_paragraphs.settings:
     notification_new_user_enabled:
       type: boolean
       label: 'Send notification for new users'
+    reliefweb_api_endpoint:
+      type: string
+      label: 'URL endpoint for the Reliefweb API'
+    reliefweb_api_appname:
+      type: string
+      label: 'Identifier used Reliefweb API calls'
 
 field.widget.settings.hr_paragraphs_link_default:
   type: mapping

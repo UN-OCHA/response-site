@@ -1,0 +1,19 @@
+uuid: 11237cdc-b6d0-4f49-91b6-16f9fc1b8088
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_collection_label
+    - taxonomy.vocabulary.cluster_or_working_group_type
+id: taxonomy_term.cluster_or_working_group_type.field_collection_label
+field_name: field_collection_label
+entity_type: taxonomy_term
+bundle: cluster_or_working_group_type
+label: 'Collection label'
+description: 'For use as a label for a group of these terms'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

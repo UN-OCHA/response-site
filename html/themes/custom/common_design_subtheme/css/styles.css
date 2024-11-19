@@ -35,6 +35,13 @@
 }
 
 /**
+ * Give a base for the pdf icon on updates.
+ */
+.node--type-update.node--view-mode-full {
+  position: relative;
+}
+
+/**
  * External URLs
  */
 .hri__external-url {

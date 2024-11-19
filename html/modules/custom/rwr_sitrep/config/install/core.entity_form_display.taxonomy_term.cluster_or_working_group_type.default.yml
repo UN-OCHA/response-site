@@ -1,0 +1,68 @@
+uuid: a8a20758-d44d-4fa7-b70a-6e485df56d37
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.cluster_or_working_group_type.field_collection_label
+    - field.field.taxonomy_term.cluster_or_working_group_type.field_pdf_enabled
+    - taxonomy.vocabulary.cluster_or_working_group_type
+  module:
+    - path
+    - text
+id: taxonomy_term.cluster_or_working_group_type.default
+targetEntityType: taxonomy_term
+bundle: cluster_or_working_group_type
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_collection_label:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_pdf_enabled:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 4
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden: {  }
