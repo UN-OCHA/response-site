@@ -1,0 +1,10 @@
+name: Response Sitrep
+description: Handles digital sitreps.
+type: module
+core_version_requirement: ^10 || ^11
+
+dependencies:
+  - drupal:language
+  - drupal:taxonomy
+  - group:group
+  - ocha_snap:ocha_snap

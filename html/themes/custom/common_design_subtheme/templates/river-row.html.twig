@@ -8,7 +8,7 @@
  */
 #}
 <article class="hri-river__result" data-rw-id="{{ row.id }}">
-  <header>
+  <header dir="auto">
     <p class="country">
       <span class="country--primary">{{ row.primary_country }}</span>
       {% if row.countries|length > 1 %}
@@ -21,7 +21,7 @@
     </h3>
   </header>
 
-  <div class="content">
+  <div class="content" dir="auto">
     {% if not row.hide_thumbnails %}
       {% for file in row.files|slice(0, 1) %}
         {% if file.preview != '' %}

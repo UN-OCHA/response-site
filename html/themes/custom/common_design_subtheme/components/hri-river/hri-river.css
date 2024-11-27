@@ -152,6 +152,9 @@
   vertical-align: middle;
   background: rgba(0, 0, 0, 0) url("../rw-brand/rw-icons-sprite.svg") -328px -32px no-repeat;
 }
+.hri-river__result:dir(rtl) .meta dd.format::before {
+  margin: -2px 0 0 6px;
+}
 
 .hri-river__result .meta dd.format.map::before {
   background-position-y: -48px;

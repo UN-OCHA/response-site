@@ -4,7 +4,7 @@
       <article class="river__result" data-rw-id="{{ row.id }}">
         <header>
           <p class="country">
-            <span class="country--primary">{{ row.primary_country }}</span>
+            <span class="country--primary">{{ row.primary_country|t }}</span>
             {% if row.countries|length > 1 %}
               {{ '+ @count more'|t({'@count': row.countries|slice(1)|length}) }}
             {% endif %}
@@ -57,7 +57,7 @@
     {{ pager }}
 
     {% if view_all %}
-      <a href="{{ view_all }}">View all updates</a>
+      <a href="{{ view_all }}">{{ 'View all updates'|t }}</a>
     {% endif %}
   </div>{# .river__results #}
 </div>{# .river #}
