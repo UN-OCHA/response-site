@@ -26,7 +26,7 @@ index 0000000..36401e2
 +    arguments: ['@group.relation_handler_decorator.permission_provider.support_translations.inner']
 diff --git a/modules/group_support_translations/src/Plugin/Group/RelationHandler/SupportTranslationsPermissionProvider.php b/modules/group_support_translations/src/Plugin/Group/RelationHandler/SupportTranslationsPermissionProvider.php
 new file mode 100644
-index 0000000..4bb51d5
+index 0000000..a358b34
 --- /dev/null
 +++ b/modules/group_support_translations/src/Plugin/Group/RelationHandler/SupportTranslationsPermissionProvider.php
 @@ -0,0 +1,148 @@
@@ -34,7 +34,7 @@ index 0000000..4bb51d5
 +
 +namespace Drupal\group_support_translations\Plugin\Group\RelationHandler;
 +
-+use Drupal\Core\Entity\TranslationableInterface;
++use Drupal\Core\Entity\TranslatableInterface;
 +use Drupal\group\Plugin\Group\Relation\GroupRelationTypeInterface;
 +use Drupal\group\Plugin\Group\RelationHandler\PermissionProviderInterface;
 +use Drupal\group\Plugin\Group\RelationHandler\PermissionProviderTrait;
@@ -53,7 +53,7 @@ index 0000000..4bb51d5
 +   *
 +   * @var bool
 +   */
-+  protected bool $implementsTranslationableInterface;
++  protected bool $implementsTranslatableInterface;
 +
 +  /**
 +   * Constructs a new SupportTranslationsPermissionProvider.
@@ -70,7 +70,7 @@ index 0000000..4bb51d5
 +   */
 +  public function init($plugin_id, GroupRelationTypeInterface $group_relation_type) {
 +    $this->defaultInit($plugin_id, $group_relation_type);
-+    $this->implementsTranslationableInterface = $this->entityType->entityClassImplements(TranslationableInterface::class);
++    $this->implementsTranslatableInterface = $this->entityType->entityClassImplements(TranslatableInterface::class);
 +  }
 +
 +  /**
@@ -132,7 +132,7 @@ index 0000000..4bb51d5
 +   *   The permission name or FALSE if it does not apply.
 +   */
 +  protected function getEntityViewAllTranslationsPermission() {
-+    if ($this->definesEntityPermissions && $this->implementsTranslationableInterface) {
++    if ($this->definesEntityPermissions && $this->implementsTranslatableInterface) {
 +      return "view all $this->pluginId entity translations";
 +    }
 +    return FALSE;
@@ -145,7 +145,7 @@ index 0000000..4bb51d5
 +   *   The permission name or FALSE if it does not apply.
 +   */
 +  protected function getEntityViewTranslationPermission() {
-+    if ($this->definesEntityPermissions && $this->implementsTranslationableInterface) {
++    if ($this->definesEntityPermissions && $this->implementsTranslatableInterface) {
 +      return "view $this->pluginId entity translations";
 +    }
 +    return FALSE;
@@ -158,7 +158,7 @@ index 0000000..4bb51d5
 +   *   The permission name or FALSE if it does not apply.
 +   */
 +  protected function getEntityRevertTranslationPermission() {
-+    if ($this->definesEntityPermissions && $this->implementsTranslationableInterface) {
++    if ($this->definesEntityPermissions && $this->implementsTranslatableInterface) {
 +      return "revert $this->pluginId entity translations";
 +    }
 +    return FALSE;
@@ -171,7 +171,7 @@ index 0000000..4bb51d5
 +   *   The permission name or FALSE if it does not apply.
 +   */
 +  protected function getEntityDeleteTranslationPermission() {
-+    if ($this->definesEntityPermissions && $this->implementsTranslationableInterface) {
++    if ($this->definesEntityPermissions && $this->implementsTranslatableInterface) {
 +      return "delete $this->pluginId entity translations";
 +    }
 +    return FALSE;
