@@ -80,6 +80,7 @@ module:
   node: 0
   ocha_monitoring: 0
   ocha_search: 0
+  ocha_snap: 0
   options: 0
   override_node_options: 0
   page_cache: 0
@@ -92,6 +93,7 @@ module:
   redirect: 0
   responsive_image: 0
   rest: 0
+  rwr_sitrep: 0
   seckit: 0
   select2: 0
   serialization: 0
