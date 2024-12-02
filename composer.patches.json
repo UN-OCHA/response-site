@@ -37,6 +37,9 @@
     },
     "mailchimp/marketing": {
       "PHP 8.2": "PATCHES/mailchimp_php82.patch"
+    },
+    "unocha/common_design": {
+      "Print css OPS-11125": "PATCHES/common_design-print-css.patch"
     }
   }
 }
