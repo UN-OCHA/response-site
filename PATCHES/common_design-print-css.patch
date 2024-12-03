@@ -1,0 +1,40 @@
+diff --git a/common_design.libraries.yml b/common_design.libraries.yml
+index b9a542d..4e14aa3 100644
+--- a/common_design.libraries.yml
++++ b/common_design.libraries.yml
+@@ -118,6 +118,8 @@ cd-other:
+       libraries/cd/cd-other/cd-skip-link.css: {}
+     theme:
+       libraries/cd/cd-other/cd-print.css: {}
++  js:
++    js/cd-print.js: {}
+ 
+ cd-core:
+   dependencies:
+diff --git a/js/cd-print.js b/js/cd-print.js
+new file mode 100644
+index 0000000..d837ed4
+--- /dev/null
++++ b/js/cd-print.js
+@@ -0,0 +1,21 @@
++/**
++ * @file
++ * Print helper.
++ */
++
++((Drupal) => {
++  'use strict';
++
++  Drupal.behaviors.cdPrint = {
++    attach: function (context, settings) {
++
++      // Remove lazy loading before printing.
++      window.addEventListener('beforeprint', (event) => {
++        document.querySelectorAll('[loading="lazy"]').forEach(element => {
++          element.removeAttribute('loading');
++        });
++      });
++
++    }
++  };
++})(Drupal);
