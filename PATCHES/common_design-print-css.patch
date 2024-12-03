@@ -13,7 +13,7 @@ index b9a542d..4e14aa3 100644
    dependencies:
 diff --git a/js/cd-print.js b/js/cd-print.js
 new file mode 100644
-index 0000000..3e196df
+index 0000000..d837ed4
 --- /dev/null
 +++ b/js/cd-print.js
 @@ -0,0 +1,21 @@
@@ -31,7 +31,7 @@ index 0000000..3e196df
 +      // Remove lazy loading before printing.
 +      window.addEventListener('beforeprint', (event) => {
 +        document.querySelectorAll('[loading="lazy"]').forEach(element => {
-+          element.removeAttr('loading');
++          element.removeAttribute('loading');
 +        });
 +      });
 +
