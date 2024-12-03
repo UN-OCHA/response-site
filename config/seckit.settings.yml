@@ -8,7 +8,7 @@ seckit_xss:
       webkit: false
     report-only: false
     default-src: "'self'"
-    script-src: "'self' 'unsafe-inline' 'unsafe-eval' fonts.googleapis.com www.gstatic.com https://*.google.com https://*.googletagmanager.com *.google-analytics.com https://tagmanager.google.com  https://www.googleadservices.com  https://googleads.g.doubleclick.net cdnjs.cloudflare.com ajax.googleapis.com https://cdn.addevent.com https://platform.twitter.com embed.aidaform.com https://cdn.jsdelivr.net https://s3.amazonaws.com https://partner.googleadservices.com"
+    script-src: "'self' 'unsafe-inline' 'unsafe-eval' fonts.googleapis.com www.gstatic.com https://*.google.com https://*.googletagmanager.com *.google-analytics.com https://tagmanager.google.com  https://www.googleadservices.com  https://googleads.g.doubleclick.net cdnjs.cloudflare.com ajax.googleapis.com https://cdn.addevent.com https://platform.twitter.com embed.aidaform.com https://cdn.jsdelivr.net https://s3.amazonaws.com https://partner.googleadservices.com https://*.list-manage.com"
     object-src: "'none'"
     style-src: "'self' 'unsafe-inline' https://googletagmanager.com https://tagmanager.google.com https://www.google.com fonts.googleapis.com cdnjs.cloudflare.com cdn.jsdelivr.net https://cdn-images.mailchimp.com"
     img-src: "'self' data: https://*"
