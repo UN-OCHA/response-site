@@ -46,4 +46,8 @@ article.node--type-page:has(.snap) {
       break-after: avoid;
     }
   }
+
+  a[href]::after {
+    content: "";
+  }
 }
