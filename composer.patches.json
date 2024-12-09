@@ -5,10 +5,11 @@
     },
     "drupal/core" : {
       "https://www.drupal.org/project/drupal/issues/3143617": "https://www.drupal.org/files/issues/2020-07-07/3143617-28_0.patch",
+      "Help group module support translations #2864721": "./PATCHES/core-group-translation-helper-MR-9075.patch",
       "Include database SSL/TLS info on status report": "./PATCHES/mysql-ssl-status.patch"
     },
     "drupal/group": {
-      "Group support translations submodule": "./PATCHES/group_support_translations-2.3.x.patch",
+      "Group support translations #2864721": "./PATCHES/group-translate_content_permission-2864721-37.patch",
       "https://www.drupal.org/project/subgroup/issues/3163044#comment-14499262": "https://www.drupal.org/files/issues/2022-05-04/i3278723.patch",
       "https://www.drupal.org/project/group/issues/3310248 - getPluginId error": "https://www.drupal.org/files/issues/2022-09-18/group-3310248-5.patch",
       "https://www.drupal.org/project/group/issues/3212608 - views data export": "https://www.drupal.org/files/issues/2022-10-19/3212608-5_0.patch"
