@@ -92,7 +92,7 @@
         "fullcalendar/fullcalendar": "^3.10.0",
         "galbar/jsonpath": "^2.0",
         "guzzlehttp/guzzle": "^7.0",
-        "league/commonmark": "1.6",
+        "league/commonmark": "2.6.0",
         "mailchimp/marketing": "^3.0",
         "mglaman/composer-drupal-lenient": "^1.0",
         "npm-asset/moment": "^2.29",
