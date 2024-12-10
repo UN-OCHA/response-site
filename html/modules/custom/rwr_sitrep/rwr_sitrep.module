@@ -33,6 +33,7 @@ function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheab
   if ($group->getGroupType()->id() == 'cluster') {
     // Make sure field exists and has a value.
     if ($group->hasField('field_cluster_subtype') && !$group->get('field_cluster_subtype')->isEmpty()) {
+      /** @var \Drupal\taxonomy\Entity\Term $term */
       $term = $group->get('field_cluster_subtype')->entity;
       if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
         $label = $term->field_collection_label->value ?? $term->label();
@@ -47,15 +48,17 @@ function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheab
       /** @var \Drupal\group\Entity\Group $subgroup */
       foreach ($subgroups as $subgroup) {
         if ($subgroup->hasField('field_cluster_subtype') && !$subgroup->get('field_cluster_subtype')->isEmpty()) {
+          /** @var \Drupal\taxonomy\Entity\Term $term */
           $term = $subgroup->get('field_cluster_subtype')->entity;
           if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
             $data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']['#link']['url'] = Url::fromRoute('view.group_nodes.page_1', ['group' => $subgroup->id()]);
+            $label = $term->field_collection_label->value ?? $term->label();
+            $data['tabs'][0]['rwr_sitrep.local_tasks:rwr_sitrep.operation']['#link']['title'] = $label;
+            $show_operation_sitreps = TRUE;
+            break;
           }
-          $show_operation_sitreps = TRUE;
-          break;
         }
       }
-
     }
   }
 
