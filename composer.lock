@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93fcb392fe416f34ed9d1c5404b6f4a7",
+    "content-hash": "1e65180a4b943ff3ad259fca416c442f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3304,17 +3304,17 @@
         },
         {
             "name": "drupal/group",
-            "version": "2.3.1",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/group.git",
-                "reference": "2.3.1"
+                "reference": "3.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/group-2.3.1.zip",
-                "reference": "2.3.1",
-                "shasum": "74c3fb919a9d5ef58ba0d42e02eabd1da3e99c3c"
+                "url": "https://ftp.drupal.org/files/projects/group-3.3.0.zip",
+                "reference": "3.3.0",
+                "shasum": "2f1c0e3fb23dad6c0284967bfc10df32f62ca2b3"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11",
@@ -3328,8 +3328,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.3.1",
-                    "datestamp": "1732523875",
+                    "version": "3.3.0",
+                    "datestamp": "1729856291",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5735,21 +5735,21 @@
         },
         {
             "name": "drupal/subgroup",
-            "version": "2.0.2",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/subgroup.git",
-                "reference": "2.0.2"
+                "reference": "3.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/subgroup-2.0.2.zip",
-                "reference": "2.0.2",
-                "shasum": "85601992656d21f1e6782625ea1877c2070a563b"
+                "url": "https://ftp.drupal.org/files/projects/subgroup-3.0.2.zip",
+                "reference": "3.0.2",
+                "shasum": "6d10783f9a128f2b3cee3ffcf219af2498d1be72"
             },
             "require": {
                 "drupal/core": "^9.5 || ^10",
-                "drupal/group": "^2.0"
+                "drupal/group": "^3.0"
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0"
@@ -5757,8 +5757,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.2",
-                    "datestamp": "1702040009",
+                    "version": "3.0.2",
+                    "datestamp": "1702039970",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -19238,14 +19238,13 @@
         "drupal/link_allowed_hosts": 10,
         "drupal/linkchecker": 15,
         "drupal/masquerade": 10,
-        "drupal/seven": 15,
-        "drupal/subgroup": 10
+        "drupal/seven": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "8.*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

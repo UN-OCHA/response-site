@@ -68,10 +68,10 @@ function paragraphs_group_permissions_paragraph_access(ParagraphInterface $entit
 
   // If we are on page, get the group.
   if (get_class($parent) == 'Drupal\node\Entity\Node') {
-    $group_content_array = GroupRelationship::loadByEntity($parent);
-    $group_content = reset($group_content_array);
-    if ($group_content) {
-      $group = $group_content->getGroup();
+    $group_relationship_array = GroupRelationship::loadByEntity($parent);
+    $group_relationship = reset($group_relationship_array);
+    if ($group_relationship) {
+      $group = $group_relationship->getGroup();
     }
     else {
       return AccessResult::neutral();

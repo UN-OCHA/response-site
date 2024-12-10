@@ -99,7 +99,7 @@ function hr_entity_freshness_write(ContentEntityBase $entity, $timestamp, $tab =
   }
   elseif ($entity instanceof Node) {
     /** @var \Drupal\group\Entity\Storage\GroupRelationshipStorage */
-    $storage = \Drupal::entityTypeManager()->getStorage('group_content');
+    $storage = \Drupal::entityTypeManager()->getStorage('group_relationship');
     $activGroupListEntity = $storage->loadByEntity($entity);
 
     if (!empty($activGroupListEntity)) {
