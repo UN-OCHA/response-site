@@ -4,6 +4,71 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.3.1](https://github.com/UN-OCHA/response-site/compare/v1.3.0...v1.3.1) (2024-11-21)
+
+### Chores
+
+* Update all outdated drupal/* unocha/* drush/* packages. ([d0c654](https://github.com/UN-OCHA/response-site/commit/d0c654d6f9d2d273e26c34691fd18a33c1ebf5b6))
+
+## [1.3.0](https://github.com/UN-OCHA/response-site/compare/v1.2.9...v1.3.0) (2024-11-18)
+
+### Features
+
+* Allow the RW API endpoint URL to be set (via Ansible) by using dependency injection. ([2fd6db](https://github.com/UN-OCHA/response-site/commit/2fd6dba48452628fcd25484ce16a03c3506fdb5a))
+
+### Bug Fixes
+
+* Avoid error ([60128d](https://github.com/UN-OCHA/response-site/commit/60128d2d842fc26bedfc3d0ede58140bfd1dfb0b))
+* Use elvis instead. ([27e410](https://github.com/UN-OCHA/response-site/commit/27e41018cda72bb576e39eab02294ec4dd2026a2))
+
+### Chores
+
+* Adapt language direction for river rows ([90a975](https://github.com/UN-OCHA/response-site/commit/90a97504d0dd17ff4f3ae31035ca5d8a42d55fc5))
+* Add arabic, just testing ([f582d7](https://github.com/UN-OCHA/response-site/commit/f582d7670b04efa1b30112a0d9513f418159006d))
+* Add arabic translations ([46bdba](https://github.com/UN-OCHA/response-site/commit/46bdba11496754fe6775f475210ecd3836dcd0f2))
+* Add comments ([460310](https://github.com/UN-OCHA/response-site/commit/46031019d8cb0465ca05da05ab866bafad6395e0))
+* Add csp for vimeo iframes ([992576](https://github.com/UN-OCHA/response-site/commit/9925764685a0a4aedb85353ece62090702a5d95e))
+* Add fix for missing field ([05a10f](https://github.com/UN-OCHA/response-site/commit/05a10f918838157251a0a93b412d1c4d751d35cb))
+* Add langcode for pdf link ([1eb980](https://github.com/UN-OCHA/response-site/commit/1eb980be82484a5e29f6e43672f08d6049714b42))
+* Add language direction for pdf header and footer ([c341f4](https://github.com/UN-OCHA/response-site/commit/c341f4ebe638f51205275246136c327e6d4e7d84))
+* Add more translations ([de7f92](https://github.com/UN-OCHA/response-site/commit/de7f9264fc8be67f27a7fc7755359f0c2b772c9d))
+* Add new field to indicate sitreps ([63698c](https://github.com/UN-OCHA/response-site/commit/63698cd06a97d9894bdab5a24b45f380c1eb1fcc))
+* Add styling for pdfs ([32aecf](https://github.com/UN-OCHA/response-site/commit/32aecfd25e2bf10c332d161a9f85dc25a90f7a8a))
+* Add taxonomy for classifying clusters and view for subgroups ([516aa8](https://github.com/UN-OCHA/response-site/commit/516aa8d1cd88aae459a25810837e2daf083af4e8))
+* Add two modules temporarily for deployment to demo instance ([5dee20](https://github.com/UN-OCHA/response-site/commit/5dee2046f81937e2c51e19691a3f2870e8340494))
+* Anchor pdf icon ([03a328](https://github.com/UN-OCHA/response-site/commit/03a328485a235106de63b529deec0f2bc12c957e))
+* AND the appname, for good measure. ([a2f937](https://github.com/UN-OCHA/response-site/commit/a2f937e00f2e9c7cfb2709b4ad9068622d4d2438))
+* Avoid error ([232897](https://github.com/UN-OCHA/response-site/commit/2328975657f41de1b6e9cd95254d44183535ff48))
+* Bump version of cd ([c9db1c](https://github.com/UN-OCHA/response-site/commit/c9db1c710e2830769379cea5ecbfe718fc4985d9))
+* Change language label in config ([d583aa](https://github.com/UN-OCHA/response-site/commit/d583aaff68380d9b26b982678059497879b303d0))
+* Code clean up ([f1ea03](https://github.com/UN-OCHA/response-site/commit/f1ea03e6f72d7665bd856fd162fc9f110f3a00b2), [0df889](https://github.com/UN-OCHA/response-site/commit/0df889830083f94ac84c7cb8dd38e33d18c8bdd6), [20a757](https://github.com/UN-OCHA/response-site/commit/20a7574a52295d32d7265c1d38ed88b2132a0857))
+* Correct order of checks ([e3a6ed](https://github.com/UN-OCHA/response-site/commit/e3a6ed7b91a2d97f4a3703bd233ae851fd9c5b3a))
+* Fix access temporarily ([5e0855](https://github.com/UN-OCHA/response-site/commit/5e0855aa512f80059150943071a83785a3a7b1f0))
+* Fix menu entries to show sitreps for groups ([6605c6](https://github.com/UN-OCHA/response-site/commit/6605c6fb5ab639daf98a8d3ae6fe7e9a27c1d0bc))
+* Fix path for default language and avoid overlap of contextual ([d424aa](https://github.com/UN-OCHA/response-site/commit/d424aadfb012f7ed89c6f0483e28c7b476b80804))
+* Include config ([9ff8ad](https://github.com/UN-OCHA/response-site/commit/9ff8ad2335f6e66962622a58eec5c9b4cc8e9f53))
+* Include local tasks ([59665e](https://github.com/UN-OCHA/response-site/commit/59665e1f930163638d105d7c7f63a0ac1db27a77))
+* Include missing view ([74febc](https://github.com/UN-OCHA/response-site/commit/74febc49e4ef2b16102c79c2a5825fbe98618c0d))
+* Include suggestions from code review ([6b41c8](https://github.com/UN-OCHA/response-site/commit/6b41c8326ed62a1dffb140747c13368175eef7be))
+* Let anonymous users view sitreps ([ffb9ad](https://github.com/UN-OCHA/response-site/commit/ffb9ad677310008e5b702314c2b37238b25e7608))
+* Merge dev ([fe4f55](https://github.com/UN-OCHA/response-site/commit/fe4f55591621cebbfcfe00a9b4b8ecea918f9a14))
+* More translations ([397ea3](https://github.com/UN-OCHA/response-site/commit/397ea3a517c1ec71950d3cafb8dceae6865c283c), [9739cd](https://github.com/UN-OCHA/response-site/commit/9739cd2a0ceaaef97264e9a1b5ba0eba82a75f5d))
+* More translations for strings ([f3f72e](https://github.com/UN-OCHA/response-site/commit/f3f72eec60c3bc17502863ee72a7d67cf81eb354))
+* Remove is_sitrep field and go by group name instead ([0cba68](https://github.com/UN-OCHA/response-site/commit/0cba689f0fd1c036058441e2c4f67097195534e8))
+* Remove repeated local task for subgroup ([842394](https://github.com/UN-OCHA/response-site/commit/84239455ab916b5fba189d0b95dcb2945b9d5e2b))
+* Revert unused config changes ([34b112](https://github.com/UN-OCHA/response-site/commit/34b1126ec2196cda707d5102e2cbe8096ef8ee6e))
+* Revert views until I work out subgroup relations ([bc1932](https://github.com/UN-OCHA/response-site/commit/bc19323c2e11c25093f4dd03f325c9075b04cd04))
+* Rtl tweak and menu weight ([1afb45](https://github.com/UN-OCHA/response-site/commit/1afb451b4d46b6d12937bf7c443205097e471ac5))
+* Simplify ([12ba74](https://github.com/UN-OCHA/response-site/commit/12ba74bd35f8f3e882e73dd84adf129e67f1dd73))
+* Sort group permissions ([be7ca3](https://github.com/UN-OCHA/response-site/commit/be7ca389d1a41b6e530c21d4a7c89ff5592c23f4))
+* Styling changes ([c1229c](https://github.com/UN-OCHA/response-site/commit/c1229cd3c16afacdb605640dccf6af8e90cd4694))
+* Tidy up the PR after review. Add missing config and schema. ([62b967](https://github.com/UN-OCHA/response-site/commit/62b967e59c0ecfe5cb1c228a080d3fafedb00843))
+* Translation ([a9267c](https://github.com/UN-OCHA/response-site/commit/a9267c49e586a54a0d210f02074a0f3d8a3ee709))
+* Update access permission ([7a7ba5](https://github.com/UN-OCHA/response-site/commit/7a7ba5624eb215074652a0aecba40240d99f2b5f))
+* Update all outdated drupal/* unocha/* drush/* packages. ([809ac8](https://github.com/UN-OCHA/response-site/commit/809ac83a4b13d4b5383e0be14c435f86bdde32bb), [4a9335](https://github.com/UN-OCHA/response-site/commit/4a9335a26ab81586dc23cd0036bd8dc4e63dd278), [c9bf49](https://github.com/UN-OCHA/response-site/commit/c9bf4959e9ecc95e273e9d73b2d9b6cd79810a2c), [e36e48](https://github.com/UN-OCHA/response-site/commit/e36e489d91a39e3ddce1e95e80cf17d897054a38), [c8ad02](https://github.com/UN-OCHA/response-site/commit/c8ad026fa0da8d6e52964a4900dbafe85bbf311a))
+* Update ocha_search module ([ff5220](https://github.com/UN-OCHA/response-site/commit/ff522004e3a0c7d8a7ec009187c6f31ff043df6e))
+* Update translations ([d59580](https://github.com/UN-OCHA/response-site/commit/d59580cad763a00fb3ae0937407bd1878141cc60))
+
 ## [1.2.9](https://github.com/UN-OCHA/response-site/compare/v1.2.8...v1.2.9) (2024-10-15)
 
 ### Chores
