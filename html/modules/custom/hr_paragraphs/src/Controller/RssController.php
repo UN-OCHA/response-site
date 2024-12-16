@@ -90,7 +90,7 @@ class RssController extends ControllerBase {
         $url,
         [
           'headers' => [
-            'Accept' => 'text/xml',
+            'Accept' => 'application/xml',
           ],
         ]
       );
