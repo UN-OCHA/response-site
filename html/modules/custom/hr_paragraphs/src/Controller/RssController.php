@@ -85,7 +85,15 @@ class RssController extends ControllerBase {
       ]);
 
       libxml_use_internal_errors(TRUE);
-      $response = $this->httpClient->request('GET', $url);
+      $response = $this->httpClient->request(
+        'GET',
+        $url,
+        [
+          'headers' => [
+            'Accept' => 'text/xml',
+          ],
+        ]
+      );
       $this->staticCache[$url] = new \SimpleXmlElement($response->getBody());
       return $this->staticCache[$url];
     }
