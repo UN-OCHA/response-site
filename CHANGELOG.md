@@ -4,6 +4,26 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.4.0](https://github.com/UN-OCHA/response-site/compare/v1.3.1...v1.4.0) (2024-12-17)
+
+### Features
+
+* Do not display links in print version [#RWR-478](https://https://humanitarian.atlassian.net/browse/RWR-478) ([a3d35e](https://github.com/UN-OCHA/response-site/commit/a3d35e6b1af3a8786de2d8fc3a64c81009f5acc0))
+
+### Bug Fixes
+
+* Add csp config for iframe ([dcf844](https://github.com/UN-OCHA/response-site/commit/dcf844ccccfad1e4ce7d9d3cc80831bc53493bb3))
+* Add gzip header to avoid errors ([b5a4ab](https://github.com/UN-OCHA/response-site/commit/b5a4ab6df9031b919bcc083be0d7348d7319ab45))
+
+### Chores
+
+* Add mailchimp to csp config ([6ca472](https://github.com/UN-OCHA/response-site/commit/6ca472bd3b8fcf18deaca92b37b28a949d62851f))
+* Update all outdated drupal/* unocha/* drush/* packages. ([7ec677](https://github.com/UN-OCHA/response-site/commit/7ec67754c7468d7d85ec7235255c0d590873c188), [7511d5](https://github.com/UN-OCHA/response-site/commit/7511d54addaacbe5ff30f9eb54f55602f0ecea35), [53b78a](https://github.com/UN-OCHA/response-site/commit/53b78a61e78ef4a5a0725414bd6c6226200bd732))
+
+##### Deps
+
+* Bump league/commonmark from 1.6.0 to 2.6.0 ([3c2d73](https://github.com/UN-OCHA/response-site/commit/3c2d738b9d1cc93b64f3cb64d63a98f3ce3be839))
+
 ## [1.3.1](https://github.com/UN-OCHA/response-site/compare/v1.3.0...v1.3.1) (2024-11-21)
 
 ### Chores
