@@ -338,6 +338,9 @@ class ReliefwebController extends ControllerBase {
         $endpoint,
         [
           'query' => $parameters,
+          'headers' => [
+            'accept-encoding' => 'gzip, deflate',
+          ],
         ]
       );
     }
