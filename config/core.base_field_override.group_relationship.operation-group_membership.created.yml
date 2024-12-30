@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-group_membership
+    - group.relationship_type.operation-group_membership
 id: group_content.operation-group_membership.created
 field_name: created
 entity_type: group_relationship

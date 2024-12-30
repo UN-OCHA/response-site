@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.cluster-group_node-page
+    - group.relationship_type.cluster-group_node-page
   module:
     - path
 id: group_content.cluster-group_node-page.path

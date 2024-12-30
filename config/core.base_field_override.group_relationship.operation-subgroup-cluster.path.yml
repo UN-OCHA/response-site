@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-subgroup-cluster
+    - group.relationship_type.operation-subgroup-cluster
   module:
     - path
 id: group_content.operation-subgroup-cluster.path
