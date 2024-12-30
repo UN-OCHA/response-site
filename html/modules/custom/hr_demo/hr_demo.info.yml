@@ -17,7 +17,7 @@ default_content:
     - aa23460d-f95e-48e8-adfe-8f216b545ed2
     - 51750e93-20d0-498d-8ca0-cef516e20772
 
-  group_content:
+  group_relationship:
     - ed69346f-741e-4dc9-a83f-f391363d8ead
     - e86205c9-0144-4017-944a-03a4c4d05dca
     - bd551926-c0fe-406d-8e58-b3fa9519b9a8

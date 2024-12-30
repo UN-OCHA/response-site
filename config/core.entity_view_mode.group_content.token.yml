@@ -7,5 +7,5 @@ dependencies:
 id: group_content.token
 label: Token
 description: ''
-targetEntityType: group_content
+targetEntityType: group_relationship
 cache: true

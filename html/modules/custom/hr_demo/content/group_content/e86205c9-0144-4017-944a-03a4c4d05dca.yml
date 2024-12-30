@@ -1,6 +1,6 @@
 _meta:
   version: '1.0'
-  entity_type: group_content
+  entity_type: group_relationship
   uuid: e86205c9-0144-4017-944a-03a4c4d05dca
   bundle: operation-group_node-page
   default_langcode: en

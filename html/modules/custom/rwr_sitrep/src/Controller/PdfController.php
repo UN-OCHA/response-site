@@ -71,15 +71,16 @@ class PdfController extends ControllerBase {
    *   Whether this is a pdf or not.
    */
   public function isPdfable(Node $node) {
-    $group_content_array = GroupRelationship::loadByEntity($node);
-    $group_content = reset($group_content_array);
-    if ($group_content) {
-      if ($group_content->getGroupType()->id() != 'cluster') {
+    $group_relationship_array = GroupRelationship::loadByEntity($node);
+    $group_relationship = reset($group_relationship_array);
+    if ($group_relationship) {
+      if ($group_relationship->getGroupType()->id() != 'cluster') {
         return FALSE;
       }
 
-      $group = $group_content->getGroup();
+      $group = $group_relationship->getGroup();
       if ($group->hasField('field_cluster_subtype') && !$group->get('field_cluster_subtype')->isEmpty()) {
+        /** @var \Drupal\taxonomy\Entity\Term */
         $term = $group->get('field_cluster_subtype')->entity;
         if ($term->hasField('field_pdf_enabled') && $term->field_pdf_enabled->value) {
           return $term->field_pdf_enabled->value;

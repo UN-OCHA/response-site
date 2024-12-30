@@ -1,6 +1,6 @@
 _meta:
   version: '1.0'
-  entity_type: group_content
+  entity_type: group_relationship
   uuid: 5470feff-af4d-49b0-8b14-554e345a1bd5
   bundle: cluster-group_node-page
   default_langcode: en

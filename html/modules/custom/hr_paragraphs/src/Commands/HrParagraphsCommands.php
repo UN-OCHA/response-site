@@ -566,7 +566,7 @@ class HrParagraphsCommands extends DrushCommands {
       if ($data['role_name'] == 'manager') {
         /** @var \Drupal\group\GroupMembership $member */
         $member = $operation->getMember($user);
-        $membership = $member->getGroupContent();
+        $membership = $member->getGroupRelationship();
 
         $role_found = FALSE;
         /** @var \Drupal\group\Entity\GroupRole $role */
