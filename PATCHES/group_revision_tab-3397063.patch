@@ -1,0 +1,17 @@
+diff --git a/group.links.task.yml b/group.links.task.yml
+index c8e9f4d..6d0d1be 100644
+--- a/group.links.task.yml
++++ b/group.links.task.yml
+@@ -41,6 +41,12 @@ group.content:
+   route_name: 'entity.group_content.collection'
+   weight: 15
+ 
++group.version_history:
++  title: 'Revisions'
++  base_route: 'entity.group.canonical'
++  route_name: 'entity.group.version_history'
++  weight: 20
++
+ group_type.edit_form:
+   title: 'Edit'
+   base_route: 'entity.group_type.edit_form'
