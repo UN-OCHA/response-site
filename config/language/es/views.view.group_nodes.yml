@@ -21,15 +21,15 @@ display:
         changed:
           label: Actualizado
           separator: ', '
-        view_group_content:
+        view_group_relationship:
           admin_label: 'View relation link'
           label: 'Link to Group content'
           text: 'View relation'
-        edit_group_content:
+        edit_group_relationship:
           admin_label: 'Edit relation link'
           label: 'Link to edit Group content'
           text: 'Edit relation'
-        delete_group_content:
+        delete_group_relationship:
           admin_label: 'Delete relation link'
           label: 'Link to delete Group content'
           text: 'Delete relation'

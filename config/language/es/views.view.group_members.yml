@@ -17,9 +17,9 @@ display:
         created:
           label: Joined
           separator: ', '
-        edit_group_content:
+        edit_group_relationship:
           text: 'Edit member'
-        delete_group_content:
+        delete_group_relationship:
           text: 'Remove member'
         dropbutton:
           label: Operaciones

@@ -20,12 +20,12 @@ display:
         changed:
           label: 'Mis à jour'
           separator: ', '
-        view_group_content:
+        view_group_relationship:
           label: 'Link to Group content'
-        edit_group_content:
+        edit_group_relationship:
           label: 'Link to edit Group content'
           text: 'Edit relation'
-        delete_group_content:
+        delete_group_relationship:
           label: 'Link to delete Group content'
           text: 'Delete relation'
         edit_node:
