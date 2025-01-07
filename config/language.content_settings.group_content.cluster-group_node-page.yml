@@ -1,0 +1,18 @@
+uuid: a8b331f6-d88a-4102-a3ca-70c42a8e20ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.content_type.cluster-group_node-page
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: group_content.cluster-group_node-page
+target_entity_type_id: group_content
+target_bundle: cluster-group_node-page
+default_langcode: site_default
+language_alterable: false

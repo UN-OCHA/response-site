@@ -1,0 +1,20 @@
+uuid: 662c7ef3-df41-4b02-9bcd-f9e5cbc74558
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.content_type.cluster-group_membership
+  module:
+    - path
+id: group_content.cluster-group_membership.path
+field_name: path
+entity_type: group_content
+bundle: cluster-group_membership
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path
