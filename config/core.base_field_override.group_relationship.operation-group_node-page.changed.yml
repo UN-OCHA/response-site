@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-group_node-page
+    - group.relationship_type.operation-group_node-page
 id: group_relationship.operation-group_node-page.changed
 field_name: changed
 entity_type: group_relationship

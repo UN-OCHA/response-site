@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-group_membership
+    - group.relationship_type.operation-group_membership
 id: group_relationship.operation-group_membership.uid
 field_name: uid
 entity_type: group_relationship
