@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.content_type.operation-group_membership
+    - group.relationship_type.operation-group_membership
   module:
     - content_translation
 third_party_settings:

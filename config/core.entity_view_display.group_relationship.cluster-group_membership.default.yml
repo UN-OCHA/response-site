@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.group_relationship.cluster-group_membership.group_roles
-    - group.content_type.cluster-group_membership
+    - group.relationship_type.cluster-group_membership
 id: group_relationship.cluster-group_membership.default
 targetEntityType: group_relationship
 bundle: cluster-group_membership
