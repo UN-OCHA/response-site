@@ -1,0 +1,16 @@
+diff --git a/group.install b/group.install
+index dd57ed9..eb19c65 100644
+--- a/group.install
++++ b/group.install
+@@ -321,6 +321,11 @@ function group_update_10304(&$sandbox) {
+     return;
+   }
+ 
++  // Include fix from #3494298.
++  $field_def = \Drupal::entityDefinitionUpdateManager()->getFieldStorageDefinition("type", "group_relationship");
++  $field_def->setSetting("target_type", "group_relationship");
++  \Drupal::entityDefinitionUpdateManager()->updateFieldStorageDefinition($field_def);
++
+   // Previous updates ran with old state entry, convert to new state entry.
+   $old_value = (bool) $state->get('group_update_10300_detected_version', FALSE);
+   $state->set('group_update_10300_detected_legacy_version', !$old_value);
