@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.relationship_type.operation-subgroup-cluster
-id: group_relationship.operation-subgroup-cluster.changed
+    - group.content_type.operation-subgroup-cluster
+id: group_content.operation-subgroup-cluster.changed
 field_name: changed
-entity_type: group_relationship
+entity_type: group_content
 bundle: operation-subgroup-cluster
 label: 'Changed on'
-description: 'The time that the group relationship was last edited.'
+description: 'The time that the group content was last edited.'
 required: false
 translatable: false
 default_value: {  }

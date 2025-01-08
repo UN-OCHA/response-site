@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.relationship_type.operation-group_node-page
-id: group_relationship.operation-group_node-page.uid
+    - group.content_type.operation-group_node-page
+id: group_content.operation-group_node-page.uid
 field_name: uid
-entity_type: group_relationship
+entity_type: group_content
 bundle: operation-group_node-page
-label: 'Group relationship creator'
-description: 'The username of the group relationship creator.'
+label: 'Group content creator'
+description: 'The username of the group content creator.'
 required: false
 translatable: false
 default_value: {  }

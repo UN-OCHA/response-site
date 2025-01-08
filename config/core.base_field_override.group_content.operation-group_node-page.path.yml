@@ -1,15 +1,15 @@
-uuid: 662c7ef3-df41-4b02-9bcd-f9e5cbc74558
+uuid: 91632108-319c-4d2d-8ce2-ad907a0983b8
 langcode: en
 status: true
 dependencies:
   config:
-    - group.relationship_type.cluster-group_membership
+    - group.content_type.operation-group_node-page
   module:
     - path
-id: group_relationship.cluster-group_membership.path
+id: group_content.operation-group_node-page.path
 field_name: path
-entity_type: group_relationship
-bundle: cluster-group_membership
+entity_type: group_content
+bundle: operation-group_node-page
 label: 'URL alias'
 description: ''
 required: false

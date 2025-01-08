@@ -3,13 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.relationship_type.operation-subgroup-cluster
-id: group_relationship.operation-subgroup-cluster.created
+    - group.content_type.operation-subgroup-cluster
+id: group_content.operation-subgroup-cluster.created
 field_name: created
-entity_type: group_relationship
+entity_type: group_content
 bundle: operation-subgroup-cluster
 label: 'Created on'
-description: 'The time that the group relationship was created.'
+description: 'The time that the group content was created.'
 required: false
 translatable: false
 default_value: {  }

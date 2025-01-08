@@ -3,12 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.relationship_type.operation-subgroup-cluster
+    - group.content_type.operation-subgroup-cluster
   module:
     - path
-id: group_relationship.operation-subgroup-cluster.path
+id: group_content.operation-subgroup-cluster.path
 field_name: path
-entity_type: group_relationship
+entity_type: group_content
 bundle: operation-subgroup-cluster
 label: 'URL alias'
 description: ''

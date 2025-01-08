@@ -3,12 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - group.relationship_type.operation-group_membership
+    - group.content_type.operation-group_membership
   module:
     - path
-id: group_relationship.operation-group_membership.path
+id: group_content.operation-group_membership.path
 field_name: path
-entity_type: group_relationship
+entity_type: group_content
 bundle: operation-group_membership
 label: 'URL alias'
 description: ''

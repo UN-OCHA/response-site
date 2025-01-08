@@ -3,4 +3,4 @@ sync_credentials: ''
 csv_source_dir: /var/www/tsv/
 notification_new_user_enabled: false
 reliefweb_api_endpoint: 'https://api.reliefweb.int/v1/reports'
-reliefweb_api_appname: 'response'
+reliefweb_api_appname: response
