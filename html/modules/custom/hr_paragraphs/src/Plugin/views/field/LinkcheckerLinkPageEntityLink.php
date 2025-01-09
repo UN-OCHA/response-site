@@ -91,7 +91,7 @@ class LinkcheckerLinkPageEntityLink extends FieldPluginBase {
           if ($revision_id == $target_ids['target_revision_id']) {
             $previous_revision = FALSE;
             continue;
-          };
+          }
         }
       }
 
