@@ -25,7 +25,7 @@ services:
       - default
 
   mysql:
-    image: public.ecr.aws/unocha/mysql:10.11
+    image: public.ecr.aws/unocha/mysql:11.4
     hostname: $PROJECT_NAME-mysql
     container_name: $PROJECT_NAME-mysql
     environment:
@@ -68,9 +68,9 @@ services:
       - "../composer.patches.json:/srv/www/composer.patches.json:rw"
       - "../composer.lock:/srv/www/composer.lock:rw"
       - "../PATCHES:/srv/www/PATCHES:rw"
-      # # Mount contrib modules and themes.
-      # - "../html/modules/contrib:/srv/www/html/modules/contrib:rw"
-      # - "../html/themes/contrib:/srv/www/html/themes/contrib:rw"
+      # Mount contrib modules and themes.
+      - "../html/modules/contrib:/srv/www/html/modules/contrib:rw"
+      - "../html/themes/contrib:/srv/www/html/themes/contrib:rw"
       # Mount nginx custom configuration.
       # - "../docker/etc/nginx/custom:/etc/nginx/custom"
     environment:
