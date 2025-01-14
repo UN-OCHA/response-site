@@ -10,10 +10,8 @@
     "drupal/group": {
       "https://www.drupal.org/project/subgroup/issues/3163044#comment-14499262": "https://www.drupal.org/files/issues/2022-05-04/i3278723.patch",
       "https://www.drupal.org/project/group/issues/3310248 - getPluginId error": "https://www.drupal.org/files/issues/2022-09-18/group-3310248-5.patch",
-      "https://www.drupal.org/project/group/issues/3212608 - views data export": "https://www.drupal.org/files/issues/2022-10-19/3212608-5_0.patch"
-    },
-    "drupal/imageapi_optimize_webp": {
-      "https://www.drupal.org/project/imageapi_optimize_webp/issues/3453941": "https://www.drupal.org/files/issues/2024-06-14/3453941-bc-break_0.patch"
+      "https://www.drupal.org/project/group/issues/3212608 - views data export": "https://www.drupal.org/files/issues/2022-10-19/3212608-5_0.patch",
+      "Group revision tab #3397063": "PATCHES/group_revision_tab-3397063.patch"
     },
     "drupal/imagemagick": {
       "Cast dimensions to int after translations": "PATCHES/imagemagick-ints.patch"
