@@ -4,6 +4,22 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.4.2](https://github.com/UN-OCHA/response-site/compare/v1.4.1...v1.4.2) (2025-01-14)
+
+### Bug Fixes
+
+* Add patch to show group revision tab ([052814](https://github.com/UN-OCHA/response-site/commit/052814f8a864fae32094679c5f1c974692554a95))
+
+### Chores
+
+* Add csp rule for kobo ([9df2f5](https://github.com/UN-OCHA/response-site/commit/9df2f5b64d39e4ac54814d9ce2f526ce1325cd51))
+* Bump version of mariadb for local development ([204a6d](https://github.com/UN-OCHA/response-site/commit/204a6d786956067d7684846cb3f5e56decd07e89))
+* Update all outdated drupal/* unocha/* drush/* packages. ([98128f](https://github.com/UN-OCHA/response-site/commit/98128fc88acc98ec2cd393be485a69b003273ed6), [fe5f89](https://github.com/UN-OCHA/response-site/commit/fe5f89915678641708b01426d04a0c52c17df034), [798b80](https://github.com/UN-OCHA/response-site/commit/798b8007703af1d5d5b470844b95898a3cee09af))
+
+##### Tests
+
+* Bump the test MariaDB to match what the dev sites will use soon. ([6a8623](https://github.com/UN-OCHA/response-site/commit/6a86232c5005b3e95945bc6ecc87b60c41567f6a))
+
 ## [1.4.0](https://github.com/UN-OCHA/response-site/compare/v1.3.1...v1.4.0) (2024-12-17)
 
 ### Features
