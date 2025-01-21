@@ -1,3 +1,5 @@
+label: Rediriger
+description: 'Liste des redirections'
 display:
   default:
     display_title: Maître
@@ -21,6 +23,8 @@ display:
             items_per_page_options_all_label: '- Tout -'
             offset_label: Décalage
       fields:
+        redirect_bulk_form:
+          action_title: 'Pour la sélection'
         redirect_source__path:
           label: 'A partir de'
           separator: ', '
@@ -33,8 +37,32 @@ display:
         redirect_redirect__uri:
           expose:
             label: À
+        status_code:
+          expose:
+            label: 'Code du statut'
+          group_info:
+            label: 'Code du statut'
+            group_items:
+              1:
+                title: '300 Choix Multiples'
+              2:
+                title: '301 Redirection Permanente'
+              3:
+                title: '302 Trouvé'
+              4:
+                title: '303 Voir Ailleurs'
+              5:
+                title: '304 Non Modifié'
+              6:
+                title: '305 Utilise un Proxy'
+              7:
+                title: '307 Redirection Temporaire'
         language:
           expose:
             label: 'Langue initiale'
+      title: Rediriger
+      empty:
+        area_text_custom:
+          content: "Il n'y a pas encore de redirection."
   page_1:
     display_title: Page

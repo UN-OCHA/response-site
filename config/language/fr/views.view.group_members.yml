@@ -1,9 +1,7 @@
-label: 'Group members'
 display:
   default:
     display_title: Maître
     display_options:
-      title: Members
       fields:
         name:
           label: Utilisateur
@@ -15,7 +13,6 @@ display:
           label: 'Mis à jour'
           separator: ', '
         created:
-          label: Joined
           separator: ', '
         dropbutton:
           label: Actions
@@ -43,6 +40,3 @@ display:
             title: Tout
   page_1:
     display_title: Page
-    display_options:
-      menu:
-        title: Members

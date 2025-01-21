@@ -1,5 +1,3 @@
-label: 'Group nodes'
-description: 'Lists all of the nodes that have been added to a group.'
 display:
   default:
     display_title: Máster
@@ -21,13 +19,6 @@ display:
         changed:
           label: Actualizado
           separator: ', '
-        edit_node:
-          admin_label: 'Edit node link'
-          text: 'Edit node'
-        delete_node:
-          admin_label: 'Delete node link'
-          label: 'Link to delete Content'
-          text: 'Delete node'
         dropbutton:
           label: Operaciones
       pager:
