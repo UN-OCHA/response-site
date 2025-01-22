@@ -1,0 +1,292 @@
+diff --git a/group.group.permissions.yml b/group.group.permissions.yml
+index fba5ecf..3d3cba5 100644
+--- a/group.group.permissions.yml
++++ b/group.group.permissions.yml
+@@ -23,6 +23,9 @@ revert group revisions:
+ delete group revisions:
+   title: 'Revisioning: Delete revisions'
+   description: 'Requires the "Delete group" permission'
++translate group:
++  title: 'Translate group'
++  description: 'Translate the group'
+ access content overview:
+   title: 'Access all entities overview'
+   description: 'View all of the entity relations for the group'
+diff --git a/src/Access/GroupTranslationManageAccessCheck.php b/src/Access/GroupTranslationManageAccessCheck.php
+new file mode 100644
+index 0000000..80c64a6
+--- /dev/null
++++ b/src/Access/GroupTranslationManageAccessCheck.php
+@@ -0,0 +1,36 @@
++<?php
++
++namespace Drupal\group\Access;
++
++use Drupal\content_translation\Access\ContentTranslationManageAccessCheck;
++use Drupal\Core\Access\AccessResult;
++use Drupal\Core\Routing\RouteMatchInterface;
++use Drupal\Core\Session\AccountInterface;
++use Drupal\group\Entity\Group;
++use Symfony\Component\Routing\Route;
++
++/**
++ * Access check for entity translation manage page.
++ */
++class GroupTranslationManageAccessCheck extends ContentTranslationManageAccessCheck {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function access(Route $route, RouteMatchInterface $route_match, AccountInterface $account, $source = NULL, $target = NULL, $language = NULL, $entity_type_id = NULL) {
++    /* @var \Drupal\group\Entity\GroupInterface $entity */
++    $entity = $route_match->getParameter($entity_type_id);
++    if ($entity_type_id === 'group' && $entity instanceof Group) {
++
++      // We always override the access for groups based on group permissions.
++      if ($entity->hasPermission('translate group', $account)) {
++        return AccessResult::allowed()->addCacheContexts(['user'])->addCacheableDependency($entity)->addCacheableDependency($entity->getGroupType());
++      }
++
++      return AccessResult::forbidden()->addCacheContexts(['user'])->addCacheableDependency($entity)->addCacheableDependency($entity->getGroupType());
++    }
++
++    return parent::access($route, $route_match, $account, $source, $target, $language, $entity_type_id);
++  }
++
++}
+diff --git a/src/Access/GroupTranslationOverviewAccessCheck.php b/src/Access/GroupTranslationOverviewAccessCheck.php
+new file mode 100644
+index 0000000..adb6eaa
+--- /dev/null
++++ b/src/Access/GroupTranslationOverviewAccessCheck.php
+@@ -0,0 +1,40 @@
++<?php
++
++namespace Drupal\group\Access;
++
++use Drupal\content_translation\Access\ContentTranslationOverviewAccess;
++use Drupal\Core\Access\AccessResult;
++use Drupal\Core\Routing\RouteMatchInterface;
++use Drupal\Core\Session\AccountInterface;
++use Drupal\group\Entity\Group;
++
++/**
++ * Access check for entity translation overview.
++ */
++class GroupTranslationOverviewAccessCheck extends ContentTranslationOverviewAccess {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function access(RouteMatchInterface $route_match, AccountInterface $account, $entity_type_id) {
++    /* @var \Drupal\group\Entity\GroupInterface $entity */
++    $entity = $route_match->getParameter($entity_type_id);
++    if ($entity_type_id === 'group' && $entity instanceof Group) {
++      // We need to make sure the group is translatable and user has permission.
++      $condition = !$entity->getUntranslated()->language()->isLocked() &&
++        \Drupal::languageManager()->isMultilingual() &&
++        $entity->isTranslatable();
++      if ($condition) {
++        // We always override the access for groups based on group permissions.
++        if ($entity->hasPermission('translate group', $account)) {
++          return AccessResult::allowed()->addCacheContexts(['user'])->addCacheableDependency($entity)->addCacheableDependency($entity->getGroupType());
++        }
++      }
++      return AccessResult::forbidden()->addCacheContexts(['user'])->addCacheableDependency($entity)->addCacheableDependency($entity->getGroupType());
++    }
++
++    // Fallback for other entities.
++    return parent::access($route_match, $account, $entity_type_id);
++  }
++
++}
+diff --git a/src/Entity/Group.php b/src/Entity/Group.php
+index 4c6b05f..b313167 100644
+--- a/src/Entity/Group.php
++++ b/src/Entity/Group.php
+@@ -44,6 +44,7 @@ use Drupal\user\UserInterface;
+  *       "delete" = "Drupal\Core\Entity\ContentEntityDeleteForm",
+  *     },
+  *     "access" = "Drupal\group\Entity\Access\GroupAccessControlHandler",
++ *     "translation" = "Drupal\group\Entity\GroupTranslationHandler",
+  *   },
+  *   base_table = "groups",
+  *   data_table = "groups_field_data",
+diff --git a/src/Entity/GroupTranslationHandler.php b/src/Entity/GroupTranslationHandler.php
+new file mode 100644
+index 0000000..54c9490
+--- /dev/null
++++ b/src/Entity/GroupTranslationHandler.php
+@@ -0,0 +1,30 @@
++<?php
++
++namespace Drupal\group\Entity;
++
++use Drupal\Core\Access\AccessResult;
++use Drupal\Core\Entity\EntityInterface;
++use Drupal\content_translation\ContentTranslationHandler;
++
++/**
++ * Defines the translation handler for groups.
++ */
++class GroupTranslationHandler extends ContentTranslationHandler {
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getTranslationAccess(EntityInterface $entity, $op) {
++    if (!$entity instanceof Group) {
++      return parent::getTranslationAccess($entity, $op);
++    }
++
++    // We always override the access for groups based on group permissions.
++    if ($entity->hasPermission('translate group', $this->currentUser)) {
++      return AccessResult::allowed();
++    }
++
++    return AccessResult::forbidden();
++  }
++
++}
+diff --git a/src/GroupServiceProvider.php b/src/GroupServiceProvider.php
+index 959f1df..cbea3f6 100644
+--- a/src/GroupServiceProvider.php
++++ b/src/GroupServiceProvider.php
+@@ -87,6 +87,19 @@ class GroupServiceProvider extends ServiceProviderBase {
+         }
+       }
+     }
++
++    // We need to override these access services to be able to explicitly
++    // set allowed access for the entity translation routes.
++    // Just implementing the access_check tag in the services file won't work.
++    // See https://drupal.org/project/drupal/issues/2991698.
++    if ($container->hasDefinition('content_translation.overview_access')) {
++      $definition = $container->getDefinition('content_translation.overview_access');
++      $definition->setClass('\Drupal\group\Access\GroupTranslationOverviewAccessCheck');
++    }
++    if ($container->hasDefinition('content_translation.manage_access')) {
++      $definition = $container->getDefinition('content_translation.manage_access');
++      $definition->setClass('\Drupal\group\Access\GroupTranslationManageAccessCheck');
++    }
+   }
+ 
+ }
+diff --git a/tests/src/Functional/GroupTranslateTest.php b/tests/src/Functional/GroupTranslateTest.php
+new file mode 100644
+index 0000000..e14f5d4
+--- /dev/null
++++ b/tests/src/Functional/GroupTranslateTest.php
+@@ -0,0 +1,112 @@
++<?php
++
++namespace Drupal\Tests\group\Functional;
++
++use Drupal\language\Entity\ConfigurableLanguage;
++
++/**
++ * Tests the group translate functionality.
++ *
++ * @group group
++ */
++class GroupTranslateTest extends GroupBrowserTestBase {
++
++  /**
++   * {@inheritdoc}
++   */
++  public static $modules = [
++    'group',
++    'group_test_config',
++    'language',
++    'content_translation',
++  ];
++
++  /**
++   * The group we will use to test methods on.
++   *
++   * @var \Drupal\group\Entity\Group
++   */
++  protected $group;
++
++  /**
++   * The group administrator user we will use.
++   *
++   * @var \Drupal\user\Entity\User
++   */
++  protected $account;
++
++  /**
++   * The group member user we will use.
++   *
++   * @var \Drupal\user\Entity\User
++   */
++  protected $member;
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setUp(): void {
++    parent::setUp();
++    $permissions = $this->getGlobalPermissions();
++    $permissions[] = 'administer group';
++    $permissions[] = 'administer content translation';
++
++    $this->account = $this->createUser($permissions);
++    $this->group = $this->createGroup(['uid' => $this->account->id()]);
++
++    $this->member = $this->createUser([
++      'access group overview',
++    ]);
++    $this->group->addMember($this->member);
++
++    // Add permission to view the group.
++    $permissions = [
++      'view group',
++    ];
++    if (!empty($permissions)) {
++      $role = $this->group->getGroupType()->getMemberRole();
++      $role->grantPermissions($permissions);
++      $role->save();
++    }
++
++    // Enable additional languages.
++    $langcodes = ['es'];
++    foreach ($langcodes as $langcode) {
++      ConfigurableLanguage::createFromLangcode($langcode)->save();
++    }
++
++    // Enable translation for default Group and ensure the change is picked up.
++    \Drupal::service('content_translation.manager')->setEnabled('group', $this->group->getGroupType()->id(), TRUE);
++  }
++
++  /**
++   * Tests that a group member has permission translate the group.
++   */
++  public function testGroupTranslate() {
++    // Make sure the Translate page is not available.
++    $this->drupalLogin($this->member);
++    $this->drupalGet('/group/' . $this->group->id() . '/translations');
++    $this->assertSession()->statusCodeEquals(403);
++
++    // Add permission to translate the group.
++    $permissions = [
++      'view group',
++      'translate group',
++    ];
++    if (!empty($permissions)) {
++      $role = $this->group->getGroupType()->getMemberRole();
++      $role->grantPermissions($permissions);
++      $role->save();
++    }
++
++    // Make sure the Translate page is available.
++    $this->drupalGet('/group/' . $this->group->id());
++    $this->drupalGet('/group/' . $this->group->id() . '/translations');
++    $this->assertSession()->statusCodeEquals(200);
++
++    $this->drupalGet('/group/' . $this->group->id() . '/translations/add/en/es');
++    $this->assertSession()->statusCodeEquals(200);
++
++  }
++
++}

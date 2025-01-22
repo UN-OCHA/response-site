@@ -31,6 +31,7 @@ permissions:
   - 'edit group'
   - 'join group'
   - 'revert group revisions'
+  - 'translate group'
   - 'update any group_node:page content'
   - 'update any group_node:page entity'
   - 'update group_node:page entity translation'
