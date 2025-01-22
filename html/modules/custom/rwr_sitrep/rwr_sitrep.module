@@ -23,7 +23,7 @@ use Drupal\taxonomy\Entity\Term;
 function rwr_sitrep_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
   $show_operation_sitreps = FALSE;
 
-  /** @var \Drupal\group\Entity\Group */
+  /** @var \Drupal\group\Entity\Group|null */
   $group = \Drupal::routeMatch()->getParameter('group');
   if (!$group) {
     return;
