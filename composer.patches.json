@@ -1,7 +1,7 @@
 {
   "patches": {
     "drupal/amazon_ses": {
-      "Cron fails on amazon_ses when not configured": "PATCHES/amazon_ses-cron-queue-3417090-5.patch"
+      "Cron fails on amazon_ses when not configured": "PATCHES/amazon_ses-cron-queue-3417090-8.patch"
     },
     "drupal/core" : {
       "https://www.drupal.org/project/drupal/issues/3143617": "https://www.drupal.org/files/issues/2020-07-07/3143617-28_0.patch",
