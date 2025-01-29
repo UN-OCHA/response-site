@@ -50,7 +50,7 @@
         "drupal/dashboards": "^2.1",
         "drupal/date_recur": "^3.2",
         "drupal/default_content": "^2.0@alpha",
-        "drupal/env_link_fixer": "^1.0",
+        "drupal/env_link_fixer": "1.0.x-dev",
         "drupal/environment_indicator": "^4.0",
         "drupal/field_group": "^3.2",
         "drupal/flexible_permissions": "^2",
