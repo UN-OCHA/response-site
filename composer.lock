@@ -118,16 +118,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.339.2",
+            "version": "3.339.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "2f4e85dd8466ffe5186887f8f1466a0248c6c094"
+                "reference": "2ceb0a5b4c0dcd3c5ca6ea7480f3da62bd4fd588"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2f4e85dd8466ffe5186887f8f1466a0248c6c094",
-                "reference": "2f4e85dd8466ffe5186887f8f1466a0248c6c094",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2ceb0a5b4c0dcd3c5ca6ea7480f3da62bd4fd588",
+                "reference": "2ceb0a5b4c0dcd3c5ca6ea7480f3da62bd4fd588",
                 "shasum": ""
             },
             "require": {
@@ -210,9 +210,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.339.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.339.3"
             },
-            "time": "2025-01-29T19:53:29+00:00"
+            "time": "2025-01-30T19:18:55+00:00"
         },
         {
             "name": "bower-asset/dragula",
@@ -2970,26 +2970,26 @@
         },
         {
             "name": "drupal/env_link_fixer",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/env_link_fixer.git",
-                "reference": "1.0.3"
+                "reference": "1.0.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/env_link_fixer-1.0.3.zip",
-                "reference": "1.0.3",
-                "shasum": "695571094d9f69a92d178416c0b7660c6f76686f"
+                "url": "https://ftp.drupal.org/files/projects/env_link_fixer-1.0.4.zip",
+                "reference": "1.0.4",
+                "shasum": "22bc6264010f00423e3c06e7c91f47dff7ab58e7"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10"
+                "drupal/core": "^9.2 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.0.3",
-                    "datestamp": "1706883160",
+                    "version": "1.0.4",
+                    "datestamp": "1738226598",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3002,14 +3002,16 @@
             ],
             "authors": [
                 {
-                    "name": "attiks",
-                    "homepage": "https://www.drupal.org/user/105002"
+                    "name": "Peter Droogmans",
+                    "homepage": "https://www.drupal.org/user/105002",
+                    "email": "attiks@gmail.com"
                 }
             ],
-            "description": "Environment Link fixer",
+            "description": "Fixes link between environments.",
             "homepage": "https://www.drupal.org/project/env_link_fixer",
             "support": {
-                "source": "https://git.drupalcode.org/project/env_link_fixer"
+                "source": "https://git.drupalcode.org/project/env_link_fixer",
+                "issues": "https://www.drupal.org/project/issues/env_link_fixer"
             }
         },
         {
