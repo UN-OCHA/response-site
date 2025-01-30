@@ -19,8 +19,14 @@ display:
           label: Roles
         created:
           label: 'Miembro desde hace'
+          settings:
+            future_format: '@interval'
+            past_format: '@interval'
         access:
           label: 'Último acceso'
+          settings:
+            future_format: 'Desde hace @interval'
+            past_format: 'Hace @interval'
         operations:
           label: Operaciones
         mail:

@@ -22,6 +22,7 @@ display:
             offset_label: Décalage
       fields:
         entity_field:
+          label: 'Champs entité'
           separator: ', '
         entity_langcode:
           label: "Langue de l'entité"
@@ -30,10 +31,13 @@ display:
           label: URL
           separator: ', '
         last_check:
+          label: 'Vérifié pour la dernière fois'
           separator: ', '
         method:
+          label: Méthode
           separator: ', '
         code:
+          label: 'Code du statut'
           separator: ', '
         error:
           label: Erreur
@@ -49,8 +53,13 @@ display:
           expose:
             label: URL
         code_1:
+          expose:
+            label: 'Code du statut'
           group_info:
             label: Résultat
+        code:
+          expose:
+            label: 'Code du statut'
         entity_langcode:
           expose:
             label: "Langue de l'entité"
@@ -59,3 +68,6 @@ display:
           content: 'Affichage de @start à @end sur @total'
   page_1:
     display_title: Page
+    display_options:
+      menu:
+        title: 'Liens brisés'
