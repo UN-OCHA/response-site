@@ -40,7 +40,6 @@
         "drupal/amazon_ses": "^3",
         "drupal/aws": "dev-2.0.x",
         "drupal/components": "^3.0@beta",
-        "drupal/config_filter": "^2.4",
         "drupal/config_split": "^2.0.0-rc4",
         "drupal/content_lock": "^2.3",
         "drupal/core-composer-scaffold": "^10",
