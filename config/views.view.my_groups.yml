@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.group.field_archive_group
     - field.storage.group.field_enabled_tabs
-    - field.storage.group_content.group_roles
+    - field.storage.group_relationship.group_roles
     - group.type.cluster
     - group.type.operation
     - user.role.authenticated
@@ -415,9 +415,9 @@ display:
           hide_alter_empty: false
         group_roles:
           id: group_roles
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: field
@@ -743,17 +743,17 @@ display:
           replica: false
           query_tags: {  }
       relationships:
-        group_content_id:
-          id: group_content_id
+        group_relationship_id:
+          id: group_relationship_id
           table: groups_field_data
-          field: group_content_id
+          field: group_relationship_id
           relationship: none
           group_type: group
           admin_label: 'Group content'
           entity_type: group
-          plugin_id: group_to_group_content
+          plugin_id: group_to_group_relationship
           required: false
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: group_membership
             'group_node:article': '0'
             'group_node:page': '0'
@@ -762,13 +762,13 @@ display:
           id: gc__user
           table: group_relationship_field_data
           field: gc__user
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: 'Group content User'
-          entity_type: group_content
-          plugin_id: group_content_to_entity
+          entity_type: group_relationship
+          plugin_id: group_relationship_to_entity
           required: false
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: group_membership
       header: {  }
       footer: {  }
@@ -784,7 +784,7 @@ display:
       tags:
         - 'config:field.storage.group.field_archive_group'
         - 'config:field.storage.group.field_enabled_tabs'
-        - 'config:field.storage.group_content.group_roles'
+        - 'config:field.storage.group_relationship.group_roles'
   page_1:
     id: page_1
     display_title: Page
@@ -813,7 +813,7 @@ display:
       tags:
         - 'config:field.storage.group.field_archive_group'
         - 'config:field.storage.group.field_enabled_tabs'
-        - 'config:field.storage.group_content.group_roles'
+        - 'config:field.storage.group_relationship.group_roles'
   page_2:
     id: page_2
     display_title: 'Page 2'
@@ -826,10 +826,10 @@ display:
           id: gid
           table: group_relationship_field_data
           field: gid
-          relationship: group_content
+          relationship: group_relationship
           group_type: group
           admin_label: ''
-          entity_type: group_content
+          entity_type: group_relationship
           entity_field: gid
           plugin_id: field
           label: Operation
@@ -1273,9 +1273,9 @@ display:
           hide_alter_empty: false
         group_roles:
           id: group_roles
-          table: group_content__group_roles
+          table: group_relationship__group_roles
           field: group_roles
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: ''
           plugin_id: field
@@ -1452,17 +1452,17 @@ display:
         filter_groups: false
         header: false
       relationships:
-        group_content_id:
-          id: group_content_id
+        group_relationship_id:
+          id: group_relationship_id
           table: groups_field_data
-          field: group_content_id
+          field: group_relationship_id
           relationship: none
           group_type: group
           admin_label: 'Group content'
           entity_type: group
-          plugin_id: group_to_group_content
+          plugin_id: group_to_group_relationship
           required: false
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: group_membership
             'group_node:article': '0'
             'group_node:page': '0'
@@ -1471,25 +1471,25 @@ display:
           id: gc__user
           table: group_relationship_field_data
           field: gc__user
-          relationship: group_content_id
+          relationship: group_relationship_id
           group_type: group
           admin_label: 'Group content User'
-          entity_type: group_content
-          plugin_id: group_content_to_entity
+          entity_type: group_relationship
+          plugin_id: group_relationship_to_entity
           required: false
-          group_content_plugins:
+          group_relation_plugins:
             group_membership: group_membership
-        group_content:
-          id: group_content
+        group_relationship:
+          id: group_relationship
           table: groups_field_data
-          field: group_content
+          field: group_relationship
           relationship: none
           group_type: group
           admin_label: 'Group group content'
           entity_type: group
-          plugin_id: group_content_to_entity_reverse
+          plugin_id: group_relationship_to_entity_reverse
           required: false
-          group_content_plugins:
+          group_relation_plugins:
             'subgroup:cluster': '0'
       header: {  }
       display_extenders: {  }
@@ -1514,4 +1514,4 @@ display:
       tags:
         - 'config:field.storage.group.field_archive_group'
         - 'config:field.storage.group.field_enabled_tabs'
-        - 'config:field.storage.group_content.group_roles'
+        - 'config:field.storage.group_relationship.group_roles'

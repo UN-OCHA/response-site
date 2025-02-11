@@ -1,0 +1,22 @@
+uuid: d8364af4-b319-41e4-b87b-f08eabd35e05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group_relationship.group_roles
+    - group.relationship_type.cluster-group_membership
+id: group_relationship.cluster-group_membership.group_roles
+field_name: group_roles
+entity_type: group_relationship
+bundle: cluster-group_membership
+label: Roles
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'group_type:group_role'
+  handler_settings:
+    group_type_id: cluster
+field_type: entity_reference

@@ -6,13 +6,13 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\group\Entity\Group;
-use Drupal\group\Plugin\GroupContentAccessControlHandler;
+use Drupal\group\Plugin\Group\RelationHandlerDefault\AccessControl;
 use Drupal\node\Entity\Node;
 
 /**
- * Provides access control for GroupContent entities and grouped entities.
+ * Provides access control for GroupRelationship entities and grouped entities.
  */
-class GroupNodeAccessControlHandler extends GroupContentAccessControlHandler {
+class GroupNodeAccessControlHandler extends AccessControl {
 
   /**
    * {@inheritdoc}
@@ -22,17 +22,17 @@ class GroupNodeAccessControlHandler extends GroupContentAccessControlHandler {
 
     if ($operation == 'view' && !$account->hasPermission('access content overview')) {
       if ($entity instanceof Node) {
-        /** @var \Drupal\group\Entity\Storage\GroupContentStorage */
-        $storage = \Drupal::entityTypeManager()->getStorage('group_content');
-        $activGroupListEntity = $storage->loadByEntity($entity);
+        /** @var \Drupal\group\Entity\Storage\GroupRelationshipStorage */
+        $storage = \Drupal::entityTypeManager()->getStorage('group_relationship');
+        $activeGroupListEntity = $storage->loadByEntity($entity);
 
         // Not a group node.
-        if (empty($activGroupListEntity)) {
+        if (empty($activeGroupListEntity)) {
           return $return_as_object ? $result : $result->isAllowed();
         }
 
-        foreach ($activGroupListEntity as $groupContent) {
-          $group = $groupContent->getGroup();
+        foreach ($activeGroupListEntity as $groupRelationship) {
+          $group = $groupRelationship->getGroup();
           if (!$group->isPublished()) {
             $result = AccessResult::forbidden();
           }

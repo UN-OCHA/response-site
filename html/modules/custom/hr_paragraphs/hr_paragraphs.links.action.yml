@@ -6,7 +6,7 @@ hr_paragraphs.add_operation:
   appears_on:
     - 'entity.group.collection'
 hr_paragraphs.add_cluster:
-  route_name: 'entity.group_content.create_form'
+  route_name: 'entity.group_relationship.create_form'
   route_parameters:
     plugin_id: 'subgroup:cluster'
   title: 'Add new Cluster or Working Group'
