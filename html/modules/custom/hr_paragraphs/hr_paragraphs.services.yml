@@ -14,8 +14,8 @@ services:
   hr_paragraphs.rss_controller:
     class: \Drupal\hr_paragraphs\Controller\RssController
     arguments: ['@http_client']
-  hr_paragraphs.breadcrumb.groupcontent:
-    class: 'Drupal\hr_paragraphs\Breadcrumb\GroupContentBreadcrumbBuilder'
+  hr_paragraphs.breadcrumb.group_relationship:
+    class: 'Drupal\hr_paragraphs\Breadcrumb\GroupRelationshipBreadcrumbBuilder'
     tags:
       - { name: 'breadcrumb_builder', priority: 100 }
   hr_paragraphs.breadcrumb.group:

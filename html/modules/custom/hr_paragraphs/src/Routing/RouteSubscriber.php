@@ -19,9 +19,9 @@ class RouteSubscriber extends RouteSubscriberBase {
       $route->setRequirement('_custom_access_group_type', 'TRUE');
     }
 
-    // Change title of group content create form.
-    if ($route = $collection->get('entity.group_content.create_form')) {
-      $route->setDefault('_title_callback', '\Drupal\hr_paragraphs\Controller\GroupContentTitleController::createFormTitle');
+    // Change title of group relationship create form.
+    if ($route = $collection->get('entity.group_relationship.create_form')) {
+      $route->setDefault('_title_callback', '\Drupal\hr_paragraphs\Controller\GroupRelationshipTitleController::createFormTitle');
     }
   }
 
