@@ -1,0 +1,103 @@
+diff --git a/src/Plugin/Group/RelationHandlerDefault/PermissionProvider.php b/src/Plugin/Group/RelationHandlerDefault/PermissionProvider.php
+index 7fef2fe..28d160b 100644
+--- a/src/Plugin/Group/RelationHandlerDefault/PermissionProvider.php
++++ b/src/Plugin/Group/RelationHandlerDefault/PermissionProvider.php
+@@ -72,6 +72,16 @@ class PermissionProvider implements PermissionProviderInterface {
+ 
+         case 'create':
+           return $this->getEntityCreatePermission();
++
++        case 'update translation':
++          return $this->getEntityUpdateTranslationPermission($scope);
++
++        case 'delete translation':
++          return $this->getEntityDeleteTranslationPermission($scope);
++
++        case 'create translation':
++          return $this->getEntityCreateTranslationPermission($scope);
++
+       }
+     }
+ 
+@@ -157,6 +167,16 @@ class PermissionProvider implements PermissionProviderInterface {
+       );
+     }
+ 
++    if ($name = $provider_chain->getPermission('update translation', 'entity')) {
++      $permissions[$name] = $this->buildPermission("$prefix Edit %entity_type entity translations");
++    }
++    if ($name = $provider_chain->getPermission('delete translation', 'entity')) {
++      $permissions[$name] = $this->buildPermission("$prefix Delete %entity_type entity translations");
++    }
++    if ($name = $provider_chain->getPermission('create translation', 'entity')) {
++      $permissions[$name] = $this->buildPermission("$prefix Add %entity_type entity translations");
++    }
++
+     return $permissions;
+   }
+ 
+@@ -310,4 +330,64 @@ class PermissionProvider implements PermissionProviderInterface {
+     return FALSE;
+   }
+ 
++  /**
++   * Gets the name of the update translation permission for the entity.
++   *
++   * @param string $scope
++   *   (optional) Whether the 'any' or 'own' permission name should be returned.
++   *   Defaults to 'any'.
++   *
++   * @return string|false
++   *   The permission name or FALSE if it does not apply.
++   */
++  public function getEntityUpdateTranslationPermission($scope = 'any') {
++    // Core has no notion of any vs own for translations (yet?).
++    if ($scope === 'any') {
++      if ($this->definesEntityPermissions && $this->entityType->isTranslatable()) {
++        return "update $this->pluginId entity translation";
++      }
++    }
++    return FALSE;
++  }
++
++  /**
++   * Gets the name of the delete translation permission for the entity.
++   *
++   * @param string $scope
++   *   (optional) Whether the 'any' or 'own' permission name should be returned.
++   *   Defaults to 'any'.
++   *
++   * @return string|false
++   *   The permission name or FALSE if it does not apply.
++   */
++  public function getEntityDeleteTranslationPermission($scope = 'any') {
++    // Core has no notion of any vs own for translations (yet?).
++    if ($scope === 'any') {
++      if ($this->definesEntityPermissions && $this->entityType->isTranslatable()) {
++        return "delete $this->pluginId entity translation";
++      }
++    }
++    return FALSE;
++  }
++
++  /**
++   * Gets the name of the create translation permission for the entity.
++   *
++   * @param string $scope
++   *   (optional) Whether the 'any' or 'own' permission name should be returned.
++   *   Defaults to 'any'.
++   *
++   * @return string|false
++   *   The permission name or FALSE if it does not apply.
++   */
++  public function getEntityCreateTranslationPermission($scope = 'any') {
++    // Core has no notion of any vs own for translations (yet?).
++    if ($scope === 'any') {
++      if ($this->definesEntityPermissions && $this->entityType->isTranslatable()) {
++        return "create $this->pluginId entity translation";
++      }
++    }
++    return FALSE;
++  }
++
+ }

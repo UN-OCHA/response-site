@@ -81,10 +81,10 @@ class LinkcheckerLinkGroupEntityLink extends FieldPluginBase {
     $parent_entity = $linked_entity;
 
     // Get group.
-    $group_content_array = GroupRelationship::loadByEntity($linked_entity);
-    $group_content = reset($group_content_array);
-    if ($group_content) {
-      $parent_entity = $group_content->getGroup();
+    $group_relationship_array = GroupRelationship::loadByEntity($linked_entity);
+    $group_relationship = reset($group_relationship_array);
+    if ($group_relationship) {
+      $parent_entity = $group_relationship->getGroup();
     }
 
     if (!empty($this->options['absolute_link'])) {

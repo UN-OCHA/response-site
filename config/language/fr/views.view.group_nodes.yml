@@ -1,4 +1,3 @@
-label: 'Group nodes'
 display:
   default:
     display_title: Maître
@@ -20,18 +19,6 @@ display:
         changed:
           label: 'Mis à jour'
           separator: ', '
-        view_group_content:
-          label: 'Link to Group content'
-        edit_group_content:
-          label: 'Link to edit Group content'
-          text: 'Edit relation'
-        delete_group_content:
-          label: 'Link to delete Group content'
-          text: 'Delete relation'
-        edit_node:
-          text: 'Edit node'
-        delete_node:
-          text: 'Delete node'
         dropbutton:
           label: Actions
       pager:

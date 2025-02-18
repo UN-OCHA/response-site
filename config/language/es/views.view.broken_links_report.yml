@@ -22,6 +22,7 @@ display:
             offset_label: Desplazamiento
       fields:
         entity_field:
+          label: 'Campo de entidad'
           separator: ', '
         entity_langcode:
           label: 'Idioma de la entidad'
@@ -30,10 +31,13 @@ display:
           label: URL
           separator: ', '
         last_check:
+          label: 'Última comprobación'
           separator: ', '
         method:
+          label: Método
           separator: ', '
         code:
+          label: 'Código de estado'
           separator: ', '
         error:
           label: Error
@@ -49,8 +53,13 @@ display:
           expose:
             label: URL
         code_1:
+          expose:
+            label: 'Código de estado'
           group_info:
             label: Resultado
+        code:
+          expose:
+            label: 'Código de estado'
         entity_langcode:
           expose:
             label: 'Idioma de la entidad'
@@ -59,3 +68,6 @@ display:
           content: 'Mostrando @start - @end de @total'
   page_1:
     display_title: Página
+    display_options:
+      menu:
+        title: 'Enlaces rotos'

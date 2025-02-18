@@ -554,17 +554,17 @@ display:
           replica: false
           query_tags: {  }
       relationships:
-        group_content:
-          id: group_content
+        group_relationship:
+          id: group_relationship
           table: groups_field_data
-          field: group_content
+          field: group_relationship
           relationship: none
           group_type: group
           admin_label: 'Group group content'
           entity_type: group
-          plugin_id: group_content_to_entity_reverse
+          plugin_id: group_relationship_to_entity_reverse
           required: false
-          group_content_plugins:
+          group_relation_plugins:
             'subgroup:cluster': 'subgroup:cluster'
       use_ajax: true
       use_more: true
