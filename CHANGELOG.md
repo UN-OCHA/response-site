@@ -4,6 +4,27 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.4.3](https://github.com/UN-OCHA/response-site/compare/v1.4.2...v1.4.3) (2025-02-18)
+
+### Bug Fixes
+
+* Handle snaps with undefined language ([5363b8](https://github.com/UN-OCHA/response-site/commit/5363b8a47b91b5a29d9f12ab1ba56959b383940e))
+* Limit html tags ([0c48c9](https://github.com/UN-OCHA/response-site/commit/0c48c92f83a301a5863dbb5ac41c213e447ffc89))
+
+### Chores
+
+* Add patches for group translations permissions ([57709d](https://github.com/UN-OCHA/response-site/commit/57709db9cbc52285082c94b6cb7dd1c59f1681d2))
+* Export config ([c0e07c](https://github.com/UN-OCHA/response-site/commit/c0e07c85f7334d99b28980d4ce344dca1dece349), [384e06](https://github.com/UN-OCHA/response-site/commit/384e06fd1faac5ca742c2dd12bfec715c9abe3ba))
+* Further name changes to move to v3 of group module ([0772e5](https://github.com/UN-OCHA/response-site/commit/0772e5facf219ddd6707eb81c3ef106ca2117b14))
+* Include patch for translating groups too ([17e1e9](https://github.com/UN-OCHA/response-site/commit/17e1e95f0af643cf35bdd410f90bdee149b95af4))
+* Remove config_filter module ([beabcc](https://github.com/UN-OCHA/response-site/commit/beabcc0c214a475e3af99f501b36d8af5d666c3c))
+* Remove unused admin theme ([018586](https://github.com/UN-OCHA/response-site/commit/0185863681a1b97ff40b3e37e1189910627ca00b))
+* Require variationcache module ([35d422](https://github.com/UN-OCHA/response-site/commit/35d42292a21c0dc8eb8efce495f98cf0edc86395))
+* Restore modules turned off by accident ([9da1e1](https://github.com/UN-OCHA/response-site/commit/9da1e1135bb41e7b8b3950e5a867f53543d89624))
+* Specify version of imagemagick ([65bacb](https://github.com/UN-OCHA/response-site/commit/65bacba42554e58b7538544b565f871b5ea2664a))
+* Update all outdated drupal/* unocha/* drush/* weitzman/drupal-test-traits packages. ([f61a25](https://github.com/UN-OCHA/response-site/commit/f61a25863b112864ff1a914490fb842e6bde84b5), [e08b1f](https://github.com/UN-OCHA/response-site/commit/e08b1f19150752f49aeb52e73dce28f4fe19860e), [a249a9](https://github.com/UN-OCHA/response-site/commit/a249a96a2984a28be9bfd66d2c7a49513bbe7dad), [fb7ed5](https://github.com/UN-OCHA/response-site/commit/fb7ed58f758f0e042381fea6e054def3f36682bf), [fdee99](https://github.com/UN-OCHA/response-site/commit/fdee995086175067828da558c1bc752b3eaa7fdd))
+* Use latest version of env_link_fixer ([c10f87](https://github.com/UN-OCHA/response-site/commit/c10f87dca787d82ff6aedca2df66faf385fc01ae))
+
 ## [1.4.2](https://github.com/UN-OCHA/response-site/compare/v1.4.1...v1.4.2) (2025-01-14)
 
 ### Bug Fixes
