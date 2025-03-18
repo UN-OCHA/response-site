@@ -75,7 +75,7 @@
         "drupal/redirect": "^1.8",
         "drupal/seckit": "^2.0",
         "drupal/select2": "^1.13",
-        "drupal/social_auth_hid": "^3.0",
+        "drupal/social_auth_hid": "^5",
         "drupal/stage_file_proxy": "^3",
         "drupal/subgroup": "^3",
         "drupal/theme_switcher": "^2",
@@ -237,7 +237,7 @@
             ]
         }
     },
-    "version": "1.4.4",
+    "version": "1.4.6",
     "require-dev": {
         "davidrjonas/composer-lock-diff": "^1.7",
         "drupal/coder": "^8.3",
