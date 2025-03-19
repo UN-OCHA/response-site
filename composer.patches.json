@@ -5,8 +5,14 @@
     },
     "drupal/core" : {
       "https://www.drupal.org/project/drupal/issues/3143617": "https://www.drupal.org/files/issues/2020-07-07/3143617-28_0.patch",
-      "Help group module support translations #2864721": "./PATCHES/core-group-translation-helper-MR-9075.patch",
+      "Help group module support translations #2864721": "./PATCHES/core-group-translation-helper-MR-9076-updated.patch",
       "Include database SSL/TLS info on status report": "./PATCHES/mysql-ssl-status.patch"
+    },
+    "drupal/devel_entity_updates": {
+      "D11 compatibility - #3454902": "PATCHES/devel_entity_updates-D11-compatibility.patch"
+    },
+    "drupal/dev_mode": {
+      "D11 compatibility - #3429839": "PATCHES/dev_mode-D11-compatibility-3429839.patch"
     },
     "drupal/group": {
       "Group support translations #2864721": "./PATCHES/group-translate_content_permission-2864721-37.patch",
@@ -19,6 +25,9 @@
     "drupal/imagemagick": {
       "Cast dimensions to int after translations": "PATCHES/imagemagick-ints.patch"
     },
+    "drupal/link_allowed_hosts": {
+      "D11 compatibility - #3431673": "PATCHES/link_allowed_hosts-D11-compatibility.patch"
+    },
     "drupal/linkchecker": {
       "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743": "PATCHES/linkchecker-unconfirmed-but-eligible-field-list-3244743.patch",
       "Do not break admin denied": "./PATCHES/linkchecker_use_uid.patch",
@@ -26,12 +35,18 @@
       "Recognize previous revisions https://www.drupal.org/project/linkchecker/issues/3366753": "./PATCHES/linkchecker-previous-revisions-3366753.patch",
       "Fallback to GET if HEAD fails - https://www.drupal.org/project/linkchecker/issues/3334240": "./PATCHES/linkchecker-fallback-get-3334240.diff"
     },
+    "drupal/maintenance200": {
+      "D11 compatibility - #3431791": "PATCHES/maintenance200-D11-compatibility-3431791.patch"
+    },
     "drupal/user_expire": {
       "Allow the notification email to be customised": "PATCHES/user_expire-customize-notification-email.patch",
       "Reset expiration when user is reactivated": "PATCHES/user_expire-reset-expiration-on-reactivation.patch"
     },
     "drupal/username_enumeration_prevention": {
       "Avoid leaking the path via Drupal.settings json": "PATCHES/username_enumeration_prevention-user-login-block-form-3312288.patch"
+    },
+    "drupal/views_field_compare": {
+      "D11 compatibility - #3435461": "PATCHES/views_field_compare-D11-compatibility.patch"
     },
     "mailchimp/marketing": {
       "PHP 8.2": "PATCHES/mailchimp_php82.patch"

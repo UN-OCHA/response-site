@@ -3,7 +3,7 @@ type: module
 description: 'Set paragraph permissions to create, update or view paragraphs within a group context.'
 package: field
 core: '8.x'
-core_version_requirement: ^8 || ^9 || ^10
+core_version_requirement: ^10 || ^11
 dependencies:
   - paragraphs:paragraphs_type_permissions
   - group:group

@@ -1,4 +1,4 @@
 name: 'HR Entity Freshness'
 type: module
 description: 'Track freshness of any entity.'
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^10 || ^11

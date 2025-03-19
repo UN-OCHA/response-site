@@ -1,7 +1,7 @@
 name: RWR
 type: theme
 description: RWR public theme, an OCHA Common Design subtheme
-core_version_requirement: ^9.5 || ^10
+core_version_requirement: ^10 || ^11
 package: Response
 base theme: common_design
 logo: 'img/logos/response-logo.svg'
