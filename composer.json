@@ -242,7 +242,7 @@
             ]
         }
     },
-    "version": "1.4.4",
+    "version": "1.4.6",
     "require-dev": {
         "davidrjonas/composer-lock-diff": "^1.7",
         "drupal/coder": "^8.3",

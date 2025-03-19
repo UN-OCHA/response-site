@@ -4,6 +4,21 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.4.6](https://github.com/UN-OCHA/response-site/compare/v1.4.5...v1.4.6) (2025-03-17)
+
+### Bug Fixes
+
+* Include sidebar on sitrep pages ([cb91e2](https://github.com/UN-OCHA/response-site/commit/cb91e264c4868d459530b5a4ef28b1d998ea7e62))
+* Use include and not include_once because software sucks. ([d707ab](https://github.com/UN-OCHA/response-site/commit/d707ab750e8426e163861de3378ca06074e9b4b2))
+
+### Chores
+
+* Update all outdated drupal/* unocha/* drush/* weitzman/drupal-test-traits packages. ([91e883](https://github.com/UN-OCHA/response-site/commit/91e8832abb74cc17fa81bbf9b2de1cf11c00caab), [44e999](https://github.com/UN-OCHA/response-site/commit/44e999ff918504bea81d10cf049851f7b9e76f85), [1cd4d4](https://github.com/UN-OCHA/response-site/commit/1cd4d45e03297fc8fa7e080fea0bc014fee29093))
+
+##### Deps-dev
+
+* Bump axios ([61c326](https://github.com/UN-OCHA/response-site/commit/61c326c8f887992dbe92924e8bd33f8d4381f458))
+
 ## [1.4.4](https://github.com/UN-OCHA/response-site/compare/v1.4.3...v1.4.4) (2025-02-20)
 
 ### Chores
