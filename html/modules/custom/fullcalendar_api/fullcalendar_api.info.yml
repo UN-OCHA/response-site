@@ -1,7 +1,7 @@
 name: 'FullCalendar API'
 description: 'API interface for jQuery FullCalendar plugin, http://fullcalendar.io/.'
 type: module
-core_version_requirement: ^8.8 || ^9 || ^10
+core_version_requirement: ^10 || ^11
 
 package: Calendar
 dependencies:
