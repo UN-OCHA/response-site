@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.4.7](https://github.com/UN-OCHA/response-site/compare/v1.4.6...v1.4.7) (2025-03-20)
+
+### Chores
+
+* Update all outdated drupal/* unocha/* drush/* weitzman/drupal-test-traits packages. ([78ac39](https://github.com/UN-OCHA/response-site/commit/78ac39643b136c838635853495dc04cf8b4d017b))
+
 ## [1.4.6](https://github.com/UN-OCHA/response-site/compare/v1.4.5...v1.4.6) (2025-03-17)
 
 ### Bug Fixes
