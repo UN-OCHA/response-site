@@ -118,16 +118,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.342.9",
+            "version": "3.342.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e6c89c32bfb4e4444b05edd05ef9852ae952dc45"
+                "reference": "587475eec402e3d0326e5021cbbc1cb1e8bf4f93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e6c89c32bfb4e4444b05edd05ef9852ae952dc45",
-                "reference": "e6c89c32bfb4e4444b05edd05ef9852ae952dc45",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/587475eec402e3d0326e5021cbbc1cb1e8bf4f93",
+                "reference": "587475eec402e3d0326e5021cbbc1cb1e8bf4f93",
                 "shasum": ""
             },
             "require": {
@@ -209,9 +209,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.342.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.342.14"
             },
-            "time": "2025-03-19T18:50:34+00:00"
+            "time": "2025-03-26T19:03:32+00:00"
         },
         {
             "name": "bower-asset/dragula",
@@ -1291,29 +1291,29 @@
         },
         {
             "name": "doctrine/collections",
-            "version": "2.2.2",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "d8af7f248c74f195f7347424600fd9e17b57af59"
+                "reference": "2eb07e5953eed811ce1b309a7478a3b236f2273d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/d8af7f248c74f195f7347424600fd9e17b57af59",
-                "reference": "d8af7f248c74f195f7347424600fd9e17b57af59",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/2eb07e5953eed811ce1b309a7478a3b236f2273d",
+                "reference": "2eb07e5953eed811ce1b309a7478a3b236f2273d",
                 "shasum": ""
             },
             "require": {
                 "doctrine/deprecations": "^1",
-                "php": "^8.1"
+                "php": "^8.1",
+                "symfony/polyfill-php84": "^1.30"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^12",
                 "ext-json": "*",
                 "phpstan/phpstan": "^1.8",
                 "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^10.5",
-                "vimeo/psalm": "^5.11"
+                "phpunit/phpunit": "^10.5"
             },
             "type": "library",
             "autoload": {
@@ -1357,7 +1357,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/collections/issues",
-                "source": "https://github.com/doctrine/collections/tree/2.2.2"
+                "source": "https://github.com/doctrine/collections/tree/2.3.0"
             },
             "funding": [
                 {
@@ -1373,7 +1373,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T06:56:21+00:00"
+            "time": "2025-03-22T10:17:19+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -4090,6 +4090,10 @@
                     "homepage": "https://www.drupal.org/user/278450"
                 },
                 {
+                    "name": "pixelwhip",
+                    "homepage": "https://www.drupal.org/user/275292"
+                },
+                {
                     "name": "sethhill",
                     "homepage": "https://www.drupal.org/user/676480"
                 }
@@ -4119,7 +4123,7 @@
                 "shasum": "2dce18e1431cd4b837b5212a8ddaeb581a642821"
             },
             "require": {
-                "drupal/core": "^10 || ^11"
+                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
             },
             "type": "drupal-module",
             "extra": {
@@ -4320,7 +4324,7 @@
                 "shasum": "fc8ea60619b6b4682bade340e13fb4565d3a7e0c"
             },
             "require": {
-                "drupal/core": "^10 || ^11"
+                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
             },
             "type": "drupal-module",
             "extra": {
@@ -6086,7 +6090,7 @@
                 "shasum": "3660611c5e81bfecab1cfb98fb96883171167fa6"
             },
             "require": {
-                "drupal/core": "^10 || ^11"
+                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
             },
             "type": "drupal-module",
             "extra": {
@@ -6364,16 +6368,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "4.0.3",
+            "version": "4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "b115554301161fa21467629f1e1391c1936de517"
+                "reference": "d42c8731f0624ad6bdc8d3e5e9a4524f68801cfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/b115554301161fa21467629f1e1391c1936de517",
-                "reference": "b115554301161fa21467629f1e1391c1936de517",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/d42c8731f0624ad6bdc8d3e5e9a4524f68801cfa",
+                "reference": "d42c8731f0624ad6bdc8d3e5e9a4524f68801cfa",
                 "shasum": ""
             },
             "require": {
@@ -6419,7 +6423,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/4.0.3"
+                "source": "https://github.com/egulias/EmailValidator/tree/4.0.4"
             },
             "funding": [
                 {
@@ -6427,7 +6431,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-27T00:36:43+00:00"
+            "time": "2025-03-06T22:45:56+00:00"
         },
         {
             "name": "fileeye/mimemap",
@@ -9159,16 +9163,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.21",
+            "version": "1.12.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "14276fdef70575106a3392a4ed553c06a984df28"
+                "reference": "29201e7a743a6ab36f91394eab51889a82631428"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/14276fdef70575106a3392a4ed553c06a984df28",
-                "reference": "14276fdef70575106a3392a4ed553c06a984df28",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/29201e7a743a6ab36f91394eab51889a82631428",
+                "reference": "29201e7a743a6ab36f91394eab51889a82631428",
                 "shasum": ""
             },
             "require": {
@@ -9213,7 +9217,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-09T09:24:50+00:00"
+            "time": "2025-03-23T14:57:32+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -11657,6 +11661,82 @@
             "time": "2024-09-09T11:45:10+00:00"
         },
         {
+            "name": "symfony/polyfill-php84",
+            "version": "v1.31.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php84.git",
+                "reference": "e5493eb51311ab0b1cc2243416613f06ed8f18bd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php84/zipball/e5493eb51311ab0b1cc2243416613f06ed8f18bd",
+                "reference": "e5493eb51311ab0b1cc2243416613f06ed8f18bd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php84\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.4+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php84/tree/v1.31.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-09-09T12:04:04+00:00"
+        },
+        {
             "name": "symfony/process",
             "version": "v7.2.4",
             "source": {
@@ -13246,16 +13326,16 @@
         },
         {
             "name": "composer/class-map-generator",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/class-map-generator.git",
-                "reference": "ffe442c5974c44a9343e37a0abcb1cc37319f5b9"
+                "reference": "134b705ddb0025d397d8318a75825fe3c9d1da34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/class-map-generator/zipball/ffe442c5974c44a9343e37a0abcb1cc37319f5b9",
-                "reference": "ffe442c5974c44a9343e37a0abcb1cc37319f5b9",
+                "url": "https://api.github.com/repos/composer/class-map-generator/zipball/134b705ddb0025d397d8318a75825fe3c9d1da34",
+                "reference": "134b705ddb0025d397d8318a75825fe3c9d1da34",
                 "shasum": ""
             },
             "require": {
@@ -13299,7 +13379,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/class-map-generator/issues",
-                "source": "https://github.com/composer/class-map-generator/tree/1.6.0"
+                "source": "https://github.com/composer/class-map-generator/tree/1.6.1"
             },
             "funding": [
                 {
@@ -13315,7 +13395,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-05T10:05:34+00:00"
+            "time": "2025-03-24T13:50:44+00:00"
         },
         {
             "name": "composer/composer",
@@ -14382,7 +14462,7 @@
                 "shasum": "7dfa949130c4add242a91604c4f0fd8e75317c54"
             },
             "require": {
-                "drupal/core": "^10 || ^11"
+                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
             },
             "type": "drupal-module",
             "extra": {
@@ -14530,16 +14610,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v4.30.1",
+            "version": "v4.30.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "f29ba8a30dfd940efb3a8a75dc44446539101f24"
+                "reference": "a4c4d8565b40b9f76debc9dfeb221412eacb8ced"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/f29ba8a30dfd940efb3a8a75dc44446539101f24",
-                "reference": "f29ba8a30dfd940efb3a8a75dc44446539101f24",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/a4c4d8565b40b9f76debc9dfeb221412eacb8ced",
+                "reference": "a4c4d8565b40b9f76debc9dfeb221412eacb8ced",
                 "shasum": ""
             },
             "require": {
@@ -14568,9 +14648,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.30.1"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.30.2"
             },
-            "time": "2025-03-13T21:08:17+00:00"
+            "time": "2025-03-26T18:01:50+00:00"
         },
         {
             "name": "jangregor/phpstan-prophecy",
@@ -17094,16 +17174,16 @@
         },
         {
             "name": "ramsey/collection",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/collection.git",
-                "reference": "3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109"
+                "reference": "344572933ad0181accbf4ba763e85a0306a8c5e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/collection/zipball/3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109",
-                "reference": "3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109",
+                "url": "https://api.github.com/repos/ramsey/collection/zipball/344572933ad0181accbf4ba763e85a0306a8c5e2",
+                "reference": "344572933ad0181accbf4ba763e85a0306a8c5e2",
                 "shasum": ""
             },
             "require": {
@@ -17164,9 +17244,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/collection/issues",
-                "source": "https://github.com/ramsey/collection/tree/2.1.0"
+                "source": "https://github.com/ramsey/collection/tree/2.1.1"
             },
-            "time": "2025-03-02T04:48:29+00:00"
+            "time": "2025-03-22T05:38:12+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -18414,16 +18494,16 @@
         },
         {
             "name": "slevomat/coding-standard",
-            "version": "8.16.0",
+            "version": "8.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "7748a4282df19daf966fda1d8c60a8aec803c83a"
+                "reference": "490023f23813483b5f75381c4ee07d26d9edced1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/7748a4282df19daf966fda1d8c60a8aec803c83a",
-                "reference": "7748a4282df19daf966fda1d8c60a8aec803c83a",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/490023f23813483b5f75381c4ee07d26d9edced1",
+                "reference": "490023f23813483b5f75381c4ee07d26d9edced1",
                 "shasum": ""
             },
             "require": {
@@ -18463,7 +18543,7 @@
             ],
             "support": {
                 "issues": "https://github.com/slevomat/coding-standard/issues",
-                "source": "https://github.com/slevomat/coding-standard/tree/8.16.0"
+                "source": "https://github.com/slevomat/coding-standard/tree/8.16.1"
             },
             "funding": [
                 {
@@ -18475,7 +18555,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-23T18:12:49+00:00"
+            "time": "2025-03-23T16:33:42+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
