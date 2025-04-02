@@ -26,7 +26,8 @@
       "Cast dimensions to int after translations": "PATCHES/imagemagick-ints.patch"
     },
     "drupal/link_allowed_hosts": {
-      "D11 compatibility - #3431673": "PATCHES/link_allowed_hosts-D11-compatibility.patch"
+      "D11 compatibility - #3431673": "PATCHES/link_allowed_hosts-D11-compatibility.patch",
+      "Avoid return type error": "PATCHES/link_allowed_hosts-return-types.patch"
     },
     "drupal/linkchecker": {
       "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743": "PATCHES/linkchecker-unconfirmed-but-eligible-field-list-3244743.patch",
