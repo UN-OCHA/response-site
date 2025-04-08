@@ -33,7 +33,7 @@
       "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743": "PATCHES/linkchecker-unconfirmed-but-eligible-field-list-3244743.patch",
       "Do not break admin denied": "./PATCHES/linkchecker_use_uid.patch",
       "Avoid null links": "./PATCHES/linkchecker_null_link.patch",
-      "Recognize previous revisions https://www.drupal.org/project/linkchecker/issues/3366753": "./PATCHES/linkchecker-previous-revisions-3366753.patch",
+      "Recognize previous revisions https://www.drupal.org/project/linkchecker/issues/3366753": "https://www.drupal.org/files/issues/2025-03-07/3366753-minimal.patch",
       "Fallback to GET if HEAD fails - https://www.drupal.org/project/linkchecker/issues/3334240": "./PATCHES/linkchecker-fallback-get-3334240.diff"
     },
     "drupal/maintenance200": {
