@@ -59,7 +59,7 @@ class LinkcheckerLinkActiveRevisions extends FilterPluginBase {
         'table' => $field->getTargetEntityTypeId() . '__' . $field->getName(),
         'field' => $field->getName() . '_target_id',
         'left_table' => 'linkchecker_link',
-        'left_field' => 'entity_id__target_id',
+        'left_field' => 'parent_entity_id',
         'operator' => '=',
       ];
 
