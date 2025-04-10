@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9bd55beb5452760fff7b3b51b912e9a",
+    "content-hash": "e6536070fa5e79b2ab880d150d960d5a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4123,7 +4123,7 @@
                 "shasum": "2dce18e1431cd4b837b5212a8ddaeb581a642821"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
+                "drupal/core": "^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
@@ -4324,7 +4324,7 @@
                 "shasum": "fc8ea60619b6b4682bade340e13fb4565d3a7e0c"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
+                "drupal/core": "^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
@@ -6090,7 +6090,7 @@
                 "shasum": "3660611c5e81bfecab1cfb98fb96883171167fa6"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
+                "drupal/core": "^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
@@ -6553,15 +6553,6 @@
                 "source": "https://github.com/FileEye/pel/tree/0.10.0"
             },
             "time": "2024-01-11T19:11:58+00:00"
-        },
-        {
-            "name": "fullcalendar/fullcalendar",
-            "version": "3.10.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/fullcalendar/fullcalendar/releases/download/v3.10.0/fullcalendar-3.10.0.zip"
-            },
-            "type": "drupal-library"
         },
         {
             "name": "galbar/jsonpath",
@@ -8580,11 +8571,148 @@
             "time": "2024-12-30T11:07:19+00:00"
         },
         {
+            "name": "npm-asset/fullcalendar",
+            "version": "6.1.15",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/fullcalendar/-/fullcalendar-6.1.15.tgz"
+            },
+            "require": {
+                "npm-asset/fullcalendar--core": "~6.1.15",
+                "npm-asset/fullcalendar--daygrid": "~6.1.15",
+                "npm-asset/fullcalendar--interaction": "~6.1.15",
+                "npm-asset/fullcalendar--list": "~6.1.15",
+                "npm-asset/fullcalendar--multimonth": "~6.1.15",
+                "npm-asset/fullcalendar--timegrid": "~6.1.15"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--core",
+            "version": "6.1.17",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/core/-/core-6.1.17.tgz"
+            },
+            "require": {
+                "npm-asset/preact": "~10.12.1"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--daygrid",
+            "version": "6.1.15",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/daygrid/-/daygrid-6.1.15.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--icalendar",
+            "version": "6.1.15",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/icalendar/-/icalendar-6.1.15.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--interaction",
+            "version": "6.1.15",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/interaction/-/interaction-6.1.15.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--list",
+            "version": "6.1.15",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/list/-/list-6.1.15.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--multimonth",
+            "version": "6.1.15",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/multimonth/-/multimonth-6.1.15.tgz"
+            },
+            "require": {
+                "npm-asset/fullcalendar--daygrid": "~6.1.15"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--timegrid",
+            "version": "6.1.15",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/timegrid/-/timegrid-6.1.15.tgz"
+            },
+            "require": {
+                "npm-asset/fullcalendar--daygrid": "~6.1.15"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/ical.js",
+            "version": "2.1.0",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/ical.js/-/ical.js-2.1.0.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MPL-2.0"
+            ]
+        },
+        {
             "name": "npm-asset/moment",
             "version": "2.30.1",
             "dist": {
                 "type": "tar",
                 "url": "https://registry.npmjs.org/moment/-/moment-2.30.1.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/preact",
+            "version": "10.12.1",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/preact/-/preact-10.12.1.tgz"
             },
             "type": "npm-asset",
             "license": [
@@ -14463,7 +14591,7 @@
                 "shasum": "7dfa949130c4add242a91604c4f0fd8e75317c54"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
+                "drupal/core": "^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {

@@ -1,34 +1,29 @@
-moment:
-  remote: https://github.com/moment/moment/releases
-  version: VERSION
+ical.js:
+  remote: https://www.npmjs.com/package/ical.js
+  version: 2.1.0
   license:
-    name: MIT
+    name: MPL
     gpl-compatible: true
   js:
-    /libraries/moment/min/moment.min.js: {}
-  dependencies:
-    - core/jquery
+    /libraries/ical.js/dist/ical.min.js: { minified: true }
 
 fullcalendar:
   remote: http://fullcalendar.io/download/
-  version: VERSION
+  version: 6.1.5
   license:
     name: MIT
     gpl-compatible: true
   js:
-    /libraries/fullcalendar/fullcalendar.min.js: {}
-    /libraries/fullcalendar/locale-all.js: {}
-  css:
-    component:
-      /libraries/fullcalendar/fullcalendar.min.css: {}
-  dependencies:
-    - core/jquery
-    - fullcalendar_api/moment
+    /libraries/fullcalendar--core/index.global.min.js: { minified: true }
+    /libraries/fullcalendar--core/locales-all.global.min.js: { minified: true }
+    /libraries/fullcalendar--daygrid/index.global.min.js: { minified: true }
+    /libraries/fullcalendar--icalendar/index.global.min.js: { minified: true }
 
 fullcalendar_load:
-  version: VERSION
+  version: 11.0.0
   js:
     js/fullcalendar.load.js: {}
   dependencies:
+    - fullcalendar_api/ical.js
     - fullcalendar_api/fullcalendar
     - core/drupalSettings

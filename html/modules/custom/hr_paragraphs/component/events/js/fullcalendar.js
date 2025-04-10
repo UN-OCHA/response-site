@@ -3,19 +3,19 @@
  * Loads the full calendar.
  */
 
-(function ($) {
+(function () {
   'use strict';
   Drupal.behaviors.HRFullCalendarApi = {
     attach: function (context, drupalSettings) {
 
-      if ($.type(drupalSettings.fullcalendar_api) === 'undefined' || $.type(drupalSettings.fullcalendar_api.instances) === 'undefined') {
+      if (typeof drupalSettings.fullcalendar_api === 'undefined' || typeof drupalSettings.fullcalendar_api.instances === 'undefined') {
         return false;
       }
 
       var id;
       for (id in drupalSettings.fullcalendar_api.instances) {
         if (drupalSettings.fullcalendar_api.instances.hasOwnProperty(id)) {
-          _fullCalendarApiInit(id, drupalSettings.fullcalendar_api.instances[id], context, drupalSettings);
+          _fullCalendarApiInit(id, drupalSettings.fullcalendar_api.instances[id]);
         }
       }
     }
@@ -24,12 +24,19 @@
   /**
    * Initialize the FullCalendar instance.
    */
-  function _fullCalendarApiInit(id, calendarSettings, context, drupalSettings) {
-    var calendar = $('#' + id, context);
+  function _fullCalendarApiInit(id, calendarSettings) {
 
-    // Merge in event callbacks.
-    $.extend(calendarSettings, {
+    var calendarEl = document.getElementById(id);
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      events: {
+        url: calendarSettings.ical_source,
+        format: 'ics'
+      }
+    });
+
+    var extension = {
       eventClick: function(info) {
+        console.log(info);
         var dateFormat = 'DD.MM.YYYY hh:mmA';
         var startdate = info.start.format(dateFormat);
         var enddate = startdate;
@@ -38,11 +45,11 @@
           enddate = info.end.format(dateFormat);
         }
 
-        $('#modalID').html(info.id);
-        $('#modalDescription').html(info.description);
-        $('#modalLocation').html(info.location);
-        $('#modalStartDate').html(startdate);
-        $('#modalEndDate').html(enddate);
+        document.getElementById('modalID').innerHTML(info.id);
+        document.getElementById('modalDescription').innerHTML(info.description);
+        document.getElementById('modalLocation').innerHTML(info.location);
+        document.getElementById('modalStartDate').innerHTML(info.startdate);
+        document.getElementById('modalEndDate').innerHTML(info.enddate);
 
         if (info.attachments) {
           var output = '';
@@ -51,12 +58,10 @@
             output += '<li><a href="' + attachment.url + '" target="_blank" rel="nofollow noopener">' + attachment.filename + '</a></li>';
           });
           output += '</ul>';
-          $('#modalAttachments').html(output);
+          document.getElementById('modalAttachments').innerHTML(output);
         }
 
-        $('#fullCalModal').dialog({
-          title: info.title
-        });
+        document.getElementById('fullCalModal').alert(info.title);
       },
       eventRender: function (event, element, view) {
         // Allow keyboard to focus on each event.
@@ -76,16 +81,14 @@
             }
 
             // Populate the modal dialog with this event's metadata.
-            $('#modalID').html(event.id);
-            $('#modalDescription').html(event.description);
-            $('#modalLocation').html(event.location);
-            $('#modalStartDate').html(startdate);
-            $('#modalEndDate').html(enddate);
+            document.getElementById('modalID').innerHTML(event.id);
+            document.getElementById('modalDescription').innerHTML(event.description);
+            document.getElementById('modalLocation').innerHTML(event.location);
+            document.getElementById('modalStartDate').innerHTML(event.startdate);
+            document.getElementById('modalEndDate').innerHTML(event.enddate);
 
             // Display the modal.
-            $('#fullCalModal').dialog({
-              title: event.title,
-            });
+            document.getElementById('fullCalModal').alert(event.title);
           }
         })
       },
@@ -94,16 +97,17 @@
           text: 'ical',
           click: function() {
             // Populate the modal dialog.
-            $('#icalSource').html(calendarSettings.ical_source);
+            document.getElementById('icalSource').innerHTML(calendarSettings.ical_source);
 
             // Display the modal,
-            $('#iCalModal').dialog({
-              title: 'Copy source link',
-            });
+            document.getElementById('iCalModal').alert('Copy source link');
           }
         }
       },
-    });
+    };
+    for (var key in extension) {
+      calendarSettings[key] = extension[key];
+    }
 
     // Add copy to clipboard.
     let copyButton = document.querySelector('.fullcalendar__copy button');
@@ -121,7 +125,7 @@
 
           e.preventDefault();
           e.stopPropagation();
-          $('#iCalModal').dialog('close');
+          document.getElementById('iCalModal').alert('close');
         }
         catch (err) {
           // Fail silently.
@@ -129,9 +133,7 @@
       });
     }
 
-    // Run any custom actions before attaching the calendar.
-    $(document, context).trigger('fullCalendarApiCalendar.preprocess', [calendar, calendarSettings]);
+    calendar.render();
 
-    calendar.fullCalendar(calendarSettings);
   }
-})(jQuery);
+})();
