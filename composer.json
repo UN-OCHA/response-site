@@ -84,7 +84,7 @@
         "mglaman/composer-drupal-lenient": "^1.0",
         "npm-asset/fullcalendar": "^6.1",
         "npm-asset/fullcalendar--icalendar": "^6.1",
-        "npm-asset/ical.js": "^2",
+        "npm-asset/ical.js": "^1",
         "npm-asset/moment": "^2.29",
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",

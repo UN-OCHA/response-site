@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e6536070fa5e79b2ab880d150d960d5a",
+    "content-hash": "06465c85666d2b700a0fc30bd1185183",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -8685,10 +8685,10 @@
         },
         {
             "name": "npm-asset/ical.js",
-            "version": "2.1.0",
+            "version": "1.5.0",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/ical.js/-/ical.js-2.1.0.tgz"
+                "url": "https://registry.npmjs.org/ical.js/-/ical.js-1.5.0.tgz"
             },
             "type": "npm-asset",
             "license": [
