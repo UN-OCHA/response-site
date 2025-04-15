@@ -34,7 +34,7 @@ class ParagraphController extends ControllerBase {
   protected $httpClient;
 
   /**
-   * The pager manager servie.
+   * The pager manager service.
    *
    * @var \Drupal\Core\Pager\PagerManagerInterface
    */
@@ -744,21 +744,18 @@ class ParagraphController extends ControllerBase {
 
     // Settings.
     $settings = [
-      'header' => [
-        'left' => 'prev,next today',
+      'headerToolbar' => [
+        'start' => 'prev,next today',
         'center' => 'title',
-        'right' => 'month,agendaWeek,agendaDay,listMonth,iCalButton',
+        'end' => 'dayGridMonth,dayGridWeek,dayGridDay,listMonth,iCalButton',
       ],
-      'plugins' => [
-        'listPlugin',
-      ],
-      'defaultDate' => date('Y-m-d'),
       'editable' => FALSE,
     ];
 
     // Set source to proxy.
     $datasource_uri = '/group/' . $group->id() . '/ical';
     $settings['events'] = $datasource_uri;
+    $settings['eventSources'] = $datasource_uri;
     $settings['ical_source'] = $group->field_ical_url->value;
 
     // Calendar link.
@@ -777,29 +774,34 @@ class ParagraphController extends ControllerBase {
       'calendar_popup' => [
         '#type' => 'inline_template',
         '#template' => '
-          <div id="fullCalModal" style="display:none;">
-          <div>Date: <span id="modalStartDate"></span> <span id="modalEndDate"></span></div>
-          <div><span id="modalDescription"></span></div>
-          <div>Location: <span id="modalLocation"></span></div>
-          <div><span id="modalAttachments"></span></div>
+          <div id="fullCalModal" class="cd-alert" style="display:none;">
+          <div class="cd-alert__container">
+          <div class="cd-alert__title"><span id="modalTitle"></span>
+          <button class="cd-button cd-button--icon cd-button--small cd-button-icon-no-margin" title="Close event info" onclick="document.getElementById(\'fullCalModal\').style.display = \'none\'">x</button>
+          </div>
+          <div class="cd-alert__message [ cd-flow ]">
+          <p><strong>Start:</strong> <span id="modalStartDate"></span></p>
+          <p><strong>Finish:</strong> <span id="modalEndDate"></span></p>
+          <p><span id="modalDescription"></span></p>
+          <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+          <p><span id="modalAttachments"></span></p>
+          </div>
+          </div>
         </div>',
-        '#attached' => [
-          'library' => [
-            'hr_paragraphs/fullcalendar',
-          ],
-        ],
       ],
       'ical_popup' => [
         '#type' => 'inline_template',
         '#template' => '
           <div id="iCalModal" style="display:none;">
-          <div>Source: <span id="icalSource"></span></div>
+          <div class="cd-alert__container">
+          <div><strong>Source:</strong> <span id="icalSource"></span></div>
           <span class="fullcalendar__copy">
-            <button class="cd-button cd-button--icon cd-button--small cd-button--icon-no-margin hri-tooltip" data-message="ICal link copied to clipboard" title="Copy link" data-source="' . $group->field_ical_url->value . '">
+            <button class="cd-button cd-button--icon cd-button--small cd-button--icon-no-margin hri-tooltip" onclick="document.getElementById(\'iCalModal\').style.display = \'none\'" data-message="ICal link copied to clipboard" title="Copy link" data-source="' . $group->field_ical_url->value . '">
               <span class="visually-hidden">Copy link</span>
               <svg class="cd-icon cd-icon--copy" aria-hidden="true" focusable="false" width="16" height="16"><use xlink:href="#cd-icon--copy"></use></svg>
             </button>
           </span>
+          </div>
         </div>',
       ],
       'calendar_link' => [

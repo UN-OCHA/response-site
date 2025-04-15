@@ -18,12 +18,14 @@ fullcalendar:
     /libraries/fullcalendar--core/locales-all.global.min.js: { minified: true }
     /libraries/fullcalendar--daygrid/index.global.min.js: { minified: true }
     /libraries/fullcalendar--icalendar/index.global.min.js: { minified: true }
+    /libraries/fullcalendar--list/index.global.min.js: { minified: true }
+  dependencies:
+    - fullcalendar_api/ical.js
 
 fullcalendar_load:
   version: 11.0.0
   js:
     js/fullcalendar.load.js: {}
   dependencies:
-    - fullcalendar_api/ical.js
     - fullcalendar_api/fullcalendar
     - core/drupalSettings

@@ -15,7 +15,7 @@
       var id;
       for (id in drupalSettings.fullcalendar_api.instances) {
         if (drupalSettings.fullcalendar_api.instances.hasOwnProperty(id)) {
-          _fullCalendarApiInit(id, drupalSettings.fullcalendar_api.instances[id]);
+          _fullCalendarApiInit(id, drupalSettings.fullcalendar_api.instances[id], context, drupalSettings);
         }
       }
     }
@@ -24,90 +24,76 @@
   /**
    * Initialize the FullCalendar instance.
    */
-  function _fullCalendarApiInit(id, calendarSettings) {
+  function _fullCalendarApiInit(id, calendarSettings, context, drupalSettings) {
 
-    var calendarEl = document.getElementById(id);
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      events: {
-        url: calendarSettings.ical_source,
-        format: 'ics'
+    var iCalSource = calendarSettings.ical_source;
+    delete calendarSettings.ical_source;
+
+    var handleModal = function(info) {
+      var event_info = info.event._def.extendedProps;
+      var startdate = event_info.local_start;
+      var enddate = startdate;
+
+      if (info.end != null) {
+        enddate = event_info.local_end;
       }
-    });
 
-    var extension = {
+      document.getElementById('modalTitle').innerHTML = info.event.title;
+      document.getElementById('modalLocation').innerHTML = event_info.location;
+      document.getElementById('modalStartDate').innerHTML = startdate;
+      document.getElementById('modalEndDate').innerHTML = enddate;
+
+      if (event_info.attachments) {
+        var output = '';
+        output += '<ul>';
+        event_info.attachments.forEach(attachment => {
+          output += '<li><a href="' + attachment.url + '" target="_blank" rel="nofollow noopener">' + attachment.filename + '</a></li>';
+        });
+        output += '</ul>';
+        document.getElementById('modalAttachments').innerHTML = output;
+      }
+
+      document.getElementById('fullCalModal').style.display = 'flex';
+    }
+    var calendarEl = document.getElementById(id);
+    if (calendarEl.classList.contains('processed')) {
+      return;
+    }
+    // Add some settings.
+    var extra_settings = {
       eventClick: function(info) {
-        console.log(info);
-        var dateFormat = 'DD.MM.YYYY hh:mmA';
-        var startdate = info.start.format(dateFormat);
-        var enddate = startdate;
-
-        if (info.end != null) {
-          enddate = info.end.format(dateFormat);
-        }
-
-        document.getElementById('modalID').innerHTML(info.id);
-        document.getElementById('modalDescription').innerHTML(info.description);
-        document.getElementById('modalLocation').innerHTML(info.location);
-        document.getElementById('modalStartDate').innerHTML(info.startdate);
-        document.getElementById('modalEndDate').innerHTML(info.enddate);
-
-        if (info.attachments) {
-          var output = '';
-          output += '<ul>';
-          info.attachments.forEach(attachment => {
-            output += '<li><a href="' + attachment.url + '" target="_blank" rel="nofollow noopener">' + attachment.filename + '</a></li>';
-          });
-          output += '</ul>';
-          document.getElementById('modalAttachments').innerHTML(output);
-        }
-
-        document.getElementById('fullCalModal').alert(info.title);
+        handleModal(info);
       },
-      eventRender: function (event, element, view) {
+      eventDidMount: function(info) {
         // Allow keyboard to focus on each event.
-        element.attr('tabindex', '0');
-
+        info.el.setAttribute('tabindex', '0');
         // When [Enter] is pressed on focused event, open the modal dialog.
-        element.keypress(function(ev){
+        info.el.addEventListener('keypress', (ev) => {
           // Check if the [Enter] key was pressed.
           if (ev.keyCode == 13) {
-            // Prepare event metadata
-            var dateFormat = 'DD.MM.YYYY hh:mmA';
-            var startdate = event.start.format(dateFormat);
-            var enddate = startdate;
-
-            if (event.end != null) {
-              enddate = event.end.format(dateFormat);
-            }
-
-            // Populate the modal dialog with this event's metadata.
-            document.getElementById('modalID').innerHTML(event.id);
-            document.getElementById('modalDescription').innerHTML(event.description);
-            document.getElementById('modalLocation').innerHTML(event.location);
-            document.getElementById('modalStartDate').innerHTML(event.startdate);
-            document.getElementById('modalEndDate').innerHTML(event.enddate);
-
-            // Display the modal.
-            document.getElementById('fullCalModal').alert(event.title);
+            handleModal(info);
           }
-        })
+        });
       },
       customButtons: {
         iCalButton: {
           text: 'ical',
           click: function() {
             // Populate the modal dialog.
-            document.getElementById('icalSource').innerHTML(calendarSettings.ical_source);
-
+            document.getElementById('icalSource').innerHTML = iCalSource;
             // Display the modal,
-            document.getElementById('iCalModal').alert('Copy source link');
+            document.getElementById('iCalModal').style.display = 'flex';
           }
         }
       },
     };
-    for (var key in extension) {
-      calendarSettings[key] = extension[key];
+    for (var key in extra_settings) {
+      calendarSettings[key] = extra_settings[key];
     }
+
+
+    var calendar = new FullCalendar.Calendar(calendarEl, calendarSettings);
+    calendarEl.classList.add('processed');
 
     // Add copy to clipboard.
     let copyButton = document.querySelector('.fullcalendar__copy button');
