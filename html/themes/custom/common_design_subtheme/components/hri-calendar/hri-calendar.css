@@ -18,6 +18,10 @@
   position: fixed;
 }
 
+#fullCalModal button {
+  color: white;
+}
+
 #fullCalModal .cd-alert__message,
 #iCalModal .cd-alert__container {
   padding: 2em;
