@@ -782,7 +782,7 @@ class ParagraphController extends ControllerBase {
           <div class="cd-alert__message [ cd-flow ]">
           <p><strong>Start:</strong> <span id="modalStartDate"></span></p>
           <p><strong>Finish:</strong> <span id="modalEndDate"></span></p>
-          <p><span id="modalDescription"></span></p>
+          <p><span id="modalDescription" class="modal-description"></span></p>
           <p><strong>Location:</strong> <span id="modalLocation"></span></p>
           <p><span id="modalAttachments"></span></p>
           </div>

@@ -15,11 +15,12 @@
 }
 
 #fullCalModal .cd-alert__title {
-  position: fixed;
+  display: flex;
 }
 
 #fullCalModal button {
   color: white;
+  border-radius: revert;
 }
 
 #fullCalModal .cd-alert__message,
@@ -32,13 +33,20 @@
 #iCalModal .cd-alert__container {
   background: #fff;
   border-radius: 5px;
-  text-align: center;
+}
+
+#fullCalModal .modal-description {
+  overflow: auto;
+  max-height: 30vh;
+  max-width: 30vw;
+  display: inline-block;
 }
 
 #modalTitle {
   color: var(--cd-white);
   background: var(--brand-primary);
   padding: 0.5em 2em;
+  flex: 1;
 }
 
 .hri-calendar__read-more {

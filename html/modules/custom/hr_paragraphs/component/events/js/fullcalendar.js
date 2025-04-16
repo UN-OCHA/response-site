@@ -40,6 +40,7 @@
 
       document.getElementById('modalTitle').innerHTML = info.event.title;
       document.getElementById('modalLocation').innerHTML = event_info.location;
+      document.getElementById('modalDescription').innerHTML = event_info.description;
       document.getElementById('modalStartDate').innerHTML = startdate;
       document.getElementById('modalEndDate').innerHTML = enddate;
 
