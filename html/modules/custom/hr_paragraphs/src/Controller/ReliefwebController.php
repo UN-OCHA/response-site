@@ -429,8 +429,8 @@ class ReliefwebController extends ControllerBase {
           // The file URL doesn't need this treatment because they only use
           // a ETag based caching strategy.
           $preview = '';
-          if (isset($file['preview']['url-thumb']) && isset($file['id'])) {
-            $preview = $this->reliefwebFixUrl($file['preview']['url-thumb']) . '?' . $file['id'];
+          if (isset($file['preview']['url-thumb'])) {
+            $preview = $this->reliefwebFixUrl($file['preview']['url-thumb']) . '?' . $file[0]['id'];
           }
           $files[] = [
             'preview' => $preview,
