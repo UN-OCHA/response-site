@@ -1,0 +1,16 @@
+/* OPS-11508: Style direct links to log in with Unitd ID on book pages to look like a button. */
+.page-detail--body .field--name-body a[href^="/user/login/"] {
+  display: inline-block;
+  margin: 1rem 0 0 0;
+  padding: 12px 18px;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  background: var(--brand-primary);
+  font-weight: bold;
+}
+.page-detail--body .field--name-body a[href^="/user/login/"]:hover,
+.page-detail--body .field--name-body a[href^="/user/login/"]:focus,
+.page-detail--body .field--name-body a[href^="/user/login/"]:active {
+  background: var(--brand-primary--dark);
+}
