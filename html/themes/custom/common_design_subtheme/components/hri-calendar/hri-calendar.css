@@ -1,16 +1,54 @@
 /**
  * HR.info customizations to fullcalendar_api output.
  */
-.hri-calendar__read-more {
-  margin-top: 1rem;
-}
 
-.ui-dialog {
+#fullCalModal,
+#iCalModal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
   min-width: max(350px, 40vw);
-  border-color: var(--brand-primary);
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 }
 
-.ui-dialog-titlebar {
+#fullCalModal .cd-alert__title {
+  display: flex;
+}
+
+#fullCalModal button {
+  color: white;
+  border-radius: revert;
+}
+
+#fullCalModal .cd-alert__message,
+#iCalModal .cd-alert__container {
+  padding: 2em;
+  margin-top: 2em;
+}
+
+#fullCalModal .cd-alert__container,
+#iCalModal .cd-alert__container {
+  background: #fff;
+  border-radius: 5px;
+}
+
+#fullCalModal .modal-description {
+  overflow: auto;
+  max-height: 30vh;
+  max-width: 30vw;
+  display: inline-block;
+}
+
+#modalTitle {
   color: var(--cd-white);
   background: var(--brand-primary);
+  padding: 0.5em 2em;
+  flex: 1;
+}
+
+.hri-calendar__read-more {
+  margin-top: 1rem;
 }
