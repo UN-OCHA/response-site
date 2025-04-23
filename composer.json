@@ -16,18 +16,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "fullcalendar/fullcalendar",
-                "version": "3.10.0",
-                "type": "drupal-library",
-                "dist": {
-                    "url": "https://github.com/fullcalendar/fullcalendar/releases/download/v3.10.0/fullcalendar-3.10.0.zip",
-                    "type": "zip"
-                }
-            }
         }
     ],
     "require": {
@@ -89,12 +77,15 @@
         "drupal/views_field_compare": "^1.0",
         "drupal/xmlsitemap": "^2@beta",
         "drush/drush": "^13",
-        "fullcalendar/fullcalendar": "^3.10.0",
         "galbar/jsonpath": "^2.0",
         "guzzlehttp/guzzle": "^7.0",
         "league/commonmark": "2.6.0",
         "mailchimp/marketing": "^3.0",
         "mglaman/composer-drupal-lenient": "^1.0",
+        "npm-asset/fullcalendar": "^6.1",
+        "npm-asset/fullcalendar--icalendar": "^6.1",
+        "npm-asset/fullcalendar--list": "^6.1",
+        "npm-asset/ical.js": "^1",
         "npm-asset/moment": "^2.29",
         "npm-asset/select2": "^4",
         "oomphinc/composer-installers-extender": "^2.0",

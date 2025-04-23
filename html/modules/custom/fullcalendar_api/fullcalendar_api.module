@@ -38,11 +38,10 @@ function template_preprocess_fullcalendar_calendar(&$vars) {
 
   // Default settings.
   $settings = [
-    'header' => [
-      'left' => 'month,agendaWeek',
-      'right' => 'prev title next',
+    'headerToolbar' => [
+      'start' => 'prev,next today',
+      'end' => 'dayGridMonth,timeGridWeek,dayGridDay',
     ],
-    'defaultDate' => (new \DateTime)->format('Y-m-d'),
     'businessHours' => TRUE,
     'editable' => TRUE,
     'events' => [],
