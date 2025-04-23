@@ -1,0 +1,20 @@
+uuid: a61f35f4-762a-4d7b-99dd-1579627cde23
+langcode: en
+status: true
+dependencies:
+  module:
+    - openid_connect
+id: core_requirements_openid_connect
+label: 'Module openid_connect'
+description: 'Requirements of the openid_connect module'
+category: Requirements
+plugin_id: core_requirements
+result_class: null
+value_label: null
+value_type: no_value
+caching_time: 3600
+settings:
+  module: openid_connect
+  exclude_keys: {  }
+thresholds:
+  type: none
