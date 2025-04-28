@@ -40,7 +40,7 @@
         "drupal/dynamic_entity_reference": "^3.2",
         "drupal/env_link_fixer": "^1",
         "drupal/environment_indicator": "^4.0",
-        "drupal/field_group": "^3.2",
+        "drupal/field_group": "^4",
         "drupal/flexible_permissions": "^2",
         "drupal/geofield": "^1.36",
         "drupal/group": "^3.3",
