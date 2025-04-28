@@ -51,7 +51,7 @@
       "Avoid leaking the path via Drupal.settings json": "PATCHES/username_enumeration_prevention-user-login-block-form-3312288.patch"
     },
     "drupal/views_data_export": {
-      "https://www.drupal.org/project/views_data_export/issues/3173296": "https://www.drupal.org/files/issues/2025-04-20/views_data_export-3173296-42.patch"
+      "https://www.drupal.org/project/views_data_export/issues/3173296": "https://www.drupal.org/files/issues/2021-02-12/3173296-9-batch-query-alter.patch"
     },
     "drupal/views_field_compare": {
       "D11 compatibility - #3435461": "PATCHES/views_field_compare-D11-compatibility.patch"
