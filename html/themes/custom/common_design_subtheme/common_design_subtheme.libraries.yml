@@ -11,6 +11,7 @@ global-styling:
     - common_design_subtheme/hri-cd-header
     - common_design_subtheme/cd-read-more
     - common_design_subtheme/hri-homepage
+    - common_design_subtheme/hri-login
 
 cd-page-title:
   css:
