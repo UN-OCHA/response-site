@@ -1,0 +1,29 @@
+uuid: bb16d212-0425-44a0-8021-84a85c86b5a6
+langcode: en
+status: true
+dependencies:
+  module:
+    - openid_connect_windows_aad
+id: entraid
+label: 'Unite ID'
+plugin: windows_aad
+settings:
+  client_id: entraid
+  client_secret: entraid_client_secret
+  iss_allowed_domains: ''
+  authorization_endpoint_wa: ''
+  token_endpoint_wa: ''
+  end_session_endpoint: ''
+  userinfo_endpoint_wa: ''
+  map_ad_groups_to_roles: false
+  group_mapping:
+    method: 0
+    mappings: ''
+    strict: false
+  userinfo_graph_api_wa: 0
+  userinfo_graph_api_use_other_mails: false
+  userinfo_update_email: false
+  hide_email_address_warning: false
+  prompt: '<noprompt>'
+  subject_key: sub
+  front_channel_logout_url: ''

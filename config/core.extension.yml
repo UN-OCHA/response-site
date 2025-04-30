@@ -41,6 +41,7 @@ module:
   group_support_revisions: 0
   gtm_barebones: 0
   help: 0
+  honeypot: 0
   hr_analytics: 0
   hr_entity_freshness: 0
   hr_mailchimp: 0
@@ -57,6 +58,7 @@ module:
   jquery_ui_dialog: 0
   jquery_ui_draggable: 0
   jquery_ui_resizable: 0
+  key: 0
   language: 0
   layout_builder: 0
   layout_discovery: 0
@@ -77,9 +79,12 @@ module:
   monitoring: 0
   mysql: 0
   node: 0
+  ocha_entraid: 0
   ocha_monitoring: 0
   ocha_search: 0
   ocha_snap: 0
+  openid_connect: 0
+  openid_connect_windows_aad: 0
   options: 0
   override_node_options: 0
   page_cache: 0
@@ -120,6 +125,7 @@ module:
   pathauto: 1
   xmlsitemap: 1
   content_translation: 10
+  externalauth: 10
   views: 10
   paragraphs: 11
   minimal: 1000
