@@ -4,7 +4,7 @@ status: true
 dependencies:
   module:
     - openid_connect_windows_aad
-id: unite_id
+id: entraid
 label: 'Unite ID'
 plugin: windows_aad
 settings:
