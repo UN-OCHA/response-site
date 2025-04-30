@@ -1,5 +1,5 @@
 /* OPS-11508: Style direct links to log in with Unite ID on pages to look like a button. */
-.node--type-page .paragraph--type--text-block a[href^="/user/login/"] {
+.node--type-page .paragraph--type--text-block a[href*="/user/login/"] {
   display: inline-block;
   margin: 1rem 0 0 0;
   padding: 12px 18px;
@@ -9,8 +9,8 @@
   background: var(--brand-primary);
   font-weight: bold;
 }
-.node--type-page .paragraph--type--text-block a[href^="/user/login/"]:hover,
-.node--type-page .paragraph--type--text-block a[href^="/user/login/"]:focus,
-.node--type-page .paragraph--type--text-block a[href^="/user/login/"]:active {
+.node--type-page .paragraph--type--text-block a[href*="/user/login/"]:hover,
+.node--type-page .paragraph--type--text-block a[href*="/user/login/"]:focus,
+.node--type-page .paragraph--type--text-block a[href*="/user/login/"]:active {
   background: var(--brand-primary--dark);
 }
