@@ -15,7 +15,6 @@ is_admin: false
 permissions:
   - 'access content'
   - 'access ocha entraid direct login'
-  - 'access ocha entraid login form'
   - 'view paragraph content call_to_action'
   - 'view paragraph content card_list'
   - 'view paragraph content child_groups'
