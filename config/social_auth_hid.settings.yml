@@ -3,10 +3,12 @@ _core:
 client_id: REPLACE_ME
 client_secret: REPLACE_ME
 base_url: 'https://auth.humanitarian.id'
-auto_redirect: true
+auto_redirect: false
 disable_default: true
 disable_password_fields: true
 disable_email_field: true
 disable_user_field: true
 disable_user_create: false
 maintenance_access: false
+scopes: ''
+endpoints: ''
