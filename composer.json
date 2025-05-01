@@ -165,7 +165,6 @@
             "constraint": "^10 || ^11",
             "allowed-list": [
                 "drupal/devel_enity_updates",
-                "drupal/dev_mode",
                 "drupal/link_allowed_hosts",
                 "drupal/maintenance200",
                 "drupal/views_field_compare"

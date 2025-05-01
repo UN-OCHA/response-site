@@ -11,9 +11,6 @@
     "drupal/devel_entity_updates": {
       "D11 compatibility - #3454902": "PATCHES/devel_entity_updates-D11-compatibility.patch"
     },
-    "drupal/dev_mode": {
-      "D11 compatibility - #3429839": "PATCHES/dev_mode-D11-compatibility-3429839.patch"
-    },
     "drupal/group": {
       "Group support translations #2864721": "./PATCHES/group-translate_content_permission-2864721-37.patch",
       "Group translate permission": "PATCHES/group-translate-group-permission-3189659-10-updated.patch",
