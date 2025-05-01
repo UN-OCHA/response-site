@@ -1,0 +1,281 @@
+From f6c4070577dae37fcffe4574efcd0f08c4852750 Mon Sep 17 00:00:00 2001
+From: dqd <10743-dqd@users.noreply.drupalcode.org>
+Date: Tue, 10 Sep 2024 19:59:21 +0000
+Subject: [PATCH 1/6] Update devel_entity_updates.info.yml
+
+---
+ devel_entity_updates.info.yml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/devel_entity_updates.info.yml b/devel_entity_updates.info.yml
+index abd0451..0b30ab2 100644
+--- a/devel_entity_updates.info.yml
++++ b/devel_entity_updates.info.yml
+@@ -1,7 +1,7 @@
+ type: module
+ name: Devel Entity Updates
+ description: 'Provides developers an API and drush command to perform automatic entity updates.'
+-core_version_requirement: ^9 || ^10
++core_version_requirement: ^10.1 || 11
+ package: Development
+ tags:
+  - developer
+-- 
+GitLab
+
+
+From cc504ad2de806041779c30cb6cb8bd39c2d51be0 Mon Sep 17 00:00:00 2001
+From: dqd <10743-dqd@users.noreply.drupalcode.org>
+Date: Tue, 10 Sep 2024 20:00:06 +0000
+Subject: [PATCH 2/6] Add .gitlab-ci.yml
+
+---
+ .gitlab-ci.yml | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 .gitlab-ci.yml
+
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+new file mode 100644
+index 0000000..b96a725
+--- /dev/null
++++ b/.gitlab-ci.yml
+@@ -0,0 +1,23 @@
++################
++# The full documentation is on https://project.pages.drupalcode.org/gitlab_templates/
++################
++
++# For information on alternative values for 'ref' see https://project.pages.drupalcode.org/gitlab_templates/info/templates-version/
++# To test a Drupal 7 project, change the first include filename from .main.yml to .main-d7.yml
++include:
++  - project: $_GITLAB_TEMPLATES_REPO
++    ref: $_GITLAB_TEMPLATES_REF
++    file:
++      - "/includes/include.drupalci.main.yml"
++      - "/includes/include.drupalci.variables.yml"
++      - "/includes/include.drupalci.workflows.yml"
++
++################
++# Pipeline configuration variables are defined with default values and descriptions in the file
++# https://git.drupalcode.org/project/gitlab_templates/-/blob/main/includes/include.drupalci.variables.yml
++# Uncomment the lines below if you want to override any of the variables. The following is just an example.
++################
++variables:
++  SKIP_ESLINT: '1'
++#   OPT_IN_TEST_NEXT_MAJOR: '1'
++#   _CURL_TEMPLATES_REF: 'main'
+-- 
+GitLab
+
+
+From 2851aea959ee7669e4788317a0b79ea5946d068e Mon Sep 17 00:00:00 2001
+From: dqd <10743-dqd@users.noreply.drupalcode.org>
+Date: Tue, 10 Sep 2024 21:00:45 +0000
+Subject: [PATCH 3/6] Update devel_entity_updates.drush8.inc
+
+---
+ drush/devel_entity_updates.drush8.inc | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drush/devel_entity_updates.drush8.inc b/drush/devel_entity_updates.drush8.inc
+index 0e758af..21941ad 100644
+--- a/drush/devel_entity_updates.drush8.inc
++++ b/drush/devel_entity_updates.drush8.inc
+@@ -82,7 +82,8 @@ function devel_entity_updates_main() {
+         ->applyUpdates();
+     }
+     catch (EntityStorageException $e) {
+-      watchdog_exception('update', $e);
++      $logger = \Drupal::logger('update');
++      Error::logException($logger, $e);
+     }
+   }
+   else {
+-- 
+GitLab
+
+
+From b5370a14c301de8d2940e0b854d944bee083103e Mon Sep 17 00:00:00 2001
+From: dqd <10743-dqd@users.noreply.drupalcode.org>
+Date: Wed, 11 Sep 2024 01:37:10 +0000
+Subject: [PATCH 4/6] repaired missing ^ in devel_entity_updates.info.yml
+
+---
+ devel_entity_updates.info.yml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/devel_entity_updates.info.yml b/devel_entity_updates.info.yml
+index 0b30ab2..2b3968b 100644
+--- a/devel_entity_updates.info.yml
++++ b/devel_entity_updates.info.yml
+@@ -1,7 +1,7 @@
+ type: module
+ name: Devel Entity Updates
+ description: 'Provides developers an API and drush command to perform automatic entity updates.'
+-core_version_requirement: ^10.1 || 11
++core_version_requirement: ^10.1 || ^11
+ package: Development
+ tags:
+  - developer
+-- 
+GitLab
+
+
+From 5d7e176384775545aa9f1d2b5a6a5036ad4ff1fd Mon Sep 17 00:00:00 2001
+From: Jeroen Tubex <19699-JeroenT@users.noreply.drupalcode.org>
+Date: Mon, 18 Nov 2024 15:28:51 +0000
+Subject: [PATCH 5/6] Apply 1 suggestion(s) to 1 file(s)
+
+Co-authored-by: Francesco Placella <32623-plach@users.noreply.drupalcode.org>
+---
+ composer.json | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/composer.json b/composer.json
+index 25bd3f8..1fad728 100644
+--- a/composer.json
++++ b/composer.json
+@@ -17,8 +17,8 @@
+     },
+     "license": "GPL-2.0+",
+     "require": {
+-        "drupal/core": "^9.2 || ^10",
+-        "drush/drush": "^11 || ^12 || ^13"
++        "drupal/core": "^10.1 || ^11",
++        "drush/drush": "^12 || ^13"
+     },
+     "require-dev": {
+         "drupal/devel": "*"
+-- 
+GitLab
+
+
+From ca9435f46827cbb7142f2e8d2c77fc721dd11dea Mon Sep 17 00:00:00 2001
+From: Jeroen Tubex <19699-JeroenT@users.noreply.drupalcode.org>
+Date: Mon, 18 Nov 2024 15:30:46 +0000
+Subject: [PATCH 6/6] Update 2 files
+
+- /drush/devel_entity_updates.drush8.inc
+- /composer.json
+---
+ composer.json                         |  2 +-
+ drush/devel_entity_updates.drush8.inc | 95 ---------------------------
+ 2 files changed, 1 insertion(+), 96 deletions(-)
+ delete mode 100644 drush/devel_entity_updates.drush8.inc
+
+diff --git a/composer.json b/composer.json
+index 1fad728..9a369c5 100644
+--- a/composer.json
++++ b/composer.json
+@@ -26,7 +26,7 @@
+     "extra": {
+         "drush": {
+             "services": {
+-                "drush.services.yml": "^11 || ^12 || ^13"
++                "drush.services.yml": "^12 || ^13"
+             }
+         }
+     }
+diff --git a/drush/devel_entity_updates.drush8.inc b/drush/devel_entity_updates.drush8.inc
+deleted file mode 100644
+index 21941ad..0000000
+--- a/drush/devel_entity_updates.drush8.inc
++++ /dev/null
+@@ -1,95 +0,0 @@
+-<?php
+-
+-/**
+- * @file
+- * Drush8 commands definitions.
+- */
+-
+-use Drupal\Core\Entity\EntityStorageException;
+-use Drupal\devel_entity_updates\DevelEntityDefinitionUpdateManager;
+-use Drush\Log\LogLevel;
+-
+-/**
+- * Implements hook_drush_command().
+- */
+-function devel_entity_updates_drush_command() {
+-  $items = [];
+-
+-  $items['devel-entity-updates'] = [
+-    'description' => dt('Apply pending entity schema updates (development tool).'),
+-    'aliases' => ['dentup', 'entup'],
+-    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
+-    'core' => ['8+'],
+-  ];
+-
+-  return $items;
+-}
+-
+-/**
+- * Implements hook_drush_command_alter().
+- */
+-function devel_entity_updates_drush_command_alter(&$command) {
+-  if ($command['command'] === 'entity-updates') {
+-    $commands = drush_get_commands();
+-    $command = $commands['devel-entity-updates'];
+-    drush_set_command($command);
+-  }
+-}
+-
+-/**
+- * Command handler. Apply pending entity schema updates.
+- */
+-function drush_devel_entity_updates() {
+-  if (drush_get_context('DRUSH_SIMULATE')) {
+-    drush_log(dt('devel-entity-updates command does not support --simulate option.'), LogLevel::OK);
+-  }
+-
+-  drush_include_engine('drupal', 'update');
+-  if (devel_entity_updates_main() === FALSE) {
+-    return FALSE;
+-  }
+-
+-  drush_drupal_cache_clear_all();
+-  drush_log(dt('Finished performing updates.'), LogLevel::OK);
+-  return NULL;
+-}
+-
+-/**
+- * Apply pending entity schema updates.
+- */
+-function devel_entity_updates_main() {
+-  $result = TRUE;
+-  $change_summary = \Drupal::entityDefinitionUpdateManager()->getChangeSummary();
+-
+-  if (!empty($change_summary)) {
+-    drush_print(dt('The following updates are pending:'));
+-    drush_print();
+-
+-    foreach ($change_summary as $entity_type_id => $changes) {
+-      drush_print($entity_type_id . ' entity type : ');
+-      foreach ($changes as $change) {
+-        drush_print(strip_tags($change), 2);
+-      }
+-    }
+-
+-    if (!drush_confirm(dt('Do you wish to run all pending updates?'))) {
+-      return drush_user_abort();
+-    }
+-
+-    try {
+-      \Drupal::classResolver()
+-        ->getInstanceFromDefinition(DevelEntityDefinitionUpdateManager::class)
+-        ->applyUpdates();
+-    }
+-    catch (EntityStorageException $e) {
+-      $logger = \Drupal::logger('update');
+-      Error::logException($logger, $e);
+-    }
+-  }
+-  else {
+-    drush_log(dt("No entity schema updates required"), LogLevel::SUCCESS);
+-    $result = FALSE;
+-  }
+-
+-  return $result;
+-}
+-- 
+GitLab
+

@@ -4,6 +4,29 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.4.9](https://github.com/UN-OCHA/response-site/compare/v1.4.8...v1.4.9) (2025-04-30)
+
+### Bug Fixes
+
+* Adjust text format config for local images ([2a36f7](https://github.com/UN-OCHA/response-site/commit/2a36f7f98327f27fb89ebd441ffe0f0c75825f81))
+* Aha! Cannot use a client that does not exist! ([eaec38](https://github.com/UN-OCHA/response-site/commit/eaec385879fbc541191427e6a20de01e27e8cb21))
+* Check existence of file.id before using it ([be6f7c](https://github.com/UN-OCHA/response-site/commit/be6f7c996fb1e949afdb65b6a2df4c83b27c1de7))
+* Check for undefined array key ([8300dd](https://github.com/UN-OCHA/response-site/commit/8300dd16740e3bad551f1342631d0de36d51141d))
+* Do connect existing users. ([05fe76](https://github.com/UN-OCHA/response-site/commit/05fe76132ec8f05611a222c51993902dd17e3ad9))
+* Regen lock file. ([1efd5d](https://github.com/UN-OCHA/response-site/commit/1efd5db5e9100e0c8916d92876afcb6ce6d63023))
+* Revert version of ical.js ([0ca8ad](https://github.com/UN-OCHA/response-site/commit/0ca8adf573925b7deba6a23faa6f0f751fd45365))
+* RWR page nodes have paragraphs, not a body field. ([b6afe4](https://github.com/UN-OCHA/response-site/commit/b6afe46706b7b19b6b3b458215cbce982acf41c3))
+
+### Chores
+
+* Add csp exception ([1bda1e](https://github.com/UN-OCHA/response-site/commit/1bda1ebaf41bd31fac9607aa8f7c0e7b277b6975))
+* Adjust login link ([68f762](https://github.com/UN-OCHA/response-site/commit/68f7629d30fae8cefd480192a953fd4f557fa646))
+* Include css ([ed5524](https://github.com/UN-OCHA/response-site/commit/ed5524c59f7d76cd3388f4ca4813e4d80e862fb2))
+* No form, only direct. ([9bb90a](https://github.com/UN-OCHA/response-site/commit/9bb90a184e7adb4fa9cd79d92e7ea63f8ddb1540))
+* Permission for entra id form ([c6b572](https://github.com/UN-OCHA/response-site/commit/c6b5721381b55215c36f69d0705abaf9175e61d1))
+* Style button plus connection config ([173df2](https://github.com/UN-OCHA/response-site/commit/173df2a27a1a4ea2fec0c1601d1c2640b286a2dc))
+* Update all outdated drupal/* unocha/* drush/* weitzman/drupal-test-traits packages. ([c5bdf0](https://github.com/UN-OCHA/response-site/commit/c5bdf02f418732e04c0f1f8011105c58204d44f7), [1348f9](https://github.com/UN-OCHA/response-site/commit/1348f99bb6660321635903f1ba7c1bdcc454e2b6), [35db75](https://github.com/UN-OCHA/response-site/commit/35db75d5f494c62e78b6b2639ba1747718c4e59c), [21452f](https://github.com/UN-OCHA/response-site/commit/21452fb2640ddbb3f1b71d6533a9f841b00fe84f), [17c65e](https://github.com/UN-OCHA/response-site/commit/17c65e8fc19911892239cac38fdb29dda2e18d64))
+
 ## [1.4.7](https://github.com/UN-OCHA/response-site/compare/v1.4.6...v1.4.7) (2025-03-20)
 
 ### Chores

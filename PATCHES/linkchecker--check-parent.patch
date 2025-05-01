@@ -1,0 +1,57 @@
+diff --git a/src/LinkCheckerLinkAccessControlHandler.php b/src/LinkCheckerLinkAccessControlHandler.php
+index 4eee9aa..07dfa3c 100644
+--- a/src/LinkCheckerLinkAccessControlHandler.php
++++ b/src/LinkCheckerLinkAccessControlHandler.php
+@@ -54,6 +54,7 @@ class LinkCheckerLinkAccessControlHandler extends EntityAccessControlHandler {
+     // entity.
+     if ($operation == 'view'
+       && isset($items)
++      && $items->getEntity()
+       && $field_definition->getName() == 'url') {
+       return $this->checkParentEntityAccess($items->getEntity(), $operation, $account);
+     }
+diff --git a/src/LinkCleanUp.php b/src/LinkCleanUp.php
+index cf4513a..52abd32 100644
+--- a/src/LinkCleanUp.php
++++ b/src/LinkCleanUp.php
+@@ -151,8 +151,10 @@ class LinkCleanUp {
+     // Get list of link IDs that should be deleted.
+     $query = $storage->getQuery();
+     $query->accessCheck();
+-    $query->condition('parent_entity_type_id', $entity->getEntityTypeId());
+-    $query->condition('parent_entity_id', $entity->id());
++    if ($entity->getEntityTypeId()) {
++      $query->condition('parent_entity_type_id', $entity->getEntityTypeId());
++      $query->condition('parent_entity_id', $entity->id());
++    }
+     if (!empty($extractedIds)) {
+       $query->condition('lid', $extractedIds, 'NOT IN');
+     }
+diff --git a/src/LinkExtractorService.php b/src/LinkExtractorService.php
+index 8e92d4c..94bbc1f 100644
+--- a/src/LinkExtractorService.php
++++ b/src/LinkExtractorService.php
+@@ -370,14 +370,15 @@ class LinkExtractorService {
+   public function saveLink(LinkCheckerLinkInterface $link) {
+     $storage = $this->entityTypeManager->getStorage($link->getEntityTypeId());
+ 
+-    $parent_entity = $link->getParentEntity();
+-    $query = $storage->getQuery()->accessCheck(FALSE)
+-      ->condition('urlhash', LinkCheckerLink::generateHash($link->getUrl()))
+-      ->condition('parent_entity_type_id', $parent_entity->getEntityTypeId())
+-      ->condition('parent_entity_id', $parent_entity->id())
+-      ->condition('entity_field', $link->getParentEntityFieldName())
+-      ->condition('entity_langcode', $link->getParentEntityLangcode());
+-    $ids = $query->execute();
++    if ($parent_entity = $link->getParentEntity()) {
++      $query = $storage->getQuery()->accessCheck(FALSE)
++        ->condition('urlhash', LinkCheckerLink::generateHash($link->getUrl()))
++        ->condition('parent_entity_type_id', $parent_entity->getEntityTypeId())
++        ->condition('parent_entity_id', $parent_entity->id())
++        ->condition('entity_field', $link->getParentEntityFieldName())
++        ->condition('entity_langcode', $link->getParentEntityLangcode());
++      $ids = $query->execute();
++    }
+ 
+     if (empty($ids)) {
+       $link->save();

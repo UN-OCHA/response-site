@@ -11,6 +11,7 @@ global-styling:
     - common_design_subtheme/hri-cd-header
     - common_design_subtheme/cd-read-more
     - common_design_subtheme/hri-homepage
+    - common_design_subtheme/hri-login
 
 cd-page-title:
   css:
@@ -110,6 +111,11 @@ hri-iframe:
       components/hri-iframe/hri-iframe.css: {}
   js:
     components/hri-iframe/hri-iframe.js: {}
+
+hri-login:
+  css:
+    theme:
+      components/hri-login/hri-login.css: {}
 
 tableau:
   js:

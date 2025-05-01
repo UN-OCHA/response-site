@@ -1,0 +1,302 @@
+diff --git a/core/modules/content_translation/src/Access/ContentTranslationOverviewAccess.php b/core/modules/content_translation/src/Access/ContentTranslationOverviewAccess.php
+index 2d5d65eb79dce240a4a6b90da1be3316a6c5bfb2..926fd730512e5c2689ea8bf39188ee539c176c52 100644
+--- a/core/modules/content_translation/src/Access/ContentTranslationOverviewAccess.php
++++ b/core/modules/content_translation/src/Access/ContentTranslationOverviewAccess.php
+@@ -18,7 +18,7 @@ class ContentTranslationOverviewAccess implements AccessInterface {
+    *
+    * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+    */
+-  protected $entityTypeManager;
++  protected EntityTypeManagerInterface $entityTypeManager;
+ 
+   /**
+    * Constructs a ContentTranslationOverviewAccess object.
+@@ -47,29 +47,28 @@ public function access(RouteMatchInterface $route_match, AccountInterface $accou
+     /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
+     $entity = $route_match->getParameter($entity_type_id);
+     if ($entity && $entity->isTranslatable()) {
+-      // Get entity base info.
+-      $bundle = $entity->bundle();
++      // @todo Remove when this module's access layer receives a proper overhaul
++      //   that introduces better permission names and alterable return values.
++      //   For now the idea is that you only need to have the 'translate any',
++      //   entity type or bundle permission to access the overview, even if you
++      //   can't do anything there. A better solution would be to introduce an
++      //   'access translation overview' permission.
++      if ($account->hasPermission('translate any entity')) {
++        return AccessResult::allowed()->cachePerPermissions();
++      }
++      $entity_type_access_permission = $entity->getEntityType()->getPermissionGranularity() == 'bundle'
++        ? "translate {$entity->bundle()} $entity_type_id"
++        : "translate $entity_type_id";
++      if ($account->hasPermission($entity_type_access_permission)) {
++        return AccessResult::allowed()->cachePerPermissions();
++      }
+ 
+       // Get entity access callback.
+       $definition = $this->entityTypeManager->getDefinition($entity_type_id);
+       $translation = $definition->get('translation');
+       $access_callback = $translation['content_translation']['access_callback'];
+-      $access = call_user_func($access_callback, $entity);
+-      if ($access->isAllowed()) {
+-        return $access;
+-      }
+ 
+-      // Check "translate any entity" permission.
+-      if ($account->hasPermission('translate any entity')) {
+-        return AccessResult::allowed()->cachePerPermissions()->inheritCacheability($access);
+-      }
+-
+-      // Check per entity permission.
+-      $permission = "translate {$entity_type_id}";
+-      if ($definition->getPermissionGranularity() == 'bundle') {
+-        $permission = "translate {$bundle} {$entity_type_id}";
+-      }
+-      return AccessResult::allowedIfHasPermission($account, $permission)->inheritCacheability($access);
++      return call_user_func($access_callback, $entity);
+     }
+ 
+     // No opinion.
+diff --git a/core/modules/content_translation/src/ContentTranslationHandler.php b/core/modules/content_translation/src/ContentTranslationHandler.php
+index ad21415ac0ad100f76d8954cc6d105c16e524dfe..4db4558db148b350a94c2cd8ec0ef4bcffcbabd3 100644
+--- a/core/modules/content_translation/src/ContentTranslationHandler.php
++++ b/core/modules/content_translation/src/ContentTranslationHandler.php
+@@ -3,7 +3,6 @@
+ namespace Drupal\content_translation;
+ 
+ use Drupal\Component\Datetime\TimeInterface;
+-use Drupal\Core\Access\AccessResult;
+ use Drupal\Core\Datetime\DateFormatterInterface;
+ use Drupal\Core\DependencyInjection\DependencySerializationTrait;
+ use Drupal\Core\Entity\EntityChangedInterface;
+@@ -43,7 +42,7 @@ class ContentTranslationHandler implements ContentTranslationHandlerInterface, E
+    *
+    * @var string
+    */
+-  protected $entityTypeId;
++  protected string $entityTypeId;
+ 
+   /**
+    * Installed field storage definitions for the entity type.
+@@ -52,7 +51,7 @@ class ContentTranslationHandler implements ContentTranslationHandlerInterface, E
+    *
+    * @var \Drupal\Core\Field\FieldStorageDefinitionInterface[]
+    */
+-  protected $fieldStorageDefinitions;
++  protected array $fieldStorageDefinitions;
+ 
+   /**
+    * Initializes an instance of the content translation controller.
+@@ -249,20 +248,7 @@ public function retranslate(EntityInterface $entity, $langcode = NULL) {
+    * {@inheritdoc}
+    */
+   public function getTranslationAccess(EntityInterface $entity, $op) {
+-    // @todo Move this logic into a translation access control handler checking also
+-    //   the translation language and the given account.
+-    $entity_type = $entity->getEntityType();
+-    $translate_permission = TRUE;
+-    // If no permission granularity is defined this entity type does not need an
+-    // explicit translate permission.
+-    if (!$this->currentUser->hasPermission('translate any entity') && $permission_granularity = $entity_type->getPermissionGranularity()) {
+-      $translate_permission = $this->currentUser->hasPermission($permission_granularity == 'bundle' ? "translate {$entity->bundle()} {$entity->getEntityTypeId()}" : "translate {$entity->getEntityTypeId()}");
+-    }
+-    $access = AccessResult::allowedIf(($translate_permission && $this->currentUser->hasPermission("$op content translations")))->cachePerPermissions();
+-    if (!$access->isAllowed()) {
+-      return AccessResult::allowedIfHasPermission($this->currentUser, 'translate editable entities')->andIf($entity->access('update', $this->currentUser, TRUE));
+-    }
+-    return $access;
++    return $entity->access("$op translation", $this->currentUser, TRUE);
+   }
+ 
+   /**
+@@ -302,7 +288,11 @@ public function entityFormAlter(array &$form, FormStateInterface $form_state, En
+       $title = $this->entityFormTitle($entity);
+       // When editing the original values display just the entity label.
+       if ($is_translation) {
+-        $t_args = ['%language' => $languages[$form_langcode]->getName(), '%title' => $entity->label(), '@title' => $title];
++        $t_args = [
++          '%language' => $languages[$form_langcode]->getName(),
++          '%title' => $entity->label(),
++          '@title' => $title,
++        ];
+         $title = $new_translation ? $this->t('Create %language translation of %title', $t_args) : $this->t('@title [%language translation]', $t_args);
+       }
+       $form['#title'] = $title;
+@@ -616,7 +606,24 @@ protected function addTranslatabilityClue(&$element) {
+     // Elements which can have a #title attribute according to FAPI Reference.
+     if (!isset($suffix)) {
+       $suffix = ' <span class="translation-entity-all-languages">(' . $this->t('all languages') . ')</span>';
+-      $fapi_title_elements = array_flip(['checkbox', 'checkboxes', 'date', 'details', 'fieldset', 'file', 'item', 'password', 'password_confirm', 'radio', 'radios', 'select', 'text_format', 'textarea', 'textfield', 'weight']);
++      $fapi_title_elements = array_flip([
++        'checkbox',
++        'checkboxes',
++        'date',
++        'details',
++        'fieldset',
++        'file',
++        'item',
++        'password',
++        'password_confirm',
++        'radio',
++        'radios',
++        'select',
++        'text_format',
++        'textarea',
++        'textfield',
++        'weight',
++      ]);
+     }
+ 
+     // Update #title attribute for all elements that are allowed to have a
+diff --git a/core/modules/content_translation/tests/src/Functional/ContentTranslationOperationsTest.php b/core/modules/content_translation/tests/src/Functional/ContentTranslationOperationsTest.php
+index 3a521b8fe6a9abe5a5127203cdf2abc2bca749b0..6f67cf5efef4e2ed62390cfebb9213005215fe7f 100644
+--- a/core/modules/content_translation/tests/src/Functional/ContentTranslationOperationsTest.php
++++ b/core/modules/content_translation/tests/src/Functional/ContentTranslationOperationsTest.php
+@@ -44,17 +44,27 @@ class ContentTranslationOperationsTest extends NodeTestBase {
+   protected static $modules = [
+     'language',
+     'content_translation',
++    'content_translation_test',
+     'node',
+     'views',
+     'block',
+   ];
+ 
++  /**
++   * The state service.
++   *
++   * @var \Drupal\Core\State\StateInterface
++   */
++  protected $state;
++
+   /**
+    * {@inheritdoc}
+    */
+   protected function setUp(): void {
+     parent::setUp();
+ 
++    $this->state = $this->container->get('state');
++
+     // Enable additional languages.
+     $langcodes = ['es', 'ast'];
+     foreach ($langcodes as $langcode) {
+@@ -138,6 +148,73 @@ public function testOperationTranslateLink(): void {
+     $this->assertSession()->linkByHrefNotExists('node/' . $node->id() . '/translations');
+   }
+ 
++  /**
++   * Tests that operation access can be altered using hook_entity_access().
++   */
++  public function testOperationTranslateLinkWithEntityAccessHook() {
++    $node = $this->drupalCreateNode(['type' => 'article', 'langcode' => 'es']);
++    // Verify no translation operation links are displayed for users without
++    // permission.
++    $this->drupalLogin($this->baseUser1);
++    $this->drupalGet('admin/content');
++    $this->assertSession()->linkByHrefNotExists('node/' . $node->id() . '/translations');
++    \Drupal::entityTypeManager()->getStorage('view')->load('content')->invalidateCaches();
++
++    // Verify that access can be given using the entity access hook.
++    $this->state->set('content_translation.entity_access.node', [
++      'create translation' => TRUE,
++      'update translation' => TRUE,
++      'delete translation' => TRUE,
++    ]);
++    $this->drupalGet('admin/content');
++    $this->assertSession()->linkByHrefExists('node/' . $node->id() . '/translations');
++
++    // Ensure that an unintended misconfiguration of permissions does not open
++    // access to the translation form, see https://www.drupal.org/node/2558905.
++    $this->drupalLogout();
++    user_role_change_permissions(
++      Role::AUTHENTICATED_ID,
++      [
++        'create content translations' => TRUE,
++        'access content' => FALSE,
++      ]
++    );
++    $this->drupalLogin($this->baseUser1);
++    $this->drupalGet($node->toUrl('drupal:content-translation-overview'));
++    $this->assertSession()->statusCodeEquals(403);
++
++    // Ensure that the translation overview is also not accessible when the user
++    // has 'access content', but the node is not published.
++    user_role_change_permissions(
++      Role::AUTHENTICATED_ID,
++      [
++        'create content translations' => TRUE,
++        'access content' => TRUE,
++      ]
++    );
++    $node->setUnpublished()->save();
++    $this->drupalGet($node->toUrl('drupal:content-translation-overview'));
++    $this->assertSession()->statusCodeEquals(403);
++
++    // Ensure the 'Translate' local task does not show up anymore when disabling
++    // translations for a content type.
++    $node->setPublished()->save();
++    user_role_change_permissions(
++      Role::AUTHENTICATED_ID,
++      [
++        'administer content translation' => TRUE,
++        'administer languages' => TRUE,
++      ]
++    );
++    $this->drupalPlaceBlock('local_tasks_block');
++    $this->drupalGet('node/' . $node->id());
++    $this->assertSession()->linkByHrefExists('node/' . $node->id() . '/translations');
++    $this->drupalGet('admin/config/regional/content-language');
++    $this->submitForm(['settings[node][article][translatable]' => FALSE], 'Save configuration');
++    $this->drupalGet('node/' . $node->id());
++    $this->assertSession()->linkByHrefNotExists('node/' . $node->id() . '/translations');
++  }
++
+   /**
+    * Tests the access to the overview page for translations.
+    *
+@@ -170,4 +247,45 @@ public function testContentTranslationOverviewAccess(): void {
+     $access_control_handler->resetCache();
+   }
+ 
++  /**
++   * Tests that overview access can be altered using hook_entity_access().
++   *
++   * @see content_translation_translate_access()
++   * @see content_translation_entity_access()
++   */
++  public function testContentTranslationOverviewAccessWithEntityAccessHook() {
++    $access_control_handler = \Drupal::entityTypeManager()->getAccessControlHandler('node');
++    $user = $this->createUser(['access content']);
++    $this->drupalLogin($user);
++
++    // User cannot access translations out of the box, but with an entity access
++    // hook changing the access to Allowed, they do.
++    $this->state->set('content_translation.entity_access.node', [
++      'create translation' => TRUE,
++      'update translation' => TRUE,
++      'delete translation' => TRUE,
++    ]);
++
++    $node = $this->drupalCreateNode(['status' => FALSE, 'type' => 'article']);
++    $this->assertFalse(content_translation_translate_access($node)->isAllowed());
++    $access_control_handler->resetCache();
++
++    $node->setPublished();
++    $node->save();
++    $this->assertTrue(content_translation_translate_access($node)->isAllowed());
++    $access_control_handler->resetCache();
++
++    user_role_change_permissions(
++      Role::AUTHENTICATED_ID,
++      [
++        'access content' => FALSE,
++      ]
++    );
++
++    $user = $this->createUser([]);
++    $this->drupalLogin($user);
++    $this->assertFalse(content_translation_translate_access($node)->isAllowed());
++    $access_control_handler->resetCache();
++  }
++
+ }

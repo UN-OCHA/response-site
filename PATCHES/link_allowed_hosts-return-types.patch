@@ -1,0 +1,42 @@
+diff --git a/src/Plugin/Validation/Constraint/LinkAllowedHostConstraint.php b/src/Plugin/Validation/Constraint/LinkAllowedHostConstraint.php
+index 2692c63..8e1ea62 100644
+--- a/src/Plugin/Validation/Constraint/LinkAllowedHostConstraint.php
++++ b/src/Plugin/Validation/Constraint/LinkAllowedHostConstraint.php
+@@ -15,6 +15,11 @@ use Symfony\Component\Validator\Constraint;
+  */
+ class LinkAllowedHostConstraint extends Constraint {
+ 
++  /**
++   * The message text.
++   *
++   * @var string
++   */
+   public $message = 'The host %host is forbidden. Only the following are allowed: %allowed_hosts.';
+ 
+   /**
+@@ -30,7 +35,7 @@ class LinkAllowedHostConstraint extends Constraint {
+    * @return array
+    *   An associative array of allowed hosts.
+    */
+-  public function getHosts() {
++  public function getHosts(): array {
+     $hosts = array_filter(array_map('trim', explode("\n", $this->hosts)));
+     return array_combine($hosts, $hosts);
+   }
+@@ -38,14 +43,14 @@ class LinkAllowedHostConstraint extends Constraint {
+   /**
+    * {@inheritdoc}
+    */
+-  public function getDefaultOption() {
++  public function getDefaultOption(): ?string {
+     return 'hosts';
+   }
+ 
+   /**
+    * {@inheritdoc}
+    */
+-  public function getRequiredOptions() {
++  public function getRequiredOptions(): array {
+     return (array) $this->getDefaultOption();
+   }
+ 

@@ -15,7 +15,6 @@
       for (id in drupalSettings.fullcalendar_api.instances) {
         if (drupalSettings.fullcalendar_api.instances.hasOwnProperty(id)) {
           _fullCalendarApiInit(id, drupalSettings.fullcalendar_api.instances[id], context, drupalSettings);
-          
         }
       }
 

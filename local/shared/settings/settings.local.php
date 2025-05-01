@@ -17,25 +17,6 @@
  */
 
 /**
- * Assertions.
- *
- * The Drupal project primarily uses runtime assertions to enforce the
- * expectations of the API by failing when incorrect calls are made by code
- * under development.
- *
- * @see http://php.net/assert
- * @see https://www.drupal.org/node/2492225
- *
- * If you are using PHP 7.0 it is strongly recommended that you set
- * zend.assertions=1 in the PHP.ini file (It cannot be changed from .htaccess
- * or runtime) on development machines and to 0 in production.
- *
- * @see https://wiki.php.net/rfc/expectations
- */
-assert_options(ASSERT_ACTIVE, TRUE);
-\Drupal\Component\Assertion\Handle::register();
-
-/**
  * Enable local development services.
  */
 $settings['container_yamls'][] = '/srv/www/shared/settings/services.yml';
@@ -167,6 +148,9 @@ if (isset($settings['config_exclude_modules']) && is_array($settings['config_exc
 } else {
   $settings['config_exclude_modules'] = ['stage_file_proxy'];
 }
+
+$config['stage_file_proxy']['origin'] = 'https://response.reliefweb.int';
+$config['stage_file_proxy']['origin_dir'] = 'sites/default/files';
 
 // Enable/disable page/render caching and css/js aggregation.
 $no_cache = TRUE;
