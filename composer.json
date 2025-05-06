@@ -81,7 +81,7 @@
         "drush/drush": "^13",
         "galbar/jsonpath": "^2.0",
         "guzzlehttp/guzzle": "^7.0",
-        "league/commonmark": "2.6.0",
+        "league/commonmark": "2.7.0",
         "mailchimp/marketing": "^3.0",
         "mglaman/composer-drupal-lenient": "^1.0",
         "npm-asset/fullcalendar": "^6.1",
