@@ -46,7 +46,7 @@
         "drupal/group": "^3.3",
         "drupal/imageapi_optimize": "^4.1@beta",
         "drupal/imageapi_optimize_binaries": "^1.0@beta",
-        "drupal/imageapi_optimize_webp": "^2.0",
+        "drupal/imageapi_optimize_webp": "^3.0@alpha",
         "drupal/imagemagick": "^4",
         "drupal/inline_entity_form": "^3@RC",
         "drupal/jquery_ui_dialog": "^2.0",
