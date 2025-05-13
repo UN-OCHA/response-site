@@ -4,6 +4,26 @@
 All notable changes to this project will be documented in this file.
 <!--- END HEADER -->
 
+## [1.4.10](https://github.com/UN-OCHA/response-site/compare/v1.4.9...v1.4.10) (2025-05-13)
+
+### Bug Fixes
+
+* Remove data export dashboard ([b4a366](https://github.com/UN-OCHA/response-site/commit/b4a366c27dd87c83f7da259deb0c4c71eb472b86))
+* Remove redirects view pane and from dashboard ([20b0c9](https://github.com/UN-OCHA/response-site/commit/20b0c90d57a6d3aa9bbb20a88cb8fed80f6cdd79))
+* Update imageapi_optimize_webp to replace removed function ([8eaa39](https://github.com/UN-OCHA/response-site/commit/8eaa398360809d576c438c8a4de6fa48143328c3))
+
+### Chores
+
+* Change name too ([a973cc](https://github.com/UN-OCHA/response-site/commit/a973ccae96f60fbf9f73a7c75377ff30cdaa55ca))
+* Update all outdated drupal/* unocha/* drush/* weitzman/drupal-test-traits packages. ([018803](https://github.com/UN-OCHA/response-site/commit/0188033abb932ae8a727ec7f846816d0bbafe863), [86b623](https://github.com/UN-OCHA/response-site/commit/86b6239580f3df0e2b2cfe1e33de817c6cfdc5e3))
+* Use correct action ([cc8a71](https://github.com/UN-OCHA/response-site/commit/cc8a71447bd344f861c79b66c0b46990e504a04d))
+* Use scripts for update action ([d066d2](https://github.com/UN-OCHA/response-site/commit/d066d2ec1a3b1d57207cd8e442d79355879c2784))
+* Use standard update action with flag ([931f97](https://github.com/UN-OCHA/response-site/commit/931f975746be173febb2431375b68778c129928f))
+
+##### Deps
+
+* Bump league/commonmark from 2.6.0 to 2.7.0 ([5b614d](https://github.com/UN-OCHA/response-site/commit/5b614d2bf90a40be16088e513bcbc98b922f0a24))
+
 ## [1.4.9](https://github.com/UN-OCHA/response-site/compare/v1.4.8...v1.4.9) (2025-04-30)
 
 ### Bug Fixes
