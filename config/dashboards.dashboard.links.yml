@@ -27,19 +27,6 @@ sections:
           items_per_page: none
         weight: 0
         additional: {  }
-      b5654097-8935-4a5c-8b82-211141090dbd:
-        uuid: b5654097-8935-4a5c-8b82-211141090dbd
-        region: content
-        configuration:
-          id: 'views_block:db_links-block_2'
-          label: ''
-          label_display: visible
-          provider: views
-          context_mapping: {  }
-          views_label: ''
-          items_per_page: none
-        weight: 1
-        additional: {  }
       6a457063-faf5-436d-b53f-ac05f3f6c820:
         uuid: 6a457063-faf5-436d-b53f-ac05f3f6c820
         region: content

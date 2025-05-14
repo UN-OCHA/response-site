@@ -46,7 +46,7 @@
         "drupal/group": "^3.3",
         "drupal/imageapi_optimize": "^4.1@beta",
         "drupal/imageapi_optimize_binaries": "^1.0@beta",
-        "drupal/imageapi_optimize_webp": "^2.0",
+        "drupal/imageapi_optimize_webp": "^3.0@alpha",
         "drupal/imagemagick": "^4",
         "drupal/inline_entity_form": "^3@RC",
         "drupal/jquery_ui_dialog": "^2.0",
@@ -81,7 +81,7 @@
         "drush/drush": "^13",
         "galbar/jsonpath": "^2.0",
         "guzzlehttp/guzzle": "^7.0",
-        "league/commonmark": "2.6.0",
+        "league/commonmark": "2.7.0",
         "mailchimp/marketing": "^3.0",
         "mglaman/composer-drupal-lenient": "^1.0",
         "npm-asset/fullcalendar": "^6.1",
@@ -165,7 +165,6 @@
             "constraint": "^10 || ^11",
             "allowed-list": [
                 "drupal/devel_enity_updates",
-                "drupal/dev_mode",
                 "drupal/link_allowed_hosts",
                 "drupal/maintenance200",
                 "drupal/views_field_compare"
@@ -236,7 +235,7 @@
             ]
         }
     },
-    "version": "1.4.9",
+    "version": "1.4.10",
     "require-dev": {
         "davidrjonas/composer-lock-diff": "^1.7",
         "drupal/coder": "^8.3",
