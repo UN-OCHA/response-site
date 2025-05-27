@@ -37,6 +37,9 @@
     "drupal/maintenance200": {
       "D11 compatibility - #3431791": "PATCHES/maintenance200-D11-compatibility-3431791.patch"
     },
+    "drupal/openid_connect": {
+      "Suppress auth error if user is blocked": "PATCHES/openid_connect-ops-11508-suppress-error-if-blocked.patch"
+    },
     "drupal/social_auth": {
       "Type Error - #3496656": "PATCHES/social_auth-type-error-3496656.patch"
     },
