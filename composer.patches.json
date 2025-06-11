@@ -50,6 +50,9 @@
     "drupal/username_enumeration_prevention": {
       "Avoid leaking the path via Drupal.settings json": "PATCHES/username_enumeration_prevention-user-login-block-form-3312288.patch"
     },
+    "drupal/views_data_export": {
+      "Batch mode does not allow other modules to alter query - #3173296 ": "https://git.drupalcode.org/project/views_data_export/-/merge_requests/57.diff"
+    },
     "drupal/views_field_compare": {
       "D11 compatibility - #3435461": "PATCHES/views_field_compare-D11-compatibility.patch"
     },
