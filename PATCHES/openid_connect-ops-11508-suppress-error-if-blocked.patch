@@ -1,0 +1,24 @@
+diff --git a/src/Controller/OpenIDConnectRedirectController.php b/src/Controller/OpenIDConnectRedirectController.php
+index 3271c54..bf0493f 100644
+--- a/src/Controller/OpenIDConnectRedirectController.php
++++ b/src/Controller/OpenIDConnectRedirectController.php
+@@ -7,6 +7,7 @@ use Drupal\Core\Access\AccessResultInterface;
+ use Drupal\Core\Config\ConfigFactoryInterface;
+ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\user\Entity\User;
+ use Drupal\Core\Extension\ModuleHandlerInterface;
+ use Drupal\Core\Language\LanguageManagerInterface;
+ use Drupal\Core\Logger\LoggerChannelTrait;
+@@ -295,7 +296,10 @@ class OpenIDConnectRedirectController implements ContainerInjectionInterface, Ac
+         if ($op === 'login') {
+           $success = $this->openIDConnect->completeAuthorization($openid_connect_client, $tokens);
+ 
+-          if (!$success) {
++          // If the user is blocked, we already get the core message stating
++          // "has not been activated". Suppress this error if that is the case.
++          $account = User::load(\Drupal::currentUser()->id());
++          if (!$success && !$account->isBlocked()) {
+             $this->messenger()->addError($this->t('Logging in with @provider could not be completed due to an error.', $provider_param));
+           }
+         }

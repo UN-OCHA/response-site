@@ -9,7 +9,7 @@ uimc_api:
   password: ''
   consumer_key: ''
   consumer_secret: ''
-  send_email: true
+  send_email: false
   verify_ssl: true
   request_timeout: 10
   default_group: ''

@@ -1,8 +1,5 @@
 {
   "patches": {
-    "drupal/amazon_ses": {
-      "Cron fails on amazon_ses when not configured": "PATCHES/amazon_ses-cron-queue-3417090-8.patch"
-    },
     "drupal/core" : {
       "https://www.drupal.org/project/drupal/issues/3143617": "https://www.drupal.org/files/issues/2020-07-07/3143617-28_0.patch",
       "Help group module support translations #2864721": "./PATCHES/core-group-translation-helper-MR-9076-updated.patch",
@@ -37,6 +34,9 @@
     "drupal/maintenance200": {
       "D11 compatibility - #3431791": "PATCHES/maintenance200-D11-compatibility-3431791.patch"
     },
+    "drupal/openid_connect": {
+      "Suppress auth error if user is blocked": "PATCHES/openid_connect-ops-11508-suppress-error-if-blocked.patch"
+    },
     "drupal/social_auth": {
       "Type Error - #3496656": "PATCHES/social_auth-type-error-3496656.patch"
     },
@@ -46,6 +46,9 @@
     },
     "drupal/username_enumeration_prevention": {
       "Avoid leaking the path via Drupal.settings json": "PATCHES/username_enumeration_prevention-user-login-block-form-3312288.patch"
+    },
+    "drupal/views_data_export": {
+      "Batch mode does not allow other modules to alter query - #3173296 ": "https://git.drupalcode.org/project/views_data_export/-/merge_requests/57.diff"
     },
     "drupal/views_field_compare": {
       "D11 compatibility - #3435461": "PATCHES/views_field_compare-D11-compatibility.patch"
