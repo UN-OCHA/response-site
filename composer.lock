@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d6d13132f52b7e40ae48c376a988542",
+    "content-hash": "923beedefd14f7b1afbda209383dba3c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5711,6 +5711,72 @@
             }
         },
         {
+            "name": "drupal/social_auth_google",
+            "version": "4.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/social_auth_google.git",
+                "reference": "4.0.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/social_auth_google-4.0.3.zip",
+                "reference": "4.0.3",
+                "shasum": "83df4179f3dd86e6e7168864ed108c240d010c4c"
+            },
+            "require": {
+                "drupal/core": "^9.5 || ^10 || ^11",
+                "drupal/social_auth": "^4.1",
+                "league/oauth2-google": "^4.0",
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "drupal/coder": "^8.3",
+                "phpcompatibility/php-compatibility": "^9.3"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "4.0.3",
+                    "datestamp": "1725460103",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Getulio Valentin Sánchez (gvso)",
+                    "homepage": "https://www.drupal.org/user/3101285",
+                    "email": "valentin2507@gmail.com"
+                },
+                {
+                    "name": "Himanshu Dixit (himanshu-dixit)",
+                    "homepage": "https://www.drupal.org/user/3513954",
+                    "email": "hudixt@gmail.com"
+                },
+                {
+                    "name": "Christopher C. Wells (wells)",
+                    "homepage": "https://www.drupal.org/user/2452278",
+                    "email": "drupal.org@chris-wells.net"
+                }
+            ],
+            "description": "Social Auth integration for Google.",
+            "homepage": "https://www.drupal.org/project/social_auth_google",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/social_auth_google",
+                "issues": "https://www.drupal.org/project/issues/social_auth_google"
+            }
+        },
+        {
             "name": "drupal/social_auth_hid",
             "version": "5.0.0",
             "source": {
@@ -5767,6 +5833,145 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/social_auth_hid",
                 "issues": "https://www.drupal.org/project/issues/social_auth_hid"
+            }
+        },
+        {
+            "name": "drupal/social_auth_linkedin",
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/social_auth_linkedin.git",
+                "reference": "4.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/social_auth_linkedin-4.0.1.zip",
+                "reference": "4.0.1",
+                "shasum": "f594b48d11b35dda921a15a0f55934527911190e"
+            },
+            "require": {
+                "drupal/core": "^9.5 || ^10 || ^11",
+                "drupal/social_auth": "^4.1",
+                "league/oauth2-linkedin": "^5.0"
+            },
+            "require-dev": {
+                "drupal/coder": "^8.3",
+                "phpcompatibility/php-compatibility": "^9.3"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "4.0.1",
+                    "datestamp": "1725474050",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Getulio Valentin Sánchez (gvso)",
+                    "homepage": "https://www.drupal.org/user/2759063",
+                    "email": "valentin2507@gmail.com"
+                },
+                {
+                    "name": "Himanshu Dixit (himanshu-dixit)",
+                    "homepage": "https://www.drupal.org/user/3101285",
+                    "email": "hudixt@gmail.com"
+                },
+                {
+                    "name": "Christopher C. Wells (wells)",
+                    "homepage": "https://www.drupal.org/user/3513954",
+                    "email": "drupal.org@chris-wells.net"
+                },
+                {
+                    "name": "wells",
+                    "homepage": "https://www.drupal.org/user/2452278"
+                }
+            ],
+            "description": "Social Auth integration for LinkedIn.",
+            "homepage": "https://www.drupal.org/project/social_auth_linkedin",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/social_auth_linkedin",
+                "issues": "https://www.drupal.org/project/issues/social_auth_linkedin"
+            }
+        },
+        {
+            "name": "drupal/social_auth_microsoft",
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/social_auth_microsoft.git",
+                "reference": "4.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/social_auth_microsoft-4.0.1.zip",
+                "reference": "4.0.1",
+                "shasum": "a13f0bd242c95e13d33f9868e991632ca2adcfb1"
+            },
+            "require": {
+                "drupal/core": "^9.5 || ^10 || ^11",
+                "drupal/social_auth": "^4.1",
+                "php": ">=8.1",
+                "stevenmaguire/oauth2-microsoft": "^2.0"
+            },
+            "require-dev": {
+                "drupal/coder": "^8.3",
+                "phpcompatibility/php-compatibility": "10.x-dev"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "4.0.1",
+                    "datestamp": "1725712017",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Getulio Valentin Sánchez (gvso)",
+                    "homepage": "https://www.drupal.org/user/3101285",
+                    "email": "valentin2507@gmail.com"
+                },
+                {
+                    "name": "Himanshu Dixit (himanshu-dixit)",
+                    "homepage": "https://www.drupal.org/user/3513954",
+                    "email": "hudixt@gmail.com"
+                },
+                {
+                    "name": "Christopher C. Wells (wells)",
+                    "homepage": "https://www.drupal.org/user/3509455",
+                    "email": "drupal.org@chris-wells.net"
+                },
+                {
+                    "name": "wells",
+                    "homepage": "https://www.drupal.org/user/2452278"
+                }
+            ],
+            "description": "Social Auth integration for Microsoft.",
+            "homepage": "https://www.drupal.org/project/social_auth_microsoft",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/social_auth_microsoft",
+                "issues": "https://www.drupal.org/project/issues/social_auth_microsoft"
             }
         },
         {
@@ -8211,6 +8416,121 @@
             "time": "2025-02-26T04:37:30+00:00"
         },
         {
+            "name": "league/oauth2-google",
+            "version": "4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/oauth2-google.git",
+                "reference": "1b01ba18ba31b29e88771e3e0979e5c91d4afe76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-google/zipball/1b01ba18ba31b29e88771e3e0979e5c91d4afe76",
+                "reference": "1b01ba18ba31b29e88771e3e0979e5c91d4afe76",
+                "shasum": ""
+            },
+            "require": {
+                "league/oauth2-client": "^2.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "eloquent/phony-phpunit": "^6.0 || ^7.1",
+                "phpunit/phpunit": "^8.0 || ^9.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\OAuth2\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Woody Gilk",
+                    "email": "hello@shadowhand.com",
+                    "homepage": "https://shadowhand.com"
+                }
+            ],
+            "description": "Google OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
+            "keywords": [
+                "Authentication",
+                "authorization",
+                "client",
+                "google",
+                "oauth",
+                "oauth2"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/oauth2-google/issues",
+                "source": "https://github.com/thephpleague/oauth2-google/tree/4.0.1"
+            },
+            "time": "2023-03-17T15:20:52+00:00"
+        },
+        {
+            "name": "league/oauth2-linkedin",
+            "version": "5.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/oauth2-linkedin.git",
+                "reference": "f9ab661ca37884067ca286412b6c17304d3c2fac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-linkedin/zipball/f9ab661ca37884067ca286412b6c17304d3c2fac",
+                "reference": "f9ab661ca37884067ca286412b6c17304d3c2fac",
+                "shasum": ""
+            },
+            "require": {
+                "league/oauth2-client": "^2.0"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\OAuth2\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Steven Maguire",
+                    "email": "stevenmaguire@gmail.com",
+                    "homepage": "https://github.com/stevenmaguire"
+                }
+            ],
+            "description": "LinkedIn OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
+            "keywords": [
+                "authorisation",
+                "authorization",
+                "client",
+                "linkedin",
+                "oauth",
+                "oauth2"
+            ],
+            "support": {
+                "issues": "https://github.com/thephpleague/oauth2-linkedin/issues",
+                "source": "https://github.com/thephpleague/oauth2-linkedin/tree/5.1.2"
+            },
+            "time": "2020-04-20T13:59:44+00:00"
+        },
+        {
             "name": "mailchimp/marketing",
             "version": "3.0.80",
             "source": {
@@ -10359,6 +10679,60 @@
                 }
             ],
             "time": "2024-03-02T07:15:17+00:00"
+        },
+        {
+            "name": "stevenmaguire/oauth2-microsoft",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stevenmaguire/oauth2-microsoft.git",
+                "reference": "f24f79d8c47224d24a1240270ca3b0a4c1521ed4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stevenmaguire/oauth2-microsoft/zipball/f24f79d8c47224d24a1240270ca3b0a4c1521ed4",
+                "reference": "f24f79d8c47224d24a1240270ca3b0a4c1521ed4",
+                "shasum": ""
+            },
+            "require": {
+                "league/oauth2-client": "^2.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stevenmaguire\\OAuth2\\Client\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Steven Maguire",
+                    "email": "stevenmaguire@gmail.com",
+                    "homepage": "https://github.com/stevenmaguire"
+                }
+            ],
+            "description": "Microsoft OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
+            "keywords": [
+                "authorisation",
+                "authorization",
+                "client",
+                "microsoft",
+                "oauth",
+                "oauth2"
+            ],
+            "support": {
+                "issues": "https://github.com/stevenmaguire/oauth2-microsoft/issues",
+                "source": "https://github.com/stevenmaguire/oauth2-microsoft/tree/master"
+            },
+            "time": "2017-06-07T13:42:47+00:00"
         },
         {
             "name": "symfony/console",
