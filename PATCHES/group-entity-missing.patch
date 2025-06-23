@@ -1,0 +1,43 @@
+diff --git a/group.module b/group.module
+index 85a3feb..e25d90c 100644
+--- a/group.module
++++ b/group.module
+@@ -5,6 +5,7 @@
+  * Allows you to group users, content and other entities.
+  */
+ 
++use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+ use Drupal\Component\Utility\Html;
+ use Drupal\Core\Access\AccessResult;
+ use Drupal\Core\Config\Entity\ConfigEntityInterface;
+@@ -302,9 +303,6 @@ function group_query_entity_query_alter(AlterableInterface $query) {
+ 
+   $entity_type_id = $query->getMetaData('entity_type');
+   if ($entity_type_id && $query->hasTag($entity_type_id . '_access')) {
+-    $entity_type_manager = \Drupal::entityTypeManager();
+-    $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+-
+     // Add specific access checks based on the entity type. Please note that we
+     // first check for the group and relationship entity types because we have
+     // full control over those and can therefore optimize the query more. If the
+@@ -328,9 +326,17 @@ function group_query_entity_query_alter(AlterableInterface $query) {
+         $class_name = EntityQueryAlter::class;
+     }
+ 
+-    \Drupal::service('class_resolver')
+-      ->getInstanceFromDefinition($class_name)
+-      ->alter($query, $entity_type);
++    try {
++      $entity_type_manager = \Drupal::entityTypeManager();
++      $entity_type = $entity_type_manager->getDefinition($entity_type_id);
++
++      \Drupal::service('class_resolver')
++        ->getInstanceFromDefinition($class_name)
++        ->alter($query, $entity_type);
++    }
++    catch (PluginNotFoundException $e) {
++      // Invalid entity type.
++    }
+   }
+ }
+ 
