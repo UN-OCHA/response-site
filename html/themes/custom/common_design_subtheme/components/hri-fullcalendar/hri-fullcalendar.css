@@ -14,3 +14,8 @@
 #fullCalModal br {
   display: none;
 }
+
+/* Wrap long event names in the grid. */
+.fc-event-title.fc-sticky {
+  white-space: wrap;
+}

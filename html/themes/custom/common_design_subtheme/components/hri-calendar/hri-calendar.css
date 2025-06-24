@@ -52,3 +52,8 @@
 .hri-calendar__read-more {
   margin-top: 1rem;
 }
+
+/* Wrap long event names in the grid. */
+.fc-event-title.fc-sticky {
+  white-space: wrap;
+}
