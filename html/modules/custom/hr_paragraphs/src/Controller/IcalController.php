@@ -100,9 +100,11 @@ class IcalController extends ControllerBase {
       if ($event['X-MICROSOFT-CDO-ALLDAYEVENT'] === 'TRUE') {
         $event['DTEND'] = $event['DTSTART'];
         $date_format = 'Y-m-d';
+        $all_day_event = TRUE;
       }
       else {
         $date_format = 'Y-m-d\\TH:i:s';
+        $all_day_event = FALSE;
       }
 
       // Make sure DTEND is set.
@@ -157,7 +159,7 @@ class IcalController extends ControllerBase {
               'location' => $event['LOCATION'] ?? '',
               'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
               'start' => $occurrence->getStart()->format($date_format),
-              'end' => ($event['X-MICROSOFT-CDO-ALLDAYEVENT'] === 'TRUE') ? $occurrence->getStart()->format($date_format) : $occurrence->getEnd()->format($date_format),
+              'end' => $all_day_event ? $occurrence->getStart()->format($date_format) : $occurrence->getEnd()->format($date_format),
               'timezone' => $event['DTSTART']->getTimezone()->getName(),
               'timezone_string' => $event['timezone_string'] ?? $event['DTSTART']->getTimezone()->getName(),
               'attachments' => $attachments,
