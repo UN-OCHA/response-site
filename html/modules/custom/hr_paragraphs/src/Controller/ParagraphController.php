@@ -754,7 +754,9 @@ class ParagraphController extends ControllerBase {
 
     // Set source to proxy.
     $datasource_uri = '/group/' . $group->id() . '/ical';
-    $settings['events'] = $datasource_uri;
+    // Events and eventSources are mutually exclusive, or we get duplicates.
+    // @see https://humanitarian.atlassian.net/browse/RWR-512
+    // $settings['events'] = $datasource_uri;
     $settings['eventSources'] = $datasource_uri;
     $settings['ical_source'] = $group->field_ical_url->value;
 
