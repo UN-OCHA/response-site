@@ -94,6 +94,17 @@ class IcalController extends ControllerBase {
         }
       }
 
+      // We cannot use the W3C format, as times must not include timezones.
+      // And another thing, exclude the time altogether in case of all-day
+      // events, so we can render them properly.
+      if ($event['X-MICROSOFT-CDO-ALLDAYEVENT'] === 'TRUE') {
+        $event['DTEND'] = $event['DTSTART'];
+        $date_format = 'Y-m-d';
+      }
+      else {
+        $date_format = 'Y-m-d\\TH:i:s';
+      }
+
       // Make sure DTEND is set.
       if (!isset($event['DTEND'])) {
         $event['DTEND'] = $event['DTSTART'];
@@ -132,13 +143,21 @@ class IcalController extends ControllerBase {
               continue;
             }
 
+            /*
+             * The generator bumps the end datetime to midnight the next day
+             * for al-day events. This causes them to display across two
+             * cells in the calendar. Fix that by overriding the end date
+             * and ensuring the format includes no time component.
+             *
+             * @see https://humanitarian.atlassian.net/browse/RWR-512
+             */
             $output[] = [
               'title' => $event['SUMMARY'] ?? '',
               'description' => $event['DESCRIPTION'] ?? '',
               'location' => $event['LOCATION'] ?? '',
               'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
-              'start' => $occurrence->getStart()->format(\DateTimeInterface::W3C),
-              'end' => $occurrence->getEnd()->format(\DateTimeInterface::W3C),
+              'start' => $occurrence->getStart()->format($date_format),
+              'end' => ($event['X-MICROSOFT-CDO-ALLDAYEVENT'] === 'TRUE') ? $occurrence->getStart()->format($date_format) : $occurrence->getEnd()->format($date_format),
               'timezone' => $event['DTSTART']->getTimezone()->getName(),
               'timezone_string' => $event['timezone_string'] ?? $event['DTSTART']->getTimezone()->getName(),
               'attachments' => $attachments,
@@ -172,8 +191,8 @@ class IcalController extends ControllerBase {
             'description' => $event['DESCRIPTION'] ?? '',
             'location' => $event['LOCATION'] ?? '',
             'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
-            'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
-            'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
+            'start' => $event['DTSTART']->format($date_format),
+            'end' => $event['DTEND']->format($date_format),
             'timezone' => $event['DTSTART']->getTimezone()->getName(),
             'timezone_string' => $event['timezone_string'] ?? $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
@@ -185,8 +204,8 @@ class IcalController extends ControllerBase {
             'description' => $event['DESCRIPTION'] ?? '',
             'location' => $event['LOCATION'] ?? '',
             'backgroundColor' => $this->setBackgroundColor($event['CATEGORIES'] ?? ''),
-            'start' => $event['DTSTART']->format(\DateTimeInterface::W3C),
-            'end' => $event['DTEND']->format(\DateTimeInterface::W3C),
+            'start' => $event['DTSTART']->format($date_format),
+            'end' => $event['DTEND']->format($date_format),
             'timezone' => $event['DTSTART']->getTimezone()->getName(),
             'timezone_string' => $event['timezone_string'] ?? $event['DTSTART']->getTimezone()->getName(),
             'attachments' => $attachments,
