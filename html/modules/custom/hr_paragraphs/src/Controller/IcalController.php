@@ -97,7 +97,7 @@ class IcalController extends ControllerBase {
       // We cannot use the W3C format, as times must not include timezones.
       // And another thing, exclude the time altogether in case of all-day
       // events, so we can render them properly.
-      if ($event['X-MICROSOFT-CDO-ALLDAYEVENT'] === 'TRUE') {
+      if (isset($event['X-MICROSOFT-CDO-ALLDAYEVENT']) && $event['X-MICROSOFT-CDO-ALLDAYEVENT'] === 'TRUE') {
         $event['DTEND'] = $event['DTSTART'];
         $date_format = 'Y-m-d';
         $all_day_event = TRUE;
