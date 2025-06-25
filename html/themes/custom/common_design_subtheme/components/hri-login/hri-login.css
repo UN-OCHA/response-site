@@ -5,12 +5,41 @@
   padding: 12px 18px;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 2rem;
   background: var(--brand-primary);
   font-weight: bold;
+  text-decoration: none;
 }
+
+.node--type-page .paragraph--type--text-block a[href*="/user/login/"]::before {
+  position: relative;
+  top: 2px;
+  left: 0px;
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
 .node--type-page .paragraph--type--text-block a[href*="/user/login/"]:hover,
 .node--type-page .paragraph--type--text-block a[href*="/user/login/"]:focus,
 .node--type-page .paragraph--type--text-block a[href*="/user/login/"]:active {
   background: var(--brand-primary--dark);
+  text-decoration: underline;
+}
+
+.node--type-page .paragraph--type--text-block a[href*="/user/login/hid"]::before {
+ content: url('../../img/auth/hid_logo.svg');
+}
+
+.node--type-page .paragraph--type--text-block a[href^="/user/login/google"]::before {
+  content: url('../../img/auth/google_logo.svg');
+}
+
+.node--type-page .paragraph--type--text-block a[href^="/user/login/linkedin"]::before {
+  content: url('../../img/auth/linkedin_logo.svg');
+}
+
+.node--type-page .paragraph--type--text-block a[href^="/user/login/microsoft"]::before {
+  content: url('../../img/auth/microsoft_logo.svg');
 }
