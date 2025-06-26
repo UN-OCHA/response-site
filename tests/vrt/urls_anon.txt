@@ -8,3 +8,4 @@ https://response.reliefweb.int/vanuatu
 https://response.reliefweb.int/vanuatu/reports
 https://response.reliefweb.int/topics
 https://response.reliefweb.int/about
+https://response.reliefweb.int/user/login
