@@ -1,0 +1,24 @@
+diff --git a/src/Entity/LinkCheckerLink.php b/src/Entity/LinkCheckerLink.php
+index 1caf4a9..869f7b1 100644
+--- a/src/Entity/LinkCheckerLink.php
++++ b/src/Entity/LinkCheckerLink.php
+@@ -181,9 +181,16 @@ class LinkCheckerLink extends ContentEntityBase implements LinkCheckerLinkInterf
+    * {@inheritdoc}
+    */
+   public function getParentEntity() {
+-    $entity_type_id = $this->get('parent_entity_type_id')->getString();
+-    $entity_id = $this->get('parent_entity_id')->getString();
+-    return $this->entityTypeManager()->getStorage($entity_type_id)->load($entity_id);
++    try {
++      $entity_type_id = $this->get('parent_entity_type_id')->getString();
++      $entity_id = $this->get('parent_entity_id')->getString();
++
++      return $this->entityTypeManager()->getStorage($entity_type_id)->load($entity_id);
++    }
++    catch (\Exception $e) {
++      // If the entity does not exist, return NULL.
++      return NULL;
++    }
+   }
+ 
+   /**
