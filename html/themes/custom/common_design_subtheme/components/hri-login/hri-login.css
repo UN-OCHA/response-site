@@ -28,6 +28,10 @@
   text-decoration: underline;
 }
 
+.node--type-page .paragraph--type--text-block a[href*="/user/login/entraid"]::before {
+ content: url('../../img/auth/und_logo.svg');
+}
+
 .node--type-page .paragraph--type--text-block a[href*="/user/login/hid"]::before {
  content: url('../../img/auth/hid_logo.svg');
 }
