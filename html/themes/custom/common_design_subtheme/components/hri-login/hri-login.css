@@ -29,7 +29,7 @@
 }
 
 .node--type-page .paragraph--type--text-block a[href*="/user/login/entraid"]::before {
- content: url('../../img/auth/und_logo.svg');
+ content: url('../../img/auth/un_logo_white.svg');
 }
 
 .node--type-page .paragraph--type--text-block a[href*="/user/login/hid"]::before {
