@@ -345,7 +345,7 @@ class ReliefwebController extends ControllerBase {
       );
     }
     catch (RequestException $exception) {
-      $this->getLogger('hr_paragraphs_reliefweb')->error('Fetching data from $url failed with @message', [
+      $this->getLogger('hr_paragraphs_reliefweb')->error('Fetching data from @url failed with @message', [
         '@url' => $endpoint,
         '@message' => $exception->getMessage(),
       ]);
