@@ -26,7 +26,6 @@
     },
     "drupal/linkchecker": {
       "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743": "PATCHES/linkchecker-unconfirmed-but-eligible-field-list-3244743.patch",
-      "Do not break admin denied": "./PATCHES/linkchecker_use_uid.patch",
       "Avoid null links": "./PATCHES/linkchecker_null_link.patch",
       "Check parent exists before getting ids - #3491838": "./PATCHES/linkchecker--check-parent.patch",
       "Recognize previous revisions https://www.drupal.org/project/linkchecker/issues/3366753": "https://www.drupal.org/files/issues/2025-03-07/3366753-minimal.patch",
