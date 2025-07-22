@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "19ad97486ec3c86ca36c120be35bb33d",
+    "content-hash": "0c9fbcca8afe60a634a47292b851e512",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9179,6 +9179,18 @@
             },
             "require": {
                 "npm-asset/preact": "~10.12.1"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--daygrid",
+            "version": "6.1.15",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/daygrid/-/daygrid-6.1.15.tgz"
             },
             "type": "npm-asset",
             "license": [
