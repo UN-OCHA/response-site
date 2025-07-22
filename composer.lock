@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2cbd33a9bd19640a1439d7c998efc0e5",
+    "content-hash": "19ad97486ec3c86ca36c120be35bb33d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9171,6 +9171,21 @@
             ]
         },
         {
+            "name": "npm-asset/fullcalendar--core",
+            "version": "6.1.18",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/core/-/core-6.1.18.tgz"
+            },
+            "require": {
+                "npm-asset/preact": "~10.12.1"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
             "name": "npm-asset/fullcalendar--icalendar",
             "version": "6.1.15",
             "dist": {
@@ -9212,6 +9227,18 @@
             "dist": {
                 "type": "tar",
                 "url": "https://registry.npmjs.org/moment/-/moment-2.30.1.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/preact",
+            "version": "10.12.1",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/preact/-/preact-10.12.1.tgz"
             },
             "type": "npm-asset",
             "license": [

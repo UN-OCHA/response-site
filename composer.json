@@ -88,6 +88,7 @@
         "mailchimp/marketing": "^3.0",
         "mglaman/composer-drupal-lenient": "^1.0",
         "npm-asset/fullcalendar": "^6.1",
+        "npm-asset/fullcalendar--core": "^6.1",
         "npm-asset/fullcalendar--icalendar": "^6.1",
         "npm-asset/fullcalendar--list": "^6.1",
         "npm-asset/ical.js": "^1",
