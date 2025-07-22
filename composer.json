@@ -240,19 +240,16 @@
     },
     "version": "1.4.10",
     "require-dev": {
-        "davidrjonas/composer-lock-diff": "^1.7",
-        "drupal/coder": "^8.3",
+        "davidrjonas/composer-lock-diff": "*",
         "drupal/config_inspector": "^2.1",
         "drupal/core-dev": "^11",
         "drupal/dev_mode": "^2.6",
+        "drupal/devel": "^5",
         "drupal/devel_php": "^1.5",
         "kint-php/kint": "^5.1",
-        "marcocesarato/php-conventional-changelog": "^1.17",
-        "mglaman/drupal-check": "^1.4",
+        "marcocesarato/php-conventional-changelog": "*",
         "phpcompatibility/php-compatibility": "^9.3",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/php-code-coverage": "^10",
-        "phpunit/phpunit": "^10",
+        "phpspec/prophecy-phpunit": "^2",
         "weitzman/drupal-test-traits": "^2.0"
     }
 }
