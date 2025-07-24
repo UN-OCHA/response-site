@@ -44,8 +44,7 @@
       "https://www.drupal.org/project/social_auth_linkedin/issues/3399739": "https://git.drupalcode.org/project/social_auth_linkedin/-/merge_requests/4.diff"
     },
     "drupal/user_expire": {
-      "Allow the notification email to be customised": "PATCHES/user_expire-customize-notification-email.patch",
-      "Reset expiration when user is reactivated": "PATCHES/user_expire-reset-expiration-on-reactivation.patch"
+      "Allow the notification email to be customised": "PATCHES/user_expire-customize-notification-email.patch"
     },
     "drupal/username_enumeration_prevention": {
       "Avoid leaking the path via Drupal.settings json": "PATCHES/username_enumeration_prevention-user-login-block-form-3312288.patch"
