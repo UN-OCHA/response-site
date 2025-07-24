@@ -1,8 +1,8 @@
 diff --git a/core/modules/mysql/src/Driver/Database/mysql/Connection.php b/core/modules/mysql/src/Driver/Database/mysql/Connection.php
-index 4fbb2221ee..abd53121e0 100644
+index bc4a360d4ae..4abcf362708 100644
 --- a/core/modules/mysql/src/Driver/Database/mysql/Connection.php
 +++ b/core/modules/mysql/src/Driver/Database/mysql/Connection.php
-@@ -73,6 +73,15 @@ class Connection extends DatabaseConnection {
+@@ -50,6 +50,15 @@ class Connection extends DatabaseConnection implements SupportsTemporaryTablesIn
     */
    private $serverVersion;
  
@@ -18,7 +18,7 @@ index 4fbb2221ee..abd53121e0 100644
    /**
     * The minimal possible value for the max_allowed_packet setting of MySQL.
     *
-@@ -272,6 +281,13 @@ public function version() {
+@@ -248,6 +257,13 @@ public function version() {
      return $this->getServerVersion();
    }
  
@@ -32,7 +32,7 @@ index 4fbb2221ee..abd53121e0 100644
    /**
     * Determines whether the MySQL distribution is MariaDB or not.
     *
-@@ -311,6 +327,19 @@ protected function getServerVersion(): string {
+@@ -287,6 +303,19 @@ protected function getServerVersion(): string {
      return $this->serverVersion;
    }
  
@@ -44,33 +44,39 @@ index 4fbb2221ee..abd53121e0 100644
 +   */
 +  protected function getServerConnectionInfo(): string {
 +    if (!$this->serverConnectionInfo) {
-+      $this->serverConnectionInfo = $this->connection->query("SHOW SESSION STATUS LIKE 'SSL_CIPHER'")->fetchColumn(1);
++      $this->serverConnectionInfo = $this->query("SHOW SESSION STATUS LIKE 'SSL_CIPHER'")->fetchField(1);
 +    }
 +    return $this->serverConnectionInfo;
 +  }
 +
-   public function databaseType() {
-     return 'mysql';
-   }
+   /**
+    * {@inheritdoc}
+    */
 diff --git a/core/modules/system/system.install b/core/modules/system/system.install
-index 7339468a92..54a4f729f1 100644
+index 431651d08e2..52cbdca8616 100644
 --- a/core/modules/system/system.install
 +++ b/core/modules/system/system.install
-@@ -531,8 +531,17 @@ function system_requirements($phase) {
-     $requirements['database_system_version'] = [
-       'title' => t('Database system version'),
-       'value' => Database::getConnection()->version(),
-+      'description' => t('Connection is not encrypted.'),
-     ];
+@@ -569,6 +569,23 @@ function system_requirements($phase): array {
+     }
+   }
  
++  if ($phase === 'runtime' || $phase === 'update') {
++    // Test database SSL/TLS support.
++    $requirements['database_connection_encryption'] = [
++      'title'=> t('Database connection encryption'),
++      'severity' => RequirementSeverity::Warning,
++      'value' => t('Disabled'),
++      'description' => t('The database connection is not encrypted.'),
++    ];
++
 +    // Check whether the database connection is encrypted and adjust the requirements array based on findings.
 +    if (Database::getConnection()->connectionInfo()) {
-+      $requirements['database_system_version']['description'] = t('Connection is encrypted with %connection.', ['%connection' => Database::getConnection()->connectionInfo() ]);
++      $requirements['database_connection_encryption']['severity'] = RequirementSeverity::OK;
++      $requirements['database_connection_encryption']['value'] = t('Enabled');
++      $requirements['database_connection_encryption']['description'] = t('The database connection is encrypted with %connection.', ['%connection' => Database::getConnection()->connectionInfo() ]);
 +    }
-+    else {
-+      $requirements['database_system_version']['severity'] = REQUIREMENT_WARNING;
-+    }
++  }
 +
-     $errors = $tasks->engineVersionRequirementsCheck();
-     $error_count = count($errors);
-     if ($error_count > 0) {
+   if ($phase === 'runtime' || $phase === 'update') {
+     // Test database JSON support.
+     $requirements['database_support_json'] = [
