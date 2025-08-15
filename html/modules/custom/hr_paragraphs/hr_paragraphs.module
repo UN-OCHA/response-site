@@ -2396,8 +2396,7 @@ function hr_paragraphs_group_presave(EntityInterface $entity) {
 
   // Revert changed time during update.
   if ($entity->isMigrating) {
-    /** @var \Drupal\Core\Entity\ContentEntityInterface $original */
-    $original = $entity->original;
+    $original = $entity->getOriginal();
     $langcode = $entity->language()->getId();
     if (!$entity->isNew() && $original && $original->hasTranslation($langcode)) {
       $original_value = $original->getTranslation($langcode)->get('changed')->value;
@@ -2433,8 +2432,7 @@ function hr_paragraphs_user_presave(EntityInterface $entity) {
 
   // Revert changed time during update.
   if ($entity->isMigrating) {
-    /** @var \Drupal\Core\Entity\ContentEntityInterface $original */
-    $original = $entity->original;
+    $original = $entity->getOriginal();
     if (!$entity->isNew() && $original) {
       $original_value = $original->get('changed')->value;
       $entity->set('changed', $original_value);
@@ -2490,8 +2488,7 @@ function hr_paragraphs_node_presave(EntityInterface $entity) {
 
   // Revert changed time during update.
   if ($entity->isMigrating) {
-    /** @var \Drupal\Core\Entity\ContentEntityInterface $original */
-    $original = $entity->original;
+    $original = $entity->getOriginal();
     $langcode = $entity->language()->getId();
     if (!$entity->isNew() && $original && $original->hasTranslation($langcode)) {
       $original_value = $original->getTranslation($langcode)->get('changed')->value;
