@@ -3,5 +3,5 @@ sync_credentials: ''
 csv_source_dir: ''
 notification_email: ''
 notification_new_user_enabled: true
-reliefweb_api_endpoint: 'https://api.reliefweb.int/v1/reports'
+reliefweb_api_endpoint: 'https://api.reliefweb.int/v2/reports'
 reliefweb_api_appname: 'response'

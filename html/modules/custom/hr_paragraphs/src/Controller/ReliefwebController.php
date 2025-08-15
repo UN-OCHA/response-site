@@ -321,7 +321,7 @@ class ReliefwebController extends ControllerBase {
    *   Raw results.
    */
   public function executeReliefwebQuery(array $parameters) : array {
-    $endpoint = $this->config('hr_paragraphs.settings')->get('reliefweb_api_endpoint') ?: 'https://api.reliefweb.int/v1/reports';
+    $endpoint = $this->config('hr_paragraphs.settings')->get('reliefweb_api_endpoint') ?: 'https://api.reliefweb.int/v2/reports';
 
     // Remove empty filters.
     if (!isset($parameters['filter']['conditions']) || empty(($parameters['filter']['conditions']))) {

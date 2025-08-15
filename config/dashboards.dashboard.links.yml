@@ -24,7 +24,7 @@ sections:
           provider: views
           context_mapping: {  }
           views_label: ''
-          items_per_page: none
+          items_per_page: 0
         weight: 0
         additional: {  }
       6a457063-faf5-436d-b53f-ac05f3f6c820:
@@ -37,7 +37,7 @@ sections:
           provider: views
           context_mapping: {  }
           views_label: ''
-          items_per_page: none
+          items_per_page: 0
         weight: 2
         additional: {  }
     third_party_settings: {  }
