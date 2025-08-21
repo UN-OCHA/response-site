@@ -3,36 +3,45 @@ hr_paragraphs.operation:
   class: '\Drupal\hr_paragraphs\Plugin\Menu\LocalTask\DynamicTabLocalTask'
   route_name: entity.group.canonical
   base_route: entity.group.canonical
+  weight: -100
 hr_paragraphs.operation.home:
   title: 'Home'
   class: '\Drupal\hr_paragraphs\Plugin\Menu\LocalTask\DynamicTabLocalTask'
   route_name: entity.group.canonical
   parent_id: hr_paragraphs.operation
+  weight: -90
 hr_paragraphs.operation.reports:
   title: 'Reports'
   route_name: hr_paragraphs.operation.reports
   parent_id: hr_paragraphs.operation
+  weight: 30
 hr_paragraphs.operation.maps:
   title: 'Maps / Infographics'
   route_name: hr_paragraphs.operation.maps
   parent_id: hr_paragraphs.operation
+  weight: 40
 hr_paragraphs.operation.assessments:
   title: 'Assessments'
   route_name: hr_paragraphs.operation.assessments
   parent_id: hr_paragraphs.operation
+  weight: 50
 hr_paragraphs.operation.events:
   title: 'Events'
   route_name: hr_paragraphs.operation.events
   parent_id: hr_paragraphs.operation
+  weight: 60
 hr_paragraphs.operation.data:
   title: 'Data'
   route_name: hr_paragraphs.operation.data
   parent_id: hr_paragraphs.operation
+  weight: 70
 hr_paragraphs.operation.contacts:
   title: 'Contacts'
   route_name: hr_paragraphs.operation.contacts
   parent_id: hr_paragraphs.operation
+  weight: 80
 hr_paragraphs.operation.pages:
   title: 'Pages'
   route_name: hr_paragraphs.operation.pages
   parent_id: hr_paragraphs.operation
+  weight: 90
