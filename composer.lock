@@ -118,16 +118,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.356.15",
+            "version": "3.356.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "ee8e1516b950e33c617ac17d6352ec5421253cff"
+                "reference": "7514867a6463fb68a60f5e17b4ccc56b4dc7d4f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ee8e1516b950e33c617ac17d6352ec5421253cff",
-                "reference": "ee8e1516b950e33c617ac17d6352ec5421253cff",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7514867a6463fb68a60f5e17b4ccc56b4dc7d4f1",
+                "reference": "7514867a6463fb68a60f5e17b4ccc56b4dc7d4f1",
                 "shasum": ""
             },
             "require": {
@@ -140,7 +140,7 @@
                 "guzzlehttp/psr7": "^2.4.5",
                 "mtdowling/jmespath.php": "^2.8.0",
                 "php": ">=8.1",
-                "psr/http-message": "^2.0"
+                "psr/http-message": "^1.0 || ^2.0"
             },
             "require-dev": {
                 "andrewsville/php-token-reflection": "^1.4",
@@ -209,9 +209,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.356.15"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.356.20"
             },
-            "time": "2025-09-10T18:05:36+00:00"
+            "time": "2025-09-17T18:23:32+00:00"
         },
         {
             "name": "bower-asset/dragula",
@@ -6101,17 +6101,17 @@
         },
         {
             "name": "drupal/stage_file_proxy",
-            "version": "3.1.5",
+            "version": "3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/stage_file_proxy.git",
-                "reference": "3.1.5"
+                "reference": "3.1.6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-3.1.5.zip",
-                "reference": "3.1.5",
-                "shasum": "b4bf35dceea7cfd2fc6808d041d903d7cbde2ed2"
+                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-3.1.6.zip",
+                "reference": "3.1.6",
+                "shasum": "06b7196c0c367dc079ab937e1f6b85fc28c2bcc2"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11",
@@ -6127,8 +6127,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "3.1.5",
-                    "datestamp": "1744819754",
+                    "version": "3.1.6",
+                    "datestamp": "1757610587",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -8285,16 +8285,16 @@
         },
         {
             "name": "league/csv",
-            "version": "9.24.1",
+            "version": "9.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/csv.git",
-                "reference": "e0221a3f16aa2a823047d59fab5809d552e29bc8"
+                "reference": "f856f532866369fb1debe4e7c5a1db185f40ef86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/csv/zipball/e0221a3f16aa2a823047d59fab5809d552e29bc8",
-                "reference": "e0221a3f16aa2a823047d59fab5809d552e29bc8",
+                "url": "https://api.github.com/repos/thephpleague/csv/zipball/f856f532866369fb1debe4e7c5a1db185f40ef86",
+                "reference": "f856f532866369fb1debe4e7c5a1db185f40ef86",
                 "shasum": ""
             },
             "require": {
@@ -8310,7 +8310,7 @@
                 "phpstan/phpstan-deprecation-rules": "^1.2.1",
                 "phpstan/phpstan-phpunit": "^1.4.2",
                 "phpstan/phpstan-strict-rules": "^1.6.2",
-                "phpunit/phpunit": "^10.5.16 || ^11.5.22",
+                "phpunit/phpunit": "^10.5.16 || ^11.5.22 || ^12.3.6",
                 "symfony/var-dumper": "^6.4.8 || ^7.3.0"
             },
             "suggest": {
@@ -8372,7 +8372,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-25T14:53:51+00:00"
+            "time": "2025-09-11T08:29:08+00:00"
         },
         {
             "name": "league/oauth2-client",
@@ -9836,16 +9836,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.23",
+            "version": "2.1.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "a34502adbbd5c2366b5a97679848a5ace4f6f2f5"
+                "reference": "25da374959afa391992792691093550b3098ef1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a34502adbbd5c2366b5a97679848a5ace4f6f2f5",
-                "reference": "a34502adbbd5c2366b5a97679848a5ace4f6f2f5",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/25da374959afa391992792691093550b3098ef1e",
+                "reference": "25da374959afa391992792691093550b3098ef1e",
                 "shasum": ""
             },
             "require": {
@@ -9890,7 +9890,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-09-10T11:42:22+00:00"
+            "time": "2025-09-17T09:55:13+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -15470,23 +15470,20 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v4.32.0",
+            "version": "v4.32.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "9a9a92ecbe9c671dc1863f6d4a91ea3ea12c8646"
+                "reference": "c4ed1c1f9bbc1e91766e2cd6c0af749324fe87cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/9a9a92ecbe9c671dc1863f6d4a91ea3ea12c8646",
-                "reference": "9a9a92ecbe9c671dc1863f6d4a91ea3ea12c8646",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/c4ed1c1f9bbc1e91766e2cd6c0af749324fe87cb",
+                "reference": "c4ed1c1f9bbc1e91766e2cd6c0af749324fe87cb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1.0"
-            },
-            "provide": {
-                "ext-protobuf": "*"
             },
             "require-dev": {
                 "phpunit/phpunit": ">=5.0.0 <8.5.27"
@@ -15511,9 +15508,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.32.0"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v4.32.1"
             },
-            "time": "2025-08-14T20:00:33+00:00"
+            "time": "2025-09-14T05:14:52+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -15777,16 +15774,16 @@
         },
         {
             "name": "marc-mabe/php-enum",
-            "version": "v4.7.1",
+            "version": "v4.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/marc-mabe/php-enum.git",
-                "reference": "7159809e5cfa041dca28e61f7f7ae58063aae8ed"
+                "reference": "bb426fcdd65c60fb3638ef741e8782508fda7eef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/marc-mabe/php-enum/zipball/7159809e5cfa041dca28e61f7f7ae58063aae8ed",
-                "reference": "7159809e5cfa041dca28e61f7f7ae58063aae8ed",
+                "url": "https://api.github.com/repos/marc-mabe/php-enum/zipball/bb426fcdd65c60fb3638ef741e8782508fda7eef",
+                "reference": "bb426fcdd65c60fb3638ef741e8782508fda7eef",
                 "shasum": ""
             },
             "require": {
@@ -15844,9 +15841,9 @@
             ],
             "support": {
                 "issues": "https://github.com/marc-mabe/php-enum/issues",
-                "source": "https://github.com/marc-mabe/php-enum/tree/v4.7.1"
+                "source": "https://github.com/marc-mabe/php-enum/tree/v4.7.2"
             },
-            "time": "2024-11-28T04:54:44+00:00"
+            "time": "2025-09-14T11:18:39+00:00"
         },
         {
             "name": "marcocesarato/php-conventional-changelog",
@@ -15928,16 +15925,16 @@
         },
         {
             "name": "micheh/phpcs-gitlab",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/micheh/phpcs-gitlab.git",
-                "reference": "48d42b48ad687566464c5588b9e518b0deee22c7"
+                "reference": "465874d545c29855fcf102351eada8b95bf7eb2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/micheh/phpcs-gitlab/zipball/48d42b48ad687566464c5588b9e518b0deee22c7",
-                "reference": "48d42b48ad687566464c5588b9e518b0deee22c7",
+                "url": "https://api.github.com/repos/micheh/phpcs-gitlab/zipball/465874d545c29855fcf102351eada8b95bf7eb2c",
+                "reference": "465874d545c29855fcf102351eada8b95bf7eb2c",
                 "shasum": ""
             },
             "require": {
@@ -15946,7 +15943,7 @@
             "require-dev": {
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^9.3 || ^10.0",
-                "squizlabs/php_codesniffer": "^3.5.0"
+                "squizlabs/php_codesniffer": "^3.5.0 || ^4.0.0"
             },
             "type": "library",
             "autoload": {
@@ -15975,9 +15972,9 @@
             ],
             "support": {
                 "issues": "https://github.com/micheh/phpcs-gitlab/issues",
-                "source": "https://github.com/micheh/phpcs-gitlab/tree/2.0.0"
+                "source": "https://github.com/micheh/phpcs-gitlab/tree/2.1.0"
             },
-            "time": "2025-01-01T11:08:56+00:00"
+            "time": "2025-09-17T09:43:27+00:00"
         },
         {
             "name": "mikey179/vfsstream",
@@ -16352,16 +16349,16 @@
         },
         {
             "name": "open-telemetry/gen-otlp-protobuf",
-            "version": "1.5.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opentelemetry-php/gen-otlp-protobuf.git",
-                "reference": "585bafddd4ae6565de154610b10a787a455c9ba0"
+                "reference": "673af5b06545b513466081884b47ef15a536edde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opentelemetry-php/gen-otlp-protobuf/zipball/585bafddd4ae6565de154610b10a787a455c9ba0",
-                "reference": "585bafddd4ae6565de154610b10a787a455c9ba0",
+                "url": "https://api.github.com/repos/opentelemetry-php/gen-otlp-protobuf/zipball/673af5b06545b513466081884b47ef15a536edde",
+                "reference": "673af5b06545b513466081884b47ef15a536edde",
                 "shasum": ""
             },
             "require": {
@@ -16411,7 +16408,7 @@
                 "issues": "https://github.com/open-telemetry/opentelemetry-php/issues",
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
-            "time": "2025-01-15T23:07:07+00:00"
+            "time": "2025-09-17T23:10:12+00:00"
         },
         {
             "name": "open-telemetry/sdk",
@@ -17779,16 +17776,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.5.37",
+            "version": "11.5.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "b87c1ad30535b40f14db1aa048e11747ba22e6ff"
+                "reference": "ad5597f79d8489d2870073ac0bc0dd0ad1fa9931"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b87c1ad30535b40f14db1aa048e11747ba22e6ff",
-                "reference": "b87c1ad30535b40f14db1aa048e11747ba22e6ff",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ad5597f79d8489d2870073ac0bc0dd0ad1fa9931",
+                "reference": "ad5597f79d8489d2870073ac0bc0dd0ad1fa9931",
                 "shasum": ""
             },
             "require": {
@@ -17860,7 +17857,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.37"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.5.39"
             },
             "funding": [
                 {
@@ -17884,7 +17881,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-11T06:21:19+00:00"
+            "time": "2025-09-14T06:20:41+00:00"
         },
         {
             "name": "ramsey/collection",
@@ -19252,16 +19249,16 @@
         },
         {
             "name": "slevomat/coding-standard",
-            "version": "8.22.0",
+            "version": "8.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "a4cef983bad2e70125612d22b2f6e2bd1333d5c2"
+                "reference": "1dd80bf3b93692bedb21a6623c496887fad05fec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/a4cef983bad2e70125612d22b2f6e2bd1333d5c2",
-                "reference": "a4cef983bad2e70125612d22b2f6e2bd1333d5c2",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/1dd80bf3b93692bedb21a6623c496887fad05fec",
+                "reference": "1dd80bf3b93692bedb21a6623c496887fad05fec",
                 "shasum": ""
             },
             "require": {
@@ -19273,11 +19270,11 @@
             "require-dev": {
                 "phing/phing": "3.0.1|3.1.0",
                 "php-parallel-lint/php-parallel-lint": "1.4.0",
-                "phpstan/phpstan": "2.1.22",
+                "phpstan/phpstan": "2.1.24",
                 "phpstan/phpstan-deprecation-rules": "2.0.3",
                 "phpstan/phpstan-phpunit": "2.0.7",
                 "phpstan/phpstan-strict-rules": "2.0.6",
-                "phpunit/phpunit": "9.6.8|10.5.48|11.4.4|11.5.36|12.3.8"
+                "phpunit/phpunit": "9.6.8|10.5.48|11.4.4|11.5.36|12.3.10"
             },
             "type": "phpcodesniffer-standard",
             "extra": {
@@ -19301,7 +19298,7 @@
             ],
             "support": {
                 "issues": "https://github.com/slevomat/coding-standard/issues",
-                "source": "https://github.com/slevomat/coding-standard/tree/8.22.0"
+                "source": "https://github.com/slevomat/coding-standard/tree/8.22.1"
             },
             "funding": [
                 {
@@ -19313,7 +19310,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-06T09:14:48+00:00"
+            "time": "2025-09-13T08:53:30+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
