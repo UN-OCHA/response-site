@@ -2498,6 +2498,38 @@ function hr_paragraphs_node_presave(EntityInterface $entity) {
 }
 
 /**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function hr_paragraphs_paragraph_presave(EntityInterface $entity) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $entity */
+  if (!$entity->hasField('field_text')) {
+    return;
+  }
+
+  // Remove class and style from all tags.
+  $text = $entity->field_text->value;
+  $text = preg_replace('/(<[a-zA-Z0-9]+)([^>]*)( class="[^"]*")([^>]*>)/', '$1$2$4', $text);
+  $text = preg_replace('/(<[a-zA-Z0-9]+)([^>]*)( style="[^"]*")([^>]*>)/', '$1$2$4', $text);
+
+  // Remove all attributes starting with data-.
+  $text = preg_replace('/(<[a-zA-Z0-9]+)([^>]*)( data-[^=]+="[^"]*")([^>]*>)/', '$1$2$4', $text);
+
+  // Remove empty attributes.
+  $text = preg_replace('/(<[a-zA-Z0-9]+)([^>]*)( [a-zA-Z0-9-]+="")([^>]*>)/', '$1$2$4', $text);
+
+  // Remove empty tags.
+  $text = preg_replace('/<([a-zA-Z0-9]+)([^>]*)><\/\1>/', '', $text);
+
+  // Remove multiple spaces.
+  $text = preg_replace('/\s+/', ' ', $text);
+
+  // Trim.
+  $text = trim($text);
+
+  $entity->field_text->value = $text;
+}
+
+/**
  * Implements hook_editor_js_settings_alter().
  */
 function hr_paragraphs_editor_js_settings_alter(array &$settings) {

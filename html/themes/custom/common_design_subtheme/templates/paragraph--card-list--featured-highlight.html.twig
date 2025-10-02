@@ -31,7 +31,7 @@
       <div{{ content_attributes.addClass('node__content').addClass('hri-card__content') }}>
         {{ content.field_image }}
         <h3 class="hri-card__title">{{ content.field_title.0 }}</h3>
-        <p class="hri-card__summary">{{ content.field_text|render|striptags|trim|replace({'&nbsp;': ''}) }}</p>
+        <p class="hri-card__summary">{{ content.field_text|render|striptags('<br><p><ol><ul><li><em><b><strong>')|raw }}</p>
         <a href="{{ paragraph.field_destination.0.url }}" class="hri-card__link" title="{{ 'View more'|t }}">{{ 'View more'|t }}</a>
       </div>
     {% endblock %}
