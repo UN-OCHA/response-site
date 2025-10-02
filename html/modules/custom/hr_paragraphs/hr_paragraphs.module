@@ -2506,6 +2506,15 @@ function hr_paragraphs_paragraph_presave(EntityInterface $entity) {
     return;
   }
 
+  // Only if format is basic_html.
+  if (!$entity->field_text->format) {
+    return;
+  }
+
+  if ($entity->field_text->format != 'basic_html') {
+    return;
+  }
+
   // Remove class and style from all tags.
   $text = $entity->field_text->value;
   $text = preg_replace('/(<[a-zA-Z0-9]+)([^>]*)( class="[^"]*")([^>]*>)/', '$1$2$4', $text);
