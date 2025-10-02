@@ -2515,19 +2515,57 @@ function hr_paragraphs_paragraph_presave(EntityInterface $entity) {
     return;
   }
 
-  // Remove class and style from all tags.
   $text = $entity->field_text->value;
-  $text = preg_replace('/(<[a-zA-Z0-9]+)([^>]*)( class="[^"]*")([^>]*>)/', '$1$2$4', $text);
-  $text = preg_replace('/(<[a-zA-Z0-9]+)([^>]*)( style="[^"]*")([^>]*>)/', '$1$2$4', $text);
+  if (empty($text)) {
+    return;
+  }
 
-  // Remove all attributes starting with data-.
-  $text = preg_replace('/(<[a-zA-Z0-9]+)([^>]*)( data-[^=]+="[^"]*")([^>]*>)/', '$1$2$4', $text);
+  // Use DOMDocument to reliably clean HTML.
+  $dom = new \DOMDocument();
 
-  // Remove empty attributes.
-  $text = preg_replace('/(<[a-zA-Z0-9]+)([^>]*)( [a-zA-Z0-9-]+="")([^>]*>)/', '$1$2$4', $text);
+  // Suppress warnings for malformed HTML.
+  libxml_use_internal_errors(TRUE);
 
+  // Load HTML fragment.
+  $dom->loadHTML('<?xml encoding="utf-8" ?>' . $text, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+  libxml_clear_errors();
+
+  // Remove unwanted attributes from all elements.
+  foreach ($dom->getElementsByTagName('*') as $el) {
+    // Remove class and style attributes.
+    $el->removeAttribute('class');
+    $el->removeAttribute('style');
+
+    // Remove data-* attributes and empty attributes.
+    $attrs = [];
+    foreach ($el->attributes as $attr) {
+      $attrs[] = $attr->name;
+    }
+    foreach ($attrs as $attr_name) {
+      if (strpos($attr_name, 'data-') === 0 || $el->getAttribute($attr_name) === '') {
+        $el->removeAttribute($attr_name);
+      }
+    }
+  }
   // Remove empty tags.
-  $text = preg_replace('/<([a-zA-Z0-9]+)([^>]*)><\/\1>/', '', $text);
+  // We need to iterate multiple times in case of nested empty tags.
+  $removed = TRUE;
+  while ($removed) {
+    $removed = FALSE;
+    foreach ($dom->getElementsByTagName('*') as $el) {
+      if (!$el->hasChildNodes() && trim($el->textContent) === '') {
+        $el->parentNode->removeChild($el);
+        $removed = TRUE;
+        break;
+      }
+    }
+  }
+
+  // Get cleaned HTML.
+  $text = $dom->saveHTML();
+
+  // Remove XML encoding declaration added for UTF-8.
+  $text = preg_replace('/^<\?xml.*?\?>/', '', $text);
 
   // Remove multiple spaces.
   $text = preg_replace('/\s+/', ' ', $text);
