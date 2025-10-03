@@ -20,6 +20,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupRelationship;
+use Drupal\hr_paragraphs\Helpers\HtmlSanitizer;
 use Drupal\node\Entity\Node;
 use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
@@ -2520,59 +2521,7 @@ function hr_paragraphs_paragraph_presave(EntityInterface $entity) {
     return;
   }
 
-  // Use DOMDocument to reliably clean HTML.
-  $dom = new \DOMDocument();
-
-  // Suppress warnings for malformed HTML.
-  libxml_use_internal_errors(TRUE);
-
-  // Load HTML fragment.
-  $dom->loadHTML('<?xml encoding="utf-8" ?>' . $text, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-  libxml_clear_errors();
-
-  // Remove unwanted attributes from all elements.
-  foreach ($dom->getElementsByTagName('*') as $el) {
-    // Remove class and style attributes.
-    $el->removeAttribute('class');
-    $el->removeAttribute('style');
-
-    // Remove data-* attributes and empty attributes.
-    $attrs = [];
-    foreach ($el->attributes as $attr) {
-      $attrs[] = $attr->name;
-    }
-    foreach ($attrs as $attr_name) {
-      if (strpos($attr_name, 'data-') === 0 || $el->getAttribute($attr_name) === '') {
-        $el->removeAttribute($attr_name);
-      }
-    }
-  }
-  // Remove empty tags.
-  // We need to iterate multiple times in case of nested empty tags.
-  $removed = TRUE;
-  while ($removed) {
-    $removed = FALSE;
-    foreach ($dom->getElementsByTagName('*') as $el) {
-      if (!$el->hasChildNodes() && trim($el->textContent) === '') {
-        $el->parentNode->removeChild($el);
-        $removed = TRUE;
-        break;
-      }
-    }
-  }
-
-  // Get cleaned HTML.
-  $text = $dom->saveHTML();
-
-  // Remove XML encoding declaration added for UTF-8.
-  $text = preg_replace('/^<\?xml.*?\?>/', '', $text);
-
-  // Remove multiple spaces.
-  $text = preg_replace('/\s+/', ' ', $text);
-
-  // Trim.
-  $text = trim($text);
-
+  $text = HtmlSanitizer::sanitize($text);
   $entity->field_text->value = $text;
 }
 
