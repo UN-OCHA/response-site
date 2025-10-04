@@ -169,7 +169,7 @@ class RssController extends ControllerBase {
       foreach ($xml->channel->item as $entry) {
         $items[] = new RssItem(
           (string) $entry->title,
-          (string) $entry->link,
+          (string) ($entry->link['href'] ?? $entry->link),
           (string) $entry->description,
           strtotime($entry->pubDate),
         );
@@ -204,7 +204,7 @@ class RssController extends ControllerBase {
       foreach ($xml->entry as $entry) {
         $items[] = new RssItem(
           (string) $entry->title,
-          (string) $entry->link,
+          (string) ($entry->link['href'] ?? $entry->link),
           (string) $entry->summary,
           strtotime($entry->updated),
         );
