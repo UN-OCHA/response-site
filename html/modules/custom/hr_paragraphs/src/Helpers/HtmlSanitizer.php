@@ -321,21 +321,13 @@ class HtmlSanitizer {
    *   Image node.
    */
   protected function handleImage(\DOMNode $node) {
-    $url = $node->getAttribute('src');
+    // Ensure there is always an alt attribute.
+    if (!$node->hasAttribute('alt')) {
+      $node->setAttribute('alt', '');
+    }
 
-    // Remove images with an invalid url.
-    if (!$this->validateUrl($url)) {
-      // Remove the node.
-      $this->removeChild($node);
-    }
     // Remove all the attributes except the 'src', 'alt' and 'title' ones.
-    else {
-      // Ensure there is always an alt attribute.
-      if (!$node->hasAttribute('alt')) {
-        $node->setAttribute('alt', '');
-      }
-      $this->removeAttributes($node, ['src', 'alt', 'title']);
-    }
+    $this->removeAttributes($node, ['src', 'alt', 'title']);
   }
 
   /**
@@ -347,42 +339,34 @@ class HtmlSanitizer {
    *   Iframe node.
    */
   protected function handleIframe(\DOMNode $node) {
-    $url = $node->getAttribute('src');
+    // Create a wrapper for the iframe so it can be made responsive.
+    $wrapper = $node->ownerDocument->createElement('div');
+    $wrapper->setAttribute('class', 'iframe-wrapper');
 
-    // Remove iframes with an invalid url.
-    if (!$this->validateUrl($url)) {
-      $this->removeChild($node);
+    // Extract the aspect ratio of the iframe.
+    $width = intval($node->getAttribute('width'), 10);
+    $height = intval($node->getAttribute('height'), 10);
+    // Default to a 2/1 ratio.
+    $ratio = '50';
+    if (!empty($width) && !empty($height)) {
+      $ratio = 100 * $height / $width;
     }
-    else {
-      // Create a wrapper for the iframe so it can be made responsive.
-      $wrapper = $node->ownerDocument->createElement('div');
-      $wrapper->setAttribute('class', 'iframe-wrapper');
+    // Set a padding top equal to the ratio to the parent so that the
+    // the aspect ratio of the iframe can be preserved.
+    $wrapper->setAttribute('style', 'padding-top:' . $ratio . '%');
 
-      // Extract the aspect ratio of the iframe.
-      $width = intval($node->getAttribute('width'), 10);
-      $height = intval($node->getAttribute('height'), 10);
-      // Default to a 2/1 ratio.
-      $ratio = '50';
-      if (!empty($width) && !empty($height)) {
-        $ratio = 100 * $height / $width;
-      }
-      // Set a padding top equal to the ratio to the parent so that the
-      // the aspect ratio of the iframe can be preserved.
-      $wrapper->setAttribute('style', 'padding-top:' . $ratio . '%');
+    // Remove most of the attributes.
+    $this->removeAttributes($node, ['src', 'title', 'allowfullscreen']);
 
-      // Remove most of the attributes.
-      $this->removeAttributes($node, ['src', 'title', 'allowfullscreen']);
+    // We allow scripts to run in the sandboxed iframe as mostly they
+    // contain dynamic content like maps or videos. We also allow opening
+    // links into new pages/tabs.
+    $node->setAttribute('sandbox', 'allow-same-origin allow-scripts allow-popups');
+    $node->setAttribute('target', '_blank');
 
-      // We allow scripts to run in the sandboxed iframe as mostly they
-      // contain dynamic content like maps or videos. We also allow opening
-      // links into new pages/tabs.
-      $node->setAttribute('sandbox', 'allow-same-origin allow-scripts allow-popups');
-      $node->setAttribute('target', '_blank');
-
-      // Replace the iframe by the wrapper and append the iframe to it.
-      $node->parentNode->replaceChild($wrapper, $node);
-      $wrapper->appendChild($node);
-    }
+    // Replace the iframe by the wrapper and append the iframe to it.
+    $node->parentNode->replaceChild($wrapper, $node);
+    $wrapper->appendChild($node);
   }
 
   /**
