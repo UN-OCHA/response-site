@@ -327,7 +327,19 @@ class HtmlSanitizer {
     }
 
     // Remove all the attributes except the 'src', 'alt' and 'title' ones.
-    $this->removeAttributes($node, ['src', 'alt', 'title']);
+    $this->removeAttributes($node, [
+      'src',
+      'alt',
+      'title',
+      'width',
+      'height',
+      'data-align',
+      'data-caption',
+      'data-entity-uuid',
+      'data-entity-type',
+      'data-entity-id',
+      'class',
+    ]);
   }
 
   /**
