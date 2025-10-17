@@ -326,7 +326,7 @@ class HtmlSanitizer {
       $node->setAttribute('alt', '');
     }
 
-    // Remove all the attributes except the 'src', 'alt' and 'title' ones.
+    // Remove some attributes.
     $this->removeAttributes($node, [
       'src',
       'alt',
