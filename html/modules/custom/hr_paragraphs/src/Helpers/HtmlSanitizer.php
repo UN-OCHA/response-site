@@ -283,8 +283,8 @@ class HtmlSanitizer {
    *   Heading node.
    */
   protected function handleHeading(\DOMNode $node) {
-    // Remove all the attributes except the 'id' that we keep to allow
-    // internal links.
+    // Remove all the attributes except 'id' (for internal links) and 'style'.
+    // Both 'id' and 'style' are preserved.
     $this->removeAttributes($node, ['id', 'style']);
   }
 
