@@ -235,7 +235,7 @@ class HtmlSanitizer {
           $this->changeTag($node, $convert[$tag]);
         }
         else {
-          $this->removeAttributes($node);
+          $this->removeAttributes($node, ['style', 'class']);
         }
       }
     }
@@ -285,7 +285,7 @@ class HtmlSanitizer {
   protected function handleHeading(\DOMNode $node) {
     // Remove all the attributes except the 'id' that we keep to allow
     // internal links.
-    $this->removeAttributes($node, ['id']);
+    $this->removeAttributes($node, ['id', 'style']);
   }
 
   /**
@@ -299,7 +299,7 @@ class HtmlSanitizer {
    */
   protected function handleLink(\DOMNode $node) {
     // Remove all the attributes except the 'href' and optional 'target'.
-    $allowed_attributes = ['href'];
+    $allowed_attributes = ['href', 'style', 'class'];
 
     // We preserve the target attribute to open in a new tab/window.
     $target = $node->getAttribute('target');
@@ -339,6 +339,7 @@ class HtmlSanitizer {
       'data-entity-type',
       'data-entity-id',
       'class',
+      'style',
     ]);
   }
 
@@ -450,7 +451,7 @@ class HtmlSanitizer {
   }
 
   /**
-   * Remove style and event attributes from a node.
+   * Remove event attributes from a node.
    *
    * @param \DOMNode $node
    *   Node from which to remove attributes.
@@ -461,7 +462,7 @@ class HtmlSanitizer {
       $attributes = $node->attributes;
       for ($i = $attributes->length - 1; $i >= 0; $i--) {
         $attribute = $attributes->item($i)->name;
-        if ($attribute === 'style' || strpos($attribute, 'on') === 0) {
+        if (strpos($attribute, 'on') === 0) {
           $node->removeAttribute($attribute);
         }
       }
