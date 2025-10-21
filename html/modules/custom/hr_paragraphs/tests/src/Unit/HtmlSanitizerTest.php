@@ -60,4 +60,22 @@ class HtmlSanitizerTest extends UnitTestCase {
     ];
   }
 
+  /**
+   * Test Ukraine page.
+   */
+  public function testUkrainePage() {
+    $input = file_get_contents(__DIR__ . '/fixtures/ukraine_page.in.html');
+    $expected = file_get_contents(__DIR__ . '/fixtures/ukraine_page.out.html');
+
+    $output = HtmlSanitizer::sanitize($input);
+    $this->assertEquals($this->normalizeHtml($expected), $this->normalizeHtml($output));
+  }
+
+  /**
+   * Remove line breaks for easier comparison in tests.
+   */
+  protected function normalizeHtml($html) {
+    return str_replace(["\n", "\r"], '', $html);
+  }
+
 }
