@@ -252,6 +252,7 @@
         "marcocesarato/php-conventional-changelog": "*",
         "phpcompatibility/php-compatibility": "^9.3",
         "phpspec/prophecy-phpunit": "^2",
+        "phpunit/phpunit": "^11.5",
         "weitzman/drupal-test-traits": "^2.0"
     }
 }

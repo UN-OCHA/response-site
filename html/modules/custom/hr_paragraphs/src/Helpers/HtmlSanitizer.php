@@ -238,6 +238,9 @@ class HtmlSanitizer {
           $this->removeAttributes($node, ['style', 'class']);
         }
       }
+
+      // Remove comments.
+      $this->removeComments($node);
     }
     $html = $dom->saveHTML();
 
@@ -284,7 +287,6 @@ class HtmlSanitizer {
    */
   protected function handleHeading(\DOMNode $node) {
     // Remove all the attributes except 'id' (for internal links) and 'style'.
-    // Both 'id' and 'style' are preserved.
     $this->removeAttributes($node, ['id', 'style']);
   }
 
@@ -565,6 +567,19 @@ class HtmlSanitizer {
     }
     // Remove the node.
     $this->removeChild($node);
+  }
+
+  /**
+   * Remove HTML comments from a DOMNode.
+   *
+   * @param \DOMNode $node
+   *   Node from which to remove comments.
+   */
+  protected function removeComments(\DOMNode $node) {
+    $xpath = new \DOMXPath($node->ownerDocument);
+    foreach ($xpath->query('//comment()') as $comment) {
+      $comment->parentNode->removeChild($comment);
+    }
   }
 
 }
