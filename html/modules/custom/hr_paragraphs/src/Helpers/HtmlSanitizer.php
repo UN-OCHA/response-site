@@ -238,10 +238,11 @@ class HtmlSanitizer {
           $this->removeAttributes($node, ['style', 'class']);
         }
       }
-
-      // Remove comments.
-      $this->removeComments($node);
     }
+
+    // Remove all comments.
+    $this->removeComments($dom);
+
     $html = $dom->saveHTML();
 
     // Search for the body tag and return its content.
@@ -570,13 +571,13 @@ class HtmlSanitizer {
   }
 
   /**
-   * Remove HTML comments from a DOMNode.
+   * Remove HTML comments from a document.
    *
-   * @param \DOMNode $node
-   *   Node from which to remove comments.
+   * @param \DOMDocument $dom
+   *   Document from which to remove comments.
    */
-  protected function removeComments(\DOMNode $node) {
-    $xpath = new \DOMXPath($node->ownerDocument);
+  protected function removeComments(\DOMDocument $dom) {
+    $xpath = new \DOMXPath($dom);
     foreach ($xpath->query('//comment()') as $comment) {
       $comment->parentNode->removeChild($comment);
     }
