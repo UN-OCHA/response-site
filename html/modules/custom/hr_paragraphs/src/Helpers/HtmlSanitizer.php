@@ -235,10 +235,14 @@ class HtmlSanitizer {
           $this->changeTag($node, $convert[$tag]);
         }
         else {
-          $this->removeAttributes($node);
+          $this->removeAttributes($node, ['style', 'class']);
         }
       }
     }
+
+    // Remove all comments.
+    $this->removeComments($dom);
+
     $html = $dom->saveHTML();
 
     // Search for the body tag and return its content.
@@ -283,9 +287,8 @@ class HtmlSanitizer {
    *   Heading node.
    */
   protected function handleHeading(\DOMNode $node) {
-    // Remove all the attributes except the 'id' that we keep to allow
-    // internal links.
-    $this->removeAttributes($node, ['id']);
+    // Remove all the attributes except 'id' (for internal links) and 'style'.
+    $this->removeAttributes($node, ['id', 'style']);
   }
 
   /**
@@ -299,7 +302,7 @@ class HtmlSanitizer {
    */
   protected function handleLink(\DOMNode $node) {
     // Remove all the attributes except the 'href' and optional 'target'.
-    $allowed_attributes = ['href'];
+    $allowed_attributes = ['href', 'style', 'class'];
 
     // We preserve the target attribute to open in a new tab/window.
     $target = $node->getAttribute('target');
@@ -326,7 +329,7 @@ class HtmlSanitizer {
       $node->setAttribute('alt', '');
     }
 
-    // Remove all the attributes except the 'src', 'alt' and 'title' ones.
+    // Remove some attributes.
     $this->removeAttributes($node, [
       'src',
       'alt',
@@ -339,6 +342,7 @@ class HtmlSanitizer {
       'data-entity-type',
       'data-entity-id',
       'class',
+      'style',
     ]);
   }
 
@@ -450,7 +454,7 @@ class HtmlSanitizer {
   }
 
   /**
-   * Remove style and event attributes from a node.
+   * Remove event attributes from a node.
    *
    * @param \DOMNode $node
    *   Node from which to remove attributes.
@@ -461,7 +465,7 @@ class HtmlSanitizer {
       $attributes = $node->attributes;
       for ($i = $attributes->length - 1; $i >= 0; $i--) {
         $attribute = $attributes->item($i)->name;
-        if ($attribute === 'style' || strpos($attribute, 'on') === 0) {
+        if (strpos($attribute, 'on') === 0) {
           $node->removeAttribute($attribute);
         }
       }
@@ -564,6 +568,19 @@ class HtmlSanitizer {
     }
     // Remove the node.
     $this->removeChild($node);
+  }
+
+  /**
+   * Remove HTML comments from a document.
+   *
+   * @param \DOMDocument $dom
+   *   Document from which to remove comments.
+   */
+  protected function removeComments(\DOMDocument $dom) {
+    $xpath = new \DOMXPath($dom);
+    foreach ($xpath->query('//comment()') as $comment) {
+      $comment->parentNode->removeChild($comment);
+    }
   }
 
 }
