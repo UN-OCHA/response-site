@@ -20,7 +20,6 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupRelationship;
-use Drupal\hr_paragraphs\Helpers\HtmlSanitizer;
 use Drupal\node\Entity\Node;
 use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
@@ -2496,33 +2495,6 @@ function hr_paragraphs_node_presave(EntityInterface $entity) {
       $entity->set('changed', $original_value);
     }
   }
-}
-
-/**
- * Implements hook_ENTITY_TYPE_presave().
- */
-function hr_paragraphs_paragraph_presave(EntityInterface $entity) {
-  /** @var \Drupal\paragraphs\Entity\Paragraph $entity */
-  if (!$entity->hasField('field_text')) {
-    return;
-  }
-
-  // Only if format is basic_html.
-  if (!$entity->field_text->format) {
-    return;
-  }
-
-  if ($entity->field_text->format != 'basic_html') {
-    return;
-  }
-
-  $text = $entity->field_text->value;
-  if (empty($text)) {
-    return;
-  }
-
-  $text = HtmlSanitizer::sanitize($text);
-  $entity->field_text->value = $text;
 }
 
 /**
