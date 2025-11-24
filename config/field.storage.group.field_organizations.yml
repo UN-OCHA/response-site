@@ -1,12 +1,12 @@
-uuid: 30d46708-048c-48c1-8ab7-88406e4d548f
+uuid: f0e9e841-3dec-40b6-a358-a55cedd63b29
 langcode: en
 status: true
 dependencies:
   module:
     - group
     - options
-id: group.field_countries
-field_name: field_countries
+id: group.field_organizations
+field_name: field_organizations
 entity_type: group
 type: list_integer
 settings:
@@ -14,7 +14,7 @@ settings:
     -
       value: 0
       label: RW
-  allowed_values_function: hr_paragraphs_allowed_countries
+  allowed_values_function: hr_paragraphs_allowed_organizations
 module: options
 locked: false
 cardinality: -1

@@ -34,6 +34,7 @@ dependencies:
     - layout_paragraphs
     - link
     - path
+    - select2
     - text
 third_party_settings:
   field_group:
@@ -247,10 +248,11 @@ content:
       placeholder_title: ''
     third_party_settings: {  }
   field_countries:
-    type: options_select
+    type: select2
     weight: 2
     region: content
-    settings: {  }
+    settings:
+      width: 100%
     third_party_settings: {  }
   field_documents_page:
     type: hr_paragraphs_link_default

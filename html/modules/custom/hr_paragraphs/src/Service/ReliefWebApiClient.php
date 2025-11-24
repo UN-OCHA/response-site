@@ -208,4 +208,89 @@ class ReliefWebApiClient {
     return $countries;
   }
 
+  /**
+   * Get sources from ReliefWeb.
+   */
+  public function getSources(): array {
+    // Check cache first.
+    $cache = $this->cache->get('reliefweb_sources');
+    if ($cache) {
+      return $cache->data;
+    }
+
+    $offset = 0;
+
+    $parameters = [
+      'appname' => $this->appName,
+      'offset' => $offset,
+      'limit' => 999,
+      'preset' => 'latest',
+      'fields[include]' => [
+        'name',
+        'shortname',
+        'url',
+        'url_alias',
+      ],
+      'sort' => ['name:asc'],
+    ];
+
+    $endpoint = $this->apiUrl . '/v2/sources';
+
+    $json = NULL;
+    do {
+      $parameters['offset'] = $offset;
+      $json_part = $this->executeReliefwebQuery($endpoint, $parameters);
+
+      if (!isset($json)) {
+        $json = $json_part;
+      }
+      else {
+        $json['data'] = array_merge($json['data'], $json_part['data']);
+      }
+
+      $offset += $parameters['limit'];
+    } while (!empty($json_part['links']['next']));
+
+    // Cache it forever.
+    $this->cache->set('reliefweb_sources', $json, Cache::PERMANENT);
+
+    return $json;
+  }
+
+  /**
+   * Get organization data keyed by id.
+   */
+  public function getOrganizationsById(): array {
+    $results = $this->getSources();
+
+    $sources = [];
+    if (!empty($results['data'])) {
+      foreach ($results['data'] as $source) {
+        $sources[$source['id']] = $source;
+      }
+    }
+
+    return $sources;
+  }
+
+  /**
+   * Get organizations list.
+   */
+  public function getOrganizationsList(): array {
+    $results = $this->getSources();
+
+    $organizations = [];
+    if (!empty($results['data'])) {
+      foreach ($results['data'] as $source) {
+        $organizations[$source['id']] = $source['fields']['name'];
+        if (!empty($source['fields']['shortname']) && $source['fields']['shortname'] !== $source['fields']['name']) {
+          $organizations[$source['id']] .= ' (' . $source['fields']['shortname'] . ')';
+        }
+      }
+    }
+
+    asort($organizations, SORT_STRING | SORT_FLAG_CASE);
+    return $organizations;
+  }
+
 }

@@ -18,6 +18,7 @@ dependencies:
     - field.field.group.cluster.field_maps_infographics_link
     - field.field.group.cluster.field_meta_description
     - field.field.group.cluster.field_offices_page
+    - field.field.group.cluster.field_organizations
     - field.field.group.cluster.field_pages_page
     - field.field.group.cluster.field_paragraphs
     - field.field.group.cluster.field_reliefweb_assessments
@@ -80,6 +81,7 @@ hidden:
   field_maps_infographics_link: true
   field_meta_description: true
   field_offices_page: true
+  field_organizations: true
   field_pages_page: true
   field_reliefweb_assessments: true
   field_reliefweb_documents: true

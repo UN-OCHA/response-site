@@ -2811,3 +2811,12 @@ function hr_paragraphs_allowed_countries(?FieldStorageDefinitionInterface $defin
   $reliefweb_api_client = \Drupal::service('hr_paragraphs.reliefweb_api_client');
   return $reliefweb_api_client->getCountriesList();
 }
+
+/**
+ * Allowed values callback for ReliefWeb organizations.
+ */
+function hr_paragraphs_allowed_organizations(?FieldStorageDefinitionInterface $definition = NULL, ?FieldableEntityInterface $entity = NULL, &$cacheable = TRUE) {
+  /** @var \Drupal\hr_paragraphs\Service\ReliefWebApiClient $reliefweb_api_client */
+  $reliefweb_api_client = \Drupal::service('hr_paragraphs.reliefweb_api_client');
+  return $reliefweb_api_client->getOrganizationsList();
+}
