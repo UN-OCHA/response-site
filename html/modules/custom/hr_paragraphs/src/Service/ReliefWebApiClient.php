@@ -170,7 +170,7 @@ class ReliefWebApiClient {
     $json = $this->executeReliefwebQuery($endpoint, $parameters);
 
     // Cache it forever.
-    $this->cache->set('reliefweb_countries', $json, Cache::PERMANENT);
+    $this->cache->set('reliefweb_countries', $json, Cache::PERMANENT, ['hr_paragraphs:reliefweb_countries']);
 
     return $json;
   }
@@ -252,7 +252,7 @@ class ReliefWebApiClient {
     } while (!empty($json_part['links']['next']));
 
     // Cache it forever.
-    $this->cache->set('reliefweb_sources', $json, Cache::PERMANENT);
+    $this->cache->set('reliefweb_sources', $json, Cache::PERMANENT, ['hr_paragraphs:reliefweb_organizations']);
 
     return $json;
   }

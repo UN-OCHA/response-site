@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\hr_paragraphs\Plugin\JsonLdEntity;
 
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\group\Entity\Group;
 use Spatie\SchemaOrg\Schema;
@@ -64,6 +65,16 @@ class OperationEntity extends BaseEntity {
 
     $area->containsPlace($places);
     return $area;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheableMetadata(EntityInterface $entity, $view_mode): CacheableMetadata {
+    $cache_data = new CacheableMetadata();
+    $cache_data->addCacheableDependency($entity);
+    $cache_data->addCacheTags(['hr_paragraphs:reliefweb_countries']);
+    return $cache_data;
   }
 
 }
