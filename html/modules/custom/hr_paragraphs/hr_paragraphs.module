@@ -11,6 +11,7 @@ use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -2800,4 +2801,20 @@ function hr_paragraphs_metatags_for_rivers(array &$metatags, array &$context) {
       $metatags['description'] = $description;
     }
   }
+}
+
+/**
+ * Allowed values callback for ReliefWeb countries.
+ */
+function hr_paragraphs_allowed_countries(?FieldStorageDefinitionInterface $definition = NULL, ?FieldableEntityInterface $entity = NULL, &$cacheable = TRUE) {
+  $endpoint = \Drupal::config('hr_paragraphs.settings')->get('reliefweb_api_endpoint') ?: 'https://api.reliefweb.int/v2/reports';
+  $appname = \Drupal::config('hr_paragraphs.settings')->get('reliefweb_api_appname') ?: 'response';
+
+  // Get base url.
+  $api_url = parse_url($endpoint, PHP_URL_SCHEME) . '://' . parse_url($endpoint, PHP_URL_HOST);
+  $api_url .= '/v2/countries';
+
+  /** @var \Drupal\hr_paragraphs\Service\ReliefWebApiClient $reliefweb_api_client */
+  $reliefweb_api_client = \Drupal::service('hr_paragraphs.reliefweb_api_client');
+  return $reliefweb_api_client->getCountriesList($api_url, $appname);
 }

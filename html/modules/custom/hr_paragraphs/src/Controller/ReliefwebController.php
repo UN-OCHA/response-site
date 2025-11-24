@@ -5,9 +5,7 @@ namespace Drupal\hr_paragraphs\Controller;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\RequestException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Drupal\hr_paragraphs\Service\ReliefWebApiClient;
 
 /**
  * Page controller for tabs.
@@ -15,11 +13,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ReliefwebController extends ControllerBase {
 
   /**
-   * The HTTP client to fetch the files with.
+   * The Reliefweb API client.
    *
-   * @var \GuzzleHttp\ClientInterface
+   * @var \Drupal\hr_paragraphs\Service\ReliefWebApiClient
    */
-  protected $httpClient;
+  protected $reliefwebApiClient;
 
   /**
    * Advanced search operator mapping.
@@ -40,8 +38,8 @@ class ReliefwebController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public function __construct(ClientInterface $http_client) {
-    $this->httpClient = $http_client;
+  public function __construct(ReliefWebApiClient $reliefweb_api_client) {
+    $this->reliefwebApiClient = $reliefweb_api_client;
   }
 
   /**
@@ -322,46 +320,7 @@ class ReliefwebController extends ControllerBase {
    */
   public function executeReliefwebQuery(array $parameters) : array {
     $endpoint = $this->config('hr_paragraphs.settings')->get('reliefweb_api_endpoint') ?: 'https://api.reliefweb.int/v2/reports';
-
-    // Remove empty filters.
-    if (!isset($parameters['filter']['conditions']) || empty(($parameters['filter']['conditions']))) {
-      unset($parameters['filter']);
-    }
-
-    try {
-      $this->getLogger('hr_paragraphs_reliefweb')->notice('Fetching data from @url', [
-        '@url' => $endpoint,
-      ]);
-
-      $response = $this->httpClient->request(
-        'GET',
-        $endpoint,
-        [
-          'query' => $parameters,
-          'headers' => [
-            'accept-encoding' => 'gzip, deflate',
-          ],
-        ]
-      );
-    }
-    catch (RequestException $exception) {
-      $this->getLogger('hr_paragraphs_reliefweb')->error('Fetching data from @url failed with @message', [
-        '@url' => $endpoint,
-        '@message' => $exception->getMessage(),
-      ]);
-
-      if ($exception->getCode() === 404) {
-        throw new NotFoundHttpException();
-      }
-      else {
-        throw $exception;
-      }
-    }
-
-    $body = $response->getBody() . '';
-    $results = json_decode($body, TRUE);
-
-    return $results;
+    return $this->reliefwebApiClient->executeReliefwebQuery($endpoint, $parameters);
   }
 
   /**
