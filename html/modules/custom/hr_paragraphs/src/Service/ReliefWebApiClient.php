@@ -184,9 +184,7 @@ class ReliefWebApiClient {
     $countries = [];
     if (!empty($results['data'])) {
       foreach ($results['data'] as $country) {
-        if (!empty($country['id'])) {
-          $countries[$country['id']] = $country;
-        }
+        $countries[$country['id']] = $country;
       }
     }
 
@@ -202,9 +200,7 @@ class ReliefWebApiClient {
     $countries = [];
     if (!empty($results['data'])) {
       foreach ($results['data'] as $country) {
-        if (!empty($country['id'])) {
-          $countries[$country['id']] = $country['fields']['name'];
-        }
+        $countries[$country['id']] = $country['fields']['name'];
       }
     }
 

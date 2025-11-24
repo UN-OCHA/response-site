@@ -56,6 +56,9 @@ class OperationEntity extends BaseEntity {
     $places = [];
     foreach ($country_ids as $country_ref) {
       $country_id = $country_ref['value'];
+      if (!isset($countries[$country_id])) {
+        continue;
+      }
       $places[] = $this->buildCountryReference($countries[$country_id]);
     }
 
