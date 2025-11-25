@@ -8,6 +8,7 @@
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -21,6 +22,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
 use Drupal\group\Entity\GroupRelationship;
+use Drupal\json_ld_schema\JsonLdSchemaUtil;
 use Drupal\node\Entity\Node;
 use Drupal\path_alias\Entity\PathAlias;
 use Drupal\subgroup\MalformedLeafException;
@@ -1883,6 +1885,9 @@ function hr_paragraphs_preprocess_river(&$variables) {
  */
 function hr_paragraphs_preprocess_fullcalendar_calendar(&$variables) {
   hr_paragraphs_group_is_archived($variables);
+
+  // Trigger json ld schema.
+  hr_paragraphs_add_json_ld_schema($variables, $variables['group']);
 }
 
 /**
@@ -2819,4 +2824,36 @@ function hr_paragraphs_allowed_organizations(?FieldStorageDefinitionInterface $d
   /** @var \Drupal\hr_paragraphs\Service\ReliefWebApiClient $reliefweb_api_client */
   $reliefweb_api_client = \Drupal::service('hr_paragraphs.reliefweb_api_client');
   return $reliefweb_api_client->getOrganizationsList();
+}
+
+/**
+ * Add json_ld_schema from entity.
+ */
+function hr_paragraphs_add_json_ld_schema(array &$build, EntityInterface $entity, string $view_mode = 'full'): void {
+  $entity_manager = \Drupal::service('plugin.manager.json_ld_schema.entity');
+  foreach ($entity_manager->getDefinitions() as $definition) {
+    /** @var \Drupal\json_ld_schema\Entity\JsonLdEntityInterface $json_ld_entity */
+    $json_ld_entity = $entity_manager->createInstance($definition['id']);
+    if (!$json_ld_entity->isApplicable($entity, $view_mode)) {
+      continue;
+    }
+
+    // Add the cacheability of the JSON LD plugin to the entity build array,
+    // because attachments will be cached alongside the rendered markup in
+    // render cache.
+    CacheableMetadata::createFromRenderArray($build)
+      ->merge($json_ld_entity->getCacheableMetadata($entity, $view_mode))
+      ->applyTo($build);
+
+    // Attach the JSON LD script to the head, so that there is no dependency on
+    // the rendering of the entity markup in any way.
+    $build['#attached']['html_head'][] = [
+      [
+        '#tag' => 'script',
+        '#attributes' => ['type' => 'application/ld+json'],
+        '#value' => JsonLdSchemaUtil::encodeJsonLdData($json_ld_entity->getData($entity, $view_mode)->toArray()),
+      ],
+      sprintf('json_ld_%s_%s_%s_%s', $entity->getEntityTypeId(), $entity->id(), $view_mode, $definition['id']),
+    ];
+  }
 }

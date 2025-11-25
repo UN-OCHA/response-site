@@ -53,6 +53,8 @@ class OperationEntity extends BaseEntity {
 
     $area = Schema::administrativeArea();
     $area->name($entity->label());
+    $area->identifier($entity->toUrl('canonical', ['absolute' => TRUE])->toString());
+    $area->url($entity->toUrl('canonical', ['absolute' => TRUE])->toString());
 
     $places = [];
     foreach ($country_ids as $country_ref) {

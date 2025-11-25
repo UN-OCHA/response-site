@@ -53,6 +53,8 @@ class ClusterEntity extends BaseEntity {
 
     $project = Schema::project();
     $project->name($entity->label());
+    $project->identifier($entity->toUrl('canonical', ['absolute' => TRUE])->toString());
+    $project->url($entity->toUrl('canonical', ['absolute' => TRUE])->toString());
 
     $orgs = [];
     foreach ($organization_ids as $organization_ref) {
