@@ -63,6 +63,12 @@ class ClusterEntity extends BaseEntity {
     }
 
     $project->member($orgs);
+
+    $events = $this->buildEvents($entity);
+    if (!empty($events)) {
+      $project->event($events);
+    }
+
     return $project;
   }
 

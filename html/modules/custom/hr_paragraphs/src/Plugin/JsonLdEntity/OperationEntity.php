@@ -64,6 +64,12 @@ class OperationEntity extends BaseEntity {
     }
 
     $area->containsPlace($places);
+
+    $events = $this->buildEvents($entity);
+    if (!empty($events)) {
+      $area->event($events);
+    }
+
     return $area;
   }
 
