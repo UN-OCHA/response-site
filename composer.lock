@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60045e0aa92eb4e9a538064b1f29e8d5",
+    "content-hash": "8339dc7c35c3863d8778b8a660aad04a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5726,6 +5726,47 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/social_auth",
                 "issues": "https://www.drupal.org/project/issues/social_auth"
+            }
+        },
+        {
+            "name": "drupal/social_auth_entra_id",
+            "version": "dev-1.0.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/social_auth_entra_id.git",
+                "reference": "140a9edf669d723f1ddca78ccb9e7af233c22c7e"
+            },
+            "require": {
+                "drupal/core": "^9 || ^10 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
+                "drupal": {
+                    "version": "1.0.3+12-dev",
+                    "datestamp": "1762884874",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "jaseerkinangattil",
+                    "homepage": "https://www.drupal.org/user/760034"
+                }
+            ],
+            "description": "Social authentication with Microsoft Entra ID.",
+            "homepage": "https://www.drupal.org/project/social_auth_entra_id",
+            "support": {
+                "source": "https://git.drupalcode.org/project/social_auth_entra_id"
             }
         },
         {
@@ -20191,6 +20232,7 @@
         "drupal/openid_connect": 20,
         "drupal/openid_connect_windows_aad": 20,
         "drupal/rdf": 10,
+        "drupal/social_auth_entra_id": 20,
         "drupal/xmlsitemap": 10
     },
     "prefer-stable": true,
@@ -20199,5 +20241,5 @@
         "php": ">=8.3"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
