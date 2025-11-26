@@ -293,4 +293,31 @@ class ReliefWebApiClient {
     return $organizations;
   }
 
+  /**
+   * Invalidate ReliefWeb cache.
+   */
+  public function invalidateReliefwebCache(string $entity_type, string $bundle, int $entity_id): void {
+    if ($entity_type != 'taxonomy_term') {
+      return;
+    }
+
+    switch ($bundle) {
+      case 'country':
+        $this->cache->delete('reliefweb_countries');
+        Cache::invalidateTags(['hr_paragraphs:reliefweb_countries']);
+
+        // Rebuild cache.
+        $this->getCountries();
+        break;
+
+      case 'source':
+        $this->cache->delete('reliefweb_sources');
+        Cache::invalidateTags(['hr_paragraphs:reliefweb_organizations']);
+
+        // Rebuild cache.
+        $this->getSources();
+        break;
+    }
+  }
+
 }
