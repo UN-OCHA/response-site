@@ -44,6 +44,7 @@
   content: url('../../img/auth/linkedin_logo.svg');
 }
 
+.node--type-page .paragraph--type--text-block a[href^="/user/login/entra-id"]::before,
 .node--type-page .paragraph--type--text-block a[href^="/user/login/microsoft"]::before {
   content: url('../../img/auth/microsoft_logo.svg');
 }
