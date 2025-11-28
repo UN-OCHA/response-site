@@ -53,7 +53,7 @@ class OperationEntity extends BaseEntity {
 
     $area = Schema::administrativeArea();
     $area->name($entity->label());
-    $area->identifier($entity->toUrl('canonical', ['absolute' => TRUE])->toString());
+    $area->identifier($entity->toUrl('canonical', ['absolute' => TRUE, 'path_processing' => FALSE])->toString());
     $area->url($entity->toUrl('canonical', ['absolute' => TRUE])->toString());
 
     $places = [];
@@ -65,7 +65,9 @@ class OperationEntity extends BaseEntity {
       $places[] = $this->buildCountryReference($countries[$country_id]);
     }
 
-    $area->containsPlace($places);
+    if (!empty($places)) {
+      $area->containsPlace($places);
+    }
 
     $events = $this->buildEvents($entity);
     if (!empty($events)) {

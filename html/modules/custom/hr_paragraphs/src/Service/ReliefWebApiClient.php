@@ -123,6 +123,11 @@ class ReliefWebApiClient {
           ],
         ]
       );
+
+      $body = $response->getBody() . '';
+      $results = json_decode($body, TRUE, 512, \JSON_THROW_ON_ERROR);
+
+      return $results;
     }
     catch (RequestException $exception) {
       $this->getLogger('hr_paragraphs_reliefweb')->error('Fetching data from @url failed with @message', [
@@ -138,10 +143,7 @@ class ReliefWebApiClient {
       }
     }
 
-    $body = $response->getBody() . '';
-    $results = json_decode($body, TRUE);
-
-    return $results;
+    return [];
   }
 
   /**
@@ -163,7 +165,7 @@ class ReliefWebApiClient {
         'url',
         'url_alias',
       ],
-      'sort' => ['name:asc'],
+      'sort' => ['name.collation_en:asc'],
     ];
 
     $endpoint = $this->apiUrl . '/v2/countries';
@@ -204,7 +206,6 @@ class ReliefWebApiClient {
       }
     }
 
-    asort($countries, SORT_STRING | SORT_FLAG_CASE);
     return $countries;
   }
 
@@ -231,7 +232,7 @@ class ReliefWebApiClient {
         'url',
         'url_alias',
       ],
-      'sort' => ['name:asc'],
+      'sort' => ['name.collation_en:asc'],
     ];
 
     $endpoint = $this->apiUrl . '/v2/sources';
@@ -249,7 +250,7 @@ class ReliefWebApiClient {
       }
 
       $offset += $parameters['limit'];
-    } while (!empty($json_part['links']['next']));
+    } while (($json_part['count'] >= $parameters['limit']));
 
     // Cache it forever.
     $this->cache->set('reliefweb_sources', $json, Cache::PERMANENT, ['hr_paragraphs:reliefweb_organizations']);
@@ -289,7 +290,6 @@ class ReliefWebApiClient {
       }
     }
 
-    asort($organizations, SORT_STRING | SORT_FLAG_CASE);
     return $organizations;
   }
 

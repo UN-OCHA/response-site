@@ -53,7 +53,7 @@ class ClusterEntity extends BaseEntity {
 
     $project = Schema::project();
     $project->name($entity->label());
-    $project->identifier($entity->toUrl('canonical', ['absolute' => TRUE])->toString());
+    $project->identifier($entity->toUrl('canonical', ['absolute' => TRUE, 'path_processing' => FALSE])->toString());
     $project->url($entity->toUrl('canonical', ['absolute' => TRUE])->toString());
 
     $orgs = [];
@@ -64,7 +64,9 @@ class ClusterEntity extends BaseEntity {
       }
     }
 
-    $project->member($orgs);
+    if (!empty($orgs)) {
+      $project->member($orgs);
+    }
 
     $events = $this->buildEvents($entity);
     if (!empty($events)) {
