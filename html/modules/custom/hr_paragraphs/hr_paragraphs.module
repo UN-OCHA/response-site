@@ -2832,5 +2832,9 @@ function hr_paragraphs_add_json_ld_schema(array &$build, EntityInterface $entity
     ->getStorage('entity_view_display')
     ->load($entity->getEntityTypeId() . '.' . $entity->bundle() . '.' . $view_mode);
 
+  if (!$display) {
+    return;
+  }
+
   json_ld_schema_entity_view($build, $entity, $display, $view_mode);
 }
