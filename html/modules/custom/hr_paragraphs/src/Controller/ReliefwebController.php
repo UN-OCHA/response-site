@@ -798,7 +798,7 @@ class ReliefwebController extends ControllerBase {
     $json = $this->getRequestContent($request);
 
     // Make sure we have the right event.
-    if (empty($json['event']) || $json['event'] !== 'reliefweb:entity_updated') {
+    if (empty($json['event'])) {
       throw new BadRequestHttpException('Invalid event type.');
     }
 
