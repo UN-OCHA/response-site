@@ -37,6 +37,9 @@
     "drupal/openid_connect": {
       "Suppress auth error if user is blocked": "PATCHES/openid_connect-ops-11508-suppress-error-if-blocked.patch"
     },
+    "drupal/select2": {
+      "https://www.drupal.org/project/select2/issues/3379063": "https://www.drupal.org/files/issues/2025-06-12/select2-3379063-8.patch"
+    },
     "drupal/social_auth": {
       "Type Error - #3496656": "PATCHES/social_auth-type-error-3496656.patch"
     },

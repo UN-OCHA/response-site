@@ -8,6 +8,7 @@ use Drupal\Core\Url;
 use Drupal\group\Entity\Group;
 use Drupal\hr_paragraphs\Controller\ParagraphController;
 use Drupal\hr_paragraphs\Controller\ReliefwebController;
+use Drupal\hr_paragraphs\Service\ReliefWebApiClient;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\Tests\hr_paragraphs\Traits\RWTestDataTrait;
 use Drupal\theme_switcher\Entity\ThemeSwitcherRule;
@@ -125,7 +126,8 @@ class HrParagraphsRWReportsTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $reliefweb_controller = new ReliefwebController($this->httpClient);
+    $reliefweb_api_client = new ReliefWebApiClient($this->httpClient, \Drupal::service('logger.factory'), \Drupal::cache(), \Drupal::configFactory());
+    $reliefweb_controller = new ReliefwebController($reliefweb_api_client);
     $this->container->set('hr_paragraphs.reliefweb_controller', $reliefweb_controller);
     \Drupal::setContainer($this->container);
 
@@ -163,7 +165,8 @@ class HrParagraphsRWReportsTest extends ExistingSiteBase {
     $handlerStack = HandlerStack::create($mock);
     $this->httpClient = new Client(['handler' => $handlerStack]);
 
-    $reliefweb_controller = new ReliefwebController($this->httpClient);
+    $reliefweb_api_client = new ReliefWebApiClient($this->httpClient, \Drupal::service('logger.factory'), \Drupal::cache(), \Drupal::configFactory());
+    $reliefweb_controller = new ReliefwebController($reliefweb_api_client);
     $this->container->set('hr_paragraphs.reliefweb_controller', $reliefweb_controller);
     \Drupal::setContainer($this->container);
 
@@ -187,7 +190,9 @@ class HrParagraphsRWReportsTest extends ExistingSiteBase {
 
     $handlerStack = HandlerStack::create($mock);
     $http_client = new Client(['handler' => $handlerStack]);
-    $reliefweb_controller = new ReliefwebController($http_client);
+
+    $reliefweb_api_client = new ReliefWebApiClient($http_client, \Drupal::service('logger.factory'), \Drupal::cache(), \Drupal::configFactory());
+    $reliefweb_controller = new ReliefwebController($reliefweb_api_client);
 
     $paragraph_controller = new ParagraphController(
       \Drupal::service('entity_type.manager'),
@@ -224,7 +229,9 @@ class HrParagraphsRWReportsTest extends ExistingSiteBase {
 
     $handlerStack = HandlerStack::create($mock);
     $http_client = new Client(['handler' => $handlerStack]);
-    $reliefweb_controller = new ReliefwebController($http_client);
+
+    $reliefweb_api_client = new ReliefWebApiClient($http_client, \Drupal::service('logger.factory'), \Drupal::cache(), \Drupal::configFactory());
+    $reliefweb_controller = new ReliefwebController($reliefweb_api_client);
 
     $paragraph_controller = new ParagraphController(
       \Drupal::service('entity_type.manager'),

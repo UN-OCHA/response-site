@@ -121,3 +121,13 @@ hr_paragraphs.dashboards:
     _title: 'Reports'
   requirements:
     _permission: 'can view global_editors dashboard'
+
+hr_paragraphs.webhook:
+  path: '/webhook/invalidate'
+  methods:
+    - POST
+  defaults:
+    _title: 'ReliefWeb Webhook'
+    _controller: '\Drupal\hr_paragraphs\Controller\ReliefwebController::invalidateCache'
+  requirements:
+    _permission: 'access content'

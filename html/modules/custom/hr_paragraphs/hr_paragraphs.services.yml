@@ -1,4 +1,7 @@
 services:
+  hr_paragraphs.reliefweb_api_client:
+    class: Drupal\hr_paragraphs\Service\ReliefWebApiClient
+    arguments: ['@http_client', '@logger.factory', '@cache.rw_api', '@config.factory']
   hr_paragraphs.paragraph_controller:
     class: \Drupal\hr_paragraphs\Controller\ParagraphController
     arguments: ['@entity_type.manager', '@http_client', '@pager.manager', '@hr_paragraphs.ical_controller', '@hr_paragraphs.reliefweb_controller', '@hr_paragraphs.hdx_controller']
@@ -7,7 +10,7 @@ services:
     arguments: ['@http_client']
   hr_paragraphs.reliefweb_controller:
     class: \Drupal\hr_paragraphs\Controller\ReliefwebController
-    arguments: ['@http_client']
+    arguments: ['@hr_paragraphs.reliefweb_api_client']
   hr_paragraphs.hdx_controller:
     class: \Drupal\hr_paragraphs\Controller\HdxController
     arguments: ['@http_client']
@@ -50,3 +53,10 @@ services:
     class: 'Drupal\hr_paragraphs\Plugin\Group\RelationHandler\GroupMembershipAllEntityReference'
     arguments: ['@group.relation_handler.entity_reference']
     shared: false
+
+  cache.rw_api:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+      - { name: cache.bin }
+    factory: ['@cache_factory', 'get']
+    arguments: [rw_api]

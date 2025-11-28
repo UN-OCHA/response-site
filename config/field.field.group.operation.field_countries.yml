@@ -1,0 +1,21 @@
+uuid: f7acad70-05e6-4666-8278-34353bfbad1e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_countries
+    - group.type.operation
+  module:
+    - options
+id: group.operation.field_countries
+field_name: field_countries
+entity_type: group
+bundle: operation
+label: Countries
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

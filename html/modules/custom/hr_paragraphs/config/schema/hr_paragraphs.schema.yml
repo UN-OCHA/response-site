@@ -23,6 +23,9 @@ hr_paragraphs.settings:
     reliefweb_api_appname:
       type: string
       label: 'Identifier used Reliefweb API calls'
+    reliefweb_api_webhook_secret:
+      type: string
+      label: 'Secret for validating ReliefWeb webhook requests'
 
 field.widget.settings.hr_paragraphs_link_default:
   type: mapping
