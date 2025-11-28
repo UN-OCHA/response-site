@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87667ada6bee31e9f67793d6acec77f0",
+    "content-hash": "3f3762a677030fc71df639182436db68",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -9266,16 +9266,18 @@
         },
         {
             "name": "npm-asset/fullcalendar",
-            "version": "v6.1.16",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fullcalendar/fullcalendar.git",
-                "reference": "6e142c3e3a770fb141a0ba82d4970acd04658808"
-            },
+            "version": "6.1.18",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fullcalendar/fullcalendar/zipball/6e142c3e3a770fb141a0ba82d4970acd04658808",
-                "reference": "6e142c3e3a770fb141a0ba82d4970acd04658808"
+                "type": "tar",
+                "url": "https://registry.npmjs.org/fullcalendar/-/fullcalendar-6.1.18.tgz"
+            },
+            "require": {
+                "npm-asset/fullcalendar--core": "~6.1.18",
+                "npm-asset/fullcalendar--daygrid": "~6.1.18",
+                "npm-asset/fullcalendar--interaction": "~6.1.18",
+                "npm-asset/fullcalendar--list": "~6.1.18",
+                "npm-asset/fullcalendar--multimonth": "~6.1.18",
+                "npm-asset/fullcalendar--timegrid": "~6.1.18"
             },
             "type": "npm-asset",
             "license": [
@@ -9284,10 +9286,10 @@
         },
         {
             "name": "npm-asset/fullcalendar--core",
-            "version": "6.1.18",
+            "version": "6.1.19",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/core/-/core-6.1.18.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/core/-/core-6.1.19.tgz"
             },
             "require": {
                 "npm-asset/preact": "~10.12.1"
@@ -9299,10 +9301,10 @@
         },
         {
             "name": "npm-asset/fullcalendar--daygrid",
-            "version": "6.1.15",
+            "version": "6.1.19",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/daygrid/-/daygrid-6.1.15.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/daygrid/-/daygrid-6.1.19.tgz"
             },
             "type": "npm-asset",
             "license": [
@@ -9311,10 +9313,22 @@
         },
         {
             "name": "npm-asset/fullcalendar--icalendar",
-            "version": "6.1.15",
+            "version": "6.1.19",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/icalendar/-/icalendar-6.1.15.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/icalendar/-/icalendar-6.1.19.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--interaction",
+            "version": "6.1.19",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/interaction/-/interaction-6.1.19.tgz"
             },
             "type": "npm-asset",
             "license": [
@@ -9323,10 +9337,40 @@
         },
         {
             "name": "npm-asset/fullcalendar--list",
-            "version": "6.1.15",
+            "version": "6.1.19",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/@fullcalendar/list/-/list-6.1.15.tgz"
+                "url": "https://registry.npmjs.org/@fullcalendar/list/-/list-6.1.19.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--multimonth",
+            "version": "6.1.19",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/multimonth/-/multimonth-6.1.19.tgz"
+            },
+            "require": {
+                "npm-asset/fullcalendar--daygrid": "~6.1.19"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "npm-asset/fullcalendar--timegrid",
+            "version": "6.1.18",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/@fullcalendar/timegrid/-/timegrid-6.1.18.tgz"
+            },
+            "require": {
+                "npm-asset/fullcalendar--daygrid": "~6.1.18"
             },
             "type": "npm-asset",
             "license": [
@@ -10451,16 +10495,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.12.14",
+            "version": "v0.12.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "95c29b3756a23855a30566b745d218bee690bef2"
+                "reference": "38953bc71491c838fcb6ebcbdc41ab7483cd549c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/95c29b3756a23855a30566b745d218bee690bef2",
-                "reference": "95c29b3756a23855a30566b745d218bee690bef2",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/38953bc71491c838fcb6ebcbdc41ab7483cd549c",
+                "reference": "38953bc71491c838fcb6ebcbdc41ab7483cd549c",
                 "shasum": ""
             },
             "require": {
@@ -10524,9 +10568,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.12.14"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.12.15"
             },
-            "time": "2025-10-27T17:15:31+00:00"
+            "time": "2025-11-28T00:00:14+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -10574,16 +10618,16 @@
         },
         {
             "name": "revolt/event-loop",
-            "version": "v1.0.7",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/revoltphp/event-loop.git",
-                "reference": "09bf1bf7f7f574453efe43044b06fafe12216eb3"
+                "reference": "b6fc06dce8e9b523c9946138fa5e62181934f91c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/09bf1bf7f7f574453efe43044b06fafe12216eb3",
-                "reference": "09bf1bf7f7f574453efe43044b06fafe12216eb3",
+                "url": "https://api.github.com/repos/revoltphp/event-loop/zipball/b6fc06dce8e9b523c9946138fa5e62181934f91c",
+                "reference": "b6fc06dce8e9b523c9946138fa5e62181934f91c",
                 "shasum": ""
             },
             "require": {
@@ -10640,9 +10684,9 @@
             ],
             "support": {
                 "issues": "https://github.com/revoltphp/event-loop/issues",
-                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.7"
+                "source": "https://github.com/revoltphp/event-loop/tree/v1.0.8"
             },
-            "time": "2025-01-25T19:27:39+00:00"
+            "time": "2025-08-27T21:33:23+00:00"
         },
         {
             "name": "rlanvin/php-rrule",
@@ -17256,16 +17300,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.6.4",
+            "version": "5.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "90a04bcbf03784066f16038e87e23a0a83cee3c2"
+                "reference": "90614c73d3800e187615e2dd236ad0e2a01bf761"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/90a04bcbf03784066f16038e87e23a0a83cee3c2",
-                "reference": "90a04bcbf03784066f16038e87e23a0a83cee3c2",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/90614c73d3800e187615e2dd236ad0e2a01bf761",
+                "reference": "90614c73d3800e187615e2dd236ad0e2a01bf761",
                 "shasum": ""
             },
             "require": {
@@ -17314,9 +17358,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.6.4"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.6.5"
             },
-            "time": "2025-11-17T21:13:10+00:00"
+            "time": "2025-11-27T19:50:05+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -19667,27 +19711,28 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v7.3.6",
+            "version": "v7.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
-                "reference": "e9a9fd604296b17bf90939c3647069f1f16ef04e"
+                "reference": "3bb26dafce31633b1f699894c86379eefc8af5bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/e9a9fd604296b17bf90939c3647069f1f16ef04e",
-                "reference": "e9a9fd604296b17bf90939c3647069f1f16ef04e",
+                "url": "https://api.github.com/repos/symfony/browser-kit/zipball/3bb26dafce31633b1f699894c86379eefc8af5bb",
+                "reference": "3bb26dafce31633b1f699894c86379eefc8af5bb",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
-                "symfony/dom-crawler": "^6.4|^7.0"
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/dom-crawler": "^6.4|^7.0|^8.0"
             },
             "require-dev": {
-                "symfony/css-selector": "^6.4|^7.0",
-                "symfony/http-client": "^6.4|^7.0",
-                "symfony/mime": "^6.4|^7.0",
-                "symfony/process": "^6.4|^7.0"
+                "symfony/css-selector": "^6.4|^7.0|^8.0",
+                "symfony/http-client": "^6.4|^7.0|^8.0",
+                "symfony/mime": "^6.4|^7.0|^8.0",
+                "symfony/process": "^6.4|^7.0|^8.0"
             },
             "type": "library",
             "autoload": {
@@ -19715,7 +19760,7 @@
             "description": "Simulates the behavior of a web browser, allowing you to make requests, click on links and submit forms programmatically",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/browser-kit/tree/v7.3.6"
+                "source": "https://github.com/symfony/browser-kit/tree/v7.4.0"
             },
             "funding": [
                 {
@@ -19735,20 +19780,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-05T07:57:47+00:00"
+            "time": "2025-11-05T14:29:59+00:00"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v7.3.6",
+            "version": "v7.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "84321188c4754e64273b46b406081ad9b18e8614"
+                "reference": "ab862f478513e7ca2fe9ec117a6f01a8da6e1135"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/84321188c4754e64273b46b406081ad9b18e8614",
-                "reference": "84321188c4754e64273b46b406081ad9b18e8614",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/ab862f478513e7ca2fe9ec117a6f01a8da6e1135",
+                "reference": "ab862f478513e7ca2fe9ec117a6f01a8da6e1135",
                 "shasum": ""
             },
             "require": {
@@ -19784,7 +19829,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v7.3.6"
+                "source": "https://github.com/symfony/css-selector/tree/v7.4.0"
             },
             "funding": [
                 {
@@ -19804,30 +19849,31 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-10-29T17:24:25+00:00"
+            "time": "2025-10-30T13:39:42+00:00"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v7.3.3",
+            "version": "v7.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "efa076ea0eeff504383ff0dcf827ea5ce15690ba"
+                "reference": "8f3e7464fe7e77294686e935956a6a8ccf7442c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/efa076ea0eeff504383ff0dcf827ea5ce15690ba",
-                "reference": "efa076ea0eeff504383ff0dcf827ea5ce15690ba",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/8f3e7464fe7e77294686e935956a6a8ccf7442c4",
+                "reference": "8f3e7464fe7e77294686e935956a6a8ccf7442c4",
                 "shasum": ""
             },
             "require": {
                 "masterminds/html5": "^2.6",
                 "php": ">=8.2",
+                "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
-                "symfony/css-selector": "^6.4|^7.0"
+                "symfony/css-selector": "^6.4|^7.0|^8.0"
             },
             "type": "library",
             "autoload": {
@@ -19855,7 +19901,7 @@
             "description": "Eases DOM navigation for HTML and XML documents",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/dom-crawler/tree/v7.3.3"
+                "source": "https://github.com/symfony/dom-crawler/tree/v7.4.0"
             },
             "funding": [
                 {
@@ -19875,20 +19921,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-06T20:13:54+00:00"
+            "time": "2025-10-31T09:30:03+00:00"
         },
         {
             "name": "symfony/lock",
-            "version": "v7.3.4",
+            "version": "v7.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/lock.git",
-                "reference": "e025f32cfd1fa8e3a4485a8d810544474aac26da"
+                "reference": "3ac96aa08ce03b4244f6cccb0389b1a85d764b5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/lock/zipball/e025f32cfd1fa8e3a4485a8d810544474aac26da",
-                "reference": "e025f32cfd1fa8e3a4485a8d810544474aac26da",
+                "url": "https://api.github.com/repos/symfony/lock/zipball/3ac96aa08ce03b4244f6cccb0389b1a85d764b5f",
+                "reference": "3ac96aa08ce03b4244f6cccb0389b1a85d764b5f",
                 "shasum": ""
             },
             "require": {
@@ -19901,7 +19947,8 @@
             },
             "require-dev": {
                 "doctrine/dbal": "^3.6|^4",
-                "predis/predis": "^1.1|^2.0"
+                "predis/predis": "^1.1|^2.0",
+                "symfony/serializer": "^6.4|^7.0"
             },
             "type": "library",
             "autoload": {
@@ -19937,7 +19984,7 @@
                 "semaphore"
             ],
             "support": {
-                "source": "https://github.com/symfony/lock/tree/v7.3.4"
+                "source": "https://github.com/symfony/lock/tree/v7.4.0"
             },
             "funding": [
                 {
@@ -19957,7 +20004,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-11T10:12:26+00:00"
+            "time": "2025-10-22T23:37:54+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
@@ -20371,6 +20418,6 @@
     "platform": {
         "php": ">=8.3"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
