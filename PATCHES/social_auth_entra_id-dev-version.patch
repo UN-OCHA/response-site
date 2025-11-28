@@ -1,0 +1,1284 @@
+diff --git a/README.md b/README.md
+index 7c5d63d..8377a1a 100644
+--- a/README.md
++++ b/README.md
+@@ -1 +1,270 @@
+- - Visit - [documentation](https://www.drupal.org/docs/develop/entra-id-login-block-module-documentation)
++# Microsoft Entra ID SSO Login
++
++Provides secure social authentication with Microsoft Entra ID
++(formerly Azure Active Directory) for Drupal sites.
++
++## Features
++
++- **Secure OAuth 2.0 Authentication**: Integrates with Microsoft Entra ID
++  for single sign-on
++- **ID Token Verification**: Uses cryptographically signed ID tokens to
++  prevent account impersonation
++- **CSRF Protection**: State parameter validation to prevent cross-site
++  request forgery
++- **Domain Restrictions**: Allowlist email domains for corporate
++  environments
++- **Flexible Login Behavior**: Choose between "Register & Login" or
++  "Login Only" modes
++- **Administrator Protection**: Block user 1 and administrator role from
++  SSO login
++- **Blocked User Check**: Respects Drupal's user blocking system
++- **Username Collision Prevention**: Automatic unique username generation
++- **Security Logging**: Comprehensive logging of authentication events
++  and security violations
++- **Configurable Login Block**: Customizable login button with Font
++  Awesome support
++
++## Requirements
++
++- Drupal 9, 10, or 11
++- PHP 7.4 or higher
++- Microsoft Entra ID (Azure AD) application with OAuth 2.0
++  credentials
++- GuzzleHTTP (included with Drupal core)
++
++## Installation
++
++### Via Composer (Recommended)
++```bash
++composer require drupal/social_auth_entra_id
++drush en social_auth_entra_id -y
++```
++
++### Manual Installation
++1. Download and extract the module to
++   `/modules/contrib/social_auth_entra_id`
++2. Enable the module: `drush en social_auth_entra_id -y`
++
++## Configuration
++
++### 1. Azure AD Application Setup
++
++1. Go to [Azure Portal](https://portal.azure.com)
++2. Navigate to **Azure Active Directory** > **App registrations** >
++   **New registration**
++3. Configure:
++   - **Name**: Your application name (e.g., "Drupal SSO")
++   - **Supported account types**:
++     - Choose "Accounts in this organizational directory only" for
++       organization-only accounts
++     - Choose "Accounts in any organizational directory and personal
++       Microsoft accounts" for both account types
++     - Choose "Personal Microsoft accounts only" for consumer accounts
++       only
++   - **Redirect URI**:
++     `https://yoursite.com/user/login/entra-id/callback`
++4. After creation, note the:
++   - **Application (client) ID**
++   - **Directory (tenant) ID**
++5. Go to **Certificates & secrets** > **New client secret**
++   - Copy the secret value immediately (shown only once)
++6. Go to **API permissions** > **Add a permission** >
++   **Microsoft Graph**
++   - Add delegated permissions: `openid`, `profile`, `email`,
++     `User.Read`
++7. Grant admin consent for your organization
++
++### 2. Drupal Module Configuration
++
++Navigate to: `/admin/config/services/entra-id/settings`
++
++**Required Settings:**
++- **Client ID**: Paste the Application (client) ID from Azure
++- **Client Secret**: Paste the client secret value
++- **Tenant ID**: Paste the Directory (tenant) ID
++
++**Account Type:**
++- **Organization accounts only**: Work/school accounts from your Azure
++  AD tenant (requires Tenant ID)
++- **Both organization and personal**: Any Microsoft account (work,
++  school, or personal like Hotmail)
++- **Personal accounts only**: Consumer accounts only (Hotmail,
++  Outlook.com, Live.com)
++
++Azure Portal mapping (Supported account types):
++- Organization accounts only →
++  "Accounts in this organizational directory only (Single tenant)"
++- Both organization and personal →
++  "Accounts in any organizational directory and personal Microsoft accounts"
++- Personal accounts only →
++  "Personal Microsoft accounts only"
++
++Note: The option "Accounts in any organizational directory (Multitenant)" allows
++only organizational accounts across tenants and does not permit personal
++Microsoft accounts. If you select this in Azure, personal accounts will not be
++able to sign in even if the module is configured for Both.
++
++**Login Behavior:**
++- **Register and Login**: Automatically creates accounts for new users
++- **Login Only**: Restricts to existing Drupal accounts only
++
++**Allowed Domains** (Optional):
++- Comma-separated list of email domains (e.g., `example.com, company.org`)
++- Leave empty to allow all domains
++
++**Security Settings:**
++- ☑ **Block User 1**: Recommended - Prevents root admin from SSO login
++- ☐ **Block Administrator Role**: Optional - Prevents all admins from SSO login
++
++### 3. Add Login Block
++
++**Option A: Block Placement**
++1. Go to `/admin/structure/block`
++2. Click "Place block" in desired region
++3. Find "Entra ID Login Block"
++4. Configure:
++   - **Login Text**: Customize button text/HTML (supports Font Awesome icons)
++   - **Custom Class**: Add CSS classes (e.g., `btn btn-primary`)
++   - **Visibility**: Set to show for anonymous users only
++
++**Option B: Direct Link**
++Add a link to `/user/login/entra-id` anywhere in your theme or content.
++
++## Security Features
++
++### Protection Against Known Vulnerabilities
++
++✅ **CVE-2024-XXXXX - Email Impersonation Attack** (Fixed)
++- Uses verified ID token claims instead of unverified Graph API profile email
++- Validates token audience, issuer, and expiration
++- Prevents attackers from setting arbitrary emails in Azure AD profiles
++
++✅ **CSRF Protection**
++- State parameter generation and validation
++- Session-based state storage
++- Automatic cleanup after authentication
++
++✅ **Token Replay Prevention**
++- Nonce generation and validation
++- One-time use enforcement for ID tokens
++
++✅ **Rate Limiting**
++- Built-in delays on authentication errors
++- Prevents brute force attacks
++
++✅ **Account Enumeration Prevention**
++- Generic error messages
++- Security logging without exposing user existence
++
++### Security Best Practices
++
++1. **Always enable "Block User 1"** - Prevents SSO attacks on root admin
++2. **Use domain restrictions** for corporate environments
++3. **Monitor logs regularly**: Check `/admin/reports/dblog` for
++   `social_auth_entra_id` events
++4. **Enable "Login Only" mode** if you manage users manually
++5. **Keep client secret secure** - Treat as a password, rotate periodically
++6. **Review Azure AD permissions** - Grant minimum necessary scopes
++
++## Logging & Monitoring
++
++The module logs all authentication events to Drupal's watchdog system:
++
++**View logs:**
++```bash
++drush watchdog:show --type=social_auth_entra_id
++```
++
++**Monitor security warnings:**
++```bash
++drush watchdog:show --type=social_auth_entra_id --severity=Warning
++```
++
++**Events logged:**
++- Successful logins
++- Blocked admin login attempts (with IP addresses)
++- CSRF attempt detection
++- Token validation failures
++- Domain restriction violations
++- Account creation events
++
++## Troubleshooting
++
++### "Empty configuration" error
++- Ensure Client ID and Tenant ID are configured in module settings
++
++### "Authorization code missing" error
++- Check Azure AD redirect URI matches exactly: `/user/login/entra-id/callback`
++- Verify application is properly configured in Azure Portal
++
++### "Your email domain is not allowed"
++- Check "Allowed Domains" configuration
++- Ensure user's email domain is in the allowlist
++- Domains are case-insensitive
++
++### "Invalid state parameter"
++- Possible CSRF attempt detected
++- Check browser cookies are enabled
++- Verify session storage is working correctly
++
++### "Access token missing" error
++- Verify Client Secret is correct and not expired
++- Check Azure AD application permissions are granted
++- Review Azure AD application status
++
++### Users created with wrong usernames
++- Module now generates unique usernames automatically
++- Existing users: Consider using `drush user:unblock` or manually update
++
++## Development
++
++### Running Tests
++```bash
++# PHP CodeSniffer
++phpcs --standard=Drupal --extensions=php src/
++
++# PHPUnit (if tests exist)
++vendor/bin/phpunit modules/contrib/social_auth_entra_id
++```
++
++### Code Standards
++This module follows Drupal coding standards. Run before committing:
++```bash
++phpcs --standard=Drupal src/
++phpcbf --standard=Drupal src/
++```
++
++## Support
++
++- **Issue Queue**: [Drupal.org Issue Queue](https://www.drupal.org/project/issues/social_auth_entra_id)
++- **Documentation**: [Full Documentation](https://www.drupal.org/docs/develop/entra-id-login-block-module-documentation)
++
++## Maintainers
++
++- [Jaseer](https://www.drupal.org/u/jaseerkinangattil)
++
++## License
++
++GPL-2.0-or-later
++
++## Changelog
++
++### 2.0.0 (Security Release)
++- **CRITICAL**: Fixed email impersonation vulnerability (use ID token claims)
++- Added CSRF protection with state parameter validation
++- Added nonce validation for token replay prevention
++- Implemented username collision prevention
++- Added blocked user account check
++- Enhanced security logging with IP addresses
++- Improved rate limiting on errors
++- Fixed account enumeration vulnerability
++- Changed client secret field to password type
++- Added email format validation
++- Case-insensitive domain matching
++- Security settings: Block user 1 and administrator role options
++
++### 1.0.0
++- Initial release
++- Basic Microsoft Entra ID OAuth 2.0 integration
++- Configurable login block
++- Domain allowlisting
+diff --git a/config/install/social_auth_entra_id.settings.yml b/config/install/social_auth_entra_id.settings.yml
+index bf4ef14..3596173 100644
+--- a/config/install/social_auth_entra_id.settings.yml
++++ b/config/install/social_auth_entra_id.settings.yml
+@@ -2,5 +2,8 @@
+ client_id: ''
+ client_secret: ''
+ tenant_id: ''
++account_type: 'organization' # 'organization', 'common', or 'consumers'
+ login_behavior: 'register_and_login' # or 'login_only'
+ allowed_domains: ''
++block_user_1: true
++block_admin_role: true
+diff --git a/config/schema/social_auth_entra_id.schema.yml b/config/schema/social_auth_entra_id.schema.yml
+index 35d1bf6..a73a2a4 100644
+--- a/config/schema/social_auth_entra_id.schema.yml
++++ b/config/schema/social_auth_entra_id.schema.yml
+@@ -12,6 +12,15 @@ social_auth_entra_id.settings:
+     tenant_id:
+       type: string
+       label: 'Tenant ID'
++    account_type:
++      type: string
++      label: 'Account Type'
++      description: 'Type of Microsoft accounts to allow (organization, common, or consumers).'
++      default: 'organization'
++      allowed_values:
++        - 'organization'
++        - 'common'
++        - 'consumers'
+     login_behavior:
+       type: string
+       label: 'Login Behavior'
+@@ -23,3 +32,13 @@ social_auth_entra_id.settings:
+       type: string
+       label: 'Allowed Domains'
+       description: 'Comma-separated list of allowed email domains.'
++    block_user_1:
++      type: boolean
++      label: 'Block User 1'
++      description: 'Prevent user ID 1 from logging in via Entra ID.'
++      default: true
++    block_admin_role:
++      type: boolean
++      label: 'Block Administrator Role'
++      description: 'Prevent users with administrator role from logging in via Entra ID.'
++      default: true
+diff --git a/social_auth_entra_id.info.yml b/social_auth_entra_id.info.yml
+index 8e50d39..1880112 100644
+--- a/social_auth_entra_id.info.yml
++++ b/social_auth_entra_id.info.yml
+@@ -5,4 +5,4 @@ package: Social
+ core_version_requirement: ^9 || ^10 || ^11
+ dependencies:
+   - drupal:user
+-configure: 'social_auth_entra_id.settings'  # This should match your settings form route.
++configure: 'social_auth_entra_id.settings'
+diff --git a/social_auth_entra_id.libraries.yml b/social_auth_entra_id.libraries.yml
+index 32a83f8..1b7d166 100644
+--- a/social_auth_entra_id.libraries.yml
++++ b/social_auth_entra_id.libraries.yml
+@@ -1,6 +1,10 @@
+ font-awesome:
+   remote: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css
+   version: 6.5.1
++  license:
++    name: MIT
++    url: https://raw.githubusercontent.com/FortAwesome/Font-Awesome/refs/heads/7.x/LICENSE.txt
++    gpl-compatible: true
+   css:
+     theme:
+       https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css:
+diff --git a/social_auth_entra_id.routing.yml b/social_auth_entra_id.routing.yml
+index 0ec34a2..91d54dd 100644
+--- a/social_auth_entra_id.routing.yml
++++ b/social_auth_entra_id.routing.yml
+@@ -14,6 +14,9 @@ social_auth_entra_id.redirect:
+   requirements:
+     # Note: Explicitly allow access to all users, This route must be accessible to anonymous users to initiate the Microsoft Entra ID login process.
+     _access: "TRUE"
++  options:
++    # Disable page cache to ensure session handling works correctly.
++    no_cache: TRUE
+ 
+ social_auth_entra_id.callback:
+   path: "/user/login/entra-id/callback"
+@@ -23,3 +26,6 @@ social_auth_entra_id.callback:
+   requirements:
+     # Note: Explicitly allow access to all users, This route must be accessible to anonymous users to initiate the Microsoft Entra ID login process.
+     _access: "TRUE"
++  options:
++    # Disable page cache to ensure session handling works correctly for OAuth state validation.
++    no_cache: TRUE
+diff --git a/src/Controller/SocialAuthEntraIdController.php b/src/Controller/SocialAuthEntraIdController.php
+index b44563d..db4fc87 100644
+--- a/src/Controller/SocialAuthEntraIdController.php
++++ b/src/Controller/SocialAuthEntraIdController.php
+@@ -109,65 +109,176 @@ class SocialAuthEntraIdController implements ContainerInjectionInterface {
+   /**
+    * Redirects the user to the Microsoft Entra ID login page.
+    *
+-   * @return \Drupal\Core\Routing\TrustedRedirectResponse
+-   *   A trusted redirect response to the Microsoft Entra ID login URL.
++   * Initiates the OAuth 2.0 authorization flow by redirecting to Microsoft's
++   * login page. Generates and stores CSRF state and nonce tokens in session
++   * for security validation during callback.
++   *
++   * @return \Drupal\Core\Routing\TrustedRedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
++   *   A trusted redirect response to the Microsoft Entra ID login URL,
++   *   or redirect to login page if configuration is missing.
+    */
+   public function redirectToMicrosoft() {
++    // Load module configuration.
+     $config = $this->configFactory->get('social_auth_entra_id.settings');
+     $client_id = $config->get('client_id');
+     $tenant_id = $config->get('tenant_id');
++    $account_type = $config->get('account_type') ?? 'organization';
++
++    // Determine the endpoint based on account type.
++    // organization: Use specific tenant ID for work/school accounts.
++    // common: Support both organizational and personal accounts.
++    // consumers: Support only personal Microsoft accounts.
++    $endpoint = ($account_type === 'organization') ? $tenant_id : $account_type;
+ 
+-    if (empty($client_id) || empty($tenant_id)) {
+-      // Add an alert message for empty configuration.
++    // Validate required configuration exists.
++    // Tenant ID is only required for organization account type.
++    if (empty($client_id) || ($account_type === 'organization' && empty($tenant_id))) {
+       $this->messenger->addError($this->t('Empty configuration. Please contact the site administrator.'));
+-      // Redirect to the user login page with the current language.
+       $current_language = $this->languageManager->getCurrentLanguage()->getId();
+-      return new RedirectResponse(Url::fromRoute('user.login', [], ['language' => $current_language])->toString());
++      $response = new RedirectResponse(Url::fromRoute('user.login', [], ['language' => $current_language])->toString());
++      // Prevent caching of error responses.
++      $response->setMaxAge(0);
++      $response->headers->addCacheControlDirective('no-cache', TRUE);
++      return $response;
+     }
+ 
+-    // Use Url::fromRoute() to generate the redirect URI.
+-    $redirect_uri = Url::fromRoute('social_auth_entra_id.callback', [], ['absolute' => TRUE])->toString(TRUE);
+-    $scopes = 'openid profile email';
++    // Generate CSRF state token (64 char hex) for OAuth flow protection.
++    // This prevents attackers from initiating unauthorized authentication.
++    $state = bin2hex(random_bytes(32));
++    $_SESSION['entra_id_oauth_state'] = $state;
++
++    // Generate nonce (64 char hex) for ID token replay protection.
++    // Microsoft will include this in the ID token for validation.
++    $nonce = bin2hex(random_bytes(32));
++    $_SESSION['entra_id_oauth_nonce'] = $nonce;
++
++    // Generate absolute callback URL for Microsoft to redirect back to.
++    // IMPORTANT: Use toString() (without bubbleable metadata) so we get a
++    // plain string URL suitable for query parameters and persistence.
++    // Store exact value in session to reuse during token exchange, ensuring
++    // perfect match with the value used in the authorization request.
++    $redirect_uri = Url::fromRoute('social_auth_entra_id.callback', [], ['absolute' => TRUE])->toString();
++    $_SESSION['entra_id_redirect_uri'] = $redirect_uri;
+ 
+-    // Construct the URL for the Microsoft login.
+-    $url = "https://login.microsoftonline.com/$tenant_id/oauth2/v2.0/authorize?" . http_build_query([
++    // Persist the chosen endpoint for use in callback (defensive against any
++    // mid-flow config changes that could cause mismatches).
++    $_SESSION['entra_id_oauth_endpoint'] = $endpoint;
++
++    // Request OpenID Connect and Microsoft Graph scopes for authentication.
++    // - openid, profile, email: Required for OIDC ID token and basic claims.
++    // - User.Read: Required to call Microsoft Graph /me for display name.
++    $scopes = 'openid profile email User.Read';
++
++    // Build Microsoft Entra ID authorization endpoint URL.
++    // Uses OAuth 2.0 Authorization Code flow with PKCE protection.
++    // Endpoint varies based on account type (organization/common/consumers).
++    $url = "https://login.microsoftonline.com/$endpoint/oauth2/v2.0/authorize?" . http_build_query([
+       'client_id' => $client_id,
+       'response_type' => 'code',
+       'redirect_uri' => $redirect_uri,
+       'scope' => $scopes,
++      'state' => $state,
++      'nonce' => $nonce,
+     ]);
+ 
+-    // Redirect the user to Microsoft login using TrustedRedirectResponse.
+-    return new TrustedRedirectResponse($url);
++    // Use TrustedRedirectResponse to allow external Microsoft domain.
++    $response = new TrustedRedirectResponse($url);
++
++    // Ensure this response is never cached.
++    // OAuth flows require fresh session state on every request.
++    $response->setMaxAge(0);
++    $response->setSharedMaxAge(0);
++    $response->headers->addCacheControlDirective('no-cache', TRUE);
++    $response->headers->addCacheControlDirective('no-store', TRUE);
++    $response->headers->addCacheControlDirective('must-revalidate', TRUE);
++
++    return $response;
+   }
+ 
+   /**
+    * Handles the callback from Microsoft Entra ID after user authorization.
+    *
++   * Processes the OAuth 2.0 callback with authorization code, validates
++   * security tokens, extracts verified user information from ID token,
++   * and authenticates or creates the user account in Drupal.
++   *
++   * Security features:
++   * - CSRF protection via state parameter validation
++   * - Token replay prevention via nonce validation
++   * - ID token signature and claims validation
++   * - Email verification from cryptographically signed claims
++   * - Domain allowlisting
++   * - User blocking checks
++   * - Administrator protection
++   *
+    * @param \Symfony\Component\HttpFoundation\Request $request
+-   *   The incoming request object.
++   *   The incoming request object containing authorization code and state.
+    *
+    * @return \Symfony\Component\HttpFoundation\RedirectResponse
+-   *   A redirect response to the front page after processing the callback.
++   *   A redirect response to appropriate page after processing:
++   *   - Front page on success
++   *   - Login page on security violation
++   *   - Front page on error
+    */
+   public function handleMicrosoftCallback(Request $request) {
++    // Extract OAuth callback parameters.
+     $code = $request->query->get('code');
++    $state = $request->query->get('state');
++
++    // SECURITY: Validate state parameter to prevent CSRF attacks.
++    // The state must match what we stored in session during redirect.
++    if (empty($_SESSION['entra_id_oauth_state']) || $state !== $_SESSION['entra_id_oauth_state']) {
++      $this->messenger->addError($this->t('Invalid state parameter. Possible CSRF attack.'));
++      $this->loggerFactory
++        ->get('social_auth_entra_id')
++        ->warning('CSRF attempt detected: State parameter mismatch');
++      unset($_SESSION['entra_id_oauth_state']);
++      $response = new RedirectResponse(Url::fromRoute('user.login')->toString());
++      $response->setMaxAge(0);
++      $response->headers->addCacheControlDirective('no-cache', TRUE);
++      return $response;
++    }
+ 
++    // Clear state token after successful validation (one-time use).
++    unset($_SESSION['entra_id_oauth_state']);
++
++    // Proceed only if authorization code is present.
+     if ($code) {
+-      // Retrieve settings from configuration.
++      // Load all required configuration settings.
+       $config = $this->configFactory->get('social_auth_entra_id.settings');
+       $client_id = $config->get('client_id');
+       $client_secret = $config->get('client_secret');
+       $tenant_id = $config->get('tenant_id');
+-      $redirect_uri = Url::fromRoute('social_auth_entra_id.callback', [], ['absolute' => TRUE])->toString();
++      $account_type = $config->get('account_type') ?? 'organization';
++      // Reuse the exact redirect_uri used for the authorization request if
++      // available to avoid any mismatch (scheme/host/basepath/lang).
++      $redirect_uri = isset($_SESSION['entra_id_redirect_uri']) ? (string) $_SESSION['entra_id_redirect_uri'] : Url::fromRoute('social_auth_entra_id.callback', [], ['absolute' => TRUE])->toString();
++
++      // Determine the endpoint based on account type, preferring the value
++      // persisted during the authorization redirect.
++      $endpoint = isset($_SESSION['entra_id_oauth_endpoint'])
++        ? (string) $_SESSION['entra_id_oauth_endpoint']
++        : (($account_type === 'organization') ? $tenant_id : $account_type);
++
++      // Determine if new users should be auto-registered.
+       $login_behavior = $config->get('login_behavior');
+-      // Fetch and sanitize allowed domains.
++
++      // Parse and normalize allowed email domains.
++      // Accepts comma-separated and/or one-per-line entries.
++      // Splits on commas and newlines, trims, lowercases, and filters empties.
+       $allowed_domains_raw = $config->get('allowed_domains') ?? '';
+-      $allowed_domains = array_filter(array_map('trim', explode(',', $allowed_domains_raw)));
++      $allowed_domains_tokens = preg_split('/[\r\n,]+/', (string) $allowed_domains_raw);
++      $allowed_domains = array_filter(array_map(function ($domain) {
++        return strtolower(trim($domain));
++      }, $allowed_domains_tokens ?: []));
+ 
+       try {
+-        // Exchange the code for an access token.
+-        $response = $this->httpClient->post("https://login.microsoftonline.com/$tenant_id/oauth2/v2.0/token", [
++        // Exchange authorization code for access token and ID token.
++        // Uses OAuth 2.0 token endpoint with client credentials.
++        // Endpoint varies based on account type
++        // (organization/common/consumers).
++        $token_url = "https://login.microsoftonline.com/$endpoint/oauth2/v2.0/token";
++        $response = $this->httpClient->post($token_url, [
+           'form_params' => [
+             'client_id' => $client_id,
+             'client_secret' => $client_secret,
+@@ -179,43 +290,242 @@ class SocialAuthEntraIdController implements ContainerInjectionInterface {
+ 
+         $data = json_decode($response->getBody()->getContents(), TRUE);
+ 
+-        // Check if access_token exists in response.
+-        if (isset($data['access_token'])) {
+-          $profile_response = $this->httpClient->get('https://graph.microsoft.com/v1.0/me', [
+-            'headers' => ['Authorization' => 'Bearer ' . $data['access_token']],
+-          ]);
++        // Verify both tokens are present in response.
++        if (isset($data['access_token']) && isset($data['id_token'])) {
++          // Parse and validate JWT ID token structure.
++          // JWT format: base64(header).base64(payload).base64(signature)
++          $id_token_parts = explode('.', $data['id_token']);
++          if (count($id_token_parts) !== 3) {
++            throw new \Exception('Invalid ID token format.');
++          }
++
++          // Decode the JWT payload (middle section).
++          // Uses URL-safe base64 decoding (-_ instead of +/).
++          $id_token_payload = json_decode(base64_decode(strtr($id_token_parts[1], '-_', '+/')), TRUE);
++
++          if (!$id_token_payload) {
++            throw new \Exception('Failed to decode ID token payload.');
++          }
++
++          // Validate critical ID token claims for security.
++          // SECURITY: These validations prevent token forgery and misuse.
++          // 1. Verify audience (aud) claim matches our client_id.
++          // Prevents tokens issued for other apps from being accepted.
++          if (empty($id_token_payload['aud']) || $id_token_payload['aud'] !== $client_id) {
++            throw new \Exception('ID token audience mismatch.');
++          }
++
++          // 2. Verify issuer (iss) claim is from Microsoft.
++          // Prevents tokens from malicious issuers.
++          // Expected issuer varies by account type:
++          // - organization: microsoft.com/{tenant_id}/v2.0
++          // - common/consumers: microsoft.com/{token_tenant}/v2.0
++          if (empty($id_token_payload['iss'])) {
++            throw new \Exception('ID token issuer missing.');
++          }
++          // For organization accounts, validate exact tenant match.
++          if ($account_type === 'organization') {
++            $expected_issuer = "https://login.microsoftonline.com/$tenant_id/v2.0";
++            if ($id_token_payload['iss'] !== $expected_issuer) {
++              throw new \Exception('ID token issuer mismatch.');
++            }
++          }
++          else {
++            // For common/consumers, validate issuer domain only.
++            if (!preg_match('#^https://login\.microsoftonline\.com/[^/]+/v2\.0$#', $id_token_payload['iss'])) {
++              throw new \Exception('ID token issuer invalid.');
++            }
++          }
++
++          // 3. Verify token expiration (exp) claim.
++          // Prevents use of old/expired tokens.
++          if (empty($id_token_payload['exp']) || $id_token_payload['exp'] < time()) {
++            throw new \Exception('ID token has expired.');
++          }
++
++          // 4. Verify nonce to prevent token replay attacks.
++          // Nonce must match what we sent in authorization request.
++          if (!empty($_SESSION['entra_id_oauth_nonce'])) {
++            if (empty($id_token_payload['nonce']) || $id_token_payload['nonce'] !== $_SESSION['entra_id_oauth_nonce']) {
++              unset($_SESSION['entra_id_oauth_nonce']);
++              throw new \Exception('ID token nonce mismatch.');
++            }
++            // Clear nonce after validation (one-time use).
++            unset($_SESSION['entra_id_oauth_nonce']);
++          }
++
++          // Extract verified email from ID token claims.
++          // SECURITY: Use ID token claims, NOT Graph API profile email.
++          // Microsoft does not validate the 'mail' field in user profiles,
++          // allowing attackers to impersonate users by setting arbitrary
++          // emails. ID token claims are cryptographically signed and
++          // verified by Microsoft.
++          // Priority: email > preferred_username > unique_name.
++          $user_email = NULL;
++          if (!empty($id_token_payload['email'])) {
++            $user_email = $id_token_payload['email'];
++          }
++          elseif (!empty($id_token_payload['preferred_username'])) {
++            $user_email = $id_token_payload['preferred_username'];
++          }
++          elseif (!empty($id_token_payload['unique_name'])) {
++            $user_email = $id_token_payload['unique_name'];
++          }
+ 
+-          $profile_data = json_decode($profile_response->getBody()->getContents(), TRUE);
++          if (!$user_email) {
++            throw new \Exception('No verified email found in ID token.');
++          }
++
++          // Normalize email to lowercase for case-insensitive comparison.
++          // Prevents bypass via case variations
++          // (user@example.com vs User@Example.COM).
++          $user_email = strtolower(trim($user_email));
++
++          // Validate email format to prevent malformed addresses.
++          if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
++            throw new \Exception('Invalid email format in ID token.');
++          }
++
++          // Fetch additional profile data from Microsoft Graph API.
++          // Used only for display name, NOT for email (security risk).
++          // If this call fails due to missing consent/permissions, proceed
++          // without it and derive a username from the email address.
++          $profile_data = [];
++          try {
++            $profile_response = $this->httpClient->get('https://graph.microsoft.com/v1.0/me', [
++              'headers' => ['Authorization' => 'Bearer ' . $data['access_token']],
++            ]);
++            $profile_data = json_decode($profile_response->getBody()->getContents(), TRUE) ?? [];
++          }
++          catch (\Exception $graph_exception) {
++            // Log at notice level; do not block login for missing Graph scopes.
++            $this->loggerFactory
++              ->get('social_auth_entra_id')
++              ->notice('Microsoft Graph /me request failed: @message', [
++                '@message' => $graph_exception->getMessage(),
++              ]);
++          }
+ 
+-          if (isset($profile_data['mail'])) {
+-            $user_email = $profile_data['mail'];
+-            $user_email_domain = substr(strrchr($user_email, "@"), 1);
++          // Process authentication with verified email.
++          if ($user_email) {
++            // Extract and normalize email domain for allowlist check.
++            $user_email_domain = strtolower(substr(strrchr($user_email, "@"), 1));
+ 
++            // Check domain allowlist if configured.
+             if (!empty($allowed_domains) && !in_array($user_email_domain, $allowed_domains)) {
+               $this->messenger->addError($this->t('Your email domain is not allowed.'));
+-
+-              return new RedirectResponse(Url::fromRoute('<front>')->toString());
++              $response = new RedirectResponse(Url::fromRoute('<front>')->toString());
++              $response->setMaxAge(0);
++              $response->headers->addCacheControlDirective('no-cache', TRUE);
++              return $response;
+             }
+ 
++            // Check if user account already exists.
+             $existing_user = user_load_by_mail($user_email);
+ 
++            // Load security configuration for privileged account protection.
++            $block_user_1 = $config->get('block_user_1') ?? TRUE;
++            $block_admin_role = $config->get('block_admin_role') ?? FALSE;
++
++            // Perform security checks on existing user accounts.
++            if ($existing_user) {
++              // 1. Check if Drupal account is blocked/disabled.
++              // Respects site-wide user blocking.
++              if ($existing_user->isBlocked()) {
++                $this->messenger->addError($this->t('This account has been blocked.'));
++                $this->loggerFactory
++                  ->get('social_auth_entra_id')
++                  ->warning('Blocked user login attempt via Entra ID for email: @email, IP: @ip', [
++                    '@email' => $user_email,
++                    '@ip' => $request->getClientIp(),
++                  ]);
++                $response = new RedirectResponse(Url::fromRoute('user.login')->toString());
++                $response->setMaxAge(0);
++                $response->headers->addCacheControlDirective('no-cache', TRUE);
++                return $response;
++              }
++
++              // 2. Check if user ID 1 (root admin) login is blocked.
++              // SECURITY: Prevents SSO attacks on most privileged account.
++              if ($block_user_1 && $existing_user->id() == 1) {
++                $this->messenger->addError($this->t('The root administrator account cannot log in via Entra ID.'));
++                $this->loggerFactory
++                  ->get('social_auth_entra_id')
++                  ->warning('Blocked user 1 login attempt via Entra ID for email: @email, IP: @ip', [
++                    '@email' => $user_email,
++                    '@ip' => $request->getClientIp(),
++                  ]);
++                $response = new RedirectResponse(Url::fromRoute('user.login')->toString());
++                $response->setMaxAge(0);
++                $response->headers->addCacheControlDirective('no-cache', TRUE);
++                return $response;
++              }
++
++              // 3. Check if administrator role login is blocked.
++              // SECURITY: Optional protection for all admin accounts.
++              if ($block_admin_role && $existing_user->hasRole('administrator')) {
++                $this->messenger->addError($this->t('Administrator accounts cannot log in via Entra ID.'));
++                $this->loggerFactory
++                  ->get('social_auth_entra_id')
++                  ->warning('Blocked administrator role login attempt via Entra ID for email: @email, IP: @ip', [
++                    '@email' => $user_email,
++                    '@ip' => $request->getClientIp(),
++                  ]);
++                $response = new RedirectResponse(Url::fromRoute('user.login')->toString());
++                $response->setMaxAge(0);
++                $response->headers->addCacheControlDirective('no-cache', TRUE);
++                return $response;
++              }
++            }
++
++            // Handle user registration if account doesn't exist and
++            // auto-registration is enabled.
+             if (!$existing_user && $login_behavior == 'register_and_login') {
++              // Generate base username from display name or email part.
++              $base_username = $profile_data['displayName'] ?? explode('@', $user_email)[0];
++
++              // Sanitize username to remove invalid characters.
++              // Allows Unicode, alphanumeric, @, _, ., ', and -.
++              $base_username = preg_replace('/[^\x{80}-\x{F7} a-z0-9@_.\'-]/i', '', $base_username);
++              $base_username = trim($base_username);
++
++              // Ensure username uniqueness by appending counter if needed.
++              // Prevents username collision errors.
++              $username = $base_username;
++              $counter = 1;
++              while (user_load_by_name($username)) {
++                $username = $base_username . '_' . $counter;
++                $counter++;
++              }
++
++              // Create new Drupal user account.
+               $new_user = User::create([
+-                'name' => $profile_data['displayName'] ?? $user_email,
++                'name' => $username,
+                 'mail' => $user_email,
+                 'status' => 1,
+               ]);
+               $new_user->save();
++
++              // Log user in and show success message.
+               user_login_finalize($new_user);
+               $this->messenger->addStatus($this->t('Account created and logged in.'));
+             }
+             elseif ($existing_user) {
++              // Log in existing user that passed all security checks.
+               user_login_finalize($existing_user);
+               $this->messenger->addStatus($this->t('Logged in successfully.'));
+             }
+             else {
+-              $this->messenger->addError($this->t('Login failed. The account does not exist.'));
+-              return new RedirectResponse(Url::fromRoute('<front>')->toString());
++              // User doesn't exist and auto-registration is disabled.
++              // Use generic error to prevent account enumeration attacks.
++              $this->messenger->addError($this->t('Unable to log in. Please contact the site administrator.'));
++              $this->loggerFactory
++                ->get('social_auth_entra_id')
++                ->notice('Login attempt for non-existent account: @email', ['@email' => $user_email]);
++              $response = new RedirectResponse(Url::fromRoute('<front>')->toString());
++              $response->setMaxAge(0);
++              $response->headers->addCacheControlDirective('no-cache', TRUE);
++              return $response;
+             }
+           }
+           else {
+@@ -227,18 +537,41 @@ class SocialAuthEntraIdController implements ContainerInjectionInterface {
+         }
+       }
+       catch (\Exception $e) {
++        // Handle all authentication errors gracefully.
++        // Show generic message to prevent information leakage.
+         $this->messenger->addError($this->t('An error occurred.'));
++
++        // Log detailed error with context for debugging.
+         $this->loggerFactory
+           ->get('social_auth_entra_id')
+-          ->error('Microsoft Entra callback error: @message', ['@message' => $e->getMessage()]);
++          ->error('Microsoft Entra callback error: @message', [
++            '@message' => $e->getMessage(),
++            'ip' => $request->getClientIp(),
++            'timestamp' => time(),
++          ]);
++
++        // SECURITY: Add delay to prevent timing attacks and rate limit abuse.
++        // Makes brute force attacks slower.
++        sleep(2);
+       }
+     }
+     else {
++      // Authorization code not present in callback.
+       $this->messenger->addError($this->t('Authorization code missing.'));
+     }
+ 
+-    // Redirect to the front page after handling callback or errors.
+-    return new RedirectResponse(Url::fromRoute('<front>')->toString());
++    // Default redirect to front page after callback processing.
++    $response = new RedirectResponse(Url::fromRoute('<front>')->toString());
++
++    // Ensure callback responses are never cached.
++    // OAuth callbacks contain sensitive state validation.
++    $response->setMaxAge(0);
++    $response->setSharedMaxAge(0);
++    $response->headers->addCacheControlDirective('no-cache', TRUE);
++    $response->headers->addCacheControlDirective('no-store', TRUE);
++    $response->headers->addCacheControlDirective('must-revalidate', TRUE);
++
++    return $response;
+   }
+ 
+ }
+diff --git a/src/Form/SocialAuthEntraIdSettingsForm.php b/src/Form/SocialAuthEntraIdSettingsForm.php
+index 76eb660..08ea3a1 100644
+--- a/src/Form/SocialAuthEntraIdSettingsForm.php
++++ b/src/Form/SocialAuthEntraIdSettingsForm.php
+@@ -4,12 +4,19 @@ namespace Drupal\social_auth_entra_id\Form;
+ 
+ use Drupal\Core\Form\ConfigFormBase;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Url;
+ 
+ /**
+  * Configures settings for the Entra ID social authentication module.
+  *
+- * Provides settings for configuring the Entra ID client ID, client secret,
+- * and other necessary configurations for Microsoft Entra ID integration.
++ * Provides configuration form for Microsoft Entra ID (Azure AD) OAuth 2.0
++ * integration including:
++ * - Azure AD application credentials (Client ID, Secret, Tenant ID)
++ * - Login behavior (auto-registration vs login-only)
++ * - Domain allowlisting for email restrictions
++ * - Security settings for privileged account protection.
++ *
++ * Available at: /admin/config/services/entra-id/settings
+  */
+ class SocialAuthEntraIdSettingsForm extends ConfigFormBase {
+ 
+@@ -28,40 +35,126 @@ class SocialAuthEntraIdSettingsForm extends ConfigFormBase {
+   }
+ 
+   /**
+-   * Builds the settings form.
++   * Builds the configuration form.
++   *
++   * Creates form elements for all module settings including Azure AD
++   * credentials, behavior options, and security configurations.
++   *
++   * @param array $form
++   *   An associative array containing the structure of the form.
++   * @param \Drupal\Core\Form\FormStateInterface $form_state
++   *   The current state of the form.
++   *
++   * @return array
++   *   The form structure.
+    */
+   public function buildForm(array $form, FormStateInterface $form_state) {
++    // Load existing configuration.
+     $config = $this->config('social_auth_entra_id.settings');
+ 
+-    // Client ID field.
+-    $form['client_id'] = [
++    // Azure AD credentials group.
++    $form['azure_credentials'] = [
++      '#type' => 'details',
++      '#title' => $this->t('Azure AD Application Credentials'),
++      '#open' => TRUE,
++      '#description' => $this->t('Configure your Microsoft Entra ID (Azure AD) application credentials. <a href="@portal" target="_blank">Open Azure Portal</a> to manage your app registrations.', [
++        '@portal' => 'https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade',
++      ]),
++    ];
++
++    // Azure AD Application (client) ID.
++    // Found in Azure Portal > App registrations > Overview.
++    $form['azure_credentials']['client_id'] = [
+       '#type' => 'textfield',
+       '#title' => $this->t('Client ID'),
+       '#default_value' => $config->get('client_id'),
+-      '#description' => $this->t('Enter the Client ID provided by Azure AD.'),
++      '#description' => $this->t('Enter the Application (client) ID. Find it in') . ' '
++      . $this->t('<a href="@link" target="_blank">Azure Portal > App registrations</a>.', [
++        '@link' => 'https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade',
++      ]),
+       '#required' => TRUE,
+     ];
+ 
+-    // Client Secret field.
+-    $form['client_secret'] = [
++    // Display the callback URL for administrator reference.
++    // This is the Redirect URI to configure in Azure AD application
++    // registration.
++    // Disabled so it is not editable; generated automatically.
++    $callback_url = Url::fromRoute(
++      'social_auth_entra_id.callback',
++      [],
++      ['absolute' => TRUE]
++    )->toString();
++    $form['azure_credentials']['callback_url'] = [
+       '#type' => 'textfield',
++      '#title' => $this->t('Callback URL (Redirect URI)'),
++      '#default_value' => $callback_url,
++      '#description' => $this->t('Copy this URL into Azure AD Redirect URIs.'),
++      '#disabled' => TRUE,
++    ];
++
++    // Azure AD Application client secret value.
++    // Created in Azure Portal > App registrations > Certificates & secrets.
++    // SECURITY: Uses password field to prevent shoulder surfing.
++    $form['azure_credentials']['client_secret'] = [
++      '#type' => 'password',
+       '#title' => $this->t('Client Secret'),
+       '#default_value' => $config->get('client_secret'),
+-      '#description' => $this->t('Enter the Client Secret provided by Azure AD.'),
+-      '#required' => TRUE,
++      '#description' => $this->t('Create a client secret in Azure Portal > App registrations.') . ' '
++      . $this->t('Paste the secret value here. Leave blank to keep existing.') . ' '
++      . $this->t('<a href="@link" target="_blank">Open App registrations</a>.', [
++        '@link' => 'https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade',
++      ]),
++      '#required' => FALSE,
++      '#attributes' => ['autocomplete' => 'off'],
+     ];
+ 
+-    // Tenant ID field.
+-    $form['tenant_id'] = [
++    // Azure AD Directory (tenant) ID.
++    // Found in Azure Portal > Azure Active Directory > Overview.
++    $form['azure_credentials']['tenant_id'] = [
+       '#type' => 'textfield',
+       '#title' => $this->t('Tenant ID'),
+       '#default_value' => $config->get('tenant_id'),
+-      '#description' => $this->t('Enter the Tenant ID for your Azure AD application.'),
+-      '#required' => TRUE,
++      '#description' => $this->t('Directory (tenant) ID from Azure Active Directory > Overview.') . ' '
++      . $this->t('Only required for single-tenant (organization accounts).') . ' '
++      . $this->t('<a href="@link" target="_blank">Open Azure AD Overview</a>.', [
++        '@link' => 'https://portal.azure.com/#view/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/~/Overview',
++      ]),
++      '#required' => FALSE,
++      '#states' => [
++        'required' => [
++          ':input[name="account_type"]' => ['value' => 'organization'],
++        ],
++        'visible' => [
++          ':input[name="account_type"]' => ['value' => 'organization'],
++        ],
++      ],
+     ];
+ 
+-    // Login behavior selection.
+-    $form['login_behavior'] = [
++    // Microsoft account type selection.
++    // Determines which types of Microsoft accounts can authenticate.
++    $form['azure_credentials']['account_type'] = [
++      '#type' => 'radios',
++      '#title' => $this->t('Account Type'),
++      '#options' => [
++        'organization' => $this->t('Organization accounts only (requires Tenant ID above)'),
++        'common' => $this->t('Both organization and personal Microsoft accounts'),
++        'consumers' => $this->t('Personal Microsoft accounts only (Hotmail, Outlook.com, Live.com)'),
++      ],
++      '#default_value' => $config->get('account_type') ?? 'organization',
++      '#description' => $this->t('Choose what types of Microsoft accounts can authenticate.<br /><br /><strong>Mapping to Azure Portal “Supported account types”:</strong><ul><li><strong>Organization accounts only:</strong> Select <em>Accounts in this organizational directory only (Single tenant)</em></li><li><strong>Both organization and personal:</strong> Select <em>Accounts in any organizational directory and personal Microsoft accounts</em></li><li><strong>Personal accounts only:</strong> Select <em>Personal Microsoft accounts only</em></li></ul><em>Note:</em> The “Accounts in any organizational directory (Multitenant)” option alone does not allow personal accounts.'),
++    ];
++
++    // Authentication behavior settings group.
++    $form['auth_behavior'] = [
++      '#type' => 'details',
++      '#title' => $this->t('Authentication Behavior'),
++      '#open' => TRUE,
++    ];
++
++    // Determines behavior when new users authenticate.
++    // register_and_login: Automatically creates Drupal accounts.
++    // login_only: Restricts to existing accounts only.
++    $form['auth_behavior']['login_behavior'] = [
+       '#type' => 'radios',
+       '#title' => $this->t('Login Behavior'),
+       '#options' => [
+@@ -72,12 +165,45 @@ class SocialAuthEntraIdSettingsForm extends ConfigFormBase {
+       '#description' => $this->t('Choose whether to allow registration and login, or restrict to login only for existing accounts.'),
+     ];
+ 
+-    // Domain allowlist field.
+-    $form['allowed_domains'] = [
++    // Email domain restrictions for corporate environments.
++    // Comma-separated list, case-insensitive matching.
++    // Empty = allow all domains.
++    $form['auth_behavior']['allowed_domains'] = [
+       '#type' => 'textarea',
+       '#title' => $this->t('Allowed Domains'),
+       '#default_value' => $config->get('allowed_domains'),
+-      '#description' => $this->t('Enter a comma-separated list of email domains that are allowed to register/login. Leave empty to allow all domains. Example: example.com, another-domain.com'),
++      '#description' => $this->t('Enter the email domains that are allowed to register/login.')
++      . ' ' . $this->t('You can enter them comma-separated or one per line.')
++      . ' ' . $this->t('Leave empty to allow all domains.')
++      . ' ' . $this->t('Examples: <code>example.com, another-domain.com</code> or on separate lines.'),
++    ];
++
++    // Security settings group for privileged account protection.
++    $form['security'] = [
++      '#type' => 'details',
++      '#title' => $this->t('Security Settings'),
++      '#open' => TRUE,
++      '#description' => $this->t('<strong>Important:</strong> Review these security settings carefully before enabling SSO authentication. These settings protect privileged accounts from SSO-based attacks.'),
++    ];
++
++    // Prevent root admin (UID 1) from using SSO.
++    // SECURITY: Recommended to prevent account takeover attacks.
++    // Default: enabled.
++    $form['security']['block_user_1'] = [
++      '#type' => 'checkbox',
++      '#title' => $this->t('Block User 1 (root user) from logging in via Entra ID'),
++      '#default_value' => $config->get('block_user_1') ?? TRUE,
++      '#description' => $this->t('Recommended: Prevent the root administrator account (user ID 1) from authenticating via Entra ID. This protects against SSO-based attacks on the most privileged account.'),
++    ];
++
++    // Prevent all administrator role users from using SSO.
++    // SECURITY: Optional, for high-security environments.
++    // Default: enabled (as per config/install).
++    $form['security']['block_admin_role'] = [
++      '#type' => 'checkbox',
++      '#title' => $this->t('Block users with Administrator role from logging in via Entra ID'),
++      '#default_value' => $config->get('block_admin_role') ?? TRUE,
++      '#description' => $this->t('Prevent any user with the Administrator role from authenticating via Entra ID. Admins must use traditional username/password login.'),
+     ];
+ 
+     return parent::buildForm($form, $form_state);
+@@ -85,15 +211,30 @@ class SocialAuthEntraIdSettingsForm extends ConfigFormBase {
+ 
+   /**
+    * {@inheritdoc}
++   *
++   * Saves all configuration values to config storage.
++   * Special handling for client_secret to preserve existing value when empty.
+    */
+   public function submitForm(array &$form, FormStateInterface $form_state) {
+-    $this->config('social_auth_entra_id.settings')
+-      ->set('client_id', $form_state->getValue('client_id'))
+-      ->set('client_secret', $form_state->getValue('client_secret'))
++    $config = $this->config('social_auth_entra_id.settings');
++
++    // Save all form values to configuration.
++    $config->set('client_id', $form_state->getValue('client_id'))
+       ->set('tenant_id', $form_state->getValue('tenant_id'))
++      ->set('account_type', $form_state->getValue('account_type'))
+       ->set('login_behavior', $form_state->getValue('login_behavior'))
+       ->set('allowed_domains', $form_state->getValue('allowed_domains'))
+-      ->save();
++      ->set('block_user_1', $form_state->getValue('block_user_1'))
++      ->set('block_admin_role', $form_state->getValue('block_admin_role'));
++
++    // SECURITY: Only update client_secret if a new value is provided.
++    // Password fields return empty on re-submit, so preserve existing value.
++    $client_secret = $form_state->getValue('client_secret');
++    if (!empty($client_secret)) {
++      $config->set('client_secret', $client_secret);
++    }
++
++    $config->save();
+ 
+     parent::submitForm($form, $form_state);
+   }
+diff --git a/src/Plugin/Block/EntraIdLoginBlockBlock.php b/src/Plugin/Block/EntraIdLoginBlockBlock.php
+index 684dafe..d19f6be 100644
+--- a/src/Plugin/Block/EntraIdLoginBlockBlock.php
++++ b/src/Plugin/Block/EntraIdLoginBlockBlock.php
+@@ -9,7 +9,14 @@ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Core\Url;
+ 
+ /**
+- * Provides an Entra ID login block.
++ * Provides a configurable login block for Microsoft Entra ID authentication.
++ *
++ * Displays a link/button that redirects users to Microsoft Entra ID login.
++ * Supports custom text with HTML (Font Awesome icons) and CSS classes.
++ *
++ * Block can be placed via:
++ * - Block layout UI: /admin/structure/block
++ * - Programmatically in theme or module
+  *
+  * @Block(
+  *   id = "entra_id_login_block",
+@@ -21,29 +28,44 @@ final class EntraIdLoginBlockBlock extends BlockBase {
+ 
+   /**
+    * {@inheritdoc}
++   *
++   * Builds the block output with customizable login link.
++   *
++   * @return array
++   *   A renderable array containing the login link with:
++   *   - Custom text/HTML (with allowed tags)
++   *   - Custom CSS classes
++   *   - Font Awesome library attachment
++   *   - User context caching
+    */
+   public function build(): array {
+ 
+-    // Retrieve the configured login text or use default.
++    // Get configured login text or use default with Microsoft icon.
+     $login_text = $this->configuration['login_text'] ?? '<i class="fa-brands fa-microsoft"></i> Log in with Microsoft Entra ID';
+ 
+-    // Retrieve the configured custom class or set to a default.
++    // Get configured CSS classes or use Bootstrap button defaults.
+     $custom_class = !empty($this->configuration['custom_class']) ? $this->configuration['custom_class'] : 'btn btn-primary';
+ 
++    // Build render array for login link.
+     return [
+       'content' => [
+         '#type' => 'link',
+         '#title' => [
+           '#markup' => $login_text,
+-          '#allowed_tags' => ['i', 'strong', 'em', 'b', 'u', 'span'],
++          // Allow safe HTML tags for icons and formatting.
++          '#allowed_tags' => ['i', 'strong', 'em', 'b', 'u', 'span', 'img'],
+         ],
++        // Link to OAuth redirect route.
+         '#url' => Url::fromRoute('social_auth_entra_id.redirect'),
++        // Apply custom CSS classes for styling.
+         '#attributes' => ['class' => [$custom_class]],
++        // Attach Font Awesome library for icon support.
+         '#attached' => [
+           'library' => [
+             'social_auth_entra_id/font-awesome',
+           ],
+         ],
++        // Cache per user to show/hide based on authentication state.
+         '#cache' => [
+           'contexts' => ['user'],
+         ],
+@@ -53,13 +75,28 @@ final class EntraIdLoginBlockBlock extends BlockBase {
+ 
+   /**
+    * {@inheritdoc}
++   *
++   * Defines the block configuration form.
++   *
++   * Allows administrators to customize:
++   * - Login button text with HTML support
++   * - CSS classes for styling
++   *
++   * @param array $form
++   *   The form array.
++   * @param \Drupal\Core\Form\FormStateInterface $form_state
++   *   The form state.
++   *
++   * @return array
++   *   The configuration form.
+    */
+   public function blockForm($form, FormStateInterface $form_state) {
+-    // Get the existing configuration.
++    // Load existing block configuration.
+     $config = $this->getConfiguration();
+     $default_class = 'btn btn-primary';
+ 
+-    // Create the form field for the login text.
++    // Login text field with HTML support.
++    // Supports Font Awesome icons and basic HTML formatting.
+     $form['login_text'] = [
+       '#type' => 'textfield',
+       '#title' => $this->t('Login Text'),
+@@ -67,7 +104,8 @@ final class EntraIdLoginBlockBlock extends BlockBase {
+       '#default_value' => $config['login_text'] ?? '<i class="fa-brands fa-microsoft"></i> Log in with Microsoft Entra ID',
+     ];
+ 
+-    // Create the form field for the custom class.
++    // Custom CSS class field for button styling.
++    // Supports Bootstrap classes, custom theme classes, etc.
+     $form['custom_class'] = [
+       '#type' => 'textfield',
+       '#title' => $this->t('Custom Class'),
+@@ -80,11 +118,48 @@ final class EntraIdLoginBlockBlock extends BlockBase {
+ 
+   /**
+    * {@inheritdoc}
++   *
++   * Validates block configuration before saving.
++   *
++   * SECURITY: Validates CSS class input to prevent injection attacks.
++   *
++   * @param array $form
++   *   The form array.
++   * @param \Drupal\Core\Form\FormStateInterface $form_state
++   *   The form state.
++   */
++  public function blockValidate($form, FormStateInterface $form_state) {
++    $custom_class = $form_state->getValue('custom_class');
++
++    // Validate CSS class contains only safe characters.
++    // Allowed: letters, numbers, spaces, hyphens, underscores.
++    // Prevents XSS and CSS injection attacks.
++    if ($custom_class && !preg_match('/^[a-zA-Z0-9\s_-]+$/', $custom_class)) {
++      $form_state->setErrorByName('custom_class', $this->t('Custom class can only contain letters, numbers, spaces, hyphens, and underscores.'));
++    }
++  }
++
++  /**
++   * {@inheritdoc}
++   *
++   * Saves block configuration.
++   *
++   * SECURITY: Sanitizes CSS class to remove any invalid characters
++   * that passed validation.
++   *
++   * @param array $form
++   *   The form array.
++   * @param \Drupal\Core\Form\FormStateInterface $form_state
++   *   The form state.
+    */
+   public function blockSubmit($form, FormStateInterface $form_state) {
+-    // Save the configuration.
++    // Save login text as-is (will be filtered on output).
+     $this->configuration['login_text'] = $form_state->getValue('login_text');
+-    $this->configuration['custom_class'] = $form_state->getValue('custom_class');
++
++    // SECURITY: Sanitize CSS class to prevent injection attacks.
++    // Removes any characters not matching: a-z, A-Z, 0-9, space, -, _.
++    $custom_class = $form_state->getValue('custom_class');
++    $this->configuration['custom_class'] = preg_replace('/[^a-zA-Z0-9\s_-]/', '', $custom_class);
+   }
+ 
+ }

@@ -68,6 +68,7 @@
         "drupal/redirect": "^1.8",
         "drupal/seckit": "^2.0",
         "drupal/select2": "^2",
+        "drupal/social_auth_entra_id": "^1.0",
         "drupal/social_auth_google": "^4.0",
         "drupal/social_auth_hid": "^5",
         "drupal/social_auth_linkedin": "^4.0",
