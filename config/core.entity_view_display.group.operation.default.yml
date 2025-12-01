@@ -8,6 +8,7 @@ dependencies:
     - field.field.group.operation.field_assessments_page
     - field.field.group.operation.field_calendar_alternate_link
     - field.field.group.operation.field_calendar_link
+    - field.field.group.operation.field_countries
     - field.field.group.operation.field_documents_page
     - field.field.group.operation.field_enabled_tabs
     - field.field.group.operation.field_hdx_alternate_source
@@ -68,6 +69,7 @@ hidden:
   field_assessments_page: true
   field_calendar_alternate_link: true
   field_calendar_link: true
+  field_countries: true
   field_documents_page: true
   field_enabled_tabs: true
   field_hdx_alternate_source: true

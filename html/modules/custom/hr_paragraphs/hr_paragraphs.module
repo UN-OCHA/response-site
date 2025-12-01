@@ -11,6 +11,7 @@ use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -1882,6 +1883,9 @@ function hr_paragraphs_preprocess_river(&$variables) {
  */
 function hr_paragraphs_preprocess_fullcalendar_calendar(&$variables) {
   hr_paragraphs_group_is_archived($variables);
+
+  // Trigger json ld schema.
+  hr_paragraphs_add_json_ld_schema($variables, $variables['group']);
 }
 
 /**
@@ -2800,4 +2804,37 @@ function hr_paragraphs_metatags_for_rivers(array &$metatags, array &$context) {
       $metatags['description'] = $description;
     }
   }
+}
+
+/**
+ * Allowed values callback for ReliefWeb countries.
+ */
+function hr_paragraphs_allowed_countries(?FieldStorageDefinitionInterface $definition = NULL, ?FieldableEntityInterface $entity = NULL, &$cacheable = TRUE) {
+  /** @var \Drupal\hr_paragraphs\Service\ReliefWebApiClient $reliefweb_api_client */
+  $reliefweb_api_client = \Drupal::service('hr_paragraphs.reliefweb_api_client');
+  return $reliefweb_api_client->getCountriesList();
+}
+
+/**
+ * Allowed values callback for ReliefWeb organizations.
+ */
+function hr_paragraphs_allowed_organizations(?FieldStorageDefinitionInterface $definition = NULL, ?FieldableEntityInterface $entity = NULL, &$cacheable = TRUE) {
+  /** @var \Drupal\hr_paragraphs\Service\ReliefWebApiClient $reliefweb_api_client */
+  $reliefweb_api_client = \Drupal::service('hr_paragraphs.reliefweb_api_client');
+  return $reliefweb_api_client->getOrganizationsList();
+}
+
+/**
+ * Add json_ld_schema from entity.
+ */
+function hr_paragraphs_add_json_ld_schema(array &$build, EntityInterface $entity, string $view_mode = 'full'): void {
+  $display = \Drupal::entityTypeManager()
+    ->getStorage('entity_view_display')
+    ->load($entity->getEntityTypeId() . '.' . $entity->bundle() . '.' . $view_mode);
+
+  if (!$display) {
+    return;
+  }
+
+  json_ld_schema_entity_view($build, $entity, $display, $view_mode);
 }

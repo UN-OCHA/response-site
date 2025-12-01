@@ -1,0 +1,21 @@
+uuid: 0a86865c-7fc1-4c26-9d59-650ed0c31a28
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_organizations
+    - group.type.cluster
+  module:
+    - options
+id: group.cluster.field_organizations
+field_name: field_organizations
+entity_type: group
+bundle: cluster
+label: Organizations
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer
