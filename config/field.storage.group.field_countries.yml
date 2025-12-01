@@ -1,0 +1,24 @@
+uuid: 30d46708-048c-48c1-8ab7-88406e4d548f
+langcode: en
+status: true
+dependencies:
+  module:
+    - group
+    - options
+id: group.field_countries
+field_name: field_countries
+entity_type: group
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 0
+      label: RW
+  allowed_values_function: hr_paragraphs_allowed_countries
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
