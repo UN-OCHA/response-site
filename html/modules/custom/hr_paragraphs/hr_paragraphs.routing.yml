@@ -128,6 +128,6 @@ hr_paragraphs.webhook:
     - POST
   defaults:
     _title: 'ReliefWeb Webhook'
-    _controller: '\Drupal\hr_paragraphs\Controller\ReliefwebController::invalidateCache'
+    _controller: 'hr_paragraphs.reliefweb_controller:invalidateCache'
   requirements:
     _permission: 'access content'
