@@ -61,7 +61,7 @@ class IcalController extends ControllerBase {
       );
     }
     catch (RequestException $exception) {
-      $this->getLogger('hr_paragraphs_ical')->error('Fetching data from $url failed with @message', [
+      $this->getLogger('hr_paragraphs_ical')->error('Fetching data from @url failed with @message', [
         '@url' => $url,
         '@message' => $exception->getMessage(),
       ]);
