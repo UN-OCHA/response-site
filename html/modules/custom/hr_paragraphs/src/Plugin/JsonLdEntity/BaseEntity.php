@@ -59,7 +59,7 @@ class BaseEntity extends JsonLdEntityBase {
 
     /** @var \Drupal\hr_paragraphs\Controller\IcalController $ical_controller */
     $ical_controller = \Drupal::service('hr_paragraphs.ical_controller');
-    $events = $ical_controller->getIcalEvents($group);
+    $events = $ical_controller->getIcalEvents($group, NULL, NULL, TRUE);
 
     $event_references = [];
     foreach ($events as $event) {
