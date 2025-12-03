@@ -37,11 +37,13 @@ class IcalController extends ControllerBase {
    *   Start date as string.
    * @param string $range_end
    *   End date as string.
+   * @param bool $ignore_exceptions
+   *   Flag that allows this controller to be used as helper.
    *
    * @return array<int, mixed>
    *   List of events found.
    */
-  public function getIcalEvents(Group $group, ?string $range_start = NULL, ?string $range_end = NULL) : array {
+  public function getIcalEvents(Group $group, ?string $range_start = NULL, ?string $range_end = NULL, bool $ignore_exceptions = FALSE) : array {
     $range_start = $range_start ?? date('Y-m-d');
     $range_end = $range_end ?? date('Y-m-d', time() + 365 * 24 * 60 * 60);
 
@@ -59,12 +61,16 @@ class IcalController extends ControllerBase {
       );
     }
     catch (RequestException $exception) {
-      $this->getLogger('hr_paragraphs_ical')->error('Fetching data from $url failed with @message', [
+      $this->getLogger('hr_paragraphs_ical')->error('Fetching data from @url failed with @message', [
         '@url' => $url,
         '@message' => $exception->getMessage(),
       ]);
 
       if ($exception->getCode() === 404) {
+        // Just return an empty array if used as a helper function.
+        if ($ignore_exceptions) {
+          return [];
+        }
         throw new NotFoundHttpException();
       }
 
