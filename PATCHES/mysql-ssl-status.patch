@@ -1,8 +1,8 @@
 diff --git a/core/modules/mysql/src/Driver/Database/mysql/Connection.php b/core/modules/mysql/src/Driver/Database/mysql/Connection.php
-index bc4a360d4ae..4abcf362708 100644
+index 90fdf9084b3..8a05db31e9f 100644
 --- a/core/modules/mysql/src/Driver/Database/mysql/Connection.php
 +++ b/core/modules/mysql/src/Driver/Database/mysql/Connection.php
-@@ -50,6 +50,15 @@ class Connection extends DatabaseConnection implements SupportsTemporaryTablesIn
+@@ -51,6 +51,15 @@ class Connection extends DatabaseConnection implements SupportsTemporaryTablesIn
     */
    private $serverVersion;
  
@@ -18,7 +18,7 @@ index bc4a360d4ae..4abcf362708 100644
    /**
     * The minimal possible value for the max_allowed_packet setting of MySQL.
     *
-@@ -248,6 +257,13 @@ public function version() {
+@@ -260,6 +269,13 @@ public function version() {
      return $this->getServerVersion();
    }
  
@@ -32,7 +32,7 @@ index bc4a360d4ae..4abcf362708 100644
    /**
     * Determines whether the MySQL distribution is MariaDB or not.
     *
-@@ -287,6 +303,19 @@ protected function getServerVersion(): string {
+@@ -299,6 +315,19 @@ protected function getServerVersion(): string {
      return $this->serverVersion;
    }
  
@@ -52,31 +52,31 @@ index bc4a360d4ae..4abcf362708 100644
    /**
     * {@inheritdoc}
     */
-diff --git a/core/modules/system/system.install b/core/modules/system/system.install
-index 431651d08e2..52cbdca8616 100644
---- a/core/modules/system/system.install
-+++ b/core/modules/system/system.install
-@@ -569,6 +569,23 @@ function system_requirements($phase): array {
+diff --git a/core/modules/system/src/Install/Requirements/SystemRequirements.php b/core/modules/system/src/Install/Requirements/SystemRequirements.php
+index ff80ee1e6a1..61884b66bb2 100644
+--- a/core/modules/system/src/Install/Requirements/SystemRequirements.php
++++ b/core/modules/system/src/Install/Requirements/SystemRequirements.php
+@@ -591,6 +591,23 @@ public static function checkRequirements(string $phase): array {
+       }
      }
-   }
  
-+  if ($phase === 'runtime' || $phase === 'update') {
-+    // Test database SSL/TLS support.
-+    $requirements['database_connection_encryption'] = [
-+      'title'=> t('Database connection encryption'),
-+      'severity' => RequirementSeverity::Warning,
-+      'value' => t('Disabled'),
-+      'description' => t('The database connection is not encrypted.'),
-+    ];
++    if ($phase === 'runtime' || $phase === 'update') {
++      // Test database SSL/TLS support.
++      $requirements['database_connection_encryption'] = [
++        'title'=> t('Database connection encryption'),
++        'severity' => RequirementSeverity::Warning,
++        'value' => t('Disabled'),
++        'description' => t('The database connection is not encrypted.'),
++      ];
 +
-+    // Check whether the database connection is encrypted and adjust the requirements array based on findings.
-+    if (Database::getConnection()->connectionInfo()) {
-+      $requirements['database_connection_encryption']['severity'] = RequirementSeverity::OK;
-+      $requirements['database_connection_encryption']['value'] = t('Enabled');
-+      $requirements['database_connection_encryption']['description'] = t('The database connection is encrypted with %connection.', ['%connection' => Database::getConnection()->connectionInfo() ]);
++      // Check whether the database connection is encrypted and adjust the requirements array based on findings.
++      if (Database::getConnection()->connectionInfo()) {
++        $requirements['database_connection_encryption']['severity'] = RequirementSeverity::OK;
++        $requirements['database_connection_encryption']['value'] = t('Enabled');
++        $requirements['database_connection_encryption']['description'] = t('The database connection is encrypted with %connection.', ['%connection' => Database::getConnection()->connectionInfo() ]);
++      }
 +    }
-+  }
 +
-   if ($phase === 'runtime' || $phase === 'update') {
-     // Test database JSON support.
-     $requirements['database_support_json'] = [
+     if ($phase === 'runtime' || $phase === 'update') {
+       // Test database JSON support.
+       $requirements['database_support_json'] = [
