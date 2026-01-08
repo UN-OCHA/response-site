@@ -11,6 +11,7 @@
 !html/themes/custom
 !load.environment.php
 !PATCHES
+!patches.lock.json
 !scripts
 !symfony.lock
 

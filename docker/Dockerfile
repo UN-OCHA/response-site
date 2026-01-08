@@ -14,7 +14,7 @@ WORKDIR /srv/www
 RUN rm -rf ./vendor && \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_MEMORY_LIMIT=-1 \
-    composer install --quiet --no-dev --prefer-dist
+    composer install --no-interaction --no-dev --prefer-dist
 
 # Copy settings to default site location.
 RUN cp -a docker/settings.php docker/services.yml docker/memcache.services.yml html/sites/default
@@ -50,6 +50,7 @@ COPY --from=builder /srv/www/html /srv/www/html/
 COPY --from=builder /srv/www/vendor /srv/www/vendor/
 COPY --from=builder /srv/www/scripts /srv/www/scripts/
 COPY --from=builder /srv/www/composer.json /srv/www/composer.json
+COPY --from=builder /srv/www/composer.lock /srv/www/composer.lock
 COPY --from=builder /srv/www/composer.patches.json /srv/www/composer.patches.json
 COPY --from=builder /srv/www/PATCHES /srv/www/PATCHES
-COPY --from=builder /srv/www/composer.lock /srv/www/composer.lock
+COPY --from=builder /srv/www/patches.lock.json /srv/www/patches.lock.json

@@ -1,0 +1,13 @@
+diff --git a/group.module b/group.module
+index e97f64e..85a3feb 100644
+--- a/group.module
++++ b/group.module
+@@ -301,7 +301,7 @@ function group_query_entity_query_alter(AlterableInterface $query) {
+   }
+ 
+   $entity_type_id = $query->getMetaData('entity_type');
+-  if ($query->hasTag($entity_type_id . '_access')) {
++  if ($entity_type_id && $query->hasTag($entity_type_id . '_access')) {
+     $entity_type_manager = \Drupal::entityTypeManager();
+     $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+ 
