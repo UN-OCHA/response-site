@@ -1,15 +1,15 @@
 diff --git a/src/Plugin/QueueWorker/LinkStatusHandle.php b/src/Plugin/QueueWorker/LinkStatusHandle.php
-index 3ed2878..e4da838 100644
+index b869154..c7b3558 100644
 --- a/src/Plugin/QueueWorker/LinkStatusHandle.php
 +++ b/src/Plugin/QueueWorker/LinkStatusHandle.php
-@@ -76,7 +76,9 @@ class LinkStatusHandle extends QueueWorkerBase implements ContainerFactoryPlugin
-           ->getStorage('linkcheckerlink')
-           ->load($linkId);
+@@ -94,7 +94,9 @@ class LinkStatusHandle extends QueueWorkerBase implements ContainerFactoryPlugin
+           continue;
+         }
  
 -        $handler->handle($link, $response);
 +        if ($link) {
 +          $handler->handle($link, $response);
 +        }
        }
-       catch (\Exception $e) {
+       catch (\Throwable $e) {
          // If we can`t load Link or entity - just skip it.
