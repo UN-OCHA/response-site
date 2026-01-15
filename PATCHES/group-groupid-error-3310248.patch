@@ -1,0 +1,13 @@
+diff --git a/src/GroupMembership.php b/src/GroupMembership.php
+index a3eec41..ba05bb7 100644
+--- a/src/GroupMembership.php
++++ b/src/GroupMembership.php
+@@ -34,7 +34,7 @@ class GroupMembership implements CacheableDependencyInterface {
+    *   GroupRelationship entity that is not based on the GroupMembership plugin.
+    */
+   public function __construct(GroupRelationshipInterface $group_relationship) {
+-    if ($group_relationship->getRelationshipType()->getPluginId() == 'group_membership') {
++    if (($relationType = $group_relationship->getRelationshipType()) && $relationType->getPluginId() == 'group_membership') {
+       $this->groupRelationship = $group_relationship;
+     }
+     else {

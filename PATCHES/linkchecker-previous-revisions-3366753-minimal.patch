@@ -1,0 +1,178 @@
+diff --git a/src/LinkCheckerService.php b/src/LinkCheckerService.php
+index ff47b90..05d0e77 100644
+--- a/src/LinkCheckerService.php
++++ b/src/LinkCheckerService.php
+@@ -15,6 +15,7 @@ use Drupal\linkchecker\Event\LinkcheckerEvents;
+ use Drupal\linkchecker\Plugin\LinkStatusHandlerManager;
+ use GuzzleHttp\Client;
+ use GuzzleHttp\Exception\RequestException;
++use GuzzleHttp\Promise\FulfilledPromise;
+ use Psr\Http\Message\ResponseInterface;
+ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+ 
+@@ -193,6 +194,10 @@ class LinkCheckerService {
+       'synchronous' => FALSE,
+     ];
+ 
++    if (!$link->isExists()) {
++      return new FulfilledPromise(NULL);
++    }
++
+     return $this->httpClient
+       ->requestAsync($link->getRequestMethod(), $link->getUrl(), $options)
+       ->then(function (ResponseInterface $response) use ($link, $uri) {
+diff --git a/src/LinkExtractorService.php b/src/LinkExtractorService.php
+index 94bbc1f..7b6972e 100644
+--- a/src/LinkExtractorService.php
++++ b/src/LinkExtractorService.php
+@@ -6,6 +6,7 @@ use Drupal\Component\Datetime\TimeInterface;
+ use Drupal\Component\Utility\UrlHelper;
+ use Drupal\Core\Config\ConfigFactory;
+ use Drupal\Core\Database\Connection;
++use Drupal\Core\Entity\EntityInterface;
+ use Drupal\Core\Entity\EntityPublishedInterface;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Entity\FieldableEntityInterface;
+@@ -14,6 +15,7 @@ use Drupal\Core\Field\FieldItemListInterface;
+ use Drupal\Core\Url;
+ use Drupal\linkchecker\Entity\LinkCheckerLink;
+ use Drupal\linkchecker\Plugin\LinkExtractorManager;
++use Drupal\paragraphs\ParagraphInterface;
+ use Symfony\Component\HttpFoundation\RequestStack;
+ 
+ /**
+@@ -136,8 +138,14 @@ class LinkExtractorService {
+       ->getConfig($entityBundle);
+ 
+     $scan = $fieldConfig->getThirdPartySetting('linkchecker', 'scan', FALSE);
++    $isOutdatedParagraph = FALSE;
++    if ($entity instanceof ParagraphInterface) {
++      $hierarchy = [];
++      $parentEntity = $this->getParentEntity($entity, $hierarchy);
++      $isOutdatedParagraph = empty($parentEntity) || !$this->isReferencedInCurrentRevision($parentEntity, $hierarchy);
++    }
+ 
+-    if ($scan) {
++    if ($scan && !$isOutdatedParagraph) {
+       try {
+         $baseContentUrl = $entity
+           ->toUrl()
+@@ -329,6 +337,21 @@ class LinkExtractorService {
+       return FALSE;
+     }
+ 
++    // If field is part of an old revision - FALSE.
++    if ($entity instanceof TranslatableInterface && $entity->getEntityType()->isRevisionable() && !$entity->isDefaultTranslation()) {
++      return FALSE;
++    }
++
++    // If field is part of a paragraph that is no longer linked
++    // to the parent's node current revision - FALSE.
++    if ($entity instanceof ParagraphInterface) {
++      $hierarchy = [];
++      $parentEntity = $this->getParentEntity($entity, $hierarchy);
++      if (empty($parentEntity) || !$this->isReferencedInCurrentRevision($parentEntity, $hierarchy)) {
++        return FALSE;
++      }
++    }
++
+     $links = $this->extractFromField($entity->get($link->getParentEntityFieldName()));
+ 
+     foreach ($links as $extractedLink) {
+@@ -495,4 +518,81 @@ class LinkExtractorService {
+     return $absoluteContentPath;
+   }
+ 
++  /**
++   * Gets parent node for a paragraph, and it's hierarchy till parent entity.
++   *
++   * @param \Drupal\Core\Entity\EntityInterface|null $entity
++   *   The paragraph entity.
++   * @param array $hierarchy
++   *   The hierarchy.
++   *
++   * @return \Drupal\core\Entity\EntityInterface|null
++   *   The parent node if it exists otherwise mull.
++   */
++  public function getParentEntity(EntityInterface|null $entity, array &$hierarchy = []): ?EntityInterface {
++    if ($entity instanceof EntityInterface && !$entity instanceof ParagraphInterface) {
++      return $entity;
++    }
++
++    if ($entity instanceof ParagraphInterface) {
++      array_unshift($hierarchy, [
++        'id' => $entity->id(),
++        'revision_id' => $entity->getEntityType()
++          ->isRevisionable() ? $entity->getRevisionId() : NULL,
++        'parent_field_name' => $entity->hasField('parent_field_name') ? $entity->get('parent_field_name')->value : NULL,
++      ]);
++      $parentEntity = $entity->getParentEntity();
++      if (!empty($parentEntity)) {
++        return $this->getParentEntity($parentEntity, $hierarchy);
++      }
++    }
++
++    return NULL;
++  }
++
++  /**
++   * Checks if a given paragraph hierarchy is still part of the parent's entity.
++   *
++   * @param \Drupal\Core\Entity\FieldableEntityInterface $node
++   *   The parent node.
++   * @param array $hierarchy
++   *   The hierarchy.
++   *
++   * @return bool
++   *   TRUE if it is part of the current entity, otherwise false.
++   *
++   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
++   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
++   */
++  public function isReferencedInCurrentRevision(FieldableEntityInterface $node, array $hierarchy = []): bool {
++    $paragraphStorage = $this->entityTypeManager->getStorage('paragraph');
++    $currentEntity = $node;
++    foreach ($hierarchy as $item) {
++      if (empty($item['parent_field_name']) ||
++        !$currentEntity->hasField($item['parent_field_name'])) {
++        return FALSE;
++      }
++
++      $parentFieldValue = $currentEntity->get($item['parent_field_name'])->getValue();
++      $paragraphFound = FALSE;
++      foreach ($parentFieldValue as $value) {
++        if ($value['target_id'] == $item['id']) {
++          if ($value['target_revision_id'] != $item['revision_id']) {
++            return FALSE;
++          }
++
++          $currentEntity = $paragraphStorage->load($value['target_id']);
++          $paragraphFound = TRUE;
++          break;
++        }
++      }
++
++      if (!$paragraphFound) {
++        return FALSE;
++      }
++    }
++
++    return TRUE;
++  }
++
+ }
+diff --git a/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php b/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php
+index 2678f26..f49f9ea 100644
+--- a/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php
++++ b/src/Plugin/views/field/LinkcheckerLinkPageEntityLabel.php
+@@ -98,6 +98,10 @@ class LinkcheckerLinkPageEntityLabel extends FieldPluginBase {
+       }
+     }
+ 
++    if (!$linkchecker_link->isExists()) {
++      return $this->sanitizeValue($linked_entity->label() . ' (Outdated content)');
++    }
++
+     return $this->sanitizeValue($linked_entity->label());
+   }
+ 

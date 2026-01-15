@@ -1,9 +1,9 @@
 diff --git a/group.links.task.yml b/group.links.task.yml
-index c8e9f4d..6d0d1be 100644
+index baf045b..f928414 100644
 --- a/group.links.task.yml
 +++ b/group.links.task.yml
 @@ -41,6 +41,12 @@ group.content:
-   route_name: 'entity.group_content.collection'
+   route_name: 'entity.group_relationship.collection'
    weight: 15
  
 +group.version_history:

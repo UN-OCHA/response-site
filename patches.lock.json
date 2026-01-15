@@ -1,0 +1,315 @@
+{
+    "_hash": "7c909f5f904a1b6a5f3f703308f427fd21d7f166805bbbff64fc32c13e9744e6",
+    "patches": {
+        "drupal/core": [
+            {
+                "package": "drupal/core",
+                "description": "https://www.drupal.org/project/drupal/issues/3143617",
+                "url": "https://www.drupal.org/files/issues/2020-07-07/3143617-28_0.patch",
+                "sha256": "1af4063f6958cfe6c397789cdd32b4ba5aef6e932197951ca3aed6c2a5d0b794",
+                "depth": 2,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Help group module support translations #2864721",
+                "url": "./PATCHES/core-group-translation-helper-MR-9076-updated.patch",
+                "sha256": "2e4b709cb579c6f8cdcd2406abac5ab4bb89e24bc4768f6f23447b3b22133804",
+                "depth": 2,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "Include database SSL/TLS info on status report",
+                "url": "./PATCHES/mysql-ssl-status.patch",
+                "sha256": "d0e18079dafbf99ff2081fa3b2ab95392def4acaed0e959c4a02c6e14ae1eab6",
+                "depth": 2,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/devel_entity_updates": [
+            {
+                "package": "drupal/devel_entity_updates",
+                "description": "D11 compatibility - #3454902",
+                "url": "PATCHES/devel_entity_updates-D11-compatibility.patch",
+                "sha256": "b4936cdac7d1fc973d3d11b0148e90d26bc59640f96f826d2646945c33aa174b",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/group": [
+            {
+                "package": "drupal/group",
+                "description": "Group support translations #2864721",
+                "url": "./PATCHES/group-translate_content_permission-2864721-37.patch",
+                "sha256": "c36af04f5140c983bd50e1fe1793723e9ed6bffc73d17a2c96ed11cc4f041c44",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/group",
+                "description": "Group translate permission",
+                "url": "PATCHES/group-translate-group-permission-3189659-10-updated.patch",
+                "sha256": "cd4894fd77ab6138aa25700b25d86c7561e7c16acd9877814144452836900d4e",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/group",
+                "description": "https://www.drupal.org/project/subgroup/issues/3163044#comment-14499262",
+                "url": "PATCHES/group-set-created-time-to-current-time-3278723.patch",
+                "sha256": "4eb85d0c5ce0ed8d1fb4d3b51402f196007c08088a650284d987a2e8c3f70e40",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/group",
+                "description": "https://www.drupal.org/project/group/issues/3310248 - getPluginId error",
+                "url": "PATCHES/group-groupid-error-3310248.patch",
+                "sha256": "c086ce7bbc7885ff1e850bbae3f40a9b05202cac2841c8fcbcaea9d20007b6d3",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/group",
+                "description": "https://www.drupal.org/project/group/issues/3212608 - views data export",
+                "url": "PATCHES/group-views-export-crash-3212608.patch",
+                "sha256": "90d8205779056af117fed731e6a95b7d9af037608226efc48037cfd57912c6ef",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/group",
+                "description": "Group revision tab #3397063",
+                "url": "PATCHES/group_revision_tab-3397063.patch",
+                "sha256": "8a78294dc1300641b24d1dd4c42098423e54c2a34a0d370eb5ed2ad1d3e98bb0",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/group",
+                "description": "https://www.drupal.org/project/group/issues/3161194 - entity type missing",
+                "url": "PATCHES/group-entity-missing.patch",
+                "sha256": "6d1822e516a419d9253916df455e101d00e3921fe2d821dccca0d3454bd9efdb",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/imagemagick": [
+            {
+                "package": "drupal/imagemagick",
+                "description": "Cast dimensions to int after translations",
+                "url": "PATCHES/imagemagick-ints.patch",
+                "sha256": "d339d53a53bb47d1f6f1a2ed77280d813d1b71cddabb83bbe7e1f70aa99fea74",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/link_allowed_hosts": [
+            {
+                "package": "drupal/link_allowed_hosts",
+                "description": "D11 compatibility - #3431673",
+                "url": "PATCHES/link_allowed_hosts-D11-compatibility.patch",
+                "sha256": "0914e4c71f2bdc3fa7c564ba1155284e82737a9b7fe9b0fae530103a3725977d",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/link_allowed_hosts",
+                "description": "Avoid return type error",
+                "url": "PATCHES/link_allowed_hosts-return-types.patch",
+                "sha256": "8ce217df033035f175ece1e3eb55891e0bfa1f92385e3f913e07856334be52aa",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/linkchecker": [
+            {
+                "package": "drupal/linkchecker",
+                "description": "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743",
+                "url": "PATCHES/linkchecker-unconfirmed-but-eligible-field-list-3244743.patch",
+                "sha256": "45abd4ebd195878056b36880ab04eb5996d92bf9a97ef8d8e84ba61e0d2d981b",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/linkchecker",
+                "description": "Avoid null links",
+                "url": "./PATCHES/linkchecker_null_link.patch",
+                "sha256": "8e199ca13ce991f05ab81f9411a988a0d679723a02094561e99527306face946",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/linkchecker",
+                "description": "Recognize previous revisions https://www.drupal.org/project/linkchecker/issues/3366753",
+                "url": "PATCHES/linkchecker-previous-revisions-3366753-minimal.patch",
+                "sha256": "1ef35aa75ca781e538641dc25a6d2d71a4cde16ecc4f7e2bddc88978c2e5e0d1",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/linkchecker",
+                "description": "Fallback to GET if HEAD fails - https://www.drupal.org/project/linkchecker/issues/3334240",
+                "url": "./PATCHES/linkchecker-fallback-get-3334240.patch",
+                "sha256": "70c1ec064dd4dc3d5a8c35807f883ba15bdd6cd9f8269bad32151e88c5463524",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            },
+            {
+                "package": "drupal/linkchecker",
+                "description": "Missing entity",
+                "url": "./PATCHES/link-checker-missing-entity.patch",
+                "sha256": "d46cddfef58549a729e39c35986536d7d0aca1cfe05917b297e68aea032aac5d",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/maintenance200": [
+            {
+                "package": "drupal/maintenance200",
+                "description": "D11 compatibility - #3431791",
+                "url": "PATCHES/maintenance200-D11-compatibility-3431791.patch",
+                "sha256": "a18c917b199168ded802407a11e2d9eb75b1933c75aea4e60701c3ba0f6ea623",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/openid_connect": [
+            {
+                "package": "drupal/openid_connect",
+                "description": "Suppress auth error if user is blocked",
+                "url": "PATCHES/openid_connect-ops-11508-suppress-error-if-blocked.patch",
+                "sha256": "838379cc3970732f52d0e5905e18dc75aeedab2c1bdc3d9e3630a0ccba321766",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/select2": [
+            {
+                "package": "drupal/select2",
+                "description": "https://www.drupal.org/project/select2/issues/3379063",
+                "url": "https://www.drupal.org/files/issues/2025-06-12/select2-3379063-8.patch",
+                "sha256": "2211a86cf7b69f27a5bfaa6fac76921e5b737032861e93ecff22210176dbbead",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/social_auth": [
+            {
+                "package": "drupal/social_auth",
+                "description": "Type Error - #3496656",
+                "url": "PATCHES/social_auth-type-error-3496656.patch",
+                "sha256": "3640ab58ebe8cc368dd9945ad38ee42ce09cfa5873167778e28fc19c4d16572d",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/social_auth_linkedin": [
+            {
+                "package": "drupal/social_auth_linkedin",
+                "description": "https://www.drupal.org/project/social_auth_linkedin/issues/3399739",
+                "url": "https://git.drupalcode.org/project/social_auth_linkedin/-/merge_requests/4.diff",
+                "sha256": "80e48fc12fbb25fe7414c63bbb18d3517d594deaf0529e3a0f080c45f9e42051",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/user_expire": [
+            {
+                "package": "drupal/user_expire",
+                "description": "Allow the notification email to be customised",
+                "url": "PATCHES/user_expire-customize-notification-email.patch",
+                "sha256": "4b7e15b4fa0b6fdee78e50e23856437954bef36974d6e14db75ab06b3f535b76",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/username_enumeration_prevention": [
+            {
+                "package": "drupal/username_enumeration_prevention",
+                "description": "Avoid leaking the path via Drupal.settings json",
+                "url": "PATCHES/username_enumeration_prevention-user-login-block-form-3312288.patch",
+                "sha256": "d69c3af6d81a028ee001324682c5ddce14124632b4a83e240cd2f838905ede87",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/views_data_export": [
+            {
+                "package": "drupal/views_data_export",
+                "description": "Batch mode does not allow other modules to alter query - #3173296",
+                "url": "PATCHES/views_data_export-batch-mode-metadata-3173296.patch",
+                "sha256": "8c02007a987cba39790016b483ab7778163cc98b241ebecec14ffd3b74f55347",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "mailchimp/marketing": [
+            {
+                "package": "mailchimp/marketing",
+                "description": "PHP 8.2",
+                "url": "PATCHES/mailchimp_php82.patch",
+                "sha256": "419cb8f1c3bf8214403e1308fff1aa959472b96cc084e3369db3817042be0227",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ]
+    }
+}

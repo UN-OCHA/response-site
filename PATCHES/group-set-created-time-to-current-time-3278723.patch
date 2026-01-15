@@ -1,0 +1,18 @@
+diff --git a/src/Entity/Group.php b/src/Entity/Group.php
+index 4c6b05f..a7585ed 100644
+--- a/src/Entity/Group.php
++++ b/src/Entity/Group.php
+@@ -124,6 +124,13 @@ class Group extends EditorialContentEntityBase implements GroupInterface {
+     return $this->get('created')->value;
+   }
+ 
++  /**
++   * {@inheritdoc}
++   */
++  public static function preCreate(EntityStorageInterface $storage, array &$values) {
++    $values['created'] = time();
++  }
++
+   /**
+    * {@inheritdoc}
+    */

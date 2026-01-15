@@ -1,5 +1,5 @@
 diff --git a/config/install/linkchecker.settings.yml b/config/install/linkchecker.settings.yml
-index f3311437c5beb3072a353b5047d769850442f95b..c8f135bae3aba4c7a69394dc998334780138ee20 100644
+index f331143..c8f135b 100644
 --- a/config/install/linkchecker.settings.yml
 +++ b/config/install/linkchecker.settings.yml
 @@ -29,6 +29,7 @@ check:
@@ -11,10 +11,10 @@ index f3311437c5beb3072a353b5047d769850442f95b..c8f135bae3aba4c7a69394dc99833478
    impersonate_account: ''
  logging:
 diff --git a/config/schema/linkchecker.schema.yml b/config/schema/linkchecker.schema.yml
-index 7b3ad78f875cbcb883190b180bcbeaf5b28051bf..3c4cd755482815392a87fdc641bbc5936984c0e5 100644
+index ef877de..bec1ad0 100644
 --- a/config/schema/linkchecker.schema.yml
 +++ b/config/schema/linkchecker.schema.yml
-@@ -79,6 +79,9 @@ linkchecker.settings:
+@@ -82,6 +82,9 @@ linkchecker.settings:
          action_status_code_404:
            type: integer
            label: 'Unpublish content on file not found error'
@@ -25,10 +25,10 @@ index 7b3ad78f875cbcb883190b180bcbeaf5b28051bf..3c4cd755482815392a87fdc641bbc593
            type: string
            label: 'Do not treat these response codes as errors'
 diff --git a/src/Form/LinkCheckerAdminSettingsForm.php b/src/Form/LinkCheckerAdminSettingsForm.php
-index 73cafcff0e0d1048fc3b4376550502a30d92f207..d6571f338766bd929fd446d3dccceb2501b8eb81 100644
+index 80d67b0..1ce84b2 100644
 --- a/src/Form/LinkCheckerAdminSettingsForm.php
 +++ b/src/Form/LinkCheckerAdminSettingsForm.php
-@@ -388,6 +388,12 @@ class LinkCheckerAdminSettingsForm extends ConfigFormBase {
+@@ -426,6 +426,12 @@ class LinkCheckerAdminSettingsForm extends ConfigFormBase {
          10 => $this->t('After ten file not found errors'),
        ],
      ];
@@ -41,8 +41,8 @@ index 73cafcff0e0d1048fc3b4376550502a30d92f207..d6571f338766bd929fd446d3dccceb25
      $form['error']['linkchecker_ignore_response_codes'] = [
        '#default_value' => $config->get('error.ignore_response_codes'),
        '#type' => 'textarea',
-@@ -480,6 +486,7 @@ class LinkCheckerAdminSettingsForm extends ConfigFormBase {
-       ->set('check.useragent', $form_state->getValue('linkchecker_check_useragent'))
+@@ -519,6 +525,7 @@ class LinkCheckerAdminSettingsForm extends ConfigFormBase {
+       ->set('search_published_contents_only', $form_state->getValue('search_published_contents_only'))
        ->set('error.action_status_code_301', $form_state->getValue('linkchecker_action_status_code_301'))
        ->set('error.action_status_code_404', $form_state->getValue('linkchecker_action_status_code_404'))
 +      ->set('error.fallback_get_if_head_fails', $form_state->getValue('linkchecker_fallback_get_if_head_fails'))
@@ -50,10 +50,10 @@ index 73cafcff0e0d1048fc3b4376550502a30d92f207..d6571f338766bd929fd446d3dccceb25
        ->set('error.impersonate_account', $form_state->getValue('linkchecker_impersonate_account'))
        ->set('logging.level', $form_state->getValue('linkchecker_logging_level'))
 diff --git a/src/LinkCheckerService.php b/src/LinkCheckerService.php
-index e672546064af73737756e62370b2e660bcfe1064..0257f8042d4591f50dbba7c4b19e5c70feb9d8c3 100644
+index ff47b90..6ed5f45 100644
 --- a/src/LinkCheckerService.php
 +++ b/src/LinkCheckerService.php
-@@ -193,6 +193,26 @@ class LinkCheckerService {
+@@ -196,6 +196,26 @@ class LinkCheckerService {
      return $this->httpClient
        ->requestAsync($link->getRequestMethod(), $link->getUrl(), $options)
        ->then(function (ResponseInterface $response) use ($link, $uri) {
@@ -80,7 +80,7 @@ index e672546064af73737756e62370b2e660bcfe1064..0257f8042d4591f50dbba7c4b19e5c70
          if (!empty($uri['fragment'])) {
            $response = $response->withHeader('Fragment', $uri['fragment']);
          }
-@@ -204,6 +224,16 @@ class LinkCheckerService {
+@@ -207,6 +227,16 @@ class LinkCheckerService {
      );
    }
  
@@ -97,7 +97,7 @@ index e672546064af73737756e62370b2e660bcfe1064..0257f8042d4591f50dbba7c4b19e5c70
    /**
     * Status code handling.
     *
-@@ -214,7 +244,7 @@ class LinkCheckerService {
+@@ -217,7 +247,7 @@ class LinkCheckerService {
     *   The link.
     */
    protected function statusHandling(ResponseInterface $response, LinkCheckerLinkInterface $link) {

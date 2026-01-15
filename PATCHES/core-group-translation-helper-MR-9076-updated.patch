@@ -1,5 +1,5 @@
 diff --git a/core/modules/content_translation/content_translation.module b/core/modules/content_translation/content_translation.module
-index fd038312f28..f50a6d2d797 100644
+index 7749def59ff..b4c7d965226 100644
 --- a/core/modules/content_translation/content_translation.module
 +++ b/core/modules/content_translation/content_translation.module
 @@ -9,6 +9,7 @@
@@ -9,8 +9,8 @@ index fd038312f28..f50a6d2d797 100644
 +use Drupal\Core\Session\AccountInterface;
  
  /**
-  * Implements hook_module_implements_alter().
-@@ -69,14 +70,77 @@ function _content_translation_install_field_storage_definitions($entity_type_id)
+  * Installs Content Translation's fields for a given entity type.
+@@ -47,14 +48,77 @@ function _content_translation_install_field_storage_definitions($entity_type_id)
   *   The access result.
   */
  function content_translation_translate_access(EntityInterface $entity) {
@@ -152,7 +152,7 @@ index 2d5d65eb79d..926fd730512 100644
  
      // No opinion.
 diff --git a/core/modules/content_translation/src/ContentTranslationHandler.php b/core/modules/content_translation/src/ContentTranslationHandler.php
-index ad21415ac0a..4db4558db14 100644
+index 5ce09394849..38f74a67bd9 100644
 --- a/core/modules/content_translation/src/ContentTranslationHandler.php
 +++ b/core/modules/content_translation/src/ContentTranslationHandler.php
 @@ -3,7 +3,6 @@
@@ -243,10 +243,10 @@ index ad21415ac0a..4db4558db14 100644
  
      // Update #title attribute for all elements that are allowed to have a
 diff --git a/core/modules/content_translation/tests/src/Functional/ContentTranslationOperationsTest.php b/core/modules/content_translation/tests/src/Functional/ContentTranslationOperationsTest.php
-index a22391b05a9..03ad4a71c42 100644
+index 6ee635700d1..512dd760167 100644
 --- a/core/modules/content_translation/tests/src/Functional/ContentTranslationOperationsTest.php
 +++ b/core/modules/content_translation/tests/src/Functional/ContentTranslationOperationsTest.php
-@@ -42,17 +42,27 @@ class ContentTranslationOperationsTest extends NodeTestBase {
+@@ -44,17 +44,27 @@ class ContentTranslationOperationsTest extends NodeTestBase {
    protected static $modules = [
      'language',
      'content_translation',
@@ -274,7 +274,7 @@ index a22391b05a9..03ad4a71c42 100644
      // Enable additional languages.
      $langcodes = ['es', 'ast'];
      foreach ($langcodes as $langcode) {
-@@ -136,6 +146,73 @@ public function testOperationTranslateLink(): void {
+@@ -138,6 +148,73 @@ public function testOperationTranslateLink(): void {
      $this->assertSession()->linkByHrefNotExists('node/' . $node->id() . '/translations');
    }
  
@@ -348,7 +348,7 @@ index a22391b05a9..03ad4a71c42 100644
    /**
     * Tests the access to the overview page for translations.
     *
-@@ -168,4 +245,45 @@ public function testContentTranslationOverviewAccess(): void {
+@@ -170,4 +247,45 @@ public function testContentTranslationOverviewAccess(): void {
      $access_control_handler->resetCache();
    }
  
