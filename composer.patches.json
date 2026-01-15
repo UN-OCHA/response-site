@@ -43,9 +43,6 @@
     "drupal/social_auth": {
       "Type Error - #3496656": "PATCHES/social_auth-type-error-3496656.patch"
     },
-    "drupal/social_auth_entra_id": {
-      "Patch up to a known working dev release at comit 140a9edf669d723f1ddca78ccb9e7af233c22c7e": "PATCHES/social_auth_entra_id-dev-version.patch"
-    },
     "drupal/social_auth_linkedin": {
       "https://www.drupal.org/project/social_auth_linkedin/issues/3399739": "https://git.drupalcode.org/project/social_auth_linkedin/-/merge_requests/4.diff"
     },
