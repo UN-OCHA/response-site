@@ -1,5 +1,5 @@
 {
-    "_hash": "282d21ac74643f82f0412e11489fa32e6fcc27b5384332314b0ac9060d91dcff",
+    "_hash": "7c909f5f904a1b6a5f3f703308f427fd21d7f166805bbbff64fc32c13e9744e6",
     "patches": {
         "drupal/core": [
             {
@@ -245,18 +245,6 @@
                 "description": "Type Error - #3496656",
                 "url": "PATCHES/social_auth-type-error-3496656.patch",
                 "sha256": "3640ab58ebe8cc368dd9945ad38ee42ce09cfa5873167778e28fc19c4d16572d",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:composer.patches.json"
-                }
-            }
-        ],
-        "drupal/social_auth_entra_id": [
-            {
-                "package": "drupal/social_auth_entra_id",
-                "description": "Patch up to a known working dev release at comit 140a9edf669d723f1ddca78ccb9e7af233c22c7e",
-                "url": "PATCHES/social_auth_entra_id-dev-version.patch",
-                "sha256": "660a81add8d61870c6041bbad0784c24c220d62ea9bedad4cba5a6a7d57f8b47",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
