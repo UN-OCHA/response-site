@@ -1,5 +1,5 @@
 {
-    "_hash": "7c909f5f904a1b6a5f3f703308f427fd21d7f166805bbbff64fc32c13e9744e6",
+    "_hash": "2daae5ac26be47473f8e1fc151a139deb010a1e09e39de0e8a8d88dd1a7eb49d",
     "patches": {
         "drupal/core": [
             {
@@ -221,6 +221,18 @@
                 "description": "Suppress auth error if user is blocked",
                 "url": "PATCHES/openid_connect-ops-11508-suppress-error-if-blocked.patch",
                 "sha256": "838379cc3970732f52d0e5905e18dc75aeedab2c1bdc3d9e3630a0ccba321766",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/openid_connect_windows_aad": [
+            {
+                "package": "drupal/openid_connect_windows_aad",
+                "description": "Prompt schema mismatch with parent plugin",
+                "url": "PATCHES/openid_connect_windows_aad-3577142-mr46.patch",
+                "sha256": "6b4bd440d50bc5cbe1f60ec835652aaec7d2dabc5e9836b478f1085a95fe12c8",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
