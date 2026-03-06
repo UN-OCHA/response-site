@@ -1,5 +1,5 @@
 {
-    "_hash": "2daae5ac26be47473f8e1fc151a139deb010a1e09e39de0e8a8d88dd1a7eb49d",
+    "_hash": "52b56464b28fdb313ecdfa9789571ad5828a6b98a4a96873ee04f376f65d39d7",
     "patches": {
         "drupal/core": [
             {
@@ -225,6 +225,16 @@
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
                 }
+            },
+            {
+                "package": "drupal/openid_connect",
+                "description": "Incorrect context in hook_redirect_logout_alter",
+                "url": "PATCHES/openid_connect-3577436-mr191.patch",
+                "sha256": "3ab9ffcd23bcaf4f12c1e657a15f349e703ef56694c25bfd13a7b28be4cad42d",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
             }
         ],
         "drupal/openid_connect_windows_aad": [
@@ -267,8 +277,8 @@
             {
                 "package": "drupal/social_auth_linkedin",
                 "description": "https://www.drupal.org/project/social_auth_linkedin/issues/3399739",
-                "url": "https://git.drupalcode.org/project/social_auth_linkedin/-/merge_requests/4.diff",
-                "sha256": "80e48fc12fbb25fe7414c63bbb18d3517d594deaf0529e3a0f080c45f9e42051",
+                "url": "PATCHES/social_auth_linkedin-3399739-mr11.patch",
+                "sha256": "4a48f2aeb0c7932fecb8e56e08c00385ff90ef31aebd14bdc53aa87b4b005735",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
