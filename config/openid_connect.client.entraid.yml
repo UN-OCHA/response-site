@@ -25,6 +25,6 @@ settings:
   userinfo_update_email: false
   hide_email_address_warning: false
   prompt:
-    login: login
+    none: 'none'
   subject_key: sub
   front_channel_logout_url: ''
