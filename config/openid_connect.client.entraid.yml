@@ -24,6 +24,7 @@ settings:
   userinfo_graph_api_use_other_mails: false
   userinfo_update_email: false
   hide_email_address_warning: false
-  prompt: '<noprompt>'
+  prompt:
+    none: 'none'
   subject_key: sub
   front_channel_logout_url: ''

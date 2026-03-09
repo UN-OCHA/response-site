@@ -1,0 +1,220 @@
+From 23e83c1839b0dbc6aa1c656f367a4f6ec81fe431 Mon Sep 17 00:00:00 2001
+From: Alex Harries <alex.harries@redactive.co.uk>
+Date: Mon, 24 Nov 2025 21:45:34 +0000
+Subject: [PATCH] Re-apply patch fixes from #3399739
+
+---
+ social_auth_linkedin.info.yml                 |  3 -
+ src/LinkedInAuthManager.php                   | 92 +++++++++++++++----
+ .../SocialAuthLinkedInSettingsFormTest.php    | 60 ------------
+ 3 files changed, 76 insertions(+), 79 deletions(-)
+ delete mode 100644 tests/src/Functional/SocialAuthLinkedInSettingsFormTest.php
+
+diff --git a/social_auth_linkedin.info.yml b/social_auth_linkedin.info.yml
+index 2b927fa..52eee84 100644
+--- a/social_auth_linkedin.info.yml
++++ b/social_auth_linkedin.info.yml
+@@ -3,8 +3,5 @@ type: module
+ description: 'Social Auth integration for LinkedIn.'
+ core_version_requirement: ^9.5 || ^10 || ^11
+ package: Social
+-
+-configure: social_auth_linkedin.settings_form
+-
+ dependencies:
+   - social_auth:social_auth
+diff --git a/src/LinkedInAuthManager.php b/src/LinkedInAuthManager.php
+index c172441..8e8544c 100644
+--- a/src/LinkedInAuthManager.php
++++ b/src/LinkedInAuthManager.php
+@@ -8,7 +8,11 @@ use Drupal\social_auth\AuthManager\OAuth2Manager;
+ use Drupal\social_auth\User\SocialAuthUser;
+ use Drupal\social_auth\User\SocialAuthUserInterface;
+ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
++use League\OAuth2\Client\Token\AccessToken;
++use League\OAuth2\Client\Token\LinkedInAccessToken;
++use RuntimeException;
+ use Symfony\Component\HttpFoundation\RequestStack;
++use GuzzleHttp\RequestOptions;
+ 
+ /**
+  * Contains all the logic for LinkedIn OAuth2 authentication.
+@@ -53,29 +57,85 @@ class LinkedInAuthManager extends OAuth2Manager {
+   /**
+    * {@inheritdoc}
+    */
+-  public function getUserInfo(): SocialAuthUserInterface {
+-    if (!$this->user) {
+-      /** @var \League\OAuth2\Client\Provider\LinkedInResourceOwner $owner */
+-      $owner = $this->client->getResourceOwner($this->getAccessToken());
+-      $this->user = new SocialAuthUser(
+-        trim("{$owner->getFirstName()} {$owner->getLastName()}"),
+-        $owner->getId(),
+-        $this->getAccessToken(),
+-        $owner->getEmail(),
+-        $owner->getImageUrl(),
+-        $this->getExtraDetails()
+-      );
+-      $this->user->setFirstName($owner->getFirstName());
+-      $this->user->setLastName($owner->getLastName());
++  public function getUserInfo(): SocialAuthUserInterface|null {
++    if (empty($this->user)) {
++      if ($token = $this->getAccessToken()) {
++        // Ensure the user information returned from LinkedIn contains at least
++        // an email address.
++        if (($linkedin_userinfo_object = $this->getLinkedInUserByToken($token))
++          && !empty($linkedin_userinfo_object->email)) {
++
++          // Create a new SocialAuthUser object.
++          $this->user = new SocialAuthUser(
++            trim($linkedin_userinfo_object->name ?? ''),
++            $linkedin_userinfo_object->sub ?? NULL,
++            $token,
++            $linkedin_userinfo_object->email,
++            $linkedin_userinfo_object->picture ?? NULL,
++            $this->getExtraDetails());
++
++          // Set the user's first and last name, if available.
++          $this->user->setFirstName($linkedin_userinfo_object->given_name ?? NULL);
++          $this->user->setLastName($linkedin_userinfo_object->family_name ?? NULL);
++
++          // Get any additional data from the $linkedin_userinfo_object object.
++          $extra_data = (array) $linkedin_userinfo_object;
++          unset($extra_data['name'], $extra_data['sub'], $extra_data['email'], $extra_data['picture']);
++          $this->user->setAdditionalData($extra_data);
++        }
++      }
+     }
++
+     return $this->user;
+   }
+ 
++  /**
++   * Get the user's details with the access token.
++   *
++   * @param \League\OAuth2\Client\Token\AccessToken|\League\OAuth2\Client\Token\LinkedInAccessToken $token
++   *   The token to use to access linked in API.
++   *
++   * @return object
++   *   The result of the user info query.
++   */
++  protected function getLinkedInUserByToken(AccessToken|LinkedInAccessToken $token): object {
++    $response = $this->client->getHttpClient()
++      ->get('https://api.linkedin.com/v2/userinfo', [
++        RequestOptions::HEADERS => [
++          'Authorization' => 'Bearer ' . $token,
++        ],
++      ]);
++
++    $response_body = json_decode($response->getBody());
++
++    // $response_body should have at least an email property.
++    if (!empty($response_body->email)) {
++      return $response_body;
++    }
++
++    throw new RuntimeException('Invalid response from LinkedIn API');
++  }
++
+   /**
+    * {@inheritdoc}
+    */
+   public function getAuthorizationUrl(): string {
+-    $scopes = ['r_liteprofile', 'r_emailaddress'];
++    // Set the scopes to openid, profile and email.
++
++    /*
++     * For more information, @see
++     * https://docs.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow
++     *
++     * Quote from that page: "The scopes available to your app depend on which
++     * Products or Partner Programs your app has access to. This information is
++     * available in the LinkedIn Developer Portal (1). Your app's Auth tab will
++     * show current scopes available. You can apply for new Products under the
++     * Products tab. If approved, your app will have access to new scopes."
++     *
++     * (1) https://www.linkedin.com/developers/apps
++     */
++
++    $scopes = ['openid', 'profile', 'email'];
+ 
+     $extra_scopes = $this->getScopes();
+     if ($extra_scopes) {
+@@ -92,7 +152,7 @@ class LinkedInAuthManager extends OAuth2Manager {
+    * {@inheritdoc}
+    */
+   public function requestEndPoint(string $method, string $path, ?string $domain = NULL, array $options = []): mixed {
+-    if (!$domain) {
++    if (empty($domain)) {
+       $domain = 'https://api.linkedin.com';
+     }
+ 
+diff --git a/tests/src/Functional/SocialAuthLinkedInSettingsFormTest.php b/tests/src/Functional/SocialAuthLinkedInSettingsFormTest.php
+deleted file mode 100644
+index 83f0c5b..0000000
+--- a/tests/src/Functional/SocialAuthLinkedInSettingsFormTest.php
++++ /dev/null
+@@ -1,60 +0,0 @@
+-<?php
+-
+-namespace Drupal\Tests\social_auth_linkedin\Functional;
+-
+-use Drupal\Tests\social_auth\Functional\SocialAuthTestBase;
+-
+-/**
+- * Test Social Auth LinkedIn settings form.
+- *
+- * @group social_auth_linkedin
+- */
+-class SocialAuthLinkedInSettingsFormTest extends SocialAuthTestBase {
+-
+-  /**
+-   * Modules to enable.
+-   *
+-   * @var array
+-   */
+-  protected static $modules = ['social_auth_linkedin'];
+-
+-  /**
+-   * {@inheritdoc}
+-   */
+-  protected function setUp(): void {
+-    $this->module = 'social_auth_linkedin';
+-    $this->provider = 'linkedin';
+-    $this->moduleType = 'social-auth';
+-
+-    parent::setUp();
+-  }
+-
+-  /**
+-   * Test if implementer is shown in the integration list.
+-   */
+-  public function testIsAvailableInIntegrationList() {
+-    $this->fields = ['client_id', 'client_secret'];
+-
+-    $this->checkIsAvailableInIntegrationList();
+-  }
+-
+-  /**
+-   * Test if permissions are set correctly for settings page.
+-   */
+-  public function testPermissionForSettingsPage() {
+-    $this->checkPermissionForSettingsPage();
+-  }
+-
+-  /**
+-   * Test settings form submission.
+-   */
+-  public function testSettingsFormSubmission() {
+-    $this->edit = [
+-      'client_id' => $this->randomString(10),
+-      'client_secret' => $this->randomString(10),
+-    ];
+-
+-    $this->checkSettingsFormSubmission();
+-  }
+-
+-}
+-- 
+GitLab
+
