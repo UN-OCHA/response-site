@@ -1,5 +1,5 @@
 {
-    "_hash": "88dd33a3e54cb910492e3468cc71b63118deabb41485f1fade6e74e881410f8a",
+    "_hash": "337298a3f7612ed6f17a0fccf186d514fbc137538ed77811cccc11981b36b6d0",
     "patches": {
         "drupal/core": [
             {
@@ -45,9 +45,9 @@
                 }
             }
         ],
-        "drup[al/dashboards": [
+        "drupal/dashboards": [
             {
-                "package": "drup[al/dashboards",
+                "package": "drupal/dashboards",
                 "description": "PHP 8.4 Support",
                 "url": "PATCHES/dashboards-php84-3542888-40.patch",
                 "sha256": "209e1ff2209747f4d193ca28e921e9c56010a92428fa1c05f2eae6eea6d4fdd2",

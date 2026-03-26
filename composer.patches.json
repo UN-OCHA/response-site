@@ -8,7 +8,7 @@
     "drupal/devel_entity_updates": {
       "D11 compatibility - #3454902": "PATCHES/devel_entity_updates-D11-compatibility.patch"
     },
-    "drup[al/dashboards": {
+    "drupal/dashboards": {
       "PHP 8.4 Support": "PATCHES/dashboards-php84-3542888-40.patch"
     },
     "drupal/group": {
