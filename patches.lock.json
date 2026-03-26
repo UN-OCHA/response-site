@@ -1,5 +1,5 @@
 {
-    "_hash": "808f1f5c9c26b25761229bb40969ca5ed0761f0478bfa22854a028798b78f0fb",
+    "_hash": "88dd33a3e54cb910492e3468cc71b63118deabb41485f1fade6e74e881410f8a",
     "patches": {
         "drupal/core": [
             {
@@ -39,6 +39,18 @@
                 "description": "D11 compatibility - #3454902",
                 "url": "PATCHES/devel_entity_updates-D11-compatibility.patch",
                 "sha256": "b4936cdac7d1fc973d3d11b0148e90d26bc59640f96f826d2646945c33aa174b",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drup[al/dashboards": [
+            {
+                "package": "drup[al/dashboards",
+                "description": "PHP 8.4 Support",
+                "url": "PATCHES/dashboards-php84-3542888-40.patch",
+                "sha256": "209e1ff2209747f4d193ca28e921e9c56010a92428fa1c05f2eae6eea6d4fdd2",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
