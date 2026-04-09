@@ -1,5 +1,5 @@
 {
-    "_hash": "808f1f5c9c26b25761229bb40969ca5ed0761f0478bfa22854a028798b78f0fb",
+    "_hash": "d9387a29a9e6f210d58037bf40e7bb17fc6858b61cb3716da466f767f63b9752",
     "patches": {
         "drupal/core": [
             {
@@ -145,6 +145,18 @@
                 "description": "Avoid return type error",
                 "url": "PATCHES/link_allowed_hosts-return-types.patch",
                 "sha256": "8ce217df033035f175ece1e3eb55891e0bfa1f92385e3f913e07856334be52aa",
+                "depth": 1,
+                "extra": {
+                    "provenance": "patches-file:composer.patches.json"
+                }
+            }
+        ],
+        "drupal/layout_paragraphs": [
+            {
+                "package": "drupal/layout_paragraphs",
+                "description": "Fix validation issues for automated testing",
+                "url": "PATCHES/layout_paragraphs-fix-implicit-nullable-warnings-3502083-7.patch",
+                "sha256": "8f43786c2903c4c5607bf3d4d5957ab379793f405001ca0f27fb5e2a81f49747",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
