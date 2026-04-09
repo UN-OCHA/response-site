@@ -1,0 +1,145 @@
+diff --git a/modules/layout_paragraphs_permissions/src/Access/LayoutParagraphsPermissionsBuilderAccess.php b/modules/layout_paragraphs_permissions/src/Access/LayoutParagraphsPermissionsBuilderAccess.php
+index d8e760f..bc5f904 100644
+--- a/modules/layout_paragraphs_permissions/src/Access/LayoutParagraphsPermissionsBuilderAccess.php
++++ b/modules/layout_paragraphs_permissions/src/Access/LayoutParagraphsPermissionsBuilderAccess.php
+@@ -19,9 +19,9 @@ class LayoutParagraphsPermissionsBuilderAccess extends LayoutParagraphsBuilderAc
+   public function access(
+     AccountInterface $account,
+     LayoutParagraphsLayout $layout_paragraphs_layout,
+-    string $operation = NULL,
+-    string $component_uuid = NULL,
+-    ParagraphsTypeInterface $paragraph_type = NULL
++    ?string $operation = NULL,
++    ?string $component_uuid = NULL,
++    ?ParagraphsTypeInterface $paragraph_type = NULL
+   ) {
+     $access = parent::access($account, $layout_paragraphs_layout, $operation, $component_uuid, $paragraph_type);
+     if ($operation == 'reorder') {
+diff --git a/src/Access/LayoutParagraphsBuilderAccess.php b/src/Access/LayoutParagraphsBuilderAccess.php
+index b3fade4..89176c4 100644
+--- a/src/Access/LayoutParagraphsBuilderAccess.php
++++ b/src/Access/LayoutParagraphsBuilderAccess.php
+@@ -52,9 +52,9 @@ class LayoutParagraphsBuilderAccess implements AccessInterface {
+   public function access(
+     AccountInterface $account,
+     LayoutParagraphsLayout $layout_paragraphs_layout,
+-    string $operation = NULL,
+-    string $component_uuid = NULL,
+-    ParagraphsTypeInterface $paragraph_type = NULL
++    ?string $operation = NULL,
++    ?string $component_uuid = NULL,
++    ?ParagraphsTypeInterface $paragraph_type = NULL
+   ) {
+ 
+     // Check field access.
+diff --git a/src/Form/DeleteComponentForm.php b/src/Form/DeleteComponentForm.php
+index 2b7cafd..6f22b8d 100644
+--- a/src/Form/DeleteComponentForm.php
++++ b/src/Form/DeleteComponentForm.php
+@@ -60,7 +60,7 @@ class DeleteComponentForm extends FormBase {
+   /**
+    * {@inheritDoc}
+    */
+-  public function buildForm(array $form, FormStateInterface $form_state, LayoutParagraphsLayout $layout_paragraphs_layout = NULL, string $component_uuid = NULL) {
++  public function buildForm(array $form, FormStateInterface $form_state, ?LayoutParagraphsLayout $layout_paragraphs_layout = NULL, ?string $component_uuid = NULL) {
+     $this->setLayoutParagraphsLayout($layout_paragraphs_layout);
+     $this->componentUuid = $component_uuid;
+     $component = $this->layoutParagraphsLayout->getComponentByUuid($this->componentUuid);
+diff --git a/src/Form/EditComponentForm.php b/src/Form/EditComponentForm.php
+index 3238646..84b819c 100644
+--- a/src/Form/EditComponentForm.php
++++ b/src/Form/EditComponentForm.php
+@@ -21,8 +21,8 @@ class EditComponentForm extends ComponentFormBase {
+   public function buildForm(
+     array $form,
+     FormStateInterface $form_state,
+-    LayoutParagraphsLayout $layout_paragraphs_layout = NULL,
+-    string $component_uuid = NULL) {
++    ?LayoutParagraphsLayout $layout_paragraphs_layout = NULL,
++    ?string $component_uuid = NULL) {
+ 
+     $this->setLayoutParagraphsLayout($layout_paragraphs_layout);
+     $this->paragraph = $this->layoutParagraphsLayout
+diff --git a/src/Form/InsertComponentForm.php b/src/Form/InsertComponentForm.php
+index 5a2372d..3859013 100644
+--- a/src/Form/InsertComponentForm.php
++++ b/src/Form/InsertComponentForm.php
+@@ -97,12 +97,12 @@ class InsertComponentForm extends ComponentFormBase {
+   public function buildForm(
+     array $form,
+     FormStateInterface $form_state,
+-    LayoutParagraphsLayout $layout_paragraphs_layout = NULL,
+-    ParagraphsTypeInterface $paragraph_type = NULL,
+-    string $parent_uuid = NULL,
+-    string $region = NULL,
+-    string $sibling_uuid = NULL,
+-    string $placement = NULL,
++    ?LayoutParagraphsLayout $layout_paragraphs_layout = NULL,
++    ?ParagraphsTypeInterface $paragraph_type = NULL,
++    ?string $parent_uuid = NULL,
++    ?string $region = NULL,
++    ?string $sibling_uuid = NULL,
++    ?string $placement = NULL,
+     array $paragraph_defaults = []
+     ) {
+ 
+diff --git a/src/Form/LayoutParagraphsBuilderForm.php b/src/Form/LayoutParagraphsBuilderForm.php
+index 6711354..8c556d7 100644
+--- a/src/Form/LayoutParagraphsBuilderForm.php
++++ b/src/Form/LayoutParagraphsBuilderForm.php
+@@ -91,9 +91,9 @@ class LayoutParagraphsBuilderForm extends FormBase {
+   public function buildForm(
+     array $form,
+     FormStateInterface $form_state,
+-    ContentEntityInterface $entity = NULL,
+-    string $field_name = NULL,
+-    string $view_mode = NULL) {
++    ?ContentEntityInterface $entity = NULL,
++    ?string $field_name = NULL,
++    ?string $view_mode = NULL) {
+ 
+     $parents = array_merge($form['#parents'] ?? [], ['layout_paragraphs_storage_key']);
+     $input = $form_state->getUserInput();
+diff --git a/src/LayoutParagraphsLayout.php b/src/LayoutParagraphsLayout.php
+index 7179a60..9536929 100644
+--- a/src/LayoutParagraphsLayout.php
++++ b/src/LayoutParagraphsLayout.php
+@@ -363,7 +363,7 @@ class LayoutParagraphsLayout implements ThirdPartySettingsInterface {
+    * @return \Drupal\layout_paragraphs\LayoutParagraphsComponent
+    *   The duplicated component.
+    */
+-  public function duplicateComponent(string $source_uuid, string $target_section_uuid = NULL) {
++  public function duplicateComponent(string $source_uuid, ?string $target_section_uuid = NULL) {
+     $source_component = $this->getComponentByUuid($source_uuid);
+     $cloned_paragraph = $source_component->getEntity()->createDuplicate();
+     if ($target_section_uuid) {
+diff --git a/src/Utility/Dialog.php b/src/Utility/Dialog.php
+index a65a70a..3582853 100644
+--- a/src/Utility/Dialog.php
++++ b/src/Utility/Dialog.php
+@@ -59,7 +59,7 @@ class Dialog {
+    * @return array
+    *   The modal settings.
+    */
+-  public static function dialogSettings(LayoutParagraphsLayout $layout = NULL) {
++  public static function dialogSettings(?LayoutParagraphsLayout $layout = NULL) {
+     $config = \Drupal::config('layout_paragraphs.modal_settings');
+ 
+     $modal_settings = [
+diff --git a/tests/modules/layout_paragraphs_complex_permissions_test/src/Access/ReorderAccessByContentType.php b/tests/modules/layout_paragraphs_complex_permissions_test/src/Access/ReorderAccessByContentType.php
+index 5349c57..d7f1f90 100644
+--- a/tests/modules/layout_paragraphs_complex_permissions_test/src/Access/ReorderAccessByContentType.php
++++ b/tests/modules/layout_paragraphs_complex_permissions_test/src/Access/ReorderAccessByContentType.php
+@@ -19,9 +19,9 @@ class ReorderAccessByContentType extends LayoutParagraphsBuilderAccess {
+   public function access(
+     AccountInterface $account,
+     LayoutParagraphsLayout $layout_paragraphs_layout,
+-    string $operation = NULL,
+-    string $component_uuid = NULL,
+-    ParagraphsTypeInterface $paragraph_type = NULL
++    ?string $operation = NULL,
++    ?string $component_uuid = NULL,
++    ?ParagraphsTypeInterface $paragraph_type = NULL
+   ) {
+     $access = parent::access($account, $layout_paragraphs_layout, $operation, $component_uuid, $paragraph_type);
+     if ($operation == 'reorder') {
