@@ -24,9 +24,6 @@
       "D11 compatibility - #3431673": "PATCHES/link_allowed_hosts-D11-compatibility.patch",
       "Avoid return type error": "PATCHES/link_allowed_hosts-return-types.patch"
     },
-    "drupal/layout_paragraphs": {
-      "Fix validation issues for automated testing": "PATCHES/layout_paragraphs-fix-implicit-nullable-warnings-3502083-7.patch"
-    },
     "drupal/linkchecker": {
       "Provide a list of unconfigured but eligible fields - https://www.drupal.org/project/linkchecker/issues/3244743": "PATCHES/linkchecker-unconfirmed-but-eligible-field-list-3244743.patch",
       "Avoid null links": "./PATCHES/linkchecker_null_link.patch",
