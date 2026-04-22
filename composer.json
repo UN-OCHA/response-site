@@ -143,6 +143,7 @@
     "prefer-stable": true,
     "config": {
         "bin-dir": "vendor/bin/",
+        "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
             "composer/installers": true,
