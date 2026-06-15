@@ -1,5 +1,5 @@
 {
-    "_hash": "808f1f5c9c26b25761229bb40969ca5ed0761f0478bfa22854a028798b78f0fb",
+    "_hash": "4c9a0c5384f36150899eb17375579faf6882b880c3130e98dd705ce28c4d285c",
     "patches": {
         "drupal/core": [
             {
@@ -26,7 +26,7 @@
                 "package": "drupal/core",
                 "description": "Include database SSL/TLS info on status report",
                 "url": "./PATCHES/mysql-ssl-status.patch",
-                "sha256": "d0e18079dafbf99ff2081fa3b2ab95392def4acaed0e959c4a02c6e14ae1eab6",
+                "sha256": "35b5c9f7d7e6d99c22cb2e86ded65a367a71f318d51c103e2a7bda531cc50921",
                 "depth": 2,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
