@@ -1,5 +1,5 @@
 {
-    "_hash": "4c9a0c5384f36150899eb17375579faf6882b880c3130e98dd705ce28c4d285c",
+    "_hash": "2140de0ea83dae59ad135e631dd641acf1feb58cb4bf9048e966895917baf698",
     "patches": {
         "drupal/core": [
             {
@@ -7,26 +7,6 @@
                 "description": "https://www.drupal.org/project/drupal/issues/3143617",
                 "url": "https://www.drupal.org/files/issues/2020-07-07/3143617-28_0.patch",
                 "sha256": "1af4063f6958cfe6c397789cdd32b4ba5aef6e932197951ca3aed6c2a5d0b794",
-                "depth": 2,
-                "extra": {
-                    "provenance": "patches-file:composer.patches.json"
-                }
-            },
-            {
-                "package": "drupal/core",
-                "description": "Help group module support translations #2864721",
-                "url": "./PATCHES/core-group-translation-helper-MR-9076-updated.patch",
-                "sha256": "2e4b709cb579c6f8cdcd2406abac5ab4bb89e24bc4768f6f23447b3b22133804",
-                "depth": 2,
-                "extra": {
-                    "provenance": "patches-file:composer.patches.json"
-                }
-            },
-            {
-                "package": "drupal/core",
-                "description": "Include database SSL/TLS info on status report",
-                "url": "./PATCHES/mysql-ssl-status.patch",
-                "sha256": "35b5c9f7d7e6d99c22cb2e86ded65a367a71f318d51c103e2a7bda531cc50921",
                 "depth": 2,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
