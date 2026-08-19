@@ -118,16 +118,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.392.1",
+            "version": "3.393.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "a49869bffa584611d22742708e69c632e1c18beb"
+                "reference": "0a46ff5138d21adbb312729f564a1c14f54909c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a49869bffa584611d22742708e69c632e1c18beb",
-                "reference": "a49869bffa584611d22742708e69c632e1c18beb",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0a46ff5138d21adbb312729f564a1c14f54909c9",
+                "reference": "0a46ff5138d21adbb312729f564a1c14f54909c9",
                 "shasum": ""
             },
             "require": {
@@ -209,9 +209,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.392.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.393.2"
             },
-            "time": "2026-08-12T18:06:57+00:00"
+            "time": "2026-08-19T18:38:54+00:00"
         },
         {
             "name": "bower-asset/dragula",
@@ -2768,17 +2768,17 @@
         },
         {
             "name": "drupal/entity",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/entity.git",
-                "reference": "8.x-1.6"
+                "reference": "8.x-1.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.6.zip",
-                "reference": "8.x-1.6",
-                "shasum": "dfb214fd45bd6ad79604d23a39a96b3d4c38f8e1"
+                "url": "https://ftp.drupal.org/files/projects/entity-8.x-1.7.zip",
+                "reference": "8.x-1.7",
+                "shasum": "d9c24749beb5bfeb398f503b8a31a676483cd182"
             },
             "require": {
                 "drupal/core": "^10.1 || ^11"
@@ -2786,8 +2786,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.6",
-                    "datestamp": "1740006812",
+                    "version": "8.x-1.7",
+                    "datestamp": "1786708365",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2818,6 +2818,10 @@
                 {
                     "name": "fago",
                     "homepage": "https://www.drupal.org/user/16747"
+                },
+                {
+                    "name": "klausi",
+                    "homepage": "https://www.drupal.org/user/262198"
                 },
                 {
                     "name": "mglaman",
@@ -5184,7 +5188,7 @@
             "extra": {
                 "drupal": {
                     "version": "8.x-1.23",
-                    "datestamp": "1785907921",
+                    "datestamp": "1786629882",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -8012,16 +8016,16 @@
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.3.22",
+            "version": "v0.3.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "02b89b39e8972a998db4d5d4ad4719239dd4aee4"
+                "reference": "b7b4c35e5bc47450f6b6238c6cc9c47ba19b2221"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/02b89b39e8972a998db4d5d4ad4719239dd4aee4",
-                "reference": "02b89b39e8972a998db4d5d4ad4719239dd4aee4",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/b7b4c35e5bc47450f6b6238c6cc9c47ba19b2221",
+                "reference": "b7b4c35e5bc47450f6b6238c6cc9c47ba19b2221",
                 "shasum": ""
             },
             "require": {
@@ -8065,9 +8069,9 @@
             "description": "Add beautiful and user-friendly forms to your command-line applications.",
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.3.22"
+                "source": "https://github.com/laravel/prompts/tree/v0.3.23"
             },
-            "time": "2026-08-04T14:50:50+00:00"
+            "time": "2026-08-11T18:58:24+00:00"
         },
         {
             "name": "lcobucci/jwt",
@@ -8726,16 +8730,16 @@
         },
         {
             "name": "mglaman/phpstan-drupal",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mglaman/phpstan-drupal.git",
-                "reference": "70c804da7e9f61e9c60785827e7d360b9444ca24"
+                "reference": "6b4fd0485597d34903efd6a66a6516b659461d2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/70c804da7e9f61e9c60785827e7d360b9444ca24",
-                "reference": "70c804da7e9f61e9c60785827e7d360b9444ca24",
+                "url": "https://api.github.com/repos/mglaman/phpstan-drupal/zipball/6b4fd0485597d34903efd6a66a6516b659461d2c",
+                "reference": "6b4fd0485597d34903efd6a66a6516b659461d2c",
                 "shasum": ""
             },
             "require": {
@@ -8807,7 +8811,7 @@
             "description": "Drupal extension and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/mglaman/phpstan-drupal/issues",
-                "source": "https://github.com/mglaman/phpstan-drupal/tree/2.1.1"
+                "source": "https://github.com/mglaman/phpstan-drupal/tree/2.1.2"
             },
             "funding": [
                 {
@@ -8823,7 +8827,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-07-17T14:04:22+00:00"
+            "time": "2026-08-13T15:38:26+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -9212,21 +9216,21 @@
         },
         {
             "name": "pear/archive_tar",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/Archive_Tar.git",
-                "reference": "dc3285537f1832da8ddbbe45f5a007248b6cc00e"
+                "reference": "a0d2c458a2ff6ee8943ac4271b7f57d613529ae0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/dc3285537f1832da8ddbbe45f5a007248b6cc00e",
-                "reference": "dc3285537f1832da8ddbbe45f5a007248b6cc00e",
+                "url": "https://api.github.com/repos/pear/Archive_Tar/zipball/a0d2c458a2ff6ee8943ac4271b7f57d613529ae0",
+                "reference": "a0d2c458a2ff6ee8943ac4271b7f57d613529ae0",
                 "shasum": ""
             },
             "require": {
                 "pear/pear-core-minimal": "^1.10.0alpha2",
-                "php": ">=5.4.0"
+                "php": ">=5.6.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "*"
@@ -9239,7 +9243,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -9278,7 +9282,7 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Archive_Tar",
                 "source": "https://github.com/pear/Archive_Tar"
             },
-            "time": "2025-07-19T14:49:16+00:00"
+            "time": "2026-08-19T17:37:49+00:00"
         },
         {
             "name": "pear/console_getopt",
@@ -20132,16 +20136,16 @@
         },
         {
             "name": "weitzman/drupal-test-traits",
-            "version": "2.7.1",
+            "version": "2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/dtt.git",
-                "reference": "1bec1eaf7a9a61f830290b93db31783efbcaaeca"
+                "reference": "e91e66f1b4c63ac7a74f1220367221af70a122fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fdtt/repository/archive.zip?sha=1bec1eaf7a9a61f830290b93db31783efbcaaeca",
-                "reference": "1bec1eaf7a9a61f830290b93db31783efbcaaeca",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Fdtt/repository/archive.zip?sha=e91e66f1b4c63ac7a74f1220367221af70a122fc",
+                "reference": "e91e66f1b4c63ac7a74f1220367221af70a122fc",
                 "shasum": ""
             },
             "require": {
@@ -20192,9 +20196,9 @@
             ],
             "description": "Traits for testing Drupal sites that have user content (versus unpopulated sites).",
             "support": {
-                "source": "https://git.drupalcode.org/project/dtt/-/tree/2.7.1"
+                "source": "https://git.drupalcode.org/project/dtt/-/tree/2.7.2"
             },
-            "time": "2026-08-09T15:59:30+00:00"
+            "time": "2026-08-13T02:58:49+00:00"
         }
     ],
     "aliases": [],
