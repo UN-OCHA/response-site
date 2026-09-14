@@ -35,8 +35,7 @@
       "D11 compatibility - #3431791": "PATCHES/maintenance200-D11-compatibility-3431791.patch"
     },
     "drupal/openid_connect": {
-      "Suppress auth error if user is blocked": "PATCHES/openid_connect-ops-11508-suppress-error-if-blocked.patch",
-      "Incorrect context in hook_redirect_logout_alter": "PATCHES/openid_connect-3577436-mr191.patch"
+      "Suppress auth error if user is blocked": "PATCHES/openid_connect-ops-11508-suppress-error-if-blocked.patch"
     },
     "drupal/select2": {
       "https://www.drupal.org/project/select2/issues/3379063": "https://www.drupal.org/files/issues/2025-06-12/select2-3379063-8.patch"

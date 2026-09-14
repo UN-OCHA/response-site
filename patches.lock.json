@@ -1,5 +1,5 @@
 {
-    "_hash": "4c9a0c5384f36150899eb17375579faf6882b880c3130e98dd705ce28c4d285c",
+    "_hash": "acc0bc152a9c37592238785f9ff5b4ac99623f95fda4333db23a61551baaf858",
     "patches": {
         "drupal/core": [
             {
@@ -221,16 +221,6 @@
                 "description": "Suppress auth error if user is blocked",
                 "url": "PATCHES/openid_connect-ops-11508-suppress-error-if-blocked.patch",
                 "sha256": "838379cc3970732f52d0e5905e18dc75aeedab2c1bdc3d9e3630a0ccba321766",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:composer.patches.json"
-                }
-            },
-            {
-                "package": "drupal/openid_connect",
-                "description": "Incorrect context in hook_redirect_logout_alter",
-                "url": "PATCHES/openid_connect-3577436-mr191.patch",
-                "sha256": "3ab9ffcd23bcaf4f12c1e657a15f349e703ef56694c25bfd13a7b28be4cad42d",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
