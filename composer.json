@@ -42,7 +42,7 @@
         "drupal/environment_indicator": "^4.0",
         "drupal/field_group": "^4",
         "drupal/flexible_permissions": "^2",
-        "drupal/geofield": "^1.36",
+        "drupal/geofield": "~10.3",
         "drupal/group": "^3.3",
         "drupal/imageapi_optimize": "^4.1@beta",
         "drupal/imageapi_optimize_binaries": "^1.0@beta",
