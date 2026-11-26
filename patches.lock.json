@@ -1,5 +1,5 @@
 {
-    "_hash": "acc0bc152a9c37592238785f9ff5b4ac99623f95fda4333db23a61551baaf858",
+    "_hash": "907ae06e6a1fc72f24311f03768e1f8b6eb6d4959701e4afa6d42b0c4b5583cd",
     "patches": {
         "drupal/core": [
             {
@@ -209,18 +209,6 @@
                 "description": "D11 compatibility - #3431791",
                 "url": "PATCHES/maintenance200-D11-compatibility-3431791.patch",
                 "sha256": "a18c917b199168ded802407a11e2d9eb75b1933c75aea4e60701c3ba0f6ea623",
-                "depth": 1,
-                "extra": {
-                    "provenance": "patches-file:composer.patches.json"
-                }
-            }
-        ],
-        "drupal/openid_connect": [
-            {
-                "package": "drupal/openid_connect",
-                "description": "Suppress auth error if user is blocked",
-                "url": "PATCHES/openid_connect-ops-11508-suppress-error-if-blocked.patch",
-                "sha256": "838379cc3970732f52d0e5905e18dc75aeedab2c1bdc3d9e3630a0ccba321766",
                 "depth": 1,
                 "extra": {
                     "provenance": "patches-file:composer.patches.json"
